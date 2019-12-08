@@ -16,7 +16,9 @@ defmodule Chunky do
     
     @doc """
     Generate all of the [permutations](https://en.wikipedia.org/wiki/Permutation), without duplicates, 
-    from a set of values. The set of values can be:
+    from a set of values. 
+    
+    The _type_ of the set of values can be:
     
      - a list of any type, like `[1, 2, 3]` or `[:a, :b, %{}]`
      - a string or binary, like `"abcd"`
