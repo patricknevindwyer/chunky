@@ -38,6 +38,113 @@ defmodule Chunky do
     ["😀★⍵", "😀⍵★", "★😀⍵", "★⍵😀", "⍵😀★", "⍵★😀"]
     ```
     
+    ## Supported Permutations
+    
+    The `Chunky.permutations/1` function can work with sets of any size (memory and time permitting). Examples that
+    follow usually use sets with a length of 3 for ease of documentation. The following types of sets are supported 
+    as permutations:
+    
+    ### List
+    
+    A list with just about _any_ kind of value can be permuted, and the result will be a list of lists:
+    
+    ```elixir
+    iex> Chunky.permutations([1, 2, 3])
+    [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+    
+    iex> Chunky.permutations([:a, "b", 3])
+    [
+        [:a, "b", 3],
+        [:a, 3, "b"],
+        ["b", :a, 3],
+        ["b", 3, :a],
+        [3, :a, "b"],
+        [3, "b", :a]
+    ]
+    ```
+    
+    Collections, types, and other values can be permuted as well:
+    
+    ```elixir
+    iex> Chunky.permutations([~D(2019-12-05), %{a: "foo"}, {:tup, :le}])
+    [
+        [~D[2019-12-05], %{a: "foo"}, {:tup, :le}],
+        [~D[2019-12-05], {:tup, :le}, %{a: "foo"}],
+        [%{a: "foo"}, ~D[2019-12-05], {:tup, :le}],
+        [%{a: "foo"}, {:tup, :le}, ~D[2019-12-05]],
+        [{:tup, :le}, ~D[2019-12-05], %{a: "foo"}],
+        [{:tup, :le}, %{a: "foo"}, ~D[2019-12-05]]
+    ]    
+    ```
+    
+    ### String/Binary
+    
+    Permuted strings are returned as a list of strings. Chunky works with full UTF-8, including multi-code point
+    glyphs like emojis and variable emojis. 
+    
+    ```elixir
+    iex> Chunky.permutations("abc")
+    ["abc", "acb", "bac", "bca", "cab", "cba"]
+    
+    iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
+    [
+        "😀🤷🏽‍♀️⭐️", 
+        "😀⭐️🤷🏽‍♀️",
+        "🤷🏽‍♀️😀⭐️", 
+        "🤷🏽‍♀️⭐️😀",
+        "⭐️😀🤷🏽‍♀️", 
+        "⭐️🤷🏽‍♀️😀"
+    ]
+    ```
+    
+    ### Tuple
+    
+    When tuples are permuted, the resulting list will also contain tuples. As part of the permutation the original
+    tuple is converted to a list, before the final values of the permutation are re-assembled into tuples. Like working
+    with lists, tuples can contain _any_ values:
+    
+    ```elixir
+    iex> Chunky.permutations({:a, :b, :c})
+    [
+        {:a, :b, :c},
+        {:a, :c, :b},
+        {:b, :a, :c},
+        {:b, :c, :a},
+        {:c, :a, :b},
+        {:c, :b, :a}
+    ]    
+    
+    iex> Chunky.permutations({:task, ~D(2019-12-09), %{value: "timer"}})
+    [
+        {:task, ~D[2019-12-09], %{value: "timer"}},
+        {:task, %{value: "timer"}, ~D[2019-12-09]}, 
+        {~D[2019-12-09], :task, %{value: "timer"}},
+        {~D[2019-12-09], %{value: "timer"}, :task},
+        {%{value: "timer"}, :task, ~D[2019-12-09]},
+        {%{value: "timer"}, ~D[2019-12-09], :task}
+    ]    
+    ```
+    
+    ### Ranges
+    
+    Ranges can be used to create permutations over ordered lists of numbers. Before permutation the provided
+    range is converted into a list. Increasing or decreasing ranges are supported.
+    
+    ```elixir
+    iex> Chunky.permutations(3..5)
+    [[3, 4, 5], [3, 5, 4], [4, 3, 5], [4, 5, 3], [5, 3, 4], [5, 4, 3]]
+    
+    iex> Chunky.permutations(-10..-12)
+    [
+        [-10, -11, -12],
+        [-10, -12, -11],
+        [-11, -10, -12],
+        [-11, -12, -10],
+        [-12, -10, -11],
+        [-12, -11, -10]
+    ]    
+    ```
+    
     ## Examples
     
         iex> Chunky.permutations([1, 2, 3])

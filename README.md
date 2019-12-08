@@ -35,10 +35,14 @@ Install by adding `chunky` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:chunky, "~> 0.1.0"}
+    {:chunky, "~> 0.1.1"}
   ]
 end
 ```
 
 Chunky documentation can be found on Hexdocs at [https://hexdocs.pm/chunky](https://hexdocs.pm/chunky).
 
+
+## Documentation
+
+See [Chunky on Hexdocs](https://hexdocs.pm/chunky).

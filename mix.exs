@@ -4,7 +4,7 @@ defmodule Chunky.MixProject do
   def project do
     [
       app: :chunky,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -30,7 +30,7 @@ defmodule Chunky.MixProject do
   defp package do
      [
          licenses: ["BSD-3-Clause"],
-         files: ~w(lib .formatter.exs mix.exs README* LICENSE*),
+         files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
          links: %{"GitHub" => "https://github.com/patricknevindwyer/chunky"}
      ] 
   end

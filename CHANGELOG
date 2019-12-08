@@ -1,0 +1,13 @@
+# CHANGELOG
+
+## v0.1.1
+
+### Documentation
+
+ - Expanded documentation for `Chunky.permutations/1`
+ 
+## v0.1.0
+
+### Enhancements
+
+ - `Chunky.permutations/1` added. Supports `list`, `tuple`, `binary`, and `range` types
