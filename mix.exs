@@ -9,9 +9,9 @@ defmodule Chunky.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "Extended chunking and Enum manipulation",
-      licenses: ["BSD-3-Clause"],
       source_url: "https://github.com/patricknevindwyer/chunky",
-      homepage_url: "https://github.com/patricknevindwyer/chunky"
+      homepage_url: "https://github.com/patricknevindwyer/chunky",
+      package: package()
     ]
   end
 
@@ -28,5 +28,12 @@ defmodule Chunky.MixProject do
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
+  end
+  
+  defp package do
+     [
+         licenses: ["BSD-3-Clause"],
+         files: ~w(lib .formatter.exs mix.exs README* LICENSE*)
+     ] 
   end
 end
