@@ -1,10 +1,20 @@
+[![Hex version badge](https://img.shields.io/hexpm/v/chunky.svg)](https://hex.pm/packages/chunky)
+[![License badge](https://img.shields.io/hexpm/l/chunky.svg)](https://github.com/patricknevindwyer/chunky/blob/master/LICENSE)
+
 # Chunky
 
 Chunking and Enumeration manipulations in Elixir.
 
 ```elixir
 iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
-["😀🤷🏽‍♀️⭐️", "😀⭐️🤷🏽‍♀️", "🤷🏽‍♀️😀⭐️", "🤷🏽‍♀️⭐️😀", "⭐️😀🤷🏽‍♀️", "⭐️🤷🏽‍♀️😀"]
+[
+  "😀🤷🏽‍♀️⭐️", 
+  "😀⭐️🤷🏽‍♀️", 
+  "🤷🏽‍♀️😀⭐️", 
+  "🤷🏽‍♀️⭐️😀", 
+  "⭐️😀🤷🏽‍♀️", 
+  "⭐️🤷🏽‍♀️😀"
+]
 
 iex> Chunky.permutations(1..4)
 [ 
