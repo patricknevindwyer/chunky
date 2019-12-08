@@ -7,7 +7,11 @@ defmodule Chunky.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      description: "Extended chunking and Enum manipulation",
+      licenses: ["BSD-3-Clause"],
+      source_url: "https://github.com/patricknevindwyer/chunky",
+      homepage_url: "https://github.com/patricknevindwyer/chunky"
     ]
   end
 

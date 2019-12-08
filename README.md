@@ -1,11 +1,26 @@
 # Chunky
 
-**TODO: Add description**
+Chunking and Enumeration manipulations in Elixir.
+
+```elixir
+iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
+["😀🤷🏽‍♀️⭐️", "😀⭐️🤷🏽‍♀️", "🤷🏽‍♀️😀⭐️", "🤷🏽‍♀️⭐️😀", "⭐️😀🤷🏽‍♀️", "⭐️🤷🏽‍♀️😀"]
+
+iex> Chunky.permutations(1..4)
+[ 
+  [1, 2, 3, 4],
+  [1, 2, 4, 3],
+  [1, 3, 2, 4],
+  [1, 3, 4, 2],
+  [1, 4, 2, 3],
+  [1, 4, 3, 2],
+  ...
+]
+```
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `chunky` to your list of dependencies in `mix.exs`:
+Install by adding `chunky` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -15,7 +30,5 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/chunky](https://hexdocs.pm/chunky).
+Chunky documentation can be found on Hexdocs at [https://hexdocs.pm/chunky](https://hexdocs.pm/chunky).
 
