@@ -2,7 +2,7 @@ defmodule Chunky.MixProject do
   use Mix.Project
 
   @version "0.1.1"
-  
+
   def project do
     [
       app: :chunky,
@@ -29,26 +29,26 @@ defmodule Chunky.MixProject do
       {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
   end
-  
+
   defp package do
-     [
-         licenses: ["BSD-3-Clause"],
-         files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
-         links: %{"GitHub" => "https://github.com/patricknevindwyer/chunky"},
-         maintainers: ["Patrick Dwyer"]
-     ] 
+    [
+      licenses: ["BSD-3-Clause"],
+      files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      links: %{"GitHub" => "https://github.com/patricknevindwyer/chunky"},
+      maintainers: ["Patrick Dwyer"]
+    ]
   end
-  
+
   defp docs do
-     [
-         main: "readme",
-         name: "Chunky",
-         source_ref: "v#{@version}",
-         canonical: "http://hexdocs.pm/chunky",
-         source_url: "https://github.com/patricknevindwyer/chunky",
-         extras: [
-             "README.md"
-         ]
-     ] 
+    [
+      main: "readme",
+      name: "Chunky",
+      source_ref: "v#{@version}",
+      canonical: "http://hexdocs.pm/chunky",
+      source_url: "https://github.com/patricknevindwyer/chunky",
+      extras: [
+        "README.md"
+      ]
+    ]
   end
 end
