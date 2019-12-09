@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v0.2.0
+
+### Enhancements
+
+ - `Chunky.chunk_length/2` added. Supports `list`, `tuple`, `binary`, and `range` types
+ 
+### Documentation
+
+ - Cleanup of readme and top level documentation
+ - Hexdocs now have embedded readme data
+ 
 ## v0.1.1
 
 ### Documentation
