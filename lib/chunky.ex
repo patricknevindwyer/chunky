@@ -198,18 +198,18 @@ defmodule Chunky do
     |> Enum.to_list()
     |> permutations()
   end
-  
+
   @doc """
   Break a set of values into smaller chunks of a specific length.
-  
+
   ```elixir
   iex> Chunky.chunk_length([1, 2, 3, 4, 5, 6], 3)
   [ [1, 2, 3], [4, 5, 6]]
-  
+
   iex> Chunky.chunk_length("Sphinx of black quartz, judge my vow", 5)
   ["Sphin", "x of ", "black", " quar", "tz, j", "udge ", "my vo", "w"]
   ```
-  
+
   The _type_ of the set of values can be:
 
    - a list of any type, like `[1, 2, 3]` or `[:a, :b, %{}]`
@@ -293,49 +293,43 @@ defmodule Chunky do
   ```
   """
   def chunk_length([], _s), do: []
-  
+
   def chunk_length(d, s) when is_list(d) and is_integer(s) do
-     [Enum.take(d, s)] ++ chunk_length(Enum.drop(d, s), s)
+    [Enum.take(d, s)] ++ chunk_length(Enum.drop(d, s), s)
   end
-  
+
   def chunk_length(str, s) when is_binary(str) and is_integer(s) do
-     
-     str
-     
-     # break into characters
-     |> String.split("")
+    str
 
-     # remove the blanks
-     |> Enum.reject(fn v -> v == "" end)
+    # break into characters
+    |> String.split("")
 
-     # chunk
-     |> chunk_length(s)
+    # remove the blanks
+    |> Enum.reject(fn v -> v == "" end)
 
-     # reconstruct strings
-     |> Enum.map(fn perm -> perm |> Enum.join("") end)
-      
+    # chunk
+    |> chunk_length(s)
+
+    # reconstruct strings
+    |> Enum.map(fn perm -> perm |> Enum.join("") end)
   end
-  
-  def chunk_length(%Range{} = range, s) when is_integer(s) do
 
+  def chunk_length(%Range{} = range, s) when is_integer(s) do
     range
 
     # expand the range, and chunk
     |> Enum.to_list()
     |> chunk_length(s)
-
   end
-  
-  def chunk_length(tup, s) when is_tuple(tup) and is_integer(s) do
 
+  def chunk_length(tup, s) when is_tuple(tup) and is_integer(s) do
     tup
-    
+
     # convert to list, and then chunk
     |> Tuple.to_list()
     |> chunk_length(s)
-    
+
     # remap to tuples
     |> Enum.map(&List.to_tuple/1)
   end
-  
 end
