@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.2.1
+
+### Documentation
+
+ - Fix reference to `Chunky.chunk_length/2` in moduledoc
+ 
 ## v0.2.0
 
 ### Enhancements
