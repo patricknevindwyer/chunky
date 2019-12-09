@@ -1,5 +1,13 @@
 # CHANGELOG
 
+
+## Pending
+
+### Documentation
+
+ - move all TODO items out of Chunky module
+ - remove references to incomplete/unimplemented functions
+
 ## v0.2.1
 
 ### Documentation

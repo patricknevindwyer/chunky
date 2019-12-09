@@ -5,15 +5,8 @@ defmodule Chunky do
   ## Functions
 
    - `Chunky.permutations/1` - Generate all combinations of a set of values, with no duplication
-   - `Chunky.filter_with_predicates/2` - Filter an enumeration to _only_ those entries that meet all the provided predicate functions
-   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
    - `Chunky.chunk_length/2` - Chunk an enumerable into specific length chunks
 
-  TODO: Chunky.filter_with_predicates/2
-  TODO: Chunky.take_sequences/1
-  TODO: nPr
-  TODO: combinations
-  TODO: nCr
   """
 
   @doc """

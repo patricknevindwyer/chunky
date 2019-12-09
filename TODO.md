@@ -8,3 +8,15 @@
 # Chunky.permutations
 
  - add N permute R
+ 
+
+# New functions
+ 
+ - Chunky.filter_with_predicates/2
+  - `Chunky.filter_with_predicates/2` - Filter an enumeration to _only_ those entries that meet all the provided predicate functions
+ - Chunky.take_sequences/1 or Chunky.chunk_runs/1
+  - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
+ - TODO: nPr
+ - TODO: combinations
+ - TODO: nCr
+ 
