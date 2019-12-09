@@ -12,6 +12,9 @@ defmodule Chunky do
   TODO: Chunky.filter_with_predicates/2
   TODO: Chunky.take_sequences/1
   TODO: Chunky.take_chunks/2
+  TODO: nPr
+  TODO: combinations
+  TODO: nCr
   """
 
   @doc """
@@ -195,4 +198,144 @@ defmodule Chunky do
     |> Enum.to_list()
     |> permutations()
   end
+  
+  @doc """
+  Break a set of values into smaller chunks of a specific length.
+  
+  ```elixir
+  iex> Chunky.chunk_length([1, 2, 3, 4, 5, 6], 3)
+  [ [1, 2, 3], [4, 5, 6]]
+  
+  iex> Chunky.chunk_length("Sphinx of black quartz, judge my vow", 5)
+  ["Sphin", "x of ", "black", " quar", "tz, j", "udge ", "my vo", "w"]
+  ```
+  
+  The _type_ of the set of values can be:
+
+   - a list of any type, like `[1, 2, 3]` or `[:a, :b, %{}]`
+   - a string or binary, like `"abcd"`
+   - a tuple, like `{1, :b, "asdf"}`
+   - a range, like `1..4` or `3..-1`
+
+  When a set is chunked, the resulting list will contain values in the _shape_ of the original; a
+  chunked list will contains lists, chunked tuples will contain tuples, chunked strings will
+  contain strings. The only exception is ranges, which will result in lists. 
+
+  ## Supported Chunking Types
+
+  The following types of sets are supported for chunking:
+
+  ### List
+
+  A list with just about _any_ kind of value can be chunked, and the result will be a list of lists:
+
+  ```elixir
+  iex> Chunky.chunk_length([1, 2, 3, 4, 5, 6, 7, 8], 3)
+  [ [1, 2, 3], [4, 5, 6], [7, 8]]
+
+  iex> Chunky.chunk_length([:a, 1, :b, 2, :c, 3, :d, 4, :e, 5, :f, 6], 4)
+  [ [:a, 1, :b, 2], [:c, 3, :d, 4], [:e, 5, :f, 6]]  
+  ```
+
+  Collections, types, and other values can be in the chunked set:
+
+  ```elixir
+  iex> Chunky.chunk_length([~D(2019-12-05), %{a: "foo"}, {:tup, :le}, true], 2)
+  [ [~D(2019-12-05), %{a: "foo"}], [{:tup, :le}, true]]  
+  ```
+
+  ### String/Binary
+
+  Chunked strings are returned as a list of strings. Chunky works with full UTF-8, including multi-code point
+  glyphs like emojis and variable emojis. 
+
+  ```elixir
+  iex> Chunky.chunk_length("abcdefghijklmnop", 7)
+  [ "abcdefg", "hijklmn", "op"]
+
+  iex> Chunky.chunk_length("😀🤷🏽‍♀️⭐️℉😐", 3)
+  ["😀🤷🏽‍♀️⭐️", "℉😐"]
+  ```
+
+  ### Tuple
+
+  When tuples are chunked, the resulting list will also contain tuples. As part of the chunking process the original
+  tuple is converted to a list, before the final values are re-assembled into tuples. Like working with lists, tuples 
+  can contain _any_ values:
+
+  ```elixir
+  iex> Chunky.chunk_length({:a, :b, :c, :d, :e, :f, :g, :h, :i, :j}, 4)
+  [ {:a, :b, :c, :d}, {:e, :f, :g, :h}, {:i, :j}]
+
+  iex> Chunky.chunk_length({:task, ~D(2019-12-09), %{value: "timer"}, true, 123, "foo"}, 2)
+  [ {:task, ~D(2019-12-09)}, {%{value: "timer"}, true}, {123, "foo"}]
+  ```
+
+  ### Ranges
+
+  Ranges can be used to create chunks over ordered lists of numbers. Before chunking the provided
+  range is converted into a list. Increasing or decreasing ranges are supported.
+
+  ```elixir
+  iex> Chunky.chunk_length(1..20, 5)
+  [ [1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20]]
+
+  iex> Chunky.chunk_length(10..-10, 3)
+  [
+      [10, 9, 8],
+      [7, 6, 5],
+      [4, 3, 2],
+      [1, 0, -1],
+      [-2, -3, -4],
+      [-5, -6, -7],
+      [-8, -9, -10]
+  ]    
+  ```
+  """
+  def chunk_length([], _s), do: []
+  
+  def chunk_length(d, s) when is_list(d) and is_integer(s) do
+     [Enum.take(d, s)] ++ chunk_length(Enum.drop(d, s), s)
+  end
+  
+  def chunk_length(str, s) when is_binary(str) and is_integer(s) do
+     
+     str
+     
+     # break into characters
+     |> String.split("")
+
+     # remove the blanks
+     |> Enum.reject(fn v -> v == "" end)
+
+     # chunk
+     |> chunk_length(s)
+
+     # reconstruct strings
+     |> Enum.map(fn perm -> perm |> Enum.join("") end)
+      
+  end
+  
+  def chunk_length(%Range{} = range, s) when is_integer(s) do
+
+    range
+
+    # expand the range, and chunk
+    |> Enum.to_list()
+    |> chunk_length(s)
+
+  end
+  
+  def chunk_length(tup, s) when is_tuple(tup) and is_integer(s) do
+
+    tup
+    
+    # convert to list, and then chunk
+    |> Tuple.to_list()
+    |> chunk_length(s)
+    
+    # remap to tuples
+    |> Enum.map(&List.to_tuple/1)
+  end
+  
 end
