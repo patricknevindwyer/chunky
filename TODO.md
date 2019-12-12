@@ -18,6 +18,13 @@
  - Chunky.take_sequences/1 or Chunky.chunk_runs/1 (day04.ex)
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
- - TODO: combinations
- - TODO: nCr
+ - crop 2d array (Day 11)
  
+# Updates
+ 
+ - better parameter names
+ - type specs?
+ - credo and dialyzer?
+ - circleCI?
+ - code coverage?
+ - code coverage badge?

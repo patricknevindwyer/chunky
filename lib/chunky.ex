@@ -4,9 +4,24 @@ defmodule Chunky do
 
   ## Functions
 
-   - `Chunky.permutations/1` - Generate all combinations of a set of values, with no duplication
+   - `Chunky.permutations/1` - Generate all permutations of a set of values, with no duplication
+   - `Chunky.combinations/2` - Generate combinations of a set of values, with no duplication
    - `Chunky.chunk_length/2` - Chunk an enumerable into specific length chunks
-
+  
+  For combinations and permutations, it can be helpful compare the differences:
+  
+  |                | Unordered              | Ordered               |
+  |----------------|------------------------|-----------------------|
+  | No Replacement | `Chunky.combination/2` | `Chunky.permutation/1 |
+  | Replacement    |  unsupported           | unsupported           |
+  
+  And expected outputs from simple string parameters:
+  
+  |                | Unordered              | Ordered               |
+  | No Replacement | `[ "abc", "abd", "acd", "bcd"]`  | `["abc", "acb", "bac", "bca", "cab", "cba"]` |
+  | Replacement    |                        |                       |
+  
+  
   """
 
   @doc """
@@ -190,7 +205,204 @@ defmodule Chunky do
     |> Enum.to_list()
     |> permutations()
   end
+  
+  @doc """
+  Generate the set of [combinations](http://mathworld.wolfram.com/Combination.html) from a set of
+  values.
+  
+  The _type_ of the set of values can be:
 
+   - a list of any type, like `[1, 2, 3]` or `[:a, :b, %{}]`
+   - a string or binary, like `"abcd"`
+   - a tuple, like `{1, :b, "asdf"}`
+   - a range, like `1..4` or `3..-1`
+
+  This is _not_ lazy generated, so a combination of a large set may take awhile. Keep in mind
+  that the total number of combinations of `k` length for a set of `n` values is:
+  
+  ```math
+       n!
+  ----------
+  k!(n - k)!
+  ``` 
+
+  When a set is generated, the resulting list will contain values in the _shape_ of the original; a
+  combination from a list will contains lists, combination from tuples will contain tuples, combination
+  from strings will contain strings. The only exception is ranges, which will result in lists. 
+
+  So, for instance, a combination from a string will result in a list of strings. Chunky _should_ handle
+  Unicode just fine:
+
+  ```elixir
+  iex> Chunky.combinations("😀★⍵😀🤷🏽‍♀️", 3)
+  ["😀★⍵", "😀★😀", "😀★🤷🏽‍♀️", "😀⍵😀", "😀⍵🤷🏽‍♀️", "😀😀🤷🏽‍♀️", "★⍵😀", "★⍵🤷🏽‍♀️", "★😀🤷🏽‍♀️", "⍵😀🤷🏽‍♀️"]
+  ```
+  
+  ## Supported Combinations
+
+  The `Chunky.combinations/2` function can work with sets of any size (memory and time permitting). Examples that
+  follow usually use sets with a length of 2 or 3 for ease of documentation. The following types of sets are supported 
+  as combinations:
+
+  ### List
+
+  A list with just about _any_ kind of value can be permuted, and the result will be a list of lists:
+
+  ```elixir
+  iex> Chunky.combinations([1, 5, 7, 11, 27], 3)
+  [[1, 5, 7], [1, 5, 11], [1, 5, 27], [1, 7, 11], [1, 7, 27], [1, 11, 27], [5, 7, 11], [5, 7, 27], [5, 11, 27], [7, 11, 27]]
+
+  iex> Chunky.combinations([:a, "b", 3, 26.2], 2)
+  [
+      [:a, "b"],
+      [:a, 3],
+      [:a, 26.2],
+      ["b", 3],
+      ["b", 26.2],
+      [3, 26.2]
+  ]
+  ```
+
+  Collections, types, and other values can be combined as well:
+
+  ```elixir
+  iex> Chunky.combinations([~D(2019-12-05), %{a: "foo"}, {:tup, :le}, [1, 2, 3]], 3)
+  [
+      [~D[2019-12-05], %{a: "foo"}, {:tup, :le}],
+      [~D[2019-12-05], %{a: "foo"}, [1, 2, 3]],
+      [~D[2019-12-05], {:tup, :le}, [1, 2, 3]],
+      [%{a: "foo"}, {:tup, :le}, [1, 2, 3]]
+  ]    
+  ```
+
+  ### String/Binary
+
+  Combined strings are returned as a list of strings. Chunky works with full UTF-8, including multi-code point
+  glyphs like emojis and variable emojis. 
+
+  ```elixir
+  iex> Chunky.combinations("abcd", 2)
+  ["ab", "ac", "ad", "bc", "bd", "cd"]
+
+  iex> Chunky.combinations("😀🤷🏽‍♀️⭐️🧁🦴", 3)
+  [
+      "😀🤷🏽‍♀️⭐️", 
+      "😀🤷🏽‍♀️🧁", 
+      "😀🤷🏽‍♀️🦴", 
+      "😀⭐️🧁", 
+      "😀⭐️🦴", 
+      "😀🧁🦴", 
+      "🤷🏽‍♀️⭐️🧁", 
+      "🤷🏽‍♀️⭐️🦴", 
+      "🤷🏽‍♀️🧁🦴",
+      "⭐️🧁🦴"
+  ]
+  ```
+
+  ### Tuple
+
+  When tuples are combined, the resulting list will also contain tuples. As part of the combination the original
+  tuple is converted to a list, before the final values of the combination are re-assembled into tuples. Like working
+  with lists, tuples can contain _any_ values:
+
+  ```elixir
+  iex> Chunky.combinations({:a, :b, :c, :d, :e}, 3)
+  [
+      {:a, :b, :c},
+      {:a, :b, :d},
+      {:a, :b, :e},
+      {:a, :c, :d},
+      {:a, :c, :e},
+      {:a, :d, :e},
+      {:b, :c, :d},
+      {:b, :c, :e},
+      {:b, :d, :e},
+      {:c, :d, :e}
+  ]    
+
+  iex> Chunky.combinations({:task, ~D(2019-12-09), %{value: "timer"}, [1, 2, 3]}, 3)
+  [
+      {:task, ~D[2019-12-09], %{value: "timer"}},
+      {:task, ~D[2019-12-09], [1, 2, 3]},
+      {:task, %{value: "timer"}, [1, 2, 3]},
+      {~D[2019-12-09], %{value: "timer"}, [1, 2, 3]}
+  ]    
+  ```
+
+  ### Ranges
+
+  Ranges can be used to create combinations over ordered lists of numbers. Before combination the provided
+  range is converted into a list. Increasing or decreasing ranges are supported.
+
+  ```elixir
+  iex> Chunky.combinations(3..6, 2)
+  [ [3, 4], [3, 5], [3, 6], [4, 5], [4, 6], [5, 6] ]
+
+  iex> Chunky.combinations(-10..-13, 3)
+  [
+      [-10, -11, -12],
+      [-10, -11, -13],
+      [-10, -12, -13],
+      [-11, -12, -13]
+  ]    
+  ```
+
+  ## Examples
+
+      iex> Chunky.combinations([4, 3, 4, 3], 3)
+      [[4, 3, 4], [4, 3, 3], [4, 4, 3], [3, 4, 3]]
+
+      iex> Chunky.combinations("abcd", 2)
+      ["ab", "ac", "ad", "bc", "bd", "cd"]
+
+      iex> Chunky.combinations({:a, :b, :c}, 1)
+      [ {:a}, {:b}, {:c}]
+
+      iex> Chunky.combinations(2..-2, 3)
+      [ [2, 1, 0], [2, 1, -1], [2, 1, -2], [2, 0, -1], [2, 0, -2], [2, -1, -2], [1, 0, -1], [1, 0, -2], [1, -1, -2], [0, -1, -2]]
+  """
+  def combinations(_, 0), do: [[]]
+  def combinations([], k) when is_integer(k), do: []
+  def combinations([head|tail], k) when is_integer(k) do
+      
+      Enum.map(
+          combinations(tail, k - 1), 
+          fn r_comb -> 
+              [head | r_comb]
+          end
+      ) 
+      ++ combinations(tail, k)
+  end
+    
+  def combinations(str, k) when is_binary(str) and is_integer(k) do
+    str
+
+    # break into characters
+    |> String.split("")
+
+    # remove the blanks
+    |> Enum.reject(fn v -> v == "" end)
+
+    # permute
+    |> combinations(k)
+
+    # reconstruct strings
+    |> Enum.map(fn perm -> perm |> Enum.join("") end)
+  end
+
+  def combinations(tup, k) when is_tuple(tup) and is_integer(k) do
+    tup
+    |> Tuple.to_list()
+    |> combinations(k)
+    |> Enum.map(&List.to_tuple/1)
+  end
+
+  def combinations(%Range{} = range, k) when is_integer(k) do
+    range
+    |> Enum.to_list()
+    |> combinations(k)
+  end
+  
   @doc """
   Break a set of values into smaller chunks of a specific length.
 

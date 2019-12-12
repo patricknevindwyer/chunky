@@ -16,6 +16,9 @@ iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
   "⭐️🤷🏽‍♀️😀"
 ]
 
+iex> Chunky.combinations(1..4, 3)
+[[1, 2, 3], [1, 2, 4], [1, 3, 4], [2, 3, 4]]
+
 iex> Chunky.chunk_length(10_000..10_100, 7)
 [
   [10000, 10001, 10002, 10003, 10004, 10005, 10006],
@@ -43,7 +46,7 @@ Install by adding `chunky` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:chunky, "~> 0.2.1"}
+    {:chunky, "~> 0.3.0"}
   ]
 end
 ```

@@ -1,8 +1,12 @@
 # CHANGELOG
 
 
-## Pending
+## v0.3.0
 
+### Enhancements
+
+ - Added `Chunky.combinations/2` for nCr unordered set generation
+ 
 ### Documentation
 
  - move all TODO items out of Chunky module
