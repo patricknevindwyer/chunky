@@ -202,6 +202,36 @@ defmodule ChunkyTest do
       assert length(permutations(1..8)) == 40320
     end
   end
+  
+  describe "permutations_size/1" do
+     
+     test "integer list" do
+         assert permutations_size([1, 2, 3, 4, 5]) == 120
+     end
+     
+     test "atom list" do
+         assert permutations_size([:a, :b, :c]) == 6
+         assert permutations_size([:a, :b]) == 2
+         assert permutations_size([:a]) == 1
+         assert permutations_size([]) == 0
+     end
+     
+     test "tuple" do
+         assert permutations_size({:a, :b, :c, :d, :e}) == 120
+     end
+     
+     test "range" do
+         assert permutations_size(1..20) == 2432902008176640000
+     end
+     
+     test "string" do
+         assert permutations_size("abcdefghijklmnopqrstuvwxyz") == 403291461126605635584000000
+     end
+     
+     test "unicode" do
+         assert permutations_size("😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️") == 720
+     end
+  end
 
   describe "chunk_length/2" do
     test "integer list" do

@@ -12,6 +12,8 @@
 
 # New functions
  
+ - Chunky.combination_size/2
+ 
  - Chunky.filter_with_predicates/2 (day04.ex)
   - `Chunky.filter_with_predicates/2` - Filter an enumeration to _only_ those entries that meet all the provided predicate functions
   - add a Predicates module, with different types of predicates
@@ -28,3 +30,11 @@
  - circleCI?
  - code coverage?
  - code coverage badge?
+
+
+# Documentation
+
+Refs for permute vs combine
+ - http://mathworld.wolfram.com/Combination.html
+ - https://rosettacode.org/wiki/Combinations_with_repetitions
+ - https://en.wikipedia.org/wiki/Combination

@@ -1,6 +1,11 @@
 # CHANGELOG
 
+## v0.4.0
 
+### Enhancements
+
+ - `Chunky.permutations_size/1` - pre-calculate the size of a permutation using a closed form equation, instead of running the permutation
+ 
 ## v0.3.0
 
 ### Enhancements
