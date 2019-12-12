@@ -5,21 +5,23 @@ defmodule Chunky do
   ## Functions
 
    - `Chunky.permutations/1` - Generate all permutations of a set of values, with no duplication
+   - `Chunky.permutations_size/1` - Calculate the size of a permutation result from `Chunky.permutations/1`
    - `Chunky.combinations/2` - Generate combinations of a set of values, with no duplication
-   - `Chunky.chunk_length/2` - Chunk an enumerable into specific length chunks
+   - `Chunky.chunk_length/2` - Chunk an enumerable into a list of specific length chunks
   
   For combinations and permutations, it can be helpful compare the differences:
   
-  |                | Unordered              | Ordered               |
-  |----------------|------------------------|-----------------------|
-  | No Replacement | `Chunky.combinations/2` | `Chunky.permutations/1 |
-  | Replacement    |  unsupported           | unsupported           |
+  |                    | Unordered               | Ordered                 |
+  |--------------------|-------------------------|-------------------------|
+  | **No Replacement** | `Chunky.combinations/2` | `Chunky.permutations/1` |
+  | **Replacement**    |  unsupported            | unsupported             |
   
   And expected outputs from simple string parameters:
   
-  |                | Unordered              | Ordered               |
-  | No Replacement | `[ "abc", "abd", "acd", "bcd"]`  | `["abc", "acb", "bac", "bca", "cab", "cba"]` |
-  | Replacement    |                        |                       |
+  |                    | Unordered                        | Ordered                                      |
+  |--------------------|----------------------------------|----------------------------------------------|
+  | **No Replacement** | `[ "abc", "abd", "acd", "bcd"]`  | `["abc", "acb", "bac", "bca", "cab", "cba"]` |
+  | **Replacement**    |                                  |                                              |
   
   
   """

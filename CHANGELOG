@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.4.1
+
+### Documentation
+
+ - Fixes for embedded `@moduledoc` for better Hexdocs layout
+ 
 ## v0.4.0
 
 ### Enhancements
