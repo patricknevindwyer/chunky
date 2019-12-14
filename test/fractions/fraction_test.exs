@@ -4,6 +4,12 @@ defmodule Chunky.FractionTest do
   
   doctest Chunky.Fraction, import: true
 
+  describe "String.Chars protocol" do
+     test "to_string" do
+         assert "#{Fraction.new(3, 5)}" == "3/5"
+     end
+  end
+  
   describe "sub/*" do
       
       test "frac - frac" do

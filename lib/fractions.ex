@@ -69,6 +69,12 @@ defmodule Chunky.Fraction do
    """
    def new(int) when is_integer(int), do: new(int, 1)
    
+   defimpl String.Chars do
+       def to_string(%Fraction{num: num, den: den}) do
+          "#{num}/#{den}" 
+       end
+   end
+   
    @doc """
    Add two fractions, or a fraction and an integer, and return the (optionally simplified) result.
    
