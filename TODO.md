@@ -11,7 +11,7 @@
  - add N permute R
  - is <pattern> a permutation of Chunky.permutations([....])?
  - is <pattern> a combination of chunky.combinations([...], k)?
- - move permute/combine et al to Chunky.Sets
+ - move permute/combine et al to Chunky.Sets or Chunky.Combinitorics
  - move enumeration ops to Chunky.Enums
  - move grids ops to Chunky.Grid
  - more enumerations from https://en.wikipedia.org/wiki/Combinatorics (approaches and subfields)
@@ -25,6 +25,31 @@
  - Chunky.take_sequences/1 or Chunky.chunk_runs/1 (day04.ex)
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
+ 
+ - Chunky.Fraction
+  - add (frac, frac)
+  - add (frac, whole)
+  - add (whole, frac)
+  - sub (frac, frac)
+  - sub (frac, whole)
+  - sub (whole, frac)
+  - mult (frac, frac)
+  - mult (frac, whole)
+  - mult (whole, frac)
+  - div (frac, frac)
+  - div (frac, whole)
+  - div (whole, frac)
+  - pow(frac, frac)
+  - pow(frac, whole)
+  - pow(whole, frac)
+  - gt(frac, frac)
+  - gt(frac, whole)
+  - lt(frac, frac)
+  - lt(frac, whole)
+  - eq(frac, frac)
+  - eq(frac, whole)
+  - sum(fracs)
+  - to_float
  
  - Chunky.Grid
   - x new grid (value)
@@ -54,7 +79,8 @@
   - rotate
   - to_string(s)
   - from_string(s)
-
+  - Enumerations for 2D (Enum.*)
+  
   - get identity
   - matrix ops
   - append (A(3x10) + )
@@ -62,6 +88,13 @@
    - size a new grid to contain them
    - paste grids
   
+  - break out an extended math module (Chunky.Sequences, Chunky.Fractions)
+   - OEIS sequences as generators
+   - sequences to fractions
+   - eulerian functions
+   - triangulars, etc
+   - primality
+      
 # Updates
  
  - better parameter names

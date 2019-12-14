@@ -18,6 +18,17 @@
 
 ### Enhancements
 
+ - `Chunky.Fraction` module for manipulating fractions
+  - `has_whole?/1` - fractions is greater than 1, and has a whole component
+  - `is_whole?/1` - does a fraction exactly represent a whole number
+  - `components/1` - tuple of numerator an denominator
+  - `get_whole/1` - get reduced whole component of a fraction
+  - `get_remainder/1` - get remainder of fraction after removing whole components
+  - `split/1` - combine `get_whole/1` and `get_remainder/1` into one call
+  - `is_simplified?/1` - is fraction in reduced form?
+  - `simplify/1` - reduce fraction
+  - `is_zero?/1` - does fraction represent zero?
+
  - `Chunky.Grid` module for working with two dimensional data
   - `Grid.new/3` - generate a grid from a value or a function
   - `Grid.get_at/2` and `Grid.get_at/3` - access cell value by 2d index
