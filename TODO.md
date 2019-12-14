@@ -47,10 +47,9 @@
   - x sub (frac, frac)
   - x sub (frac, whole)
   - x sub (whole, frac)
-  - 
-  - mult (frac, frac)
-  - mult (frac, whole)
-  - mult (whole, frac)
+  - x mult (frac, frac)
+  - x mult (frac, whole)
+  - x mult (whole, frac)
   - div (frac, frac)
   - div (frac, whole)
   - div (whole, frac)

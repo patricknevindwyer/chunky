@@ -144,6 +144,75 @@ defmodule Chunky.Fraction do
    
    def subtract(%Fraction{}=fraction_a, int, opts) when is_integer(int), do: subtract(fraction_a, Fraction.new(int, 1), opts)
    def subtract(int, %Fraction{}=fraction_b, opts) when is_integer(int), do: subtract(Fraction.new(int, 1), fraction_b, opts)
+
+   @doc """
+   Multiply two fractions, or a fraction and an integer and return the (optionally simplified) result.
+   
+   ## Examples
+   
+        iex> Fraction.multiply(Fraction.new(3, 7), Fraction.new(22, 7))
+        %Fraction{num: 66, den: 49}
+
+        iex> Fraction.multiply(Fraction.new(2, 9), 33, simplify: true)
+        %Fraction{num: 22, den: 3}
+   
+        iex> Fraction.multiply(4, Fraction.new(12, 5))
+        %Fraction{num: 48, den: 5}
+   """
+   def multiply(a, b, opts \\ [])
+   def multiply(%Fraction{}=fraction_a, %Fraction{}=fraction_b, opts) do
+       simp = opts |> Keyword.get(:simplify, false)
+       
+       if simp do
+           Fraction.new( (fraction_a.num * fraction_b.num), (fraction_a.den * fraction_b.den)) |> simplify()
+       else
+           Fraction.new( (fraction_a.num * fraction_b.num), (fraction_a.den * fraction_b.den))
+       end
+       
+   end
+   
+   def multiply(%Fraction{}=fraction_a, int, opts) when is_integer(int), do: multiply(fraction_a, Fraction.new(int), opts)
+   def multiply(int, %Fraction{}=fraction_b, opts) when is_integer(int), do: multiply(Fraction.new(int), fraction_b, opts)
+   
+   @doc """
+   Create the reciprocal of a fraction, optionally simplifying the result. 
+   
+   Negative fractions will switch the sign to carry on the new numerator. Trying to take the reciprocal
+   of a zero fraction will result in an error.
+   
+   ## Examples
+   
+       iex> Fraction.new(3, 4) |> Fraction.reciprocal()
+       %Fraction{num: 4, den: 3}
+   
+       iex> Fraction.new(-4, 40) |> Fraction.reciprocal(simplify: true)
+       %Fraction{num: -10, den: 1}
+   
+       iex> Fraction.new(0, 3) |> Fraction.reciprocal()
+       {:error, :invalid_denominator}
+   """
+   def reciprocal(%Fraction{}=fraction, opts \\ []) do
+       simp = opts |> Keyword.get(:simplify, false)
+       
+       cond do
+          fraction.num == 0 -> {:error, :invalid_denominator} 
+          fraction.num < 0 -> 
+              
+              if simp do
+                  Fraction.new(fraction.den * -1, abs(fraction.num)) |> simplify()
+              else
+                  Fraction.new(fraction.den * -1, abs(fraction.num))                  
+              end
+              
+          true -> 
+
+              if simp do
+                  Fraction.new(fraction.den, fraction.num) |> simplify()
+              else
+                  Fraction.new(fraction.den, fraction.num)
+              end
+       end
+   end
    
    @doc """
    Extract the numerator and denominator of a fraction as a tuple of values.
