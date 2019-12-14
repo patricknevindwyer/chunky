@@ -108,6 +108,38 @@ defmodule Chunky.Fraction do
    def add(int, %Fraction{}=fraction_b, opts) when is_integer(int), do: add(Fraction.new(int, 1), fraction_b, opts)
    
    @doc """
+   Subtract two fractions, or a fraction an an integer, and return the (optionally) simplified result.
+   
+   ## Examples
+
+       iex> Fraction.subtract(Fraction.new(3, 5), Fraction.new(1, 5))
+       %Fraction{num: 2, den: 5}
+   
+       iex> Fraction.subtract(2, Fraction.new(-6, 9), simplify: true)
+       %Fraction{num: 8, den: 3}
+   
+       iex> Fraction.subtract(Fraction.new(-2, 4), -5, simplify: true)
+       %Fraction{num: 9, den: 2}
+   """
+   def subtract(a, b, opts \\ [])
+   def subtract(%Fraction{}=fraction_a, %Fraction{}=fraction_b, opts) do
+       simp = opts |> Keyword.get(:simplify, false)
+       
+       new_base = lcm(fraction_a.den, fraction_b.den)
+       a_mult = div(new_base, fraction_a.den)
+       b_mult = div(new_base, fraction_b.den)
+       
+       if simp do
+           Fraction.new( (fraction_a.num * a_mult) - (fraction_b.num * b_mult), new_base) |> simplify()
+       else
+           Fraction.new( (fraction_a.num * a_mult) - (fraction_b.num * b_mult), new_base)
+       end
+   end
+   
+   def subtract(%Fraction{}=fraction_a, int, opts) when is_integer(int), do: subtract(fraction_a, Fraction.new(int, 1), opts)
+   def subtract(int, %Fraction{}=fraction_b, opts) when is_integer(int), do: subtract(Fraction.new(int, 1), fraction_b, opts)
+   
+   @doc """
    Extract the numerator and denominator of a fraction as a tuple of values.
    
    ## Examples

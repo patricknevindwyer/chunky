@@ -4,7 +4,129 @@ defmodule Chunky.FractionTest do
   
   doctest Chunky.Fraction, import: true
 
-  describe "add/2" do
+  describe "sub/*" do
+      
+      test "frac - frac" do
+
+         test_cases = [
+             
+             # pos - pos == pos
+             %{left: {3, 5}, right: {1, 5}, result: {2, 5}, opts: []},
+             %{left: {7, 3}, right: {1, 9}, result: {20, 9}, opts: []},
+             %{left: {8, 3}, right: {3, 9}, result: {21, 9}, opts: []},
+             %{left: {8, 3}, right: {3, 9}, result: {7, 3}, opts: [simplify: true]},
+             
+             # pos - pos == neg
+             %{left: {1, 3}, right: {9, 9}, result: {-6, 9}, opts: []},
+             %{left: {1, 3}, right: {9, 9}, result: {-2, 3}, opts: [simplify: true]},
+             
+             
+             # pos - neg == pos
+             %{left: {1, 3}, right: {-6, 9}, result: {9, 9}, opts: []},
+             %{left: {1, 3}, right: {-6, 9}, result: {1, 1}, opts: [simplify: true]},
+                          
+             # neg - pos == neg
+             %{left: {-1, 3}, right: {6, 9}, result: {-9, 9}, opts: []},
+             %{left: {-1, 3}, right: {6, 9}, result: {-1, 1}, opts: [simplify: true]},
+             
+             # neg - neg
+             %{left: {-1, 3}, right: {-6, 9}, result: {3, 9}, opts: []},
+             %{left: {-1, 3}, right: {-6, 9}, result: {1, 3}, opts: [simplify: true]},
+             
+         ] 
+         
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.subtract(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+      end
+      
+      test "int - frac" do
+
+          test_cases = [
+             
+              # pos - pos == pos
+              %{left: 3, right: {1, 5}, result: {14, 5}, opts: []},
+              %{left: 1, right: {3, 9}, result: {6, 9}, opts: []},
+              %{left: 1, right: {3, 9}, result: {2, 3}, opts: [simplify: true]},
+             
+              # pos - pos == neg
+              %{left: 1, right: {15, 9}, result: {-6, 9}, opts: []},
+              %{left: 1, right: {15, 9}, result: {-2, 3}, opts: [simplify: true]},
+             
+              # pos - neg == pos
+              %{left: 2, right: {-6, 9}, result: {24, 9}, opts: []},
+              %{left: 2, right: {-6, 9}, result: {8, 3}, opts: [simplify: true]},
+                          
+              # neg - pos == neg
+              %{left: -3, right: {6, 9}, result: {-33, 9}, opts: []},
+              %{left: -3, right: {6, 9}, result: {-11, 3}, opts: [simplify: true]},
+             
+              # neg - neg
+              %{left: -1, right: {-6, 9}, result: {-3, 9}, opts: []},
+              %{left: -1, right: {-6, 9}, result: {-1, 3}, opts: [simplify: true]},
+             
+          ] 
+         
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = test_case.left
+                  f_b = Fraction.new(test_case.right)
+
+                  assert Fraction.subtract(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+              end
+          )
+          
+      end
+      
+      test "frac - int" do
+          
+          test_cases = [
+             
+              # pos - pos == pos
+              %{left: {7, 5}, right: 1, result: {2, 5}, opts: []},
+              %{left: {24, 9}, right: 2, result: {6, 9}, opts: []},
+              %{left: {24, 9}, right: 2, result: {2, 3}, opts: [simplify: true]},
+             
+              # pos - pos == neg
+              %{left: {8, 6}, right: 2, result: {-4, 6}, opts: []},
+              %{left: {8, 6}, right: 2, result: {-2, 3}, opts: [simplify: true]},
+             
+             
+              # pos - neg == pos
+              %{left: {2, 6}, right: -4, result: {26, 6}, opts: []},
+              %{left: {2, 6}, right: -4, result: {13, 3}, opts: [simplify: true]},
+                          
+              # neg - pos == neg
+              %{left: {-2, 4}, right: 3, result: {-14, 4}, opts: []},
+              %{left: {-2, 4}, right: 3, result: {-7, 2}, opts: [simplify: true]},
+             
+              # neg - neg
+              %{left: {-2, 4}, right: -5, result: {18, 4}, opts: []},
+              %{left: {-2, 4}, right: -5, result: {9, 2}, opts: [simplify: true]},
+             
+          ] 
+         
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.left)
+                  f_b = test_case.right
+
+                  assert Fraction.subtract(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+              end
+          )          
+      end
+  end
+  
+  describe "add/*" do
      
      test "pos/pos + pos/pos" do
          
