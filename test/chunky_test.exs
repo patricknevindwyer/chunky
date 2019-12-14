@@ -5,194 +5,206 @@ defmodule ChunkyTest do
   import Chunky
 
   describe "combinations/2" do
-      
     test "empty list nCk(_, 3)" do
-        assert combinations([], 3) == []
+      assert combinations([], 3) == []
     end
-    
-    test "empty string nCk(_, 3)"  do
-        assert combinations("", 3) == []
+
+    test "empty string nCk(_, 3)" do
+      assert combinations("", 3) == []
     end
-    
+
     test "single step range nCk(_, 1)" do
-        assert combinations(1..1, 1) == [ [1] ]
+      assert combinations(1..1, 1) == [[1]]
     end
-    
+
     test "empty k nCk(_, 0)" do
-        assert combinations([1, 2, 3], 0) == []
+      assert combinations([1, 2, 3], 0) == []
     end
-    
+
     test "k larger than list nCk(_, _)" do
-        
     end
-    
+
     test "integer nCk(_, 3)" do
-       assert combinations([0, 1, 2, 3, 4], 3) == [
-           [0,1,2],
-           [0,1,3],
-           [0,1,4],
-           [0,2,3],
-           [0,2,4],
-           [0,3,4],
-           [1,2,3],
-           [1,2,4],
-           [1,3,4],
-           [2,3,4]
-       ]
+      assert combinations([0, 1, 2, 3, 4], 3) == [
+               [0, 1, 2],
+               [0, 1, 3],
+               [0, 1, 4],
+               [0, 2, 3],
+               [0, 2, 4],
+               [0, 3, 4],
+               [1, 2, 3],
+               [1, 2, 4],
+               [1, 3, 4],
+               [2, 3, 4]
+             ]
     end
-    
+
     test "integer nCk(_, 2)" do
-       assert combinations([1, 3, 5, 7, 11, 13], 2)  == [
-           [1, 3],
-           [1, 5],
-           [1, 7],
-           [1, 11],
-           [1, 13],
-           [3, 5],
-           [3, 7],
-           [3, 11],
-           [3, 13],
-           [5, 7],
-           [5, 11],
-           [5, 13], 
-           [7, 11],
-           [7, 13],
-           [11, 13]
-       ]
+      assert combinations([1, 3, 5, 7, 11, 13], 2) == [
+               [1, 3],
+               [1, 5],
+               [1, 7],
+               [1, 11],
+               [1, 13],
+               [3, 5],
+               [3, 7],
+               [3, 11],
+               [3, 13],
+               [5, 7],
+               [5, 11],
+               [5, 13],
+               [7, 11],
+               [7, 13],
+               [11, 13]
+             ]
     end
-    
+
     test "integer nCk(_, 1)" do
-       assert combinations([1, 2, 3, 4, 5, 6, 7, 8], 1) == [[1], [2], [3], [4], [5], [6], [7], [8]] 
+      assert combinations([1, 2, 3, 4, 5, 6, 7, 8], 1) == [[1], [2], [3], [4], [5], [6], [7], [8]]
     end
-    
+
     test "integer ordering nCk(_, 2)" do
-       assert combinations([7, 0, 3, 6, 4, 6], 2) == [
-           [7, 0],
-           [7, 3],
-           [7, 6],
-           [7, 4],
-           [7, 6],
-           [0, 3],
-           [0, 6],
-           [0, 4],
-           [0, 6],
-           [3, 6],
-           [3, 4],
-           [3, 6],
-           [6, 4],
-           [6, 6],
-           [4, 6]
-       ] 
+      assert combinations([7, 0, 3, 6, 4, 6], 2) == [
+               [7, 0],
+               [7, 3],
+               [7, 6],
+               [7, 4],
+               [7, 6],
+               [0, 3],
+               [0, 6],
+               [0, 4],
+               [0, 6],
+               [3, 6],
+               [3, 4],
+               [3, 6],
+               [6, 4],
+               [6, 6],
+               [4, 6]
+             ]
     end
-    
+
     test "atom list nCk(_, 3)" do
-        assert combinations([:a, :b, :c, :d], 3) == [[:a, :b, :c], [:a, :b, :d], [:a, :c, :d], [:b, :c, :d]]
+      assert combinations([:a, :b, :c, :d], 3) == [
+               [:a, :b, :c],
+               [:a, :b, :d],
+               [:a, :c, :d],
+               [:b, :c, :d]
+             ]
     end
-    
+
     test "atom list nCk(_, 1)" do
-        assert combinations([:a, :b, :c, :d], 1) == [ [:a], [:b], [:c], [:d]]
+      assert combinations([:a, :b, :c, :d], 1) == [[:a], [:b], [:c], [:d]]
     end
-    
+
     # string
     test "string nCk(_, 3)" do
-        assert combinations("abcd", 3) == ["abc", "abd", "acd", "bcd"]
+      assert combinations("abcd", 3) == ["abc", "abd", "acd", "bcd"]
     end
-    
+
     test "string nCk(_, 1)" do
-        assert combinations("abcd", 1) == ["a", "b", "c", "d"]
+      assert combinations("abcd", 1) == ["a", "b", "c", "d"]
     end
-    
+
     # unicdoe
     test "unicode nCk(_, 3)" do
-        assert combinations("★⍵¥᙭", 3) == ["★⍵¥", "★⍵᙭", "★¥᙭", "⍵¥᙭"]
-        assert combinations("😀🤷🏽‍♀️⭐️🙎🏻‍♀️", 3) == ["😀🤷🏽‍♀️⭐️", "😀🤷🏽‍♀️🙎🏻‍♀️", "😀⭐️🙎🏻‍♀️", "🤷🏽‍♀️⭐️🙎🏻‍♀️"]
+      assert combinations("★⍵¥᙭", 3) == ["★⍵¥", "★⍵᙭", "★¥᙭", "⍵¥᙭"]
+      assert combinations("😀🤷🏽‍♀️⭐️🙎🏻‍♀️", 3) == ["😀🤷🏽‍♀️⭐️", "😀🤷🏽‍♀️🙎🏻‍♀️", "😀⭐️🙎🏻‍♀️", "🤷🏽‍♀️⭐️🙎🏻‍♀️"]
     end
-    
+
     test "unicode nCk(_, 1)" do
-        assert combinations("★⍵¥᙭", 1) == ["★", "⍵", "¥", "᙭"]
-        assert combinations("😀🤷🏽‍♀️⭐️🙎🏻‍♀️", 1) == ["😀", "🤷🏽‍♀️", "⭐️", "🙎🏻‍♀️"]        
+      assert combinations("★⍵¥᙭", 1) == ["★", "⍵", "¥", "᙭"]
+      assert combinations("😀🤷🏽‍♀️⭐️🙎🏻‍♀️", 1) == ["😀", "🤷🏽‍♀️", "⭐️", "🙎🏻‍♀️"]
     end
-    
+
     # tuple
     test "tuple nCk(_, 3)" do
-        assert combinations({:a, :b, :c, :d}, 3) == [{:a, :b, :c}, {:a, :b, :d}, {:a, :c, :d}, {:b, :c, :d}]
-        assert combinations({:a, 1, true, %{}}, 3) == [{:a, 1, true}, {:a, 1, %{}}, {:a, true, %{}}, {1, true, %{}}]
+      assert combinations({:a, :b, :c, :d}, 3) == [
+               {:a, :b, :c},
+               {:a, :b, :d},
+               {:a, :c, :d},
+               {:b, :c, :d}
+             ]
+
+      assert combinations({:a, 1, true, %{}}, 3) == [
+               {:a, 1, true},
+               {:a, 1, %{}},
+               {:a, true, %{}},
+               {1, true, %{}}
+             ]
     end
-    
+
     test "tuple nCk(_, 1)" do
-        assert combinations({:a, :b, :c, :d}, 1) == [{:a}, {:b}, {:c}, {:d}]
-        assert combinations({:a, 1, true, %{}}, 1) == [{:a}, {1}, {true}, {%{}}]        
+      assert combinations({:a, :b, :c, :d}, 1) == [{:a}, {:b}, {:c}, {:d}]
+      assert combinations({:a, 1, true, %{}}, 1) == [{:a}, {1}, {true}, {%{}}]
     end
-    
+
     # range
     test "range nCk(_, 3)" do
-        assert combinations(1..4, 3) == [ [1, 2, 3], [1, 2, 4], [1, 3, 4], [2, 3, 4]]
-        assert combinations(1..-2, 3) == [ [1, 0, -1], [1, 0, -2], [1, -1, -2], [0, -1, -2]]
+      assert combinations(1..4, 3) == [[1, 2, 3], [1, 2, 4], [1, 3, 4], [2, 3, 4]]
+      assert combinations(1..-2, 3) == [[1, 0, -1], [1, 0, -2], [1, -1, -2], [0, -1, -2]]
     end
-    
+
     test "range nCk(_, 1)" do
-        assert combinations(1..4, 1) == [ [1], [2], [3], [4]]
-        assert combinations(1..-2, 1) == [ [1], [0], [-1], [-2]]        
+      assert combinations(1..4, 1) == [[1], [2], [3], [4]]
+      assert combinations(1..-2, 1) == [[1], [0], [-1], [-2]]
     end
-    
+
     # large combinations
     test "large size nCk(10, 4)" do
-        assert length(combinations([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4)) == 210
+      assert length(combinations([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4)) == 210
     end
-    
+
     test "large size nCk(20, 6)" do
-        assert length(combinations(1..20, 6)) == 38760
+      assert length(combinations(1..20, 6)) == 38760
     end
-    
   end
-  
+
   describe "combinations_size/2" do
-     
-     test "integer list" do
-         assert combinations_size([1, 2, 3, 4, 5], 2) == 10
-         assert combinations_size([1, 2, 3, 4, 5], 3) == 10
-         assert combinations_size([1, 2, 3, 4, 5], 4) == 5
-         assert combinations_size([1, 2, 3, 4, 5], 5) == 1
-         assert combinations_size([1, 2, 3, 4, 5], 6) == 0
-     end
-     
-     test "atom list" do
-         assert combinations_size([:a, :b, :c, :d], 2) == 6
-         assert combinations_size([:a, :b], 1) == 2
-         assert combinations_size([], 3) == 0
-     end
-     
-     test "tuple" do
-         assert combinations_size({:a, :b, :c, :d, :e, :f}, 3) == 20
-     end
-     
-     test "range" do
-         assert combinations_size(1..20, 5) == 15504
-     end
-     
-     test "string" do
-         assert combinations_size("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 5) == 2598960
-     end
-     
-     test "unicode" do
-         assert combinations_size("😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️", 8) == 43758
-     end
+    test "integer list" do
+      assert combinations_size([1, 2, 3, 4, 5], 2) == 10
+      assert combinations_size([1, 2, 3, 4, 5], 3) == 10
+      assert combinations_size([1, 2, 3, 4, 5], 4) == 5
+      assert combinations_size([1, 2, 3, 4, 5], 5) == 1
+      assert combinations_size([1, 2, 3, 4, 5], 6) == 0
+    end
+
+    test "atom list" do
+      assert combinations_size([:a, :b, :c, :d], 2) == 6
+      assert combinations_size([:a, :b], 1) == 2
+      assert combinations_size([], 3) == 0
+    end
+
+    test "tuple" do
+      assert combinations_size({:a, :b, :c, :d, :e, :f}, 3) == 20
+    end
+
+    test "range" do
+      assert combinations_size(1..20, 5) == 15504
+    end
+
+    test "string" do
+      assert combinations_size("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 5) ==
+               2_598_960
+    end
+
+    test "unicode" do
+      assert combinations_size("😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️", 8) == 43758
+    end
   end
-  
+
   describe "permutations/1" do
-      
     test "empty list" do
-        assert permutations([]) == []
+      assert permutations([]) == []
     end
-    
+
     test "empty string" do
-        assert permutations("") == []
+      assert permutations("") == []
     end
-    
+
     test "single step range" do
-        assert permutations(1..1) == [[1]]
+      assert permutations(1..1) == [[1]]
     end
-    
+
     test "integer list" do
       assert permutations([1, 2, 3]) == [
                [1, 2, 3],
@@ -269,35 +281,35 @@ defmodule ChunkyTest do
       assert length(permutations(1..8)) == 40320
     end
   end
-  
+
   describe "permutations_size/1" do
-     
-     test "integer list" do
-         assert permutations_size([1, 2, 3, 4, 5]) == 120
-     end
-     
-     test "atom list" do
-         assert permutations_size([:a, :b, :c]) == 6
-         assert permutations_size([:a, :b]) == 2
-         assert permutations_size([:a]) == 1
-         assert permutations_size([]) == 0
-     end
-     
-     test "tuple" do
-         assert permutations_size({:a, :b, :c, :d, :e}) == 120
-     end
-     
-     test "range" do
-         assert permutations_size(1..20) == 2432902008176640000
-     end
-     
-     test "string" do
-         assert permutations_size("abcdefghijklmnopqrstuvwxyz") == 403291461126605635584000000
-     end
-     
-     test "unicode" do
-         assert permutations_size("😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️") == 720
-     end
+    test "integer list" do
+      assert permutations_size([1, 2, 3, 4, 5]) == 120
+    end
+
+    test "atom list" do
+      assert permutations_size([:a, :b, :c]) == 6
+      assert permutations_size([:a, :b]) == 2
+      assert permutations_size([:a]) == 1
+      assert permutations_size([]) == 0
+    end
+
+    test "tuple" do
+      assert permutations_size({:a, :b, :c, :d, :e}) == 120
+    end
+
+    test "range" do
+      assert permutations_size(1..20) == 2_432_902_008_176_640_000
+    end
+
+    test "string" do
+      assert permutations_size("abcdefghijklmnopqrstuvwxyz") ==
+               403_291_461_126_605_635_584_000_000
+    end
+
+    test "unicode" do
+      assert permutations_size("😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️") == 720
+    end
   end
 
   describe "chunk_length/2" do

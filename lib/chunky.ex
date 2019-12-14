@@ -9,22 +9,22 @@ defmodule Chunky do
    - `Chunky.combinations/2` - Generate combinations of a set of values, with no duplication
    - `Chunky.combinations_size/2` - Calculate the size of a combanation result from `Chunky.combinations/2`
    - `Chunky.chunk_length/2` - Chunk an enumerable into a list of specific length chunks
-  
+
   For combinations and permutations, it can be helpful compare the differences:
-  
+
   |                    | Unordered               | Ordered                 |
   |--------------------|-------------------------|-------------------------|
   | **No Replacement** | `Chunky.combinations/2` | `Chunky.permutations/1` |
   | **Replacement**    |  unsupported            | unsupported             |
-  
+
   And expected outputs from simple string parameters:
-  
+
   |                    | Unordered                        | Ordered                                      |
   |--------------------|----------------------------------|----------------------------------------------|
   | **No Replacement** | `[ "abc", "abd", "acd", "bcd"]`  | `["abc", "acb", "bac", "bca", "cab", "cba"]` |
   | **Replacement**    |                                  |                                              |
-  
-  
+
+
   """
 
   @doc """
@@ -178,10 +178,11 @@ defmodule Chunky do
   def permutations([]), do: []
 
   def permutations(list) when is_list(list) do
-      permutations_calc(list)
+    permutations_calc(list)
   end
 
   def permutations(""), do: []
+
   def permutations(str) when is_binary(str) do
     str
 
@@ -210,78 +211,75 @@ defmodule Chunky do
     |> Enum.to_list()
     |> permutations_calc()
   end
-  
+
   # private functions to run actual permutations
   defp permutations_calc([]), do: [[]]
 
   defp permutations_calc(list) when is_list(list),
     do: for(elem <- list, rest <- permutations_calc(list -- [elem]), do: [elem | rest])
-  
+
   @doc """
   Compute the size of the result of calling `Chunky.permutations/1`, without actually
   running a permutation.
-  
+
   The results of a permutation of a set of `n` items grows at a rate of `n!`.
-  
+
   This can be a quick sanity check before running a permutation. Works with all of the
   parameters that work with `Chunky.permutations/1`, as a drop in replacement. Uses
   a closed form factorial to calculate the size of the list that would result from an
   indentical call to `Chunky.permutations/1`:
-  
+
   ```elixir
   iex> Chunky.permutations_size("abcd")
   24
-  
+
   iex> Chunky.permutations_size(1..10)
   3628800
-  
+
   iex> Chunky.permutations_size({:a, :b, :c, :d, :e, :f, :g})
   5040
-  
+
   iex> Chunky.permutations_size([1, 4, 8, 10, 15, 37, 91, 113, 3345, 8765, 101010, 345678])
   479001600
   ```
-  
+
   See `Chunky.permutations/1` for more details on supported types.
   """
   def permutations_size([]), do: 0
+
   def permutations_size(list) when is_list(list) do
-      list |> length() |> fac()
+    list |> length() |> fac()
   end
-  
+
   def permutations_size(str) when is_binary(str) do
-      str
+    str
 
-      # break into characters
-      |> String.split("")
+    # break into characters
+    |> String.split("")
 
-      # remove the blanks
-      |> Enum.reject(fn v -> v == "" end)
+    # remove the blanks
+    |> Enum.reject(fn v -> v == "" end)
 
-      # permute
-      |> permutations_size()
-      
+    # permute
+    |> permutations_size()
   end
-  
+
   def permutations_size(tup) when is_tuple(tup) do
-      
-      tup
-      |> Tuple.to_list()
-      |> permutations_size()
-      
+    tup
+    |> Tuple.to_list()
+    |> permutations_size()
   end
-  
+
   def permutations_size(%Range{} = range) do
-      range
-      |> Enum.to_list()
-      |> permutations_size()
+    range
+    |> Enum.to_list()
+    |> permutations_size()
   end
-  
-  
+
   @doc """
   Generate the set of [combinations](http://mathworld.wolfram.com/Combination.html) from a set of
   values.
-  
+
   The _type_ of the set of values can be:
 
    - a list of any type, like `[1, 2, 3]` or `[:a, :b, %{}]`
@@ -291,7 +289,7 @@ defmodule Chunky do
 
   This is _not_ lazy generated, so a combination of a large set may take awhile. Keep in mind
   that the total number of combinations of `k` length for a set of `n` values is:
-  
+
   ```math
        n!
   ----------
@@ -309,7 +307,7 @@ defmodule Chunky do
   iex> Chunky.combinations("😀★⍵😀🤷🏽‍♀️", 3)
   ["😀★⍵", "😀★😀", "😀★🤷🏽‍♀️", "😀⍵😀", "😀⍵🤷🏽‍♀️", "😀😀🤷🏽‍♀️", "★⍵😀", "★⍵🤷🏽‍♀️", "★😀🤷🏽‍♀️", "⍵😀🤷🏽‍♀️"]
   ```
-  
+
   ## Supported Combinations
 
   The `Chunky.combinations/2` function can work with sets of any size (memory and time permitting). Examples that
@@ -435,10 +433,11 @@ defmodule Chunky do
   """
   def combinations(_, 0), do: []
   def combinations([], k) when is_integer(k), do: []
+
   def combinations(list, k) when is_list(list) and is_integer(k) do
-      combinations_calc(list, k)
+    combinations_calc(list, k)
   end
-    
+
   def combinations(str, k) when is_binary(str) and is_integer(k) do
     str
 
@@ -467,63 +466,61 @@ defmodule Chunky do
     |> Enum.to_list()
     |> combinations_calc(k)
   end
-  
+
   defp combinations_calc(_, 0), do: [[]]
   defp combinations_calc([], k) when is_integer(k), do: []
-  defp combinations_calc([head|tail], k) when is_integer(k) do
-      
-      Enum.map(
-          combinations_calc(tail, k - 1), 
-          fn r_comb -> 
-              [head | r_comb]
-          end
-      ) 
-      ++ combinations_calc(tail, k)
+
+  defp combinations_calc([head | tail], k) when is_integer(k) do
+    Enum.map(
+      combinations_calc(tail, k - 1),
+      fn r_comb ->
+        [head | r_comb]
+      end
+    ) ++ combinations_calc(tail, k)
   end
-  
-  
+
   @doc """
   Compute the size of the result of calling `Chunky.combinations/2`, without actually
   running a combination.
-  
+
   This is particularly useful, as the number of results of a combination of `k` elements
   from a set of `n`, grows as:
-  
+
   ```
        n!
   ----------
   k!(n - k)!
   ```
-  
+
   This can be a quick sanity check before running a permutation. Works with all of the
   parameters that work with `Chunky.permutations/1`, as a drop in replacement. Uses
   a closed form factorial to calculate the size of the list that would result from an
   indentical call to `Chunky.permutations/1`:
-  
+
   ```elixir
   iex> Chunky.combinations_size("abcd", 2)
   6
-  
+
   iex> Chunky.combinations_size(1..10, 4)
   210
-  
+
   iex> Chunky.combinations_size({:a, :b, :c, :d, :e, :f, :g}, 5)
   21
-  
+
   iex> Chunky.combinations_size([2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30], 3)
   455
   ```
-  
+
   See `Chunky.combinations/2` for more details on supported types.  
   """
   def combinations_size(list, k) when is_list(list) and is_integer(k) do
-      if k > length(list) do
-          0
-      else
-          Kernel.trunc(fac(length(list)) / (fac(k) * fac(length(list) - k)))
-      end
+    if k > length(list) do
+      0
+    else
+      Kernel.trunc(fac(length(list)) / (fac(k) * fac(length(list) - k)))
+    end
   end
-  
+
   def combinations_size(str, k) when is_binary(str) and is_integer(k) do
     str
 
@@ -535,7 +532,6 @@ defmodule Chunky do
 
     # permute
     |> combinations_size(k)
-
   end
 
   def combinations_size(tup, k) when is_tuple(tup) and is_integer(k) do
@@ -549,8 +545,7 @@ defmodule Chunky do
     |> Enum.to_list()
     |> combinations_size(k)
   end
-  
-  
+
   @doc """
   Break a set of values into smaller chunks of a specific length.
 
@@ -684,16 +679,16 @@ defmodule Chunky do
     # remap to tuples
     |> Enum.map(&List.to_tuple/1)
   end
-  
+
   # integer factorial - used by permutations_size/1 and combinations_size/2
   defp fac(0), do: 1
   defp fac(1), do: 1
+
   defp fac(n) when is_integer(n) do
-     if n > 1 do
-         n * fac(n - 1)
-     else
-         0
-     end 
+    if n > 1 do
+      n * fac(n - 1)
+    else
+      0
+    end
   end
-  
 end
