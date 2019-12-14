@@ -179,6 +179,7 @@ defmodule Chunky do
   def permutations(list) when is_list(list),
     do: for(elem <- list, rest <- permutations(list -- [elem]), do: [elem | rest])
 
+  def permutations(""), do: []
   def permutations(str) when is_binary(str) do
     str
 
@@ -212,6 +213,8 @@ defmodule Chunky do
   Compute the size of the result of calling `Chunky.permutations/1`, without actually
   running a permutation.
   
+  The results of a permutation of a set of `n` items grows at a rate of `n!`.
+  
   This can be a quick sanity check before running a permutation. Works with all of the
   parameters that work with `Chunky.permutations/1`, as a drop in replacement. Uses
   a closed form factorial to calculate the size of the list that would result from an
@@ -233,6 +236,7 @@ defmodule Chunky do
   
   See `Chunky.permutations/1` for more details on supported types.
   """
+  def permutations_size([]), do: 0
   def permutations_size(list) when is_list(list) do
       list |> length() |> fac()
   end
@@ -464,6 +468,75 @@ defmodule Chunky do
   end
   
   @doc """
+  Compute the size of the result of calling `Chunky.combinations/2`, without actually
+  running a combination.
+  
+  This is particularly useful, as the number of results of a combination of `k` elements
+  from a set of `n`, grows as:
+  
+  ```
+       n!
+  ----------
+  k!(n - k)!
+  ```
+  
+  This can be a quick sanity check before running a permutation. Works with all of the
+  parameters that work with `Chunky.permutations/1`, as a drop in replacement. Uses
+  a closed form factorial to calculate the size of the list that would result from an
+  indentical call to `Chunky.permutations/1`:
+  
+  ```elixir
+  iex> Chunky.combinations_size("abcd", 2)
+  6
+  
+  iex> Chunky.combinations_size(1..10, 4)
+  210
+  
+  iex> Chunky.combinations_size({:a, :b, :c, :d, :e, :f, :g}, 5)
+  21
+  
+  iex> Chunky.combinations_size([2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30], 3)
+  455
+  ```
+  
+  See `Chunky.combinations/2` for more details on supported types.  
+  """
+  def combinations_size(list, k) when is_list(list) and is_integer(k) do
+      if k > length(list) do
+          0
+      else
+          Kernel.trunc(fac(length(list)) / (fac(k) * fac(length(list) - k)))
+      end
+  end
+  
+  def combinations_size(str, k) when is_binary(str) and is_integer(k) do
+    str
+
+    # break into characters
+    |> String.split("")
+
+    # remove the blanks
+    |> Enum.reject(fn v -> v == "" end)
+
+    # permute
+    |> combinations_size(k)
+
+  end
+
+  def combinations_size(tup, k) when is_tuple(tup) and is_integer(k) do
+    tup
+    |> Tuple.to_list()
+    |> combinations_size(k)
+  end
+
+  def combinations_size(%Range{} = range, k) when is_integer(k) do
+    range
+    |> Enum.to_list()
+    |> combinations_size(k)
+  end
+  
+  
+  @doc """
   Break a set of values into smaller chunks of a specific length.
 
   ```elixir
@@ -598,7 +671,7 @@ defmodule Chunky do
   end
   
   # integer factorial - used by permutations_size/1 and combinations_size/2
-  defp fac(0), do: 0
+  defp fac(0), do: 1
   defp fac(1), do: 1
   defp fac(n) when is_integer(n) do
      if n > 1 do

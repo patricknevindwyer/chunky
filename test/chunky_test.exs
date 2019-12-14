@@ -5,6 +5,27 @@ defmodule ChunkyTest do
   import Chunky
 
   describe "combinations/2" do
+      
+    test "empty list nCk(_, 3)" do
+        assert combinations([], 3) == []
+    end
+    
+    test "empty string nCk(_, 3)"  do
+        assert combinations("", 3) == []
+    end
+    
+    test "single step range nCk(_, 1)" do
+        assert combinations(1..1, 1) == [ [1] ]
+    end
+    
+    test "empty k nCk(_, 0)" do
+        assert combinations([1, 2, 3], 0) == []
+    end
+    
+    test "k larger than list nCk(_, _)" do
+        
+    end
+    
     test "integer nCk(_, 3)" do
        assert combinations([0, 1, 2, 3, 4], 3) == [
            [0,1,2],
@@ -125,7 +146,53 @@ defmodule ChunkyTest do
     
   end
   
+  describe "combinations_size/2" do
+     
+     test "integer list" do
+         assert combinations_size([1, 2, 3, 4, 5], 2) == 10
+         assert combinations_size([1, 2, 3, 4, 5], 3) == 10
+         assert combinations_size([1, 2, 3, 4, 5], 4) == 5
+         assert combinations_size([1, 2, 3, 4, 5], 5) == 1
+         assert combinations_size([1, 2, 3, 4, 5], 6) == 0
+     end
+     
+     test "atom list" do
+         assert combinations_size([:a, :b, :c, :d], 2) == 6
+         assert combinations_size([:a, :b], 1) == 2
+         assert combinations_size([], 3) == 0
+     end
+     
+     test "tuple" do
+         assert combinations_size({:a, :b, :c, :d, :e, :f}, 3) == 20
+     end
+     
+     test "range" do
+         assert combinations_size(1..20, 5) == 15504
+     end
+     
+     test "string" do
+         assert combinations_size("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 5) == 2598960
+     end
+     
+     test "unicode" do
+         assert combinations_size("😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️😀🤷🏽‍♀️⭐️", 8) == 43758
+     end
+  end
+  
   describe "permutations/1" do
+      
+    test "empty list" do
+        assert permutations([]) == []
+    end
+    
+    test "empty string" do
+        assert permutations("") == []
+    end
+    
+    test "single step range" do
+        assert permutations(1..1) == [[1]]
+    end
+    
     test "integer list" do
       assert permutations([1, 2, 3]) == [
                [1, 2, 3],
