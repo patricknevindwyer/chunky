@@ -6,13 +6,23 @@
  - top of module documentation
  - version bump in mix.exs
  - version bump in README.md
- - git tag -a v0.x.x
+ - git tag -a v0.x.x -m "v0.x.x - summary"
  - git push
  - git push --tags
  - mix hex.publish
 
 # CHANGELOG
 
+
+## v0.*.0
+
+### Enhancements
+
+ - `Chunky.Grid` module for working with two dimensional data
+  - `Grid.new/3` - generate a grid from a value or a function
+  - `Grid.get_at/2` and `Grid.get_at/3` - access cell value by 2d index
+  - `Grid.valid_coordinate/*` and `Grid.valid_coordinate?/*` - determine if a coordinate is within grid bounds
+  
 ## v0.5.0
 
 ### Enhancements

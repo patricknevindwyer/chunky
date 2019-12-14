@@ -4,12 +4,19 @@
  - add option `pad_right` to pad out trailing missing data in last chunk
  - add option `pad_left` to pad out the chunking at the start of the data
  - add option `drop_incomplete_chunk` option to drop the last chunk if it doesn't fill out to the right size
- 
-# Chunky.permutations
+ - this is Enum.chunk_every/2
+  
+# Chunky.Sets
 
  - add N permute R
+ - is <pattern> a permutation of Chunky.permutations([....])?
+ - is <pattern> a combination of chunky.combinations([...], k)?
+ - move permute/combine et al to Chunky.Sets
+ - move enumeration ops to Chunky.Enums
+ - move grids ops to Chunky.Grid
+ - more enumerations from https://en.wikipedia.org/wiki/Combinatorics (approaches and subfields)
+ - more alternations from https://en.wikipedia.org/wiki/Twelvefold_way (see Formulas) (see the twentyfold way)
  
-
 # New functions
   
  - Chunky.filter_with_predicates/2 (day04.ex)
@@ -18,13 +25,48 @@
  - Chunky.take_sequences/1 or Chunky.chunk_runs/1 (day04.ex)
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
- - crop 2d array (Day 11)
  
+ - Chunky.Grid
+  - x new grid (value)
+  - x new grid (function)
+  - x value at grid point
+  - x coord in grid
+  - update_at
+  - get and update at
+  - replace_at
+  - find_index(fn)
+  - find_value()
+  - grid point for value 
+  - crop grid
+   - crop 2d array (Day 11)
+  - get row/col
+  - insert row/col
+  - delete row/col
+  - update row/col
+  - replace row/col  
+  - grid slice
+  - replace_area
+  - update_area
+  - paste grid in grid
+  - merge(fn {(x, y), a_val, b_val} -> val)
+  - display_grid (func for value)
+  - grid point for sub grid
+  - rotate
+  - to_string(s)
+  - from_string(s)
+
+  - get identity
+  - matrix ops
+  - append (A(3x10) + )
+   - take a list of grid, or grid of grids
+   - size a new grid to contain them
+   - paste grids
+  
 # Updates
  
  - better parameter names
  - type specs?
- - credo and dialyzer?
+ - credo and dialyzer/dialyxir?
  - circleCI?
  - code coverage?
  - code coverage badge?
