@@ -798,6 +798,19 @@ defmodule Chunky.FractionTest do
 
   end
   
+  describe "new/1" do
+      
+      test "pos int" do
+         f = Fraction.new(5)
+         assert f |> Fraction.components() == {5, 1} 
+      end
+      
+      test "neg int" do
+         f = Fraction.new(-7)
+         assert f |> Fraction.components() == {-7, 1} 
+      end
+  end
+  
   describe "new/2" do
      
      test "pos/pos partial" do

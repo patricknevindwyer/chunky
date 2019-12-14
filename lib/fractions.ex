@@ -32,7 +32,6 @@ defmodule Chunky.Fraction do
        iex> Fraction.new(0, 37)
        %Fraction{num: 0, den: 37}
    """
-   def new({num, den}) when is_integer(num) and is_integer(den), do: new(num, den)
    def new(num, den) when is_integer(num) and is_integer(den) do
        
        cond do
@@ -45,6 +44,30 @@ defmodule Chunky.Fraction do
        end
        
    end
+   
+   @doc """
+   Create a fraction from a tuple of a numerator and denominator.
+   
+   ## Examples
+   
+       iex> Fraction.new({4, 5})
+       %Fraction{num: 4, den: 5}
+   
+   """
+   def new({num, den}) when is_integer(num) and is_integer(den), do: new(num, den)
+   
+   @doc """
+   Create a whole number fraction from an integer.
+   
+   ## Examples
+   
+       iex> Fraction.new(4)
+       %Fraction{num: 4, den: 1}
+   
+       iex> Fraction.new(-22)
+       %Fraction{num: -22, den: 1}
+   """
+   def new(int) when is_integer(int), do: new(int, 1)
    
    @doc """
    Add two fractions, or a fraction and an integer, and return the (optionally simplified) result.
