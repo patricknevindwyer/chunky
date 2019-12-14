@@ -4,6 +4,279 @@ defmodule Chunky.FractionTest do
   
   doctest Chunky.Fraction, import: true
 
+  describe "add/2" do
+     
+     test "pos/pos + pos/pos" do
+         
+         test_cases = [
+             %{left: {1, 4}, right: {2, 4}, result: {3, 4}, opts: []},
+             %{left: {0, 5}, right: {3, 5}, result: {3, 5}, opts: []},
+             %{left: {1, 4}, right: {1, 2}, result: {3, 4}, opts: []},
+             %{left: {5, 6}, right: {9, 2}, result: {16, 3}, opts: [simplify: true]},
+             %{left: {5, 6}, right: {9, 2}, result: {32, 6}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+
+     end
+     
+     test "pos/pos + neg/pos" do
+
+         test_cases = [
+             %{left: {1, 4}, right: {-2, 4}, result: {-1, 4}, opts: []},
+             %{left: {0, 5}, right: {-3, 5}, result: {-3, 5}, opts: []},
+             %{left: {1, 4}, right: {-1, 2}, result: {-1, 4}, opts: []},
+             %{left: {5, 6}, right: {-9, 2}, result: {-11, 3}, opts: [simplify: true]},
+             %{left: {5, 6}, right: {-9, 2}, result: {-22, 6}, opts: []},
+             %{left: {8, 7}, right: {-1, 4}, result: {25, 28}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "neg/pos + pos/pos" do
+         
+         test_cases = [
+             %{right: {1, 4}, left: {-2, 4}, result: { -1, 4}, opts: []},
+             %{right: {0, 5}, left: {-3, 5}, result: { -3, 5}, opts: []},
+             %{right: {1, 4}, left: {-1, 2}, result: { -1, 4}, opts: []},
+             %{right: {5, 6}, left: {-9, 2}, result: {-22, 6}, opts: []},
+             %{right: {5, 6}, left: {-9, 2}, result: {-11, 3}, opts: [simplify: true]},
+             %{right: {8, 7}, left: {-1, 4}, result: { 25, 28}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "neg/pos + neg/pos" do
+         
+         test_cases = [
+             %{left: {-1, 4}, right: {-2, 4}, result: {-3, 4}, opts: []},
+             %{left: { 0, 5}, right: {-3, 5}, result: {-3, 5}, opts: []},
+             %{left: {-1, 4}, right: {-1, 2}, result: {-3, 4}, opts: []},
+             %{left: {-5, 6}, right: {-9, 2}, result: {-32, 6}, opts: []},
+             %{left: {-5, 6}, right: {-9, 2}, result: {-16, 3}, opts: [simplify: true]},
+             %{left: {-8, 7}, right: {-1, 4}, result: {-39, 28}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "pos/pos + pos integer" do
+
+         test_cases = [
+             %{left: {1, 4}, right: 0, result: {1, 4}, opts: []},
+             %{left: {0, 5}, right: 1, result: {1, 1}, opts: [simplify: true]},
+             %{left: {0, 5}, right: 1, result: {5, 5}, opts: []},
+             %{left: {1, 4}, right: 4, result: {17, 4}, opts: []},
+             %{left: {5, 6}, right: 9, result: {59, 6}, opts: []},
+             %{left: {8, 7}, right: 3, result: {29, 7}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = test_case.right
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "neg/pos + pos integer" do
+
+         test_cases = [
+             %{left: {-1, 4}, right: 0, result: {-1, 4}, opts: []},
+             %{left: {-1, 4}, right: 4, result: {15, 4}, opts: []},
+             %{left: {-5, 6}, right: 9, result: {49, 6}, opts: []},
+             %{left: {-8, 7}, right: 3, result: {13, 7}, opts: []},
+             %{left: {-4, 2}, right: 3, result: {2, 2}, opts: []},
+             %{left: {-4, 2}, right: 3, result: {1, 1}, opts: [simplify: true]}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = test_case.right
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "pos/pos + neg integer" do
+
+         test_cases = [
+             %{left: {0, 5}, right: -1, result: {-5, 5}, opts: []},
+             %{left: {0, 5}, right: -1, result: {-1, 1}, opts: [simplify: true]},
+             %{left: {1, 4}, right: -4, result: {-15, 4}, opts: []},
+             %{left: {5, 6}, right: -9, result: {-49, 6}, opts: []},
+             %{left: {8, 7}, right: -3, result: {-13, 7}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = test_case.right
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "neg/pos + neg integer" do
+         
+         test_cases = [
+             %{left: {-1, 4}, right: -4, result: {-17, 4}, opts: []},
+             %{left: {-5, 6}, right: -9, result: {-59, 6}, opts: []},
+             %{left: {-8, 7}, right: -3, result: {-29, 7}, opts: []},
+             %{left: {-3, 9}, right: -2, result: {-21, 9}, opts: []},
+             %{left: {-3, 9}, right: -2, result: {-7, 3}, opts: [simplify: true]}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = Fraction.new(test_case.left)
+                 f_b = test_case.right
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "pos integer + pos/pos" do
+         test_cases = [
+             %{right: {1, 4}, left: 0, result: {1, 4}, opts: []},
+             %{right: {0, 5}, left: 1, result: {1, 1}, opts: [simplify: true]},
+             %{right: {0, 5}, left: 1, result: {5, 5}, opts: []},
+             %{right: {1, 4}, left: 4, result: {17, 4}, opts: []},
+             %{right: {5, 6}, left: 9, result: {59, 6}, opts: []},
+             %{right: {8, 7}, left: 3, result: {29, 7}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = test_case.left
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "pos integer + neg/pos" do
+
+         test_cases = [
+             %{right: {-1, 4}, left: 0, result: {-1, 4}, opts: []},
+             %{right: {-1, 4}, left: 4, result: {15, 4}, opts: []},
+             %{right: {-5, 6}, left: 9, result: {49, 6}, opts: []},
+             %{right: {-8, 7}, left: 3, result: {13, 7}, opts: []},
+             %{right: {-2, 4}, left: 8, result: {30, 4}, opts: []},
+             %{right: {-2, 4}, left: 8, result: {15, 2}, opts: [simplify: true]}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = test_case.left
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+     test "neg integer + pos/pos" do
+
+         test_cases = [
+             %{right: {0, 5}, left: -1, result: {-5, 5}, opts: []},
+             %{right: {0, 5}, left: -1, result: {-1, 1}, opts: [simplify: true]},
+             %{right: {1, 4}, left: -4, result: {-15, 4}, opts: []},
+             %{right: {5, 6}, left: -9, result: {-49, 6}, opts: []},
+             %{right: {8, 7}, left: -3, result: {-13, 7}, opts: []}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = test_case.left
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end 
+     
+     test "neg integer + neg/pos" do
+
+         test_cases = [
+             %{right: {-1, 4}, left: -4, result: {-17, 4}, opts: []},
+             %{right: {-5, 6}, left: -9, result: {-59, 6}, opts: []},
+             %{right: {-8, 7}, left: -3, result: {-29, 7}, opts: []},
+             %{right: {-3, 3}, left: -5, result: {-18, 3}, opts: []},
+             %{right: {-3, 3}, left: -5, result: {-6, 1}, opts: [simplify: true]}
+         ]
+
+         test_cases
+         |> Enum.each(
+             fn test_case ->
+                 f_a = test_case.left
+                 f_b = Fraction.new(test_case.right)
+
+                 assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+             end
+         )
+         
+     end
+     
+  end
 
   describe "is_whole?/1" do
       

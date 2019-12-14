@@ -26,10 +26,24 @@
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
  
+ - Sequences
+  - create basic struct
+   - named sequence
+   - sequence info func
+   - multiple modules
+   - OEIS sequences
+   - iterators (embed a next/1 function)
+   - struct has a value and data section to carry info
+   - sequence ID
+   - sequence index
+  - sequence listing
+  - sequence sizing (finite vs infinite)
+   
  - Chunky.Fraction
-  - add (frac, frac)
-  - add (frac, whole)
-  - add (whole, frac)
+  - x add (frac, frac)
+  - x add (frac, whole)
+  - x add (whole, frac)
+  - new(integer)
   - sub (frac, frac)
   - sub (frac, whole)
   - sub (whole, frac)
@@ -50,6 +64,9 @@
   - eq(frac, whole)
   - sum(fracs)
   - to_float
+  - can_scale_denominator_to?(frac, size)
+  - scale_denominator_to(frac, size)
+  - nearest_fraction(frac, denominator)
  
  - Chunky.Grid
   - x new grid (value)

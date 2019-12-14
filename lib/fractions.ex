@@ -4,7 +4,7 @@ defmodule Chunky.Fraction do
    
    """ 
    
-   defstruct [:num, :dem]
+   defstruct [:num, :den]
    
    alias Chunky.Fraction
    
@@ -21,29 +21,68 @@ defmodule Chunky.Fraction do
    ## Examples
    
        iex> Fraction.new(1, 3)
-       %Fraction{num: 1, dem: 3}
+       %Fraction{num: 1, den: 3}
    
        iex> Fraction.new(22, -7)
-       %Fraction{num: -22, dem: 7}
+       %Fraction{num: -22, den: 7}
    
        iex> Fraction.new(17, 0)
        {:error, :invalid_denominator}
    
        iex> Fraction.new(0, 37)
-       %Fraction{num: 0, dem: 37}
+       %Fraction{num: 0, den: 37}
    """
-   def new(num, dem) when is_integer(num) and is_integer(dem) do
+   def new({num, den}) when is_integer(num) and is_integer(den), do: new(num, den)
+   def new(num, den) when is_integer(num) and is_integer(den) do
        
        cond do
-           dem == 0 -> {:error, :invalid_denominator}
-           num == 0 && dem != 0 -> %Fraction{num: 0, dem: abs(dem)}
-           num > 0 && dem < 0 -> %Fraction{num: num * -1, dem: abs(dem)}
-           num < 0 && dem > 0 -> %Fraction{num: num, dem: dem}
-           num < 0 && dem < 0 -> %Fraction{num: abs(num), dem: abs(dem)}
-           true -> %Fraction{num: num, dem: dem}
+           den == 0 -> {:error, :invalid_denominator}
+           num == 0 && den != 0 -> %Fraction{num: 0, den: abs(den)}
+           num > 0 && den < 0 -> %Fraction{num: num * -1, den: abs(den)}
+           num < 0 && den > 0 -> %Fraction{num: num, den: den}
+           num < 0 && den < 0 -> %Fraction{num: abs(num), den: abs(den)}
+           true -> %Fraction{num: num, den: den}
        end
        
    end
+   
+   @doc """
+   Add two fractions, or a fraction and an integer, and return the (optionally simplified) result.
+   
+   ## Examples
+   
+       iex> Fraction.add(Fraction.new(1, 2), Fraction.new(-8, 3))
+       %Fraction{num: -13, den: 6}
+   
+       iex> Fraction.add(Fraction.new(3, 4), Fraction.new(3, 4), simplify: true)
+       %Fraction{num: 3, den: 2}
+   
+       iex> Fraction.add(Fraction.new(1, 3), 5)
+       %Fraction{num: 16, den: 3}
+       
+       iex> Fraction.add(2, Fraction.new(5, 4))
+       %Fraction{num: 13, den: 4}
+   
+   """
+   def add(a, b, opts \\ [])
+   def add(%Fraction{}=fraction_a, %Fraction{}=fraction_b, opts) do
+       
+       simp = opts |> Keyword.get(:simplify, false)
+       
+       new_base = lcm(fraction_a.den, fraction_b.den)
+       a_mult = div(new_base, fraction_a.den)
+       b_mult = div(new_base, fraction_b.den)
+       
+       if simp do
+           Fraction.new((fraction_a.num * a_mult) + (fraction_b.num * b_mult), new_base) |> simplify()
+       else
+           Fraction.new((fraction_a.num * a_mult) + (fraction_b.num * b_mult), new_base)
+       end
+   end   
+   
+   def add(%Fraction{}=fraction_a, int, opts) when is_integer(int), do: add(fraction_a, Fraction.new(int, 1), opts)
+  
+   def add(int, %Fraction{}=fraction_b, opts) when is_integer(int), do: add(Fraction.new(int, 1), fraction_b, opts)
    
    @doc """
    Extract the numerator and denominator of a fraction as a tuple of values.
@@ -57,7 +96,7 @@ defmodule Chunky.Fraction do
        {0, 3}
    
    """
-   def components(%Fraction{}=fraction), do: {fraction.num, fraction.dem}
+   def components(%Fraction{}=fraction), do: {fraction.num, fraction.den}
    
    @doc """
    Determine if a fraction exactly represents a whole number, with no remainder.
@@ -70,7 +109,7 @@ defmodule Chunky.Fraction do
        iex> Fraction.new(-22, 11) |> Fraction.is_whole?()
        true
    """
-   def is_whole?(%Fraction{}=fraction), do: rem(fraction.num, fraction.dem) == 0
+   def is_whole?(%Fraction{}=fraction), do: rem(fraction.num, fraction.den) == 0
 
    @doc """
    Determine if a fraction is greater than 1, and has a whole number component.
@@ -84,7 +123,7 @@ defmodule Chunky.Fraction do
        true
    
    """
-   def has_whole?(%Fraction{}=fraction), do: abs(fraction.num) >= fraction.dem
+   def has_whole?(%Fraction{}=fraction), do: abs(fraction.num) >= fraction.den
    
    @doc """
    Get the whole component of a fraction.
@@ -100,7 +139,7 @@ defmodule Chunky.Fraction do
        iex> Fraction.new(-10, 2) |> Fraction.get_whole()
        -5
    """
-   def get_whole(%Fraction{}=fraction), do: div(fraction.num, fraction.dem)
+   def get_whole(%Fraction{}=fraction), do: div(fraction.num, fraction.den)
    
    @doc """
    Get the fractional part left after removing any whole components from the
@@ -109,18 +148,18 @@ defmodule Chunky.Fraction do
    ## Example
    
        iex> Fraction.new(3, 45) |> Fraction.get_remainder()
-       %Fraction{num: 3, dem: 45}
+       %Fraction{num: 3, den: 45}
    
        iex> Fraction.new(7, 3) |> Fraction.get_remainder()
-       %Fraction{num: 1, dem: 3}
+       %Fraction{num: 1, den: 3}
    
        iex> Fraction.new(-10, 4) |> Fraction.get_remainder()
-       %Fraction{num: -2, dem: 4}
+       %Fraction{num: -2, den: 4}
    
    """
    def get_remainder(%Fraction{}=fraction) do
        
-       rem(fraction.num, fraction.dem) |> Fraction.new(fraction.dem)
+       rem(fraction.num, fraction.den) |> Fraction.new(fraction.den)
        
    end
    
@@ -130,13 +169,13 @@ defmodule Chunky.Fraction do
    ## Examples
    
        iex> Fraction.new(6, 4) |> Fraction.split()
-       {1, %Fraction{num: 2, dem: 4}}
+       {1, %Fraction{num: 2, den: 4}}
    
        iex> Fraction.new(-22, 7) |> Fraction.split()
-       {-3, %Fraction{num: -1, dem: 7}}
+       {-3, %Fraction{num: -1, den: 7}}
    
        iex> Fraction.new(0, 3) |> Fraction.split()
-       {0, %Fraction{num: 0, dem: 3}}
+       {0, %Fraction{num: 0, den: 3}}
    """
    def split(%Fraction{}=fraction) do
        {
@@ -162,7 +201,7 @@ defmodule Chunky.Fraction do
        iex> Fraction.new(22, 7) |> Fraction.is_simplified?()
        true
    """
-   def is_simplified?(%Fraction{}=fraction), do: Integer.gcd(fraction.num, fraction.dem) == 1
+   def is_simplified?(%Fraction{}=fraction), do: Integer.gcd(fraction.num, fraction.den) == 1
    
    @doc """
    Simplify a fraction.
@@ -170,17 +209,17 @@ defmodule Chunky.Fraction do
    ## Examples
    
        iex> Fraction.new(6, 8) |> Fraction.simplify()
-       %Fraction{num: 3, dem: 4}
+       %Fraction{num: 3, den: 4}
    
        iex> Fraction.new(24, 8) |> Fraction.simplify()
-       %Fraction{num: 3, dem: 1}
+       %Fraction{num: 3, den: 1}
    
        iex> Fraction.new(22, 7) |> Fraction.simplify()
-       %Fraction{num: 22, dem: 7}
+       %Fraction{num: 22, den: 7}
    """
    def simplify(%Fraction{}=fraction) do
-       gcd = Integer.gcd(fraction.num, fraction.dem)
-       Fraction.new(div(fraction.num, gcd), div(fraction.dem, gcd))
+       gcd = Integer.gcd(fraction.num, fraction.den)
+       Fraction.new(div(fraction.num, gcd), div(fraction.den, gcd))
    end
    
    @doc """
@@ -197,4 +236,5 @@ defmodule Chunky.Fraction do
    """
    def is_zero?(%Fraction{}=fraction), do: fraction.num == 0
    
+   defp lcm(a,b) when is_integer(a) and is_integer(b), do: div(abs(a*b), Integer.gcd(a,b))
 end
