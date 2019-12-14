@@ -7,6 +7,7 @@ defmodule Chunky do
    - `Chunky.permutations/1` - Generate all permutations of a set of values, with no duplication
    - `Chunky.permutations_size/1` - Calculate the size of a permutation result from `Chunky.permutations/1`
    - `Chunky.combinations/2` - Generate combinations of a set of values, with no duplication
+   - `Chunky.combinations_size/2` - Calculate the size of a combanation result from `Chunky.combinations/2`
    - `Chunky.chunk_length/2` - Chunk an enumerable into a list of specific length chunks
   
   For combinations and permutations, it can be helpful compare the differences:
@@ -174,10 +175,11 @@ defmodule Chunky do
       [ [1, 0, -1], [1, -1, 0], [0, 1, -1], [0, -1, 1], [-1, 1, 0], [-1, 0, 1]]
 
   """
-  def permutations([]), do: [[]]
+  def permutations([]), do: []
 
-  def permutations(list) when is_list(list),
-    do: for(elem <- list, rest <- permutations(list -- [elem]), do: [elem | rest])
+  def permutations(list) when is_list(list) do
+      permutations_calc(list)
+  end
 
   def permutations(""), do: []
   def permutations(str) when is_binary(str) do
@@ -190,7 +192,7 @@ defmodule Chunky do
     |> Enum.reject(fn v -> v == "" end)
 
     # permute
-    |> permutations()
+    |> permutations_calc()
 
     # reconstruct strings
     |> Enum.map(fn perm -> perm |> Enum.join("") end)
@@ -199,15 +201,21 @@ defmodule Chunky do
   def permutations(tup) when is_tuple(tup) do
     tup
     |> Tuple.to_list()
-    |> permutations()
+    |> permutations_calc()
     |> Enum.map(&List.to_tuple/1)
   end
 
   def permutations(%Range{} = range) do
     range
     |> Enum.to_list()
-    |> permutations()
+    |> permutations_calc()
   end
+  
+  # private functions to run actual permutations
+  defp permutations_calc([]), do: [[]]
+
+  defp permutations_calc(list) when is_list(list),
+    do: for(elem <- list, rest <- permutations_calc(list -- [elem]), do: [elem | rest])
   
   @doc """
   Compute the size of the result of calling `Chunky.permutations/1`, without actually
@@ -425,17 +433,10 @@ defmodule Chunky do
       iex> Chunky.combinations(2..-2, 3)
       [ [2, 1, 0], [2, 1, -1], [2, 1, -2], [2, 0, -1], [2, 0, -2], [2, -1, -2], [1, 0, -1], [1, 0, -2], [1, -1, -2], [0, -1, -2]]
   """
-  def combinations(_, 0), do: [[]]
+  def combinations(_, 0), do: []
   def combinations([], k) when is_integer(k), do: []
-  def combinations([head|tail], k) when is_integer(k) do
-      
-      Enum.map(
-          combinations(tail, k - 1), 
-          fn r_comb -> 
-              [head | r_comb]
-          end
-      ) 
-      ++ combinations(tail, k)
+  def combinations(list, k) when is_list(list) and is_integer(k) do
+      combinations_calc(list, k)
   end
     
   def combinations(str, k) when is_binary(str) and is_integer(k) do
@@ -448,7 +449,7 @@ defmodule Chunky do
     |> Enum.reject(fn v -> v == "" end)
 
     # permute
-    |> combinations(k)
+    |> combinations_calc(k)
 
     # reconstruct strings
     |> Enum.map(fn perm -> perm |> Enum.join("") end)
@@ -457,15 +458,29 @@ defmodule Chunky do
   def combinations(tup, k) when is_tuple(tup) and is_integer(k) do
     tup
     |> Tuple.to_list()
-    |> combinations(k)
+    |> combinations_calc(k)
     |> Enum.map(&List.to_tuple/1)
   end
 
   def combinations(%Range{} = range, k) when is_integer(k) do
     range
     |> Enum.to_list()
-    |> combinations(k)
+    |> combinations_calc(k)
   end
+  
+  defp combinations_calc(_, 0), do: [[]]
+  defp combinations_calc([], k) when is_integer(k), do: []
+  defp combinations_calc([head|tail], k) when is_integer(k) do
+      
+      Enum.map(
+          combinations_calc(tail, k - 1), 
+          fn r_comb -> 
+              [head | r_comb]
+          end
+      ) 
+      ++ combinations_calc(tail, k)
+  end
+  
   
   @doc """
   Compute the size of the result of calling `Chunky.combinations/2`, without actually

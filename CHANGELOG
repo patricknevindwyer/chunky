@@ -1,5 +1,24 @@
+# Feature Release steps
+
+ - tests passing
+ - mix format
+ - inline documentation
+ - top of module documentation
+ - version bump in mix.exs
+ - version bump in README.md
+ - git tag -a v0.x.x
+ - git push
+ - git push --tags
+ - mix hex.publish
+
 # CHANGELOG
 
+## v0.5.0
+
+### Enhancements
+
+ - `Chunky.combinations_size/2` - pre-calculate the size of a combination using a closed form equation, instead of running the combination
+ 
 ## v0.4.1
 
 ### Documentation
