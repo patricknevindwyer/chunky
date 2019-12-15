@@ -10,6 +10,56 @@ defmodule Chunky.FractionTest do
      end
   end
   
+  describe "sum/1" do
+      test "unsimplified" do
+          assert Fraction.sum(
+              [
+                  Fraction.new(1, 2),
+                  Fraction.new(2, 3),
+                  Fraction.new(3, 4),
+                  Fraction.new(4, 5),
+                  Fraction.new(17, 60),
+                  3
+              ]
+          ) == Fraction.new(360, 60)
+      end
+      
+      test "simplified" do
+          assert Fraction.sum(
+              [
+                  Fraction.new(1, 2),
+                  Fraction.new(2, 3),
+                  Fraction.new(3, 4),
+                  Fraction.new(4, 5),
+                  Fraction.new(17, 60),
+                  3
+              ],
+              simplify: true
+          ) == Fraction.new(6, 1)
+      end
+      
+  end
+  
+  describe "normalize_all/1" do
+     
+     test "all fractions" do
+        assert Fraction.normalize_all(
+            [
+                Fraction.new(1, 2),
+                Fraction.new(2, 3),
+                Fraction.new(3, 4),
+                Fraction.new(4, 5)
+            ]
+        ) == [
+            %Fraction{num: 30, den: 60},
+            %Fraction{num: 40, den: 60},
+            %Fraction{num: 45, den: 60},
+            %Fraction{num: 48, den: 60}
+        ]
+     end 
+     
+  end
+  
   describe "comparators" do
   
       test "gt?(int, frac)" do

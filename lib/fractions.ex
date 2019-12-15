@@ -596,6 +596,86 @@ defmodule Chunky.Fraction do
    end
    
    @doc """
+   Normalize (move to the same denominator) all of the fractions and integers in a
+   list.
+   
+   At least one member of the list must be a fraction. Integers will be automatically
+   converted to normalized fractions.
+   
+   ## Examples
+   
+        iex> Fraction.normalize_all([Fraction.new(1, 2), Fraction.new(2, 3), Fraction.new(3, 4), 7])
+        [
+            %Fraction{den: 12, num: 6},
+            %Fraction{den: 12, num: 8},
+            %Fraction{den: 12, num: 9},
+            %Fraction{den: 12, num: 84}
+        ]
+
+   """
+   def normalize_all(list) when is_list(list) do
+      
+      # convert everything to fractions, if they aren't already
+      fracs = list
+      |> Enum.map(
+          fn entry -> 
+              
+              case entry do
+                 %Fraction{}=f -> f
+                 v when is_integer(v) -> Fraction.new(v) 
+              end
+          end
+      ) 
+      
+      # extract denominators
+      denoms = fracs
+      |> Enum.map(fn f -> f.den end)
+      
+      # find our new base
+      new_base = lcm(denoms)
+      
+      # iterate and normalize everything
+      fracs
+      |> Enum.map(
+          fn frac -> 
+              f_mult = new_base / frac.den
+              Fraction.new(Kernel.trunc(frac.num * f_mult), new_base)
+          end
+      )
+      
+   end
+   
+   @doc """
+   Add a series of fractions and integers.
+   
+   ## Example
+   
+       iex> Fraction.sum([Fraction.new(3, 4), Fraction.new(5, 7), Fraction.new(8, 11), 1, Fraction.new(249, 308)])
+       %Fraction{num: 1232, den: 308}
+
+       iex> Fraction.sum([Fraction.new(3, 4), Fraction.new(5, 7), Fraction.new(8, 11), 1, Fraction.new(249, 308)], simplify: true)
+       %Fraction{num: 4, den: 1}
+   
+   """
+   def sum(list, opts \\ []) when is_list(list) do
+       
+       simp = opts |> Keyword.get(:simplify, false)
+       
+       # normalize the fractions, hold one aside so we can reference the new denominator later
+       [head_frac|_] = n_fracs = normalize_all(list)
+       
+       # gather the full sum of new numerators
+       n_num = Enum.sum(n_fracs |> Enum.map(fn f -> f.num end))
+       
+       if simp do
+           Fraction.new(n_num, head_frac.den) |> simplify()
+       else
+           Fraction.new(n_num, head_frac.den)
+       end
+       
+   end
+   
+   @doc """
    Compare a fraction with an integer or fraction using _greater than_ comparison.
    
    ## Examples
@@ -796,6 +876,8 @@ defmodule Chunky.Fraction do
    defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
     
    # simple Least Common Multiple    
-   defp lcm(a,b) when is_integer(a) and is_integer(b), do: div(abs(a*b), Integer.gcd(a,b))
+   def lcm([a, b]), do: lcm(a, b)
+   def lcm([a | rest]), do: lcm(a, lcm(rest))
+   def lcm(a,b) when is_integer(a) and is_integer(b), do: div(abs(a*b), Integer.gcd(a,b))
 
 end

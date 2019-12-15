@@ -41,6 +41,9 @@
   - `is_negative?/2` - Test if a fraction is negative
   - `power/3` - Fractional and integer powers of integers and fractions
   - `gt?/2`, `gte?/2`, `lt?/2`, `lte?/2`, and `eq?/2` added for comparison between fractions and fractions and integers
+  - `normalize_all/1` - normalize a list of fractions and integers, like `normalize/2`
+  - `sum/2` - sum a list of fractions and integers
+  - `lcm/1` - find Least Common Multiple from a list of integers
 
  - `Chunky.Grid` module for working with two dimensional data
   - `Grid.new/3` - generate a grid from a value or a function

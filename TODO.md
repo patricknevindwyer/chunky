@@ -75,9 +75,9 @@
   - x eq(frac, whole)
   - x eq(whole, frac)
 
-  - lcm(list)  
-  - normalize(list of fractions)
-  - sum(fracs)
+  - x lcm(list)  
+  - x normalize(list of fractions)
+  - x sum(fracs)
   - to_float
   
   - update readme
