@@ -13,7 +13,11 @@
 
 # CHANGELOG
 
+## v0.6.1
 
+ - `Chunky.Grid`
+  - `put_at/3` and `put_at/4` - put values into the grid
+  
 ## v0.6.0
 
 ### Enhancements

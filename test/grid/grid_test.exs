@@ -171,6 +171,42 @@ defmodule Chunky.GridTest do
     end
   end
 
+  describe "put_*" do
+      
+      test "put_at/* - valid" do
+          g = Grid.new(10, 10, -1)
+          
+          gp = g |> Grid.put_at(2, 2, 35)
+          assert gp |> Grid.get_at(2, 2) == 35
+          
+          gp = gp |> Grid.put_at(0, 0, 4)
+          assert gp |> Grid.get_at(0, 0) == 4
+          
+          gp = gp |> Grid.put_at({9, 0}, 17)
+          assert gp |> Grid.get_at(9, 0) == 17
+      end
+      
+      test "put_at/* - invalid x lower bound" do
+          g = Grid.new(10, 10, -1)          
+          assert g |> Grid.put_at(-1, 2, 35) == {:error, :invalid_x_coordinate}
+      end
+      
+      test "put_at/* - invalid x upper bound" do
+          g = Grid.new(10, 10, -1)          
+          assert g |> Grid.put_at(10, 2, 35) == {:error, :invalid_x_coordinate}
+      end
+      
+      test "put_at/* - invalid y lower bound" do
+          g = Grid.new(10, 10, -1)          
+          assert g |> Grid.put_at(3, -3, 35) == {:error, :invalid_y_coordinate}          
+      end
+      
+      test "put_at/* - invalid y upper bound" do
+          g = Grid.new(10, 10, -1)          
+          assert g |> Grid.put_at(3, 30, 35) == {:error, :invalid_y_coordinate}          
+      end
+  end
+  
   describe "get_*" do
     test "get_at/* - valid" do
       g = Grid.new(10, 10, fn {x, y} -> x * y end)
