@@ -53,20 +53,32 @@
   - x div (frac, frac)
   - x div (frac, whole)
   - x div (whole, frac)
-  - pow(frac, frac)
+  - x pow(frac, frac)
   - x pow(frac, whole)
-  - pow(whole, frac)
+  - x pow(whole, frac)
   - gt(frac, frac)
   - gt(frac, whole)
+  - gt(whole, frac)
+  - gte(frac, frac)
+  - gte(frac, whole)
+  - gte(whole, frac)
+  
   - lt(frac, frac)
   - lt(frac, whole)
+  - lt(whole, frac)
+  - lte(frac, frac)
+  - lte(frac, whole)
+  - lte(whole, frac)
+  
   - eq(frac, frac)
   - eq(frac, whole)
+  - eq(whole, frac)
+  
   - sum(fracs)
   - to_float
   - can_scale_denominator_to?(frac, size)
   - scale_denominator_to(frac, size)
-  - nearest_fraction(frac, denominator)
+  - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64
  
  - Chunky.Grid
   - x new grid (value)

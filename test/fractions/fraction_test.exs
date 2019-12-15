@@ -10,6 +10,137 @@ defmodule Chunky.FractionTest do
      end
   end
   
+  describe "power/3 - frac ^ frac" do
+  
+      test "fractional roots" do
+          test_cases = [
+              %{fraction: {4, 16}, power: {1, 2}, result: {2, 4}, opts: []},
+              %{fraction: {4, 16}, power: {1, 2}, result: {1, 2}, opts: [simplify: true]},
+              
+              %{fraction: {8, 27}, power: {1, 3}, result: {2, 3}, opts: []},
+              
+              %{fraction: {8, 8}, power: {2, 3}, result: {4, 4}, opts: []},
+              %{fraction: {8, 8}, power: {2, 3}, result: {1, 1}, opts: [simplify: true]},
+              
+              # so. SO. I randomly plugged these in for the "irrationals, not allowed" section. Pulled
+              # the number out of thin air. Turns out, 7 and 32 both have 30th powers with 5th roots. 
+              %{fraction: {7, 32}, power: {30, 5}, result: {117649, 1073741824}, opts: []}
+              
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.fraction)
+                  pow = Fraction.new(test_case.power)
+                  
+                  assert Fraction.power(f_a, pow, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.power(f_a, pow, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+          
+      end
+      
+      test "irrational roots - not allowed" do
+          
+          test_cases = [
+              %{fraction: {4, 27}, power: {3, 2}},
+              %{fraction: {7, 32}, power: {31, 5}}
+          ]
+
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.fraction)
+                  pow = Fraction.new(test_case.power)
+                  
+                  assert Fraction.power(f_a, pow) == {:error, :no_fractional_power}
+              end
+          )          
+          
+      end
+      
+      test "irrational roots - allowed" do
+
+          test_cases = [
+              %{fraction: {4, 27}, power: {3, 2}, result: 0.05702224880885193, opts: [allow_irrational: true]},
+              %{fraction: {7, 32}, power: {31, 5}, result: 8.08496199028741e-5, opts: [allow_irrational: true]},
+              %{fraction: {7, 32}, power: {-17, 5}, result: 175.45937993085406, opts: [allow_irrational: true]},
+          ]
+
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.fraction)
+                  pow = Fraction.new(test_case.power)
+                  
+                  assert Fraction.power(f_a, pow, test_case.opts) == test_case.result
+              end
+          )
+          
+      end
+      
+      test "frac ^ (0/pos)" do
+          
+          assert Fraction.power(Fraction.new(3, 34), Fraction.new(0, 4)) == Fraction.new(1, 1)
+          
+      end
+  end
+  
+  describe "power/3 - int ^ frac" do
+      
+      test "int^(pos/pos)" do
+          test_cases = [
+              %{base: 4, power: {4, 8}, result: {2, 1}, opts: []},
+              %{base: 2, power: {10, 5}, result: {4, 1}, opts: []}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  base = test_case.base
+                  pow = Fraction.new(test_case.power)
+                  
+                  assert Fraction.power(base, pow, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.power(base, pow, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+          
+      end
+      
+      test "int^(neg/pos)" do
+
+          test_cases = [
+              %{base: 4, power: {-4, 8}, result: {1, 2}, opts: []},
+              %{base: 2, power: {-10, 5}, result: {1, 4}, opts: []}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  base = test_case.base
+                  pow = Fraction.new(test_case.power)
+                  
+                  assert Fraction.power(base, pow, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.power(base, pow, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+          
+      end
+      
+      test "int^(0/pos)" do
+          assert Fraction.power(7, Fraction.new(0, 4)) == Fraction.new(1, 1)
+      end
+      
+      test "int^frac - irrationals not allowed" do
+          assert Fraction.power(9, Fraction.new(7, 13)) == {:error, :no_fractional_power}
+      end
+      
+      test "int^frac - irrationals allowed" do
+          assert Fraction.power(9, Fraction.new(7, 13), allow_irrational: true) == 3.26454673038995
+      end
+  end
+  
   describe "power/2 - frac ^ int" do
   
       test "pos/pos ^ pos" do

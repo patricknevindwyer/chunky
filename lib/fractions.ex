@@ -247,8 +247,64 @@ defmodule Chunky.Fraction do
        end
    end
    
+   @doc """
+   Use fractions in power/exponent calculations.
+   
+   The base or the power (or both) can be fractions. 
+   
+   Fractions taken to an integer power will behave as expected:
+   
+   ```elixir
+   iex> Fraction.power(Fraction.new(3, 4), 7)
+   %Chunky.Fraction{den: 16384, num: 2187}
+   ```
+   
+   Fractions or integers taken to a fractional power will not always return expected values,
+   as most fractional powers do not have a result that can be represented as a fraction. By 
+   default the power functions will return an error value in these cases:
+   
+   ```elixir
+   iex> Fraction.power(9, Fraction.new(7, 13))
+   {:error, :no_fractional_power}
+   ```
+   
+   If you want the floating point fractional result, you can use the `allow_irrational`
+   flag:
+   
+   ```elixir
+   iex> Fraction.power(9, Fraction.new(7, 13), allow_irrational: true)
+   3.26454673038995
+   ```
+   
+   When calculating the fractional power of a value, an `epsilon` value is used as part
+   of the n-th root finding and resulting analysis The epsilon determines how close to
+   a whole number different components of the resulting fractions need to be, to be treated
+   as whole numbers.
+   
+   ## Options
+   
+    - `simplify` - Boolean. Optionally simplify the return fraction
+    - `epsilon` - Float. Small number used to compare how close two values are
+    - `allow_irrational` - Boolean. Allow a non-fractional (irrational) result to be returned
+   
+   ## Examples
+   
+       iex> Fraction.power(Fraction.new(7, 32), Fraction.new(30, 5))
+       %Fraction{num: 117649, den: 1073741824}
+   
+       iex> Fraction.power(Fraction.new(3, 5), 3)
+       %Fraction{num: 27, den: 125}
+   
+       iex> Fraction.power(4, Fraction.new(-4, 8))
+       %Fraction{num: 1, den: 2}
+   
+       iex> Fraction.power(9, Fraction.new(7, 13), allow_irrational: true)
+       3.26454673038995
+   
+   """
    def power(a, b, opts \\ [])
    
+   # fractional base, negative integer power
    def power(%Fraction{}=fraction, int, opts) when is_integer(int) and int < 0 do
        case reciprocal(fraction) do
           {:error, reason} -> {:error, reason}
@@ -256,6 +312,7 @@ defmodule Chunky.Fraction do
        end
    end
    
+   # fractional base, positive integer power
    def power(%Fraction{}=fraction, int, opts) when is_integer(int) and int >= 0 do
        simp = opts |> Keyword.get(:simplify, false)
        
@@ -271,7 +328,94 @@ defmodule Chunky.Fraction do
        end
    end
    
+   # integer base, fractional power
+   def power(int, %Fraction{}=fraction_b, opts) when is_integer(int) do
+       
+       # conver the base to a fraction, and continue
+       power(Fraction.new(int), fraction_b, opts) 
+       
+   end
    
+   # fractional base, negative fractional power
+   def power(%Fraction{}=fraction_a, %Fraction{num: num}=fraction_b, opts) when num < 0 do
+       
+       # we have a special case we need to catch - the power fraction is negative. Reciprocal
+       # base to a positive power to the rescue
+       case reciprocal(fraction_a) do
+          {:error, reason} -> {:error, reason}
+          r_frac -> power(r_frac, multiply(fraction_b, -1), opts) 
+       end
+   end
+   
+   # fractional base, positive fractional power
+   def power(%Fraction{}=fraction_a, %Fraction{}=fraction_b, opts) do
+
+       simp = opts |> Keyword.get(:simplify, false)
+       allow_irs = opts |> Keyword.get(:allow_irrational, false)
+       epsilon = opts |> Keyword.get(:epsilon, 1.0e-7)
+       
+       # break our fractional power into the power and root segments
+       f_pow = fraction_b.num
+       f_root = fraction_b.den
+       
+       # we use the equivalence of (x/y) ^ (m/n) of
+       #
+       #    (x^(m/n)) / (y^(m/n))
+       #
+       # and further that x^(m/n) is equivalent to
+       #
+       #    (x^m)^(1/n)
+       
+       # we can run this for both the top and bottom of the fraction, but we
+       # need to check a few things. The powers will always work, but the
+       # n-th root may not converge to an integer. If that's the case, we
+       # may want to bail on the calculation. We do have an option `allow_irrationals`
+       # that will build the final result as an irration number.
+       
+       # first we try and run the numbers through in fractional mode
+       num_powed = :math.pow(fraction_a.num, f_pow) |> Kernel.trunc()
+       den_powed = :math.pow(fraction_a.den, f_pow) |> Kernel.trunc()
+       
+       case {
+               integer_nth_root?(num_powed, f_root, epsilon), 
+               integer_nth_root?(den_powed, f_root, epsilon)
+           } do
+           
+           { {true, num_i_root}, {true, den_i_root}} -> 
+               
+               if simp do
+                   Fraction.new(num_i_root, den_i_root) |> simplify()
+               else
+                   Fraction.new(num_i_root, den_i_root)
+               end
+               
+           { {true, num_i_root}, {false, _, den_irr}} ->
+               
+               if allow_irs do
+                  num_i_root / den_irr
+               else
+                  {:error, :no_fractional_power} 
+               end
+               
+           { {false, _, num_irr}, {true, den_i_root}} ->
+
+               if allow_irs do
+                  num_irr / den_i_root
+               else
+                  {:error, :no_fractional_power} 
+               end
+               
+           { {false, _, num_irr}, {false, _, den_irr}} ->
+               
+               if allow_irs do
+                  num_irr / den_irr
+               else
+                  {:error, :no_fractional_power} 
+               end
+               
+       end
+       
+   end
    
    @doc """
    Extract the numerator and denominator of a fraction as a tuple of values.
@@ -426,4 +570,64 @@ defmodule Chunky.Fraction do
    def is_zero?(%Fraction{}=fraction), do: fraction.num == 0
    
    defp lcm(a,b) when is_integer(a) and is_integer(b), do: div(abs(a*b), Integer.gcd(a,b))
+   
+   @doc """
+   Determine if the n-th root of a number is a whole integer.
+   
+   If the result n-th root is within `epsilon` of a whole
+   integer, we consider the result an integer n-th root. 
+   This calcualtion runs the fast converging n-th root at a higher
+   epsilon than it's configured to use for comparison and testing of the
+   result value. 
+   
+   ## Examples
+   
+       iex> Fraction.integer_nth_root?(27, 3)
+       {true, 3}
+   
+       iex> Fraction.integer_nth_root?(1234, 6)
+       {false, :no_integer_nth_root, 3.2750594908836885}
+   """
+   def integer_nth_root?(x, n, epsilon \\ 1.0e-6) do
+   
+       root = nth_root(x, n, epsilon * 0.001)
+       i_root = Float.round(root)
+       
+       if abs(root - i_root) < epsilon do
+           {true, Kernel.trunc(i_root)}
+       else
+           {false, :no_integer_nth_root, root}
+       end
+   end
+   
+   @doc """
+   Generalized integer nth root, from:
+   
+       https://github.com/acmeism/RosettaCodeData/blob/master/Task/Nth-root/Elixir/nth-root.elixir
+   
+   based on a fast converging Newton's Method process.
+   
+   ## Examples
+   
+       iex> nth_root(8, 3)
+       2.0
+   
+       iex> nth_root(27, 3)
+       3.0
+   
+       iex> nth_root(78125, 7)
+       5.0
+   """
+   def nth_root(x, n, precision \\ 1.0e-7) do
+         
+       f = fn(prev) -> 
+           ( (n - 1) * prev + x / :math.pow(prev, (n-1) ) ) / n 
+       end
+       
+       fixed_point(f, x, precision, f.(x))
+   end
+
+   defp fixed_point(_, guess, tolerance, next) when abs(guess - next) < tolerance, do: next
+   defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
+
 end
