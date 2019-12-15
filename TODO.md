@@ -56,26 +56,33 @@
   - x pow(frac, frac)
   - x pow(frac, whole)
   - x pow(whole, frac)
-  - gt(frac, frac)
-  - gt(frac, whole)
-  - gt(whole, frac)
-  - gte(frac, frac)
-  - gte(frac, whole)
-  - gte(whole, frac)
   
-  - lt(frac, frac)
-  - lt(frac, whole)
-  - lt(whole, frac)
-  - lte(frac, frac)
-  - lte(frac, whole)
-  - lte(whole, frac)
+  - x gt(frac, frac)
+  - x gt(frac, whole)
+  - x gt(whole, frac)
+  - x gte(frac, frac)
+  - x gte(frac, whole)
+  - x gte(whole, frac)
   
-  - eq(frac, frac)
-  - eq(frac, whole)
-  - eq(whole, frac)
+  - x lt(frac, frac)
+  - x lt(frac, whole)
+  - x lt(whole, frac)
+  - x lte(frac, frac)
+  - x lte(frac, whole)
+  - x lte(whole, frac)
   
+  - x eq(frac, frac)
+  - x eq(frac, whole)
+  - x eq(whole, frac)
+
+  - lcm(list)  
+  - normalize(list of fractions)
   - sum(fracs)
   - to_float
+  
+  - update readme
+  - update top of module for fractions
+
   - can_scale_denominator_to?(frac, size)
   - scale_denominator_to(frac, size)
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64

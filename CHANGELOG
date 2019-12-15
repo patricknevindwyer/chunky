@@ -36,6 +36,11 @@
   - `multiply/3` - Multiply two fractions, or a fraction and an integer
   - `reciprocal/2` - Take the reciprocal of a fraction
   - `divide/3` - Divide two fractions, or a fraction and an integer
+  - `normalize/2` - Normalize two fractions to a common denominator
+  - `is_positive?/1` - Test if a fraction is positive
+  - `is_negative?/2` - Test if a fraction is negative
+  - `power/3` - Fractional and integer powers of integers and fractions
+  - `gt?/2`, `gte?/2`, `lt?/2`, `lte?/2`, and `eq?/2` added for comparison between fractions and fractions and integers
 
  - `Chunky.Grid` module for working with two dimensional data
   - `Grid.new/3` - generate a grid from a value or a function

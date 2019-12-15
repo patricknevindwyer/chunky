@@ -10,6 +10,459 @@ defmodule Chunky.FractionTest do
      end
   end
   
+  describe "comparators" do
+  
+      test "gt?(int, frac)" do
+          test_cases = [
+              %{left: -3, right: {3, 4}, result: false},
+              %{left: 0, right: {3, 4}, result: false},
+              %{left: 1, right: {0, 4}, result: true},
+              %{left: 1, right: {4, 4}, result: false},
+              %{left: 3, right: {3, 4}, result: true}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = test_case.left
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.gt?(left, right) == test_case.result
+              end
+          )          
+      end
+      
+      test "gt?(frac, int)" do
+          test_cases = [
+              %{left: {-3, 4}, right: 2, result: false},
+              %{left: {0, 4}, right: 2, result: false},
+              %{left: {0, 4}, right: 0, result: false},
+              %{left: {1, 2}, right: 2, result: false},
+              %{left: {4, 2}, right: 2, result: false},
+              %{left: {5, 2}, right: 2, result: true}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = test_case.right
+                  
+                  assert Fraction.gt?(left, right) == test_case.result
+              end
+          )          
+          
+      end
+      
+      test "gt?(frac, frac)" do
+          
+          test_cases = [
+              %{left: {-3, 4}, right: {3, 4}, result: false},
+              %{left: {0, 4}, right: {3, 4}, result: false},
+              %{left: {0, 4}, right: {0, 4}, result: false},
+              %{left: {1, 2}, right: {2, 4}, result: false},
+              %{left: {4, 2}, right: {8, 4}, result: false},
+              %{left: {5, 2}, right: {3, 4}, result: true}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.gt?(left, right) == test_case.result
+              end
+          )          
+          
+          
+      end
+      
+      
+      test "gte?(int, frac)" do
+          test_cases = [
+              %{left: -3, right: {3, 4}, result: false},
+              %{left: 0, right: {3, 4}, result: false},
+              %{left: 1, right: {0, 4}, result: true},
+              %{left: 1, right: {4, 4}, result: true},
+              %{left: 3, right: {3, 4}, result: true}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = test_case.left
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.gte?(left, right) == test_case.result
+              end
+          )          
+      end
+      
+      test "gte?(frac, int)" do
+          test_cases = [
+              %{left: {-3, 4}, right: 2, result: false},
+              %{left: {0, 4}, right: 2, result: false},
+              %{left: {0, 4}, right: 0, result: true},
+              %{left: {1, 2}, right: 2, result: false},
+              %{left: {4, 2}, right: 2, result: true},
+              %{left: {5, 2}, right: 2, result: true}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = test_case.right
+                  
+                  assert Fraction.gte?(left, right) == test_case.result
+              end
+          )          
+          
+      end
+      
+      test "gte?(frac, frac)" do
+          
+          test_cases = [
+              %{left: {-3, 4}, right: {3, 4}, result: false},
+              %{left: {0, 4}, right: {3, 4}, result: false},
+              %{left: {0, 4}, right: {0, 4}, result: true},
+              %{left: {1, 2}, right: {2, 4}, result: true},
+              %{left: {4, 2}, right: {8, 4}, result: true},
+              %{left: {5, 2}, right: {3, 4}, result: true}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.gte?(left, right) == test_case.result
+              end
+          )          
+          
+          
+      end
+      
+      
+      test "lt?(int, frac)" do
+          test_cases = [
+              %{left: -3, right: {3, 4}, result: true},
+              %{left: 0, right: {3, 4}, result: true},
+              %{left: 1, right: {0, 4}, result: false},
+              %{left: 1, right: {4, 4}, result: false},
+              %{left: 3, right: {3, 4}, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = test_case.left
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.lt?(left, right) == test_case.result
+              end
+          )          
+      end
+      
+      test "lt?(frac, int)" do
+          test_cases = [
+              %{left: {-3, 4}, right: 2, result: true},
+              %{left: {0, 4}, right: 2, result: true},
+              %{left: {0, 4}, right: 0, result: false},
+              %{left: {1, 2}, right: 2, result: true},
+              %{left: {4, 2}, right: 2, result: false},
+              %{left: {5, 2}, right: 2, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = test_case.right
+                  
+                  assert Fraction.lt?(left, right) == test_case.result
+              end
+          )          
+          
+      end
+      
+      test "lt?(frac, frac)" do
+          
+          test_cases = [
+              %{left: {-3, 4}, right: {3, 4}, result: true},
+              %{left: {0, 4}, right: {3, 4}, result: true},
+              %{left: {0, 4}, right: {0, 4}, result: false},
+              %{left: {1, 2}, right: {2, 4}, result: false},
+              %{left: {4, 2}, right: {8, 4}, result: false},
+              %{left: {5, 2}, right: {3, 4}, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.lt?(left, right) == test_case.result
+              end
+          )          
+          
+          
+      end
+      
+      test "lte?(int, frac)" do
+          test_cases = [
+              %{left: -3, right: {3, 4}, result: true},
+              %{left: 0, right: {3, 4}, result: true},
+              %{left: 1, right: {0, 4}, result: false},
+              %{left: 1, right: {4, 4}, result: true},
+              %{left: 3, right: {3, 4}, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = test_case.left
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.lte?(left, right) == test_case.result
+              end
+          )          
+      end
+      
+      test "lte?(frac, int)" do
+          test_cases = [
+              %{left: {-3, 4}, right: 2, result: true},
+              %{left: {0, 4}, right: 2, result: true},
+              %{left: {0, 4}, right: 0, result: true},
+              %{left: {1, 2}, right: 2, result: true},
+              %{left: {4, 2}, right: 2, result: true},
+              %{left: {5, 2}, right: 2, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = test_case.right
+                  
+                  assert Fraction.lte?(left, right) == test_case.result
+              end
+          )          
+          
+      end
+      
+      test "lte?(frac, frac)" do
+          
+          test_cases = [
+              %{left: {-3, 4}, right: {3, 4}, result: true},
+              %{left: {0, 4}, right: {3, 4}, result: true},
+              %{left: {0, 4}, right: {0, 4}, result: true},
+              %{left: {1, 2}, right: {2, 4}, result: true},
+              %{left: {4, 2}, right: {8, 4}, result: true},
+              %{left: {5, 2}, right: {3, 4}, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.lte?(left, right) == test_case.result
+              end
+          )          
+          
+          
+      end
+      
+      test "eq?(int, frac)" do
+          test_cases = [
+              %{left: -3, right: {3, 4}, result: false},
+              %{left: 0, right: {3, 4}, result: false},
+              %{left: 1, right: {0, 4}, result: false},
+              %{left: 1, right: {4, 4}, result: true},
+              %{left: 3, right: {3, 4}, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = test_case.left
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.eq?(left, right) == test_case.result
+              end
+          )          
+      end
+      
+      test "eq?(frac, int)" do
+          test_cases = [
+              %{left: {-3, 4}, right: 2, result: false},
+              %{left: {0, 4}, right: 2, result: false},
+              %{left: {0, 4}, right: 0, result: true},
+              %{left: {1, 2}, right: 2, result: false},
+              %{left: {4, 2}, right: 2, result: true},
+              %{left: {5, 2}, right: 2, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = test_case.right
+                  
+                  assert Fraction.eq?(left, right) == test_case.result
+              end
+          )          
+          
+      end
+      
+      test "eq?(frac, frac)" do
+          
+          test_cases = [
+              %{left: {-3, 4}, right: {3, 4}, result: false},
+              %{left: {0, 4}, right: {3, 4}, result: false},
+              %{left: {0, 4}, right: {0, 4}, result: true},
+              %{left: {1, 2}, right: {2, 4}, result: true},
+              %{left: {4, 2}, right: {8, 4}, result: true},
+              %{left: {5, 2}, right: {3, 4}, result: false}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  
+                  left = Fraction.new(test_case.left)
+                  right = Fraction.new(test_case.right)
+                  
+                  assert Fraction.eq?(left, right) == test_case.result
+              end
+          )          
+          
+          
+      end
+  end
+  
+  describe "is_positive?" do
+      test "pos" do
+          assert Fraction.is_positive?(Fraction.new(3, 5))
+      end
+      
+      test "neg" do
+          assert Fraction.is_positive?(Fraction.new(-3, 5)) == false
+      end
+      
+      test "zero" do
+          assert Fraction.is_positive?(Fraction.new(0, 5))
+      end
+  end
+  
+  describe "is_negative?" do
+      test "pos" do
+          assert Fraction.is_negative?(Fraction.new(3, 5)) == false
+      end
+      
+      test "neg" do
+          assert Fraction.is_negative?(Fraction.new(-3, 5))
+      end
+      
+      test "zero" do
+          assert Fraction.is_negative?(Fraction.new(0, 5)) == false
+      end      
+  end
+  
+  describe "normalize" do
+      
+      test "identical base" do
+          
+          assert Fraction.normalize(
+              Fraction.new(3, 5), 
+              Fraction.new(7, 5)
+          ) == {
+              %Fraction{num: 3, den: 5},
+              %Fraction{num: 7, den: 5}
+          }
+          
+      end
+      
+      test "pos, pos" do
+          
+          assert Fraction.normalize(
+              Fraction.new(5, 7), 
+              Fraction.new(11, 3)
+          ) == {
+              %Fraction{num: 15, den: 21},
+              %Fraction{num: 77, den: 21}
+          }
+          
+      end
+      
+      test "neg, pos" do
+          
+          assert Fraction.normalize(
+              Fraction.new(-3, 5), 
+              Fraction.new(7, 3)
+          ) == {
+              %Fraction{num: -9, den: 15},
+              %Fraction{num: 35, den: 15}
+          }
+          
+      end
+      
+      test "neg, neg" do
+          
+          assert Fraction.normalize(
+              Fraction.new(-4, 3), 
+              Fraction.new(-6, 9)
+          ) == {
+              %Fraction{num: -12, den: 9},
+              %Fraction{num: -6, den: 9}
+          }
+          
+      end
+      
+      test "int, frac" do
+
+          assert Fraction.normalize(
+              3, 
+              Fraction.new(7, 5)
+          ) == {
+              %Fraction{num: 15, den: 5},
+              %Fraction{num: 7, den: 5}
+          }
+          
+      end
+      
+      test "frac, int" do
+
+          assert Fraction.normalize(
+              Fraction.new(3, 5), 
+              6
+          ) == {
+              %Fraction{num: 3, den: 5},
+              %Fraction{num: 30, den: 5}
+          }
+          
+      end
+  end
+  
   describe "power/3 - frac ^ frac" do
   
       test "fractional roots" do

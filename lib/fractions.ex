@@ -556,6 +556,173 @@ defmodule Chunky.Fraction do
    end
    
    @doc """
+   Change a combination of fractions, or fractions and integers, into the
+   same denominator.
+   
+   ## Example
+   
+       iex> Fraction.normalize(Fraction.new(3, 4), Fraction.new(1, 7))
+       { %Fraction{num: 21, den: 28}, %Fraction{num: 4, den: 28} }
+   
+       iex> Fraction.normalize(3, Fraction.new(2, 5))
+       { %Fraction{num: 15, den: 5}, %Fraction{num: 2, den: 5} }
+       
+       iex> Fraction.normalize(Fraction.new(6, 4), 2)
+       { %Fraction{num: 6, den: 4}, %Fraction{num: 8, den: 4} }
+   """
+   def normalize(%Fraction{}=fraction_a, int) when is_integer(int) do
+       normalize(fraction_a, Fraction.new(int))
+   end
+   
+   def normalize(int, %Fraction{}=fraction_b) when is_integer(int) do
+       normalize(Fraction.new(int), fraction_b)
+   end
+   
+   def normalize(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+   
+       if fraction_a.den == fraction_b.den do
+           {fraction_a, fraction_b}
+       else
+           new_base = lcm(fraction_a.den, fraction_b.den)
+           a_mult = new_base / fraction_a.den
+           b_mult = new_base / fraction_b.den
+           
+           {
+               Fraction.new(Kernel.trunc(fraction_a.num * a_mult), new_base),
+               Fraction.new(Kernel.trunc(fraction_b.num * b_mult), new_base)
+           }
+       end
+       
+   end
+   
+   @doc """
+   Compare a fraction with an integer or fraction using _greater than_ comparison.
+   
+   ## Examples
+   
+       iex> Fraction.gt?(Fraction.new(7, 9), Fraction.new(3, 5))
+       true
+   
+       iex> Fraction.gt?(3, Fraction.new(15, 4))
+       false
+   
+       iex> Fraction.gt?(Fraction.new(-3, 12), -2)
+       true
+   """
+   def gt?(%Fraction{}=fraction_a, int) when is_integer(int), do: gt?(fraction_a, Fraction.new(int))
+   def gt?(int, %Fraction{}=fraction_b) when is_integer(int), do: gt?(Fraction.new(int), fraction_b)   
+   def gt?(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+      {norm_a, norm_b} = normalize(fraction_a, fraction_b)
+      norm_a.num > norm_b.num 
+   end
+
+   @doc """
+   Compare a fraction with an integer or fraction using _greater than or equal_ comparison.
+   
+   ## Examples
+   
+       iex> Fraction.gte?(Fraction.new(3, 9), Fraction.new(1, 3))
+       true
+   
+       iex> Fraction.gte?(3, Fraction.new(15, 4))
+       false
+   
+       iex> Fraction.gte?(Fraction.new(-3, 12), -2)
+       true
+   """
+   def gte?(%Fraction{}=fraction_a, int) when is_integer(int), do: gte?(fraction_a, Fraction.new(int))
+   def gte?(int, %Fraction{}=fraction_b) when is_integer(int), do: gte?(Fraction.new(int), fraction_b)   
+   def gte?(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+      {norm_a, norm_b} = normalize(fraction_a, fraction_b)
+      norm_a.num >= norm_b.num 
+   end
+
+   @doc """
+   Compare a fraction with an integer or fraction using _less than_ comparison.
+   
+   ## Examples
+   
+       iex> Fraction.lt?(Fraction.new(7, 9), Fraction.new(3, 5))
+       false
+   
+       iex> Fraction.lt?(3, Fraction.new(15, 4))
+       true
+   
+       iex> Fraction.lt?(Fraction.new(-3, 12), -2)
+       false
+   """
+   def lt?(%Fraction{}=fraction_a, int) when is_integer(int), do: lt?(fraction_a, Fraction.new(int))
+   def lt?(int, %Fraction{}=fraction_b) when is_integer(int), do: lt?(Fraction.new(int), fraction_b)   
+   def lt?(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+      {norm_a, norm_b} = normalize(fraction_a, fraction_b)
+      norm_a.num < norm_b.num 
+   end
+
+   @doc """
+   Compare a fraction with an integer or fraction using _less than or equal_ comparison.
+   
+   ## Examples
+   
+       iex> Fraction.lte?(Fraction.new(7, 9), Fraction.new(3, 5))
+       false
+   
+       iex> Fraction.lte?(3, Fraction.new(15, 4))
+       true
+   
+       iex> Fraction.lte?(Fraction.new(-24, 12), -2)
+       true
+   """
+   def lte?(%Fraction{}=fraction_a, int) when is_integer(int), do: lte?(fraction_a, Fraction.new(int))
+   def lte?(int, %Fraction{}=fraction_b) when is_integer(int), do: lte?(Fraction.new(int), fraction_b)   
+   def lte?(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+      {norm_a, norm_b} = normalize(fraction_a, fraction_b)
+      norm_a.num <= norm_b.num 
+   end
+
+   @doc """
+   Compare a fraction with an integer or fraction using _equals_ comparison.
+   
+   ## Examples
+   
+       iex> Fraction.eq?(Fraction.new(7, 9), Fraction.new(3, 5))
+       false
+   
+       iex> Fraction.eq?(3, Fraction.new(12, 4))
+       true
+   
+       iex> Fraction.eq?(Fraction.new(-3, 12), -2)
+       false
+   """
+   def eq?(%Fraction{}=fraction_a, int) when is_integer(int), do: eq?(fraction_a, Fraction.new(int))
+   def eq?(int, %Fraction{}=fraction_b) when is_integer(int), do: eq?(Fraction.new(int), fraction_b)      
+   def eq?(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+       {norm_a, norm_b} = normalize(fraction_a, fraction_b)
+       norm_a.num == norm_b.num        
+   end
+   
+   @doc """
+   Determine if a fraction is negative.
+   
+   ## Examples
+   
+       iex> Fraction.new(-3, 4) |> Fraction.is_negative?()
+       true
+   """
+   def is_negative?(%Fraction{num: num}) when num < 0, do: true
+   def is_negative?(_), do: false
+   
+   @doc """
+   Determine if a fraction is positive.
+   
+   ## Examples
+   
+       iex> Fraction.new(-3, 4) |> Fraction.is_positive?()
+       false
+   """
+   def is_positive?(%Fraction{num: num}) when num >= 0, do: true
+   def is_positive?(_), do: false
+   
+   @doc """
    Does a fraction represent a zero value?
    
    ## Examples
@@ -568,8 +735,6 @@ defmodule Chunky.Fraction do
    
    """
    def is_zero?(%Fraction{}=fraction), do: fraction.num == 0
-   
-   defp lcm(a,b) when is_integer(a) and is_integer(b), do: div(abs(a*b), Integer.gcd(a,b))
    
    @doc """
    Determine if the n-th root of a number is a whole integer.
@@ -629,5 +794,8 @@ defmodule Chunky.Fraction do
 
    defp fixed_point(_, guess, tolerance, next) when abs(guess - next) < tolerance, do: next
    defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
+    
+   # simple Least Common Multiple    
+   defp lcm(a,b) when is_integer(a) and is_integer(b), do: div(abs(a*b), Integer.gcd(a,b))
 
 end
