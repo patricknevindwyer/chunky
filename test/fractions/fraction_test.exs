@@ -10,6 +10,120 @@ defmodule Chunky.FractionTest do
      end
   end
   
+  describe "power/2 - frac ^ int" do
+  
+      test "pos/pos ^ pos" do
+          test_cases = [
+              %{fraction: {1, 3}, power: 3, result: {1, 27}, opts: []},
+              %{fraction: {3, 5}, power: 3, result: {27, 125}, opts: []},
+              
+              %{fraction: {2, 4}, power: 2, result: {4, 16}, opts: []},
+              %{fraction: {2, 4}, power: 2, result: {1, 4}, opts: [simplify: true]},
+              
+              %{fraction: {4, 3}, power: 3, result: {64, 27}, opts: []},
+              
+              %{fraction: {0, 3}, power: 2, result: {0, 9}, opts: []}
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.fraction)
+                  pow = test_case.power
+                  
+                  assert Fraction.power(f_a, pow, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.power(f_a, pow, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+          
+      end
+      
+      test "neg/pos ^ pos" do
+
+          test_cases = [
+              %{fraction: {-1, 3}, power: 3, result: {-1, 27}, opts: []},
+              %{fraction: {-3, 5}, power: 3, result: {-27, 125}, opts: []},
+              
+              %{fraction: {-2, 4}, power: 2, result: {4, 16}, opts: []},
+              %{fraction: {-2, 4}, power: 2, result: {1, 4}, opts: [simplify: true]},
+              
+              %{fraction: {-4, 3}, power: 3, result: {-64, 27}, opts: []}
+              
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.fraction)
+                  pow = test_case.power
+                  
+                  assert Fraction.power(f_a, pow, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.power(f_a, pow, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+
+      end
+      
+      test "pos/pos ^ neg" do
+
+          test_cases = [
+              %{fraction: {1, 3}, power: -3, result: {27, 1}, opts: []},
+              %{fraction: {3, 5}, power: -3, result: {125, 27}, opts: []},
+              
+              %{fraction: {2, 4}, power: -2, result: {16, 4}, opts: []},
+              %{fraction: {2, 4}, power: -2, result: {4, 1}, opts: [simplify: true]},
+              
+              %{fraction: {4, 3}, power: -3, result: {27, 64}, opts: []}
+               
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.fraction)
+                  pow = test_case.power
+                  
+                  assert Fraction.power(f_a, pow, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.power(f_a, pow, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+          
+      end
+      
+      test "neg/pos ^ neg" do
+
+          test_cases = [
+              %{fraction: {-1, 3}, power: -3, result: {-27, 1}, opts: []},
+              %{fraction: {-3, 5}, power: -3, result: {-125, 27}, opts: []},
+              
+              %{fraction: {-2, 4}, power: -2, result: {16, 4}, opts: []},
+              %{fraction: {-2, 4}, power: -2, result: {4, 1}, opts: [simplify: true]},
+              
+              %{fraction: {-4, 3}, power: -3, result: {-27, 64}, opts: []}
+              
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.fraction)
+                  pow = test_case.power
+                  
+                  assert Fraction.power(f_a, pow, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.power(f_a, pow, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+          
+      end
+      
+      test "0/pos ^ neg" do
+          
+          z_f = Fraction.new(0, 3)
+          
+          assert z_f |> Fraction.power(-3) == {:error, :invalid_denominator}
+      end
+  end
+  
   describe "reciprocal/2" do
       
       test "reciprocals" do

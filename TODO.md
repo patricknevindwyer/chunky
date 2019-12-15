@@ -54,7 +54,7 @@
   - x div (frac, whole)
   - x div (whole, frac)
   - pow(frac, frac)
-  - pow(frac, whole)
+  - x pow(frac, whole)
   - pow(whole, frac)
   - gt(frac, frac)
   - gt(frac, whole)

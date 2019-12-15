@@ -247,6 +247,32 @@ defmodule Chunky.Fraction do
        end
    end
    
+   def power(a, b, opts \\ [])
+   
+   def power(%Fraction{}=fraction, int, opts) when is_integer(int) and int < 0 do
+       case reciprocal(fraction) do
+          {:error, reason} -> {:error, reason}
+          r_frac -> power(r_frac, abs(int), opts) 
+       end
+   end
+   
+   def power(%Fraction{}=fraction, int, opts) when is_integer(int) and int >= 0 do
+       simp = opts |> Keyword.get(:simplify, false)
+       
+       p_num = :math.pow(fraction.num, int) |> Kernel.trunc()
+       p_den = :math.pow(fraction.den, int) |> Kernel.trunc()
+       
+       p_frac = Fraction.new(p_num, p_den)
+       
+       if simp do
+           p_frac |> simplify()
+       else
+           p_frac
+       end
+   end
+   
+   
+   
    @doc """
    Extract the numerator and denominator of a fraction as a tuple of values.
    
