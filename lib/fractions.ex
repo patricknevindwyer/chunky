@@ -173,6 +173,39 @@ defmodule Chunky.Fraction do
    
    def multiply(%Fraction{}=fraction_a, int, opts) when is_integer(int), do: multiply(fraction_a, Fraction.new(int), opts)
    def multiply(int, %Fraction{}=fraction_b, opts) when is_integer(int), do: multiply(Fraction.new(int), fraction_b, opts)
+
+   @doc """
+   Divide two fractions, or a fraction and an integer and return the (optionally simplified) result.
+   
+   ## Examples
+   
+       iex> Fraction.divide(Fraction.new(3, 4), Fraction.new(-7, 2))
+       %Fraction{num: -6, den: 28}
+   
+       iex> Fraction.divide(Fraction.new(28, 4), 4, simplify: true)
+       %Fraction{num: 7, den: 4}
+   
+       iex> Fraction.divide(60, Fraction.new(7, 12))
+       %Fraction{num: 720, den: 7}
+   
+   """   
+   def divide(a, b, opts \\ [])
+   def divide(%Fraction{}=fraction_a, %Fraction{}=fraction_b, opts) do
+       
+       case reciprocal(fraction_b) do
+
+          {:error, reason} -> 
+              {:error, reason} 
+
+          r_frac -> 
+              # multiply out
+              multiply(fraction_a, r_frac, opts)
+              
+       end
+   end
+   
+   def divide(%Fraction{}=fraction_a, int, opts) when is_integer(int), do: divide(fraction_a, Fraction.new(int), opts)
+   def divide(int, %Fraction{}=fraction_b, opts) when is_integer(int), do: divide(Fraction.new(int), fraction_b, opts)
    
    @doc """
    Create the reciprocal of a fraction, optionally simplifying the result. 

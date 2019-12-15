@@ -35,6 +35,7 @@
   - `String.Chars` - Fractions now work properly with IO functions
   - `multiply/3` - Multiply two fractions, or a fraction and an integer
   - `reciprocal/2` - Take the reciprocal of a fraction
+  - `divide/3` - Divide two fractions, or a fraction and an integer
 
  - `Chunky.Grid` module for working with two dimensional data
   - `Grid.new/3` - generate a grid from a value or a function

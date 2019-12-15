@@ -49,6 +49,135 @@ defmodule Chunky.FractionTest do
       end
   end
   
+  describe "divide/*" do
+
+      test "frac / frac" do
+          
+          test_cases = [
+              
+              # pos / pos == pos
+              %{left: {3, 4}, right: {1, 2}, result: {6, 4}, opts: []},
+              %{left: {3, 4}, right: {1, 2}, result: {3, 2}, opts: [simplify: true]},
+              %{left: {4, 1}, right: {3, 4}, result: {16, 3}, opts: []},
+              %{left: {8, 7}, right: {7, 3}, result: {24, 49}, opts: []},
+              
+              # pos / neg == neg
+              %{left: {3, 4}, right: {-7, 2}, result: {-6, 28}, opts: []},
+              %{left: {3, 4}, right: {-7, 2}, result: {-3, 14}, opts: [simplify: true]},
+              %{left: {0, 3}, right: {-3, 4}, result: {0, 9}, opts: []},
+              
+              # neg / pos == neg
+              %{left: {-6, 11}, right: {4, 9}, result: {-54, 44}, opts: []},
+              %{left: {-6, 11}, right: {4, 9}, result: {-27, 22}, opts: [simplify: true]},
+              
+              # nev / neg == pos
+              %{left: {-3, 7}, right: {-11, 2}, result: {6, 77}, opts: []},
+              %{left: {-11, 3}, right: {-11, 3}, result: {33, 33}, opts: []},
+              %{left: {-11, 3}, right: {-11, 3}, result: {1, 1}, opts: [simplify: true]},
+              
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.left)
+                  f_b = Fraction.new(test_case.right)
+
+                  assert Fraction.divide(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.divide(f_a, f_b, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )
+          
+      end
+      
+      test "frac / int" do
+
+          test_cases = [
+              
+              # pos / pos == pos
+              %{left: {3, 4}, right: 3, result: {3, 12}, opts: []},
+              %{left: {3, 4}, right: 3, result: {1, 4}, opts: [simplify: true]},
+              %{left: {4, 1}, right: 7, result: {4, 7}, opts: []},
+              %{left: {8, 7}, right: 11, result: {8, 77}, opts: []},
+              
+              # pos / neg == neg
+              %{left: {3, 4}, right: -3, result: {-3, 12}, opts: []},
+              %{left: {3, 4}, right: -3, result: {-1, 4}, opts: [simplify: true]},
+              %{left: {0, 3}, right: -7, result: {0, 21}, opts: []},
+              
+              # neg / pos == neg
+              %{left: {-6, 11}, right: 4, result: {-6, 44}, opts: []},
+              %{left: {-6, 11}, right: 4, result: {-3, 22}, opts: [simplify: true]},
+              
+              # nev / neg == pos
+              %{left: {-3, 7}, right: -3, result: {3, 21}, opts: []},
+              %{left: {-3, 7}, right: -3, result: {1, 7}, opts: [simplify: true]},
+              %{left: {-11, 3}, right: -11, result: {11, 33}, opts: []},
+              %{left: {-11, 3}, right: -11, result: {1, 3}, opts: [simplify: true]},
+              
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = Fraction.new(test_case.left)
+                  f_b = test_case.right
+
+                  assert Fraction.divide(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.divide(f_a, f_b, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )          
+      end
+      
+      test "int / frac" do
+          
+          test_cases = [
+              
+              # pos / pos == pos
+              %{left: 3, right: {1, 2}, result: {6, 1}, opts: []},
+              %{left: 4, right: {4, 2}, result: {2, 1}, opts: [simplify: true]},
+              %{left: 5, right: {3, 4}, result: {20, 3}, opts: []},
+              %{left: 9, right: {7, 3}, result: {27, 7}, opts: []},
+              
+              # pos / neg == neg
+              %{left: 14, right: {-7, 2}, result: {-28, 7}, opts: []},
+              %{left: 14, right: {-7, 2}, result: {-4, 1}, opts: [simplify: true]},
+              %{left: 0, right: {-3, 4}, result: {0, 3}, opts: []},
+              
+              # neg / pos == neg
+              %{left: -6, right: {4, 9}, result: {-54, 4}, opts: []},
+              %{left: -6, right: {4, 9}, result: {-27, 2}, opts: [simplify: true]},
+              
+              # nev / neg == pos
+              %{left: -3, right: {-11, 2}, result: {6, 11}, opts: []},
+              %{left: -11, right: {-11, 3}, result: {33, 11}, opts: []},
+              %{left: -11, right: {-11, 3}, result: {3, 1}, opts: [simplify: true]},
+              
+          ]
+          
+          test_cases
+          |> Enum.each(
+              fn test_case ->
+                  f_a = test_case.left
+                  f_b = Fraction.new(test_case.right)
+
+                  assert Fraction.divide(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
+                  assert Fraction.divide(f_a, f_b, test_case.opts) |> Fraction.components() == test_case.result
+              end
+          )      
+              
+      end
+      
+      test "zeros" do
+          
+          f_a = Fraction.new(3, 2)
+          f_b = Fraction.new(0, 3)
+          
+          assert Fraction.divide(f_b, f_a) |> Fraction.components() == {0, 9}
+          assert Fraction.divide(f_a, f_b) == {:error, :invalid_denominator}
+      end
+  end
+  
   describe "multiply/*" do
       
       test "frac * frac" do
