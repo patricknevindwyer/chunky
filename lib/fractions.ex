@@ -69,10 +69,14 @@ defmodule Chunky.Fraction do
     - `reciprocal/2` - Inverse or reciprocal of a fraction
     - `simplify/1` - Simplify a fraction to it's reduced form
     - `split/1` - Extract the whole value portion and the remainer portion of a fraction as a tuple
-
+    - `to_float/2` - Convert a fraction to a floating point value
+  
   ```elixir
   iex> Fraction.new(88, 28) |> Fraction.simplify() |> Fraction.split()
   {3, %Fraction{num: 1, den: 7}}
+  
+  iex> Fraction.new(22, 7) |> Fraction.to_float(precision: 2)
+  3.14
   ```
 
   ## Aggregate Functions
@@ -163,6 +167,77 @@ defmodule Chunky.Fraction do
   end
 
   @doc """
+  Convert a floating point value to a fraction.
+  
+  There are two modes for converting values:
+  
+   - Using precision approximation (via `Float.ratio/1`)
+   - Using natural conversion
+  
+  Natural conversion tries to find a fraction that represents the intended value of
+  a float, while precision approximation tries to find a fractional representation of
+  the encoded floating point value. Use the `conversion` flag to toggle between
+  the two modes. 
+  
+  ## Flags
+  
+   - `conversion` - Atom. One of `:natural` or `:precision`
+  
+  ## Example
+  
+      iex> Fraction.new(0.9, conversion: :natural) |> to_string()
+      "9/10"
+      
+      iex> Fraction.new(0.9, conversion: :precision) |> to_string()
+      "8106479329266893/9007199254740992"
+  
+      iex> Fraction.new(3.14, conversion: :natural) |> to_string()
+      "314/100"
+      
+      iex> Fraction.new(3.14, conversion: :precision) |> to_string()
+      "7070651414971679/2251799813685248"
+  """
+  def new(fl, opts) when is_float(fl) and is_list(opts) do
+      
+      mode = opts |> Keyword.get(:conversion, :natural)
+      
+      case mode do
+          
+          :precision -> Float.ratio(fl) |> new()
+          
+          :natural -> 
+              
+              [hi, lo] = fl 
+              |> Float.to_string()
+              |> String.split(".")
+              
+              # how many digits in denominator?
+              den = Kernel.trunc(:math.pow(10, String.length(lo)))
+              
+              # now build the numerator
+              {hi_v, _} = Integer.parse(hi)
+              {lo_v, _} = Integer.parse(lo)
+              new((hi_v * den) + lo_v, den)
+
+      end
+  end
+  
+  @doc """
+  Convert a float to a fraction.
+  
+  This is a short hand call to `new/2` for converting a float to
+  a fraction using natural conversion, so `new(0.9)` is equivalent
+  to calling `new(0.9, conversion: :natural)`.
+  
+  ## Example
+  
+      iex> new(0.9)
+      %Fraction{num: 9, den: 10}
+      
+  """
+  def new(fl) when is_float(fl), do: new(fl, conversion: :natural)
+  
+  @doc """
   Create a fraction from a tuple of a numerator and denominator.
 
   ## Examples
@@ -185,6 +260,87 @@ defmodule Chunky.Fraction do
       %Fraction{num: -22, den: 1}
   """
   def new(int) when is_integer(int), do: new(int, 1)
+  
+  @doc """
+  Create a fraction from a fraction. 
+  
+  This is an identity function, and the original fraction is returned. This is primarily
+  used for aggregate functions and multi-type parsing.
+  
+  ## Example
+  
+      iex> Fraction.new(22, 7) |> Fraction.new()
+      %Fraction{num: 22, den: 7}
+  
+  """
+  def new(%Fraction{}=fraction), do: fraction
+  
+  @doc """
+  Convert a string encoding of an integer, float, or fraction into a fraction.
+  
+  ## Example
+  
+      iex> Fraction.new("3")
+      %Fraction{num: 3, den: 1}
+  
+      iex> Fraction.new("12/7")
+      %Fraction{num: 12, den: 7}
+  
+      iex> Fraction.new("13 / 5")
+      %Fraction{num: 13, den: 5}
+  
+      iex> Fraction.new("foo/bar")
+      {:error, :no_parsable_fraction}
+  
+      iex> Fraction.new("3.14")
+      %Fraction{num: 314, den: 100}
+  """
+  def new(string) when is_binary(string) do
+      case String.split(string, "/") do
+          
+          [single] -> 
+              case float_or_integer(single) do
+                  :none -> {:error, :no_parseable_fraction}
+                  {:integer, i} -> new(i)
+                  {:float, f} -> new(f)
+              end
+              
+          
+          [num, den] -> 
+              p_num = num |> String.trim() |> Integer.parse()
+              p_den = den |> String.trim() |> Integer.parse()
+              
+              case {p_num, p_den} do
+                 {:error, :error} -> {:error, :no_parsable_fraction}
+                 {_, :error} -> {:error, :no_parsable_fraction}
+                 {:error, _} -> {:error, :no_parsable_fraction}
+                 {{v_num, _}, {v_den, _}} -> new(v_num, v_den)
+              end
+          
+          _o -> {:error, :no_parsable_fraction}
+      end
+  end
+  
+  # support method - a string may contain a float, integer, or nothing useful,
+  # determine the best one to use.
+  defp float_or_integer(s) do
+      str = s |> String.trim()
+      # does it even have a decimal?
+     if String.contains?(str, ".") do
+         # does float parse it?
+         case Float.parse(str) do
+            :error -> :none
+            {v, _} -> {:float, v}
+         end
+     else
+         case Integer.parse(str) do
+             :error -> :none
+             {v, _} -> {:integer, v}
+         end
+     end 
+  end
+  
+  
 
   defimpl String.Chars do
     def to_string(%Fraction{num: num, den: den}) do
@@ -568,6 +724,28 @@ defmodule Chunky.Fraction do
   def components(%Fraction{} = fraction), do: {fraction.num, fraction.den}
 
   @doc """
+  Convert a fraction to a float, optionally rounding to a specific precision.
+  
+  ## Options
+  
+   - `precision` - Integer. Default `15`. Number of digits of precision in float. From `0` to `15`.
+  
+  ## Examples
+  
+      iex> Fraction.new(22, 7) |> to_float()
+      3.142857142857143
+  
+      iex> Fraction.new(22, 7) |> to_float(precision: 2)
+      3.14
+  """
+  def to_float(%Fraction{}=fraction, opts \\ []) do
+      
+      precision = opts |> Keyword.get(:precision, 15)
+      
+      Float.round(fraction.num / fraction.den, precision)
+  end
+  
+  @doc """
   Determine if a fraction exactly represents a whole number, with no remainder.
 
   ## Examples
@@ -803,7 +981,82 @@ defmodule Chunky.Fraction do
       Fraction.new(n_num, head_frac.den)
     end
   end
+  
+  @doc """
+  Find the minimum value in a list of fractions. Values are calculated based on float
+  conversion of fractions.  
+  
+  ## Example
+  
+      iex> Fraction.min([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
+      %Fraction{num: 3, den: 7}
+  
+  """
+  def min(list) do
+      list |> Enum.min_by(&to_float/1)
+  end
+  
+  @doc """
+  Return the smaller of two fractions.
+  
+  ## Example
+  
+      iex> Fraction.min( Fraction.new(3, 7), Fraction.new(11, 28) )
+      %Fraction{num: 11, den: 28}
+  
+  """
+  def min(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+     if Fraction.lte?(fraction_a, fraction_b) do
+         fraction_a
+     else
+         fraction_b
+     end 
+  end
 
+  @doc """
+  Return the maximum value in a list of fractions. Values are calculated based on float
+  converion of fractions.
+  
+  ## Example
+
+      iex> Fraction.max([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
+      %Fraction{num: 11, den: 23}
+  
+  """
+  def max(list) do
+      list |> Enum.max_by(&to_float/1)
+  end
+  
+  @doc """
+  Return the larger of two fractions.
+  
+  ## Example
+  
+      iex> Fraction.max( Fraction.new(3, 7), Fraction.new(11, 28) )
+      %Fraction{num: 3, den: 7}
+  
+  """
+  def max(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+      if Fraction.gte?(fraction_a, fraction_b) do
+          fraction_a
+      else
+          fraction_b
+      end
+  end
+  
+  @doc """
+  Return a tuple with the smallest and largest fractions from a list.
+  
+  ## Example
+  
+      iex> Fraction.min_max([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
+      { %Fraction{num: 3, den: 7}, %Fraction{num: 11, den: 23} }
+  
+  """
+  def min_max(list) do
+     list |> Enum.min_max_by(&to_float/1) 
+  end
+  
   @doc """
   Compare a fraction with an integer or fraction using _greater than_ comparison.
 

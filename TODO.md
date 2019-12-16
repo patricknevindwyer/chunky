@@ -42,12 +42,36 @@
    - returning a "sequence complete" or a has_next flag
    
  - Chunky.Fraction
-  - to_float
-  - min(aggregate)
-  - max(aggregate)
+  - min(aggregate) (write tests)
+  - to_float (write tests)
+  - min(frac, frac) (write tests)
+  - max(aggregate) (write tests)
+  - max(frac, frac) (write tests)
+  - min_max (write tests)
+
+  - new(frac) -> frac (write tests)
+  - new/1 (string) (write tests)
+  - new/1 (float) (write tests)
+  - new/1 (string - float as string) (write tests)
+  
+  - min(int, frac)
+  - min(frac, int)
+  - max(int, frac)
+  - max(frac, int)
+
+  - re-order functions that are in triplicate (like gt? lt?, etc) so the (frac, frac) version is
+    first, as the first one is the one that shows up in documentation parameter names
+    
+  - aggregates need to check for integers -> just map everything through Fraction.new()
+  - aggregates need docs for working with _anything_ (string, int, float, frac, tuple, pair)
+   - sum
+   - min
+   - max
+   - min_max
+  
   - uniq(aggregate)
-  - new/1 (string)
-  - new/1 (float)
+  - sort(aggregate)
+  - clamp(aggregate) filter to be within a min and max value
   
   - update readme
   - update top of module for fractions
@@ -57,6 +81,8 @@
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64
  
  - Chunky.Grid
+  - add a struct for coordinate or a convetion of %{x, y}
+  - functions with coords should take def(grid, x, y, ...) def(grid, {x, y}, ...) or def(grid, %{}, ...)
   - day 15 
   - get/put/update
   - count (extract with val or func)
