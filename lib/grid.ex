@@ -42,16 +42,18 @@ defmodule Chunky.Grid do
       true -> grid.data |> Kernel.get_in([Access.at(y), Access.at(x)])
     end
   end
-  
+
   def put_at(%Grid{} = grid, {x, y}, v), do: put_at(grid, x, y, v)
-  
+
   def put_at(%Grid{} = grid, x, y, v) do
-     case valid_coordinate(grid, x, y) do
-         {false, reason} -> {:error, reason}
-         true ->  
-             n_data = grid.data |> put_in([Access.at(y), Access.at(x)], v)
-             %{grid | data: n_data}
-     end
+    case valid_coordinate(grid, x, y) do
+      {false, reason} ->
+        {:error, reason}
+
+      true ->
+        n_data = grid.data |> put_in([Access.at(y), Access.at(x)], v)
+        %{grid | data: n_data}
+    end
   end
 
   def valid_coordinate?(%Grid{} = grid, {x, y}) when is_integer(x) and is_integer(y),
