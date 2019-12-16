@@ -1,7 +1,126 @@
 defmodule Chunky.Fraction do
   @moduledoc """
-  Functions for creating and manipulating fractions.
+  Functions for creating and manipulating fractions. 
+  
+  Most functions will work with combinations of _Fractions_ and _Integers_. All of
+  the fraction functions work with explicit integer numerators and denominators, falling
+  back to returning floating point number only when configured to in special circumstances.
+  
+  ## Creating Fractions
+  
+  Construct fractions from a single integer, tuple of integers, or a pair of integer
+  parameters.
 
+    - `new/1` - Create a Fraction from an integer or tuple of integers
+    - `new/2` - Create a Fraction from a numerator and denominator
+  
+  ```elixir
+  iex> Fraction.new(3)
+  %Fraction{num: 3, den: 1}
+  
+  iex> Fraction.new({22, 7})
+  %Fraction{num: 22, den: 7}
+  ```
+  
+  ## Basic Math
+  
+  Standard math functions that work with two fractions, or a fraction and an integer. Options
+  allow for automatic simplification and control over how certain operations work.
+  
+    - `add/3` - Add two fractions, or a fraction and an integer
+    - `subtract/3` - Subtract two fractions, or a fraction and an integer
+    - `multiply/3` - Multiply two fractions, or a fraction and an integer
+    - `divide/3` - Divide two fractions, or a fraction and an integer
+    - `power/3` - Take a fraction or an integer to the power of a fraction or an integer
+  
+  ```elixir
+  iex> Fraction.new(4, 3) |> Fraction.add(Fraction.new({1, 6})) |> Fraction.power(2)
+  %Fraction{num: 81, den: 36}
+  
+  iex> Fraction.power(8, Fraction.new(1, 3))
+  %Fraction{num: 2, den: 1}
+  ```
+  
+  ## Comparisons
+  
+  Binary comparisons between two fractions or a fraction and an integer.
+  
+    - `eq?/2` - Equality (`==`) comparison between two fractions, or a fraction and an integer
+    - `gt?/2` - Greater than (`>`) comparison between two fractions, or a fraction and an integer
+    - `gte?/2` - Greater than or equal (`>=`) comparison between two fractions, or a fraction and an integer
+    - `lt?/2` - Less than (`<`) comparison between two fractions, or a fraction and an integer
+    - `lte?/2` - Less than or equal (`<=`) comparison between two fractions, or a fraction and an integer
+  
+  ```elixir
+  iex> Fraction.gt?(Fraction.new(7, 8), Fraction.new(8, 9))
+  false
+  
+  iex> Fraction.eq?(3, Fraction.new(27, 9))
+  true
+  ```
+  
+  ## Fraction Manipulation
+
+  Manipulate the components of individual fractions.
+      
+    - `components/1` - Get the numerator and denominator of a fraction as a tuple of integers
+    - `get_remainder/1` - Get fractional remainder after removing all whole values of a fraction
+    - `get_whole/1` - Get whole value portion of a fraction
+    - `reciprocal/2` - Inverse or reciprocal of a fraction
+    - `simplify/1` - Simplify a fraction to it's reduced form
+    - `split/1` - Extract the whole value portion and the remainer portion of a fraction as a tuple
+  
+  ```elixir
+  iex> Fraction.new(88, 28) |> Fraction.simplify() |> Fraction.split()
+  {3, %Fraction{num: 1, den: 7}}
+  ```
+
+  ## Aggregate Functions
+  
+  Work with multiple fractions in aggregate.
+  
+    - `sum/2` - Find the sum of a list of fractions
+    - `normalize/2` - Convert two fractions to a common denominator
+    - `normalize_all/1` - Convert a list of two or more fractions to a common denominator
+  
+  ```elixir
+  iex> Fraction.normalize(Fraction.new(22, 7), Fraction.new(4, 3))
+  { %Fraction{num: 66, den: 21}, %Fraction{num: 28, den: 21} }
+  ```
+    
+  ## Inspection
+  
+  Inspect the properties of individual fractions.
+  
+    - `has_whole?/1` - Does a fraction have a whole value component? (i.e. has a total value greater than `1`)
+    - `is_negative?/1` - Is a fraction negative?
+    - `is_positive?/1` - Is a fraction positive?
+    - `is_simplified?/1` - Is a fraction in it's simplified form?
+    - `is_whole?/1` - Is the fraction an _exact_ whole number?
+    - `is_zero?/1` - Is the fraction zero?
+  
+  ```elixir
+  iex> Fraction.new(3, 18) |> is_simplified?()
+  false
+  ```
+  
+  ## Integer Math
+  
+  Integer math functions that support fraction functions and manipulations.
+  
+    - `integer_nth_root?/3` - Determine if an integer has a specific `n-th` root
+    - `lcm/1` - Least common multiple of a list of integers
+    - `lcm/2` - Least common multiple of two integers
+    - `nth_root/3` - Floating point `n-th` root of an integer
+  
+  ```elixir
+  iex> 64 |> Fraction.integer_nth_root?(3)
+  {true, 4}
+  
+  iex> Fraction.lcm([3, 4, 5])
+  60
+  ```
+  
   """
 
   defstruct [:num, :den]
@@ -76,6 +195,10 @@ defmodule Chunky.Fraction do
   @doc """
   Add two fractions, or a fraction and an integer, and return the (optionally simplified) result.
 
+  ## Options
+  
+   - `simplify` - **Boolean** - default `false`. Return result as a simplified fraction.
+  
   ## Examples
 
       iex> Fraction.add(Fraction.new(1, 2), Fraction.new(-8, 3))
@@ -116,6 +239,10 @@ defmodule Chunky.Fraction do
   @doc """
   Subtract two fractions, or a fraction an an integer, and return the (optionally) simplified result.
 
+  ## Options
+  
+   - `simplify` - **Boolean** - default `false`. Return result as a simplified fraction.
+
   ## Examples
 
       iex> Fraction.subtract(Fraction.new(3, 5), Fraction.new(1, 5))
@@ -152,6 +279,10 @@ defmodule Chunky.Fraction do
   @doc """
   Multiply two fractions, or a fraction and an integer and return the (optionally simplified) result.
 
+  ## Options
+  
+   - `simplify` - **Boolean** - default `false`. Return result as a simplified fraction.
+
   ## Examples
 
        iex> Fraction.multiply(Fraction.new(3, 7), Fraction.new(22, 7))
@@ -183,6 +314,10 @@ defmodule Chunky.Fraction do
 
   @doc """
   Divide two fractions, or a fraction and an integer and return the (optionally simplified) result.
+
+  ## Options
+  
+   - `simplify` - **Boolean** - default `false`. Return result as a simplified fraction.
 
   ## Examples
 
@@ -220,6 +355,10 @@ defmodule Chunky.Fraction do
 
   Negative fractions will switch the sign to carry on the new numerator. Trying to take the reciprocal
   of a zero fraction will result in an error.
+
+  ## Options
+  
+   - `simplify` - **Boolean** - default `false`. Return result as a simplified fraction.
 
   ## Examples
 
@@ -291,9 +430,9 @@ defmodule Chunky.Fraction do
 
   ## Options
 
-   - `simplify` - Boolean. Optionally simplify the return fraction
+   - `simplify` - **Boolean**. Default `false`. Optionally simplify the return fraction
    - `epsilon` - Float. Small number used to compare how close two values are
-   - `allow_irrational` - Boolean. Allow a non-fractional (irrational) result to be returned
+   - `allow_irrational` - Boolean. eDefault `false`. Allow a non-fractional (irrational) result to be returned
 
   ## Examples
 
@@ -636,6 +775,10 @@ defmodule Chunky.Fraction do
   @doc """
   Add a series of fractions and integers.
 
+  ## Options
+  
+   - `simplify` - **Boolean** - default `false`. Return result as a simplified fraction.
+
   ## Example
 
       iex> Fraction.sum([Fraction.new(3, 4), Fraction.new(5, 7), Fraction.new(8, 11), 1, Fraction.new(249, 308)])
@@ -831,6 +974,10 @@ defmodule Chunky.Fraction do
   epsilon than it's configured to use for comparison and testing of the
   result value. 
 
+  ## Options
+  
+   - `epsilon` - **Float**. Default `1.0e-6`. Error bounds for calculating float equality.
+  
   ## Examples
 
       iex> Fraction.integer_nth_root?(27, 3)
@@ -857,6 +1004,10 @@ defmodule Chunky.Fraction do
 
   based on a fast converging Newton's Method process.
 
+  ## Options
+  
+   - `precision` - **Float**. Default `1.0e-7`. Precision to which root is calculated.
+  
   ## Examples
 
       iex> nth_root(8, 3)
@@ -879,7 +1030,17 @@ defmodule Chunky.Fraction do
   defp fixed_point(_, guess, tolerance, next) when abs(guess - next) < tolerance, do: next
   defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
 
-  # simple Least Common Multiple    
+  @doc """
+  Find the **least common multiple** of two integers or a list of integers.
+  
+  ## Example
+  
+      iex> lcm(5, 7)
+      35
+      
+      iex> lcm([3, 5, 7, 11, 13, 17])
+      255255
+  """    
   def lcm([a, b]), do: lcm(a, b)
   def lcm([a | rest]), do: lcm(a, lcm(rest))
   def lcm(a, b) when is_integer(a) and is_integer(b), do: div(abs(a * b), Integer.gcd(a, b))

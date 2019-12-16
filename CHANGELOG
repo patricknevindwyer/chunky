@@ -13,7 +13,16 @@
 
 # CHANGELOG
 
+## v0.6.2
+
+### Documentation
+
+ - `Chunky.Fraction` - Enhancements to documentation. Extended doctests
+
+
 ## v0.6.1
+
+### Enhancements
 
  - `Chunky.Grid`
   - `put_at/3` and `put_at/4` - put values into the grid

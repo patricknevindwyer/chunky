@@ -40,45 +40,12 @@
   - sequence sizing (finite vs infinite)
    
  - Chunky.Fraction
-  - x add (frac, frac)
-  - x add (frac, whole)
-  - x add (whole, frac)
-  - x new(integer)
-  - x sub (frac, frac)
-  - x sub (frac, whole)
-  - x sub (whole, frac)
-  - x mult (frac, frac)
-  - x mult (frac, whole)
-  - x mult (whole, frac)
-  - x div (frac, frac)
-  - x div (frac, whole)
-  - x div (whole, frac)
-  - x pow(frac, frac)
-  - x pow(frac, whole)
-  - x pow(whole, frac)
-  
-  - x gt(frac, frac)
-  - x gt(frac, whole)
-  - x gt(whole, frac)
-  - x gte(frac, frac)
-  - x gte(frac, whole)
-  - x gte(whole, frac)
-  
-  - x lt(frac, frac)
-  - x lt(frac, whole)
-  - x lt(whole, frac)
-  - x lte(frac, frac)
-  - x lte(frac, whole)
-  - x lte(whole, frac)
-  
-  - x eq(frac, frac)
-  - x eq(frac, whole)
-  - x eq(whole, frac)
-
-  - x lcm(list)  
-  - x normalize(list of fractions)
-  - x sum(fracs)
   - to_float
+  - min(aggregate)
+  - max(aggregate)
+  - uniq(aggregate)
+  - new/1 (string)
+  - new/1 (float)
   
   - update readme
   - update top of module for fractions
@@ -88,10 +55,25 @@
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64
  
  - Chunky.Grid
-  - x new grid (value)
-  - x new grid (function)
-  - x value at grid point
-  - x coord in grid
+  - day 15 
+  - get/put/update
+  - count (extract with val or func)
+  - find_index(val or func)
+  - any?
+  - clamp coordinates (list of maps with x/y)
+  - map
+  - draw grid
+  - put_all(points, val) put_all(points, func)
+   - point is map? tuple?
+   - map can carry extra data
+   - tuple needs to be a 2-tuple
+  - step from point by cardinal directions (or ordinal)
+   - step(point, direction, amount)
+  - neighbors(point, step amount) (get the 8 neighbors, 22 neighbors, etc)
+  - steps from/to (maze solving)
+  - maze methods?
+  - update_all()
+   
   - update_at
   - get and update at
   - replace_at
