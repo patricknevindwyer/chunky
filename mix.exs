@@ -10,7 +10,7 @@ defmodule Chunky.MixProject do
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      description: "Extended chunking and Enum manipulation",
+      description: "Fractions, Grids, and Combinatorics for Elixir",
       source_url: "https://github.com/patricknevindwyer/chunky",
       homepage_url: "https://github.com/patricknevindwyer/chunky",
       package: package(),
