@@ -38,6 +38,8 @@
    - sequence index
   - sequence listing
   - sequence sizing (finite vs infinite)
+  - finite vs infinite sequences
+   - returning a "sequence complete" or a has_next flag
    
  - Chunky.Fraction
   - to_float
