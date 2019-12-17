@@ -10,6 +10,54 @@ defmodule Chunky.FractionTest do
     end
   end
 
+  describe "to_float/2" do
+    test "zero" do
+        assert Fraction.new(0, 3) |> Fraction.to_float() == 0.0
+    end
+    
+    test "negative" do
+        assert Fraction.new(-3, 4) |> Fraction.to_float() |> Fraction.floats_equal?(-0.75)
+    end
+    
+    test "positive" do
+        assert Fraction.new(1, 16) |> Fraction.to_float() |> Fraction.floats_equal?(0.0625)
+    end
+    
+    test "precision" do
+        assert Fraction.new(22, 7) |> Fraction.to_float() |> Fraction.floats_equal?(3.14) == false
+        assert Fraction.new(22, 7) |> Fraction.to_float(precision: 2) |> Fraction.floats_equal?(3.14)
+    end    
+  end
+  
+  describe "min/1" do
+    test "single" do
+        assert Fraction.min([Fraction.new(3, 4)]) == Fraction.new(3, 4)
+    end
+    
+    test "equal fractions" do
+        
+        # should keep first min
+        assert Fraction.min([Fraction.new(9, 16), Fraction.new(3, 4)]) |> Fraction.components() == {9, 16}
+    end
+    
+    test "out of order" do
+        fracs = 9..1 |> Enum.map(fn d -> Fraction.new(1, d) end)
+        assert Fraction.min(fracs) == Fraction.new(1, 9)
+    end
+    
+    test "zero" do
+        assert Fraction.min([Fraction.new(1, 3), Fraction.new(0, 4), Fraction.new(9, 1)]) == Fraction.new(0, 4)
+    end
+    
+    test "negative" do
+        assert Fraction.min([Fraction.new(3, 1), Fraction.new("0/3"), Fraction.new(-3, 9)]) == Fraction.new(-3, 9)
+    end    
+    
+    test "empty" do
+        assert Fraction.min([]) == nil
+    end
+  end
+  
   describe "sum/1" do
     test "unsimplified" do
       assert Fraction.sum([

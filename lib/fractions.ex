@@ -83,10 +83,11 @@ defmodule Chunky.Fraction do
 
   Work with multiple fractions in aggregate.
 
-    - `sum/2` - Find the sum of a list of fractions
+    - `min/1` - Find the smallest in a list of fractions
     - `normalize/2` - Convert two fractions to a common denominator
     - `normalize_all/1` - Convert a list of two or more fractions to a common denominator
-
+    - `sum/2` - Find the sum of a list of fractions
+  
   ```elixir
   iex> Fraction.normalize(Fraction.new(22, 7), Fraction.new(4, 3))
   { %Fraction{num: 66, den: 21}, %Fraction{num: 28, den: 21} }
@@ -116,7 +117,11 @@ defmodule Chunky.Fraction do
     - `lcm/1` - Least common multiple of a list of integers
     - `lcm/2` - Least common multiple of two integers
     - `nth_root/3` - Floating point `n-th` root of an integer
-
+  
+  ## Float Math
+  
+    - `floats_equal/3` - Determine if two floats are equal, within an error bound
+  
   ```elixir
   iex> 64 |> Fraction.integer_nth_root?(3)
   {true, 4}
@@ -992,6 +997,7 @@ defmodule Chunky.Fraction do
       %Fraction{num: 3, den: 7}
   
   """
+  def min([]), do: nil
   def min(list) do
       list |> Enum.min_by(&to_float/1)
   end
@@ -1248,6 +1254,21 @@ defmodule Chunky.Fraction do
     else
       {false, :no_integer_nth_root, root}
     end
+  end
+  
+  @doc """
+  Compare two floating points number using an epsilon error boundary.
+  
+  ## Example
+  
+      iex> floats_equal?(3.11, 3.1)
+      false
+  
+      iex> floats_equal?(3.11, 3.1, 0.05)
+      true
+  """
+  def floats_equal?(a, b, epsilon \\ 1.0e-6) do
+      abs(a - b) < epsilon
   end
 
   @doc """

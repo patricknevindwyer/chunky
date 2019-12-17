@@ -42,8 +42,7 @@
    - returning a "sequence complete" or a has_next flag
    
  - Chunky.Fraction
-  - min(aggregate) (write tests)
-  - to_float (write tests)
+
   - min(frac, frac) (write tests)
   - max(aggregate) (write tests)
   - max(frac, frac) (write tests)
