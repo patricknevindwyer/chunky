@@ -32,7 +32,8 @@ defmodule Chunky.Fraction do
     - `multiply/3` - Multiply two fractions, or a fraction and an integer
     - `divide/3` - Divide two fractions, or a fraction and an integer
     - `power/3` - Take a fraction or an integer to the power of a fraction or an integer
-
+    - `min_of/2` - Find the smaller of two fractions, or a fraction and value compatible with `new/1`
+  
   ```elixir
   iex> Fraction.new(4, 3) |> Fraction.add(Fraction.new({1, 6})) |> Fraction.power(2)
   %Fraction{num: 81, den: 36}
@@ -83,7 +84,7 @@ defmodule Chunky.Fraction do
 
   Work with multiple fractions in aggregate.
 
-    - `min/1` - Find the smallest in a list of fractions
+    - `min_of/1` - Find the smallest in a list of fractions
     - `normalize/2` - Convert two fractions to a common denominator
     - `normalize_all/1` - Convert a list of two or more fractions to a common denominator
     - `sum/2` - Find the sum of a list of fractions
@@ -118,10 +119,6 @@ defmodule Chunky.Fraction do
     - `lcm/2` - Least common multiple of two integers
     - `nth_root/3` - Floating point `n-th` root of an integer
   
-  ## Float Math
-  
-    - `floats_equal/3` - Determine if two floats are equal, within an error bound
-  
   ```elixir
   iex> 64 |> Fraction.integer_nth_root?(3)
   {true, 4}
@@ -129,6 +126,11 @@ defmodule Chunky.Fraction do
   iex> Fraction.lcm([3, 4, 5])
   60
   ```
+
+  ## Float Math
+  
+    - `floats_equal/3` - Determine if two floats are equal, within an error bound
+  
 
   """
 
@@ -993,31 +995,47 @@ defmodule Chunky.Fraction do
   
   ## Example
   
-      iex> Fraction.min([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
+      iex> Fraction.min_of([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
       %Fraction{num: 3, den: 7}
   
   """
-  def min([]), do: nil
-  def min(list) do
+  def min_of([]), do: nil
+  def min_of(list) do
       list |> Enum.min_by(&to_float/1)
   end
   
   @doc """
-  Return the smaller of two fractions.
+  Return the smaller of two fractions, or a fraction and an alternate
+  encoding (like float, string, or integer).
   
   ## Example
   
-      iex> Fraction.min( Fraction.new(3, 7), Fraction.new(11, 28) )
+      iex> Fraction.min_of( Fraction.new(3, 7), Fraction.new(11, 28) )
       %Fraction{num: 11, den: 28}
   
+      iex> Fraction.min_of( Fraction.new(22, 7), "3/7")
+      %Fraction{num: 3, den: 7}
+  
+      iex> Fraction.min_of(0.5, Fraction.new(-3, 5))
+      %Fraction{num: -3, den: 5}
+  
   """
-  def min(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
+  def min_of(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
      if Fraction.lte?(fraction_a, fraction_b) do
          fraction_a
      else
          fraction_b
      end 
   end
+
+  def min_of(%Fraction{}=fraction_a, int) when is_integer(int), do: min_of(fraction_a, new(int))
+  def min_of(int, %Fraction{}=fraction_b) when is_integer(int), do: min_of(new(int), fraction_b)
+  
+  def min_of(%Fraction{}=fraction_a, str) when is_binary(str), do: min_of(fraction_a, new(str))
+  def min_of(str, %Fraction{}=fraction_b) when is_binary(str), do: min_of(new(str), fraction_b)
+
+  def min_of(%Fraction{}=fraction_a, f) when is_float(f), do: min_of(fraction_a, new(f))
+  def min_of(f, %Fraction{}=fraction_b) when is_float(f), do: min_of(new(f), fraction_b)
 
   @doc """
   Return the maximum value in a list of fractions. Values are calculated based on float

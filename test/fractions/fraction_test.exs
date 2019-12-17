@@ -29,32 +29,78 @@ defmodule Chunky.FractionTest do
     end    
   end
   
-  describe "min/1" do
+  describe "min_of/2" do
+    test "equal" do
+       assert Fraction.min_of(Fraction.new(2, 4), Fraction.new(4, 8)) == Fraction.new(2, 4)
+    end
+    
+    test "min last" do
+        assert Fraction.min_of(Fraction.new(22, 7), Fraction.new(7, 22)) == Fraction.new(7, 22)
+    end
+    
+    test "zeros" do
+        assert Fraction.min_of(Fraction.new(7, 3), Fraction.new(0, 3)) == Fraction.new(0, 3)
+    end
+    
+    test "negative" do
+       assert Fraction.min_of(Fraction.new(-1, 3), Fraction.new(-3, 1)) == Fraction.new(-3, 1) 
+    end
+    
+    test "strings frac" do
+        
+        assert Fraction.min_of(Fraction.new(3, 4), "-1/3") == Fraction.new(-1, 3)
+        assert Fraction.min_of("3/7", Fraction.new(7, 4)) == Fraction.new(3, 7)
+        
+    end
+    
+    test "strings int" do
+        assert Fraction.min_of(Fraction.new(3, 4), "-1") == Fraction.new(-1, 1)
+        assert Fraction.min_of("5", Fraction.new(7, 4)) == Fraction.new(7, 4)        
+    end
+    
+    test "strings float" do
+        assert Fraction.min_of(Fraction.new(8, 3), "3.14") == Fraction.new(8, 3)
+        assert Fraction.min_of("0.25", Fraction.new(0, 3)) == Fraction.new(0, 3)
+        assert Fraction.min_of("0.25", Fraction.new(4, 3)) == Fraction.new(25, 100)
+    end
+    
+    test "floats" do
+        assert Fraction.min_of(1.3, Fraction.new(0, 3)) == Fraction.new(0, 3)
+        assert Fraction.min_of(Fraction.new(7, 3), 1.25) == Fraction.new(125, 100)
+    end
+    
+    test "ints" do
+        assert Fraction.min_of(-3, Fraction.new(0, 3)) == Fraction.new(-3, 1)        
+        assert Fraction.min_of(Fraction.new(0, 3), 4) == Fraction.new(0, 3)        
+    end
+  end
+  
+  describe "min_of/1" do
     test "single" do
-        assert Fraction.min([Fraction.new(3, 4)]) == Fraction.new(3, 4)
+        assert Fraction.min_of([Fraction.new(3, 4)]) == Fraction.new(3, 4)
     end
     
     test "equal fractions" do
         
         # should keep first min
-        assert Fraction.min([Fraction.new(9, 16), Fraction.new(3, 4)]) |> Fraction.components() == {9, 16}
+        assert Fraction.min_of([Fraction.new(9, 16), Fraction.new(3, 4)]) |> Fraction.components() == {9, 16}
     end
     
     test "out of order" do
         fracs = 9..1 |> Enum.map(fn d -> Fraction.new(1, d) end)
-        assert Fraction.min(fracs) == Fraction.new(1, 9)
+        assert Fraction.min_of(fracs) == Fraction.new(1, 9)
     end
     
     test "zero" do
-        assert Fraction.min([Fraction.new(1, 3), Fraction.new(0, 4), Fraction.new(9, 1)]) == Fraction.new(0, 4)
+        assert Fraction.min_of([Fraction.new(1, 3), Fraction.new(0, 4), Fraction.new(9, 1)]) == Fraction.new(0, 4)
     end
     
     test "negative" do
-        assert Fraction.min([Fraction.new(3, 1), Fraction.new("0/3"), Fraction.new(-3, 9)]) == Fraction.new(-3, 9)
+        assert Fraction.min_of([Fraction.new(3, 1), Fraction.new("0/3"), Fraction.new(-3, 9)]) == Fraction.new(-3, 9)
     end    
     
     test "empty" do
-        assert Fraction.min([]) == nil
+        assert Fraction.min_of([]) == nil
     end
   end
   

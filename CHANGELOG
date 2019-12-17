@@ -19,8 +19,8 @@
 
  - `Chunky.Fraction`
   - `to_float/2` - convert to a float, with optional precision rounding
-  - `min/1` - find the smallest from a list of fractions
-  - `min/2` - find the smallest of two fractions
+  - `min_of/1` - find the smallest from a list of fractions
+  - `min_of/2` - find the smallest of two fractions
   
 ## v0.6.2
 

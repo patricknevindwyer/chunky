@@ -43,7 +43,7 @@
    
  - Chunky.Fraction
 
-  - min(frac, frac) (write tests)
+  - change max/1 /2 to max_of/1/2
   - max(aggregate) (write tests)
   - max(frac, frac) (write tests)
   - min_max (write tests)
