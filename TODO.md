@@ -48,6 +48,8 @@
   - max(frac, frac) (write tests)
   - min_max (write tests)
 
+  - all frac math or other methods should take encodable values as well as fractions
+  
   - new(frac) -> frac (write tests)
   - new/1 (string) (write tests)
   - new/1 (float) (write tests)
@@ -80,6 +82,12 @@
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64
  
  - Chunky.Grid
+  - day 17 has:
+   - Enum.filter for grids
+   - cardinal neighbors
+   - draw
+   - put_all
+   - at_edge?
   - add a struct for coordinate or a convetion of %{x, y}
   - functions with coords should take def(grid, x, y, ...) def(grid, {x, y}, ...) or def(grid, %{}, ...)
   - day 15 

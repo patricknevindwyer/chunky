@@ -13,7 +13,7 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.6.3
 
 ### Enhancements
 
@@ -21,6 +21,9 @@
   - `to_float/2` - convert to a float, with optional precision rounding
   - `min_of/1` - find the smallest from a list of fractions
   - `min_of/2` - find the smallest of two fractions
+ - `Chunky.Grid`
+  - `put_all/2` - basic function for putting `{x, y, v}` tuples  or `%{x: x, y: y, value: value}` maps into the grid
+  - `find_index/2` - Find coordinates in grid of a value
   
 ## v0.6.2
 
