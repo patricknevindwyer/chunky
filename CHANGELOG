@@ -13,6 +13,13 @@
 
 # CHANGELOG
 
+## v0.*.*
+
+### Enhancements
+
+ - `Chunky.Fractions`
+  - added `uniq/2` for finding distinct fractions in a list
+  
 ## v0.6.4
 
 ### Enhancements

@@ -50,9 +50,6 @@
   - clamp(aggregate) filter to be within a min and max value
   - partition by (integer divisor)
   
-  - update readme
-  - update top of module for fractions
-
   - can_scale_denominator_to?(frac, size)
   - scale_denominator_to(frac, size)
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64

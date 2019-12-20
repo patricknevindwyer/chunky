@@ -42,6 +42,7 @@ defmodule Chunky.Fraction do
    - `min_max_of/1`
    - `normalize_all/1`
    - `sum/1`
+   - `uniq/2`
 
   ## Creating Fractions
 
@@ -57,16 +58,16 @@ defmodule Chunky.Fraction do
 
   iex> Fraction.new({22, 7})
   %Fraction{num: 22, den: 7}
-  
+
   iex> Fraction.new(0.25, conversion: :precision)
   %Fraction{num: 1, den: 4}
-  
+
   iex> Fraction.new("-33/913")
   %Fraction{num: -33, den: 913}
-  
+
   iex> Fraction.new(5, 11)
   %Fraction{num: 5, den: 11}
-  
+
   ```
 
   ## Basic Math
@@ -75,12 +76,12 @@ defmodule Chunky.Fraction do
   allow for automatic simplification and control over how certain operations work.
 
     - `add/3` - Add two fractions, or a fraction and a value compatible with `new/1`
-    - `subtract/3` - Subtract two fractions, or a fraction and a value compatible with `new/1`
+    - `divide/3` - Divide two fractions, or a fraction and a value compatible with `new/1`
     - `max_of/2` - Find the larger of two fractions, or a fraction and a value compatible with `new/1`
     - `min_of/2` - Find the smaller of two fractions, or a fraction and value compatible with `new/1`
     - `multiply/3` - Multiply two fractions, or a fraction and a value compatible with `new/1`
-    - `divide/3` - Divide two fractions, or a fraction and a value compatible with `new/1`
     - `power/3` - Take a fraction or an integer to the power of a fraction or an integer
+    - `subtract/3` - Subtract two fractions, or a fraction and a value compatible with `new/1`
 
   ```elixir
   iex> Fraction.new(4, 3) |> Fraction.add(Fraction.new({1, 6})) |> Fraction.power(2)
@@ -140,6 +141,7 @@ defmodule Chunky.Fraction do
     - `normalize/2` - Convert two fractions to a common denominator
     - `normalize_all/1` - Convert a list of two or more fractions to a common denominator
     - `sum/2` - Find the sum of a list of fractions
+    - `uniq/2` - Extract unique fractions from a list of values
 
   ```elixir
   iex> Fraction.normalize(Fraction.new(22, 7), Fraction.new(4, 3))
@@ -1267,6 +1269,45 @@ defmodule Chunky.Fraction do
   def fractionalize(candidates) when is_list(candidates) do
     candidates
     |> Enum.map(&new/1)
+  end
+
+  @doc """
+  Return only the unique fractions from a list of values. 
+
+  Values that are not yet Fractions are coerced into fractional values before 
+  processing. 
+
+  **Supports Type Coercion?**: ✅
+
+  Determining _what_ is unique from the list of values is controlled
+  by the `by` option. By default, `value` comparison is used, so `1/2` and `2/4` would
+  be equal, and only one returned. If `components` comparison is specified,
+  the literal numerator and denominator must match, so non-simplified, but value
+  equal fractions would be different from one another.
+
+  ## Options
+
+   - `by` - Either `:value` or `:components`. Default `:value`.   
+
+  ## Examples
+
+      iex> Fraction.uniq(["2/4", Fraction.new(4, 2), 2, 0.5])
+      [%Fraction{num: 2, den: 4}, %Fraction{num: 4, den: 2}]
+
+      iex> Fraction.uniq(["2/4", Fraction.new(4, 2), 2, 0.5], by: :components)
+      [%Fraction{num: 2, den: 4}, %Fraction{num: 4, den: 2}, %Fraction{num: 2, den: 1}, %Fraction{num: 5, den: 10}]
+
+  """
+  def uniq(values, opts \\ []) when is_list(values) do
+    uby = opts |> Keyword.get(:by, :value)
+
+    ufunc =
+      case uby do
+        :value -> fn v -> v |> simplify() |> components() end
+        :components -> fn v -> v |> components() end
+      end
+
+    values |> fractionalize() |> Enum.uniq_by(&ufunc.(&1))
   end
 
   @doc """

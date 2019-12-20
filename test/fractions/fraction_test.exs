@@ -70,6 +70,54 @@ defmodule Chunky.FractionTest do
     end
   end
 
+  describe "uniq/2" do
+    test "default by" do
+      assert Fraction.uniq(["6/22", "4/2", "2/1", "42/21", "3/11"]) == [
+               %Fraction{num: 6, den: 22},
+               %Fraction{num: 4, den: 2}
+             ]
+    end
+
+    test "by: :value" do
+      assert Fraction.uniq(["4/10", "-3/9", "2/5", "-9/27"]) == [
+               %Fraction{num: 4, den: 10},
+               %Fraction{num: -3, den: 9}
+             ]
+    end
+
+    test "by: :components" do
+      assert Fraction.uniq(
+               ["4/10", "-3/9", "2/5", "-9/27"],
+               by: :components
+             ) == [
+               %Fraction{num: 4, den: 10},
+               %Fraction{num: -3, den: 9},
+               %Fraction{num: 2, den: 5},
+               %Fraction{num: -9, den: 27}
+             ]
+    end
+
+    test "type mix" do
+      assert Fraction.uniq([
+               Fraction.new(3, 7),
+               1.5,
+               8,
+               "9",
+               "1.3",
+               "22/7",
+               {8, 11}
+             ]) == [
+               %Fraction{num: 3, den: 7},
+               %Fraction{num: 15, den: 10},
+               %Fraction{num: 8, den: 1},
+               %Fraction{num: 9, den: 1},
+               %Fraction{num: 13, den: 10},
+               %Fraction{num: 22, den: 7},
+               %Fraction{num: 8, den: 11}
+             ]
+    end
+  end
+
   describe "fractionalize/1" do
     test "empty" do
       assert Fraction.fractionalize([]) == []
