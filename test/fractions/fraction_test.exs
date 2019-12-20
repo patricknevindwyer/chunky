@@ -70,6 +70,91 @@ defmodule Chunky.FractionTest do
     end
   end
 
+  describe "clamp/2" do
+    @fracs ["-3", "-4/2", -1.5, 0, Fraction.new(3, 4), "4/2", 3.14]
+
+    test "defaults" do
+      assert Fraction.clamp(@fracs) == [
+               %Fraction{num: 0, den: 1},
+               %Fraction{num: 3, den: 4}
+             ]
+    end
+
+    test "[vals]" do
+      assert Fraction.clamp(
+               @fracs,
+               min: -2,
+               max: 2,
+               inclusive_min: true,
+               inclusive_max: true
+             ) == [
+               %Fraction{num: -4, den: 2},
+               %Fraction{num: -15, den: 10},
+               %Fraction{num: 0, den: 1},
+               %Fraction{num: 3, den: 4},
+               %Fraction{num: 4, den: 2}
+             ]
+    end
+
+    test "[vals] fractional bounsd" do
+      assert Fraction.clamp(
+               @fracs,
+               min: -1.5,
+               max: "3/4",
+               inclusive_min: true,
+               inclusive_max: true
+             ) == [
+               %Fraction{num: -15, den: 10},
+               %Fraction{num: 0, den: 1},
+               %Fraction{num: 3, den: 4}
+             ]
+    end
+
+    test "[vals)" do
+      assert Fraction.clamp(
+               @fracs,
+               min: -2,
+               max: 2,
+               inclusive_min: true,
+               inclusive_max: false
+             ) == [
+               %Fraction{num: -4, den: 2},
+               %Fraction{num: -15, den: 10},
+               %Fraction{num: 0, den: 1},
+               %Fraction{num: 3, den: 4}
+             ]
+    end
+
+    test "(vals]" do
+      assert Fraction.clamp(
+               @fracs,
+               min: -2,
+               max: 2,
+               inclusive_min: false,
+               inclusive_max: true
+             ) == [
+               %Fraction{num: -15, den: 10},
+               %Fraction{num: 0, den: 1},
+               %Fraction{num: 3, den: 4},
+               %Fraction{num: 4, den: 2}
+             ]
+    end
+
+    test "(vals)" do
+      assert Fraction.clamp(
+               @fracs,
+               min: -2,
+               max: 2,
+               inclusive_min: false,
+               inclusive_max: false
+             ) == [
+               %Fraction{num: -15, den: 10},
+               %Fraction{num: 0, den: 1},
+               %Fraction{num: 3, den: 4}
+             ]
+    end
+  end
+
   describe "sort/2" do
     test "empty" do
       assert Fraction.sort([]) == []
@@ -2389,6 +2474,13 @@ defmodule Chunky.FractionTest do
 
     test "float" do
       assert Fraction.new(0.5) == %Fraction{num: 5, den: 10}
+    end
+
+    test "float variations" do
+      assert Fraction.new(-0.5) == %Fraction{num: -5, den: 10}
+      assert Fraction.new(-1.5) == %Fraction{num: -15, den: 10}
+      assert Fraction.new(-2.5) == %Fraction{num: -25, den: 10}
+      assert Fraction.new(-1.33) == %Fraction{num: -133, den: 100}
     end
   end
 

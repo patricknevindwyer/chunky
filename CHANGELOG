@@ -20,6 +20,7 @@
  - `Chunky.Fractions`
   - added `uniq/2` for finding distinct fractions in a list
   - added `sort/2` for sorting value lists
+  - added `clamp/2` for constraining value lists
   
 ## v0.6.4
 

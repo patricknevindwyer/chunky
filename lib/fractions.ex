@@ -34,6 +34,7 @@ defmodule Chunky.Fraction do
    - `lt?/2`
    - `lte?/2`
    - `eq?/2`
+   - `clamp/2`
    - `fractionalize/1`
    - `max_of/1`
    - `max_of/2`
@@ -135,6 +136,7 @@ defmodule Chunky.Fraction do
   Work with multiple fractions in aggregate. Most aggregate functions will work with Fractions, or any
   value that can be converted to a fraction with `new/1`.
 
+    - `clamp/2` - Constrain a list of values to be within a specific range
     - `fractionalize/1` - Convert a list of fraction representations (anything that works with `new/1`) into Fraction structs
     - `max_of/1` - Find the largest value in a list of fractions, or literals compatible with `new/1`
     - `min_of/1` - Find the smallest value in a list of fractions, or literals compatible with `new/1`
@@ -282,7 +284,13 @@ defmodule Chunky.Fraction do
         # now build the numerator
         {hi_v, _} = Integer.parse(hi)
         {lo_v, _} = Integer.parse(lo)
-        new(hi_v * den + lo_v, den)
+
+        # compensate for negative numbers
+        if fl < 0 do
+          new(hi_v * den - lo_v, den)
+        else
+          new(hi_v * den + lo_v, den)
+        end
     end
   end
 
@@ -1339,6 +1347,49 @@ defmodule Chunky.Fraction do
     sorter = opts |> Keyword.get(:sorter, &<=/2)
 
     values |> fractionalize() |> Enum.sort_by(fn v -> v |> to_float() end, sorter)
+  end
+
+  @doc """
+  Constrain a list of values as fraction to only those values within the specified
+  min and max.
+
+  Values that are not yet Fractions are coerced into fractional values before 
+  processing. 
+
+  **Supports Type Coercion?**: ✅
+
+  ## Options
+
+   - `min` - Minimum value for constraining value list. Can be any value that is handled by `new/1`
+   - `max` - Maximum value for constraining value list. Can be any value that is handled by `new/1`
+   - `min_inclusive` - Boolean. Default `true`. Use inclusive minimum constraint (values `>=` min), otherwise use exclusive (values `>` min).
+   - `max_inclusive` - Boolean. Default `true`. Use inclusive maximum constraint (values `<=` max), otherwise use exclusive (values `<` max).
+
+  ## Examples
+
+      iex> Fraction.clamp(["22/7", "14/7", "11/7", "7/7"], min: 1, max: 2, inclusive_max: false)
+      [%Fraction{num: 11, den: 7}, %Fraction{num: 7, den: 7}]
+
+      iex> Fraction.clamp(["22/7", "14/7", "11/7", "7/7"], min: 1, max: 2, inclusive_min: false)
+      [%Fraction{num: 14, den: 7}, %Fraction{num: 11, den: 7}]
+
+  """
+  def clamp(values, opts \\ []) when is_list(values) do
+    min_val = opts |> Keyword.get(:min, 0)
+    max_val = opts |> Keyword.get(:max, 1)
+    min_inc = opts |> Keyword.get(:inclusive_min, true)
+    max_inc = opts |> Keyword.get(:inclusive_max, true)
+
+    values
+    |> fractionalize()
+    |> Enum.filter(fn frac ->
+      case {min_inc, max_inc} do
+        {true, true} -> gte?(frac, min_val) && lte?(frac, max_val)
+        {true, false} -> gte?(frac, min_val) && lt?(frac, max_val)
+        {false, true} -> gt?(frac, min_val) && lte?(frac, max_val)
+        {false, false} -> gt?(frac, min_val) && lt?(frac, max_val)
+      end
+    end)
   end
 
   @doc """

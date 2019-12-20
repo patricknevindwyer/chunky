@@ -45,7 +45,6 @@
    
  - Chunky.Fraction
 
-  - clamp(aggregate) filter to be within a min and max value
   - partition by (integer divisor)
 
   - adversarial tests for anything using fractionalize
