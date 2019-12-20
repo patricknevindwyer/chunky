@@ -43,6 +43,10 @@
   - finite vs infinite sequences
    - returning a "sequence complete" or a has_next flag
    
+ - Math
+  - exotic math functions (totients, newtons method generalized, etc)
+  - OEIS support functions
+  
  - Chunky.Fraction
 
   - partition by (integer divisor)
@@ -54,6 +58,8 @@
   - can_scale_denominator_to?(frac, size)
   - scale_denominator_to(frac, size)
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64
+  
+  - exotic math functions
   
   - typespecs
   
