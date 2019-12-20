@@ -7,11 +7,11 @@ defmodule Chunky.Fraction do
   back to returning floating point number only when configured to in special circumstances.
 
   ## Value Coercion
-  
+
   A subset of functions for working with fractions will automatically coerce things that
   _look_ like fractions - any value that can be parsed by some version of `new/1`. This
   includes:
-  
+
    - Existing fractions `%Fraction{num: 22, den:7}`
    - Integers `14`
    - Floats `1.75`
@@ -19,12 +19,12 @@ defmodule Chunky.Fraction do
    - Integer as String `"4"`
    - Float as String `"1.35"`
    - Fraction as String `"2/9"`
-  
+
   See `new/1` for more information about how values are converted to fractions.
-  
+
   The following functions support mixed types as parameters, either positionally (like
   the basic math functions) or as part of a list (aggregate functions):
-  
+
    - `add/3`
    - `divide/3`
    - `multiply/3`
@@ -42,7 +42,7 @@ defmodule Chunky.Fraction do
    - `min_max_of/1`
    - `normalize_all/1`
    - `sum/1`
-  
+
   ## Creating Fractions
 
   Construct fractions from a single integer, tuple of integers, or a pair of integer
@@ -71,7 +71,7 @@ defmodule Chunky.Fraction do
     - `multiply/3` - Multiply two fractions, or a fraction and a value compatible with `new/1`
     - `divide/3` - Divide two fractions, or a fraction and a value compatible with `new/1`
     - `power/3` - Take a fraction or an integer to the power of a fraction or an integer
-  
+
   ```elixir
   iex> Fraction.new(4, 3) |> Fraction.add(Fraction.new({1, 6})) |> Fraction.power(2)
   %Fraction{num: 81, den: 36}
@@ -109,11 +109,11 @@ defmodule Chunky.Fraction do
     - `simplify/1` - Simplify a fraction to it's reduced form
     - `split/1` - Extract the whole value portion and the remainer portion of a fraction as a tuple
     - `to_float/2` - Convert a fraction to a floating point value
-  
+
   ```elixir
   iex> Fraction.new(88, 28) |> Fraction.simplify() |> Fraction.split()
   {3, %Fraction{num: 1, den: 7}}
-  
+
   iex> Fraction.new(22, 7) |> Fraction.to_float(precision: 2)
   3.14
   ```
@@ -130,11 +130,11 @@ defmodule Chunky.Fraction do
     - `normalize/2` - Convert two fractions to a common denominator
     - `normalize_all/1` - Convert a list of two or more fractions to a common denominator
     - `sum/2` - Find the sum of a list of fractions
-  
+
   ```elixir
   iex> Fraction.normalize(Fraction.new(22, 7), Fraction.new(4, 3))
   { %Fraction{num: 66, den: 21}, %Fraction{num: 28, den: 21} }
-  
+
   iex> Fraction.max_of(["3/4", {4, 5}, 1.5])
   %Fraction{num: 15, den: 10}
   ```
@@ -163,7 +163,7 @@ defmodule Chunky.Fraction do
     - `lcm/1` - Least common multiple of a list of integers
     - `lcm/2` - Least common multiple of two integers
     - `nth_root/3` - Floating point `n-th` root of an integer
-  
+
   ```elixir
   iex> 64 |> Fraction.integer_nth_root?(3)
   {true, 4}
@@ -173,9 +173,9 @@ defmodule Chunky.Fraction do
   ```
 
   ## Float Math
-  
+
     - `floats_equal/3` - Determine if two floats are equal, within an error bound
-  
+
 
   """
 
@@ -220,29 +220,29 @@ defmodule Chunky.Fraction do
 
   @doc """
   Convert a floating point value to a fraction.
-  
+
   There are two modes for converting values:
-  
+
    - Using precision approximation (via `Float.ratio/1`)
    - Using natural conversion
-  
+
   Natural conversion tries to find a fraction that represents the intended value of
   a float, while precision approximation tries to find a fractional representation of
   the encoded floating point value. Use the `conversion` flag to toggle between
   the two modes. 
-  
+
   ## Flags
-  
+
    - `conversion` - Atom. One of `:natural` or `:precision`
-  
+
   ## Example
-  
+
       iex> Fraction.new(0.9, conversion: :natural) |> to_string()
       "9/10"
       
       iex> Fraction.new(0.9, conversion: :precision) |> to_string()
       "8106479329266893/9007199254740992"
-  
+
       iex> Fraction.new(3.14, conversion: :natural) |> to_string()
       "314/100"
       
@@ -250,45 +250,43 @@ defmodule Chunky.Fraction do
       "7070651414971679/2251799813685248"
   """
   def new(fl, opts) when is_float(fl) and is_list(opts) do
-      
-      mode = opts |> Keyword.get(:conversion, :natural)
-      
-      case mode do
-          
-          :precision -> Float.ratio(fl) |> new()
-          
-          :natural -> 
-              
-              [hi, lo] = fl 
-              |> Float.to_string()
-              |> String.split(".")
-              
-              # how many digits in denominator?
-              den = Kernel.trunc(:math.pow(10, String.length(lo)))
-              
-              # now build the numerator
-              {hi_v, _} = Integer.parse(hi)
-              {lo_v, _} = Integer.parse(lo)
-              new((hi_v * den) + lo_v, den)
+    mode = opts |> Keyword.get(:conversion, :natural)
 
-      end
+    case mode do
+      :precision ->
+        Float.ratio(fl) |> new()
+
+      :natural ->
+        [hi, lo] =
+          fl
+          |> Float.to_string()
+          |> String.split(".")
+
+        # how many digits in denominator?
+        den = Kernel.trunc(:math.pow(10, String.length(lo)))
+
+        # now build the numerator
+        {hi_v, _} = Integer.parse(hi)
+        {lo_v, _} = Integer.parse(lo)
+        new(hi_v * den + lo_v, den)
+    end
   end
-  
+
   @doc """
   Convert a float to a fraction.
-  
+
   This is a short hand call to `new/2` for converting a float to
   a fraction using natural conversion, so `new(0.9)` is equivalent
   to calling `new(0.9, conversion: :natural)`.
-  
+
   ## Example
-  
+
       iex> new(0.9)
       %Fraction{num: 9, den: 10}
       
   """
   def new(fl) when is_float(fl), do: new(fl, conversion: :natural)
-  
+
   @doc """
   Create a fraction from a tuple of a numerator and denominator.
 
@@ -312,86 +310,85 @@ defmodule Chunky.Fraction do
       %Fraction{num: -22, den: 1}
   """
   def new(int) when is_integer(int), do: new(int, 1)
-  
+
   @doc """
   Create a fraction from a fraction. 
-  
+
   This is an identity function, and the original fraction is returned. This is primarily
   used for aggregate functions and multi-type parsing.
-  
+
   ## Example
-  
+
       iex> Fraction.new(22, 7) |> Fraction.new()
       %Fraction{num: 22, den: 7}
-  
+
   """
-  def new(%Fraction{}=fraction), do: fraction
-  
+  def new(%Fraction{} = fraction), do: fraction
+
   @doc """
   Convert a string encoding of an integer, float, or fraction into a fraction.
-  
+
   ## Example
-  
+
       iex> Fraction.new("3")
       %Fraction{num: 3, den: 1}
-  
+
       iex> Fraction.new("12/7")
       %Fraction{num: 12, den: 7}
-  
+
       iex> Fraction.new("13 / 5")
       %Fraction{num: 13, den: 5}
-  
+
       iex> Fraction.new("foo/bar")
       {:error, :no_parsable_fraction}
-  
+
       iex> Fraction.new("3.14")
       %Fraction{num: 314, den: 100}
   """
   def new(string) when is_binary(string) do
-      case String.split(string, "/") do
-          
-          [single] -> 
-              case float_or_integer(single) do
-                  :none -> {:error, :no_parseable_fraction}
-                  {:integer, i} -> new(i)
-                  {:float, f} -> new(f)
-              end
-              
-          
-          [num, den] -> 
-              p_num = num |> String.trim() |> Integer.parse()
-              p_den = den |> String.trim() |> Integer.parse()
-              
-              case {p_num, p_den} do
-                 {:error, :error} -> {:error, :no_parsable_fraction}
-                 {_, :error} -> {:error, :no_parsable_fraction}
-                 {:error, _} -> {:error, :no_parsable_fraction}
-                 {{v_num, _}, {v_den, _}} -> new(v_num, v_den)
-              end
-          
-          _o -> {:error, :no_parsable_fraction}
-      end
+    case String.split(string, "/") do
+      [single] ->
+        case float_or_integer(single) do
+          :none -> {:error, :no_parseable_fraction}
+          {:integer, i} -> new(i)
+          {:float, f} -> new(f)
+        end
+
+      [num, den] ->
+        p_num = num |> String.trim() |> Integer.parse()
+        p_den = den |> String.trim() |> Integer.parse()
+
+        case {p_num, p_den} do
+          {:error, :error} -> {:error, :no_parsable_fraction}
+          {_, :error} -> {:error, :no_parsable_fraction}
+          {:error, _} -> {:error, :no_parsable_fraction}
+          {{v_num, _}, {v_den, _}} -> new(v_num, v_den)
+        end
+
+      _o ->
+        {:error, :no_parsable_fraction}
+    end
   end
-  
+
   # support method - a string may contain a float, integer, or nothing useful,
   # determine the best one to use.
   defp float_or_integer(s) do
-      str = s |> String.trim()
-      # does it even have a decimal?
-     if String.contains?(str, ".") do
-         # does float parse it?
-         case Float.parse(str) do
-            :error -> :none
-            {v, _} -> {:float, v}
-         end
-     else
-         case Integer.parse(str) do
-             :error -> :none
-             {v, _} -> {:integer, v}
-         end
-     end 
+    str = s |> String.trim()
+    # does it even have a decimal?
+    if String.contains?(str, ".") do
+      # does float parse it?
+      case Float.parse(str) do
+        :error -> :none
+        {v, _} -> {:float, v}
+      end
+    else
+      case Integer.parse(str) do
+        :error -> :none
+        {v, _} -> {:integer, v}
+      end
+    end
   end
-  
+
   # Support stringification
   defimpl String.Chars do
     def to_string(%Fraction{num: num, den: den}) do
@@ -403,7 +400,7 @@ defmodule Chunky.Fraction do
   Add two fractions, or a fraction and a value, and return the (optionally simplified) result.
 
   **Supports Type Coercion?**: ✅
-  
+
   ## Options
 
    - `simplify` - **Boolean** - default `false`. Return result as a simplified fraction.
@@ -421,7 +418,7 @@ defmodule Chunky.Fraction do
       
       iex> Fraction.add(2, Fraction.new(5, 4))
       %Fraction{num: 13, den: 4}
-  
+
       iex> Fraction.add("2/3", Fraction.new(5, 3))
       %Fraction{num: 7, den: 3}
 
@@ -448,15 +445,20 @@ defmodule Chunky.Fraction do
   def add(int, %Fraction{} = fraction_b, opts) when is_integer(int),
     do: add(Fraction.new(int, 1), fraction_b, opts)
 
+  def add(%Fraction{} = fraction_a, str, opts) when is_binary(str),
+    do: add(fraction_a, new(str), opts)
 
-    def add(%Fraction{}=fraction_a, str, opts) when is_binary(str), do: add(fraction_a, new(str), opts)
-    def add(str, %Fraction{}=fraction_b, opts) when is_binary(str), do: add(new(str), fraction_b, opts)
+  def add(str, %Fraction{} = fraction_b, opts) when is_binary(str),
+    do: add(new(str), fraction_b, opts)
 
-    def add(%Fraction{}=fraction_a, f, opts) when is_float(f), do: add(fraction_a, new(f), opts)
-    def add(f, %Fraction{}=fraction_b, opts) when is_float(f), do: add(new(f), fraction_b, opts)
+  def add(%Fraction{} = fraction_a, f, opts) when is_float(f), do: add(fraction_a, new(f), opts)
+  def add(f, %Fraction{} = fraction_b, opts) when is_float(f), do: add(new(f), fraction_b, opts)
 
-    def add(%Fraction{}=fraction_a, tup, opts) when is_tuple(tup), do: add(fraction_a, new(tup), opts)
-    def add(tup, %Fraction{}=fraction_b, opts) when is_tuple(tup), do: add(new(tup), fraction_b, opts)
+  def add(%Fraction{} = fraction_a, tup, opts) when is_tuple(tup),
+    do: add(fraction_a, new(tup), opts)
+
+  def add(tup, %Fraction{} = fraction_b, opts) when is_tuple(tup),
+    do: add(new(tup), fraction_b, opts)
 
   @doc """
   Subtract two fractions, or a fraction an a value, and return the (optionally) simplified result.
@@ -477,7 +479,7 @@ defmodule Chunky.Fraction do
 
       iex> Fraction.subtract(Fraction.new(-2, 4), -5, simplify: true)
       %Fraction{num: 9, den: 2}
-  
+
       iex> Fraction.subtract(Fraction.new(8, 10), 0.5)
       %Fraction{num: 3, den: 10}
   """
@@ -503,14 +505,23 @@ defmodule Chunky.Fraction do
   def subtract(int, %Fraction{} = fraction_b, opts) when is_integer(int),
     do: subtract(Fraction.new(int, 1), fraction_b, opts)
 
-    def subtract(%Fraction{}=fraction_a, str, opts) when is_binary(str), do: subtract(fraction_a, new(str), opts)
-    def subtract(str, %Fraction{}=fraction_b, opts) when is_binary(str), do: subtract(new(str), fraction_b, opts)
+  def subtract(%Fraction{} = fraction_a, str, opts) when is_binary(str),
+    do: subtract(fraction_a, new(str), opts)
 
-    def subtract(%Fraction{}=fraction_a, f, opts) when is_float(f), do: subtract(fraction_a, new(f), opts)
-    def subtract(f, %Fraction{}=fraction_b, opts) when is_float(f), do: subtract(new(f), fraction_b, opts)
+  def subtract(str, %Fraction{} = fraction_b, opts) when is_binary(str),
+    do: subtract(new(str), fraction_b, opts)
 
-    def subtract(%Fraction{}=fraction_a, tup, opts) when is_tuple(tup), do: subtract(fraction_a, new(tup), opts)
-    def subtract(tup, %Fraction{}=fraction_b, opts) when is_tuple(tup), do: subtract(new(tup), fraction_b, opts)
+  def subtract(%Fraction{} = fraction_a, f, opts) when is_float(f),
+    do: subtract(fraction_a, new(f), opts)
+
+  def subtract(f, %Fraction{} = fraction_b, opts) when is_float(f),
+    do: subtract(new(f), fraction_b, opts)
+
+  def subtract(%Fraction{} = fraction_a, tup, opts) when is_tuple(tup),
+    do: subtract(fraction_a, new(tup), opts)
+
+  def subtract(tup, %Fraction{} = fraction_b, opts) when is_tuple(tup),
+    do: subtract(new(tup), fraction_b, opts)
 
   @doc """
   Multiply two fractions, or a fraction and a value and return the (optionally simplified) result.
@@ -553,14 +564,23 @@ defmodule Chunky.Fraction do
   def multiply(int, %Fraction{} = fraction_b, opts) when is_integer(int),
     do: multiply(Fraction.new(int), fraction_b, opts)
 
-    def multiply(%Fraction{}=fraction_a, str, opts) when is_binary(str), do: multiply(fraction_a, new(str), opts)
-    def multiply(str, %Fraction{}=fraction_b, opts) when is_binary(str), do: multiply(new(str), fraction_b, opts)
+  def multiply(%Fraction{} = fraction_a, str, opts) when is_binary(str),
+    do: multiply(fraction_a, new(str), opts)
 
-    def multiply(%Fraction{}=fraction_a, f, opts) when is_float(f), do: multiply(fraction_a, new(f), opts)
-    def multiply(f, %Fraction{}=fraction_b, opts) when is_float(f), do: multiply(new(f), fraction_b, opts)
+  def multiply(str, %Fraction{} = fraction_b, opts) when is_binary(str),
+    do: multiply(new(str), fraction_b, opts)
 
-    def multiply(%Fraction{}=fraction_a, tup, opts) when is_tuple(tup), do: multiply(fraction_a, new(tup), opts)
-    def multiply(tup, %Fraction{}=fraction_b, opts) when is_tuple(tup), do: multiply(new(tup), fraction_b, opts)
+  def multiply(%Fraction{} = fraction_a, f, opts) when is_float(f),
+    do: multiply(fraction_a, new(f), opts)
+
+  def multiply(f, %Fraction{} = fraction_b, opts) when is_float(f),
+    do: multiply(new(f), fraction_b, opts)
+
+  def multiply(%Fraction{} = fraction_a, tup, opts) when is_tuple(tup),
+    do: multiply(fraction_a, new(tup), opts)
+
+  def multiply(tup, %Fraction{} = fraction_b, opts) when is_tuple(tup),
+    do: multiply(new(tup), fraction_b, opts)
 
   @doc """
   Divide two fractions, or a fraction and a value and return the (optionally simplified) result.
@@ -581,7 +601,7 @@ defmodule Chunky.Fraction do
 
       iex> Fraction.divide(60, Fraction.new(7, 12))
       %Fraction{num: 720, den: 7}
-  
+
       iex> Fraction.divide(Fraction.new(11, 17), "3")
       %Fraction{num: 11, den: 51}
 
@@ -605,14 +625,23 @@ defmodule Chunky.Fraction do
   def divide(int, %Fraction{} = fraction_b, opts) when is_integer(int),
     do: divide(Fraction.new(int), fraction_b, opts)
 
-    def divide(%Fraction{}=fraction_a, str, opts) when is_binary(str), do: divide(fraction_a, new(str), opts)
-    def divide(str, %Fraction{}=fraction_b, opts) when is_binary(str), do: divide(new(str), fraction_b, opts)
+  def divide(%Fraction{} = fraction_a, str, opts) when is_binary(str),
+    do: divide(fraction_a, new(str), opts)
 
-    def divide(%Fraction{}=fraction_a, f, opts) when is_float(f), do: divide(fraction_a, new(f), opts)
-    def divide(f, %Fraction{}=fraction_b, opts) when is_float(f), do: divide(new(f), fraction_b, opts)
+  def divide(str, %Fraction{} = fraction_b, opts) when is_binary(str),
+    do: divide(new(str), fraction_b, opts)
 
-    def divide(%Fraction{}=fraction_a, tup, opts) when is_tuple(tup), do: multiply(fraction_a, new(tup), opts)
-    def divide(tup, %Fraction{}=fraction_b, opts) when is_tuple(tup), do: multiply(new(tup), fraction_b, opts)
+  def divide(%Fraction{} = fraction_a, f, opts) when is_float(f),
+    do: divide(fraction_a, new(f), opts)
+
+  def divide(f, %Fraction{} = fraction_b, opts) when is_float(f),
+    do: divide(new(f), fraction_b, opts)
+
+  def divide(%Fraction{} = fraction_a, tup, opts) when is_tuple(tup),
+    do: multiply(fraction_a, new(tup), opts)
+
+  def divide(tup, %Fraction{} = fraction_b, opts) when is_tuple(tup),
+    do: multiply(new(tup), fraction_b, opts)
 
   @doc """
   Create the reciprocal of a fraction, optionally simplifying the result. 
@@ -833,26 +862,25 @@ defmodule Chunky.Fraction do
 
   @doc """
   Convert a fraction to a float, optionally rounding to a specific precision.
-  
+
   ## Options
-  
+
    - `precision` - Integer. Default `15`. Number of digits of precision in float. From `0` to `15`.
-  
+
   ## Examples
-  
+
       iex> Fraction.new(22, 7) |> to_float()
       3.142857142857143
-  
+
       iex> Fraction.new(22, 7) |> to_float(precision: 2)
       3.14
   """
-  def to_float(%Fraction{}=fraction, opts \\ []) do
-      
-      precision = opts |> Keyword.get(:precision, 15)
-      
-      Float.round(fraction.num / fraction.den, precision)
+  def to_float(%Fraction{} = fraction, opts \\ []) do
+    precision = opts |> Keyword.get(:precision, 15)
+
+    Float.round(fraction.num / fraction.den, precision)
   end
-  
+
   @doc """
   Determine if a fraction exactly represents a whole number, with no remainder.
 
@@ -1028,7 +1056,7 @@ defmodule Chunky.Fraction do
            %Fraction{den: 12, num: 9},
            %Fraction{den: 12, num: 84}
        ]
-  
+
        iex> Fraction.normalize_all(["3/4", {7, 8}, Fraction.new(8, 16)])
        [
             %Fraction{num: 12, den: 16},
@@ -1090,145 +1118,147 @@ defmodule Chunky.Fraction do
       Fraction.new(n_num, head_frac.den)
     end
   end
-  
+
   @doc """
   Find the minimum value in a list of fractions or vaules. Relative comparisons are calculated based on float
   conversion of fractions.  
-  
+
   **Supports Type Coercion?**: ✅
-  
+
   ## Example
-  
+
       iex> Fraction.min_of([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
       %Fraction{num: 3, den: 7}
-  
+
   """
   def min_of([]), do: nil
+
   def min_of(list) do
-      list |> fractionalize() |> Enum.min_by(&to_float/1)
+    list |> fractionalize() |> Enum.min_by(&to_float/1)
   end
-  
+
   @doc """
   Return the smaller of two fractions, or a fraction and an alternate
   encoding (like float, string, or integer).
-  
+
   **Supports Type Coercion?**: ✅
-  
+
   ## Example
-  
+
       iex> Fraction.min_of( Fraction.new(3, 7), Fraction.new(11, 28) )
       %Fraction{num: 11, den: 28}
-  
+
       iex> Fraction.min_of( Fraction.new(22, 7), "3/7")
       %Fraction{num: 3, den: 7}
-  
+
       iex> Fraction.min_of(0.5, Fraction.new(-3, 5))
       %Fraction{num: -3, den: 5}
       
       iex> Fraction.min_of(Fraction.new(3), "22/7")
       %Fraction{num: 3, den: 1}
-  
+
   """
-  def min_of(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
-     if Fraction.lte?(fraction_a, fraction_b) do
-         fraction_a
-     else
-         fraction_b
-     end 
+  def min_of(%Fraction{} = fraction_a, %Fraction{} = fraction_b) do
+    if Fraction.lte?(fraction_a, fraction_b) do
+      fraction_a
+    else
+      fraction_b
+    end
   end
 
-  def min_of(%Fraction{}=fraction_a, int) when is_integer(int), do: min_of(fraction_a, new(int))
-  def min_of(int, %Fraction{}=fraction_b) when is_integer(int), do: min_of(new(int), fraction_b)
-  
-  def min_of(%Fraction{}=fraction_a, str) when is_binary(str), do: min_of(fraction_a, new(str))
-  def min_of(str, %Fraction{}=fraction_b) when is_binary(str), do: min_of(new(str), fraction_b)
+  def min_of(%Fraction{} = fraction_a, int) when is_integer(int), do: min_of(fraction_a, new(int))
+  def min_of(int, %Fraction{} = fraction_b) when is_integer(int), do: min_of(new(int), fraction_b)
 
-  def min_of(%Fraction{}=fraction_a, f) when is_float(f), do: min_of(fraction_a, new(f))
-  def min_of(f, %Fraction{}=fraction_b) when is_float(f), do: min_of(new(f), fraction_b)
+  def min_of(%Fraction{} = fraction_a, str) when is_binary(str), do: min_of(fraction_a, new(str))
+  def min_of(str, %Fraction{} = fraction_b) when is_binary(str), do: min_of(new(str), fraction_b)
+
+  def min_of(%Fraction{} = fraction_a, f) when is_float(f), do: min_of(fraction_a, new(f))
+  def min_of(f, %Fraction{} = fraction_b) when is_float(f), do: min_of(new(f), fraction_b)
 
   @doc """
   Return the maximum value in a list of fractions or values. Relative comparisons are calculated based on float
   converion of fractions.
 
   **Supports Type Coercion?**: ✅
-  
+
   ## Example
 
       iex> Fraction.max_of([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
       %Fraction{num: 11, den: 23}
-  
+
   """
   def max_of([]), do: nil
+
   def max_of(list) do
-      list |> fractionalize() |> Enum.max_by(&to_float/1)
+    list |> fractionalize() |> Enum.max_by(&to_float/1)
   end
-  
+
   @doc """
   Return the larger of two fractions or values.
-  
+
   **Supports Type Coercion?**: ✅
-  
+
   ## Example
-  
+
       iex> Fraction.max_of( Fraction.new(3, 7), Fraction.new(11, 28) )
       %Fraction{num: 3, den: 7}
       
       iex> Fraction.max_of(Fraction.new(4, 3), 8.3)
       %Fraction{num: 83, den: 10}
-  
-  """
-  def max_of(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
-      if Fraction.gte?(fraction_a, fraction_b) do
-          fraction_a
-      else
-          fraction_b
-      end
-  end
-  
-  def max_of(%Fraction{}=fraction_a, int) when is_integer(int), do: max_of(fraction_a, new(int))
-  def max_of(int, %Fraction{}=fraction_b) when is_integer(int), do: max_of(new(int), fraction_b)
-  
-  def max_of(%Fraction{}=fraction_a, str) when is_binary(str), do: max_of(fraction_a, new(str))
-  def max_of(str, %Fraction{}=fraction_b) when is_binary(str), do: max_of(new(str), fraction_b)
 
-  def max_of(%Fraction{}=fraction_a, f) when is_float(f), do: max_of(fraction_a, new(f))
-  def max_of(f, %Fraction{}=fraction_b) when is_float(f), do: max_of(new(f), fraction_b)
-  
-  
+  """
+  def max_of(%Fraction{} = fraction_a, %Fraction{} = fraction_b) do
+    if Fraction.gte?(fraction_a, fraction_b) do
+      fraction_a
+    else
+      fraction_b
+    end
+  end
+
+  def max_of(%Fraction{} = fraction_a, int) when is_integer(int), do: max_of(fraction_a, new(int))
+  def max_of(int, %Fraction{} = fraction_b) when is_integer(int), do: max_of(new(int), fraction_b)
+
+  def max_of(%Fraction{} = fraction_a, str) when is_binary(str), do: max_of(fraction_a, new(str))
+  def max_of(str, %Fraction{} = fraction_b) when is_binary(str), do: max_of(new(str), fraction_b)
+
+  def max_of(%Fraction{} = fraction_a, f) when is_float(f), do: max_of(fraction_a, new(f))
+  def max_of(f, %Fraction{} = fraction_b) when is_float(f), do: max_of(new(f), fraction_b)
+
   @doc """
   Return a tuple with the smallest and largest fractions from a list.
-  
+
   **Supports Type Coercion?**: ✅
-  
+
   ## Example
-  
+
       iex> Fraction.min_max_of([ Fraction.new(3, 7), Fraction.new(5, 11), Fraction.new(11, 23)])
       { %Fraction{num: 3, den: 7}, %Fraction{num: 11, den: 23} }
-  
+
   """
   def min_max_of([]), do: {nil, nil}
+
   def min_max_of(list) do
-     list |> fractionalize() |> Enum.min_max_by(&to_float/1) 
+    list |> fractionalize() |> Enum.min_max_by(&to_float/1)
   end
-  
+
   @doc """
   Take a mixed list of fraction representations %Fraction{}, integer, float,
   string, etc), and convert all to fractions. This is _not_ a normalization
   process - the resulting fractions are not guaranteed to share a denominator.
-  
+
   **Supports Type Coercion?**: ✅
-  
+
   ## Example
-  
+
       iex> fractionalize([%Fraction{num: 3, den: 4}, 12, 0.25, "22/7", "4"])
       [%Fraction{num: 3, den: 4}, %Fraction{num: 12, den: 1}, %Fraction{num: 25, den: 100}, %Fraction{num: 22, den: 7}, %Fraction{num: 4, den: 1}]
-  
+
   """
   def fractionalize(candidates) when is_list(candidates) do
-      candidates
-      |> Enum.map(&new/1)
+    candidates
+    |> Enum.map(&new/1)
   end
-  
+
   @doc """
   Compare a fraction with a value or fraction using _greater than_ comparison.
 
@@ -1257,14 +1287,14 @@ defmodule Chunky.Fraction do
   def gt?(int, %Fraction{} = fraction_b) when is_integer(int),
     do: gt?(Fraction.new(int), fraction_b)
 
-  def gt?(%Fraction{}=fraction_a, str) when is_binary(str), do: gt?(fraction_a, new(str))
-  def gt?(str, %Fraction{}=fraction_b) when is_binary(str), do: gt?(new(str), fraction_b)
+  def gt?(%Fraction{} = fraction_a, str) when is_binary(str), do: gt?(fraction_a, new(str))
+  def gt?(str, %Fraction{} = fraction_b) when is_binary(str), do: gt?(new(str), fraction_b)
 
-  def gt?(%Fraction{}=fraction_a, f) when is_float(f), do: gt?(fraction_a, new(f))
-  def gt?(f, %Fraction{}=fraction_b) when is_float(f), do: gt?(new(f), fraction_b)
+  def gt?(%Fraction{} = fraction_a, f) when is_float(f), do: gt?(fraction_a, new(f))
+  def gt?(f, %Fraction{} = fraction_b) when is_float(f), do: gt?(new(f), fraction_b)
 
-  def gt?(%Fraction{}=fraction_a, tup) when is_tuple(tup), do: gt?(fraction_a, new(tup))
-  def gt?(tup, %Fraction{}=fraction_b) when is_tuple(tup), do: gt?(new(tup), fraction_b)
+  def gt?(%Fraction{} = fraction_a, tup) when is_tuple(tup), do: gt?(fraction_a, new(tup))
+  def gt?(tup, %Fraction{} = fraction_b) when is_tuple(tup), do: gt?(new(tup), fraction_b)
 
   @doc """
   Compare a fraction with a value or fraction using _greater than or equal_ comparison.
@@ -1293,15 +1323,14 @@ defmodule Chunky.Fraction do
   def gte?(int, %Fraction{} = fraction_b) when is_integer(int),
     do: gte?(Fraction.new(int), fraction_b)
 
+  def gte?(%Fraction{} = fraction_a, str) when is_binary(str), do: gte?(fraction_a, new(str))
+  def gte?(str, %Fraction{} = fraction_b) when is_binary(str), do: gte?(new(str), fraction_b)
 
-  def gte?(%Fraction{}=fraction_a, str) when is_binary(str), do: gte?(fraction_a, new(str))
-  def gte?(str, %Fraction{}=fraction_b) when is_binary(str), do: gte?(new(str), fraction_b)
+  def gte?(%Fraction{} = fraction_a, f) when is_float(f), do: gte?(fraction_a, new(f))
+  def gte?(f, %Fraction{} = fraction_b) when is_float(f), do: gte?(new(f), fraction_b)
 
-  def gte?(%Fraction{}=fraction_a, f) when is_float(f), do: gte?(fraction_a, new(f))
-  def gte?(f, %Fraction{}=fraction_b) when is_float(f), do: gte?(new(f), fraction_b)
-
-  def gte?(%Fraction{}=fraction_a, tup) when is_tuple(tup), do: gte?(fraction_a, new(tup))
-  def gte?(tup, %Fraction{}=fraction_b) when is_tuple(tup), do: gte?(new(tup), fraction_b)
+  def gte?(%Fraction{} = fraction_a, tup) when is_tuple(tup), do: gte?(fraction_a, new(tup))
+  def gte?(tup, %Fraction{} = fraction_b) when is_tuple(tup), do: gte?(new(tup), fraction_b)
 
   @doc """
   Compare a fraction with a value or fraction using _less than_ comparison.
@@ -1330,15 +1359,14 @@ defmodule Chunky.Fraction do
   def lt?(int, %Fraction{} = fraction_b) when is_integer(int),
     do: lt?(Fraction.new(int), fraction_b)
 
+  def lt?(%Fraction{} = fraction_a, str) when is_binary(str), do: lt?(fraction_a, new(str))
+  def lt?(str, %Fraction{} = fraction_b) when is_binary(str), do: lt?(new(str), fraction_b)
 
-  def lt?(%Fraction{}=fraction_a, str) when is_binary(str), do: lt?(fraction_a, new(str))
-  def lt?(str, %Fraction{}=fraction_b) when is_binary(str), do: lt?(new(str), fraction_b)
+  def lt?(%Fraction{} = fraction_a, f) when is_float(f), do: lt?(fraction_a, new(f))
+  def lt?(f, %Fraction{} = fraction_b) when is_float(f), do: lt?(new(f), fraction_b)
 
-  def lt?(%Fraction{}=fraction_a, f) when is_float(f), do: lt?(fraction_a, new(f))
-  def lt?(f, %Fraction{}=fraction_b) when is_float(f), do: lt?(new(f), fraction_b)
-
-  def lt?(%Fraction{}=fraction_a, tup) when is_tuple(tup), do: lt?(fraction_a, new(tup))
-  def lt?(tup, %Fraction{}=fraction_b) when is_tuple(tup), do: lt?(new(tup), fraction_b)
+  def lt?(%Fraction{} = fraction_a, tup) when is_tuple(tup), do: lt?(fraction_a, new(tup))
+  def lt?(tup, %Fraction{} = fraction_b) when is_tuple(tup), do: lt?(new(tup), fraction_b)
 
   @doc """
   Compare a fraction with a value or fraction using _less than or equal_ comparison.
@@ -1367,15 +1395,14 @@ defmodule Chunky.Fraction do
   def lte?(int, %Fraction{} = fraction_b) when is_integer(int),
     do: lte?(Fraction.new(int), fraction_b)
 
+  def lte?(%Fraction{} = fraction_a, str) when is_binary(str), do: lte?(fraction_a, new(str))
+  def lte?(str, %Fraction{} = fraction_b) when is_binary(str), do: lte?(new(str), fraction_b)
 
-  def lte?(%Fraction{}=fraction_a, str) when is_binary(str), do: lte?(fraction_a, new(str))
-  def lte?(str, %Fraction{}=fraction_b) when is_binary(str), do: lte?(new(str), fraction_b)
+  def lte?(%Fraction{} = fraction_a, f) when is_float(f), do: lte?(fraction_a, new(f))
+  def lte?(f, %Fraction{} = fraction_b) when is_float(f), do: lte?(new(f), fraction_b)
 
-  def lte?(%Fraction{}=fraction_a, f) when is_float(f), do: lte?(fraction_a, new(f))
-  def lte?(f, %Fraction{}=fraction_b) when is_float(f), do: lte?(new(f), fraction_b)
-
-  def lte?(%Fraction{}=fraction_a, tup) when is_tuple(tup), do: lte?(fraction_a, new(tup))
-  def lte?(tup, %Fraction{}=fraction_b) when is_tuple(tup), do: lte?(new(tup), fraction_b)
+  def lte?(%Fraction{} = fraction_a, tup) when is_tuple(tup), do: lte?(fraction_a, new(tup))
+  def lte?(tup, %Fraction{} = fraction_b) when is_tuple(tup), do: lte?(new(tup), fraction_b)
 
   @doc """
   Compare a fraction with a value or fraction using _equals_ comparison.
@@ -1404,15 +1431,14 @@ defmodule Chunky.Fraction do
   def eq?(int, %Fraction{} = fraction_b) when is_integer(int),
     do: eq?(Fraction.new(int), fraction_b)
 
-  
-  def eq?(%Fraction{}=fraction_a, str) when is_binary(str), do: eq?(fraction_a, new(str))
-  def eq?(str, %Fraction{}=fraction_b) when is_binary(str), do: eq?(new(str), fraction_b)
+  def eq?(%Fraction{} = fraction_a, str) when is_binary(str), do: eq?(fraction_a, new(str))
+  def eq?(str, %Fraction{} = fraction_b) when is_binary(str), do: eq?(new(str), fraction_b)
 
-  def eq?(%Fraction{}=fraction_a, f) when is_float(f), do: eq?(fraction_a, new(f))
-  def eq?(f, %Fraction{}=fraction_b) when is_float(f), do: eq?(new(f), fraction_b)
+  def eq?(%Fraction{} = fraction_a, f) when is_float(f), do: eq?(fraction_a, new(f))
+  def eq?(f, %Fraction{} = fraction_b) when is_float(f), do: eq?(new(f), fraction_b)
 
-  def eq?(%Fraction{}=fraction_a, tup) when is_tuple(tup), do: eq?(fraction_a, new(tup))
-  def eq?(tup, %Fraction{}=fraction_b) when is_tuple(tup), do: eq?(new(tup), fraction_b)
+  def eq?(%Fraction{} = fraction_a, tup) when is_tuple(tup), do: eq?(fraction_a, new(tup))
+  def eq?(tup, %Fraction{} = fraction_b) when is_tuple(tup), do: eq?(new(tup), fraction_b)
 
   @doc """
   Determine if a fraction is negative.
@@ -1481,20 +1507,20 @@ defmodule Chunky.Fraction do
       {false, :no_integer_nth_root, root}
     end
   end
-  
+
   @doc """
   Compare two floating points number using an epsilon error boundary.
-  
+
   ## Example
-  
+
       iex> floats_equal?(3.11, 3.1)
       false
-  
+
       iex> floats_equal?(3.11, 3.1, 0.05)
       true
   """
   def floats_equal?(a, b, epsilon \\ 1.0e-6) do
-      abs(a - b) < epsilon
+    abs(a - b) < epsilon
   end
 
   @doc """

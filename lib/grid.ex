@@ -86,40 +86,36 @@ defmodule Chunky.Grid do
   @doc """
   Add a list of point data to a grid. Points can be specified as `{x, y, value}` tuples
   or as maps of `%{x: x, y: y, value: value}`.
-  
+
   ## Example
-  
+
      #iex> Grid.new(10, 10) |> put_all([ {1, 1, "#"}, {3, 2, "."}, ...])
   """
-  def put_all(%Grid{}=grid, [datum]) do
-      case datum do
-         {x, y, val} -> grid |> Grid.put_at(x, y, val)
-         %{x: x, y: y, value: val} ->  grid |> Grid.put_at(x, y, val)
-      end
-   end
-   
-  def put_all(%Grid{}=grid, [datum | data]) do
-      case datum do
-         {x, y, val} -> grid |> Grid.put_at(x, y, val) |> put_all(data)
-         %{x: x, y: y, value: val} ->  grid |> Grid.put_at(x, y, val) |> put_all(data)
-      end            
+  def put_all(%Grid{} = grid, [datum]) do
+    case datum do
+      {x, y, val} -> grid |> Grid.put_at(x, y, val)
+      %{x: x, y: y, value: val} -> grid |> Grid.put_at(x, y, val)
+    end
   end
 
-  def find_index(%Grid{}=grid, val) do
-      0..grid.height - 1
-      |> Enum.map(
-          fn y -> 
-              0..grid.width - 1
-              |> Enum.map(
-                  fn x -> 
-                      {grid |> Grid.get_at(x, y) == val, x, y}
-                  end
-              )
-          end
-      )
-      |> List.flatten()
-      |> Enum.filter(fn {has, _, _} -> has end)
-      |> Enum.map(fn {_, x, y} -> {x, y} end)
+  def put_all(%Grid{} = grid, [datum | data]) do
+    case datum do
+      {x, y, val} -> grid |> Grid.put_at(x, y, val) |> put_all(data)
+      %{x: x, y: y, value: val} -> grid |> Grid.put_at(x, y, val) |> put_all(data)
+    end
+  end
+
+  def find_index(%Grid{} = grid, val) do
+    0..(grid.height - 1)
+    |> Enum.map(fn y ->
+      0..(grid.width - 1)
+      |> Enum.map(fn x ->
+        {grid |> Grid.get_at(x, y) == val, x, y}
+      end)
+    end)
+    |> List.flatten()
+    |> Enum.filter(fn {has, _, _} -> has end)
+    |> Enum.map(fn {_, x, y} -> {x, y} end)
   end
 
   # generate the raw lists for a grid
