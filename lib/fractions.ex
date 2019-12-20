@@ -41,6 +41,7 @@ defmodule Chunky.Fraction do
    - `min_of/2`
    - `min_max_of/1`
    - `normalize_all/1`
+   - `sort/2`
    - `sum/1`
    - `uniq/2`
 
@@ -140,6 +141,7 @@ defmodule Chunky.Fraction do
     - `min_max_of/1` - Find the smallest and largest values in a list of fractions or literals compatible with `new/1`
     - `normalize/2` - Convert two fractions to a common denominator
     - `normalize_all/1` - Convert a list of two or more fractions to a common denominator
+    - `sort/2` - Sort a list of values as fractions
     - `sum/2` - Find the sum of a list of fractions
     - `uniq/2` - Extract unique fractions from a list of values
 
@@ -1308,6 +1310,35 @@ defmodule Chunky.Fraction do
       end
 
     values |> fractionalize() |> Enum.uniq_by(&ufunc.(&1))
+  end
+
+  @doc """
+  Sort a list of values.
+
+  Values that are not yet Fractions are coerced into fractional values before 
+  processing. 
+
+  **Supports Type Coercion?**: ✅
+
+  Sorting is done based on floating point values of fractions.
+
+  ## Options
+
+   - `sorter` - Function arity 2. Default `&<=/2`. Comparison to use when sorting.
+
+  ## Examples
+
+      iex> Fraction.sort(["22/7", 3, "2.9", Fraction.new(1, 3)])
+      [%Fraction{num: 1, den: 3}, %Fraction{num: 29, den: 10}, %Fraction{num: 3, den: 1}, %Fraction{num: 22, den: 7}]
+
+      iex> Fraction.sort(["22/7", 3, "2.9", Fraction.new(1, 3)], sorter: &>=/2)
+      [%Fraction{num: 22, den: 7}, %Fraction{num: 3, den: 1}, %Fraction{num: 29, den: 10}, %Fraction{num: 1, den: 3}]
+
+  """
+  def sort(values, opts \\ []) when is_list(values) do
+    sorter = opts |> Keyword.get(:sorter, &<=/2)
+
+    values |> fractionalize() |> Enum.sort_by(fn v -> v |> to_float() end, sorter)
   end
 
   @doc """

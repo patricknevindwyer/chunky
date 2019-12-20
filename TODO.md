@@ -45,15 +45,19 @@
    
  - Chunky.Fraction
 
-  - uniq(aggregate) - simplify first?
-  - sort(aggregate)
   - clamp(aggregate) filter to be within a min and max value
   - partition by (integer divisor)
-  
+
+  - adversarial tests for anything using fractionalize
+   - non-fractionalized values
+   - garbage (atoms, nil, maps, lists, etc)
+     
   - can_scale_denominator_to?(frac, size)
   - scale_denominator_to(frac, size)
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64
- 
+  
+  - typespecs
+  
  - Chunky.Grid
   - day 17 has:
    - Enum.filter for grids

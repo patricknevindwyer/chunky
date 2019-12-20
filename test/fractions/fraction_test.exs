@@ -70,6 +70,55 @@ defmodule Chunky.FractionTest do
     end
   end
 
+  describe "sort/2" do
+    test "empty" do
+      assert Fraction.sort([]) == []
+    end
+
+    test "lte - type mix" do
+      assert Fraction.sort([
+               Fraction.new(3, 7),
+               1.5,
+               8,
+               "9",
+               "1.3",
+               "22/7",
+               {8, 11}
+             ]) == [
+               %Fraction{num: 3, den: 7},
+               %Fraction{num: 8, den: 11},
+               %Fraction{num: 13, den: 10},
+               %Fraction{num: 15, den: 10},
+               %Fraction{num: 22, den: 7},
+               %Fraction{num: 8, den: 1},
+               %Fraction{num: 9, den: 1}
+             ]
+    end
+
+    test "gte - type mix" do
+      assert Fraction.sort(
+               [
+                 Fraction.new(3, 7),
+                 1.5,
+                 8,
+                 "9",
+                 "1.3",
+                 "22/7",
+                 {8, 11}
+               ],
+               sorter: &>=/2
+             ) == [
+               %Fraction{num: 9, den: 1},
+               %Fraction{num: 8, den: 1},
+               %Fraction{num: 22, den: 7},
+               %Fraction{num: 15, den: 10},
+               %Fraction{num: 13, den: 10},
+               %Fraction{num: 8, den: 11},
+               %Fraction{num: 3, den: 7}
+             ]
+    end
+  end
+
   describe "uniq/2" do
     test "default by" do
       assert Fraction.uniq(["6/22", "4/2", "2/1", "42/21", "3/11"]) == [
