@@ -29,6 +29,121 @@ defmodule Chunky.FractionTest do
     end    
   end
   
+  describe "min_max_of/1" do
+      test "empty" do
+          assert Fraction.min_max_of([]) == {nil, nil}
+      end
+      
+      test "one value" do
+          assert Fraction.min_max_of(["1/2"]) == {%Fraction{num: 1, den: 2}, %Fraction{num: 1, den: 2}}
+      end
+      
+      test "two values" do
+          assert Fraction.min_max_of([Fraction.new(1, 2), Fraction.new(4, 5)]) == { %Fraction{num: 1, den: 2}, %Fraction{num: 4, den: 5} }
+      end
+      
+      test "equal values" do
+          assert Fraction.min_max_of(["1/2", "1/2", "1/2"]) == { %Fraction{num: 1, den: 2}, %Fraction{num: 1, den: 2}}
+      end
+      
+      test "multiple values" do
+          fracs = 1..9 |> Enum.map(fn den -> Fraction.new(9, den) end)
+          assert Fraction.min_max_of(fracs) == { %Fraction{num: 9, den: 9}, %Fraction{num: 9, den: 1} }
+      end
+      
+      test "type mix" do
+          assert Fraction.min_max_of(
+              [
+                  Fraction.new(3, 7),
+                  1.5,
+                  8,
+                  "9",
+                  "1.3",
+                  "22/7",
+                  {8, 11}                  
+              ]
+          ) == { %Fraction{num: 3, den: 7}, %Fraction{num: 9, den: 1} }
+      end
+  end
+  
+  describe "fractionalize/1" do
+      test "empty" do
+          assert Fraction.fractionalize([]) == []
+      end
+      
+      test "fraction struct transliteration" do
+          assert Fraction.fractionalize([ Fraction.new(2, 4), Fraction.new(8, 16)]) == [ %Fraction{num: 2, den: 4}, %Fraction{num: 8, den: 16}]
+      end
+      
+      test "type mix" do
+          assert Fraction.fractionalize(
+              [
+                  Fraction.new(3, 7),
+                  1.5,
+                  8,
+                  "9",
+                  "1.3",
+                  "22/7",
+                  {8, 11}                  
+              ]          
+          ) == [
+              %Fraction{num: 3, den: 7},
+              %Fraction{num: 15, den: 10},
+              %Fraction{num: 8, den: 1},
+              %Fraction{num: 9, den: 1},
+              %Fraction{num: 13, den: 10},
+              %Fraction{num: 22, den: 7},
+              %Fraction{num: 8, den: 11}
+          ]
+      end
+  end
+  
+  describe "max_of/2" do
+    test "equal" do
+       assert Fraction.max_of(Fraction.new(2, 4), Fraction.new(4, 8)) == Fraction.new(2, 4)
+    end
+    
+    test "min last" do
+        assert Fraction.max_of(Fraction.new(22, 7), Fraction.new(7, 22)) == Fraction.new(22, 7)
+    end
+    
+    test "zeros" do
+        assert Fraction.max_of(Fraction.new(7, 3), Fraction.new(0, 3)) == Fraction.new(7, 3)
+    end
+    
+    test "negative" do
+       assert Fraction.max_of(Fraction.new(-1, 3), Fraction.new(-3, 1)) == Fraction.new(-1, 3) 
+    end
+    
+    test "strings frac" do
+        
+        assert Fraction.max_of(Fraction.new(3, 4), "-1/3") == Fraction.new(3, 4)
+        assert Fraction.max_of("3/7", Fraction.new(7, 4)) == Fraction.new(7, 4)
+        
+    end
+    
+    test "strings int" do
+        assert Fraction.max_of(Fraction.new(3, 4), "-1") == Fraction.new(3, 4)
+        assert Fraction.max_of("5", Fraction.new(7, 4)) == Fraction.new(5, 1)        
+    end
+    
+    test "strings float" do
+        assert Fraction.max_of(Fraction.new(8, 3), "3.14") == Fraction.new(314, 100)
+        assert Fraction.max_of("0.25", Fraction.new(0, 3)) == Fraction.new(25, 100)
+        assert Fraction.max_of("0.25", Fraction.new(4, 3)) == Fraction.new(4, 3)
+    end
+    
+    test "floats" do
+        assert Fraction.max_of(1.3, Fraction.new(0, 3)) == Fraction.new(13, 10)
+        assert Fraction.max_of(Fraction.new(7, 3), 1.25) == Fraction.new(7, 3)
+    end
+    
+    test "ints" do
+        assert Fraction.max_of(-3, Fraction.new(0, 3)) == Fraction.new(0, 3)
+        assert Fraction.max_of(Fraction.new(0, 3), 4) == Fraction.new(4, 1)        
+    end
+  end
+  
   describe "min_of/2" do
     test "equal" do
        assert Fraction.min_of(Fraction.new(2, 4), Fraction.new(4, 8)) == Fraction.new(2, 4)
@@ -102,6 +217,63 @@ defmodule Chunky.FractionTest do
     test "empty" do
         assert Fraction.min_of([]) == nil
     end
+    
+    test "type mix" do
+        assert Fraction.min_of(
+            [
+                Fraction.new(3, 7),
+                1.5,
+                8,
+                "9",
+                "1.3",
+                "22/7",
+                {8, 11}
+            ]
+        ) == Fraction.new(3, 7)
+    end
+  end
+  
+  describe "max_of/1" do
+    test "single" do
+        assert Fraction.max_of([Fraction.new(3, 4)]) == Fraction.new(3, 4)
+    end
+    
+    test "equal fractions" do
+        
+        # should keep first min
+        assert Fraction.max_of([Fraction.new(9, 16), Fraction.new(3, 4)]) |> Fraction.components() == {3, 4}
+    end
+    
+    test "out of order" do
+        fracs = 9..1 |> Enum.map(fn d -> Fraction.new(1, d) end)
+        assert Fraction.max_of(fracs) == Fraction.new(1, 1)
+    end
+    
+    test "zero" do
+        assert Fraction.max_of([Fraction.new(1, 3), Fraction.new(0, 4), Fraction.new(9, 1)]) == Fraction.new(9, 1)
+    end
+    
+    test "negative" do
+        assert Fraction.max_of([Fraction.new(3, 1), Fraction.new("0/3"), Fraction.new(-3, 9)]) == Fraction.new(3, 1)
+    end    
+    
+    test "empty" do
+        assert Fraction.max_of([]) == nil
+    end
+    
+    test "type mix" do
+        assert Fraction.max_of(
+            [
+                Fraction.new(3, 7),
+                1.5,
+                8,
+                "9",
+                "1.3",
+                "22/7",
+                {8, 11}
+            ]
+        ) == Fraction.new(9, 1)
+    end
   end
   
   describe "sum/1" do
@@ -129,6 +301,20 @@ defmodule Chunky.FractionTest do
                simplify: true
              ) == Fraction.new(6, 1)
     end
+    
+    test "type mix" do
+       assert Fraction.sum(
+           [
+               Fraction.new(3, 7),
+               1.5,
+               8,
+               "9",
+               "1.3",
+               "22/7",
+               {8, 11}
+           ]
+       ) == %Fraction{num: 18556, den: 770}
+    end
   end
 
   describe "normalize_all/1" do
@@ -144,6 +330,28 @@ defmodule Chunky.FractionTest do
                %Fraction{num: 45, den: 60},
                %Fraction{num: 48, den: 60}
              ]
+    end
+    
+    test "type mix" do
+        assert Fraction.normalize_all(
+            [
+                Fraction.new(3, 7),
+                1.5,
+                8,
+                "9",
+                "1.3",
+                "22/7",
+                {8, 11}
+            ]
+        ) == [
+            %Fraction{num: 330, den: 770},
+            %Fraction{num: 1155, den: 770},
+            %Fraction{num: 6160, den: 770},
+            %Fraction{num: 6930, den: 770},
+            %Fraction{num: 1001, den: 770},
+            %Fraction{num: 2420, den: 770},
+            %Fraction{num: 560, den: 770}
+        ]
     end
   end
 
@@ -204,6 +412,50 @@ defmodule Chunky.FractionTest do
       end)
     end
 
+    test "gt?(_, frac)" do
+       test_cases = [
+           %{left: Fraction.new(3, 7), right: {2, 1}, result: false},
+           %{left: 1.5, right: {2, 1}, result: false},
+           %{left: 8, right: {2, 1}, result: true},
+           %{left: "9", right: {2, 1}, result: true},
+           %{left: "1.3", right: {2, 1}, result: false},
+           %{left: "22/7", right: {2, 1}, result: true},
+           %{left: {8, 11}, right: {2, 1}, result: false}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = test_case.left
+         right = Fraction.new(test_case.right)
+
+         assert Fraction.gt?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    test "gt?(frac, _)" do
+       test_cases = [
+           %{right: Fraction.new(3, 7), left: {2, 1}, result: true},
+           %{right: 1.5, left: {2, 1}, result: true},
+           %{right: 8, left: {2, 1}, result: false},
+           %{right: "9", left: {2, 1}, result: false},
+           %{right: "1.3", left: {2, 1}, result: true},
+           %{right: "22/7", left: {2, 1}, result: false},
+           %{right: {8, 11}, left: {2, 1}, result: true}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = Fraction.new(test_case.left)
+         right = test_case.right
+
+         assert Fraction.gt?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    
+    
     test "gte?(int, frac)" do
       test_cases = [
         %{left: -3, right: {3, 4}, result: false},
@@ -260,6 +512,50 @@ defmodule Chunky.FractionTest do
       end)
     end
 
+    test "gte?(_, frac)" do
+       test_cases = [
+           %{left: Fraction.new(3, 7), right: {2, 1}, result: false},
+           %{left: 1.5, right: {2, 1}, result: false},
+           %{left: 8, right: {2, 1}, result: true},
+           %{left: "9", right: {2, 1}, result: true},
+           %{left: "1.3", right: {2, 1}, result: false},
+           %{left: "22/7", right: {2, 1}, result: true},
+           %{left: {8, 11}, right: {2, 1}, result: false}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = test_case.left
+         right = Fraction.new(test_case.right)
+
+         assert Fraction.gte?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    test "gte?(frac, _)" do
+       test_cases = [
+           %{right: Fraction.new(3, 7), left: {2, 1}, result: true},
+           %{right: 1.5, left: {2, 1}, result: true},
+           %{right: 8, left: {2, 1}, result: false},
+           %{right: "9", left: {2, 1}, result: false},
+           %{right: "1.3", left: {2, 1}, result: true},
+           %{right: "22/7", left: {2, 1}, result: false},
+           %{right: {8, 11}, left: {2, 1}, result: true}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = Fraction.new(test_case.left)
+         right = test_case.right
+
+         assert Fraction.gte?(left, right) == test_case.result
+       end)
+       
+    end
+
+
+
     test "lt?(int, frac)" do
       test_cases = [
         %{left: -3, right: {3, 4}, result: true},
@@ -315,6 +611,50 @@ defmodule Chunky.FractionTest do
         assert Fraction.lt?(left, right) == test_case.result
       end)
     end
+    
+    test "lt?(_, frac)" do
+       test_cases = [
+           %{left: Fraction.new(3, 7), right: {2, 1}, result: true},
+           %{left: 1.5, right: {2, 1}, result: true},
+           %{left: 8, right: {2, 1}, result: false},
+           %{left: "9", right: {2, 1}, result: false},
+           %{left: "1.3", right: {2, 1}, result: true},
+           %{left: "22/7", right: {2, 1}, result: false},
+           %{left: {8, 11}, right: {2, 1}, result: true}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = test_case.left
+         right = Fraction.new(test_case.right)
+
+         assert Fraction.lt?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    test "lt?(frac, _)" do
+       test_cases = [
+           %{right: Fraction.new(3, 7), left: {2, 1}, result: false},
+           %{right: 1.5, left: {2, 1}, result: false},
+           %{right: 8, left: {2, 1}, result: true},
+           %{right: "9", left: {2, 1}, result: true},
+           %{right: "1.3", left: {2, 1}, result: false},
+           %{right: "22/7", left: {2, 1}, result: true},
+           %{right: {8, 11}, left: {2, 1}, result: false}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = Fraction.new(test_case.left)
+         right = test_case.right
+
+         assert Fraction.lt?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    
 
     test "lte?(int, frac)" do
       test_cases = [
@@ -371,6 +711,50 @@ defmodule Chunky.FractionTest do
         assert Fraction.lte?(left, right) == test_case.result
       end)
     end
+    
+    test "lte?(_, frac)" do
+       test_cases = [
+           %{left: Fraction.new(3, 7), right: {2, 1}, result: true},
+           %{left: 1.5, right: {2, 1}, result: true},
+           %{left: 8, right: {2, 1}, result: false},
+           %{left: "9", right: {2, 1}, result: false},
+           %{left: "1.3", right: {2, 1}, result: true},
+           %{left: "22/7", right: {2, 1}, result: false},
+           %{left: {8, 11}, right: {2, 1}, result: true}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = test_case.left
+         right = Fraction.new(test_case.right)
+
+         assert Fraction.lte?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    test "lte?(frac, _)" do
+       test_cases = [
+           %{right: Fraction.new(3, 7), left: {2, 1}, result: false},
+           %{right: 1.5, left: {2, 1}, result: false},
+           %{right: 8, left: {2, 1}, result: true},
+           %{right: "9", left: {2, 1}, result: true},
+           %{right: "1.3", left: {2, 1}, result: false},
+           %{right: "22/7", left: {2, 1}, result: true},
+           %{right: {8, 11}, left: {2, 1}, result: false}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = Fraction.new(test_case.left)
+         right = test_case.right
+
+         assert Fraction.lte?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    
 
     test "eq?(int, frac)" do
       test_cases = [
@@ -427,6 +811,49 @@ defmodule Chunky.FractionTest do
         assert Fraction.eq?(left, right) == test_case.result
       end)
     end
+    
+    test "eq?(_, frac)" do
+       test_cases = [
+           %{left: Fraction.new(3, 7), right: {2, 1}, result: false},
+           %{left: 1.5, right: {2, 1}, result: false},
+           %{left: 8, right: {2, 1}, result: false},
+           %{left: "9", right: {2, 1}, result: false},
+           %{left: "1.3", right: {2, 1}, result: false},
+           %{left: "22/7", right: {2, 1}, result: false},
+           %{left: {8, 11}, right: {2, 1}, result: false}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = test_case.left
+         right = Fraction.new(test_case.right)
+
+         assert Fraction.eq?(left, right) == test_case.result
+       end)
+       
+    end
+    
+    test "eq?(frac, _)" do
+       test_cases = [
+           %{right: Fraction.new(3, 7), left: {2, 1}, result: false},
+           %{right: 1.5, left: {2, 1}, result: false},
+           %{right: 8, left: {2, 1}, result: false},
+           %{right: "9", left: {2, 1}, result: false},
+           %{right: "1.3", left: {2, 1}, result: false},
+           %{right: "22/7", left: {2, 1}, result: false},
+           %{right: {8, 11}, left: {2, 1}, result: false}
+       ] 
+       
+       test_cases
+       |> Enum.each(fn test_case ->
+         left = Fraction.new(test_case.left)
+         right = test_case.right
+
+         assert Fraction.eq?(left, right) == test_case.result
+       end)
+       
+    end
+    
   end
 
   describe "is_positive?" do
@@ -883,6 +1310,40 @@ defmodule Chunky.FractionTest do
       assert Fraction.divide(f_b, f_a) |> Fraction.components() == {0, 9}
       assert Fraction.divide(f_a, f_b) == {:error, :invalid_denominator}
     end
+    
+    test "type mixing frac / _" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.divide(Fraction.new(3, 4), val)
+            end
+        )
+    end
+    
+    test "type mixing _ / frac" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.divide(val, Fraction.new(3, 4))
+            end
+        )        
+    end
   end
 
   describe "multiply/*" do
@@ -1005,6 +1466,40 @@ defmodule Chunky.FractionTest do
         assert Fraction.multiply(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
       end)
     end
+    
+    test "type mixing frac * _" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.multiply(Fraction.new(3, 4), val)
+            end
+        )
+    end
+    
+    test "type mixing _ * frac" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.multiply(val, Fraction.new(3, 4))
+            end
+        )        
+    end
   end
 
   describe "subtract/*" do
@@ -1106,6 +1601,40 @@ defmodule Chunky.FractionTest do
 
         assert Fraction.subtract(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
       end)
+    end
+    
+    test "type mixing frac - _" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.subtract(Fraction.new(3, 4), val)
+            end
+        )
+    end
+    
+    test "type mixing _ - frac" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.subtract(val, Fraction.new(3, 4))
+            end
+        )        
     end
   end
 
@@ -1331,6 +1860,40 @@ defmodule Chunky.FractionTest do
 
         assert Fraction.add(f_a, f_b, test_case.opts) == Fraction.new(test_case.result)
       end)
+    end
+    
+    test "type mixing frac + _" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.add(Fraction.new(3, 4), val)
+            end
+        )
+    end
+    
+    test "type mixing _ + frac" do
+        [
+            Fraction.new(3, 7),
+            1.5,
+            8,
+            "9",
+            "1.3",
+            "22/7",
+            {8, 11}
+        ]
+        |> Enum.each(
+            fn val -> 
+                assert %Fraction{} = Fraction.add(val, Fraction.new(3, 4))
+            end
+        )        
     end
   end
 
@@ -1748,6 +2311,27 @@ defmodule Chunky.FractionTest do
       f = Fraction.new(-7)
       assert f |> Fraction.components() == {-7, 1}
     end
+    
+    test "tuple" do
+        assert Fraction.new({7, 11}) == %Fraction{num: 7, den: 11}
+    end
+    
+    test "string - frac" do
+        assert Fraction.new("49/76") == %Fraction{num: 49, den: 76}
+    end
+    
+    test "string - int" do
+        assert Fraction.new("-312") == %Fraction{num: -312, den: 1}
+    end
+    
+    test "string - float" do
+        assert Fraction.new("1.5") == %Fraction{num: 15, den: 10}
+    end
+    
+    test "float" do
+        assert Fraction.new(0.5) == %Fraction{num: 5, den: 10}
+    end
+    
   end
 
   describe "new/2" do
@@ -1863,6 +2447,16 @@ defmodule Chunky.FractionTest do
 
     test "0/0" do
       assert Fraction.new(0, 0) == {:error, :invalid_denominator}
+    end
+    
+    test "float, natural" do
+        assert Fraction.new(0.25, conversion: :natural) == %Fraction{num: 25, den: 100}
+        assert Fraction.new(3.14, conversion: :natural) == %Fraction{num: 314, den: 100}
+    end
+    
+    test "float, precision" do
+        assert Fraction.new(0.25, conversion: :precision) == %Fraction{num: 1, den: 4}        
+        assert Fraction.new(3.14, conversion: :precision) == %Fraction{num: 7070651414971679, den: 2251799813685248}
     end
   end
 end

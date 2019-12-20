@@ -36,6 +36,8 @@
    - struct has a value and data section to carry info
    - sequence ID
    - sequence index
+   - enumerable? But they aren't - we need enumerable methods with 
+     explicity defined limits
   - sequence listing
   - sequence sizing (finite vs infinite)
   - finite vs infinite sequences
@@ -43,36 +45,10 @@
    
  - Chunky.Fraction
 
-  - change max/1 /2 to max_of/1/2
-  - max(aggregate) (write tests)
-  - max(frac, frac) (write tests)
-  - min_max (write tests)
-
-  - all frac math or other methods should take encodable values as well as fractions
-  
-  - new(frac) -> frac (write tests)
-  - new/1 (string) (write tests)
-  - new/1 (float) (write tests)
-  - new/1 (string - float as string) (write tests)
-  
-  - min(int, frac)
-  - min(frac, int)
-  - max(int, frac)
-  - max(frac, int)
-
-  - re-order functions that are in triplicate (like gt? lt?, etc) so the (frac, frac) version is
-    first, as the first one is the one that shows up in documentation parameter names
-    
-  - aggregates need to check for integers -> just map everything through Fraction.new()
-  - aggregates need docs for working with _anything_ (string, int, float, frac, tuple, pair)
-   - sum
-   - min
-   - max
-   - min_max
-  
-  - uniq(aggregate)
+  - uniq(aggregate) - simplify first?
   - sort(aggregate)
   - clamp(aggregate) filter to be within a min and max value
+  - partition by (integer divisor)
   
   - update readme
   - update top of module for fractions

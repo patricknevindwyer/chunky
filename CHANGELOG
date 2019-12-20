@@ -13,6 +13,13 @@
 
 # CHANGELOG
 
+## v0.6.4
+
+### Enhancements
+
+ - `Chunky.Fraction`
+  - Most functions now use type coercion to handle any value that can be converted to a fraction via `new/1`
+  
 ## v0.6.3
 
 ### Enhancements
