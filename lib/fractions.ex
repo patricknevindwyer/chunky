@@ -1174,7 +1174,7 @@ defmodule Chunky.Fraction do
       %Fraction{num: 3, den: 7}
       
       iex> Fraction.max_of(Fraction.new(4, 3), 8.3)
-      %Fraction{num: 83, den: 101}
+      %Fraction{num: 83, den: 10}
   
   """
   def max_of(%Fraction{}=fraction_a, %Fraction{}=fraction_b) do
