@@ -48,8 +48,8 @@ defmodule Chunky.Fraction do
   Construct fractions from a single integer, tuple of integers, or a pair of integer
   parameters.
 
-    - `new/1` - Create a Fraction from an integer or tuple of integers
-    - `new/2` - Create a Fraction from a numerator and denominator
+    - `new/1` - Create a Fraction from an integer, float, string, or tuple of integers
+    - `new/2` - Create a Fraction from a numerator and denominator, or a float with options
 
   ```elixir
   iex> Fraction.new(3)
@@ -57,6 +57,16 @@ defmodule Chunky.Fraction do
 
   iex> Fraction.new({22, 7})
   %Fraction{num: 22, den: 7}
+  
+  iex> Fraction.new(0.25, conversion: :precision)
+  %Fraction{num: 1, den: 4}
+  
+  iex> Fraction.new("-33/913")
+  %Fraction{num: -33, den: 913}
+  
+  iex> Fraction.new(5, 11)
+  %Fraction{num: 5, den: 11}
+  
   ```
 
   ## Basic Math

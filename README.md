@@ -34,7 +34,7 @@ Install by adding `chunky` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:chunky, "~> 0.6.2"}
+    {:chunky, "~> 0.6.4"}
   ]
 end
 ```
@@ -44,4 +44,6 @@ Chunky documentation can be found on Hexdocs at [https://hexdocs.pm/chunky](http
 
 ## Documentation
 
-See [Chunky on Hexdocs](https://hexdocs.pm/chunky).
+ - [Fractions](/chunky/Chunky.Fraction.html#content)
+ - [Grids](https://hexdocs.pm/chunky/Chunky.Grid.html#content)
+ - [Combinitorics](https://hexdocs.pm/chunky/Chunky.html#content)
