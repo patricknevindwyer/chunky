@@ -26,7 +26,49 @@
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
  
+ - Large Numbers
+  - elixir/erlang large numbers fall apart at a certain point
+  - could modify existing arbitrary decimal libraries (like `decimal`)
+  - mod_pow fails on large enough numbers
+
+ - Modulo Arithmetic
+  
  - Sequences
+ 
+  - finish docs/doc tests for sequence
+  - add basic tests for all sequences 
+  - test with three sequence types
+  
+   - take!/2
+   - write tests for seq manipulators
+   - positive whole (write tests)
+   
+   - sequence from function with 0 last values, just derived from index
+    - write tests
+    - use... fractions? 1/whole number?
+    
+   - take/2 and take!/2 need to check for finite sequences that are finished
+      
+   - allow %Sequence.info as function or map
+   - functions for pretty printing sequence info
+   - sequence info function taking the sequence struct for formatting info data, instead of an arity 0
+
+   - fibonacci tests
+    - sequence for function test
+    - OEIS tests
+       
+   - fraction sequence creator (function to turn one fractional denom into another)
+   - finite sequences (:has_next, :done, etc)
+    - doc labels finite and/or finite_length (use finite length to properly handle zero length sequences)
+    - data labels for finite/infinite
+    - finite state label in "data" or in attributes (assume infinite) 
+    
+   - add a function for quickly creating a small finite list sequence
+   - should sequence get finite labels?
+   - inspection function for OEIS type sequences
+   
+   - documentation for available sequences
+    
   - create basic struct
    - named sequence
    - sequence info func
@@ -60,6 +102,7 @@
   - nearest_fraction(frac, denominator), ie: nearest_fraction(1/2, 64) -> 32/64
   
   - exotic math functions
+  - fractionable?/1
   
   - typespecs
   

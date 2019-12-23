@@ -1,0 +1,231 @@
+defmodule Chunky.SequenceTest do
+  use ExUnit.Case
+  
+  alias Chunky.Sequence
+  doctest Chunky.Sequence
+
+  @sequences [
+      %{
+          module: Chunky.Sequence.Basic, sequence: :whole_numbers, 
+          opts: [], values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], finite: false
+      }
+  ]
+  
+  describe "create/3" do
+     test "valid sequence" do
+         
+         @sequences
+         |> Enum.each(
+             fn seq -> 
+                assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence)
+                assert sequence.index == -1
+                assert sequence.value == 0
+             end
+         )
+
+     end
+     
+     test "invalid module - invalid sequence" do
+         assert Sequence.create(Chunky.Sequence.Zzzz, :does_not_exist) == :no_such_module
+     end
+     
+     test "valid module - invalid sequence" do
+         assert Sequence.create(Chunky.Sequence.Basic, :does_not_exist) == :no_such_sequence
+     end
+     
+     test "valid sequence - with options" do
+         @sequences
+         |> Enum.each(
+             fn seq -> 
+                assert %Sequence{} = Sequence.create(seq.module, seq.sequence, seq.opts)
+             end
+         )         
+     end 
+  end
+  
+  describe "available/1" do
+      
+      test "available returns list" do
+         assert is_list(Sequence.available(Chunky.Sequence.Basic))
+      end
+      
+      test "available returns proper docs" do
+          
+          Sequence.available(Chunky.Sequence.Basic)
+          |> Enum.each(
+              fn seq -> 
+                  assert Map.has_key?(seq, :seq_id)
+                  assert Map.has_key?(seq, :name)
+                  assert Map.has_key?(seq, :description)
+              end
+          )
+      end
+  end
+  
+  describe "is_available?/2" do
+      
+      test "true" do
+          assert Sequence.is_available?(Chunky.Sequence.Basic, :whole_numbers)
+      end
+      
+      test "false" do
+          assert Sequence.is_available?(Chunky.Sequence.Basic, :does_not_exist) == false
+      end
+      
+      test "sequences test" do
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+                  assert Sequence.is_available?(seq.module, seq.sequence)
+              end
+          )
+      end
+  end
+  
+  describe "has_next/1" do
+      
+      test "infinite sequence" do
+          
+          @sequences
+          |> Enum.filter(fn seq -> !seq.finite end)
+          |> Enum.each(
+              fn seq -> 
+                  sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+                  assert Sequence.has_next?(sequence)
+              end
+          )
+          
+      end
+  end
+  
+  describe "next/1" do
+      
+      test "value is stored/iterates" do
+
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+                  sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+                  
+                  # first step
+                  {va, n_seq} = Sequence.next(sequence)                  
+                  assert n_seq.value == va
+                  assert n_seq.value == Enum.at(seq.values, 0)
+                  
+                  # second step
+                  {vb, o_seq} = Sequence.next(n_seq)
+                  assert o_seq.value == vb
+                  assert o_seq.value == Enum.at(seq.values, 1)
+              end
+          )
+          
+      end
+      
+      test "index iterates" do
+          
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+                  sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+                  
+                  # first step
+                  {_, n_seq} = Sequence.next(sequence)                  
+                  assert n_seq.index == 0
+                  
+                  # second step
+                  {_, o_seq} = Sequence.next(n_seq)
+                  assert o_seq.index == 1
+              end
+          )
+          
+      end
+      
+  end
+  
+  describe "next!/1" do
+     
+     test "value is stored" do
+         
+         @sequences
+         |> Enum.each(
+             fn seq -> 
+                 sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+                 
+                 # first step
+                 %Sequence{} = n_seq = Sequence.next!(sequence)                  
+                 assert n_seq.value == Enum.at(seq.values, 0)
+                 
+                 # second step
+                 %Sequence{} = o_seq = Sequence.next!(n_seq)
+                 assert o_seq.value == Enum.at(seq.values, 1)
+             end
+         )
+         
+     end
+     
+     test "index iterates" do
+
+         @sequences
+         |> Enum.each(
+             fn seq -> 
+                 sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+                 
+                 # first step
+                 %Sequence{} = n_seq = Sequence.next!(sequence)                  
+                 assert n_seq.index == 0
+                 
+                 # second step
+                 %Sequence{} = o_seq = Sequence.next!(n_seq)
+                 assert o_seq.index == 1
+             end
+         )
+         
+     end 
+  end
+  
+  describe "take/2" do
+      
+      test "0" do
+          
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+                  
+                  # create the sequence
+                  assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+                  
+                  # taking nothing should return nothing and iterate nothing
+                  assert {[], %Sequence{}=post} = Sequence.take(sequence, 0)
+                  assert post.index == -1
+              end
+          )
+      end
+      
+      test "many" do
+
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+                  
+                  # create the sequence
+                  assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+                  
+                  # taking nothing should return nothing and iterate nothing
+                  {values, %Sequence{}=post} = Sequence.take(sequence, length(seq.values))
+                  assert post.index == length(seq.values) - 1
+                  assert values == seq.values
+                  assert post.value == seq.values |> List.last()
+              end
+          )
+          
+      end
+      
+      test "negative" do
+          assert %Sequence{} = sequence = Sequence.create(Chunky.Sequence.Basic, :whole_numbers)
+          assert {[], %Sequence{}=post} = Sequence.take(sequence, -3)
+          assert post.index == -1
+          assert post.value == 0
+      end
+  end
+  
+end
