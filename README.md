@@ -3,7 +3,7 @@
 
 # Chunky
 
-Fractions, 2D Grids, and Enumeration manipulations in Elixir.
+Fractions, Sequences, 2D Grids, and Enumeration manipulations in Elixir.
 
 ```elixir
 iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
@@ -18,6 +18,9 @@ iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
 
 iex> Chunky.combinations(1..4, 3)
 [[1, 2, 3], [1, 2, 4], [1, 3, 4], [2, 3, 4]]
+
+iex> Chunky.Sequence.create(Chunky.Sequence.OEIS, :a000045) |> Chunky.Sequence.take!(10)
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
 iex> Chunky.Fraction.power(Chunky.Fraction.new(7, 32), Chunky.Fraction.new(30, 5))
 %Chunky.Fraction{num: 117649, den: 1073741824}
@@ -45,5 +48,6 @@ Chunky documentation can be found on Hexdocs at [https://hexdocs.pm/chunky](http
 ## Documentation
 
  - [Fractions](/chunky/Chunky.Fraction.html#content)
+ - [Sequences](/chunky/Chunky.Sequences.html#content)
  - [Grids](https://hexdocs.pm/chunky/Chunky.Grid.html#content)
  - [Combinitorics](https://hexdocs.pm/chunky/Chunky.html#content)
