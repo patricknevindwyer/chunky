@@ -11,6 +11,16 @@ defmodule Chunky.Sequence do
     [1, 2, 3, 4, 5, 6]
     ```
     
+    # Available Sequences
+    
+    The Chunky.Sequence modules have sequences available in:
+    
+     - `Chunky.Sequence.Basic` - Simple integer sequences, and defined sequence progressions
+     - `Chunky.Sequence.OEIS` - Integer Sequences from the [Online Encyclopedia of Integer Sequences](https://oeis.org)
+     - `Chunky.Sequence.Test` - Sequences for test purposes
+    
+    # About Sequences
+    
     Sequences are stateful - sequence manipulations will always return a `%Sequence{}`
     object along with any other requested data. Repeated calls to the same instance
     of a Sequence struct will always yield the same result:
@@ -67,10 +77,10 @@ defmodule Chunky.Sequence do
      - `available/1` - List available sequences from a specific module
      - `has_next?/1` - Check that a sequence has at least one more available value
      - `is_available?/2` - Check if a specific sequence is available
-     - `is_instance/2` - Check if a sequence is an instance of a specific sequence identifier
-     - `is_instance/3` - Check if a sequence is an instance of a specific sequence identifier
+     - `is_instance?/2` - Check if a sequence is an instance of a specific sequence identifier
+     - `is_instance?/3` - Check if a sequence is an instance of a specific sequence identifier
      - `get_references/1` - Retrieve reference sources and links for a sequence
-     - `has_reference?/2 - Check if a sequence has a specific reference source
+     - `has_reference?/2` - Check if a sequence has a specific reference source
      - `readable_name/1` - Find the human readable name of a sequence
     
     ## Manipulating Sequences

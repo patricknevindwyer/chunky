@@ -34,10 +34,16 @@
  - Modulo Arithmetic
   
  - Sequences
-    
-       
-   - documentation for available sequences
- 
+
+   - documentation
+    - better top docs for all sequences
+     - link to main sequence docs
+     - examples
+     - annotate every function
+     - generic annotation for `seq_*` type functions (or skip docs annotation)
+         
+   - utility
+    - create sequence from Map returned by available/1     
    - New Sequences
     - fractional types
     - OEIS top N
