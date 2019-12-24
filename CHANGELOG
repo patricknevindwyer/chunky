@@ -20,6 +20,7 @@
  - `Chunky.Sequences` - Create, inspect, manipulate, iterate, and compare finite and infinite value sequences
   - New functions:
    - `create/3` - Create a new sequence instance
+   - `available/0` - List all loaded sequences from all loaded applications and modules
    - `available/1` - List available sequences from a module
    - `has_next?/1` - Check that a sequence has at least one more available value
    - `is_available?/2` - Check if a specific sequence is available

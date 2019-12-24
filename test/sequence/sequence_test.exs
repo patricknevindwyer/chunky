@@ -106,6 +106,28 @@ defmodule Chunky.SequenceTest do
       end
   end
   
+  describe "available/0" do
+      test "available returns list" do
+         assert is_list(Sequence.available()) 
+      end
+      
+      test "available returns large enough list" do
+          assert length(Sequence.available()) > 10
+      end
+      
+      test "available returns proper docs" do
+          Sequence.available()
+          |> Enum.each(
+              fn seq -> 
+                  assert Map.has_key?(seq, :sequence)
+                  assert Map.has_key?(seq, :name)
+                  assert Map.has_key?(seq, :description)
+                  assert Map.has_key?(seq, :module)
+              end
+          )          
+      end
+  end
+  
   describe "available/1" do
       
       test "available returns list" do
@@ -117,9 +139,10 @@ defmodule Chunky.SequenceTest do
           Sequence.available(Chunky.Sequence.Basic)
           |> Enum.each(
               fn seq -> 
-                  assert Map.has_key?(seq, :seq_id)
+                  assert Map.has_key?(seq, :sequence)
                   assert Map.has_key?(seq, :name)
                   assert Map.has_key?(seq, :description)
+                  assert Map.has_key?(seq, :module)
               end
           )
       end

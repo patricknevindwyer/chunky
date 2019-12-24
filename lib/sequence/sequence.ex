@@ -63,7 +63,8 @@ defmodule Chunky.Sequence do
     
     ## Finding and Inspecting Sequences
     
-     - `available/1` - List available sequences from a module
+     - `available/0` - List all loaded sequences from all loaded applications and modules
+     - `available/1` - List available sequences from a specific module
      - `has_next?/1` - Check that a sequence has at least one more available value
      - `is_available?/2` - Check if a specific sequence is available
      - `is_instance/2` - Check if a sequence is an instance of a specific sequence identifier
@@ -645,7 +646,7 @@ defmodule Chunky.Sequence do
    Available sequences can be found with `available/1`:
    
        iex> Sequence.available(Sequence.Basic) |> List.first()
-       %{description: "Decimal digits: [0, 1, 2, 3, 4, ...]", name: "Decimal Digits", seq_id: :decimal_digits}
+       %{description: "Decimal digits: [0, 1, 2, 3, 4, ...]", name: "Decimal Digits", sequence: :decimal_digits, module: Sequence.Basic}
        
    The function name within a module can also be used to identify a sequence, as all 
    sequence generation functions follow the format `create_sequence_*`. The OEIS `fibonacci`
@@ -814,6 +815,37 @@ defmodule Chunky.Sequence do
    end
    
    @doc """
+   Scan all loaded applications and modules for sequences.
+   
+   This is almost identical to the `available/1` function, but it scans a selection of loaded applications
+   and modules, excluding the core libraries, for sequences. The return values are the same as for `available/1`.
+   
+   """
+   def available do
+       skip_list = [:logger, :public_key, :crypto, :compiler, :ssl, :asn1, :kernel, :iex, :inets, :hex, :elixir, :mix, :stdlib]
+       
+       # find loading applications
+       Application.loaded_applications 
+       |> Enum.map(fn {lib, _, _} -> lib end)
+       
+       # skip things that we know we don't need to check
+       |> Enum.reject(fn app -> Enum.member?(skip_list, app) end)
+       
+       # turn the applications into modules
+       |> Enum.map(
+           fn app -> 
+               {:ok, mod_list} = :application.get_key(app, :modules)
+               mod_list
+           end
+       )
+       |> List.flatten()
+       
+       # check for available sequences
+       |> Enum.map(&available/1)
+       |> List.flatten()
+   end
+   
+   @doc """
    List available sequence in a specific module.
    
    Sequences are organized into modules, with sequences of different sources or shapes
@@ -826,7 +858,7 @@ defmodule Chunky.Sequence do
         3
         
         iex> Sequence.available(Sequence.Basic) |> List.last()
-        %{description: "Whole numbers: [1, 2, 3, 4, 5, ...]", name: "Whole Numbers", seq_id: :whole_numbers}
+        %{description: "Whole numbers: [1, 2, 3, 4, 5, ...]", name: "Whole Numbers", sequence: :whole_numbers, module: Sequence.Basic}
    
    """
    def available(module) do
@@ -854,7 +886,7 @@ defmodule Chunky.Sequence do
               |> Enum.map(&String.capitalize/1)
               |> Enum.join(" ")
               
-              %{seq_id: base |> String.to_atom(), name: nice_name, description: sequence_summary(mod_docs, func, arity)}
+              %{module: module, sequence: base |> String.to_atom(), name: nice_name, description: sequence_summary(mod_docs, func, arity)}
           end
       )
            

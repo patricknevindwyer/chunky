@@ -34,33 +34,21 @@
  - Modulo Arithmetic
   
  - Sequences
-
-   
-   - functions for pretty printing sequence info
+    
        
-   - fraction sequence creator (function to turn one fractional denom into another)
-    
-   - add a function for quickly creating a small finite list sequence
-   - should sequence get finite labels?
-   - inspection function for OEIS type sequences
-   
    - documentation for available sequences
-    
-  - create basic struct
-   - named sequence
-   - sequence info func
-   - multiple modules
-   - OEIS sequences
-   - iterators (embed a next/1 function)
-   - struct has a value and data section to carry info
-   - sequence ID
-   - sequence index
-   - enumerable? But they aren't - we need enumerable methods with 
-     explicity defined limits
-  - sequence listing
-  - sequence sizing (finite vs infinite)
-  - finite vs infinite sequences
-   - returning a "sequence complete" or a has_next flag
+ 
+   - New Sequences
+    - fractional types
+    - OEIS top N
+    - float sequences?
+   - new functions   
+    - functions for pretty printing sequence info
+    - fraction sequence creator (function to turn one fractional denom into another)
+    - sequence comparisons/ordering (OEIS ordering)
+    - more Enum.* compatible functions
+    - take_without(sequence, count, drop/reject function)
+
    
  - Math
   - exotic math functions (totients, newtons method generalized, etc)
