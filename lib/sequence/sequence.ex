@@ -85,6 +85,7 @@ defmodule Chunky.Sequence do
     
     ## Manipulating Sequences
     
+     - `map/2` - Apply a function to values in a sequence, and collect the result
      - `next/1` - Retrieve the next sequence value and updated sequence struct as a tuple
      - `next!/1` - Retrieve the next sequence as just an updated sequence struct
      - `take/2` - Like `Enum.take/2` - retrieve a list of values from a sequence
@@ -279,6 +280,29 @@ defmodule Chunky.Sequence do
        {[n] ++ rest, l_seq}
    end
 
+   @doc """
+   Apply a function to every value in a Sequence. Like `Enum.map/2`.
+   
+   For infinite sequences, this will never complete. Use `Sequence.take/2` and apply
+   a normal map.
+   
+   ## Examples
+   
+       iex> Sequence.create(Sequence.Test, :list_medium) |> Sequence.map(fn v -> v * 3 end)
+       [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+   
+   """
+   def map(%Sequence{data: %{list: []}}, map_func) when is_function(map_func, 1), do: []
+   def map(%Sequence{}=sequence, map_func) when is_function(map_func, 1) do
+       
+       if sequence.finished do
+           []
+       else
+          {v, u_seq} = sequence |> next()
+          [map_func.(v)] ++ map(u_seq, map_func)
+       end
+   end
+   
    @doc """
    Retrieve the next `count` values from a sequence, without retaining sequence state.
    

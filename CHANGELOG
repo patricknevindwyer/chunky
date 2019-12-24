@@ -35,12 +35,14 @@
    - `take!/2` - Like `take/2`, but only return the updated sequence struct
    - `sequence_for_function/1` - Wrap a function as a sequence - see Developing New Sequences
    - `sequence_for_list/1` - Wrap a list as a sequence - see Developing New Sequences
+   - `map/2` - Apply a function to values in a sequence, and collect the result
   - New Sequences:
    - `{Basic, :whole_numbers}` - Whole number sequence, starting from `1` or any other digit
    - `{Basic, :empty}` - The empty sequence
    - `{Basic, :decimal_digits}` - The decimal digits
    - `{OEIS, :a000045}` - OEIS - Fibonacci sequence
    - `{OEIS, :fibonacci}` - OEIS - alternate name, Fibonacci sequence
+   - `{OEIS, :keyword_core}` - OEIS - List of core sequences, according to OEIS
    - Various test sequences
 
  

@@ -128,6 +128,16 @@ defmodule Chunky.SequenceTest do
       end
   end
   
+  describe "map/2" do
+      test "empty sequence" do
+          assert Sequence.create(Sequence.Test, :list_empty) |> Sequence.map(fn v -> v end) == []
+      end
+      
+      test "finite sequence" do
+          assert Sequence.create(Sequence.Test, :list_medium) |> Sequence.map(fn v -> v * 2 end) == [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+      end
+  end
+  
   describe "available/1" do
       
       test "available returns list" do

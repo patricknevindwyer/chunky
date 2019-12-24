@@ -41,7 +41,11 @@
      - examples
      - annotate every function
      - generic annotation for `seq_*` type functions (or skip docs annotation)
-         
+
+   - we could mark sequences from lists as finite
+   - top level label for finite
+   - normal map/filter/etc methods could block on finite labels
+            
    - utility
     - create sequence from Map returned by available/1     
    - New Sequences
