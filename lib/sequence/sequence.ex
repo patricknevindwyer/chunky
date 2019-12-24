@@ -55,6 +55,8 @@ defmodule Chunky.Sequence do
     0
     ```
     
+    # Working with Sequences
+    
     ## Creating Sequences
     
      - `create/3` - Create a new sequence instance
@@ -64,16 +66,170 @@ defmodule Chunky.Sequence do
      - `available/1` - List available sequences from a module
      - `has_next?/1` - Check that a sequence has at least one more available value
      - `is_available?/2` - Check if a specific sequence is available
+     - `is_instance/2` - Check if a sequence is an instance of a specific sequence identifier
+     - `is_instance/3` - Check if a sequence is an instance of a specific sequence identifier
+     - `get_references/1` - Retrieve reference sources and links for a sequence
+     - `has_reference?/2 - Check if a sequence has a specific reference source
+     - `readable_name/1` - Find the human readable name of a sequence
     
     ## Manipulating Sequences
     
      - `next/1` - Retrieve the next sequence value and updated sequence struct as a tuple
      - `next!/1` - Retrieve the next sequence as just an updated sequence struct
      - `take/2` - Like `Enum.take/2` - retrieve a list of values from a sequence
+     - `take!/2` - Like `take/2`, but only return the updated sequence struct
+    
+    ## Developing Sequences
+    
+     - `sequence_for_function/1` - Wrap a function as a sequence - see Developing New Sequences
+     - `sequence_for_list/1` - Wrap a list as a sequence - see Developing New Sequences
+    
+    # Developing New Sequences
+    
+    Sequences can be built in three different ways:
+    
+     - Verbose Iterators (See `Sequence.Basic.create_sequence_whole_numbers/1`)
+     - Simple Functions (See `sequence_for_function/1` and `Sequence.OEIS.create_sequence_a000045/1`)
+     - Static Lists (See `sequence_for_list/1` and `Sequence.Basic.create_sequence_empty/1`)
+    
+    All three ways of developing sequences have things in common:
+    
+     - All will have a `create_sequence_*/1` function - this is how the Sequence package finds and instantiates sequences
+     - All will have common function attributes (via data `@doc` attributes) for the `create_sequence_*/1` function
+    
+    ## Verbose Iterators
+    
+    The most expressive way to write sequences is using the Verbose Iterators technique. In this style, the `create_sequence_*/1`
+    function returns a map that is used to build out the `%Sequence{}` struct. Let's take apart the `:whole_numbers` sequence
+    in the `Sequence.Basic` module.
+    
+    The create function looks like:
+    
+    ```elixir
+    @doc sequence: "Whole numbers: [1, 2, 3, 4, 5, ...]", references: [{:wolfram, :positive_integer, "http://mathworld.wolfram.com/PositiveInteger.html"}, {:wikipedia, :natural_number, "https://en.wikipedia.org/wiki/Natural_number"}]
+    def create_sequence_whole_numbers(opts \\ []) do
+        start = opts |> Keyword.get(:start, 1)
+        
+       %{
+           next_fn: &seq_whole_number_next/3,
+           data: %{
+               start: start
+           }
+       } 
+    end   
+    ```
+    
+    Starting with the `@doc` attributes, and working through the whole function:
+    
+     1. The `@doc` attribute defines the sequence readable name with the `sequence:` attribute
+     2. The `@doc` attribute defines _references_ for the sequence with the `references:` attribute (See `get_references/1`)
+     3. The function signature `create_sequence_whole_numbers/1` defines the sequence identifier `whole_numbers` - this is automatically translated by the Sequence module functions
+     4. For this sequence, we check for a `start` option - what value our sequence should start at
+     5. We return a Map with two keys, the `next_fn` which is a function with arity 3, and a `data` attribute, which we can use to store any data we like
+    
+    Every `next_fn` (or _iterator_ function) for a sequence can be called in two ways; `:init` mode and `:next` mode. The
+    `:init` mode is used to prime the value and our state, the `data` attribute we set in our create function. In `:next`
+    mode we generate the next value in our sequence. Both modes can update the `data` state map, which is maintained by
+    the sequence functions. This allows more complex information needed to generate values to be stored.
+    
+    Let's take a look at how the `seq_whole_number_next/3` function we referenced handles the two modes for the `:whole_numbers` sequence:
+    
+    ```elixir
+    defp seq_whole_number_next(:init, data, _value) do
+        %{
+            data: data,
+            value: data.start - 1
+        }
+    end
+    
+    defp seq_whole_number_next(:next, data, value) do
+       {
+           :continue,
+           %{data: data, value: value + 1}
+       } 
+    end   
+    ```
+    
+    In this case we use two different functions to handle the `:init` and `:next` states. In the `:init` we update our value,
+    and return our state (the `data` attribute) as is. When generating the next iteration value in `:next` mode, we refernce
+    the `value` parameter, which was the last calculated value for the sequence. In this case we return a slightly different
+    structure: we explicitly let the iterator know that our sequence can continue further - we have more values.
+    
+    The return value of the `next_fn` iterator can be of three forms. Map form:
+    
+    ```elixir
+    %{data: %{}, value: _}
+    ```
+    
+    _Continue_ tuple form:
+    
+    ```elixir
+    {
+        :continue,
+        %{data: %{}, value: _}
+    }
+    ```
+    
+    or _Last_ tuple form:
+    
+    ```elixir
+    {
+        :last,
+        %{data: %{}, value: _}
+    }
+    ```
+    
+    If the `:last` tuple form is returned, the sequence is marked as finished, and no further values will be
+    generated.
+    
+    ## Simple Functions
+    
+    Some sequences can be generated from a single function, like many mathematical progressions. The Verbose Iterator
+    way of writing a sequence would be overkill - we can use the `sequence_for_function/1` utility for wrapping a
+    single function in a sequence. See `sequence_for_function/1` for more details.
+    
+    As a simple example we can look at how the OEIS Fibonacci sequence is implemented:
+    
+    ```elixir
+    @doc sequence: "OEIS A000045 - Fibonacci Numbers [0, 1, 1, 2, 3, 5, ...]", references: [{:oeis, :a000045, "https://oeis.org/A000045"}]
+    def create_sequence_fibonacci(_opts) do
+        sequence_for_function(&seq_a000045/3)
+    end
+    
+    def seq_a000045(idx, a, b) do
+        case idx do
+            0 -> 0
+            1 -> 1
+            _ -> a + b
+        end
+    end  
+    ```
+    
+    Like when writing a sequence as a Verbose Iterator, we have a `create_sequence_*/1` function with
+    `@doc` attributes that define the sequence name and references. Then we provide the `sequence_for_function/1`
+    function with a reference to the function that generates values - in this case a fibonacci function that
+    uses the index and last two calculated values to determine the next value in the sequence. 
+    
+    ## Static Lists
+    
+    For sufficiently small finite lists, we can use the `sequence_for_list/1` utility function to wrap
+    a list of static values as a sequence. See `sequence_for_list/1` for more details.
+    
+    We can take apart the `:decimal_digits` sequence:
+    
+    ```elixir
+    @doc sequence: "Decimal digits: [0, 1, 2, 3, 4, ...]", references: [{:wikipedia, :decimal_digit, "https://en.wikipedia.org/wiki/Numerical_digit"}]
+    def create_sequence_decimal_digits(_opts) do
+        sequence_for_list([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    end   
+    ```
+    
+    This sequence has the expected `sequence:` and `references:` doc attributes, and then a call to the
+    `sequence_for_list/1` function with a list of data.
     
     """
        
-   defstruct [:info_fn, :next_fn, :data, :index, :value, :finished]
+   defstruct [:next_fn, :data, :index, :value, :finished, :instance]
    
    alias Chunky.Sequence
 
@@ -96,6 +252,8 @@ defmodule Chunky.Sequence do
        [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
    
    """
+   def take(%Sequence{data: %{list: []}}=sequence, _count), do: {[], sequence} # this is a hack, but it works for now - covers Empty Sets
+   def take(%Sequence{finished: true}=sequence, _count), do: {[], sequence} # cover finished sequences
    def take(%Sequence{}=sequence, count) when is_integer(count) and count < 1, do: {[], sequence}      
    
    def take(%Sequence{}=sequence, 1) do
@@ -109,13 +267,33 @@ defmodule Chunky.Sequence do
        
        {[n] ++ rest, l_seq}
    end
-    
+
+   @doc """
+   Retrieve the next `count` values from a sequence, without retaining sequence state.
+   
+   This function behaves similarly to the `take/2` function, but the state of the 
+   sequence isn't maintained, so any subsequent calls to the same sequence will still
+   contain the values retrieved with `take!`.
+   
+   ## Examples
+   
+       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers)
+       iex> seq |> Sequence.take!(5)
+       [1, 2, 3, 4, 5]
+       iex> seq |> Sequence.take!(10)
+       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+   
+   """
+   def take!(%Sequence{}=seq, count) when is_integer(count) do
+      {res, _seq} = take(seq, count)
+      res
+   end
+   
    @doc """
    Create a new sequence from a simple function and an information function. 
    
    The simple sequence function should take one or more parameters, 
-   corresponding to the last `N` values of the sequence. The info function 
-   should be an arity/1 function that takes an instance of a Sequence struct.
+   corresponding to the last `N` values of the sequence. 
    
    ## Configuration
    
@@ -134,7 +312,6 @@ defmodule Chunky.Sequence do
    being `1, 1, 1`, we could write the function:
    
    ```elixir
-   @doc sequence: "Add last three values"
    def add_last_three(_idx, a, b, c) do
        case {a, b, c} do
            {0, 0, 0} -> 1
@@ -152,27 +329,99 @@ defmodule Chunky.Sequence do
    def create_sequence_add_last_three(_opts) do
        sequence_for_function(&add_last_three/4)
    end
+   ```
    
-   ## Info Function
+   Note that the `create_sequence_add_last_three/1` function should have proper `sequence` and 
+   `references` attributes. See the Developing Sequences section for more details.
    
-   The information function with arity 1 will recieve all the values in the `data` attribute of
-   the sequence, including any data registered as a `data` doc attribute. The return value of the
-   information function should be a Map.
+   ## Attributes
+   
+   For the `@doc` attributes of the sequence function to readable, the function reference passed
+   to the `sequence_for_function/1` function must be scoped to a module or module alias, not a bare
+   referene. This means that this will work:
+   
+   ```
+   sequence_for_function(&Sequence.Test.seq_last_three/4)
+   ```
+   
+   but the following will not:
+   
+   ```
+   sequence_for_function(&seq_last_three/4)
+   ```
+   
+   ### Data attribute
+   
+   If the sequence function uses a _data_ attribute, the call signature of the sequence function
+   changes. For example, a simple function using the last two values, with _no data_ attribute, will
+   have a function signature like:
+   
+   ```elixir
+   def seq_no_data_last_two(idx, a, b) do
+       ...
+   end
+   ```
+   
+   While a sequence function that _has_ a data attribute will look like:
+   
+   ```elixir
+   @doc data: %{start_values: [1, 2, 3]}
+   def seq_with_data_last_two(data, idx, a, b) do
+       ...
+   end
+   ```
+   
+   ### Fill Value attribute
+   
+   Sequence functions that reference past values are normally called with `0` if some of the
+   past values haven't yet been created. The `fill_value` doc attribute can be used to change
+   the default value.
+   
+   For instance, on the first call to iterate the sequence:
+   
+   ```elixir
+   def seq_defaults_last_two(idx, a, b) do
+       # a == 0
+       # b == 0
+   end
+   ```
+   
+   but when we change the `fill_value`:
+   
+   ```elixir
+   @doc fill_value: 17
+   def seq_fill_last_two(idx, a, b) do
+       # a == 17
+       # b == 17
+   end
    ```
    
    """
-   def sequence_for_function(seq_function, info_function) when is_function(seq_function) and is_function(info_function) do
+   def sequence_for_function(seq_function) when is_function(seq_function) do
        
        # setup the attribute data
-       sf_meta = Function.info(seq_function) |> Map.new()
+       sf_meta = Function.info(seq_function) |> Map.new()       
        attrs = attributes_for_function(sf_meta.module, sf_meta.name, sf_meta.arity)
        
+       # select out the function attributes we want to track
        fill_value = Map.get(attrs, :fill_value, 0)
-       sequence_summary = Map.get(attrs, :sequence)
        data = Map.get(attrs, :data, %{})
+
+       # does this function have a data attribute?
+       has_data_attr = Map.has_key?(attrs, :data)
        
        # setup our tracking data for value mapping
-       data = data |> Map.put(:last_n, 1..sf_meta.arity - 1 |> Enum.map(fn _ -> fill_value end))
+       last_n_size = if has_data_attr do
+           sf_meta.arity - 2
+       else
+           sf_meta.arity - 1
+       end
+       
+       data = if last_n_size == 0 do
+           data |> Map.put(:last_n, [])
+       else
+           data |> Map.put(:last_n, 1..last_n_size |> Enum.map(fn _ -> fill_value end))
+       end
        data = data |> Map.put(:index, 0)
        
        # setup the sequence function wrapper
@@ -182,39 +431,57 @@ defmodule Chunky.Sequence do
                   %{data: data, value: fill_value} 
               :next -> 
                   
+                  # if our function has a data attribute, it's the first value in the call
+                  # list, otherwise the index is first
+                  apply_values = if has_data_attr do
+                      [data, n_data.index] ++ n_data.last_n
+                  else
+                      [n_data.index] ++ n_data.last_n
+                  end
+
                   # call function on last N values
-                  apply_values = [n_data.index] ++ n_data.last_n
                   new_value = apply(seq_function, apply_values)
-                  new_last_n = Enum.drop(n_data.last_n, 1) ++ [new_value]
+                  new_last_n = Enum.drop(n_data.last_n ++ [new_value], 1)
                   %{data: %{n_data | last_n: new_last_n, index: n_data.index + 1}, value: new_value}
            end
        end
        
        # build a struct
        %{
-           info_fn: info_function,
            next_fn: sff_next,
-           data: data |> Map.merge(%{name: sequence_summary})
+           data: data
        } 
        
    end
-   
+
    @doc """
-   Create a sequence from a function - short version of `Sequence.sequence_for_function/1`
+   Create a sequence that references a static list of data.
    
-   This version uses a default information function that returns the `data` map exactly as is.
-   """
-   def sequence_for_function(seq_function) when is_function(seq_function) do
-       sequence_for_function(seq_function, &default_info_function/1)
+   In the case of suitable small finite sequences, it is significantly easier to
+   use a static list of data as a sequence. The `sequence_for_list/1` function provides
+   a simple way to do this. For example, to create a sequence for a short list of 5
+   numbers:
+   
+   ```elixir
+   def create_sequence_my_short_list(_opts) do
+       sequence_for_list([3, 7, 11, 27, 47])
    end
+   ```
    
-   def sequence_for_list(list_data, attrs, info_function) when is_list(list_data) and is_map(attrs) and is_function(info_function) do
+   Like with the `sequence_for_function/1` example, the above example `create_sequence_*` function
+   should include full `sequence` and `references` doc attributes. See the Developing Sequences
+   section for more details.
+   
+   Sequences generated from a list behave just like any other sequence. 
+   
+   """      
+   def sequence_for_list(list_data) when is_list(list_data) do
 
        # setup the attribute data
        data = %{
            list: list_data,
            index: 0
-           } |> Map.merge(attrs)
+       }
        
        # setup the sequence function wrapper
        sff_next = fn mode, n_data, _value -> 
@@ -225,7 +492,7 @@ defmodule Chunky.Sequence do
                   
                   # do we have any more values?
                   cond do
-                     length(n_data.list) -> 
+                     length(n_data.list) == 0 -> 
                          {:last, %{data: n_data, value: 0}} 
                          
                      (n_data.index + 1) == length(n_data.list) ->
@@ -252,20 +519,11 @@ defmodule Chunky.Sequence do
        
        # build a struct
        %{
-           info_fn: info_function,
            next_fn: sff_next,
            data: data 
        } 
        
-   end
-   
-   def sequence_for_list(list_data, attrs) when is_list(list_data) and is_map(attrs) do
-       sequence_for_list(list_data, attrs, &default_info_function/1)
-   end
-   
-   # the default information function - just mirror our data attribute
-   defp default_info_function(data), do: data
-   
+   end   
    
    @doc """
    Check that a sequence has more values.
@@ -274,16 +532,53 @@ defmodule Chunky.Sequence do
    it can make sense to check for additional values before trying to access more
    data:
    
+       iex> seq = Sequence.create(Sequence.Basic, :empty) |> Sequence.next!()
+       iex> seq |> Sequence.has_next?()
+       false
+   
+       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.next!()
+       iex> seq |> Sequence.has_next?()
+       true
    
    """
    def has_next?(%Sequence{finished: false}), do: true
    def has_next?(%Sequence{}), do: false
    
+   @doc """
+   Iterate a sequence, returning only the updated Sequence structure.
+   
+   The Sequence structure maintains the last index and value seen in a sequence, so
+   is a useful shorthand when explictly returning the sequence value isn't necessary.
+   This also makes it possible to chain together calls to `next!/1` and other sequence
+   methods.
+   
+   ## Examples
+   
+       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers)
+       iex> updated_seq = seq |> Sequence.next!()
+       iex> updated_seq.value
+       1
+   
+   """
    def next!(%Sequence{}=sequence) do
        {_v, n_seq} = next(sequence)
        n_seq
    end
    
+   @doc """
+   Iterate a sequence, returning the sequence value and updated sequence struct.
+   
+   The sequence struct needs to be maintained in order to iterate a sequence; with the
+   `next/1` function, you can access the iterated value _and_ the updated struct with
+   the same call.
+   
+   ## Example
+   
+       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers)
+       iex> {val, _updated_seq} = seq |> Sequence.next()
+       iex> val
+       1
+   """
    def next(%Sequence{}=sequence) do
        
        # call next function with (:next)
@@ -307,6 +602,7 @@ defmodule Chunky.Sequence do
        
    end
    
+   # initialize a sequence, setting up the "pre" state of the full sequence
    defp init(%Sequence{}=sequence) do
       
        # call next function with (:init)
@@ -316,6 +612,45 @@ defmodule Chunky.Sequence do
        %{sequence | data: data, value: value}
    end
    
+   @doc """
+   Instantiate an instance of a sequence.
+   
+       iex> seq = Sequence.create(Sequence.Basic, :empty)
+       iex> seq |> Sequence.readable_name()
+       "Empty sequence: []"
+   
+       iex> seq = Sequence.create(Sequence.OEIS, :fibonacci)
+       iex> seq |> Sequence.take!(10)
+       [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+   
+   Some sequences accept options, which change the progression or shape of the generated
+   sequence data:
+   
+       iex> Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.take!(5)
+       [1, 2, 3, 4, 5]
+   
+       iex> Sequence.create(Sequence.Basic, :whole_numbers, [start: 13]) |> Sequence.take!(5)
+       [13, 14, 15, 16, 17]
+   
+   ## Finding Available Sequences
+   
+   Sequences are referenced by Module name and a sequence identifier. 
+   
+   The documentation for the Sequence sub-modules contains reference data for all available
+   sequences. See:
+   
+    - `Chunky.Sequence.Basic`
+    - `Chunky.Sequence.OEIS`
+   
+   Available sequences can be found with `available/1`:
+   
+       iex> Sequence.available(Sequence.Basic) |> List.first()
+       %{description: "Decimal digits: [0, 1, 2, 3, 4, ...]", name: "Decimal Digits", seq_id: :decimal_digits}
+       
+   The function name within a module can also be used to identify a sequence, as all 
+   sequence generation functions follow the format `create_sequence_*`. The OEIS `fibonacci`
+   sequence is indirectly created via the function `Chunky.Sequence.OEIS.create_sequence_fibonacci/1`.
+   """
    def create(module, seq_name, opts \\ []) when is_atom(seq_name) do
       
        case Code.ensure_loaded?(module) do
@@ -325,15 +660,15 @@ defmodule Chunky.Sequence do
                
                if is_available?(module, seq_name) do
                    # run create, capture the output
-                   %{info_fn: info_fn, next_fn: next_fn, data: data} = apply(module, create_fn, [opts])
+                   %{next_fn: next_fn, data: data} = apply(module, create_fn, [opts])
                
                    %Sequence{
-                       info_fn: info_fn,
                        next_fn: next_fn,
                        data: data,
                        value: 0,
                        index: -1,
-                       finished: false
+                       finished: false,
+                       instance: {module, seq_name}
                    } |> init()
                else
                    :no_such_sequence
@@ -343,6 +678,54 @@ defmodule Chunky.Sequence do
         end
    end
    
+   @doc """
+   Check if a sequence struct is an instance of a specific sequence.
+   
+   See also `is_instance?/3`.
+   
+   ## Example
+   
+       iex> seq = Sequence.create(Sequence.OEIS, :a000045)
+       iex> seq |> Sequence.is_instance?({Sequence.OEIS, :a000066})
+       false
+       iex> seq |> Sequence.is_instance?({Sequence.OEIS, :a000045})
+       true
+       
+   """
+   def is_instance?(%Sequence{}=sequence, {module, seq_name}) when is_atom(seq_name) do
+       sequence.instance == {module, seq_name}
+   end
+
+   @doc """
+   Check if a sequence struct is an instance of a specific sequence.
+   
+   See also `is_instance?/2`.
+   
+   ## Example
+   
+       iex> seq = Sequence.create(Sequence.OEIS, :a000045)
+       iex> seq |> Sequence.is_instance?(Sequence.OEIS, :a000066)
+       false
+       iex> seq |> Sequence.is_instance?(Sequence.OEIS, :a000045)
+       true
+       
+   """   
+   def is_instance?(%Sequence{}=sequence, module, seq_name) when is_atom(seq_name) do
+       is_instance?(sequence, {module, seq_name})
+   end
+   
+   @doc """
+   Determine if a specific sequence is available.
+   
+   ## Example
+   
+       iex> Sequence.is_available?(Sequence.OEIS, :fibonacci)
+       true
+   
+       iex> Sequence.is_available?(Sequence.OEIS, :quadronacci)
+       false
+   
+   """
    def is_available?(module, seq_name) when is_atom(seq_name) do
        
        create_fn = "create_sequence_#{seq_name}" |> String.to_atom()
@@ -359,6 +742,93 @@ defmodule Chunky.Sequence do
        
    end
    
+   @doc """
+   Retrieve sequence reference data for a sequence instance.
+   
+   Every sequence can have zero or more references to online sources, documentation,
+   or sequence metadata. Common references are [OEIS](https://oeis.org), 
+   [Wikipedia](https://en.wikipedia.org/wiki/Main_Page), and [Wolfram MathWorld](http://mathworld.wolfram.com).
+   
+   Each reference is of the form `{:source, :identifier, "URI"}`. 
+   
+   You can also check for specific references with `has_reference/2`.
+   
+   ## Examples
+   
+       iex> Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.get_references()
+       [{:wolfram, :positive_integer, "http://mathworld.wolfram.com/PositiveInteger.html"}, {:wikipedia, :natural_number, "https://en.wikipedia.org/wiki/Natural_number"}]
+   
+   """
+   def get_references(%Sequence{}=sequence) do
+      
+       {mod, fun} = sequence.instance
+       full_fun = "create_sequence_#{fun}" |> String.to_atom()
+       
+       attrs = attributes_for_function(mod, full_fun, 1)
+       
+       attrs |> Map.get(:references, [])
+   end
+   
+   @doc """
+   Check if a sequence instance has a reference to a specific source.
+   
+   See also `get_references/1`.
+   
+   ## Examples
+   
+       iex> Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.has_reference?(:wolfram)
+       true
+   
+       iex> Sequence.create(Sequence.OEIS, :a000045) |> Sequence.has_reference?(:oeis)
+       true
+
+       iex> Sequence.create(Sequence.OEIS, :a000045) |> Sequence.has_reference?(:wolfram)
+       false
+   
+   """
+   def has_reference?(%Sequence{}=sequence, seq_type) when is_atom(seq_type) do
+      
+      get_references(sequence)
+      |> Enum.filter(fn {st, _, _} -> st == seq_type end) 
+      |> length() > 0
+      
+   end
+   
+   @doc """
+   Get a human readable name for a sequence.
+   
+   ## Example
+   
+       iex> Sequence.create(Sequence.OEIS, :a000045) |> Sequence.readable_name()
+       "OEIS A000045 - Fibonacci Numbers [0, 1, 1, 2, 3, 5, ...]"
+   
+   """
+   def readable_name(%Sequence{}=sequence) do
+       {mod, fun} = sequence.instance
+       full_fun = "create_sequence_#{fun}" |> String.to_atom()
+       
+       attrs = attributes_for_function(mod, full_fun, 1)
+       
+       attrs |> Map.get(:sequence, "")
+       
+   end
+   
+   @doc """
+   List available sequence in a specific module.
+   
+   Sequences are organized into modules, with sequences of different sources or shapes
+   in different modules. Sequences built or included via alternate packages can also
+   be queried this way.
+   
+   ## Example
+   
+        iex> Sequence.available(Sequence.Basic) |> length()
+        3
+        
+        iex> Sequence.available(Sequence.Basic) |> List.last()
+        %{description: "Whole numbers: [1, 2, 3, 4, 5, ...]", name: "Whole Numbers", seq_id: :whole_numbers}
+   
+   """
    def available(module) do
        
        mod_docs = Code.fetch_docs(module)
@@ -390,7 +860,7 @@ defmodule Chunky.Sequence do
            
    end
    
-   defp attributes_for_function(module, function, arity) do
+   defp attributes_for_function(module, function, arity) when is_atom(function) and is_integer(arity) do
        {:docs_v1, _, :elixir, _, _, _, f_docs} = Code.fetch_docs(module)
        case f_docs
        |> Enum.filter(

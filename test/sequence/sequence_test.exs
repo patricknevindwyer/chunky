@@ -25,6 +25,16 @@ defmodule Chunky.SequenceTest do
 
      end
      
+     test "has instance attributes" do
+         @sequences
+         |> Enum.each(
+             fn seq -> 
+                assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence)
+                assert sequence.instance == {seq.module, seq.sequence}
+             end
+         )         
+     end
+     
      test "invalid module - invalid sequence" do
          assert Sequence.create(Chunky.Sequence.Zzzz, :does_not_exist) == :no_such_module
      end
@@ -41,6 +51,59 @@ defmodule Chunky.SequenceTest do
              end
          )         
      end 
+  end
+  
+  describe "is_instance?/2" do
+      test "is_instance?/2" do
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+                 assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence)
+                 assert Sequence.is_instance?(sequence, {seq.module, seq.sequence})
+              end
+          )         
+      end      
+  end
+  
+  describe "is_instance?/3" do
+      test "is_instance?/3" do
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+                 assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence)
+                 assert Sequence.is_instance?(sequence, seq.module, seq.sequence)
+              end
+          )         
+      end      
+  end
+  
+  describe "readable_name/1" do
+      test "basic::whole numbers" do
+          assert %Sequence{} = seq = Sequence.create(Sequence.Basic, :whole_numbers) 
+          assert Sequence.readable_name(seq) == "Whole numbers: [1, 2, 3, 4, 5, ...]"
+      end
+  end
+  
+  describe "get_references/1" do
+      
+      test "oeis refs" do
+         assert %Sequence{} = seq = Sequence.create(Sequence.OEIS, :fibonacci) 
+         assert Sequence.get_references(seq) == [{:oeis, :a000045, "https://oeis.org/A000045"}]
+      end
+      
+  end
+  
+  describe "has_reference?/2" do
+      test "oeis refs" do
+          assert %Sequence{} = seq = Sequence.create(Sequence.OEIS, :fibonacci) 
+          assert Sequence.has_reference?(seq, :oeis)
+      end
+      
+      test "multi-ref" do
+          assert %Sequence{} = seq = Sequence.create(Sequence.Basic, :whole_numbers) 
+          assert Sequence.has_reference?(seq, :wolfram) 
+          assert Sequence.has_reference?(seq, :wikipedia) 
+      end
   end
   
   describe "available/1" do
@@ -181,6 +244,50 @@ defmodule Chunky.SequenceTest do
          )
          
      end 
+  end
+  
+  describe "take!/2" do
+        
+      test "0" do
+      
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+              
+                  # create the sequence
+                  assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+              
+                  # taking nothing should return nothing and iterate nothing
+                  assert [] = Sequence.take!(sequence, 0)
+                  assert sequence.index == -1
+              end
+          )
+      end
+  
+      test "many" do
+
+          @sequences
+          |> Enum.each(
+              fn seq -> 
+              
+                  # create the sequence
+                  assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence, seq.opts)
+              
+                  # taking nothing should return nothing and iterate nothing
+                  assert values = Sequence.take!(sequence, length(seq.values))
+                  assert sequence.index == -1
+                  assert values == seq.values
+              end
+          )
+      
+      end
+  
+      test "negative" do
+          assert %Sequence{} = sequence = Sequence.create(Chunky.Sequence.Basic, :whole_numbers)
+          assert [] = Sequence.take!(sequence, -3)
+          assert sequence.index == -1
+          assert sequence.value == 0
+      end      
   end
   
   describe "take/2" do
