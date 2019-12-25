@@ -16,6 +16,9 @@ iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
   "⭐️🤷🏽‍♀️😀"
 ]
 
+iex> Chunky.Math.is_prime?(30762542250301270692051460539586166927291732754961)
+true
+
 iex> Chunky.combinations(1..4, 3)
 [[1, 2, 3], [1, 2, 4], [1, 3, 4], [2, 3, 4]]
 
@@ -48,6 +51,7 @@ Chunky documentation can be found on Hexdocs at [https://hexdocs.pm/chunky](http
 ## Documentation
 
  - [Fractions](/chunky/Chunky.Fraction.html#content)
+ - [Math](/chunky/Chunky.Math.html#content)
  - [Sequences](/chunky/Chunky.Sequences.html#content)
  - [Grids](https://hexdocs.pm/chunky/Chunky.Grid.html#content)
  - [Combinitorics](https://hexdocs.pm/chunky/Chunky.html#content)

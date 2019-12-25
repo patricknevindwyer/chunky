@@ -42,6 +42,16 @@
      - annotate every function
      - generic annotation for `seq_*` type functions (or skip docs annotation)
 
+ - Math module
+  - is_prime?/2
+   - Miller-rabin primality testing (https://rosettacode.org/wiki/Miller–Rabin_primality_test#Elixir)
+   - AKS primality testing (https://rosettacode.org/wiki/AKS_test_for_primes#Elixir)
+  - factorization
+  - generalized newtons method
+  - do I still have the old programmish content on Dreamhost?
+  - LCM
+  - sqrt, cube_root, nth_root, nth_integer_root, has_nth_integer_root?
+  
    - we could mark sequences from lists as finite
    - top level label for finite
    - normal map/filter/etc methods could block on finite labels
@@ -53,6 +63,8 @@
     - OEIS top N
     - float sequences?
    - new functions   
+    - finite sequences handle differently than other sequences
+     - enum methods can all take an optional _count_ keyword param
     - functions for pretty printing sequence info
     - fraction sequence creator (function to turn one fractional denom into another)
     - sequence comparisons/ordering (OEIS ordering)

@@ -17,6 +17,10 @@
 
 ### Enhancements
 
+ - `Chunky.Math` - Extended math for integers and floating point
+  - `pow/3` - Modular arithmetic exponentiation
+  - `is_prime?/1` - Primality test for integers
+  
  - `Chunky.Sequences` - Create, inspect, manipulate, iterate, and compare finite and infinite value sequences
   - New functions:
    - `create/3` - Create a new sequence instance
