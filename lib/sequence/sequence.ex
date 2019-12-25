@@ -77,6 +77,7 @@ defmodule Chunky.Sequence do
    - `available/1` - List available sequences from a specific module
    - `has_next?/1` - Check that a sequence has at least one more available value
    - `is_available?/2` - Check if a specific sequence is available
+   - `is_finite?/1` - Check of a sequence is finite or infinite in the Sequence library implementation
    - `is_instance?/2` - Check if a sequence is an instance of a specific sequence identifier
    - `is_instance?/3` - Check if a sequence is an instance of a specific sequence identifier
    - `get_references/1` - Retrieve reference sources and links for a sequence
@@ -241,7 +242,7 @@ defmodule Chunky.Sequence do
 
   """
 
-  defstruct [:next_fn, :data, :index, :value, :finished, :instance]
+  defstruct [:next_fn, :data, :index, :value, :finished, :instance, :finite]
 
   alias Chunky.Sequence
 
@@ -489,7 +490,8 @@ defmodule Chunky.Sequence do
     # build a struct
     %{
       next_fn: sff_next,
-      data: data
+      data: data,
+      source: :sequence_for_function
     }
   end
 
@@ -557,7 +559,8 @@ defmodule Chunky.Sequence do
     # build a struct
     %{
       next_fn: sff_next,
-      data: data
+      data: data,
+      source: :sequence_for_list
     }
   end
 
@@ -580,6 +583,24 @@ defmodule Chunky.Sequence do
   def has_next?(%Sequence{finished: false}), do: true
   def has_next?(%Sequence{}), do: false
 
+  @doc """
+  Determine if a sequence is finite or infinite.
+  
+  A sequence being finite or infinite is not a reflection of the absolute computability or
+  theoretical limits of a sequence, but is determined by the quantity of values
+  available in the Sequence library implementation.
+  
+  ## Examples
+  
+      iex> Sequence.create(Sequence.OEIS, :fibonacci) |> Sequence.is_finite?()
+      false
+  
+      iex> Sequence.create(Sequence.OEIS.Core, :a000041) |> Sequence.is_finite?()
+      true
+  
+  """
+  def is_finite?(%Sequence{finite: f}) when is_boolean(f), do: f
+  
   @doc """
   Iterate a sequence, returning only the updated Sequence structure.
 
@@ -688,7 +709,13 @@ defmodule Chunky.Sequence do
 
         if is_available?(module, seq_name) do
           # run create, capture the output
-          %{next_fn: next_fn, data: data} = apply(module, create_fn, [opts])
+          %{next_fn: next_fn, data: data} = creation_data = apply(module, create_fn, [opts])
+          
+          # check for finite/infinite
+          seq_finite = case Map.get(creation_data, :source, :direct) do
+             :sequence_for_list -> true
+             _ -> false 
+          end
 
           %Sequence{
             next_fn: next_fn,
@@ -696,7 +723,8 @@ defmodule Chunky.Sequence do
             value: 0,
             index: -1,
             finished: false,
-            instance: {module, seq_name}
+            instance: {module, seq_name},
+            finite: seq_finite
           }
           |> init()
         else

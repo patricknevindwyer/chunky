@@ -37,6 +37,11 @@
   - Sequence.at(seq, idx)
   - add Math.partition(int) for [0, 250] - use sequence a000041
  
+ - Modifications
+  - offset label for sequences (shift the starting index)
+   - change A000593
+   - add in tests
+   
  - Large Numbers
   - mod_pow fails on large enough numbers
 

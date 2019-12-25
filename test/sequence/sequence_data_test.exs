@@ -97,28 +97,28 @@ defmodule Chunky.SequenceDataTest do
       sequence: :list_empty,
       opts: [],
       values: [],
-      finite: false
+      finite: true
     },
     %{
       module: Chunky.Sequence.Test,
       sequence: :list_small,
       opts: [],
       values: [1, 8, 27, 64, 125],
-      finite: false
+      finite: true
     },
     %{
       module: Chunky.Sequence.Test,
       sequence: :list_medium,
       opts: [],
       values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      finite: false
+      finite: true
     },
     %{
       module: Chunky.Sequence.Test,
       sequence: :list_large,
       opts: [],
       values: [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009],
-      finite: false
+      finite: true
     }
   ]
 
@@ -145,6 +145,9 @@ defmodule Chunky.SequenceDataTest do
         # check values
         assert values == seq_def.values
         # assert(values == seq_def.values, Sequence.readable_name(seq))
+        
+        # check finite/infinite
+        assert Sequence.is_finite?(seq) == seq_def.finite
       end)
     end
   end

@@ -18,10 +18,15 @@
 ### Changes/Refactorizations
 
 ### Enhancements
+ - Chunk.Sequence
+  - sequences are now marked as finite or infinite (as computable/stored in Squence library)
+  - New Functions:
+   - `is_finite?/1` - Is a sequence finite or infinite is sequence library?
 
 ### New Sequences
 
  - A000593 - Sum of Odd Divisors of N
+ 
  
 ## v0.7.0
 
