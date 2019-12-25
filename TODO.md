@@ -25,6 +25,17 @@
  - Chunky.take_sequences/1 or Chunky.chunk_runs/1 (day04.ex)
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
+
+
+
+ - Tests
+  - add a000041 to tests
+  - add a000593 to tests
+  
+ - Additions
+  - Sequence.drop(seq, quant)
+  - Sequence.at(seq, idx)
+  - add Math.partition(int) for [0, 250] - use sequence a000041
  
  - Large Numbers
   - mod_pow fails on large enough numbers
