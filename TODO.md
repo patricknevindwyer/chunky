@@ -43,9 +43,6 @@
      - generic annotation for `seq_*` type functions (or skip docs annotation)
 
  - Math module
-  - is_prime?/2
-   - Miller-rabin primality testing (https://rosettacode.org/wiki/Miller–Rabin_primality_test#Elixir)
-   - AKS primality testing (https://rosettacode.org/wiki/AKS_test_for_primes#Elixir)
   - factorization
   - generalized newtons method
   - do I still have the old programmish content on Dreamhost?
