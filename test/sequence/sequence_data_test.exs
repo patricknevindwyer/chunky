@@ -7,6 +7,7 @@ defmodule Chunky.SequenceDataTest do
   alias Chunky.Sequence
   doctest Chunky.Sequence.Basic
   doctest Chunky.Sequence.OEIS
+  doctest Chunky.Sequence.OEIS.Core
 
   @sequences [
       
