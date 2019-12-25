@@ -27,8 +27,6 @@
  - TODO: nPr
  
  - Large Numbers
-  - elixir/erlang large numbers fall apart at a certain point
-  - could modify existing arbitrary decimal libraries (like `decimal`)
   - mod_pow fails on large enough numbers
 
  - Modulo Arithmetic
@@ -44,6 +42,8 @@
 
  - Math module
   - factorization
+   - x prime factorization
+   - all factorizations
   - generalized newtons method
   - do I still have the old programmish content on Dreamhost?
   - LCM

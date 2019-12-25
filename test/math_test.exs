@@ -4,6 +4,29 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
   
+  describe "prime_factors/1" do
+      test "1" do
+          assert Math.prime_factors(1) == [1]
+          
+      end
+      
+      test "small composite" do
+          assert Math.prime_factors(210) == [1, 2, 3, 5, 7]
+      end
+      
+      test "small prime" do
+          assert Math.prime_factors(101) == [1, 101]
+      end
+      
+      test "large composite" do
+          assert Math.prime_factors(3217644767340672907899084554130) == [1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79]
+      end
+      
+      test "large prime" do
+          assert Math.prime_factors(5754853343) == [1, 5754853343]
+      end
+  end
+  
   describe "is_prime?/1" do
      
      test "first 100 primes" do

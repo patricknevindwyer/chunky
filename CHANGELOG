@@ -13,13 +13,14 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.7.0
 
 ### Enhancements
 
  - `Chunky.Math` - Extended math for integers and floating point
   - `pow/3` - Modular arithmetic exponentiation
   - `is_prime?/1` - Primality test for integers
+  - `prime_factors/1` - Factorize an integer to prime factors
   
  - `Chunky.Sequences` - Create, inspect, manipulate, iterate, and compare finite and infinite value sequences
   - New functions:
@@ -47,6 +48,7 @@
    - `{OEIS, :a000045}` - OEIS - Fibonacci sequence
    - `{OEIS, :fibonacci}` - OEIS - alternate name, Fibonacci sequence
    - `{OEIS, :keyword_core}` - OEIS - List of core sequences, according to OEIS
+   - `{OEIS, :a000041}` - OEIS - Partitions of Integers
    - Various test sequences
 
  

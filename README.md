@@ -31,6 +31,9 @@ iex> Chunky.Fraction.power(Chunky.Fraction.new(7, 32), Chunky.Fraction.new(30, 5
 iex> Chunky.Fraction.power(Chunky.Fraction.new(7, 32), Chunky.Fraction.new(30, 5)) |> IO.puts()
 117649/1073741824
 
+iex> Chunky.Math.prime_factors(3217644767340672907899084554130)
+[1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79]
+
 ```
 
 ## Installation
@@ -40,7 +43,7 @@ Install by adding `chunky` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:chunky, "~> 0.6.5"}
+    {:chunky, "~> 0.7.0"}
   ]
 end
 ```
