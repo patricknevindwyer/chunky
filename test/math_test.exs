@@ -4,6 +4,32 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_highly_abundant?/1" do
+      test "1" do
+          assert Math.is_highly_abundant?(1)
+      end
+      
+      test "10" do
+          assert Math.is_highly_abundant?(10)          
+      end
+      
+      test "11" do
+          assert Math.is_highly_abundant?(11) == false
+      end
+      
+      test "59" do
+          assert Math.is_highly_abundant?(59) == false
+      end
+      
+      test "60" do
+          assert Math.is_highly_abundant?(60)          
+      end
+      
+      test "1980" do
+          assert Math.is_highly_abundant?(1980)          
+      end
+  end
+  
   describe "aliquot_sum/1" do
       test "1" do
          assert Math.aliquot_sum(1) == 0 

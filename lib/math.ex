@@ -261,7 +261,7 @@ defmodule Chunky.Math do
   
   Alternatively, an abundant number is a number that satisfies: `𝜎(n) > 2n`
   
-  See also; `is_deficient?/1`, `is_perfect?/1`, `next_abundant/1`.
+  See also; `is_deficient?/1`, `is_perfect?/1`, `is_highly_abundant?/1`, `next_abundant/1`.
   
   ## Examples
   
@@ -277,6 +277,42 @@ defmodule Chunky.Math do
   """
   def is_abundant?(n) when is_integer(n) and n > 0 do
      sigma(n) > (2 * n) 
+  end
+  
+  @doc """
+  Check if a number `n` is _highly abundant_.
+  
+  A number `n` is _highly abundant_ when the sum of the proper factors of `n` is
+  greater than the sum of the proper factors of any number `m` that is in ` 0 < m < n`.
+  
+  Alternatively, for all natural numbers, `m < n ; 𝜎(m) < 𝜎(n)`.
+  
+  See also; `is_deficient?/1`, `is_perfect?/1`, `is_abundant?/1`.
+  
+  ## Examples
+  
+      iex> Math.is_highly_abundant?(1)
+      true
+  
+      iex> Math.is_highly_abundant?(5)
+      false
+  
+      iex> Math.is_highly_abundant?(30)
+      true
+      
+      iex> Math.is_highly_abundant?(2099)
+      false
+      
+      iex> Math.is_highly_abundant?(2100)
+      true
+  """
+  def is_highly_abundant?(1), do: true
+  def is_highly_abundant?(n) when is_integer(n) and n > 1 do
+      s_n = sigma(n)
+      
+      1..n - 1
+      |> Enum.filter(fn m -> sigma(m) > s_n end)
+      |> length() == 0
   end
   
   @doc """
@@ -312,7 +348,7 @@ defmodule Chunky.Math do
   A perfect integer is an `n` where the sum of the proper divisors of `n` is equal to `n`. Alternatively,
   an `n` that satisfies `𝜎(n) == 2n`.
   
-  See also; `is_abundant?/1`, `is_deficient?/1`.
+  See also; `is_abundant?/1`, `is_highly_abundant?/1`, `is_deficient?/1`.
   
   ## Examples
   
@@ -340,7 +376,7 @@ defmodule Chunky.Math do
   
   Alternatively, a deficient number is a number that satisfies: `𝜎(n) < 2n`
   
-  See also; `is_abundant?/1`, `is_perfect?/1`, `next_deficient/1`.
+  See also; `is_abundant?/1`, `is_highly_abundant?/1`, `is_perfect?/1`, `next_deficient/1`.
   
   ## Examples
   
