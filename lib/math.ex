@@ -22,13 +22,13 @@ defmodule Chunky.Math do
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `sigma/2` - Generalized Sigma function for integers
-   - `next_abundant/1` - Find the next abundant number after `n`
-   - `next_deficient/1` - Find the next deficient number after `n`
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
   
   ## Number Generation
   
    - `next_number/2` - Use a number theory predicate to find the next integer in a sequence
+   - `next_abundant/1` - Find the next abundant number after `n`
+   - `next_deficient/1` - Find the next deficient number after `n`
   """
 
   require Integer
