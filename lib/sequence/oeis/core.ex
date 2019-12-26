@@ -4,6 +4,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   ## Available Sequences
 
+   - [A000005 - Divisors of N](https://oeis.org/A000005) - `:a000005` - `create_sequence_a000005/1`
    - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
@@ -270,7 +271,38 @@ defmodule Chunky.Sequence.OEIS.Core do
     213_636_919_820_625,
     230_793_554_364_681
   ]
+  
+  @doc """
+  OEIS Sequence `A000005` - Number of divisors of N, simga-0(n), `𝝈0(n)`.
 
+  From [OEIS A000005](https://oeis.org/A000005):
+
+  > d(n) (also called tau(n) or sigma_0(n)), the number of divisors of n. 
+  > (Formerly M0246 N0086)  
+  
+  **Sequence IDs**: `:a000005`
+
+  **Finite**: False
+  
+  **Offset**: 1
+  
+  ## Example
+  
+      iex> Sequence.create(Sequence.OEIS.Core, :a000005) |> Sequence.take!(10)
+      [1, 2, 2, 3, 2, 4, 2, 4, 3, 4]
+  
+  
+  """
+  @doc offset: 1, sequence: "Number of Divisors of N or 𝝈0(n)", references: [{:oeis, :a000005, "https://oeis.org/A000005"}]
+  def create_sequence_a000005(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000005/1)
+  end
+  
+  @doc offset: 1
+  def seq_a000005(idx) do
+      Math.sigma(idx, 0)
+  end
+  
   @doc """
   OEIS Sequence `A000009` - Number of partitions of n into distinct parts
 

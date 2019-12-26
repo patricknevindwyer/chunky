@@ -59,6 +59,14 @@ defmodule Chunky.SequenceDataTest do
     # Sequence.OEIS.Core
     %{
       module: Chunky.Sequence.OEIS.Core,
+      sequence: :a000005,
+      opts: [],
+      values: [1, 2, 2, 3, 2, 4, 2, 4, 3, 4],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Core,
       sequence: :a000009,
       opts: [],
       values: [1, 1, 1, 2, 2, 3, 4, 5, 6, 8],
