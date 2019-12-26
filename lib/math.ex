@@ -8,8 +8,12 @@ defmodule Chunky.Math do
 
   ## Integer Arithmetic
 
+   - `factors/1` - All divisors for an integer
    - `is_prime?/1` - Test if an integer is prime
+   - `pow/2` - Integer exponentiation
    - `prime_factors/1` - Factorize an integer into prime factors
+   - `sigma/1` - Sigma-1 function (sum of divisors)
+   - `sigma/2` - Generalized Sigma function for integers
 
   """
 
@@ -121,7 +125,7 @@ defmodule Chunky.Math do
   defp decomposition(n, k, acc), do: decomposition(n, k + 1, acc)
 
   @doc """
-  Calculate the sum-of-divisors (or sigma-1, `σ1(n)`) of an integer.
+  Calculate the sigma-1 (or `σ1(n)`), also known as sum-of-divisors of an integer.
   
   This is all of the divisors of `n` summed.
   
@@ -140,6 +144,31 @@ defmodule Chunky.Math do
   def sigma(n) when is_integer(n) and n > 0 do
       factors(n)
       |> Enum.sum()
+  end
+  
+  @doc """
+  Calculate a sigma function of an integer, for any `p`-th powers.
+  
+  This is a generalized Sigma function of the form `σp(n)`, so the Sigma-0 of
+  a number `σ0(n)` would be `sigma(n, 0)`, while the Sigma-4 (`σ4(n)`) would be `sigma(n, 4)`.
+  
+  For a faster version of `σ1(n)` (or the sum-of-divisors) see `sigma/1`.
+  
+  ## Examples
+  
+      iex> Math.sigma(12, 2)
+      210
+  
+      iex> Math.sigma(19, 4)
+      130322
+  
+      iex> Math.sigma(24, 0)
+      8
+  """
+  def sigma(n, p) when is_integer(n) and is_integer(p) and n > 0 and p >= 0 do
+     factors(n)
+     |> Enum.map(fn fac -> pow(fac, p) end)
+     |> Enum.sum() 
   end
   
   @doc """
@@ -186,6 +215,25 @@ defmodule Chunky.Math do
     :crypto.mod_pow(x, y, mod) |> :binary.decode_unsigned()
   end
 
+  @doc """
+  Integer exponentiation, `x^y`.
+  
+  This function uses pure integer methods to bypass issues with floating point precision
+  trucation in large values using the built-in `:math` exponentiation functions.
+  
+  ## Example
+      
+      iex> Math.pow(2, 10)
+      1024
+  
+      iex> Math.pow(17, 14)
+      168377826559400929
+  """
+  def pow(_x, 0), do: 1
+  def pow(x, 1), do: x
+  def pow(x, y) when is_integer(x) and is_integer(y) and Integer.is_even(y), do: pow(x * x, div(y, 2))
+  def pow(x, y) when is_integer(x) and is_integer(y), do: x * pow(x * x, div(y - 1, 2))
+  
   #
   # Miller-Rabin primality test adapted from Rosetta Code:
   #   https://rosettacode.org/wiki/Miller–Rabin_primality_test#Elixir
