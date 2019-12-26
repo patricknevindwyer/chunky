@@ -6,7 +6,7 @@ defmodule Chunky.MathTest do
 
   describe "is_perfect_power?/1" do
       test "1" do
-         assert Math.is_perfect_power?(1) == false 
+         assert Math.is_perfect_power?(1) == true 
       end
       
       test "8" do

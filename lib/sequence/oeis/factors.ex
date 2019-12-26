@@ -4,6 +4,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Available Sequences
 
+   - [A001597 - Perfect Powers](https://oeis.org/A001597) - `:a001597` - `create_sequence_a001597/1`
    - [A001694 - Powerful Numbers](https://oeis.org/A001694) - `:a001694` - `create_sequence_a001694/1`
    - [A005361 - Product of Expoenents of prime factors of N](https://oeis.org/A005361) - `:a005361` - `create_sequence_a005361/1`
    - [A005934 - Highly powerful numbers: numbers with record value](https://oeis.org/A005934) - `:a005934` - `create_sequence_a005934/1`
@@ -13,6 +14,37 @@ defmodule Chunky.Sequence.OEIS.Factors do
   alias Chunky.Math
 
   require Integer
+  
+  @doc """
+  OEIS Sequence `A001597` - Perfect Powers
+
+  From [OEIS A001597](https://oeis.org/A001597):
+
+  > Perfect powers: m^k where m > 0 and k >= 2. 
+  > (Formerly M3326 N1336)
+  
+  **Sequence IDs**: `:a001597`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a001597) |> Sequence.take!(20)
+      [1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 81, 100, 121, 125, 128, 144, 169, 196, 216]
+
+ 
+  """
+  @doc offset: 1, sequence: "Perfect Powers", references: [{:oeis, :a001597, "https://oeis.org/A001597"}]
+  def create_sequence_a001597(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a001597/2)
+  end
+  
+  @doc offset: 1
+  def seq_a001597(_idx, last) do
+      Math.next_number(&Math.is_perfect_power?/1, last)
+  end
   
   @doc """
   OEIS Sequence `A001694` - Powerful Numbers

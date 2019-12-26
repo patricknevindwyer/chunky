@@ -439,6 +439,7 @@ defmodule Chunky.Math do
       iex> Math.is_perfect_power?(226)
       false
   """
+  def is_perfect_power?(1), do: true
   def is_perfect_power?(n) when is_integer(n) and n > 0 do
       
       # find all factors
