@@ -5,6 +5,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   ## Available Sequences
 
    - [A001694 - Powerful Numbers](https://oeis.org/A001694) - `:a001694` - `create_sequence_a001694/1`
+   - [A005361 - Product of Expoenents of prime factors of N](https://oeis.org/A005361) - `:a005361` - `create_sequence_a005361/1`
   
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
@@ -40,6 +41,47 @@ defmodule Chunky.Sequence.OEIS.Factors do
   @doc offset: 1
   def seq_a001694(_idx, last) do
       Math.next_number(&Math.is_powerful_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A005361` - Product of Expoenents of prime factors of N
+
+  From [OEIS A005361](https://oeis.org/A005361):
+
+  > Product of exponents of prime factorization of n. 
+  > (Formerly M0063)  
+  
+  **Sequence IDs**: `:a005361`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a005361) |> Sequence.take!(20)
+      [1, 1, 1, 2, 1, 1, 1, 3, 2, 1, 1, 2, 1, 1, 1, 4, 1, 2, 1, 2]
+
+  """
+  @doc offset: 1, sequence: "Product of exponents of prime factorization of N", references: [{:oeis, :a005361, "https://oeis.org/A005361"}]
+  def create_sequence_a005361(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a005361/1)
+  end
+  
+  @doc offset: 1
+  def seq_a005361(idx) do
+      
+      # find the prime factors
+      Math.prime_factors(idx) 
+     
+      # group by factor - this is effectively finding the exponent of the factor
+      |> Enum.group_by(fn i -> i end) 
+     
+      # map to the length of the group (extract the exponent)
+      |> Enum.map(fn {_base, exp} -> length(exp) end)
+     
+      # multiply
+      |> Enum.reduce(1, fn x, acc -> x * acc end)
   end
 
 end
