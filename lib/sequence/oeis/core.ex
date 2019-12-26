@@ -272,79 +272,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   ]
 
   @doc """
-  OEIS Sequence `A000041` - Partitions of integer N
-
-  This sequence contains the partitions of the integers from `0` to `250`.
-
-  From [Wikipedia]():
-
-  > In number theory, the partition function  `p(n)` represents the number of possible partitions of a non-negative integer `n`. For instance, 
-  > `p(4) = 5` because the integer `4` has the five partitions: `1 + 1 + 1 + 1`, `1 + 1 + 2`, `1 + 3`, `2 + 2`, and `4`.
-
-  From [OEIS A000041](https://oeis.org/A000041):
-
-  > a(n) is the number of partitions of n (the partition numbers). 
-  > (Formerly M0663 N0244)
-
-  **Sequence IDs**: `:a000041`
-
-  **Finite**: true
-
-  ## Example
-      
-      iex> Sequence.create(Sequence.OEIS.Core, :a000041) |> Sequence.take!(10)
-      [1, 1, 2, 3, 5, 7, 11, 15, 22, 30]
-
-  """
-  @doc sequence: "OEIS A000041 - Partitions of N [1, 1, 2, 3, 5, ...]",
-       references: [
-         {:oeis, :a000041, "https://oeis.org/A000041"},
-         {:wikipedia, :partition_function,
-          "https://en.wikipedia.org/wiki/Partition_function_(number_theory)"}
-       ]
-  def create_sequence_a000041(_opts) do
-    sequence_for_list(@data_a000041)
-  end
-  
-  @doc """
-  
-  OEIS Sequence `A000593` - Sum of Odd Divisors of N
-
-  From [OEIS A000593](https://oeis.org/A000593):
-
-  > Sum of odd divisors of n. 
-  > (Formerly M3197 N1292)
-
-  **Sequence IDs**: `:a000593`
-
-  **Finite**: False
-  
-  **Offset**: 1
-  
-  ## Example
-  
-      iex> Sequence.create(Sequence.OEIS.Core, :a000593) |> Sequence.take!(10)
-      [1, 1, 4, 1, 6, 4, 8, 1, 13, 6]
-  
-  """
-  @doc offset: 1, sequence: "OEIS A000593 - Sum of Odd Divisors of N [1, 1, 4, 1, 6, ...]", references: [{:oeis, :a000593, "http://oeis.org/A000593"}]
-  def create_sequence_a000593(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000593/1)
-  end
-
-  @doc offset: 1  
-  def seq_a000593(idx) do
-      
-      # N is idx +1, as this is an offset sequence (1, 3)
-
-      Chunky.Math.prime_factors(idx) ++ [idx]
-      |> Enum.filter(&Integer.is_odd/1)
-      |> Enum.uniq()
-      |> Enum.sum()
-  end
-  
-  
-  @doc """
   OEIS Sequence `A000009` - Number of partitions of n into distinct parts
 
   From [OEIS A000009](https://oeis.org/A000009):
@@ -410,6 +337,41 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
   
   @doc """
+  OEIS Sequence `A000041` - Partitions of integer N
+
+  This sequence contains the partitions of the integers from `0` to `250`.
+
+  From [Wikipedia]():
+
+  > In number theory, the partition function  `p(n)` represents the number of possible partitions of a non-negative integer `n`. For instance, 
+  > `p(4) = 5` because the integer `4` has the five partitions: `1 + 1 + 1 + 1`, `1 + 1 + 2`, `1 + 3`, `2 + 2`, and `4`.
+
+  From [OEIS A000041](https://oeis.org/A000041):
+
+  > a(n) is the number of partitions of n (the partition numbers). 
+  > (Formerly M0663 N0244)
+
+  **Sequence IDs**: `:a000041`
+
+  **Finite**: true
+
+  ## Example
+      
+      iex> Sequence.create(Sequence.OEIS.Core, :a000041) |> Sequence.take!(10)
+      [1, 1, 2, 3, 5, 7, 11, 15, 22, 30]
+
+  """
+  @doc sequence: "OEIS A000041 - Partitions of N [1, 1, 2, 3, 5, ...]",
+       references: [
+         {:oeis, :a000041, "https://oeis.org/A000041"},
+         {:wikipedia, :partition_function,
+          "https://en.wikipedia.org/wiki/Partition_function_(number_theory)"}
+       ]
+  def create_sequence_a000041(_opts) do
+    sequence_for_list(@data_a000041)
+  end
+  
+  @doc """
   OEIS Sequence `A000079` - Powers of 2 `a(n) = 2^n`
 
   From [OEIS A000009](https://oeis.org/A000009):
@@ -466,4 +428,42 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a000203(idx) do
       Math.sigma(idx)
   end
+  
+  @doc """
+  
+  OEIS Sequence `A000593` - Sum of Odd Divisors of N
+
+  From [OEIS A000593](https://oeis.org/A000593):
+
+  > Sum of odd divisors of n. 
+  > (Formerly M3197 N1292)
+
+  **Sequence IDs**: `:a000593`
+
+  **Finite**: False
+  
+  **Offset**: 1
+  
+  ## Example
+  
+      iex> Sequence.create(Sequence.OEIS.Core, :a000593) |> Sequence.take!(10)
+      [1, 1, 4, 1, 6, 4, 8, 1, 13, 6]
+  
+  """
+  @doc offset: 1, sequence: "OEIS A000593 - Sum of Odd Divisors of N [1, 1, 4, 1, 6, ...]", references: [{:oeis, :a000593, "http://oeis.org/A000593"}]
+  def create_sequence_a000593(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000593/1)
+  end
+
+  @doc offset: 1  
+  def seq_a000593(idx) do
+      
+      # N is idx +1, as this is an offset sequence (1, 3)
+
+      Chunky.Math.prime_factors(idx) ++ [idx]
+      |> Enum.filter(&Integer.is_odd/1)
+      |> Enum.uniq()
+      |> Enum.sum()
+  end
+  
 end
