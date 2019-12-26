@@ -4,6 +4,78 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_perfect_power?/1" do
+      test "1" do
+         assert Math.is_perfect_power?(1) == false 
+      end
+      
+      test "8" do
+          assert Math.is_perfect_power?(8)
+      end
+      
+      test "18" do
+          assert Math.is_perfect_power?(18) == false           
+      end
+      
+      test "676" do
+          assert Math.is_perfect_power?(676)           
+      end
+      
+      test "1010" do
+          assert Math.is_perfect_power?(1010) == false           
+      end
+  end
+  
+  describe "is_root_of?/2" do
+      test "2, 8" do
+          assert Math.is_root_of?(2, 8)
+      end
+      
+      test "4, 64" do
+          assert Math.is_root_of?(4, 64)          
+      end
+      
+      test "7, 16807" do
+          assert Math.is_root_of?(7, 16807)          
+      end
+      
+      test "9, 282429536481" do
+          assert Math.is_root_of?(9, 282429536481)
+      end
+  end
+  
+  describe "is_perfect_square?/1" do
+      test "3" do
+          assert Math.is_perfect_square?(3) == false
+      end
+      
+      test "12" do
+          assert Math.is_perfect_square?(12) == false
+      end
+      
+      test "49" do
+          assert Math.is_perfect_square?(49)          
+      end
+      
+      test "29241" do
+          assert Math.is_perfect_square?(29241)          
+      end
+  end
+  
+  describe "is_perfect_cube?/1" do
+      test "27" do
+          assert Math.is_perfect_cube?(27)
+      end
+      
+      test "400" do
+          assert Math.is_perfect_cube?(400) == false
+      end
+      
+      test "405224" do
+          assert Math.is_perfect_cube?(405224)
+      end
+  end
+  
   describe "is_highly_powerful_number?/1" do
       test "1" do
          assert Math.is_highly_powerful_number?(1) 

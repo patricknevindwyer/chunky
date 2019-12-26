@@ -21,10 +21,15 @@ defmodule Chunky.Math do
    - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
+   - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `sigma/2` - Generalized Sigma function for integers
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
+   - `is_perfect_power?/1` - Is `n` a perfect power?
+   - `is_root_of?/2` - Check if `m` is a k-th root of `n`
+   - `is_perfect_square?/1` - Is `n` a perfect square?
+   - `is_perfect_cube?/1` - Is `m` a perfect square?
   
   ## Number Generation
   
@@ -354,6 +359,141 @@ defmodule Chunky.Math do
       |> Enum.filter(fn m -> sigma(m) > s_n end)
       |> length() == 0
   end
+  
+  @doc """
+  Check if `n` is a perfect square.
+  
+  Perfect squares are `n` such that there exists an `m` where `m * m == n`.
+  
+  ## Examples
+  
+      iex> Math.is_perfect_square?(3)
+      false
+  
+      iex> Math.is_perfect_square?(25)
+      true
+  
+      iex> Math.is_perfect_square?(123456)
+      false
+  """
+  def is_perfect_square?(n) when is_integer(n) and n <= 3, do: false
+  def is_perfect_square?(n) when is_integer(n) and n > 3 do
+      
+      # find all factors
+      factors(n) 
+      
+      # remove 1 and N
+      -- [1, n]
+      
+      # check if any are the perfect square
+      |> Enum.filter(fn fac -> fac * fac == n end)
+      |> length() > 0
+      
+  end
+  
+  @doc """
+  Check if `n` is a perfect cube.
+  
+  Perfect cubes are `n` such that there exists an `m` where `m * m * m == n` or `m^3 == n`.
+  
+  ## Examples
+  
+      iex> Math.is_perfect_cube?(6)
+      false
+  
+      iex> Math.is_perfect_cube?(8000)
+      true
+  
+      iex> Math.is_perfect_cube?(1879080904)
+      true
+  """
+  def is_perfect_cube?(n) when is_integer(n) and n <= 7, do: false
+  def is_perfect_cube?(n) when is_integer(n) and n > 7 do
+
+      # find all factors
+      factors(n) 
+      
+      # remove 1 and N
+      -- [1, n]
+      
+      # check if any are the perfect cube
+      |> Enum.filter(fn fac -> fac * fac * fac == n end)
+      |> length() > 0
+      
+  end
+  
+  @doc """
+  Check if `n` is a _perfect power_.
+  
+  Perfect powers are `n` where positive integers `m` and `k` exist, such 
+  that `m^k == n`.
+  
+  ## Examples
+  
+      iex> Math.is_perfect_power?(4)
+      true
+      
+      iex> Math.is_perfect_power?(100)
+      true
+      
+      iex> Math.is_perfect_power?(226)
+      false
+  """
+  def is_perfect_power?(n) when is_integer(n) and n > 0 do
+      
+      # find all factors
+      factors(n)
+      
+      # drop 1 and N
+      -- [1, n]
+      
+      # drop duplicates
+      |> Enum.uniq()
+      
+      # check if any are roots
+      |> Enum.filter(
+          fn fac -> 
+              if fac * fac <= n do
+                  is_root_of?(fac, n)
+              else
+                  false
+              end
+          end
+      )
+      |> length() > 0
+  end
+  
+  @doc """
+  Check if `n` is any `k`-th root of `m`, where `k > 2`.
+  
+  This function uses a repeated multiplication method to test if `n` has any
+  power `k` such that `n^k == m`.
+  
+  ## Examples
+  
+      iex> Math.is_root_of?(2, 8)
+      true
+      
+      iex> Math.is_root_of?(2, 2048)
+      true
+  
+      iex> Math.is_root_of?(7, 16807)
+      true
+  
+      iex> Math.is_root_of?(5, 16808)
+      false
+  """
+  def is_root_of?(n, m) when is_integer(n) and is_integer(m) and n >= m, do: false
+  def is_root_of?(n, m) when is_integer(n) and is_integer(m) and n < m do
+      
+      # walk powers of n until we're equal to or bigger than
+      # the target number
+      is_root_of_iter(n, n, m)
+  end
+  
+  defp is_root_of_iter(_base, n, m) when n == m, do: true
+  defp is_root_of_iter(base, n, m) when n < m, do: is_root_of_iter(base, n * base, m)
+  defp is_root_of_iter(_base, n, m) when n > m, do: false
   
   @doc """
   Check if a number `n` is a _highly powerful number_.

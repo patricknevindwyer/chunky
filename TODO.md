@@ -46,7 +46,8 @@
 
  - Math module
   - add next_arithmetic_number/1 from OEIS 3601 impl
- 
+  - generalize next_* number function to be next(func, n)
+   
   - factorization
    - x prime factorization
    - all factorizations
