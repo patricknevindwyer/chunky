@@ -8,7 +8,8 @@ defmodule Chunky.SequenceDataTest do
   doctest Chunky.Sequence.Basic
   doctest Chunky.Sequence.OEIS
   doctest Chunky.Sequence.OEIS.Core
-
+  doctest Chunky.Sequence.OEIS.Sigma
+  
   @sequences [
     # Sequence.Basic
     %{
@@ -107,6 +108,152 @@ defmodule Chunky.SequenceDataTest do
       sequence: :a001157,
       opts: [],
       values: [1, 5, 10, 21, 26, 50, 50, 85, 91, 130],
+      finite: false,
+      first_index: 1
+    },
+    
+    # Sequence.OEIS.Sigma
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a001158,
+      opts: [],
+      values: [1, 9, 28, 73, 126, 252, 344, 585, 757, 1134],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a001159,
+      opts: [],
+      values: [1, 17, 82, 273, 626, 1394, 2402, 4369, 6643, 10642],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a001160,
+      opts: [],
+      values: [1, 33, 244, 1057, 3126, 8052, 16808, 33825, 59293, 103158],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013954,
+      opts: [],
+      values: [1, 65, 730, 4161, 15626, 47450, 117650, 266305, 532171, 1015690],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013955,
+      opts: [],
+      values: [1, 129, 2188, 16513, 78126, 282252, 823544, 2113665, 4785157, 10078254],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013956,
+      opts: [],
+      values: [1, 257, 6562, 65793, 390626, 1686434, 5764802, 16843009, 43053283, 100390882],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013957,
+      opts: [],
+      values: [1, 513, 19684, 262657, 1953126, 10097892, 40353608, 134480385, 387440173, 1001953638],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013958,
+      opts: [],
+      values: [1, 1025, 59050, 1049601, 9765626, 60526250, 282475250, 1074791425, 3486843451, 10009766650],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013959,
+      opts: [],
+      values: [1, 2049, 177148, 4196353, 48828126, 362976252, 1977326744, 8594130945, 31381236757, 100048830174],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013960,
+      opts: [],
+      values: [1, 4097, 531442, 16781313, 244140626, 2177317874, 13841287202, 68736258049, 282430067923, 1000244144722],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013961,
+      opts: [],
+      values: [1, 8193, 1594324, 67117057, 1220703126, 13062296532, 96889010408, 549822930945, 2541867422653, 10001220711318],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013962,
+      opts: [],
+      values: [1, 16385, 4782970, 268451841, 6103515626, 78368963450, 678223072850, 4398314962945, 22876797237931, 100006103532010],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013963,
+      opts: [],
+      values: [1, 32769, 14348908, 1073774593, 30517578126, 470199366252, 4747561509944, 35185445863425, 205891146443557, 1000030517610894],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013964,
+      opts: [],
+      values: [1, 65537, 43046722, 4295032833, 152587890626, 2821153019714, 33232930569602, 281479271743489, 1853020231898563, 10000152587956162],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013965,
+      opts: [],
+      values: [1, 131073, 129140164, 17180000257, 762939453126, 16926788715972, 232630513987208, 2251816993685505, 16677181828806733, 100000762939584198],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013966,
+      opts: [],
+      values: [1, 262145, 387420490, 68719738881, 3814697265626, 101560344351050, 1628413597910450, 18014467229220865, 150094635684419611, 1000003814697527770],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013967,
+      opts: [],
+      values: [1, 524289, 1162261468, 274878431233, 19073486328126, 609360902796252, 11398895185373144, 144115462954287105, 1350851718835253557, 10000019073486852414],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a013968,
+      opts: [],
+      values: [1, 1048577, 3486784402, 1099512676353, 95367431640626, 3656161927895954, 79792266297612002, 1152922604119523329, 12157665462543713203, 100000095367432689202],
       finite: false,
       first_index: 1
     },
