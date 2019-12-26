@@ -7,6 +7,23 @@ defmodule Chunky.Sequence.OEIS.Sigma do
   ## Available Sequences
 
    - [A001158 - Sum of cubes of divisors of N, simga-3(n)](https://oeis.org/A001158) - `:a001158` - `create_sequence_a001158/1`
+   - [A001159 - sum of 4th powers of divisors of n, simga-4(n)](https://oeis.org/A001159) - `a001159` - `create_sequence_a001159/1`
+   - [A001160 - sum of 5th powers of divisors of n, simga-5(n)](https://oeis.org/A001160) - `a001160` - `create_sequence_a001160/1`
+   - [A013954 - sum of 6th powers of divisors of n, simga-6(n)](https://oeis.org/A013954) - `a013954` - `create_sequence_a013954/1`
+   - [A013955 - sum of 7th powers of divisors of n, simga-7(n)](https://oeis.org/A013955) - `a013955` - `create_sequence_a013955/1`
+   - [A013956 - sum of 8th powers of divisors of n, simga-8(n)](https://oeis.org/A013956) - `a013956` - `create_sequence_a013956/1`
+   - [A013957 - sum of 9th powers of divisors of n, simga-9(n)](https://oeis.org/A013957) - `a013957` - `create_sequence_a013957/1`
+   - [A013958 - sum of 10th powers of divisors of n, simga-10(n)](https://oeis.org/A013958) - `a013958` - `create_sequence_a013958/1`
+   - [A013959 - sum of 11th powers of divisors of n, simga-11(n)](https://oeis.org/A013959) - `a013959` - `create_sequence_a013959/1`
+   - [A013960 - sum of 12th powers of divisors of n, simga-12(n)](https://oeis.org/A013960) - `a013960` - `create_sequence_a013960/1`
+   - [A013961 - sum of 13th powers of divisors of n, simga-13(n)](https://oeis.org/A013961) - `a013961` - `create_sequence_a013961/1`
+   - [A013962 - sum of 14th powers of divisors of n, simga-14(n)](https://oeis.org/A013962) - `a013962` - `create_sequence_a013962/1`
+   - [A013963 - sum of 15th powers of divisors of n, simga-15(n)](https://oeis.org/A013963) - `a013963` - `create_sequence_a013963/1`
+   - [A013964 - sum of 16th powers of divisors of n, simga-16(n)](https://oeis.org/A013964) - `a013964` - `create_sequence_a013964/1`
+   - [A013965 - sum of 17th powers of divisors of n, simga-17(n)](https://oeis.org/A013965) - `a013965` - `create_sequence_a013965/1`
+   - [A013966 - sum of 18th powers of divisors of n, simga-18(n)](https://oeis.org/A013966) - `a013966` - `create_sequence_a013966/1`
+   - [A013967 - sum of 19th powers of divisors of n, simga-19(n)](https://oeis.org/A013967) - `a013967` - `create_sequence_a013967/1`
+   - [A013968 - sum of 20th powers of divisors of n, simga-20(n)](https://oeis.org/A013968) - `a013968` - `create_sequence_a013968/1`
   
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
