@@ -4,9 +4,10 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   ## Available Sequences
 
+   - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
-
+  
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
   
@@ -304,6 +305,19 @@ defmodule Chunky.Sequence.OEIS.Core do
   
   @doc """
   
+  OEIS Sequence `A000593` - Sum of Odd Divisors of N
+
+  From [OEIS A000593](https://oeis.org/A000593):
+
+  > Sum of odd divisors of n. 
+  > (Formerly M3197 N1292)
+
+  **Sequence IDs**: `:a000593`
+
+  **Finite**: False
+  
+  **Offset**: 1
+  
   ## Example
   
       iex> Sequence.create(Sequence.OEIS.Core, :a000593) |> Sequence.take!(10)
@@ -324,5 +338,71 @@ defmodule Chunky.Sequence.OEIS.Core do
       |> Enum.filter(&Integer.is_odd/1)
       |> Enum.uniq()
       |> Enum.sum()
+  end
+  
+  
+  @doc """
+  OEIS Sequence `A000009` - Number of partitions of n into distinct parts
+
+  From [OEIS A000009](https://oeis.org/A000009):
+
+  > Expansion of Product_{m >= 1} (1 + x^m); number of partitions of n into distinct parts; number of partitions of n into odd parts (if n > 0). 
+  > (Formerly M0281 N0100)
+  
+  ## Divergence
+  
+  Calculation of this sequence is based on translation of a Maxima program by [Vladimir Kruchinin](http://oeis.org/wiki/User:Vladimir_Kruchinin),
+  and diverges from canonical results for `n > 10`.
+  
+  **Sequence IDs**: `:a000009`
+
+  **Finite**: False
+  
+  **Offset**: 0
+  
+  ## Example
+  
+      iex> Sequence.create(Sequence.OEIS.Core, :a000009) |> Sequence.take!(10)
+      [1, 1, 1, 2, 2, 3, 4, 5, 6, 8]
+  """
+  @doc sequence: "Number of partitions of n into distinct parts", references: [{:oeis, :a000009, "http://oeis.org/A000009"}]
+  def create_sequence_a000009(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000009/1)
+  end
+  
+  def seq_a000009(idx) do
+      seq_a000009_s(idx, 1)
+  end
+  
+  defp seq_a000009_h(n) do
+     if Integer.is_odd(n) do
+         1
+     else
+         0
+     end 
+  end
+  
+  defp seq_a000009_s(n, m) do
+     if n == 0 do
+         1
+     else
+         if n < m do
+            0 
+         else
+             if n == m do
+                seq_a000009_h(n) 
+             else
+                 v = m..div(n, 2)
+                 |> Enum.map(
+                     fn k -> 
+                         seq_a000009_h(k) * seq_a000009_s(n - k, k)
+                     end
+                 ) 
+                 |> Enum.sum() 
+                 
+                 v + seq_a000009_h(n)
+             end
+         end
+     end 
   end
 end

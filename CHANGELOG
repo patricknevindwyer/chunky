@@ -18,6 +18,7 @@
 ### Changes/Refactorizations
 
 ### Enhancements
+
  - Chunk.Sequence
   - sequences are now marked as finite or infinite (as computable/stored in Squence library)
   - sequences can now have initial index/offset other than 0 (like A000593)
@@ -27,6 +28,7 @@
 ### New Sequences
 
  - A000593 - Sum of Odd Divisors of N
+ - A000009 - Number of partitions of n into distinct parts
  
  
 ## v0.7.0
