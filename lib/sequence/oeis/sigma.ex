@@ -9,6 +9,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
    - [A001158 - Sum of cubes of divisors of N, simga-3(n)](https://oeis.org/A001158) - `:a001158` - `create_sequence_a001158/1`
    - [A001159 - sum of 4th powers of divisors of n, simga-4(n)](https://oeis.org/A001159) - `a001159` - `create_sequence_a001159/1`
    - [A001160 - sum of 5th powers of divisors of n, simga-5(n)](https://oeis.org/A001160) - `a001160` - `create_sequence_a001160/1`
+   - [A003601 - Arithmetic Numbers](https://oeis.org/A003601) - `a003601` - `create_sequence_a003601/1`
    - [A013954 - sum of 6th powers of divisors of n, simga-6(n)](https://oeis.org/A013954) - `a013954` - `create_sequence_a013954/1`
    - [A013955 - sum of 7th powers of divisors of n, simga-7(n)](https://oeis.org/A013955) - `a013955` - `create_sequence_a013955/1`
    - [A013956 - sum of 8th powers of divisors of n, simga-8(n)](https://oeis.org/A013956) - `a013956` - `create_sequence_a013956/1`
@@ -123,6 +124,45 @@ defmodule Chunky.Sequence.OEIS.Sigma do
   @doc offset: 1
   def seq_a001160(idx) do
     Math.sigma(idx, 5)
+  end
+
+  @doc """
+  OEIS Sequence `A003601` - Arithmetic Numbers
+
+  From [OEIS A003601](https://oeis.org/A003601):
+
+  > Numbers n such that the average of the divisors of n is an integer: sigma_0(n) divides sigma_1(n). Alternatively, tau(n) (A000005(n)) divides sigma(n) (A000203(n)). 
+  > (Formerly M2389)
+  
+  **Sequence IDs**: `:a003601`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Sigma, :a003601) |> Sequence.take!(10)
+      [1, 3, 5, 6, 7, 11, 13, 14, 15, 17]
+  
+  """
+  @doc offset: 1, sequence: "Numbers n such that the average of the divisors of n is an integer", references: [{:oeis, :a003601, "https://oeis.org/A003601"}]
+  def create_sequence_a003601(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a003601/2)
+  end
+  
+  @doc offset: 1
+  def seq_a003601(_idx, last) do
+      next_seq_a003601(last)
+  end
+  
+  defp next_seq_a003601(last) do
+      divs = Math.factors(last + 1)
+      if rem(divs |> Enum.sum(), length(divs)) == 0 do
+          last + 1
+      else
+          next_seq_a003601(last + 1)
+      end
   end
 
   @doc """

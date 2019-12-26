@@ -171,6 +171,14 @@ defmodule Chunky.SequenceDataTest do
     },
     %{
       module: Chunky.Sequence.OEIS.Sigma,
+      sequence: :a003601,
+      opts: [],
+      values: [1, 3, 5, 6, 7, 11, 13, 14, 15, 17],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013954,
       opts: [],
       values: [1, 65, 730, 4161, 15626, 47450, 117_650, 266_305, 532_171, 1_015_690],

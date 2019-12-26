@@ -26,12 +26,14 @@
   - is_deficient?/1 - Is a number `n` a deficient number
   - next_deficient/1 - Find the next deficient number
   
+  
 ### New Sequences
  
  - A001065 - Aliquot parts of N
  - A005101 - Abundant Numbers
  - A000396 - Perfect Numbers
  - A005100 - Deficient Numbers
+ - A003601 - Arithmetic Numbers
 
 ## v0.8.0
 
