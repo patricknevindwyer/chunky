@@ -29,6 +29,7 @@
   - aliquot_sum/1 - Aliquot Sum of `n`
   - is_highly_abundant?/1` - Is a number `n` highly abundant?
   - is_powerful_number?/1 - Is a number `n` a powerful number?
+  - product_of_prime_factors/1 - Number theoretical function for product of prime factor exponents of `n`
   
 ### New Sequences
  
@@ -40,6 +41,7 @@
  - A002093 - Highly Abundant Numbers
  - Added Sequences.OEIS.Factors module
  - A001694 - Powerful Numbers
+ - A005361 - Product of Prime Exponents of factors of N
 
 ## v0.8.0
 

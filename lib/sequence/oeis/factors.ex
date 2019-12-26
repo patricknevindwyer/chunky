@@ -69,19 +69,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
   end
   
   @doc offset: 1
-  def seq_a005361(idx) do
-      
-      # find the prime factors
-      Math.prime_factors(idx) 
-     
-      # group by factor - this is effectively finding the exponent of the factor
-      |> Enum.group_by(fn i -> i end) 
-     
-      # map to the length of the group (extract the exponent)
-      |> Enum.map(fn {_base, exp} -> length(exp) end)
-     
-      # multiply
-      |> Enum.reduce(1, fn x, acc -> x * acc end)
+  def seq_a005361(idx) do      
+      Math.product_of_prime_factor_exponents(idx)
   end
 
 end

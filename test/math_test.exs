@@ -4,6 +4,24 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "product_of_prime_factor_exponents/1" do
+      test "1" do
+          assert Math.product_of_prime_factor_exponents(1) == 1
+      end
+      
+      test "8" do
+          assert Math.product_of_prime_factor_exponents(8) == 3
+      end
+      
+      test "134" do
+          assert Math.product_of_prime_factor_exponents(135) == 3
+      end
+      
+      test "100000" do
+          assert Math.product_of_prime_factor_exponents(100000) == 25
+      end    
+  end
+  
   describe "is_powerful_number?/1" do
       test "1" do
           assert Math.is_powerful_number?(1)
