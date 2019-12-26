@@ -235,6 +235,30 @@ defmodule Chunky.Sequence.OEIS do
     length(covered) / length(mapped_seq)
   end
 
+  def coverage() do
+      [
+          {Sequence.OEIS, :keyword_core}
+      ]
+      |> Enum.map(
+          fn {s_mod, s_key} -> 
+              
+              # get coverage
+              seq = Sequence.create(s_mod, s_key)
+              cov = seq |> coverage()
+              
+              # get name
+              nom = seq |> Sequence.readable_name()
+              
+              {nom, cov}
+          end
+      )
+      |> Enum.each(
+          fn {nom, cov} -> 
+              IO.puts("Sequence #{nom} - #{cov * 100.0 |> Float.round(2)}%")
+          end
+      )
+  end
+  
   @doc """
   OEIS Sequence `A000045` - Fibonacci numbers
 
