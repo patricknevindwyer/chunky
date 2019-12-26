@@ -19,12 +19,16 @@ defmodule Chunky.Math do
    - `is_abundant?/1` - Test if an integer is _abundant_
    - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
+   - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `sigma/2` - Generalized Sigma function for integers
    - `next_abundant/1` - Find the next abundant number after `n`
    - `next_deficient/1` - Find the next deficient number after `n`
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
   
+  ## Number Generation
+  
+   - `next_number/2` - Use a number theory predicate to find the next integer in a sequence
   """
 
   require Integer
@@ -396,6 +400,63 @@ defmodule Chunky.Math do
      sigma(n) < (2 * n) 
   end
 
+  @doc """
+  Determine if an integer `n` is a _powerful number_.
+  
+  A _powerful number_ is an integer `n` such that for all _prime factors_ `m` of `n`,
+  `m^2` also evenly divides `n`. Alternatively, a _powerful number_ `n` can be written
+  as `n = a^2 * b^3` for positive integers `a` and `b`; `n` is the product of a square
+  and a cube.
+  
+  ## Examples
+  
+      iex> Math.is_powerful_number?(8)
+      true
+  
+      iex> Math.is_powerful_number?(10)
+      false
+  
+      iex> Math.is_powerful_number?(800)
+      true
+  
+      iex> Math.is_powerful_number?(970)
+      false
+  """
+  def is_powerful_number?(n) when is_integer(n) and n > 0 do
+      
+      p_fs = prime_factors(n) |> Enum.uniq()
+      
+      # walk through the prime factors and filter out to those that aren't
+      # also squared factors such that n % p_f^2 == 0
+      p_fs
+      |> Enum.filter(
+          fn p_f -> 
+              rem(n, p_f * p_f) != 0
+          end
+      )
+      |> length() == 0
+  end
+  
+  @doc """
+  Apply a number theoretic property test to integers to find the next number
+  in a sequence.
+  
+  ## Examples
+  
+      iex> Math.next_number(&Math.is_powerful_number?/1, 49)
+      64
+  
+      iex> Math.next_number(&Math.is_abundant?/1, 60)
+      66
+  """
+  def next_number(property_func, n) when is_function(property_func, 1) and is_integer(n) and n >= 0 do
+      if property_func.(n + 1) do
+          n + 1
+      else
+          next_number(property_func, n + 1)
+      end
+  end
+  
   @doc """
   Find the next deficient number after `n`.
   

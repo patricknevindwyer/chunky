@@ -9,7 +9,8 @@ defmodule Chunky.SequenceDataTest do
   doctest Chunky.Sequence.OEIS
   doctest Chunky.Sequence.OEIS.Core
   doctest Chunky.Sequence.OEIS.Sigma
-
+  doctest Chunky.Sequence.OEIS.Factors
+  
   @sequences [
     # Sequence.Basic
     %{
@@ -448,6 +449,17 @@ defmodule Chunky.SequenceDataTest do
       finite: false,
       first_index: 1
     },
+    
+    # Sequence.OEIS.Factors
+    %{
+      module: Chunky.Sequence.OEIS.Factors,
+      sequence: :a001694,
+      opts: [],
+      values: [1, 4, 8, 9, 16, 25, 27, 32, 36, 49],
+      finite: false,
+      first_index: 1
+    },
+    
 
     # Sequence.Test
     %{

@@ -28,6 +28,7 @@
   - is_arithmetic_number?/1 - Is a number `n` an arithmetic number
   - aliquot_sum/1 - Aliquot Sum of `n`
   - is_highly_abundant?/1` - Is a number `n` highly abundant?
+  - is_powerful_number?/1 - Is a number `n` a powerful number?
   
 ### New Sequences
  
@@ -37,6 +38,8 @@
  - A005100 - Deficient Numbers
  - A003601 - Arithmetic Numbers
  - A002093 - Highly Abundant Numbers
+ - Added Sequences.OEIS.Factors module
+ - A001694 - Powerful Numbers
 
 ## v0.8.0
 

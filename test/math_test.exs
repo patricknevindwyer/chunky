@@ -4,6 +4,24 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_powerful_number?/1" do
+      test "1" do
+          assert Math.is_powerful_number?(1)
+      end
+      
+      test "48" do
+          assert Math.is_powerful_number?(48) == false
+      end
+      
+      test "49" do
+          assert Math.is_powerful_number?(49)
+      end
+      
+      test "972" do
+          assert Math.is_powerful_number?(972)
+      end
+  end
+  
   describe "is_highly_abundant?/1" do
       test "1" do
           assert Math.is_highly_abundant?(1)
