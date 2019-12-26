@@ -6,6 +6,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
    - [A001694 - Powerful Numbers](https://oeis.org/A001694) - `:a001694` - `create_sequence_a001694/1`
    - [A005361 - Product of Expoenents of prime factors of N](https://oeis.org/A005361) - `:a005361` - `create_sequence_a005361/1`
+   - [A005934 - Highly powerful numbers: numbers with record value](https://oeis.org/A005934) - `:a005934` - `create_sequence_a005934/1`
   
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
@@ -73,4 +74,64 @@ defmodule Chunky.Sequence.OEIS.Factors do
       Math.product_of_prime_factor_exponents(idx)
   end
 
+  @doc """
+  OEIS Sequence `A005934` - Highly powerful numbers: numbers with record value
+
+  From [OEIS A005934](https://oeis.org/A005934):
+
+  > Highly powerful numbers: numbers with record value of the product of the exponents in prime factorization (A005361). 
+  > (Formerly M3333)
+    
+  **Sequence IDs**: `:a005934`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a005934) |> Sequence.take!(20)
+      [1, 4, 8, 16, 32, 64, 128, 144, 216, 288, 432, 864, 1296, 1728, 2592, 3456, 5184, 7776, 10368, 15552]
+  """
+  @doc offset: 1, sequence: "Highly powerful numbers: numbers with record value", references: [{:oeis, :a005934, "https://oeis.org/A005934"}, {:wikipedia, :highly_powerful_number, "https://en.wikipedia.org/wiki/Highly_powerful_number"}]
+  def create_sequence_a005934(_opts) do
+      %{
+          next_fn: &seq_a005934/3,
+          data: %{
+              ppfe_max: 0
+          }
+      }      
+  end
+    
+  defp seq_a005934(:init, data, _value) do
+      %{
+          data: data,
+          value: 0
+      }
+  end
+  
+  defp seq_a005934(:next, data, value) do
+      
+      # find the next number after value that has a sigma greater than sigma max
+      s_m = data.ppfe_max
+      s_n = seq_a005934_greater_ppfe(s_m, value + 1)
+      next_ppfe_max = Math.product_of_prime_factor_exponents(s_n)
+      
+      {
+          :continue,
+          %{
+              data: data |> Map.put(:ppfe_max, next_ppfe_max),
+              value: s_n
+          }
+      }
+  end
+  
+  defp seq_a005934_greater_ppfe(ppfe_max, val) do
+     if Math.product_of_prime_factor_exponents(val) > ppfe_max do
+         val
+     else
+         seq_a005934_greater_ppfe(ppfe_max, val + 1)
+     end 
+  end
+  
 end

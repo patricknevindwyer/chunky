@@ -21,6 +21,7 @@ defmodule Chunky.Math do
    - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
+   - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `sigma/2` - Generalized Sigma function for integers
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
@@ -332,7 +333,7 @@ defmodule Chunky.Math do
   
       iex> Math.is_highly_abundant?(1)
       true
-  
+        
       iex> Math.is_highly_abundant?(5)
       false
   
@@ -352,6 +353,43 @@ defmodule Chunky.Math do
       1..n - 1
       |> Enum.filter(fn m -> sigma(m) > s_n end)
       |> length() == 0
+  end
+  
+  @doc """
+  Check if a number `n` is a _highly powerful number_.
+  
+  Highly powerful numbers are similar in concept to highly _abundant_ numbers. For highly powerful numbers,
+  the product of the exponents of prime factors of the number `n` need to be greater than the same property
+  for any number `m`, such that `0 < m < n`.
+  
+  If you need a _sequence_ of highly powerful numbers, use the `A005934` sequence in `Chunky.Sequence.OEIS.Factors`, which
+  uses an max/compare method for building the sequence, which is _vastly_ more efficient than repeated
+  calls to `is_highly_powerful_number?/1`.
+  
+  See also `is_powerful_number?/1`, and [Highly powerful number](https://en.wikipedia.org/wiki/Highly_powerful_number).
+  
+  ## Examples
+  
+      iex> Math.is_highly_powerful_number?(4)
+      true
+  
+      iex> Math.is_highly_powerful_number?(256)
+      false
+      
+      iex> Math.is_highly_powerful_number?(62208)
+      true
+  """
+  def is_highly_powerful_number?(1), do: true
+  def is_highly_powerful_number?(n) when is_integer(n) and n > 1 do
+      
+      # find prod of prim factors exponents for N
+      ppfe_n = product_of_prime_factor_exponents(n)
+      
+      # check all previous values, and compare
+      1..n - 1
+      |> Enum.filter(fn m -> product_of_prime_factor_exponents(m) >= ppfe_n end)
+      |> length() == 0
+      
   end
   
   @doc """

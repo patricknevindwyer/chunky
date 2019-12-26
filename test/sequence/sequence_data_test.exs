@@ -459,12 +459,19 @@ defmodule Chunky.SequenceDataTest do
       finite: false,
       first_index: 1
     },
-    
     %{
       module: Chunky.Sequence.OEIS.Factors,
       sequence: :a005361,
       opts: [],
       values: [	1, 1, 1, 2, 1, 1, 1, 3, 2, 1],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Factors,
+      sequence: :a005934,
+      opts: [],
+      values: [1, 4, 8, 16, 32, 64, 128, 144, 216, 288],
       finite: false,
       first_index: 1
     },

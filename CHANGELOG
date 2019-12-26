@@ -30,6 +30,7 @@
   - is_highly_abundant?/1` - Is a number `n` highly abundant?
   - is_powerful_number?/1 - Is a number `n` a powerful number?
   - product_of_prime_factors/1 - Number theoretical function for product of prime factor exponents of `n`
+  - is_highly_powerful_number?/1 - Is a number a _highly powerful_ number?
   
 ### New Sequences
  
@@ -42,6 +43,7 @@
  - Added Sequences.OEIS.Factors module
  - A001694 - Powerful Numbers
  - A005361 - Product of Prime Exponents of factors of N
+ - A005934 - Highly powerful numbers: numbers with record value
 
 ## v0.8.0
 
