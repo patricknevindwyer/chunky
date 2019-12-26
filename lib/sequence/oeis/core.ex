@@ -10,8 +10,10 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000079) - `:a000203` - `create_sequence_a000203/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
+   - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
-
+   - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
+  
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
   alias Chunky.Math
@@ -506,6 +508,36 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A001065` - Sum of proper divisors (Aliquot parts) of N.
+
+  From [OEIS A001065](https://oeis.org/A001065):
+
+  > Sum of proper divisors (or aliquot parts) of n: sum of divisors of n that are less than n. 
+  > (Formerly M2226 N0884)
+  
+  **Sequence IDs**: `:a001065`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Core, :a001065) |> Sequence.take!(20)
+      [0, 1, 1, 3, 1, 6, 1, 7, 4, 8, 1, 16, 1, 10, 9, 15, 1, 21, 1, 22]
+
+  """
+  @doc offset: 1, sequence: "Aliquot parts of N", references: [{:oeis, :a001065, "https://oeis.org/A001065"}]
+  def create_sequence_a001065(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001065/1)
+  end
+  
+  @doc offset: 1
+  def seq_a001065(idx) do
+      Math.factors(idx) -- [idx] |> Enum.sum()
+  end
+
+  @doc """
   OEIS Sequence `A001157` - Sum of squares of divisors of N, simga-2(n), `𝝈2(n)`.
 
   From [OEIS A001157](https://oeis.org/A001157):
@@ -536,4 +568,36 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a001157(idx) do
     Math.sigma(idx, 2)
   end
+  
+  @doc """
+  OEIS Sequence `A005101` - Abundant Numbers
+
+  From [OEIS A005101](https://oeis.org/A005101):
+
+  > Abundant numbers (sum of divisors of n exceeds 2n). 
+  > (Formerly M4825)
+  
+  **Sequence IDs**: `:a005101`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Core, :a005101) |> Sequence.take!(10)
+      [12, 18, 20, 24, 30, 36, 40, 42, 48, 54]
+  
+  """
+  @doc offset: 1, sequence: "Abundant Numbers", references: [{:oeis, :a005101, "http://oeis.org/A005101"}]
+  def create_sequence_a005101(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005101/2)
+  end
+  
+  @doc offset: 1, fill_value: 1
+  def seq_a005101(_idx, last) do
+      Math.next_abundant(last)
+  end
+  
+
 end

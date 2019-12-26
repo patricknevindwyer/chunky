@@ -199,6 +199,55 @@ defmodule Chunky.Math do
       _ -> miller_rabin?(i, 40)
     end
   end
+  
+  @doc """
+  Determine if an integer is _abundant_. 
+  
+  An abundant number is an integer `n`, such that the sum of all proper divisors of `n` (including itself)
+  is greater than `2 * n`. 
+  
+  Alternatively, an abundant number is a number that satisfies: `𝜎(n) > 2n`
+  
+  ## Examples
+  
+      iex> Math.is_abundant?(3)
+      false
+      
+      iex> Math.is_abundant?(12)
+      true
+      
+      iex> Math.is_abundant?(945)
+      true
+  
+  """
+  def is_abundant?(n) when is_integer(n) and n > 0 do
+     sigma(n) > (2 * n) 
+  end
+  
+  @doc """
+  Find the next abundant number after `n`.
+  
+  ## Examples
+  
+      iex> Math.next_abundant(1)
+      12
+  
+      iex> Math.next_abundant(12)
+      18
+  
+      iex> Math.next_abundant(60)
+      66
+  
+      iex> Math.next_abundant(264)
+      270
+  """
+  def next_abundant(n) when is_integer(n) and n > 0 do
+      if is_abundant?(n + 1) do
+          n + 1
+      else
+          next_abundant(n + 1)
+      end
+  end
 
   @doc """
   Integer power/exponentiation in Modular Arithmetic.

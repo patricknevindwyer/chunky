@@ -4,6 +4,43 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_abundant?/1" do
+      test "1" do
+          assert Math.is_abundant?(1) == false
+      end
+      
+      test "12" do
+          assert Math.is_abundant?(12)          
+      end
+      
+      test "60" do
+          assert Math.is_abundant?(60)          
+      end
+      
+      test "252" do
+          assert Math.is_abundant?(252)
+      end
+      
+      test "945" do
+          assert Math.is_abundant?(945)          
+      end
+  end
+  
+  describe "next_abundant/1" do
+      
+      test "1" do
+          assert Math.next_abundant(1) == 12
+      end
+      
+      test "12" do
+          assert Math.next_abundant(12) == 18
+      end
+      
+      test "144" do
+          assert Math.next_abundant(144) == 150          
+      end
+  end
+  
   describe "pow/2" do
     test "-2^3" do
       assert Math.pow(-2, 3) == -8
