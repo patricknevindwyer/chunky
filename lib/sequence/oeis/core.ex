@@ -6,6 +6,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
    - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
+   - [A000079 - Powers of 2](http://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
   
   """
@@ -405,4 +406,34 @@ defmodule Chunky.Sequence.OEIS.Core do
          end
      end 
   end
+  
+  @doc """
+  OEIS Sequence `A000079` - Powers of 2 `a(n) = 2^n`
+
+  From [OEIS A000009](https://oeis.org/A000009):
+
+  > Powers of 2: a(n) = 2^n. 
+  > (Formerly M1129 N0432)  
+    
+  **Sequence IDs**: `:a000079`
+
+  **Finite**: False
+  
+  **Offset**: 0
+  
+  ## Example
+  
+      iex> Sequence.create(Sequence.OEIS.Core, :a000079) |> Sequence.take!(20)
+      [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288]
+  
+  """
+  @doc sequence: "Powers of 2: a(n) = 2^n", references: [{:oeis, :a000079, "http://oeis.org/A000079"}]
+  def create_sequence_a000079(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000079/1)
+  end
+  
+  def seq_a000079(idx) do
+     :math.pow(2, idx) |> Kernel.trunc() 
+  end
+  
 end
