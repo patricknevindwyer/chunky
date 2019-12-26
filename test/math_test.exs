@@ -4,6 +4,48 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+
+  describe "factors/1" do
+      test "1" do
+          assert Math.factors(1) == [1]
+      end
+      
+      test "small prime" do
+          assert Math.factors(17) == [1, 17]
+      end
+      
+      test "small composite" do
+          assert Math.factors(24) == [1, 2, 3, 4, 6, 8, 12, 24]
+      end
+      
+      test "large prime" do
+          assert Math.factors(5_915_587_277) == [1, 5_915_587_277]
+      end
+      
+      test "large composite" do
+          assert Math.factors(12345678) == [1, 2, 3, 6, 9, 18, 47, 94, 141, 282, 423, 846, 14593, 29186, 43779, 87558, 131337, 262674, 685871, 1371742, 2057613, 4115226, 6172839, 12345678]
+      end
+  end
+  
+  describe "sigma/1" do
+      
+      test "1" do
+          assert Math.sigma(1) == 1
+      end
+      
+      test "8" do
+          assert Math.sigma(8) == 15
+      end
+      
+      test "70" do
+          assert Math.sigma(70) == 144
+      end
+      
+      test "100_000" do
+          assert Math.sigma(100000) == 246078
+      end
+  end
+  
   describe "prime_factors/1" do
     test "1" do
       assert Math.prime_factors(1) == [1]
