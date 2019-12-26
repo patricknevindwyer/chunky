@@ -9,6 +9,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
    - [A001158 - Sum of cubes of divisors of N, simga-3(n)](https://oeis.org/A001158) - `:a001158` - `create_sequence_a001158/1`
    - [A001159 - sum of 4th powers of divisors of n, simga-4(n)](https://oeis.org/A001159) - `a001159` - `create_sequence_a001159/1`
    - [A001160 - sum of 5th powers of divisors of n, simga-5(n)](https://oeis.org/A001160) - `a001160` - `create_sequence_a001160/1`
+   - [A002093 - Highly Abundant Numbers](https://oeis.org/A002093) - `a002093` - `create_sequence_a002093/1`
    - [A003601 - Arithmetic Numbers](https://oeis.org/A003601) - `a003601` - `create_sequence_a003601/1`
    - [A013954 - sum of 6th powers of divisors of n, simga-6(n)](https://oeis.org/A013954) - `a013954` - `create_sequence_a013954/1`
    - [A013955 - sum of 7th powers of divisors of n, simga-7(n)](https://oeis.org/A013955) - `a013955` - `create_sequence_a013955/1`
@@ -126,6 +127,67 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     Math.sigma(idx, 5)
   end
 
+  @doc """
+  OEIS Sequence `A002093` - Highly Abundant Numbers
+
+  From [OEIS A002093](https://oeis.org/A002093):
+
+  > Highly abundant numbers: numbers n such that sigma(n) > sigma(m) for all m < n. 
+  > (Formerly M0553 N0200)
+  
+  **Sequence IDs**: `:a002093`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Sigma, :a002093) |> Sequence.take!(25)
+      [1, 2, 3, 4, 6, 8, 10, 12, 16, 18, 20, 24, 30, 36, 42, 48, 60, 72, 84, 90, 96, 108, 120, 144, 168]
+
+  """
+  @doc offset: 1, sequence: "Highly abundant numbers", references: [{:oeis, :a002093, "https://oeis.org/A002093"}, {:wikipedia, :highly_abundant_number, "https://en.wikipedia.org/wiki/Highly_abundant_number"}]
+  def create_sequence_a002093(_opts) do
+      %{
+          next_fn: &seq_a002093/3,
+          data: %{
+              sigma_max: 0
+          }
+      }
+  end
+  
+  def seq_a002093(:init, data, _value) do
+      %{
+          data: data,
+          value: 0
+      }
+  end
+  
+  def seq_a002093(:next, data, value) do
+      
+      # find the next number after value that has a sigma greater than sigma max
+      s_m = data.sigma_max
+      s_n = seq_a002093_greater_sigma(s_m, value + 1)
+      next_sigma_max = Math.sigma(s_n)
+      
+      {
+          :continue,
+          %{
+              data: data |> Map.put(:sigma_max, next_sigma_max),
+              value: s_n
+          }
+      }
+  end
+  
+  defp seq_a002093_greater_sigma(sig_max, val) do
+     if Math.sigma(val) > sig_max do
+         val
+     else
+         seq_a002093_greater_sigma(sig_max, val + 1)
+     end 
+  end
+  
   @doc """
   OEIS Sequence `A003601` - Arithmetic Numbers
 

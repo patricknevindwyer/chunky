@@ -27,6 +27,7 @@
   - next_deficient/1 - Find the next deficient number
   - is_arithmetic_number?/1 - Is a number `n` an arithmetic number
   - aliquot_sum/1 - Aliquot Sum of `n`
+  - is_highly_abundant?/1` - Is a number `n` highly abundant?
   
 ### New Sequences
  
@@ -35,6 +36,7 @@
  - A000396 - Perfect Numbers
  - A005100 - Deficient Numbers
  - A003601 - Arithmetic Numbers
+ - A002093 - Highly Abundant Numbers
 
 ## v0.8.0
 
