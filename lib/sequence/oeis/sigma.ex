@@ -157,8 +157,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
   end
   
   defp next_seq_a003601(last) do
-      divs = Math.factors(last + 1)
-      if rem(divs |> Enum.sum(), length(divs)) == 0 do
+      if Math.is_arithmetic_number?(last + 1) do
           last + 1
       else
           next_seq_a003601(last + 1)

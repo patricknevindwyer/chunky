@@ -25,7 +25,7 @@
   - is_perfect?/1 - Is a number `n` a perfect number
   - is_deficient?/1 - Is a number `n` a deficient number
   - next_deficient/1 - Find the next deficient number
-  
+  - is_arithmetic_number?/1 - Is a number `n` an arithmetic number
   
 ### New Sequences
  

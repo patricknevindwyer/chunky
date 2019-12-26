@@ -27,7 +27,7 @@
  - TODO: nPr
   
  - Additions
-  - add OEIS sigma-2 through sigma-20
+  - add Sigma-21 through 24
   - add an OEIS.Factors module
  
   - Sequence.drop(seq, quant)
@@ -40,15 +40,13 @@
  - Modulo Arithmetic
   
  - Sequences
-
-   - documentation
-    - better top docs for all sequences
-     - link to main sequence docs
-     - examples
-     - annotate every function
-     - generic annotation for `seq_*` type functions (or skip docs annotation)
+  - Future Sequences
+   - https://oeis.org/A005237 - Numbers n such that n and n+1 have the same number of divisors.
+   - Divisor sequences - https://en.wikipedia.org/wiki/Category:Divisor_function
 
  - Math module
+  - add next_arithmetic_number/1 from OEIS 3601 impl
+ 
   - factorization
    - x prime factorization
    - all factorizations

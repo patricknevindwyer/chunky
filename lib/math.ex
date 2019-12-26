@@ -22,6 +22,7 @@ defmodule Chunky.Math do
    - `is_perfect?/1` - Test if an integer is _perfect_
    - `is_abundant?/1` - Test if an integer is _abundant_
    - `is_deficient?/1` - Test if an integer is _deficient_
+   - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
   
   
   """
@@ -207,6 +208,28 @@ defmodule Chunky.Math do
       3 -> true
       _ -> miller_rabin?(i, 40)
     end
+  end
+  
+  @doc """
+  Determine if an integer is an _arithmetic number_.
+  
+  An arithmetic number `n` such that the average of the sum of the proper divisors of `n` is
+  a whole integer. Alternatively, `n` that satisfy `𝜎(n) / 𝜏(n) == 0`.
+  
+  ## Examples
+  
+      iex> Math.is_arithmetic_number?(11)
+      true
+      
+      iex> Math.is_arithmetic_number?(32)
+      false
+      
+      iex> Math.is_arithmetic_number?(12953)
+      true
+  """
+  def is_arithmetic_number?(n) when is_integer(n) and n > 0 do
+      divs = Math.factors(n)
+      rem(divs |> Enum.sum(), length(divs)) == 0
   end
   
   @doc """

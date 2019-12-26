@@ -4,6 +4,20 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_arithmetic_number?/1" do
+      test "1" do
+          assert Math.is_arithmetic_number?(1)
+      end
+      
+      test "12910" do
+          assert Math.is_arithmetic_number?(12910)          
+      end
+      
+      test "12916" do
+          assert Math.is_arithmetic_number?(12916) == false
+      end
+  end
+  
   describe "is_perfect?/1" do
       test "1" do
           assert Math.is_perfect?(1) == false
