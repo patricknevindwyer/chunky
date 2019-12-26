@@ -13,7 +13,7 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.8.0
 
 ### Changes/Refactorizations
 
@@ -26,7 +26,9 @@
    - `is_finite?/1` - Is a sequence finite or infinite is sequence library?
  - Chunky.Math
   - `factors/1` - All divisors of N
-  - `sigma/1` - Sigma function of factors of N
+  - `sigma/1` - Sigma-1 function of factors of N
+  - `sigma/2` - Generalized Sigma function
+  - `pow/2` - Pure integer exponentiation
   
 ### New Sequences
 
@@ -34,6 +36,8 @@
  - A000009 - Number of partitions of n into distinct parts
  - A000079 - Powers of 2
  - A000203 - Sigma-1 of N
+ - A001057 through A001060 - sigma2 through sigma5 of N
+ - A013954 through A013968 - sigma6 through sigma20 of N
  
  
 ## v0.7.0

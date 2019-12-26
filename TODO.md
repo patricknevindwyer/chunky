@@ -27,6 +27,9 @@
  - TODO: nPr
   
  - Additions
+  - add OEIS sigma-2 through sigma-20
+  - add an OEIS.Factors module
+ 
   - Sequence.drop(seq, quant)
   - Sequence.at(seq, idx)
   - add Math.partition(int) for [0, 250] - use sequence a000041
