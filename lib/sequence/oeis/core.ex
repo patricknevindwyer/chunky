@@ -569,7 +569,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   
   @doc offset: 1
   def seq_a001065(idx) do
-      Math.factors(idx) -- [idx] |> Enum.sum()
+      Math.aliquot_sum(idx)
   end
 
   @doc """
