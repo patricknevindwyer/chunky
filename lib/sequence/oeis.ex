@@ -1,6 +1,14 @@
 defmodule Chunky.Sequence.OEIS do
   @moduledoc """
   Online Encyclopedia of Integer Sequences (OEIS) sequence iterators.
+  
+  Supported sequences are broken down into modules based on OEIS Keyword, subject matter, or 
+  related methods.
+  
+  ## Available Modules
+  
+   - `Sequence.OEIS.Core` - OEIS `core` Keyword sequences
+   - `Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
 
   ## Available Sequences
 
