@@ -10,6 +10,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000079) - `:a000203` - `create_sequence_a000203/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
+   - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
   
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -497,5 +498,34 @@ defmodule Chunky.Sequence.OEIS.Core do
       |> Enum.uniq()
       |> Enum.sum()
   end
+
+  @doc """
+  OEIS Sequence `A001157` - Sum of squares of divisors of N, simga-2(n), `𝝈2(n)`.
+
+  From [OEIS A001157](https://oeis.org/A001157):
+
+  > sigma_2(n): sum of squares of divisors of n. 
+  > (Formerly M3799 N1551)  
   
+  **Sequence IDs**: `:a001157`
+
+  **Finite**: False
+  
+  **Offset**: 1
+  
+  ## Example
+  
+      iex> Sequence.create(Sequence.OEIS.Core, :a001157) |> Sequence.take!(10)
+      [1, 5, 10, 21, 26, 50, 50, 85, 91, 130]
+  
+  """
+  @doc offset: 1, sequence: "Sum of squares of divisors of n, 𝝈2(n)", references: [{:oeis, :a001157, "https://oeis.org/A001157"}]
+  def create_sequence_a001157(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001157/1)
+  end
+  
+  @doc offset: 1
+  def seq_a001157(idx) do
+     Math.sigma(idx, 2) 
+  end  
 end
