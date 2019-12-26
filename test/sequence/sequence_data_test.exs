@@ -97,6 +97,14 @@ defmodule Chunky.SequenceDataTest do
     },
     %{
       module: Chunky.Sequence.OEIS.Core,
+      sequence: :a000396,
+      opts: [],
+      values: [6, 28, 496, 8128, 33550336, 8589869056, 137438691328, 2305843008139952128, 2658455991569831744654692615953842176, 191561942608236107294793378084303638130997321548169216],
+      finite: true,
+      first_index: 1
+    },    
+    %{
+      module: Chunky.Sequence.OEIS.Core,
       sequence: :a000593,
       opts: [],
       values: [1, 1, 4, 1, 6, 4, 8, 1, 13, 6],
@@ -116,6 +124,14 @@ defmodule Chunky.SequenceDataTest do
       sequence: :a001157,
       opts: [],
       values: [1, 5, 10, 21, 26, 50, 50, 85, 91, 130],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Chunky.Sequence.OEIS.Core,
+      sequence: :a005100,
+      opts: [],
+      values: [1, 2, 3, 4, 5, 7, 8, 9, 10, 11],
       finite: false,
       first_index: 1
     },

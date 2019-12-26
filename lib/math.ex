@@ -9,12 +9,21 @@ defmodule Chunky.Math do
   ## Integer Arithmetic
 
    - `factors/1` - All divisors for an integer
-   - `is_prime?/1` - Test if an integer is prime
    - `pow/2` - Integer exponentiation
    - `prime_factors/1` - Factorize an integer into prime factors
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `sigma/2` - Generalized Sigma function for integers
+   - `next_abundant/1` - Find the next abundant number after `n`
+   - `next_deficient/1` - Find the next deficient number after `n`
+  
+  ## Number Theory
 
+   - `is_prime?/1` - Test if an integer is prime
+   - `is_perfect?/1` - Test if an integer is _perfect_
+   - `is_abundant?/1` - Test if an integer is _abundant_
+   - `is_deficient?/1` - Test if an integer is _deficient_
+  
+  
   """
 
   require Integer
@@ -208,6 +217,8 @@ defmodule Chunky.Math do
   
   Alternatively, an abundant number is a number that satisfies: `𝜎(n) > 2n`
   
+  See also; `is_deficient?/1`, `is_perfect?/1`, `next_abundant/1`.
+  
   ## Examples
   
       iex> Math.is_abundant?(3)
@@ -226,6 +237,8 @@ defmodule Chunky.Math do
   
   @doc """
   Find the next abundant number after `n`.
+  
+  See `is_abundant?/1`.
   
   ## Examples
   
@@ -246,6 +259,85 @@ defmodule Chunky.Math do
           n + 1
       else
           next_abundant(n + 1)
+      end
+  end
+  
+  @doc """
+  Determine if an integer is a _perfect_ number.
+  
+  A perfect integer is an `n` where the sum of the proper divisors of `n` is equal to `n`. Alternatively,
+  an `n` that satisfies `𝜎(n) == 2n`.
+  
+  See also; `is_abundant?/1`, `is_deficient?/1`.
+  
+  ## Examples
+  
+      iex> Math.is_perfect?(5)
+      false
+      
+      iex> Math.is_perfect?(6)
+      true
+  
+      iex> Math.is_perfect?(20)
+      false
+      
+      iex> Math.is_perfect?(33550336)
+      true
+  """
+  def is_perfect?(n) when is_integer(n) and n > 0 do
+     sigma(n) == (2 * n) 
+  end
+  
+  @doc """
+  Determine if an integer is _deficient_.
+  
+  A deficient number is an integer `n`, such that the sum of all proper divisors of `n` (including itself)
+  is less than `2 * n`. 
+  
+  Alternatively, a deficient number is a number that satisfies: `𝜎(n) < 2n`
+  
+  See also; `is_abundant?/1`, `is_perfect?/1`, `next_deficient/1`.
+  
+  ## Examples
+  
+      iex> Math.is_deficient?(1)
+      true
+  
+      iex> Math.is_deficient?(71)
+      true
+  
+      iex> Math.is_deficient?(33550336)
+      false
+  
+      iex> Math.is_deficient?(60)
+      false
+  """
+  def is_deficient?(n) when is_integer(n) and n > 0 do
+     sigma(n) < (2 * n) 
+  end
+
+  @doc """
+  Find the next deficient number after `n`.
+  
+  See `is_deficient?/1`.
+  
+  ## Examples
+  
+      iex> Math.next_deficient(0)
+      1
+
+      iex> Math.next_deficient(5)
+      7
+
+      iex> Math.next_deficient(41)
+      43
+  
+  """
+  def next_deficient(n) when is_integer(n) and n >= 0 do
+      if is_deficient?(n + 1) do
+          n + 1
+      else
+          next_deficient(n + 1)
       end
   end
 

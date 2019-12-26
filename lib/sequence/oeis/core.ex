@@ -8,10 +8,12 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
-   - [A000203 - Sum of Divisors](https://oeis.org/A000079) - `:a000203` - `create_sequence_a000203/1`
+   - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
+   - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
+   - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
   
   """
@@ -274,6 +276,14 @@ defmodule Chunky.Sequence.OEIS.Core do
     213_636_919_820_625,
     230_793_554_364_681
   ]
+  
+  # raw data for A000396 - Perfect Numbers
+  @data_a000396 [
+      6,28,496,8128,33550336,8589869056,137438691328,
+      2305843008139952128,
+      2658455991569831744654692615953842176,
+      191561942608236107294793378084303638130997321548169216
+  ]
 
   @doc """
   OEIS Sequence `A000005` - Number of divisors of N, simga-0(n), `𝝈0(n)`.
@@ -470,6 +480,31 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000396` - Perfect Numbers
+
+  From [OEIS A000396](https://oeis.org/A000396):
+
+  > Perfect numbers n: n is equal to the sum of the proper divisors of n. 
+  > (Formerly M4186 N1744)
+  
+  **Sequence IDs**: `:a000396`
+
+  **Finite**: True
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Core, :a000396) |> Sequence.take!(5)
+      [6, 28, 496, 8128, 33550336]  
+  
+  """
+  @doc offset: 1, sequence: "Perfect Numbers", references: [{:oeis, :a000396, "http://oeis.org/A000396"}]
+  def create_sequence_a000396(_opts) do
+      sequence_for_list(@data_a000396)
+  end
+  
+  @doc """
 
   OEIS Sequence `A000593` - Sum of Odd Divisors of N
 
@@ -568,7 +603,37 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a001157(idx) do
     Math.sigma(idx, 2)
   end
+
+  @doc """
+  OEIS Sequence `A005100` - Deficient Numbers
+
+  From [OEIS A005100](https://oeis.org/A005100):
+
+  > Deficient numbers: numbers n such that sigma(n) < 2n. 
+  > (Formerly M0514)  
   
+  **Sequence IDs**: `:a005100`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Core, :a005100) |> Sequence.take!(25)
+      [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 19, 21, 22, 23, 25, 26, 27, 29, 31, 32]
+  
+  """
+  @doc offset: 1, sequence: "Deficient Numbers", references: [{:oeis, :a005100, "http://oeis.org/A005100"}]
+  def create_sequence_a005100(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005100/2)
+  end
+  
+  @doc offset: 1
+  def seq_a005100(_idx, last) do
+      Math.next_deficient(last)
+  end
+    
   @doc """
   OEIS Sequence `A005101` - Abundant Numbers
 

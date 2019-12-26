@@ -4,6 +4,65 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_perfect?/1" do
+      test "1" do
+          assert Math.is_perfect?(1) == false
+      end
+      
+      test "6" do
+          assert Math.is_perfect?(6)
+      end
+      
+      test "20" do
+          assert Math.is_perfect?(20) == false
+      end
+      
+      test "496" do
+          assert Math.is_perfect?(496)
+      end
+      
+      test "1024" do
+          assert Math.is_perfect?(1024) == false
+      end
+      
+      test "137438691328" do
+          assert Math.is_perfect?(137438691328)
+      end
+  end
+  
+  describe "is_deficient?/1" do
+      test "1" do
+          assert Math.is_deficient?(1)
+      end
+      
+      test "6" do
+          assert Math.is_deficient?(6) == false
+      end
+      
+      test "60" do
+          assert Math.is_deficient?(60) == false
+      end
+      
+      test "265" do
+          assert Math.is_deficient?(265)
+      end
+  end
+  
+  describe "next_deficient/1" do
+      
+      test "1" do
+          assert Math.next_deficient(1) == 2
+      end
+      
+      test "5" do
+          assert Math.next_deficient(5) == 7
+      end
+      
+      test "100" do
+          assert Math.next_deficient(100) == 101
+      end
+  end
+  
   describe "is_abundant?/1" do
       test "1" do
           assert Math.is_abundant?(1) == false

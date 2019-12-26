@@ -7,8 +7,8 @@ defmodule Chunky.Sequence.OEIS do
 
   ## Available Modules
 
-   - `Sequence.OEIS.Core` - OEIS `core` Keyword sequences
-   - `Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
+   - `Chunky.Sequence.OEIS.Core` - OEIS `core` Keyword sequences
+   - `Chunky.Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
 
   ## Available Sequences
 

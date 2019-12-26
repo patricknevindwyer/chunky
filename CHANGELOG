@@ -13,6 +13,26 @@
 
 # CHANGELOG
 
+## v0.*.*
+
+### Changes/Refactorizations
+
+### Enhancements
+
+ - Chunky.Math
+  - is_abundant?/1 - Is a number `n` an Abundant number
+  - next_abundant/1 - Find the next abundant number after `n`
+  - is_perfect?/1 - Is a number `n` a perfect number
+  - is_deficient?/1 - Is a number `n` a deficient number
+  - next_deficient/1 - Find the next deficient number
+  
+### New Sequences
+ 
+ - A001065 - Aliquot parts of N
+ - A005101 - Abundant Numbers
+ - A000396 - Perfect Numbers
+ - A005100 - Deficient Numbers
+
 ## v0.8.0
 
 ### Changes/Refactorizations
