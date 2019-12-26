@@ -9,7 +9,7 @@ defmodule Chunky.SequenceDataTest do
   doctest Chunky.Sequence.OEIS
   doctest Chunky.Sequence.OEIS.Core
   doctest Chunky.Sequence.OEIS.Sigma
-  
+
   @sequences [
     # Sequence.Basic
     %{
@@ -56,7 +56,7 @@ defmodule Chunky.SequenceDataTest do
       values: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34],
       finite: false
     },
-    
+
     # Sequence.OEIS.Core
     %{
       module: Chunky.Sequence.OEIS.Core,
@@ -77,7 +77,7 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Core,
       sequence: :a000041,
       opts: [],
-      values: [1,1,2,3,5,7,11,15,22,30],
+      values: [1, 1, 2, 3, 5, 7, 11, 15, 22, 30],
       finite: true
     },
     %{
@@ -111,7 +111,7 @@ defmodule Chunky.SequenceDataTest do
       finite: false,
       first_index: 1
     },
-    
+
     # Sequence.OEIS.Sigma
     %{
       module: Chunky.Sequence.OEIS.Sigma,
@@ -133,7 +133,7 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a001160,
       opts: [],
-      values: [1, 33, 244, 1057, 3126, 8052, 16808, 33825, 59293, 103158],
+      values: [1, 33, 244, 1057, 3126, 8052, 16808, 33825, 59293, 103_158],
       finite: false,
       first_index: 1
     },
@@ -141,7 +141,7 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013954,
       opts: [],
-      values: [1, 65, 730, 4161, 15626, 47450, 117650, 266305, 532171, 1015690],
+      values: [1, 65, 730, 4161, 15626, 47450, 117_650, 266_305, 532_171, 1_015_690],
       finite: false,
       first_index: 1
     },
@@ -149,7 +149,7 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013955,
       opts: [],
-      values: [1, 129, 2188, 16513, 78126, 282252, 823544, 2113665, 4785157, 10078254],
+      values: [1, 129, 2188, 16513, 78126, 282_252, 823_544, 2_113_665, 4_785_157, 10_078_254],
       finite: false,
       first_index: 1
     },
@@ -157,7 +157,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013956,
       opts: [],
-      values: [1, 257, 6562, 65793, 390626, 1686434, 5764802, 16843009, 43053283, 100390882],
+      values: [
+        1,
+        257,
+        6562,
+        65793,
+        390_626,
+        1_686_434,
+        5_764_802,
+        16_843_009,
+        43_053_283,
+        100_390_882
+      ],
       finite: false,
       first_index: 1
     },
@@ -165,7 +176,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013957,
       opts: [],
-      values: [1, 513, 19684, 262657, 1953126, 10097892, 40353608, 134480385, 387440173, 1001953638],
+      values: [
+        1,
+        513,
+        19684,
+        262_657,
+        1_953_126,
+        10_097_892,
+        40_353_608,
+        134_480_385,
+        387_440_173,
+        1_001_953_638
+      ],
       finite: false,
       first_index: 1
     },
@@ -173,7 +195,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013958,
       opts: [],
-      values: [1, 1025, 59050, 1049601, 9765626, 60526250, 282475250, 1074791425, 3486843451, 10009766650],
+      values: [
+        1,
+        1025,
+        59050,
+        1_049_601,
+        9_765_626,
+        60_526_250,
+        282_475_250,
+        1_074_791_425,
+        3_486_843_451,
+        10_009_766_650
+      ],
       finite: false,
       first_index: 1
     },
@@ -181,7 +214,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013959,
       opts: [],
-      values: [1, 2049, 177148, 4196353, 48828126, 362976252, 1977326744, 8594130945, 31381236757, 100048830174],
+      values: [
+        1,
+        2049,
+        177_148,
+        4_196_353,
+        48_828_126,
+        362_976_252,
+        1_977_326_744,
+        8_594_130_945,
+        31_381_236_757,
+        100_048_830_174
+      ],
       finite: false,
       first_index: 1
     },
@@ -189,7 +233,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013960,
       opts: [],
-      values: [1, 4097, 531442, 16781313, 244140626, 2177317874, 13841287202, 68736258049, 282430067923, 1000244144722],
+      values: [
+        1,
+        4097,
+        531_442,
+        16_781_313,
+        244_140_626,
+        2_177_317_874,
+        13_841_287_202,
+        68_736_258_049,
+        282_430_067_923,
+        1_000_244_144_722
+      ],
       finite: false,
       first_index: 1
     },
@@ -197,7 +252,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013961,
       opts: [],
-      values: [1, 8193, 1594324, 67117057, 1220703126, 13062296532, 96889010408, 549822930945, 2541867422653, 10001220711318],
+      values: [
+        1,
+        8193,
+        1_594_324,
+        67_117_057,
+        1_220_703_126,
+        13_062_296_532,
+        96_889_010_408,
+        549_822_930_945,
+        2_541_867_422_653,
+        10_001_220_711_318
+      ],
       finite: false,
       first_index: 1
     },
@@ -205,7 +271,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013962,
       opts: [],
-      values: [1, 16385, 4782970, 268451841, 6103515626, 78368963450, 678223072850, 4398314962945, 22876797237931, 100006103532010],
+      values: [
+        1,
+        16385,
+        4_782_970,
+        268_451_841,
+        6_103_515_626,
+        78_368_963_450,
+        678_223_072_850,
+        4_398_314_962_945,
+        22_876_797_237_931,
+        100_006_103_532_010
+      ],
       finite: false,
       first_index: 1
     },
@@ -213,7 +290,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013963,
       opts: [],
-      values: [1, 32769, 14348908, 1073774593, 30517578126, 470199366252, 4747561509944, 35185445863425, 205891146443557, 1000030517610894],
+      values: [
+        1,
+        32769,
+        14_348_908,
+        1_073_774_593,
+        30_517_578_126,
+        470_199_366_252,
+        4_747_561_509_944,
+        35_185_445_863_425,
+        205_891_146_443_557,
+        1_000_030_517_610_894
+      ],
       finite: false,
       first_index: 1
     },
@@ -221,7 +309,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013964,
       opts: [],
-      values: [1, 65537, 43046722, 4295032833, 152587890626, 2821153019714, 33232930569602, 281479271743489, 1853020231898563, 10000152587956162],
+      values: [
+        1,
+        65537,
+        43_046_722,
+        4_295_032_833,
+        152_587_890_626,
+        2_821_153_019_714,
+        33_232_930_569_602,
+        281_479_271_743_489,
+        1_853_020_231_898_563,
+        10_000_152_587_956_162
+      ],
       finite: false,
       first_index: 1
     },
@@ -229,7 +328,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013965,
       opts: [],
-      values: [1, 131073, 129140164, 17180000257, 762939453126, 16926788715972, 232630513987208, 2251816993685505, 16677181828806733, 100000762939584198],
+      values: [
+        1,
+        131_073,
+        129_140_164,
+        17_180_000_257,
+        762_939_453_126,
+        16_926_788_715_972,
+        232_630_513_987_208,
+        2_251_816_993_685_505,
+        16_677_181_828_806_733,
+        100_000_762_939_584_198
+      ],
       finite: false,
       first_index: 1
     },
@@ -237,7 +347,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013966,
       opts: [],
-      values: [1, 262145, 387420490, 68719738881, 3814697265626, 101560344351050, 1628413597910450, 18014467229220865, 150094635684419611, 1000003814697527770],
+      values: [
+        1,
+        262_145,
+        387_420_490,
+        68_719_738_881,
+        3_814_697_265_626,
+        101_560_344_351_050,
+        1_628_413_597_910_450,
+        18_014_467_229_220_865,
+        150_094_635_684_419_611,
+        1_000_003_814_697_527_770
+      ],
       finite: false,
       first_index: 1
     },
@@ -245,7 +366,18 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013967,
       opts: [],
-      values: [1, 524289, 1162261468, 274878431233, 19073486328126, 609360902796252, 11398895185373144, 144115462954287105, 1350851718835253557, 10000019073486852414],
+      values: [
+        1,
+        524_289,
+        1_162_261_468,
+        274_878_431_233,
+        19_073_486_328_126,
+        609_360_902_796_252,
+        11_398_895_185_373_144,
+        144_115_462_954_287_105,
+        1_350_851_718_835_253_557,
+        10_000_019_073_486_852_414
+      ],
       finite: false,
       first_index: 1
     },
@@ -253,11 +385,21 @@ defmodule Chunky.SequenceDataTest do
       module: Chunky.Sequence.OEIS.Sigma,
       sequence: :a013968,
       opts: [],
-      values: [1, 1048577, 3486784402, 1099512676353, 95367431640626, 3656161927895954, 79792266297612002, 1152922604119523329, 12157665462543713203, 100000095367432689202],
+      values: [
+        1,
+        1_048_577,
+        3_486_784_402,
+        1_099_512_676_353,
+        95_367_431_640_626,
+        3_656_161_927_895_954,
+        79_792_266_297_612_002,
+        1_152_922_604_119_523_329,
+        12_157_665_462_543_713_203,
+        100_000_095_367_432_689_202
+      ],
       finite: false,
       first_index: 1
     },
-    
 
     # Sequence.Test
     %{
@@ -348,13 +490,13 @@ defmodule Chunky.SequenceDataTest do
         # check values
         assert values == seq_def.values
         # assert(values == seq_def.values, Sequence.readable_name(seq))
-        
+
         # check finite/infinite
         assert Sequence.is_finite?(seq) == seq_def.finite
-        
+
         # let's check our first index
         first_index = Map.get(seq_def, :first_index, 0)
-        
+
         assert (seq |> Sequence.next!()).index == first_index
       end)
     end

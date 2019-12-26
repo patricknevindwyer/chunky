@@ -1,12 +1,12 @@
 defmodule Chunky.Sequence.OEIS do
   @moduledoc """
   Online Encyclopedia of Integer Sequences (OEIS) sequence iterators.
-  
+
   Supported sequences are broken down into modules based on OEIS Keyword, subject matter, or 
   related methods.
-  
+
   ## Available Modules
-  
+
    - `Sequence.OEIS.Core` - OEIS `core` Keyword sequences
    - `Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
 
@@ -248,29 +248,24 @@ defmodule Chunky.Sequence.OEIS do
   sequence support modules.
   """
   def coverage() do
-      [
-          {Sequence.OEIS, :keyword_core}
-      ]
-      |> Enum.map(
-          fn {s_mod, s_key} -> 
-              
-              # get coverage
-              seq = Sequence.create(s_mod, s_key)
-              cov = seq |> coverage()
-              
-              # get name
-              nom = seq |> Sequence.readable_name()
-              
-              {nom, cov}
-          end
-      )
-      |> Enum.each(
-          fn {nom, cov} -> 
-              IO.puts("Sequence #{nom} - #{cov * 100.0 |> Float.round(2)}%")
-          end
-      )
+    [
+      {Sequence.OEIS, :keyword_core}
+    ]
+    |> Enum.map(fn {s_mod, s_key} ->
+      # get coverage
+      seq = Sequence.create(s_mod, s_key)
+      cov = seq |> coverage()
+
+      # get name
+      nom = seq |> Sequence.readable_name()
+
+      {nom, cov}
+    end)
+    |> Enum.each(fn {nom, cov} ->
+      IO.puts("Sequence #{nom} - #{(cov * 100.0) |> Float.round(2)}%")
+    end)
   end
-  
+
   @doc """
   OEIS Sequence `A000045` - Fibonacci numbers
 

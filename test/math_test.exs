@@ -5,360 +5,363 @@ defmodule Chunky.MathTest do
   doctest Chunky.Math
 
   describe "pow/2" do
-      test "-2^3" do
-          assert Math.pow(-2, 3) == -8
-      end
-      
-      test "2^10" do
-          assert Math.pow(2, 10) == 1024
-      end
-      
-      test "17^14" do
-          assert Math.pow(17, 14) == 168377826559400929
-      end
-      
-      test "210^0" do
-          assert Math.pow(210, 0) == 1
-      end
-  end
-  
-  describe "sigma/2" do
-      @doc """
-      Test values derived from OEIS Sequence data for out of band validation
-      """
-      test "sigma-0" do
-          nums = [3, 5, 8, 16, 24, 30, 104]
-          sigs = [2, 2, 4, 5, 8, 8, 8]
-          sigma_sub = 0
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )
-      end
-      
-      test "sigma-1" do
-          nums = [3, 5, 8, 16, 24, 30, 70]
-          sigs = [4, 6, 15, 31, 60, 72, 144]
-          sigma_sub = 1
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )          
-      end
-      
-      test "sigma-2" do
-          nums = [3, 5, 8, 16, 24, 30, 50]
-          sigs = [10, 26, 85, 341, 850, 1300, 3255]
-          sigma_sub = 2
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )          
-          
-      end
-      
-      test "sigma-3" do
-          nums = [3, 5, 8, 16, 24, 42]
-          sigs = [28, 126, 585, 4681, 16380, 86688]
-          sigma_sub = 3
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )          
-          
-      end
-      
-      test "sigma-4" do
-          nums = [3, 5, 8, 16, 24, 33]
-          sigs = [82, 626, 4369, 69905, 358258, 1200644]
-          sigma_sub = 4
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-      end
-      
-      test "sigma-5" do
-          nums = [3, 5, 8, 16, 24, 29]
-          sigs = [244, 3126, 33825, 1082401, 8253300, 20511150]
-          sigma_sub = 5
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-      end
-      
-      test "sigma-6" do
-          nums = [3, 5, 8, 16, 18, 23]
-          sigs = [730, 15626, 266305, 17043521, 34591115, 148035890]
-          sigma_sub = 6
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-7" do
-          nums = [3, 5, 8, 16, 18, 22]
-          sigs = [2188, 78126, 2113665, 270549121, 617285253, 2513845188]
-          sigma_sub = 7
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-8" do
-          nums = [3, 5, 8, 16, 18, 20]
-          sigs = [6562, 390626, 16843009, 4311810305, 11064693731, 25700456418]
-          sigma_sub = 8
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-9" do
-          nums = [3, 5, 8, 16, 18, 20]
-          sigs = [19684, 1953126, 134480385, 68853957121, 198756808749, 513002215782]
-          sigma_sub = 9
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-10" do
-          nums = [3, 5, 8, 16, 17]
-          sigs = [59050, 9765626, 1074791425, 1100586419201, 2015993900450]
-          sigma_sub = 10
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-11" do
-          nums = [3, 5, 8, 16, 18, 20]
-          sigs = [177148, 48828126, 8594130945, 17600780175361, 64300154115093, 204900053024478]
-          sigma_sub = 11
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-12" do
-          nums = [3, 5, 8, 16, 18]
-          sigs = [531442, 244140626, 68736258049, 281543712968705, 1157115988280531]
-          sigma_sub = 12
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-13" do
-          nums = [3, 5, 8, 16, 18]
-          sigs = [1594324, 1220703126, 549822930945, 4504149450301441, 20825519793796029]
-          sigma_sub = 13
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-14" do
-          nums = [3, 5, 8, 16, 17]
-          sigs = [4782970, 6103515626, 4398314962945, 72061992352890881, 168377826559400930]
-          sigma_sub = 14
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-15" do
-          nums = [3, 5, 8, 16]
-          sigs = [14348908, 30517578126, 35185445863425, 1152956690052710401]
-          sigma_sub = 15
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-16" do
-          nums = [3, 5, 8, 15]
-          sigs = [43046722, 152587890626, 281479271743489, 6568408508343827972]
-          sigma_sub = 16
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-17" do
-          nums = [3, 5, 8, 15]
-          sigs = [129140164, 762939453126, 2251816993685505, 98526126098761952664]
-          sigma_sub = 17
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-18" do
-          nums = [3, 5, 8, 12]
-          sigs = [387420490, 3814697265626, 18014467229220865, 26623434909949071690]
-          sigma_sub = 18
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-19" do
-          nums = [3, 5, 8, 12]
-          sigs = [1162261468, 19073486328126, 144115462954287105, 319480609006403630044]
-          sigma_sub = 19
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
-      
-      test "sigma-20" do
+    test "-2^3" do
+      assert Math.pow(-2, 3) == -8
+    end
 
-          nums = [3, 5, 8, 12]
-          sigs = [3486784402, 95367431640626, 1152922604119523329, 3833763649708914645906]
-          sigma_sub = 20
-          
-          Enum.zip(nums, sigs)
-          |> Enum.each(
-              fn {n, s} -> 
-                  assert Math.sigma(n, sigma_sub) == s
-              end
-          )                    
-          
-      end
+    test "2^10" do
+      assert Math.pow(2, 10) == 1024
+    end
+
+    test "17^14" do
+      assert Math.pow(17, 14) == 168_377_826_559_400_929
+    end
+
+    test "210^0" do
+      assert Math.pow(210, 0) == 1
+    end
   end
-  
+
+  describe "sigma/2" do
+    @doc """
+    Test values derived from OEIS Sequence data for out of band validation
+    """
+    test "sigma-0" do
+      nums = [3, 5, 8, 16, 24, 30, 104]
+      sigs = [2, 2, 4, 5, 8, 8, 8]
+      sigma_sub = 0
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-1" do
+      nums = [3, 5, 8, 16, 24, 30, 70]
+      sigs = [4, 6, 15, 31, 60, 72, 144]
+      sigma_sub = 1
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-2" do
+      nums = [3, 5, 8, 16, 24, 30, 50]
+      sigs = [10, 26, 85, 341, 850, 1300, 3255]
+      sigma_sub = 2
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-3" do
+      nums = [3, 5, 8, 16, 24, 42]
+      sigs = [28, 126, 585, 4681, 16380, 86688]
+      sigma_sub = 3
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-4" do
+      nums = [3, 5, 8, 16, 24, 33]
+      sigs = [82, 626, 4369, 69905, 358_258, 1_200_644]
+      sigma_sub = 4
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-5" do
+      nums = [3, 5, 8, 16, 24, 29]
+      sigs = [244, 3126, 33825, 1_082_401, 8_253_300, 20_511_150]
+      sigma_sub = 5
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-6" do
+      nums = [3, 5, 8, 16, 18, 23]
+      sigs = [730, 15626, 266_305, 17_043_521, 34_591_115, 148_035_890]
+      sigma_sub = 6
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-7" do
+      nums = [3, 5, 8, 16, 18, 22]
+      sigs = [2188, 78126, 2_113_665, 270_549_121, 617_285_253, 2_513_845_188]
+      sigma_sub = 7
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-8" do
+      nums = [3, 5, 8, 16, 18, 20]
+      sigs = [6562, 390_626, 16_843_009, 4_311_810_305, 11_064_693_731, 25_700_456_418]
+      sigma_sub = 8
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-9" do
+      nums = [3, 5, 8, 16, 18, 20]
+      sigs = [19684, 1_953_126, 134_480_385, 68_853_957_121, 198_756_808_749, 513_002_215_782]
+      sigma_sub = 9
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-10" do
+      nums = [3, 5, 8, 16, 17]
+      sigs = [59050, 9_765_626, 1_074_791_425, 1_100_586_419_201, 2_015_993_900_450]
+      sigma_sub = 10
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-11" do
+      nums = [3, 5, 8, 16, 18, 20]
+
+      sigs = [
+        177_148,
+        48_828_126,
+        8_594_130_945,
+        17_600_780_175_361,
+        64_300_154_115_093,
+        204_900_053_024_478
+      ]
+
+      sigma_sub = 11
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-12" do
+      nums = [3, 5, 8, 16, 18]
+      sigs = [531_442, 244_140_626, 68_736_258_049, 281_543_712_968_705, 1_157_115_988_280_531]
+      sigma_sub = 12
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-13" do
+      nums = [3, 5, 8, 16, 18]
+
+      sigs = [
+        1_594_324,
+        1_220_703_126,
+        549_822_930_945,
+        4_504_149_450_301_441,
+        20_825_519_793_796_029
+      ]
+
+      sigma_sub = 13
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-14" do
+      nums = [3, 5, 8, 16, 17]
+
+      sigs = [
+        4_782_970,
+        6_103_515_626,
+        4_398_314_962_945,
+        72_061_992_352_890_881,
+        168_377_826_559_400_930
+      ]
+
+      sigma_sub = 14
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-15" do
+      nums = [3, 5, 8, 16]
+      sigs = [14_348_908, 30_517_578_126, 35_185_445_863_425, 1_152_956_690_052_710_401]
+      sigma_sub = 15
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-16" do
+      nums = [3, 5, 8, 15]
+      sigs = [43_046_722, 152_587_890_626, 281_479_271_743_489, 6_568_408_508_343_827_972]
+      sigma_sub = 16
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-17" do
+      nums = [3, 5, 8, 15]
+      sigs = [129_140_164, 762_939_453_126, 2_251_816_993_685_505, 98_526_126_098_761_952_664]
+      sigma_sub = 17
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-18" do
+      nums = [3, 5, 8, 12]
+      sigs = [387_420_490, 3_814_697_265_626, 18_014_467_229_220_865, 26_623_434_909_949_071_690]
+      sigma_sub = 18
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-19" do
+      nums = [3, 5, 8, 12]
+
+      sigs = [
+        1_162_261_468,
+        19_073_486_328_126,
+        144_115_462_954_287_105,
+        319_480_609_006_403_630_044
+      ]
+
+      sigma_sub = 19
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+
+    test "sigma-20" do
+      nums = [3, 5, 8, 12]
+
+      sigs = [
+        3_486_784_402,
+        95_367_431_640_626,
+        1_152_922_604_119_523_329,
+        3_833_763_649_708_914_645_906
+      ]
+
+      sigma_sub = 20
+
+      Enum.zip(nums, sigs)
+      |> Enum.each(fn {n, s} ->
+        assert Math.sigma(n, sigma_sub) == s
+      end)
+    end
+  end
+
   describe "factors/1" do
-      test "1" do
-          assert Math.factors(1) == [1]
-      end
-      
-      test "small prime" do
-          assert Math.factors(17) == [1, 17]
-      end
-      
-      test "small composite" do
-          assert Math.factors(24) == [1, 2, 3, 4, 6, 8, 12, 24]
-      end
-      
-      test "large prime" do
-          assert Math.factors(5_915_587_277) == [1, 5_915_587_277]
-      end
-      
-      test "large composite" do
-          assert Math.factors(12345678) == [1, 2, 3, 6, 9, 18, 47, 94, 141, 282, 423, 846, 14593, 29186, 43779, 87558, 131337, 262674, 685871, 1371742, 2057613, 4115226, 6172839, 12345678]
-      end
+    test "1" do
+      assert Math.factors(1) == [1]
+    end
+
+    test "small prime" do
+      assert Math.factors(17) == [1, 17]
+    end
+
+    test "small composite" do
+      assert Math.factors(24) == [1, 2, 3, 4, 6, 8, 12, 24]
+    end
+
+    test "large prime" do
+      assert Math.factors(5_915_587_277) == [1, 5_915_587_277]
+    end
+
+    test "large composite" do
+      assert Math.factors(12_345_678) == [
+               1,
+               2,
+               3,
+               6,
+               9,
+               18,
+               47,
+               94,
+               141,
+               282,
+               423,
+               846,
+               14593,
+               29186,
+               43779,
+               87558,
+               131_337,
+               262_674,
+               685_871,
+               1_371_742,
+               2_057_613,
+               4_115_226,
+               6_172_839,
+               12_345_678
+             ]
+    end
   end
-  
+
   describe "sigma/1" do
-      
-      test "1" do
-          assert Math.sigma(1) == 1
-      end
-      
-      test "8" do
-          assert Math.sigma(8) == 15
-      end
-      
-      test "70" do
-          assert Math.sigma(70) == 144
-      end
-      
-      test "100_000" do
-          assert Math.sigma(100000) == 246078
-      end
+    test "1" do
+      assert Math.sigma(1) == 1
+    end
+
+    test "8" do
+      assert Math.sigma(8) == 15
+    end
+
+    test "70" do
+      assert Math.sigma(70) == 144
+    end
+
+    test "100_000" do
+      assert Math.sigma(100_000) == 246_078
+    end
   end
-  
+
   describe "prime_factors/1" do
     test "1" do
       assert Math.prime_factors(1) == [1]

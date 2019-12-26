@@ -64,15 +64,15 @@ defmodule Chunky.Sequence do
   iex> seq.index
   0
   ```
-  
+
   Some sequences start at an index _other than_ 0, like the Sum of Odd Divisors (A000593):
-  
+
   ```elixir
   iex> seq = Sequence.create(Sequence.OEIS.Core, :a000593) |> Sequence.next!()
   iex> seq.index
   1
   ```
-  
+
   # Working with Sequences
 
   ## Creating Sequences
@@ -119,16 +119,16 @@ defmodule Chunky.Sequence do
    - All will have common function attributes (via data `@doc` attributes) for the `create_sequence_*/1` function
 
   ## Sequence Attributes
-  
+
   Top level `create_sequence_*` functions should have the following attributes:
-  
+
    - `sequence` - Readable name of the sequence
    - `references` - List of tuples of the form `{:source, :short_name, "URI"}`
-  
+
   along with the required attributes, the following optional attributes can be used:
-  
+
    - `offset` - Integer. Default `0`. Start a sequence at an index other than `0`.
-  
+
   ## Verbose Iterators
 
   The most expressive way to write sequences is using the Verbose Iterators technique. In this style, the `create_sequence_*/1`
@@ -408,23 +408,23 @@ defmodule Chunky.Sequence do
   ```
 
   ### Offset Attribute
-  
+
   Some sequences don't start counting at index 0. When a different offset is required than the default `0`,
   the `offset` attribute can be used. This attribute needs to be set on the `create_sequence_*` function
   as well as the simple sequence function:
-  
+
   ```elixir
   @doc offset: 2
   def create_sequence_count_from_two(_opts) do
-  
+
   end
-  
+
   @doc offset: 2
   def seq_count_from_two(idx) do
       # first _idx_ received will be 2
   end
   ```
-  
+
   ### Data attribute
 
   If the sequence function uses a _data_ attribute, the call signature of the sequence function
@@ -481,7 +481,7 @@ defmodule Chunky.Sequence do
     fill_value = Map.get(attrs, :fill_value, 0)
     data = Map.get(attrs, :data, %{})
     index_offset = Map.get(attrs, :offset, 0)
-    
+
     # does this function have a data attribute?
     has_data_attr = Map.has_key?(attrs, :data)
 
@@ -506,11 +506,9 @@ defmodule Chunky.Sequence do
     sff_next = fn mode, n_data, _value ->
       case mode do
         :init ->
-          
           %{data: data, value: fill_value}
 
         :next ->
-            
           # if our function has a data attribute, it's the first value in the call
           # list, otherwise the index is first
           apply_values =
@@ -554,25 +552,25 @@ defmodule Chunky.Sequence do
   section for more details.
 
   Sequences generated from a list behave just like any other sequence.
-  
+
   ## Attributes of List Sequences
-  
+
   ## Finite Sequence
-  
+
   A sequence created from a list is automatically marked as _finite_. See `is_finite?/1`.
-  
+
   ## Offset Attribute
-  
+
   Some sequences don't start counting at index 0. When a different offset is required than the default `0`,
   the `offset` attribute can be used. This attribute needs to be set on the `create_sequence_*` function.
-  
+
   ```elixir
   @doc offset: 2
   def create_sequence_count_from_two(_opts) do
       sequence_from_list([0, 0, 200, 201, 203, 204])
   end
   ```
-  
+
   """
   def sequence_for_list(list_data) when is_list(list_data) do
     # setup the attribute data
@@ -643,22 +641,22 @@ defmodule Chunky.Sequence do
 
   @doc """
   Determine if a sequence is finite or infinite.
-  
+
   A sequence being finite or infinite is not a reflection of the absolute computability or
   theoretical limits of a sequence, but is determined by the quantity of values
   available in the Sequence library implementation.
-  
+
   ## Examples
-  
+
       iex> Sequence.create(Sequence.OEIS, :fibonacci) |> Sequence.is_finite?()
       false
-  
+
       iex> Sequence.create(Sequence.OEIS.Core, :a000041) |> Sequence.is_finite?()
       true
-  
+
   """
   def is_finite?(%Sequence{finite: f}) when is_boolean(f), do: f
-  
+
   @doc """
   Iterate a sequence, returning only the updated Sequence structure.
 
@@ -768,20 +766,23 @@ defmodule Chunky.Sequence do
         if is_available?(module, seq_name) do
           # run create, capture the output
           %{next_fn: next_fn, data: data} = creation_data = apply(module, create_fn, [opts])
-          
+
           # check for finite/infinite based on how the sequence was created
-          seq_finite = case Map.get(creation_data, :source, :direct) do
-             :sequence_for_list -> true
-             _ -> false 
-          end
-          
+          seq_finite =
+            case Map.get(creation_data, :source, :direct) do
+              :sequence_for_list -> true
+              _ -> false
+            end
+
           # check the creation function for an `offset` attribute, which can shift the
           # starting point of our index. The offste is added to our default offset.
           create_fn_attrs = attributes_for_function(module, create_fn, 1)
-          offset_adjustment = case create_fn_attrs do
-             %{offset: v} when is_integer(v) -> v
-             _ -> 0
-          end
+
+          offset_adjustment =
+            case create_fn_attrs do
+              %{offset: v} when is_integer(v) -> v
+              _ -> 0
+            end
 
           %Sequence{
             next_fn: next_fn,

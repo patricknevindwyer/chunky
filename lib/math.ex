@@ -49,73 +49,74 @@ defmodule Chunky.Math do
 
   @doc """
   Factorize an integer into all divisors.
-  
+
   This will find all divisors, prime and composite, of an integer. The algorithm used
   for factorization is not optimal for very large numbers, as it uses a multiple pass
   calculation for co-factors and composite factors.
-  
-  
+
+
   ## Example
-  
+
       iex> Math.factors(2)
       [1, 2]
-  
+
       iex> Math.factors(84)
       [1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84]
-  
+
       iex> Math.factors(123456)
       [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192, 643, 1286, 1929, 2572, 3858, 5144, 7716, 10288, 15432, 20576, 30864, 41152, 61728, 123456]
-  
+
   """
   def factors(n) when is_integer(n) and n > 0 do
-      
-      # start with prime factors
-      pf = prime_factors(n)
+    # start with prime factors
+    pf =
+      prime_factors(n)
       |> Enum.uniq()
-      
-      # get complements from primes
-      cf = pf
+
+    # get complements from primes
+    cf =
+      pf
       |> Enum.map(fn p_factor -> div(n, p_factor) end)
       |> Enum.uniq()
-      
-      # run powers of primes up to sqrt(n)
-      pf_powers = power_factors_up_to(pf, n)
-      
-      # check each of the pf powers as a factor to build other factors
-      of = pf_powers
+
+    # run powers of primes up to sqrt(n)
+    pf_powers = power_factors_up_to(pf, n)
+
+    # check each of the pf powers as a factor to build other factors
+    of =
+      pf_powers
       |> Enum.filter(fn pf_power -> rem(n, pf_power) == 0 end)
       |> Enum.map(fn pf_power -> [div(n, pf_power), pf_power] end)
       |> List.flatten()
-      
-      pf ++ cf ++ of |> Enum.uniq() |> Enum.sort()
+
+    (pf ++ cf ++ of) |> Enum.uniq() |> Enum.sort()
   end
-  
+
   # given a list of factors of N, and N, build a list of the powers of each integer
   # in factor_list up to sqrt(N)
   defp power_factors_up_to(factor_list, n) when is_list(factor_list) and is_integer(n) do
-      
-     # find our max value
-     up_to_ceil = :math.sqrt(n) |> Float.ceil() |> Kernel.trunc()
-     
-     factor_list
-     |> Enum.map(fn factor -> power_factor_up_to(factor, 2, up_to_ceil) end )
-     |> List.flatten()
-     
+    # find our max value
+    up_to_ceil = :math.sqrt(n) |> Float.ceil() |> Kernel.trunc()
+
+    factor_list
+    |> Enum.map(fn factor -> power_factor_up_to(factor, 2, up_to_ceil) end)
+    |> List.flatten()
   end
-  
+
   # build powers of `base` up to `up_to_ceil`
   defp power_factor_up_to(1, _f, _u), do: []
+
   defp power_factor_up_to(base, factor, up_to_ceil) do
-      # v = :math.pow(base, factor) |> Kernel.trunc()
-      v = base * factor
-      
-      if v > up_to_ceil do
-          []
-      else
-          [v] ++ power_factor_up_to(base, factor + 1, up_to_ceil)
-      end
+    # v = :math.pow(base, factor) |> Kernel.trunc()
+    v = base * factor
+
+    if v > up_to_ceil do
+      []
+    else
+      [v] ++ power_factor_up_to(base, factor + 1, up_to_ceil)
+    end
   end
-  
+
   #
   # prime decomposition via trial division Adapted from Rosetta Code
   #   http://rosettacode.org/wiki/Prime_decomposition#Elixir
@@ -126,51 +127,51 @@ defmodule Chunky.Math do
 
   @doc """
   Calculate the sigma-1 (or `σ1(n)`), also known as sum-of-divisors of an integer.
-  
+
   This is all of the divisors of `n` summed.
-  
+
   ## Example
-  
+
       iex> Math.sigma(70)
       144
     
       iex> Math.sigma(408)
       1080
-  
+
       iex> Math.sigma(100000)
       246078
-  
+
   """
   def sigma(n) when is_integer(n) and n > 0 do
-      factors(n)
-      |> Enum.sum()
+    factors(n)
+    |> Enum.sum()
   end
-  
+
   @doc """
   Calculate a sigma function of an integer, for any `p`-th powers.
-  
+
   This is a generalized Sigma function of the form `σp(n)`, so the Sigma-0 of
   a number `σ0(n)` would be `sigma(n, 0)`, while the Sigma-4 (`σ4(n)`) would be `sigma(n, 4)`.
-  
+
   For a faster version of `σ1(n)` (or the sum-of-divisors) see `sigma/1`.
-  
+
   ## Examples
-  
+
       iex> Math.sigma(12, 2)
       210
-  
+
       iex> Math.sigma(19, 4)
       130322
-  
+
       iex> Math.sigma(24, 0)
       8
   """
   def sigma(n, p) when is_integer(n) and is_integer(p) and n > 0 and p >= 0 do
-     factors(n)
-     |> Enum.map(fn fac -> pow(fac, p) end)
-     |> Enum.sum() 
+    factors(n)
+    |> Enum.map(fn fac -> pow(fac, p) end)
+    |> Enum.sum()
   end
-  
+
   @doc """
   Determine if a positive integer is prime.
 
@@ -217,23 +218,26 @@ defmodule Chunky.Math do
 
   @doc """
   Integer exponentiation, `x^y`.
-  
+
   This function uses pure integer methods to bypass issues with floating point precision
   trucation in large values using the built-in `:math` exponentiation functions.
-  
+
   ## Example
       
       iex> Math.pow(2, 10)
       1024
-  
+
       iex> Math.pow(17, 14)
       168377826559400929
   """
   def pow(_x, 0), do: 1
   def pow(x, 1), do: x
-  def pow(x, y) when is_integer(x) and is_integer(y) and Integer.is_even(y), do: pow(x * x, div(y, 2))
+
+  def pow(x, y) when is_integer(x) and is_integer(y) and Integer.is_even(y),
+    do: pow(x * x, div(y, 2))
+
   def pow(x, y) when is_integer(x) and is_integer(y), do: x * pow(x * x, div(y - 1, 2))
-  
+
   #
   # Miller-Rabin primality test adapted from Rosetta Code:
   #   https://rosettacode.org/wiki/Miller–Rabin_primality_test#Elixir

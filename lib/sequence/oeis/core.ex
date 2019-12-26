@@ -11,13 +11,13 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000203 - Sum of Divisors](https://oeis.org/A000079) - `:a000203` - `create_sequence_a000203/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
-  
+
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
   alias Chunky.Math
-    
+
   require Integer
-  
+
   # raw data for the A000041 - Partitions of N
   @data_a000041 [
     1,
@@ -272,7 +272,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     213_636_919_820_625,
     230_793_554_364_681
   ]
-  
+
   @doc """
   OEIS Sequence `A000005` - Number of divisors of N, simga-0(n), `𝝈0(n)`.
 
@@ -280,30 +280,32 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > d(n) (also called tau(n) or sigma_0(n)), the number of divisors of n. 
   > (Formerly M0246 N0086)  
-  
+
   **Sequence IDs**: `:a000005`
 
   **Finite**: False
-  
+
   **Offset**: 1
-  
+
   ## Example
-  
+
       iex> Sequence.create(Sequence.OEIS.Core, :a000005) |> Sequence.take!(10)
       [1, 2, 2, 3, 2, 4, 2, 4, 3, 4]
-  
-  
+
+
   """
-  @doc offset: 1, sequence: "Number of Divisors of N or 𝝈0(n)", references: [{:oeis, :a000005, "https://oeis.org/A000005"}]
+  @doc offset: 1,
+       sequence: "Number of Divisors of N or 𝝈0(n)",
+       references: [{:oeis, :a000005, "https://oeis.org/A000005"}]
   def create_sequence_a000005(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000005/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000005/1)
   end
-  
+
   @doc offset: 1
   def seq_a000005(idx) do
-      Math.sigma(idx, 0)
+    Math.sigma(idx, 0)
   end
-  
+
   @doc """
   OEIS Sequence `A000009` - Number of partitions of n into distinct parts
 
@@ -311,64 +313,64 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > Expansion of Product_{m >= 1} (1 + x^m); number of partitions of n into distinct parts; number of partitions of n into odd parts (if n > 0). 
   > (Formerly M0281 N0100)
-  
+
   ## Divergence
-  
+
   Calculation of this sequence is based on translation of a Maxima program by [Vladimir Kruchinin](http://oeis.org/wiki/User:Vladimir_Kruchinin),
   and diverges from canonical results for `n > 10`.
-  
+
   **Sequence IDs**: `:a000009`
 
   **Finite**: False
-  
+
   **Offset**: 0
-  
+
   ## Example
-  
+
       iex> Sequence.create(Sequence.OEIS.Core, :a000009) |> Sequence.take!(10)
       [1, 1, 1, 2, 2, 3, 4, 5, 6, 8]
   """
-  @doc sequence: "Number of partitions of n into distinct parts", references: [{:oeis, :a000009, "http://oeis.org/A000009"}]
+  @doc sequence: "Number of partitions of n into distinct parts",
+       references: [{:oeis, :a000009, "http://oeis.org/A000009"}]
   def create_sequence_a000009(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000009/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000009/1)
   end
-  
+
   def seq_a000009(idx) do
-      seq_a000009_s(idx, 1)
+    seq_a000009_s(idx, 1)
   end
-  
+
   defp seq_a000009_h(n) do
-     if Integer.is_odd(n) do
-         1
-     else
-         0
-     end 
+    if Integer.is_odd(n) do
+      1
+    else
+      0
+    end
   end
-  
+
   defp seq_a000009_s(n, m) do
-     if n == 0 do
-         1
-     else
-         if n < m do
-            0 
-         else
-             if n == m do
-                seq_a000009_h(n) 
-             else
-                 v = m..div(n, 2)
-                 |> Enum.map(
-                     fn k -> 
-                         seq_a000009_h(k) * seq_a000009_s(n - k, k)
-                     end
-                 ) 
-                 |> Enum.sum() 
-                 
-                 v + seq_a000009_h(n)
-             end
-         end
-     end 
+    if n == 0 do
+      1
+    else
+      if n < m do
+        0
+      else
+        if n == m do
+          seq_a000009_h(n)
+        else
+          v =
+            m..div(n, 2)
+            |> Enum.map(fn k ->
+              seq_a000009_h(k) * seq_a000009_s(n - k, k)
+            end)
+            |> Enum.sum()
+
+          v + seq_a000009_h(n)
+        end
+      end
+    end
   end
-  
+
   @doc """
   OEIS Sequence `A000041` - Partitions of integer N
 
@@ -403,7 +405,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def create_sequence_a000041(_opts) do
     sequence_for_list(@data_a000041)
   end
-  
+
   @doc """
   OEIS Sequence `A000079` - Powers of 2 `a(n) = 2^n`
 
@@ -415,24 +417,25 @@ defmodule Chunky.Sequence.OEIS.Core do
   **Sequence IDs**: `:a000079`
 
   **Finite**: False
-  
+
   **Offset**: 0
-  
+
   ## Example
-  
+
       iex> Sequence.create(Sequence.OEIS.Core, :a000079) |> Sequence.take!(20)
       [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288]
-  
+
   """
-  @doc sequence: "Powers of 2: a(n) = 2^n", references: [{:oeis, :a000079, "http://oeis.org/A000079"}]
+  @doc sequence: "Powers of 2: a(n) = 2^n",
+       references: [{:oeis, :a000079, "http://oeis.org/A000079"}]
   def create_sequence_a000079(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000079/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000079/1)
   end
-  
+
   def seq_a000079(idx) do
-     :math.pow(2, idx) |> Kernel.trunc() 
+    :math.pow(2, idx) |> Kernel.trunc()
   end
-  
+
   @doc """
   OEIS Sequence `A000203` - Sum of Divisors `σ1(n)`
 
@@ -440,30 +443,32 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > (n) = sigma(n), the sum of the divisors of n. Also called sigma_1(n). 
   > (Formerly M2329 N0921)    
-  
+
   **Sequence IDs**: `:a000203`
 
   **Finite**: False
-  
+
   **Offset**: 1
-  
+
   ## Example
-  
+
       iex> Sequence.create(Sequence.OEIS.Core, :a000203) |> Sequence.take!(20)
       [1, 3, 4, 7, 6, 12, 8, 15, 13, 18, 12, 28, 14, 24, 24, 31, 18, 39, 20, 42]  
   """
-  @doc offset: 1, sequence: "Sigma(n) - Sum of Divisors", references: [{:oeis, :a000203, "http://oeis.org/A000203"}]
+  @doc offset: 1,
+       sequence: "Sigma(n) - Sum of Divisors",
+       references: [{:oeis, :a000203, "http://oeis.org/A000203"}]
   def create_sequence_a000203(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000203/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000203/1)
   end
-  
+
   @doc offset: 1
   def seq_a000203(idx) do
-      Math.sigma(idx)
+    Math.sigma(idx)
   end
-  
+
   @doc """
-  
+
   OEIS Sequence `A000593` - Sum of Odd Divisors of N
 
   From [OEIS A000593](https://oeis.org/A000593):
@@ -474,29 +479,30 @@ defmodule Chunky.Sequence.OEIS.Core do
   **Sequence IDs**: `:a000593`
 
   **Finite**: False
-  
+
   **Offset**: 1
-  
+
   ## Example
-  
+
       iex> Sequence.create(Sequence.OEIS.Core, :a000593) |> Sequence.take!(10)
       [1, 1, 4, 1, 6, 4, 8, 1, 13, 6]
-  
+
   """
-  @doc offset: 1, sequence: "OEIS A000593 - Sum of Odd Divisors of N [1, 1, 4, 1, 6, ...]", references: [{:oeis, :a000593, "http://oeis.org/A000593"}]
+  @doc offset: 1,
+       sequence: "OEIS A000593 - Sum of Odd Divisors of N [1, 1, 4, 1, 6, ...]",
+       references: [{:oeis, :a000593, "http://oeis.org/A000593"}]
   def create_sequence_a000593(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000593/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000593/1)
   end
 
-  @doc offset: 1  
+  @doc offset: 1
   def seq_a000593(idx) do
-      
-      # N is idx +1, as this is an offset sequence (1, 3)
+    # N is idx +1, as this is an offset sequence (1, 3)
 
-      Chunky.Math.prime_factors(idx) ++ [idx]
-      |> Enum.filter(&Integer.is_odd/1)
-      |> Enum.uniq()
-      |> Enum.sum()
+    (Chunky.Math.prime_factors(idx) ++ [idx])
+    |> Enum.filter(&Integer.is_odd/1)
+    |> Enum.uniq()
+    |> Enum.sum()
   end
 
   @doc """
@@ -506,26 +512,28 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > sigma_2(n): sum of squares of divisors of n. 
   > (Formerly M3799 N1551)  
-  
+
   **Sequence IDs**: `:a001157`
 
   **Finite**: False
-  
+
   **Offset**: 1
-  
+
   ## Example
-  
+
       iex> Sequence.create(Sequence.OEIS.Core, :a001157) |> Sequence.take!(10)
       [1, 5, 10, 21, 26, 50, 50, 85, 91, 130]
-  
+
   """
-  @doc offset: 1, sequence: "Sum of squares of divisors of n, 𝝈2(n)", references: [{:oeis, :a001157, "https://oeis.org/A001157"}]
+  @doc offset: 1,
+       sequence: "Sum of squares of divisors of n, 𝝈2(n)",
+       references: [{:oeis, :a001157, "https://oeis.org/A001157"}]
   def create_sequence_a001157(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001157/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001157/1)
   end
-  
+
   @doc offset: 1
   def seq_a001157(idx) do
-     Math.sigma(idx, 2) 
-  end  
+    Math.sigma(idx, 2)
+  end
 end
