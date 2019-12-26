@@ -30,6 +30,7 @@ defmodule Chunky.Math do
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
    - `is_perfect_square?/1` - Is `n` a perfect square?
    - `is_perfect_cube?/1` - Is `m` a perfect square?
+   - `is_achilles_number?/1` - Is `n` an Achilles Number?
   
   ## Number Generation
   
@@ -462,6 +463,32 @@ defmodule Chunky.Math do
           end
       )
       |> length() > 0
+  end
+  
+  @doc """
+  Check if a number is an Achilles Number.
+  
+  Achilles numbers are `n` that are _powerful_ (see `is_powerful_number?/1` but not _perfect powers_ (see `is_perfect_power?/1`).
+  
+  See `Chunky.Sequence.OEIS.Factor`, sequence `A052486`.
+  
+  ## Examples
+  
+      iex> Math.is_achilles_number?(70)
+      false
+      
+      iex> Math.is_achilles_number?(72)
+      true
+  
+      iex> Math.is_achilles_number?(2700)
+      true
+  
+      iex> Math.is_achilles_number?(784)
+      false
+  """
+  def is_achilles_number?(n) when is_integer(n) and n <= 71, do: false
+  def is_achilles_number?(n) when is_integer(n) and n > 71 do
+      is_powerful_number?(n) and !is_perfect_power?(n)
   end
   
   @doc """

@@ -8,6 +8,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A001694 - Powerful Numbers](https://oeis.org/A001694) - `:a001694` - `create_sequence_a001694/1`
    - [A005361 - Product of Expoenents of prime factors of N](https://oeis.org/A005361) - `:a005361` - `create_sequence_a005361/1`
    - [A005934 - Highly powerful numbers: numbers with record value](https://oeis.org/A005934) - `:a005934` - `create_sequence_a005934/1`
+   - [A052486 - Achilles numbers - powerful but imperfect](https://oeis.org/A052486) - `:a052486` - `create_sequence_a052486/1`
   
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
@@ -166,4 +167,30 @@ defmodule Chunky.Sequence.OEIS.Factors do
      end 
   end
   
+  @doc """
+  OEIS Sequence `A052486` - Achilles numbers - powerful but imperfect
+
+  From [OEIS A052486](https://oeis.org/A052486):
+
+  > Achilles numbers - powerful but imperfect: if n = Product(p_i^e_i) then all e_i > 1 (i.e., powerful), but the highest common factor of the e_i is 1, i.e., not a perfect power.
+      
+  **Sequence IDs**: `:a052486`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a052486) |> Sequence.take!(20)
+      [72, 108, 200, 288, 392, 432, 500, 648, 675, 800, 864, 968, 972, 1125, 1152, 1323, 1352, 1372, 1568, 1800]
+  """
+  @doc offset: 1, sequence: "Achilles numbers - powerful but imperfect", references: [{:oeis, :a052486, "https://oeis.org/A052486"}, {:wikipedia, :achilles_number, "https://en.wikipedia.org/wiki/Achilles_number"}]
+  def create_sequence_a052486(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a052486/2)
+  end
+  
+  def seq_a052486(_idx, last) do
+      Math.next_number(&Math.is_achilles_number?/1, last)
+  end
 end

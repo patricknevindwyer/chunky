@@ -35,6 +35,7 @@
   - is_perfect_square?/1
   - is_perfect_cube?/1
   - is_root_of?/2
+  - is_achilles_number?/1
   
 ### New Sequences
  
@@ -49,6 +50,7 @@
  - A005361 - Product of Prime Exponents of factors of N
  - A005934 - Highly powerful numbers: numbers with record value
  - A001597 - Perfect Powers
+ - A052486 - Achilles Numbers
 
 ## v0.8.0
 

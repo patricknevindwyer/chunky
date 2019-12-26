@@ -4,6 +4,30 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_achilles_number?/1" do
+      
+      test "1" do
+          assert Math.is_achilles_number?(1) == false
+      end
+      
+      test "70" do
+          assert Math.is_achilles_number?(70) == false
+      end
+      
+      test "72" do
+          assert Math.is_achilles_number?(72)
+      end
+      
+      test "5000" do
+          assert Math.is_achilles_number?(5000)
+      end
+      
+      test "5425069447" do
+          assert Math.is_achilles_number?(5425069447)
+      end
+      
+  end
+  
   describe "is_perfect_power?/1" do
       test "1" do
          assert Math.is_perfect_power?(1) == true 
