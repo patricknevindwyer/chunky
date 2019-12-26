@@ -310,15 +310,16 @@ defmodule Chunky.Sequence.OEIS.Core do
       [1, 1, 4, 1, 6, 4, 8, 1, 13, 6]
   
   """
-  @doc sequence: "OEIS A000593 - Sum of Odd Divisors of N [1, 1, 4, 1, 6, ...]", references: [{:oeis, :a000593, "http://oeis.org/A000593"}]
+  @doc offset: 1, sequence: "OEIS A000593 - Sum of Odd Divisors of N [1, 1, 4, 1, 6, ...]", references: [{:oeis, :a000593, "http://oeis.org/A000593"}]
   def create_sequence_a000593(_opts) do
       sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000593/1)
   end
-  
+
+  @doc offset: 1  
   def seq_a000593(idx) do
       
       # N is idx +1, as this is an offset sequence (1, 3)
-      idx = idx + 1
+
       Chunky.Math.prime_factors(idx) ++ [idx]
       |> Enum.filter(&Integer.is_odd/1)
       |> Enum.uniq()

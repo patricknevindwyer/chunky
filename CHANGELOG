@@ -20,6 +20,7 @@
 ### Enhancements
  - Chunk.Sequence
   - sequences are now marked as finite or infinite (as computable/stored in Squence library)
+  - sequences can now have initial index/offset other than 0 (like A000593)
   - New Functions:
    - `is_finite?/1` - Is a sequence finite or infinite is sequence library?
 

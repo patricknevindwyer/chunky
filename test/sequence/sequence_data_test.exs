@@ -55,6 +55,26 @@ defmodule Chunky.SequenceDataTest do
       values: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34],
       finite: false
     },
+    
+    # Sequence.OEIS.Core
+    %{
+      module: Chunky.Sequence.OEIS.Core,
+      sequence: :a000041,
+      opts: [],
+      values: [1,1,2,3,5,7,11,15,22,30],
+      finite: true
+    },
+
+    # Sequence.OEIS.Core
+    %{
+      module: Chunky.Sequence.OEIS.Core,
+      sequence: :a000593,
+      opts: [],
+      values: [1, 1, 4, 1, 6, 4, 8, 1, 13, 6],
+      finite: false,
+      first_index: 1
+    },
+    
 
     # Sequence.Test
     %{
@@ -148,6 +168,11 @@ defmodule Chunky.SequenceDataTest do
         
         # check finite/infinite
         assert Sequence.is_finite?(seq) == seq_def.finite
+        
+        # let's check our first index
+        first_index = Map.get(seq_def, :first_index, 0)
+        
+        assert (seq |> Sequence.next!()).index == first_index
       end)
     end
   end
