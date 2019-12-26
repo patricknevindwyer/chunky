@@ -4,6 +4,20 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "aliquot_sum/1" do
+      test "1" do
+         assert Math.aliquot_sum(1) == 0 
+      end
+      
+      test "10" do
+          assert Math.aliquot_sum(10) == 8
+      end
+      
+      test "100" do
+          assert Math.aliquot_sum(100) == 117
+      end
+  end
+  
   describe "is_arithmetic_number?/1" do
       test "1" do
           assert Math.is_arithmetic_number?(1)

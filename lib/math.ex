@@ -11,10 +11,6 @@ defmodule Chunky.Math do
    - `factors/1` - All divisors for an integer
    - `pow/2` - Integer exponentiation
    - `prime_factors/1` - Factorize an integer into prime factors
-   - `sigma/1` - Sigma-1 function (sum of divisors)
-   - `sigma/2` - Generalized Sigma function for integers
-   - `next_abundant/1` - Find the next abundant number after `n`
-   - `next_deficient/1` - Find the next deficient number after `n`
   
   ## Number Theory
 
@@ -23,7 +19,11 @@ defmodule Chunky.Math do
    - `is_abundant?/1` - Test if an integer is _abundant_
    - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
-  
+   - `sigma/1` - Sigma-1 function (sum of divisors)
+   - `sigma/2` - Generalized Sigma function for integers
+   - `next_abundant/1` - Find the next abundant number after `n`
+   - `next_deficient/1` - Find the next deficient number after `n`
+   - `aliquot_sum/1` - Find the Aliquot Sum of `n`
   
   """
 
@@ -135,6 +135,27 @@ defmodule Chunky.Math do
   defp decomposition(n, k, acc) when rem(n, k) == 0, do: decomposition(div(n, k), k, [k | acc])
   defp decomposition(n, k, acc), do: decomposition(n, k + 1, acc)
 
+  @doc """
+  Find the Aliquot Sum of `n`.
+  
+  An [Aliquot Sum](https://en.wikipedia.org/wiki/Aliquot_sum) of an integer `n` is the sum of
+  the _proper divisors_ (all divisors _except_ `n`) of `n`.
+  
+  ## Examples
+  
+      iex> Math.aliquot_sum(1)
+      0
+  
+      iex> Math.aliquot_sum(10)
+      8
+      
+      iex> Math.aliquot_sum(48)
+      76
+  """
+  def aliquot_sum(n) when is_integer(n) and n > 0 do
+      factors(n) -- [n] |> Enum.sum()
+  end
+  
   @doc """
   Calculate the sigma-1 (or `σ1(n)`), also known as sum-of-divisors of an integer.
 
