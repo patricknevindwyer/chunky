@@ -4,6 +4,126 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "jordan_totient/2" do
+      test "j_2" do
+          k = 2
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 3, 72, 576, 886464]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )
+      end
+      
+      test "j_3" do
+          k = 3
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 7, 868, 22568, 960058008]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )
+          
+      end
+      
+      test "j_4" do
+          k = 4
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 15, 9360, 748800, 983709100800]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )          
+      end
+      
+      test "j_5" do
+          k = 5
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 31, 96844, 23436248, 990915284398248]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )          
+      end
+      
+      test "j_6" do
+          k = 6
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 63, 984312, 716579136, 992651447419579584]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )          
+      end
+      
+      test "j_7" do
+          k = 7
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 127, 9921748, 21688941128, 992566908799084488888]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )          
+      end
+      
+      test "j_8" do
+          k = 8
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 255, 99609120, 653435827200, 991876743346590471859200]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )          
+      end
+      
+      test "j_9" do
+          k = 9
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 511, 998046364, 19643548536248, 990985566285083759262811848]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )          
+      end
+      
+      test "j_10" do
+          k = 10
+          ns = [1, 2, 10, 30, 999]
+          os = [1, 1023, 9990233352, 589903298968896, 990028113712767365061852506304]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.jordan_totient(n, k) == o
+              end
+          )          
+      end
+  end
+  
   describe "is_coprime?/2" do
     test "any 1" do
       assert Math.is_coprime?(1, 24)

@@ -18,6 +18,9 @@
 
 ### Enhancements
 
+ - Chunky.Math
+  - jordan_totient/2 - Jordan totient `J-k(n)`
+  
 ### New Sequences
 
 

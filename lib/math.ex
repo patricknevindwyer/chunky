@@ -33,7 +33,8 @@ defmodule Chunky.Math do
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_achilles_number?/1` - Is `n` an Achilles Number?
    - `totient/1` - Calculate Euler's totient for `n`
-
+   - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
+  
   ## Cryptographic Math
 
    - `is_b_smooth?/2` - Is `n` prime factor smooth up to `b` - all prime factors <= `b`  
@@ -228,6 +229,63 @@ defmodule Chunky.Math do
     # now the result should be N*(continued fraction eulerian product)
     Fraction.multiply(n, c_f)
     |> Fraction.get_whole()
+  end
+  
+  @doc """
+  Jordan totient function `Jk(n)`.
+  
+  The Jordan totient is a generalized form of the Euler totient function, where `J1(n) = Φ(n)`. The
+  Jordan totient is a positive integer `m` of `k`-tuples that are co-prime to `n`.
+  
+  Calculating the totient is a semi-closed form of a Dirichlet series/Euler product, and is dependent
+  on the size of `n` for factorization and `k` for exponentiation.
+  
+  ## Examples
+  
+  Finding `J2(3)`:
+  
+        iex> Math.jordan_totient(3, 2)
+        8
+  
+  Finding `J9(7)`:
+  
+        iex> Math.jordan_totient(7, 9)
+        40353606
+  
+  Finding `J10(9999)`:
+      
+        iex> Math.jordan_totient(9999, 10)
+        9989835316811664782653775044519099200000
+        
+  """
+  def jordan_totient(n, k) when is_integer(n) and n > 0 and is_integer(k) and k > 0 do
+      # ref: https://en.wikipedia.org/wiki/Jordan%27s_totient_function#Definition
+      
+      # find prime factors, reduce to factors > 1
+      p_fs =
+        (prime_factors(n)
+         |> Enum.uniq()) --
+          [1]
+
+      # run an eulerian product
+      c_f =
+        p_fs
+        |> Enum.map(fn p_f ->
+            
+            # take p_f to the k
+            pfk = Math.pow(p_f, k)
+            Fraction.subtract(1, Fraction.new(1, pfk))
+            
+        end)
+
+        # reduce 1/pK via multiplication
+        |> Enum.reduce(Fraction.new(1, 1), fn x, acc -> Fraction.multiply(x, acc) end)
+
+      # now the result should be N*(continued fraction eulerian product)
+      # but first we take n to the k
+      Math.pow(n, k)
+      |> Fraction.multiply(c_f)
+      |> Fraction.get_whole()
   end
 
   @doc """

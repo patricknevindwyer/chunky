@@ -91,6 +91,10 @@
 
    
  - Math
+  - rewrite totient to map to generic totient, or named totient
+   - add euler_totient/1
+   - totient should take a keyword param to point to either jordan or euler
+   
   - exotic math functions (newtons method generalized, etc)
   - OEIS support functions
   
