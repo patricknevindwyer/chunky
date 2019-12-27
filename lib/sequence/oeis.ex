@@ -284,6 +284,13 @@ defmodule Chunky.Sequence.OEIS do
     |> Enum.each(fn {nom, cov} ->
       IO.puts("\t#{nom} - #{(cov * 100.0) |> Float.round(2)}%")
     end)
+    
+    IO.puts("Sequences")
+    # sequence, ordered list
+    oeis_sequences
+    |> Enum.map(fn %{sequence: sequence} -> sequence end)
+    |> Enum.sort()
+    |> Enum.each(fn s -> IO.puts("\t#{s}") end)
   end
   
   defp has_oeis_reference?(seq_def) do

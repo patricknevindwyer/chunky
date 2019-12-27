@@ -16,6 +16,7 @@ defmodule Chunky.Math do
   ## Number Theory
 
    - `is_prime?/1` - Test if an integer is prime
+   - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
    - `is_perfect?/1` - Test if an integer is _perfect_
    - `is_abundant?/1` - Test if an integer is _abundant_
    - `is_deficient?/1` - Test if an integer is _deficient_
@@ -31,6 +32,7 @@ defmodule Chunky.Math do
    - `is_perfect_square?/1` - Is `n` a perfect square?
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_achilles_number?/1` - Is `n` an Achilles Number?
+   - `totient/1` - Calculate Euler's totient for `n`
   
   ## Cryptographic Math
   
@@ -53,6 +55,7 @@ defmodule Chunky.Math do
 
   require Integer
   alias Chunky.Math
+  alias Chunky.Fraction
 
   @rand_max Kernel.trunc(:math.pow(2, 63))
 
@@ -159,6 +162,75 @@ defmodule Chunky.Math do
   defp decomposition(n, k, acc) when rem(n, k) == 0, do: decomposition(div(n, k), k, [k | acc])
   defp decomposition(n, k, acc), do: decomposition(n, k + 1, acc)
 
+  @doc """
+  Determine if two numbers, `a` and `b`, are co-prime.
+  
+  From [Wikipedia](https://en.wikipedia.org/wiki/Coprime_integers):
+  
+  > In number theory, two integers a and b are said to be relatively prime, 
+  > mutually prime,[1] or coprime (also written co-prime) if the only positive 
+  > integer (factor) that divides both of them is 1
+  
+  ## Examples
+  
+      iex> Math.is_coprime?(14, 15)
+      true
+  
+      iex> Math.is_coprime?(14, 21)
+      false
+  
+      iex> Math.is_coprime?(17, 2048)
+      true
+  """
+  def is_coprime?(a, b) when is_integer(a) and is_integer(b) and a > 0 and b > 0 do
+      Integer.gcd(a, b) == 1
+  end
+  
+  @doc """
+  Euler's totient function for `n`.
+  
+  Also called _phi_ or written as `Φ(n)`, the Eulerian totient function counts the positive
+  integers up to `n` that are _relatively prime_ or _coprime_ to `n`. The method used for
+  calculating this function relies on a partially closed form of Euler's product formula
+  that grows relative to the number of prime factors of `n`.
+  
+  ## Examples
+  
+      iex> Math.totient(36)
+      12
+  
+      iex> Math.totient(101)
+      100
+  
+      iex> Math.totient(99999)
+      64800
+  
+  """
+  def totient(n) when is_integer(n) and n > 0 do
+      
+      # ref: https://en.wikipedia.org/wiki/Euler%27s_totient_function#Euler's_product_formula
+      
+      # find prime factors, reduce to factors > 1
+      p_fs = (prime_factors(n)
+      |> Enum.uniq())
+      -- [1]
+      
+      # run an eulerian product
+      c_f = p_fs
+      |> Enum.map(
+          fn p_f -> 
+              Fraction.subtract(1, Fraction.new(1, p_f))
+          end
+      )
+      
+      # reduce 1/pK via multiplication
+      |> Enum.reduce(Fraction.new(1, 1), fn x, acc -> Fraction.multiply(x, acc) end)
+      
+      # now the result should be N*(continued fraction eulerian product)
+      Fraction.multiply(n, c_f)
+      |> Fraction.get_whole()
+  end
+  
   @doc """
   Check if an integer `n` is 3-smooth.
   

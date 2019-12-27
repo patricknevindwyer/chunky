@@ -6,6 +6,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
    - [A001597 - Perfect Powers](https://oeis.org/A001597) - `:a001597` - `create_sequence_a001597/1`
    - [A001694 - Powerful Numbers](https://oeis.org/A001694) - `:a001694` - `create_sequence_a001694/1`
+   - [A002182 - Highly composite numbers: numbers with record value](https://oeis.org/A002182) - `:a002182` - `create_sequence_a002182/1`
    - [A002473 - 7-smooth Numbers](https://oeis.org/A002473) - `:a002473` - `create_sequence_a03586/1`
    - [A003586 - 3-smooth Numbers](https://oeis.org/A003586) - `:a003586` - `create_sequence_a03586/1`
    - [A005361 - Product of Expoenents of prime factors of N](https://oeis.org/A005361) - `:a005361` - `create_sequence_a005361/1`
@@ -85,7 +86,59 @@ defmodule Chunky.Sequence.OEIS.Factors do
   def seq_a001694(_idx, last) do
       Math.next_number(&Math.is_powerful_number?/1, last)
   end
+
+  @doc """
+  OEIS Sequence `A002182` - Highly composite numbers: numbers with record value
+
+  From [OEIS A002182](https://oeis.org/A002182):
+
+  > Highly composite numbers, definition (1): where d(n), the number of divisors of n (A000005), increases to a record. 
+  > (Formerly M1025 N0385)
+      
+  **Sequence IDs**: `:a002182`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a002182) |> Sequence.take!(20)
+      [1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360, 720, 840, 1260, 1680, 2520, 5040, 7560]
+  """
+  @doc offset: 1, sequence: "Highly composite numbers, record value of sigma0(n)", references: [{:oeis, :a002182, "https://oeis.org/A002182"}]
+  def create_sequence_a002182(_opts) do
+      %{
+          next_fn: &seq_a002182/3,
+          data: %{
+              sig_0_max: 0
+          }
+      }
+  end
   
+  defp seq_a002182(:init, data, _value), do: %{data: data, value: 0}
+  defp seq_a002182(:next, data, value) do
+      sig_0_max = data.sig_0_max
+      next_han = seq_a002182_greater_sig_0(sig_0_max, value + 1)
+      next_sig_0_max = Math.sigma(next_han, 0)
+      
+      {
+          :continue,
+          %{
+              data: data |> Map.put(:sig_0_max, next_sig_0_max),
+              value: next_han
+          }
+      }
+  end
+  
+  defp seq_a002182_greater_sig_0(last_sig_max, val) do
+     if Math.sigma(val, 0) > last_sig_max do
+         val
+     else
+         seq_a002182_greater_sig_0(last_sig_max, val + 1)
+     end 
+  end
+    
   @doc """
   OEIS Sequence `A002473` - 7-smooth Numbers
 

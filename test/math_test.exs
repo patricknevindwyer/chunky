@@ -4,6 +4,48 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_coprime?/2" do
+      
+      test "any 1" do
+          assert Math.is_coprime?(1, 24)
+          assert Math.is_coprime?(13, 1)
+      end
+      
+      test "14/15" do
+          assert Math.is_coprime?(14, 15)
+      end
+      
+      test "2/2048" do
+          assert Math.is_coprime?(2, 2048) == false
+      end
+      
+      test "17/2048" do
+          assert Math.is_coprime?(17, 2048)
+      end
+  end
+  
+  describe "totient/1" do      
+      test "1" do
+          assert Math.totient(1) == 1
+      end
+      
+      test "36" do
+          assert Math.totient(36) == 12
+      end
+      
+      test "141" do
+          assert Math.totient(141) == 92
+      end
+      
+      test "80000" do
+          assert Math.totient(80000) == 32000
+      end
+      
+      test "100000" do
+          assert Math.totient(100000) == 40000
+      end
+  end
+  
   describe "is_b_smooth?/2" do
       test "not prime" do
           assert_raise ArgumentError, fn ->

@@ -36,6 +36,8 @@
   - is_perfect_cube?/1 - Is integer `n` a perfect cube?
   - is_root_of?/2 - Is integer `n` any k-th root of `m`?
   - is_achilles_number?/1 - Is integer `n` an achilles number?
+  - is_coprime?/2 - Test if `m` and `n` are co-prime
+  - totient/1 - Calculate Euler's totient for `n`
   
  - Chunky.Sequence
   - drop/2 - Like Enum.drop

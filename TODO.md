@@ -31,7 +31,6 @@
   - add Panarithmetic Numbers (https://oeis.org/A005153)
   - add an OEIS.Factors module
  
-  - Sequence.drop(seq, quant)
   - Sequence.at(seq, idx)
   - add Math.partition(int) for [0, 250] - use sequence a000041
     
@@ -43,8 +42,12 @@
  - Modulo Arithmetic
   
  - Sequences
-  - b-smooth:
-   - extend doctest in Factors for top N known in OEIS
+  - document patterns of developing sequences
+   - using Math.next_number/2 for easy computable sequences (see a001597 in OEIS.Factors)
+   - for _highly_ or _record value_ sequences (see a002093 in OEIS.Sigma)
+   
+  - powers of N
+  - check power of 2 sequence, make sure we're using our Math.pow/2 instead of :math.pow/2
  
  - tool - download JSON of sequence, build formatted @doc string and @doc attrs
  
@@ -88,7 +91,7 @@
 
    
  - Math
-  - exotic math functions (totients, newtons method generalized, etc)
+  - exotic math functions (newtons method generalized, etc)
   - OEIS support functions
   
  - Chunky.Fraction
