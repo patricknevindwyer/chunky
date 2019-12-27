@@ -102,8 +102,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a002473) |> Sequence.take!(20)
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a002473) |> Sequence.drop(20) |> Sequence.take!(20)
+      [28, 30, 32, 35, 36, 40, 42, 45, 48, 49, 50, 54, 56, 60, 63, 64, 70, 72, 75, 80]
 
   """
   @doc offset: 1, sequence: "7-smooth numbers", references: [{:oeis, :a002473, "https://oeis.org/A002473"}]
@@ -131,8 +131,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a003586) |> Sequence.take!(20)
-      [1, 2, 3, 4, 6, 8, 9, 12, 16, 18, 24, 27, 32, 36, 48, 54, 64, 72, 81, 96]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a003586) |> Sequence.drop(20) |> Sequence.take!(20)
+      [108, 128, 144, 162, 192, 216, 243, 256, 288, 324, 384, 432, 486, 512, 576, 648, 729, 768, 864, 972]
 
   """
   @doc offset: 1, sequence: "3-smooth numbers", references: [{:oeis, :a003586, "https://oeis.org/A003586"}]
@@ -250,8 +250,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a051037) |> Sequence.take!(20)
-      [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a051037) |> Sequence.drop(20) |> Sequence.take!(20)
+      [40, 45, 48, 50, 54, 60, 64, 72, 75, 80, 81, 90, 96, 100, 108, 120, 125, 128, 135, 144]
 
   """
   @doc offset: 1, sequence: "5-smooth numbers", references: [{:oeis, :a051037, "https://oeis.org/A051037"}]
@@ -279,8 +279,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a051038) |> Sequence.take!(20)
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 18, 20, 21, 22, 24]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a051038) |> Sequence.drop(20) |> Sequence.take!(20)
+      [25, 27, 28, 30, 32, 33, 35, 36, 40, 42, 44, 45, 48, 49, 50, 54, 55, 56, 60, 63]
 
   """
   @doc offset: 1, sequence: "11-smooth numbers", references: [{:oeis, :a051038, "https://oeis.org/A051038"}]
@@ -335,8 +335,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a080197) |> Sequence.take!(20)
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 21, 22]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080197) |> Sequence.drop(20) |> Sequence.take!(20)
+      [24, 25, 26, 27, 28, 30, 32, 33, 35, 36, 39, 40, 42, 44, 45, 48, 49, 50, 52, 54]
 
   """
   @doc offset: 1, sequence: "13-smooth numbers", references: [{:oeis, :a080197, "https://oeis.org/A080197"}]
@@ -364,8 +364,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a080681) |> Sequence.take!(20)
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080681) |> Sequence.drop(20) |> Sequence.take!(20)
+      [22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 39, 40, 42, 44, 45, 48, 49, 50]
 
   """
   @doc offset: 1, sequence: "17-smooth numbers", references: [{:oeis, :a080681, "https://oeis.org/A080681"}]
@@ -393,8 +393,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a080682) |> Sequence.take!(20)
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080682) |> Sequence.drop(20) |> Sequence.take!(20)
+      [21, 22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 48]
 
   """
   @doc offset: 1, sequence: "19-smooth numbers", references: [{:oeis, :a080682, "https://oeis.org/A080682"}]
@@ -422,8 +422,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS.Factors, :a080683) |> Sequence.take!(20)
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080683) |> Sequence.drop(20) |> Sequence.take!(20)
+      [21, 22, 23, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45]
 
   """
   @doc offset: 1, sequence: "23-smooth numbers", references: [{:oeis, :a080683, "https://oeis.org/A080683"}]
