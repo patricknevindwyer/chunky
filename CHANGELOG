@@ -23,6 +23,29 @@
   
 ### New Sequences
 
+ - A007434 - Jordan-2 totient `J_2(n)`
+ - A059376 - Jordan function J_3(n)
+ - A059377 - Jordan function J_4(n)
+ - A059378 - Jordan function J_5(n)
+ - A065958 - a(n) = n^2*Product_{distinct primes p dividing n} (1+1/p^2)
+ - A065959 - a(n) = n^3*Product_{distinct primes p dividing n} (1+1/p^3)
+ - A065960 - a(n) = n^4*Product_{distinct primes p dividing n} (1+1/p^4)
+ - A069091 - Jordan function J_6(n)
+ - A069092 - Jordan function J_7(n)
+ - A069093 - Jordan function J_8(n)
+ - A069094 - Jordan function J_9(n)
+ - A069095 - Jordan function J_10(n)
+ - A160889 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 4
+ - A160891 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 5
+ - A160893 - a(n) = Sum_{d|n} Möbius(n/d)*d^5/phi(n)
+ - A160895 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 7
+ - A160897 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 8
+ - A160908 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 9
+ - A160953 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 10
+ - A160957 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 11
+ - A160960 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 12
+ - A001615 - Dedekind psi function
+ 
 
 ## v0.9.0
 

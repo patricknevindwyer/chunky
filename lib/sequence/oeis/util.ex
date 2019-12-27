@@ -28,11 +28,12 @@ defmodule Chunky.Sequence.OEIS.Util do
       
       # select out the interesting bits
       %{
-          "id" => old_id,
           "data" => sample_data_raw,
           "name" => seq_name,
           "offset" => offset_raw
       } = result
+      
+      old_id = Map.get(result, "id", "")
             
       # parse the offset data
       [s_off, _] = String.split(offset_raw, ",")
@@ -70,7 +71,7 @@ defmodule Chunky.Sequence.OEIS.Util do
 
       ## Example
 
-          iex> Sequence.create(Sequence.OEIS.Factors, :#{seq_id_lower}) |> Sequence.take!(#{seq_sample_data_size})
+          iex> Sequence.create(#{in_module}, :#{seq_id_lower}) |> Sequence.take!(#{seq_sample_data_size})
           [#{sample_data_raw}]
 
 
