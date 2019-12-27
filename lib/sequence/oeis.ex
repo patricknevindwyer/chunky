@@ -242,32 +242,29 @@ defmodule Chunky.Sequence.OEIS do
 
     length(covered) / length(mapped_seq)
   end
-  
+
   @doc """
   Print out a coverage report for named sequence groups (like CORE) in the OEIS
   sequence support modules.
   """
   def coverage() do
-      
-      # total OEIS sequences
-      oeis_sequences = Sequence.available() |> Enum.filter(&has_oeis_reference?/1)
-      
-      # total report
-      IO.puts("OEIS Coverage")
-      IO.puts("\t#{length(oeis_sequences)} total sequences")
-      
-      IO.puts("By Module")
-      # group by module
-      oeis_sequences
-      |> Enum.group_by(fn %{module: mod} -> mod end)
-      |> Enum.each(
-          fn {mod, seqs} -> 
-              IO.puts("\t#{mod} - #{length(seqs)} sequences")
-          end
-      )
-      
-      IO.puts("Sequence Groups")
-      # build and report specific sequence group coverage
+    # total OEIS sequences
+    oeis_sequences = Sequence.available() |> Enum.filter(&has_oeis_reference?/1)
+
+    # total report
+    IO.puts("OEIS Coverage")
+    IO.puts("\t#{length(oeis_sequences)} total sequences")
+
+    IO.puts("By Module")
+    # group by module
+    oeis_sequences
+    |> Enum.group_by(fn %{module: mod} -> mod end)
+    |> Enum.each(fn {mod, seqs} ->
+      IO.puts("\t#{mod} - #{length(seqs)} sequences")
+    end)
+
+    IO.puts("Sequence Groups")
+    # build and report specific sequence group coverage
     [
       {Sequence.OEIS, :keyword_core}
     ]
@@ -284,7 +281,7 @@ defmodule Chunky.Sequence.OEIS do
     |> Enum.each(fn {nom, cov} ->
       IO.puts("\t#{nom} - #{(cov * 100.0) |> Float.round(2)}%")
     end)
-    
+
     IO.puts("Sequences")
     # sequence, ordered list
     oeis_sequences
@@ -292,12 +289,12 @@ defmodule Chunky.Sequence.OEIS do
     |> Enum.sort()
     |> Enum.each(fn s -> IO.puts("\t#{s}") end)
   end
-  
+
   defp has_oeis_reference?(seq_def) do
-     seq_def
-     |> Sequence.get_references()
-     |> Enum.filter(fn {src, _, _} -> src == :oeis end) 
-     |> length() > 0
+    seq_def
+    |> Sequence.get_references()
+    |> Enum.filter(fn {src, _, _} -> src == :oeis end)
+    |> length() > 0
   end
 
   @doc """

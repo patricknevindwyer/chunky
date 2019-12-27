@@ -49,29 +49,29 @@ defmodule Chunky.SequenceTest do
   end
 
   describe "drop/2" do
-      test "empty" do
-          assert %Sequence{} = seq = Sequence.create(Sequence.Test, :list_empty)
-          p_seq = seq |> Sequence.drop(10)
-          assert p_seq |> Sequence.take!(10) == []
-      end
-      
-      test "short - drop to end" do
-          assert %Sequence{} = seq = Sequence.create(Sequence.Test, :list_small)
-          p_seq = seq |> Sequence.drop(10)
-          assert p_seq |> Sequence.take!(10) == []
-      end
-      
-      test "drop 0" do
-          assert %Sequence{} = seq = Sequence.create(Sequence.Basic, :whole_numbers)
-          assert seq |> Sequence.drop(0) |> Sequence.take!(10) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-      end
-      
-      test "drop N" do
-          assert %Sequence{} = seq = Sequence.create(Sequence.Basic, :whole_numbers)
-          assert seq |> Sequence.drop(3) |> Sequence.take!(10) == [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-      end
+    test "empty" do
+      assert %Sequence{} = seq = Sequence.create(Sequence.Test, :list_empty)
+      p_seq = seq |> Sequence.drop(10)
+      assert p_seq |> Sequence.take!(10) == []
+    end
+
+    test "short - drop to end" do
+      assert %Sequence{} = seq = Sequence.create(Sequence.Test, :list_small)
+      p_seq = seq |> Sequence.drop(10)
+      assert p_seq |> Sequence.take!(10) == []
+    end
+
+    test "drop 0" do
+      assert %Sequence{} = seq = Sequence.create(Sequence.Basic, :whole_numbers)
+      assert seq |> Sequence.drop(0) |> Sequence.take!(10) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    end
+
+    test "drop N" do
+      assert %Sequence{} = seq = Sequence.create(Sequence.Basic, :whole_numbers)
+      assert seq |> Sequence.drop(3) |> Sequence.take!(10) == [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    end
   end
-  
+
   describe "is_instance?/2" do
     test "is_instance?/2" do
       @sequences

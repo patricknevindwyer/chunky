@@ -5,459 +5,454 @@ defmodule Chunky.MathTest do
   doctest Chunky.Math
 
   describe "is_coprime?/2" do
-      
-      test "any 1" do
-          assert Math.is_coprime?(1, 24)
-          assert Math.is_coprime?(13, 1)
-      end
-      
-      test "14/15" do
-          assert Math.is_coprime?(14, 15)
-      end
-      
-      test "2/2048" do
-          assert Math.is_coprime?(2, 2048) == false
-      end
-      
-      test "17/2048" do
-          assert Math.is_coprime?(17, 2048)
-      end
+    test "any 1" do
+      assert Math.is_coprime?(1, 24)
+      assert Math.is_coprime?(13, 1)
+    end
+
+    test "14/15" do
+      assert Math.is_coprime?(14, 15)
+    end
+
+    test "2/2048" do
+      assert Math.is_coprime?(2, 2048) == false
+    end
+
+    test "17/2048" do
+      assert Math.is_coprime?(17, 2048)
+    end
   end
-  
-  describe "totient/1" do      
-      test "1" do
-          assert Math.totient(1) == 1
-      end
-      
-      test "36" do
-          assert Math.totient(36) == 12
-      end
-      
-      test "141" do
-          assert Math.totient(141) == 92
-      end
-      
-      test "80000" do
-          assert Math.totient(80000) == 32000
-      end
-      
-      test "100000" do
-          assert Math.totient(100000) == 40000
-      end
+
+  describe "totient/1" do
+    test "1" do
+      assert Math.totient(1) == 1
+    end
+
+    test "36" do
+      assert Math.totient(36) == 12
+    end
+
+    test "141" do
+      assert Math.totient(141) == 92
+    end
+
+    test "80000" do
+      assert Math.totient(80000) == 32000
+    end
+
+    test "100000" do
+      assert Math.totient(100_000) == 40000
+    end
   end
-  
+
   describe "is_b_smooth?/2" do
-      test "not prime" do
-          assert_raise ArgumentError, fn ->
-             Math.is_b_smooth?(4, 20) 
-          end
-      end      
+    test "not prime" do
+      assert_raise ArgumentError, fn ->
+        Math.is_b_smooth?(4, 20)
+      end
+    end
   end
-  
+
   describe "is_3_smooth?/1" do
-      test "yes" do
-          [1, 2, 3, 4, 6, 8, 144] 
-          |> Enum.each(fn n -> assert Math.is_3_smooth?(n) end)
-      end
-      
-      test "no" do
-          [5, 7, 10, 65, 513]
-          |> Enum.each(fn n -> assert !Math.is_3_smooth?(n) end)
-      end
+    test "yes" do
+      [1, 2, 3, 4, 6, 8, 144]
+      |> Enum.each(fn n -> assert Math.is_3_smooth?(n) end)
+    end
+
+    test "no" do
+      [5, 7, 10, 65, 513]
+      |> Enum.each(fn n -> assert !Math.is_3_smooth?(n) end)
+    end
   end
-  
+
   describe "is_5_smooth?/1" do
-      test "yes" do
-          [1, 3, 5, 9, 128, 375] 
-          |> Enum.each(fn n -> assert Math.is_5_smooth?(n) end)
-      end
-      
-      test "no" do
-          [13, 14, 124, 280]
-          |> Enum.each(fn n -> assert !Math.is_5_smooth?(n) end)
-      end      
+    test "yes" do
+      [1, 3, 5, 9, 128, 375]
+      |> Enum.each(fn n -> assert Math.is_5_smooth?(n) end)
+    end
+
+    test "no" do
+      [13, 14, 124, 280]
+      |> Enum.each(fn n -> assert !Math.is_5_smooth?(n) end)
+    end
   end
 
   describe "is_7_smooth?/1" do
-      test "yes" do
-          [4, 7, 16, 24, 49, 150, 180] 
-          |> Enum.each(fn n -> assert Math.is_7_smooth?(n) end)
-      end
-      
-      test "no" do
-          [19, 31, 130, 155, 190]
-          |> Enum.each(fn n -> assert !Math.is_7_smooth?(n) end)
-      end      
+    test "yes" do
+      [4, 7, 16, 24, 49, 150, 180]
+      |> Enum.each(fn n -> assert Math.is_7_smooth?(n) end)
+    end
+
+    test "no" do
+      [19, 31, 130, 155, 190]
+      |> Enum.each(fn n -> assert !Math.is_7_smooth?(n) end)
+    end
   end
-  
+
   describe "is_11_smooth?/1" do
-      test "yes" do
-          [5, 12, 56, 60, 121] 
-          |> Enum.each(fn n -> assert Math.is_11_smooth?(n) end)
-      end
-      
-      test "no" do
-          [13, 58, 102, 124, 138]
-          |> Enum.each(fn n -> assert !Math.is_11_smooth?(n) end)
-      end      
+    test "yes" do
+      [5, 12, 56, 60, 121]
+      |> Enum.each(fn n -> assert Math.is_11_smooth?(n) end)
+    end
+
+    test "no" do
+      [13, 58, 102, 124, 138]
+      |> Enum.each(fn n -> assert !Math.is_11_smooth?(n) end)
+    end
   end
-  
+
   describe "is_13_smooth?/1" do
-      test "yes" do
-          [6, 14, 24, 28, 44, 98] 
-          |> Enum.each(fn n -> assert Math.is_13_smooth?(n) end)
-      end
-      
-      test "no" do
-          [19, 38, 51, 94, 106]
-          |> Enum.each(fn n -> assert !Math.is_13_smooth?(n) end)
-      end      
+    test "yes" do
+      [6, 14, 24, 28, 44, 98]
+      |> Enum.each(fn n -> assert Math.is_13_smooth?(n) end)
+    end
+
+    test "no" do
+      [19, 38, 51, 94, 106]
+      |> Enum.each(fn n -> assert !Math.is_13_smooth?(n) end)
+    end
   end
-  
+
   describe "is_17_smooth?/1" do
-      test "yes" do
-          [9, 17, 21, 54, 63, 80, 105] 
-          |> Enum.each(fn n -> assert Math.is_17_smooth?(n) end)
-      end
-      
-      test "no" do
-          [19, 29, 43, 92, 103]
-          |> Enum.each(fn n -> assert !Math.is_17_smooth?(n) end)
-      end      
+    test "yes" do
+      [9, 17, 21, 54, 63, 80, 105]
+      |> Enum.each(fn n -> assert Math.is_17_smooth?(n) end)
+    end
+
+    test "no" do
+      [19, 29, 43, 92, 103]
+      |> Enum.each(fn n -> assert !Math.is_17_smooth?(n) end)
+    end
   end
-  
+
   describe "is_19_smooth?/1" do
-      test "yes" do
-          [8, 20, 36, 52, 68, 91, 100] 
-          |> Enum.each(fn n -> assert Math.is_19_smooth?(n) end)
-      end
-      
-      test "no" do
-          [23, 47, 67, 79, 92, 97]
-          |> Enum.each(fn n -> assert !Math.is_19_smooth?(n) end)
-      end      
+    test "yes" do
+      [8, 20, 36, 52, 68, 91, 100]
+      |> Enum.each(fn n -> assert Math.is_19_smooth?(n) end)
+    end
+
+    test "no" do
+      [23, 47, 67, 79, 92, 97]
+      |> Enum.each(fn n -> assert !Math.is_19_smooth?(n) end)
+    end
   end
-  
+
   describe "is_23_smooth?/1" do
-      test "yes" do
-          [8, 33, 50, 65, 77, 90, 95] 
-          |> Enum.each(fn n -> assert Math.is_23_smooth?(n) end)
-      end
-      
-      test "no" do
-          [29, 37, 47, 53, 67, 83]
-          |> Enum.each(fn n -> assert !Math.is_23_smooth?(n) end)
-      end      
+    test "yes" do
+      [8, 33, 50, 65, 77, 90, 95]
+      |> Enum.each(fn n -> assert Math.is_23_smooth?(n) end)
+    end
+
+    test "no" do
+      [29, 37, 47, 53, 67, 83]
+      |> Enum.each(fn n -> assert !Math.is_23_smooth?(n) end)
+    end
   end
-  
+
   describe "is_achilles_number?/1" do
-      
-      test "1" do
-          assert Math.is_achilles_number?(1) == false
-      end
-      
-      test "70" do
-          assert Math.is_achilles_number?(70) == false
-      end
-      
-      test "72" do
-          assert Math.is_achilles_number?(72)
-      end
-      
-      test "5000" do
-          assert Math.is_achilles_number?(5000)
-      end
-      
-      test "5425069447" do
-          assert Math.is_achilles_number?(5425069447)
-      end
-      
+    test "1" do
+      assert Math.is_achilles_number?(1) == false
+    end
+
+    test "70" do
+      assert Math.is_achilles_number?(70) == false
+    end
+
+    test "72" do
+      assert Math.is_achilles_number?(72)
+    end
+
+    test "5000" do
+      assert Math.is_achilles_number?(5000)
+    end
+
+    test "5425069447" do
+      assert Math.is_achilles_number?(5_425_069_447)
+    end
   end
-  
+
   describe "is_perfect_power?/1" do
-      test "1" do
-         assert Math.is_perfect_power?(1) == true 
-      end
-      
-      test "8" do
-          assert Math.is_perfect_power?(8)
-      end
-      
-      test "18" do
-          assert Math.is_perfect_power?(18) == false           
-      end
-      
-      test "676" do
-          assert Math.is_perfect_power?(676)           
-      end
-      
-      test "1010" do
-          assert Math.is_perfect_power?(1010) == false           
-      end
+    test "1" do
+      assert Math.is_perfect_power?(1) == true
+    end
+
+    test "8" do
+      assert Math.is_perfect_power?(8)
+    end
+
+    test "18" do
+      assert Math.is_perfect_power?(18) == false
+    end
+
+    test "676" do
+      assert Math.is_perfect_power?(676)
+    end
+
+    test "1010" do
+      assert Math.is_perfect_power?(1010) == false
+    end
   end
-  
+
   describe "is_root_of?/2" do
-      test "2, 8" do
-          assert Math.is_root_of?(2, 8)
-      end
-      
-      test "4, 64" do
-          assert Math.is_root_of?(4, 64)          
-      end
-      
-      test "7, 16807" do
-          assert Math.is_root_of?(7, 16807)          
-      end
-      
-      test "9, 282429536481" do
-          assert Math.is_root_of?(9, 282429536481)
-      end
+    test "2, 8" do
+      assert Math.is_root_of?(2, 8)
+    end
+
+    test "4, 64" do
+      assert Math.is_root_of?(4, 64)
+    end
+
+    test "7, 16807" do
+      assert Math.is_root_of?(7, 16807)
+    end
+
+    test "9, 282429536481" do
+      assert Math.is_root_of?(9, 282_429_536_481)
+    end
   end
-  
+
   describe "is_perfect_square?/1" do
-      test "3" do
-          assert Math.is_perfect_square?(3) == false
-      end
-      
-      test "12" do
-          assert Math.is_perfect_square?(12) == false
-      end
-      
-      test "49" do
-          assert Math.is_perfect_square?(49)          
-      end
-      
-      test "29241" do
-          assert Math.is_perfect_square?(29241)          
-      end
+    test "3" do
+      assert Math.is_perfect_square?(3) == false
+    end
+
+    test "12" do
+      assert Math.is_perfect_square?(12) == false
+    end
+
+    test "49" do
+      assert Math.is_perfect_square?(49)
+    end
+
+    test "29241" do
+      assert Math.is_perfect_square?(29241)
+    end
   end
-  
+
   describe "is_perfect_cube?/1" do
-      test "27" do
-          assert Math.is_perfect_cube?(27)
-      end
-      
-      test "400" do
-          assert Math.is_perfect_cube?(400) == false
-      end
-      
-      test "405224" do
-          assert Math.is_perfect_cube?(405224)
-      end
+    test "27" do
+      assert Math.is_perfect_cube?(27)
+    end
+
+    test "400" do
+      assert Math.is_perfect_cube?(400) == false
+    end
+
+    test "405224" do
+      assert Math.is_perfect_cube?(405_224)
+    end
   end
-  
+
   describe "is_highly_powerful_number?/1" do
-      test "1" do
-         assert Math.is_highly_powerful_number?(1) 
-      end
-      
-      test "2" do
-          assert Math.is_highly_powerful_number?(2) == false
-      end
-      
-      test "64" do
-          assert Math.is_highly_powerful_number?(64) 
-      end
-      
-      test "65" do
-          assert Math.is_highly_powerful_number?(65) == false
-      end
-      
-      test "41472" do
-          assert Math.is_highly_powerful_number?(41472) 
-      end
-      
-      test "41474" do
-          assert Math.is_highly_powerful_number?(41474) == false
-      end
+    test "1" do
+      assert Math.is_highly_powerful_number?(1)
+    end
+
+    test "2" do
+      assert Math.is_highly_powerful_number?(2) == false
+    end
+
+    test "64" do
+      assert Math.is_highly_powerful_number?(64)
+    end
+
+    test "65" do
+      assert Math.is_highly_powerful_number?(65) == false
+    end
+
+    test "41472" do
+      assert Math.is_highly_powerful_number?(41472)
+    end
+
+    test "41474" do
+      assert Math.is_highly_powerful_number?(41474) == false
+    end
   end
-  
+
   describe "product_of_prime_factor_exponents/1" do
-      test "1" do
-          assert Math.product_of_prime_factor_exponents(1) == 1
-      end
-      
-      test "8" do
-          assert Math.product_of_prime_factor_exponents(8) == 3
-      end
-      
-      test "134" do
-          assert Math.product_of_prime_factor_exponents(135) == 3
-      end
-      
-      test "100000" do
-          assert Math.product_of_prime_factor_exponents(100000) == 25
-      end    
+    test "1" do
+      assert Math.product_of_prime_factor_exponents(1) == 1
+    end
+
+    test "8" do
+      assert Math.product_of_prime_factor_exponents(8) == 3
+    end
+
+    test "134" do
+      assert Math.product_of_prime_factor_exponents(135) == 3
+    end
+
+    test "100000" do
+      assert Math.product_of_prime_factor_exponents(100_000) == 25
+    end
   end
-  
+
   describe "is_powerful_number?/1" do
-      test "1" do
-          assert Math.is_powerful_number?(1)
-      end
-      
-      test "48" do
-          assert Math.is_powerful_number?(48) == false
-      end
-      
-      test "49" do
-          assert Math.is_powerful_number?(49)
-      end
-      
-      test "972" do
-          assert Math.is_powerful_number?(972)
-      end
+    test "1" do
+      assert Math.is_powerful_number?(1)
+    end
+
+    test "48" do
+      assert Math.is_powerful_number?(48) == false
+    end
+
+    test "49" do
+      assert Math.is_powerful_number?(49)
+    end
+
+    test "972" do
+      assert Math.is_powerful_number?(972)
+    end
   end
-  
+
   describe "is_highly_abundant?/1" do
-      test "1" do
-          assert Math.is_highly_abundant?(1)
-      end
-      
-      test "10" do
-          assert Math.is_highly_abundant?(10)          
-      end
-      
-      test "11" do
-          assert Math.is_highly_abundant?(11) == false
-      end
-      
-      test "59" do
-          assert Math.is_highly_abundant?(59) == false
-      end
-      
-      test "60" do
-          assert Math.is_highly_abundant?(60)          
-      end
-      
-      test "1980" do
-          assert Math.is_highly_abundant?(1980)          
-      end
+    test "1" do
+      assert Math.is_highly_abundant?(1)
+    end
+
+    test "10" do
+      assert Math.is_highly_abundant?(10)
+    end
+
+    test "11" do
+      assert Math.is_highly_abundant?(11) == false
+    end
+
+    test "59" do
+      assert Math.is_highly_abundant?(59) == false
+    end
+
+    test "60" do
+      assert Math.is_highly_abundant?(60)
+    end
+
+    test "1980" do
+      assert Math.is_highly_abundant?(1980)
+    end
   end
-  
+
   describe "aliquot_sum/1" do
-      test "1" do
-         assert Math.aliquot_sum(1) == 0 
-      end
-      
-      test "10" do
-          assert Math.aliquot_sum(10) == 8
-      end
-      
-      test "100" do
-          assert Math.aliquot_sum(100) == 117
-      end
+    test "1" do
+      assert Math.aliquot_sum(1) == 0
+    end
+
+    test "10" do
+      assert Math.aliquot_sum(10) == 8
+    end
+
+    test "100" do
+      assert Math.aliquot_sum(100) == 117
+    end
   end
-  
+
   describe "is_arithmetic_number?/1" do
-      test "1" do
-          assert Math.is_arithmetic_number?(1)
-      end
-      
-      test "12910" do
-          assert Math.is_arithmetic_number?(12910)          
-      end
-      
-      test "12916" do
-          assert Math.is_arithmetic_number?(12916) == false
-      end
+    test "1" do
+      assert Math.is_arithmetic_number?(1)
+    end
+
+    test "12910" do
+      assert Math.is_arithmetic_number?(12910)
+    end
+
+    test "12916" do
+      assert Math.is_arithmetic_number?(12916) == false
+    end
   end
-  
+
   describe "is_perfect?/1" do
-      test "1" do
-          assert Math.is_perfect?(1) == false
-      end
-      
-      test "6" do
-          assert Math.is_perfect?(6)
-      end
-      
-      test "20" do
-          assert Math.is_perfect?(20) == false
-      end
-      
-      test "496" do
-          assert Math.is_perfect?(496)
-      end
-      
-      test "1024" do
-          assert Math.is_perfect?(1024) == false
-      end
-      
-      test "137438691328" do
-          assert Math.is_perfect?(137438691328)
-      end
+    test "1" do
+      assert Math.is_perfect?(1) == false
+    end
+
+    test "6" do
+      assert Math.is_perfect?(6)
+    end
+
+    test "20" do
+      assert Math.is_perfect?(20) == false
+    end
+
+    test "496" do
+      assert Math.is_perfect?(496)
+    end
+
+    test "1024" do
+      assert Math.is_perfect?(1024) == false
+    end
+
+    test "137438691328" do
+      assert Math.is_perfect?(137_438_691_328)
+    end
   end
-  
+
   describe "is_deficient?/1" do
-      test "1" do
-          assert Math.is_deficient?(1)
-      end
-      
-      test "6" do
-          assert Math.is_deficient?(6) == false
-      end
-      
-      test "60" do
-          assert Math.is_deficient?(60) == false
-      end
-      
-      test "265" do
-          assert Math.is_deficient?(265)
-      end
+    test "1" do
+      assert Math.is_deficient?(1)
+    end
+
+    test "6" do
+      assert Math.is_deficient?(6) == false
+    end
+
+    test "60" do
+      assert Math.is_deficient?(60) == false
+    end
+
+    test "265" do
+      assert Math.is_deficient?(265)
+    end
   end
-  
+
   describe "next_deficient/1" do
-      
-      test "1" do
-          assert Math.next_deficient(1) == 2
-      end
-      
-      test "5" do
-          assert Math.next_deficient(5) == 7
-      end
-      
-      test "100" do
-          assert Math.next_deficient(100) == 101
-      end
+    test "1" do
+      assert Math.next_deficient(1) == 2
+    end
+
+    test "5" do
+      assert Math.next_deficient(5) == 7
+    end
+
+    test "100" do
+      assert Math.next_deficient(100) == 101
+    end
   end
-  
+
   describe "is_abundant?/1" do
-      test "1" do
-          assert Math.is_abundant?(1) == false
-      end
-      
-      test "12" do
-          assert Math.is_abundant?(12)          
-      end
-      
-      test "60" do
-          assert Math.is_abundant?(60)          
-      end
-      
-      test "252" do
-          assert Math.is_abundant?(252)
-      end
-      
-      test "945" do
-          assert Math.is_abundant?(945)          
-      end
+    test "1" do
+      assert Math.is_abundant?(1) == false
+    end
+
+    test "12" do
+      assert Math.is_abundant?(12)
+    end
+
+    test "60" do
+      assert Math.is_abundant?(60)
+    end
+
+    test "252" do
+      assert Math.is_abundant?(252)
+    end
+
+    test "945" do
+      assert Math.is_abundant?(945)
+    end
   end
-  
+
   describe "next_abundant/1" do
-      
-      test "1" do
-          assert Math.next_abundant(1) == 12
-      end
-      
-      test "12" do
-          assert Math.next_abundant(12) == 18
-      end
-      
-      test "144" do
-          assert Math.next_abundant(144) == 150          
-      end
+    test "1" do
+      assert Math.next_abundant(1) == 12
+    end
+
+    test "12" do
+      assert Math.next_abundant(12) == 18
+    end
+
+    test "144" do
+      assert Math.next_abundant(144) == 150
+    end
   end
-  
+
   describe "pow/2" do
     test "-2^3" do
       assert Math.pow(-2, 3) == -8

@@ -134,7 +134,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
 
   > Highly abundant numbers: numbers n such that sigma(n) > sigma(m) for all m < n. 
   > (Formerly M0553 N0200)
-  
+
   **Sequence IDs**: `:a002093`
 
   **Finite**: False
@@ -147,47 +147,52 @@ defmodule Chunky.Sequence.OEIS.Sigma do
       [1, 2, 3, 4, 6, 8, 10, 12, 16, 18, 20, 24, 30, 36, 42, 48, 60, 72, 84, 90, 96, 108, 120, 144, 168]
 
   """
-  @doc offset: 1, sequence: "Highly abundant numbers", references: [{:oeis, :a002093, "https://oeis.org/A002093"}, {:wikipedia, :highly_abundant_number, "https://en.wikipedia.org/wiki/Highly_abundant_number"}]
+  @doc offset: 1,
+       sequence: "Highly abundant numbers",
+       references: [
+         {:oeis, :a002093, "https://oeis.org/A002093"},
+         {:wikipedia, :highly_abundant_number,
+          "https://en.wikipedia.org/wiki/Highly_abundant_number"}
+       ]
   def create_sequence_a002093(_opts) do
-      %{
-          next_fn: &seq_a002093/3,
-          data: %{
-              sigma_max: 0
-          }
+    %{
+      next_fn: &seq_a002093/3,
+      data: %{
+        sigma_max: 0
       }
+    }
   end
-  
+
   def seq_a002093(:init, data, _value) do
-      %{
-          data: data,
-          value: 0
-      }
+    %{
+      data: data,
+      value: 0
+    }
   end
-  
+
   def seq_a002093(:next, data, value) do
-      
-      # find the next number after value that has a sigma greater than sigma max
-      s_m = data.sigma_max
-      s_n = seq_a002093_greater_sigma(s_m, value + 1)
-      next_sigma_max = Math.sigma(s_n)
-      
-      {
-          :continue,
-          %{
-              data: data |> Map.put(:sigma_max, next_sigma_max),
-              value: s_n
-          }
+    # find the next number after value that has a sigma greater than sigma max
+    s_m = data.sigma_max
+    s_n = seq_a002093_greater_sigma(s_m, value + 1)
+    next_sigma_max = Math.sigma(s_n)
+
+    {
+      :continue,
+      %{
+        data: data |> Map.put(:sigma_max, next_sigma_max),
+        value: s_n
       }
+    }
   end
-  
+
   defp seq_a002093_greater_sigma(sig_max, val) do
-     if Math.sigma(val) > sig_max do
-         val
-     else
-         seq_a002093_greater_sigma(sig_max, val + 1)
-     end 
+    if Math.sigma(val) > sig_max do
+      val
+    else
+      seq_a002093_greater_sigma(sig_max, val + 1)
+    end
   end
-  
+
   @doc """
   OEIS Sequence `A003601` - Arithmetic Numbers
 
@@ -195,7 +200,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
 
   > Numbers n such that the average of the divisors of n is an integer: sigma_0(n) divides sigma_1(n). Alternatively, tau(n) (A000005(n)) divides sigma(n) (A000203(n)). 
   > (Formerly M2389)
-  
+
   **Sequence IDs**: `:a003601`
 
   **Finite**: False
@@ -206,24 +211,26 @@ defmodule Chunky.Sequence.OEIS.Sigma do
 
       iex> Sequence.create(Sequence.OEIS.Sigma, :a003601) |> Sequence.take!(10)
       [1, 3, 5, 6, 7, 11, 13, 14, 15, 17]
-  
+
   """
-  @doc offset: 1, sequence: "Numbers n such that the average of the divisors of n is an integer", references: [{:oeis, :a003601, "https://oeis.org/A003601"}]
+  @doc offset: 1,
+       sequence: "Numbers n such that the average of the divisors of n is an integer",
+       references: [{:oeis, :a003601, "https://oeis.org/A003601"}]
   def create_sequence_a003601(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a003601/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a003601/2)
   end
-  
+
   @doc offset: 1
   def seq_a003601(_idx, last) do
-      next_seq_a003601(last)
+    next_seq_a003601(last)
   end
-  
+
   defp next_seq_a003601(last) do
-      if Math.is_arithmetic_number?(last + 1) do
-          last + 1
-      else
-          next_seq_a003601(last + 1)
-      end
+    if Math.is_arithmetic_number?(last + 1) do
+      last + 1
+    else
+      next_seq_a003601(last + 1)
+    end
   end
 
   @doc """

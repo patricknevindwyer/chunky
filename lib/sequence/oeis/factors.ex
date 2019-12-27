@@ -18,14 +18,14 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A080681 - 17-smooth Numbers](https://oeis.org/A080681) - `:a080681` - `create_sequence_a03586/1`
    - [A080682 - 29-smooth Numbers](https://oeis.org/A080682) - `:a080682` - `create_sequence_a03586/1`
    - [A080683 - 23-smooth Numbers](https://oeis.org/A080683) - `:a080683` - `create_sequence_a03586/1`
-  
-  
+
+
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
   alias Chunky.Math
 
   require Integer
-  
+
   @doc """
   OEIS Sequence `A001597` - Perfect Powers
 
@@ -33,7 +33,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   > Perfect powers: m^k where m > 0 and k >= 2. 
   > (Formerly M3326 N1336)
-  
+
   **Sequence IDs**: `:a001597`
 
   **Finite**: False
@@ -45,18 +45,20 @@ defmodule Chunky.Sequence.OEIS.Factors do
       iex> Sequence.create(Sequence.OEIS.Factors, :a001597) |> Sequence.take!(20)
       [1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 81, 100, 121, 125, 128, 144, 169, 196, 216]
 
- 
+
   """
-  @doc offset: 1, sequence: "Perfect Powers", references: [{:oeis, :a001597, "https://oeis.org/A001597"}]
+  @doc offset: 1,
+       sequence: "Perfect Powers",
+       references: [{:oeis, :a001597, "https://oeis.org/A001597"}]
   def create_sequence_a001597(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a001597/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a001597/2)
   end
-  
+
   @doc offset: 1
   def seq_a001597(_idx, last) do
-      Math.next_number(&Math.is_perfect_power?/1, last)
+    Math.next_number(&Math.is_perfect_power?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A001694` - Powerful Numbers
 
@@ -64,7 +66,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   > Powerful numbers, definition (1): if a prime p divides n then p^2 must also divide n (also called squareful, square full, square-full or 2-powerful numbers). 
   > (Formerly M3325 N1335)
-  
+
   **Sequence IDs**: `:a001694`
 
   **Finite**: False
@@ -77,14 +79,16 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [1, 4, 8, 9, 16, 25, 27, 32, 36, 49, 64, 72, 81, 100, 108, 121, 125, 128, 144, 169]
 
   """
-  @doc offset: 1, sequence: "Powerful numbers", references: [{:oeis, :a001694, "https://oeis.org/A001694"}]
+  @doc offset: 1,
+       sequence: "Powerful numbers",
+       references: [{:oeis, :a001694, "https://oeis.org/A001694"}]
   def create_sequence_a001694(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a001694/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a001694/2)
   end
-  
+
   @doc offset: 1
   def seq_a001694(_idx, last) do
-      Math.next_number(&Math.is_powerful_number?/1, last)
+    Math.next_number(&Math.is_powerful_number?/1, last)
   end
 
   @doc """
@@ -106,39 +110,42 @@ defmodule Chunky.Sequence.OEIS.Factors do
       iex> Sequence.create(Sequence.OEIS.Factors, :a002182) |> Sequence.take!(20)
       [1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360, 720, 840, 1260, 1680, 2520, 5040, 7560]
   """
-  @doc offset: 1, sequence: "Highly composite numbers, record value of sigma0(n)", references: [{:oeis, :a002182, "https://oeis.org/A002182"}]
+  @doc offset: 1,
+       sequence: "Highly composite numbers, record value of sigma0(n)",
+       references: [{:oeis, :a002182, "https://oeis.org/A002182"}]
   def create_sequence_a002182(_opts) do
-      %{
-          next_fn: &seq_a002182/3,
-          data: %{
-              sig_0_max: 0
-          }
+    %{
+      next_fn: &seq_a002182/3,
+      data: %{
+        sig_0_max: 0
       }
+    }
   end
-  
+
   defp seq_a002182(:init, data, _value), do: %{data: data, value: 0}
+
   defp seq_a002182(:next, data, value) do
-      sig_0_max = data.sig_0_max
-      next_han = seq_a002182_greater_sig_0(sig_0_max, value + 1)
-      next_sig_0_max = Math.sigma(next_han, 0)
-      
-      {
-          :continue,
-          %{
-              data: data |> Map.put(:sig_0_max, next_sig_0_max),
-              value: next_han
-          }
+    sig_0_max = data.sig_0_max
+    next_han = seq_a002182_greater_sig_0(sig_0_max, value + 1)
+    next_sig_0_max = Math.sigma(next_han, 0)
+
+    {
+      :continue,
+      %{
+        data: data |> Map.put(:sig_0_max, next_sig_0_max),
+        value: next_han
       }
+    }
   end
-  
+
   defp seq_a002182_greater_sig_0(last_sig_max, val) do
-     if Math.sigma(val, 0) > last_sig_max do
-         val
-     else
-         seq_a002182_greater_sig_0(last_sig_max, val + 1)
-     end 
+    if Math.sigma(val, 0) > last_sig_max do
+      val
+    else
+      seq_a002182_greater_sig_0(last_sig_max, val + 1)
+    end
   end
-    
+
   @doc """
   OEIS Sequence `A002473` - 7-smooth Numbers
 
@@ -159,23 +166,25 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [28, 30, 32, 35, 36, 40, 42, 45, 48, 49, 50, 54, 56, 60, 63, 64, 70, 72, 75, 80]
 
   """
-  @doc offset: 1, sequence: "7-smooth numbers", references: [{:oeis, :a002473, "https://oeis.org/A002473"}]
+  @doc offset: 1,
+       sequence: "7-smooth numbers",
+       references: [{:oeis, :a002473, "https://oeis.org/A002473"}]
   def create_sequence_a002473(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a002473/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a002473/2)
   end
-  
+
   @doc offset: 1
   def seq_a002473(_idx, last) do
-      Math.next_number(&Math.is_7_smooth?/1, last)
-  end    
-  
+    Math.next_number(&Math.is_7_smooth?/1, last)
+  end
+
   @doc """
   OEIS Sequence `A003586` - 3-smooth Numbers
 
   From [OEIS A003586](https://oeis.org/A003586):
 
   > 3-smooth numbers: numbers of the form 2^i*3^j with i, j >= 0.  
-  
+
   **Sequence IDs**: `:a003586`
 
   **Finite**: False
@@ -188,16 +197,18 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [108, 128, 144, 162, 192, 216, 243, 256, 288, 324, 384, 432, 486, 512, 576, 648, 729, 768, 864, 972]
 
   """
-  @doc offset: 1, sequence: "3-smooth numbers", references: [{:oeis, :a003586, "https://oeis.org/A003586"}]
+  @doc offset: 1,
+       sequence: "3-smooth numbers",
+       references: [{:oeis, :a003586, "https://oeis.org/A003586"}]
   def create_sequence_a003586(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a003586/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a003586/2)
   end
-  
+
   @doc offset: 1
   def seq_a003586(_idx, last) do
-      Math.next_number(&Math.is_3_smooth?/1, last)
+    Math.next_number(&Math.is_3_smooth?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A005361` - Product of Expoenents of prime factors of N
 
@@ -205,7 +216,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   > Product of exponents of prime factorization of n. 
   > (Formerly M0063)  
-  
+
   **Sequence IDs**: `:a005361`
 
   **Finite**: False
@@ -218,14 +229,16 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [1, 1, 1, 2, 1, 1, 1, 3, 2, 1, 1, 2, 1, 1, 1, 4, 1, 2, 1, 2]
 
   """
-  @doc offset: 1, sequence: "Product of exponents of prime factorization of N", references: [{:oeis, :a005361, "https://oeis.org/A005361"}]
+  @doc offset: 1,
+       sequence: "Product of exponents of prime factorization of N",
+       references: [{:oeis, :a005361, "https://oeis.org/A005361"}]
   def create_sequence_a005361(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a005361/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a005361/1)
   end
-  
+
   @doc offset: 1
-  def seq_a005361(idx) do      
-      Math.product_of_prime_factor_exponents(idx)
+  def seq_a005361(idx) do
+    Math.product_of_prime_factor_exponents(idx)
   end
 
   @doc """
@@ -247,54 +260,59 @@ defmodule Chunky.Sequence.OEIS.Factors do
       iex> Sequence.create(Sequence.OEIS.Factors, :a005934) |> Sequence.take!(20)
       [1, 4, 8, 16, 32, 64, 128, 144, 216, 288, 432, 864, 1296, 1728, 2592, 3456, 5184, 7776, 10368, 15552]
   """
-  @doc offset: 1, sequence: "Highly powerful numbers: numbers with record value", references: [{:oeis, :a005934, "https://oeis.org/A005934"}, {:wikipedia, :highly_powerful_number, "https://en.wikipedia.org/wiki/Highly_powerful_number"}]
+  @doc offset: 1,
+       sequence: "Highly powerful numbers: numbers with record value",
+       references: [
+         {:oeis, :a005934, "https://oeis.org/A005934"},
+         {:wikipedia, :highly_powerful_number,
+          "https://en.wikipedia.org/wiki/Highly_powerful_number"}
+       ]
   def create_sequence_a005934(_opts) do
-      %{
-          next_fn: &seq_a005934/3,
-          data: %{
-              ppfe_max: 0
-          }
-      }      
+    %{
+      next_fn: &seq_a005934/3,
+      data: %{
+        ppfe_max: 0
+      }
+    }
   end
-    
+
   defp seq_a005934(:init, data, _value) do
-      %{
-          data: data,
-          value: 0
-      }
+    %{
+      data: data,
+      value: 0
+    }
   end
-  
+
   defp seq_a005934(:next, data, value) do
-      
-      # find the next number after value that has a sigma greater than sigma max
-      s_m = data.ppfe_max
-      s_n = seq_a005934_greater_ppfe(s_m, value + 1)
-      next_ppfe_max = Math.product_of_prime_factor_exponents(s_n)
-      
-      {
-          :continue,
-          %{
-              data: data |> Map.put(:ppfe_max, next_ppfe_max),
-              value: s_n
-          }
+    # find the next number after value that has a sigma greater than sigma max
+    s_m = data.ppfe_max
+    s_n = seq_a005934_greater_ppfe(s_m, value + 1)
+    next_ppfe_max = Math.product_of_prime_factor_exponents(s_n)
+
+    {
+      :continue,
+      %{
+        data: data |> Map.put(:ppfe_max, next_ppfe_max),
+        value: s_n
       }
+    }
   end
-  
+
   defp seq_a005934_greater_ppfe(ppfe_max, val) do
-     if Math.product_of_prime_factor_exponents(val) > ppfe_max do
-         val
-     else
-         seq_a005934_greater_ppfe(ppfe_max, val + 1)
-     end 
+    if Math.product_of_prime_factor_exponents(val) > ppfe_max do
+      val
+    else
+      seq_a005934_greater_ppfe(ppfe_max, val + 1)
+    end
   end
-  
+
   @doc """
   OEIS Sequence `A051037` - 5-smooth Numbers
 
   From [OEIS A051037](https://oeis.org/A051037):
 
   > 5-smooth numbers, i.e., numbers whose prime divisors are all <= 5
-  
+
   **Sequence IDs**: `:a051037`
 
   **Finite**: False
@@ -307,16 +325,18 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [40, 45, 48, 50, 54, 60, 64, 72, 75, 80, 81, 90, 96, 100, 108, 120, 125, 128, 135, 144]
 
   """
-  @doc offset: 1, sequence: "5-smooth numbers", references: [{:oeis, :a051037, "https://oeis.org/A051037"}]
+  @doc offset: 1,
+       sequence: "5-smooth numbers",
+       references: [{:oeis, :a051037, "https://oeis.org/A051037"}]
   def create_sequence_a051037(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051037/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051037/2)
   end
-  
+
   @doc offset: 1
   def seq_a051037(_idx, last) do
-      Math.next_number(&Math.is_5_smooth?/1, last)
+    Math.next_number(&Math.is_5_smooth?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A051038` - 11-smooth Numbers
 
@@ -336,16 +356,18 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [25, 27, 28, 30, 32, 33, 35, 36, 40, 42, 44, 45, 48, 49, 50, 54, 55, 56, 60, 63]
 
   """
-  @doc offset: 1, sequence: "11-smooth numbers", references: [{:oeis, :a051038, "https://oeis.org/A051038"}]
+  @doc offset: 1,
+       sequence: "11-smooth numbers",
+       references: [{:oeis, :a051038, "https://oeis.org/A051038"}]
   def create_sequence_a051038(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051038/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051038/2)
   end
-  
+
   @doc offset: 1
   def seq_a051038(_idx, last) do
-      Math.next_number(&Math.is_11_smooth?/1, last)
-  end  
-  
+    Math.next_number(&Math.is_11_smooth?/1, last)
+  end
+
   @doc """
   OEIS Sequence `A052486` - Achilles numbers - powerful but imperfect
 
@@ -364,15 +386,20 @@ defmodule Chunky.Sequence.OEIS.Factors do
       iex> Sequence.create(Sequence.OEIS.Factors, :a052486) |> Sequence.take!(20)
       [72, 108, 200, 288, 392, 432, 500, 648, 675, 800, 864, 968, 972, 1125, 1152, 1323, 1352, 1372, 1568, 1800]
   """
-  @doc offset: 1, sequence: "Achilles numbers - powerful but imperfect", references: [{:oeis, :a052486, "https://oeis.org/A052486"}, {:wikipedia, :achilles_number, "https://en.wikipedia.org/wiki/Achilles_number"}]
+  @doc offset: 1,
+       sequence: "Achilles numbers - powerful but imperfect",
+       references: [
+         {:oeis, :a052486, "https://oeis.org/A052486"},
+         {:wikipedia, :achilles_number, "https://en.wikipedia.org/wiki/Achilles_number"}
+       ]
   def create_sequence_a052486(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a052486/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a052486/2)
   end
-  
+
   def seq_a052486(_idx, last) do
-      Math.next_number(&Math.is_achilles_number?/1, last)
+    Math.next_number(&Math.is_achilles_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A080197` - 13-smooth Numbers
 
@@ -392,16 +419,18 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [24, 25, 26, 27, 28, 30, 32, 33, 35, 36, 39, 40, 42, 44, 45, 48, 49, 50, 52, 54]
 
   """
-  @doc offset: 1, sequence: "13-smooth numbers", references: [{:oeis, :a080197, "https://oeis.org/A080197"}]
+  @doc offset: 1,
+       sequence: "13-smooth numbers",
+       references: [{:oeis, :a080197, "https://oeis.org/A080197"}]
   def create_sequence_a080197(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080197/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080197/2)
   end
-  
+
   @doc offset: 1
   def seq_a080197(_idx, last) do
-      Math.next_number(&Math.is_13_smooth?/1, last)
-  end    
-  
+    Math.next_number(&Math.is_13_smooth?/1, last)
+  end
+
   @doc """
   OEIS Sequence `A080681` - 17-smooth Numbers
 
@@ -421,15 +450,17 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 39, 40, 42, 44, 45, 48, 49, 50]
 
   """
-  @doc offset: 1, sequence: "17-smooth numbers", references: [{:oeis, :a080681, "https://oeis.org/A080681"}]
+  @doc offset: 1,
+       sequence: "17-smooth numbers",
+       references: [{:oeis, :a080681, "https://oeis.org/A080681"}]
   def create_sequence_a080681(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080681/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080681/2)
   end
-  
+
   @doc offset: 1
   def seq_a080681(_idx, last) do
-      Math.next_number(&Math.is_17_smooth?/1, last)
-  end      
+    Math.next_number(&Math.is_17_smooth?/1, last)
+  end
 
   @doc """
   OEIS Sequence `A080682` - 19-smooth Numbers
@@ -450,16 +481,18 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [21, 22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 48]
 
   """
-  @doc offset: 1, sequence: "19-smooth numbers", references: [{:oeis, :a080682, "https://oeis.org/A080682"}]
+  @doc offset: 1,
+       sequence: "19-smooth numbers",
+       references: [{:oeis, :a080682, "https://oeis.org/A080682"}]
   def create_sequence_a080682(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080682/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080682/2)
   end
-  
+
   @doc offset: 1
   def seq_a080682(_idx, last) do
-      Math.next_number(&Math.is_19_smooth?/1, last)
+    Math.next_number(&Math.is_19_smooth?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A080683` - 23-smooth Numbers
 
@@ -479,13 +512,15 @@ defmodule Chunky.Sequence.OEIS.Factors do
       [21, 22, 23, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45]
 
   """
-  @doc offset: 1, sequence: "23-smooth numbers", references: [{:oeis, :a080683, "https://oeis.org/A080683"}]
+  @doc offset: 1,
+       sequence: "23-smooth numbers",
+       references: [{:oeis, :a080683, "https://oeis.org/A080683"}]
   def create_sequence_a080683(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080683/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080683/2)
   end
-  
+
   @doc offset: 1
   def seq_a080683(_idx, last) do
-      Math.next_number(&Math.is_23_smooth?/1, last)
+    Math.next_number(&Math.is_23_smooth?/1, last)
   end
 end

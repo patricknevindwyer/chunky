@@ -16,7 +16,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
-  
+
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
   alias Chunky.Math
@@ -277,13 +277,19 @@ defmodule Chunky.Sequence.OEIS.Core do
     213_636_919_820_625,
     230_793_554_364_681
   ]
-  
+
   # raw data for A000396 - Perfect Numbers
   @data_a000396 [
-      6,28,496,8128,33550336,8589869056,137438691328,
-      2305843008139952128,
-      2658455991569831744654692615953842176,
-      191561942608236107294793378084303638130997321548169216
+    6,
+    28,
+    496,
+    8128,
+    33_550_336,
+    8_589_869_056,
+    137_438_691_328,
+    2_305_843_008_139_952_128,
+    2_658_455_991_569_831_744_654_692_615_953_842_176,
+    191_561_942_608_236_107_294_793_378_084_303_638_130_997_321_548_169_216
   ]
 
   @doc """
@@ -391,7 +397,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > Euler totient function phi(n): count numbers <= n and prime to n. 
   > (Formerly M0299 N0111)
-  
+
   **Sequence IDs**: `:a000010`
 
   **Finite**: false
@@ -402,16 +408,22 @@ defmodule Chunky.Sequence.OEIS.Core do
       [1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8]
 
   """
-  @doc offset: 1, sequence: "Euler totient function phi(n)", references: [{:oeis, :a000010, "https://oeis.org/A000010"}, {:wikipedia, :eulers_totient_function, "https://en.wikipedia.org/wiki/Euler%27s_totient_function"}]
+  @doc offset: 1,
+       sequence: "Euler totient function phi(n)",
+       references: [
+         {:oeis, :a000010, "https://oeis.org/A000010"},
+         {:wikipedia, :eulers_totient_function,
+          "https://en.wikipedia.org/wiki/Euler%27s_totient_function"}
+       ]
   def create_sequence_a000010(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000010/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000010/1)
   end
-  
+
   @doc offset: 1
   def seq_a000010(idx) do
-      Math.totient(idx)
+    Math.totient(idx)
   end
-  
+
   @doc """
   OEIS Sequence `A000041` - Partitions of integer N
 
@@ -515,7 +527,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > Perfect numbers n: n is equal to the sum of the proper divisors of n. 
   > (Formerly M4186 N1744)
-  
+
   **Sequence IDs**: `:a000396`
 
   **Finite**: True
@@ -526,13 +538,15 @@ defmodule Chunky.Sequence.OEIS.Core do
 
       iex> Sequence.create(Sequence.OEIS.Core, :a000396) |> Sequence.take!(5)
       [6, 28, 496, 8128, 33550336]  
-  
+
   """
-  @doc offset: 1, sequence: "Perfect Numbers", references: [{:oeis, :a000396, "http://oeis.org/A000396"}]
+  @doc offset: 1,
+       sequence: "Perfect Numbers",
+       references: [{:oeis, :a000396, "http://oeis.org/A000396"}]
   def create_sequence_a000396(_opts) do
-      sequence_for_list(@data_a000396)
+    sequence_for_list(@data_a000396)
   end
-  
+
   @doc """
 
   OEIS Sequence `A000593` - Sum of Odd Divisors of N
@@ -578,7 +592,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > Sum of proper divisors (or aliquot parts) of n: sum of divisors of n that are less than n. 
   > (Formerly M2226 N0884)
-  
+
   **Sequence IDs**: `:a001065`
 
   **Finite**: False
@@ -591,14 +605,16 @@ defmodule Chunky.Sequence.OEIS.Core do
       [0, 1, 1, 3, 1, 6, 1, 7, 4, 8, 1, 16, 1, 10, 9, 15, 1, 21, 1, 22]
 
   """
-  @doc offset: 1, sequence: "Aliquot parts of N", references: [{:oeis, :a001065, "https://oeis.org/A001065"}]
+  @doc offset: 1,
+       sequence: "Aliquot parts of N",
+       references: [{:oeis, :a001065, "https://oeis.org/A001065"}]
   def create_sequence_a001065(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001065/1)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001065/1)
   end
-  
+
   @doc offset: 1
   def seq_a001065(idx) do
-      Math.aliquot_sum(idx)
+    Math.aliquot_sum(idx)
   end
 
   @doc """
@@ -640,7 +656,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > Deficient numbers: numbers n such that sigma(n) < 2n. 
   > (Formerly M0514)  
-  
+
   **Sequence IDs**: `:a005100`
 
   **Finite**: False
@@ -651,18 +667,20 @@ defmodule Chunky.Sequence.OEIS.Core do
 
       iex> Sequence.create(Sequence.OEIS.Core, :a005100) |> Sequence.take!(25)
       [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 19, 21, 22, 23, 25, 26, 27, 29, 31, 32]
-  
+
   """
-  @doc offset: 1, sequence: "Deficient Numbers", references: [{:oeis, :a005100, "http://oeis.org/A005100"}]
+  @doc offset: 1,
+       sequence: "Deficient Numbers",
+       references: [{:oeis, :a005100, "http://oeis.org/A005100"}]
   def create_sequence_a005100(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005100/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005100/2)
   end
-  
+
   @doc offset: 1
   def seq_a005100(_idx, last) do
-      Math.next_deficient(last)
+    Math.next_deficient(last)
   end
-    
+
   @doc """
   OEIS Sequence `A005101` - Abundant Numbers
 
@@ -670,7 +688,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   > Abundant numbers (sum of divisors of n exceeds 2n). 
   > (Formerly M4825)
-  
+
   **Sequence IDs**: `:a005101`
 
   **Finite**: False
@@ -681,17 +699,17 @@ defmodule Chunky.Sequence.OEIS.Core do
 
       iex> Sequence.create(Sequence.OEIS.Core, :a005101) |> Sequence.take!(10)
       [12, 18, 20, 24, 30, 36, 40, 42, 48, 54]
-  
+
   """
-  @doc offset: 1, sequence: "Abundant Numbers", references: [{:oeis, :a005101, "http://oeis.org/A005101"}]
+  @doc offset: 1,
+       sequence: "Abundant Numbers",
+       references: [{:oeis, :a005101, "http://oeis.org/A005101"}]
   def create_sequence_a005101(_opts) do
-      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005101/2)
+    sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005101/2)
   end
-  
+
   @doc offset: 1, fill_value: 1
   def seq_a005101(_idx, last) do
-      Math.next_abundant(last)
+    Math.next_abundant(last)
   end
-  
-
 end
