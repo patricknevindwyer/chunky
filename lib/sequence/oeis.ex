@@ -286,6 +286,7 @@ defmodule Chunky.Sequence.OEIS do
     # sequence, ordered list
     oeis_sequences
     |> Enum.map(fn %{sequence: sequence} -> sequence end)
+    |> Enum.filter(fn seq -> Atom.to_string(seq) |> String.starts_with?("a") end)
     |> Enum.sort()
     |> Enum.each(fn s -> IO.puts("\t#{s}") end)
   end
