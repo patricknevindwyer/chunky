@@ -986,7 +986,16 @@ defmodule Chunky.Sequence do
       :hex,
       :elixir,
       :mix,
-      :stdlib
+      :stdlib,
+      :ssl_verify_fun,
+      :hackney,
+      :httpoison,
+      :jason,
+      :unicode_util_compat,
+      :metrics,
+      :idna,
+      :mimerl,
+      :certifi
     ]
 
     # find loading applications

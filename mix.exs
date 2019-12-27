@@ -26,7 +26,9 @@ defmodule Chunky.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
+      {:httpoison, "~> 1.6", only: [:dev, :test]},
+      {:jason, "~> 1.1", only: [:dev, :test]}
     ]
   end
 

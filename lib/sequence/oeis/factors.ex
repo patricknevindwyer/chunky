@@ -11,6 +11,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A003586 - 3-smooth Numbers](https://oeis.org/A003586) - `:a003586` - `create_sequence_a03586/1`
    - [A005361 - Product of Expoenents of prime factors of N](https://oeis.org/A005361) - `:a005361` - `create_sequence_a005361/1`
    - [A005934 - Highly powerful numbers: numbers with record value](https://oeis.org/A005934) - `:a005934` - `create_sequence_a005934/1`
+   - [A007434 - Jordan function J_2(n)](https://oeis.org/A007434) - `:a007434` - `create_sequence_a007434/1`
    - [A051037 - 5-smooth Numbers](https://oeis.org/A051037) - `:a051037` - `create_sequence_a03586/1`
    - [A051038 - 11-smooth Numbers](https://oeis.org/A051038) - `:a051038` - `create_sequence_a03586/1`
    - [A052486 - Achilles numbers - powerful but imperfect](https://oeis.org/A052486) - `:a052486` - `create_sequence_a052486/1`
@@ -18,7 +19,6 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A080681 - 17-smooth Numbers](https://oeis.org/A080681) - `:a080681` - `create_sequence_a03586/1`
    - [A080682 - 29-smooth Numbers](https://oeis.org/A080682) - `:a080682` - `create_sequence_a03586/1`
    - [A080683 - 23-smooth Numbers](https://oeis.org/A080683) - `:a080683` - `create_sequence_a03586/1`
-
 
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
@@ -304,6 +304,38 @@ defmodule Chunky.Sequence.OEIS.Factors do
     else
       seq_a005934_greater_ppfe(ppfe_max, val + 1)
     end
+  end
+
+  @doc """
+  OEIS Sequence `A007434` - Jordan function J_2(n)
+
+  From [OEIS A007434](https://oeis.org/A007434):
+
+  > Jordan function J_2(n) (a generalization of phi(n)).
+  > (Formerly M2717)
+
+  **Sequence IDs**: `:a007434`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a007434) |> Sequence.take!(48)
+      [1,3,8,12,24,24,48,48,72,72,120,96,168,144,192,192,288,216,360,288,384,360,528,384,600,504,648,576,840,576,960,768,960,864,1152,864,1368,1080,1344,1152,1680,1152,1848,1440,1728,1584,2208,1536]
+
+  """
+  @doc offset: 1,
+       sequence: "Jordan function J_2(n)",
+       references: [{:oeis, :a007434, "https://oeis.org/A007434"}]
+  def create_sequence_a007434(_opts) do
+      sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a007434/1)
+  end
+
+  @doc offset: 1
+  def seq_a007434(idx) do
+      Math.jordan_totient(idx, 2)
   end
 
   @doc """

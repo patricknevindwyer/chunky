@@ -26,6 +26,9 @@
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
   
+ - verify that Chunky builds installed via hex can actaully access the .__info__ data required for sequence creation
+ - verify that Chunky builds don't throw errors for dev/test deps that aren't installed
+  
  - Additions
   - add Sigma-21 through 24
   - add Panarithmetic Numbers (https://oeis.org/A005153)
