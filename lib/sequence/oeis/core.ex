@@ -6,6 +6,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
    - [A000005 - Divisors of N](https://oeis.org/A000005) - `:a000005` - `create_sequence_a000005/1`
    - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
+   - [A000010 - Euler's totient function](https://oeis.org/A000010) - `:a000010` - `create_sequence_a000010/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
@@ -383,6 +384,34 @@ defmodule Chunky.Sequence.OEIS.Core do
     end
   end
 
+  @doc """
+  OEIS Sequence `A000010` - Euler's totient function `phi(n)`
+
+  From [OEIS A000010](https://oeis.org/A000010):
+
+  > Euler totient function phi(n): count numbers <= n and prime to n. 
+  > (Formerly M0299 N0111)
+  
+  **Sequence IDs**: `:a000010`
+
+  **Finite**: false
+
+  ## Example
+      
+      iex> Sequence.create(Sequence.OEIS.Core, :a000010) |> Sequence.take!(20)
+      [1, 1, 2, 2, 4, 2, 6, 4, 6, 4, 10, 4, 12, 6, 8, 8, 16, 6, 18, 8]
+
+  """
+  @doc offset: 1, sequence: "Euler totient function phi(n)", references: [{:oeis, :a000010, "https://oeis.org/A000010"}, {:wikipedia, :eulers_totient_function, "https://en.wikipedia.org/wiki/Euler%27s_totient_function"}]
+  def create_sequence_a000010(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000010/1)
+  end
+  
+  @doc offset: 1
+  def seq_a000010(idx) do
+      Math.totient(idx)
+  end
+  
   @doc """
   OEIS Sequence `A000041` - Partitions of integer N
 
