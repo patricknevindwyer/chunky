@@ -6,6 +6,7 @@
  - top of module documentation
  - version bump in mix.exs
  - version bump in README.md
+ - version bump in CHANGELOG
  - git tag -a v0.x.x -m "v0.x.x - summary"
  - git push
  - git push --tags
@@ -14,6 +15,13 @@
 # CHANGELOG
 
 ## v0.*.*
+
+### Enhancements
+
+### New Sequences
+
+
+## v0.9.0
 
 ### Changes/Refactorizations
 
