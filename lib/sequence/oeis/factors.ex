@@ -77,6 +77,244 @@ defmodule Chunky.Sequence.OEIS.Factors do
       Math.next_number(&Math.is_powerful_number?/1, last)
   end
   
+  
+  
+  
+  @doc """
+  OEIS Sequence `A003586` - 3-smooth Numbers
+
+  From [OEIS A003586](https://oeis.org/A003586):
+
+  > 3-smooth numbers: numbers of the form 2^i*3^j with i, j >= 0.  
+  
+  **Sequence IDs**: `:a003586`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a003586) |> Sequence.take!(20)
+      [1, 2, 3, 4, 6, 8, 9, 12, 16, 18, 24, 27, 32, 36, 48, 54, 64, 72, 81, 96]
+
+  """
+  @doc offset: 1, sequence: "3-smooth numbers", references: [{:oeis, :a003586, "https://oeis.org/A003586"}]
+  def create_sequence_a003586(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a003586/2)
+  end
+  
+  @doc offset: 1
+  def seq_a003586(_idx, last) do
+      Math.next_number(&Math.is_3_smooth?/1, last)
+  end
+
+  @doc """
+  OEIS Sequence `A051037` - 5-smooth Numbers
+
+  From [OEIS A051037](https://oeis.org/A051037):
+
+  > 5-smooth numbers, i.e., numbers whose prime divisors are all <= 5
+  
+  **Sequence IDs**: `:a051037`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a051037) |> Sequence.take!(20)
+      [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36]
+
+  """
+  @doc offset: 1, sequence: "5-smooth numbers", references: [{:oeis, :a051037, "https://oeis.org/A051037"}]
+  def create_sequence_a051037(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051037/2)
+  end
+  
+  @doc offset: 1
+  def seq_a051037(_idx, last) do
+      Math.next_number(&Math.is_5_smooth?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A002473` - 7-smooth Numbers
+
+  From [OEIS A002473](https://oeis.org/A002473):
+
+  > 7-smooth numbers: positive numbers whose prime divisors are all <= 7. 
+  > (Formerly M0477 N0177)
+    
+  **Sequence IDs**: `:a002473`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a002473) |> Sequence.take!(20)
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27]
+
+  """
+  @doc offset: 1, sequence: "7-smooth numbers", references: [{:oeis, :a002473, "https://oeis.org/A002473"}]
+  def create_sequence_a002473(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a002473/2)
+  end
+  
+  @doc offset: 1
+  def seq_a002473(_idx, last) do
+      Math.next_number(&Math.is_7_smooth?/1, last)
+  end  
+  
+  @doc """
+  OEIS Sequence `A051038` - 11-smooth Numbers
+
+  From [OEIS A051038](https://oeis.org/A051038):
+
+  > 11-smooth numbers: numbers whose prime divisors are all <= 11.
+      
+  **Sequence IDs**: `:a051038`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a051038) |> Sequence.take!(20)
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 18, 20, 21, 22, 24]
+
+  """
+  @doc offset: 1, sequence: "11-smooth numbers", references: [{:oeis, :a051038, "https://oeis.org/A051038"}]
+  def create_sequence_a051038(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051038/2)
+  end
+  
+  @doc offset: 1
+  def seq_a051038(_idx, last) do
+      Math.next_number(&Math.is_11_smooth?/1, last)
+  end  
+  
+  @doc """
+  OEIS Sequence `A080197` - 13-smooth Numbers
+
+  From [OEIS A080197](https://oeis.org/A080197):
+
+  > 13-smooth numbers: numbers whose prime divisors are all <= 13.
+      
+  **Sequence IDs**: `:a080197`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080197) |> Sequence.take!(20)
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 21, 22]
+
+  """
+  @doc offset: 1, sequence: "13-smooth numbers", references: [{:oeis, :a080197, "https://oeis.org/A080197"}]
+  def create_sequence_a080197(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080197/2)
+  end
+  
+  @doc offset: 1
+  def seq_a080197(_idx, last) do
+      Math.next_number(&Math.is_13_smooth?/1, last)
+  end    
+  
+  @doc """
+  OEIS Sequence `A080681` - 17-smooth Numbers
+
+  From [OEIS A080681](https://oeis.org/A080681):
+
+  > 17-smooth numbers: numbers whose prime divisors are all <= 17.
+      
+  **Sequence IDs**: `:a080681`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080681) |> Sequence.take!(20)
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21]
+
+  """
+  @doc offset: 1, sequence: "17-smooth numbers", references: [{:oeis, :a080681, "https://oeis.org/A080681"}]
+  def create_sequence_a080681(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080681/2)
+  end
+  
+  @doc offset: 1
+  def seq_a080681(_idx, last) do
+      Math.next_number(&Math.is_17_smooth?/1, last)
+  end      
+
+  @doc """
+  OEIS Sequence `A080682` - 19-smooth Numbers
+
+  From [OEIS A080682](https://oeis.org/A080682):
+
+  > 19-smooth numbers: numbers whose prime divisors are all <= 19.
+      
+  **Sequence IDs**: `:a080682`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080682) |> Sequence.take!(20)
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+  """
+  @doc offset: 1, sequence: "19-smooth numbers", references: [{:oeis, :a080682, "https://oeis.org/A080682"}]
+  def create_sequence_a080682(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080682/2)
+  end
+  
+  @doc offset: 1
+  def seq_a080682(_idx, last) do
+      Math.next_number(&Math.is_19_smooth?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A080683` - 23-smooth Numbers
+
+  From [OEIS A080683](https://oeis.org/A080683):
+
+  > 23-smooth numbers: numbers whose prime divisors are all <= 23.
+      
+  **Sequence IDs**: `:a080683`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Sequence.OEIS.Factors, :a080683) |> Sequence.take!(20)
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+  """
+  @doc offset: 1, sequence: "23-smooth numbers", references: [{:oeis, :a080683, "https://oeis.org/A080683"}]
+  def create_sequence_a080683(_opts) do
+      sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080683/2)
+  end
+  
+  @doc offset: 1
+  def seq_a080683(_idx, last) do
+      Math.next_number(&Math.is_23_smooth?/1, last)
+  end
+  
+  
+  
   @doc """
   OEIS Sequence `A005361` - Product of Expoenents of prime factors of N
 
