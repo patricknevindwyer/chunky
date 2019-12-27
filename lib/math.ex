@@ -32,6 +32,18 @@ defmodule Chunky.Math do
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_achilles_number?/1` - Is `n` an Achilles Number?
   
+  ## Cryptographic Math
+  
+   - `is_b_smooth?/2` - Is `n` prime factor smooth up to `b` - all prime factors <= `b`  
+   - `is_3_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 3)`
+   - `is_5_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 5)`
+   - `is_7_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 7)`
+   - `is_11_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 11)`
+   - `is_13_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 13)`
+   - `is_17_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 17)`
+   - `is_19_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 19)`
+   - `is_23_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 23)`
+  
   ## Number Generation
   
    - `next_number/2` - Use a number theory predicate to find the next integer in a sequence
@@ -147,6 +159,221 @@ defmodule Chunky.Math do
   defp decomposition(n, k, acc) when rem(n, k) == 0, do: decomposition(div(n, k), k, [k | acc])
   defp decomposition(n, k, acc), do: decomposition(n, k + 1, acc)
 
+  @doc """
+  Check if an integer `n` is 3-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_3_smooth?(3)
+      true
+  
+      iex> Math.is_3_smooth?(40)
+      false
+  
+      iex> Math.is_3_smooth?(107)
+      false
+  
+      iex> Math.is_3_smooth?(2020)
+      false
+  """
+  def is_3_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 3)
+  
+  @doc """
+  Check if an integer `n` is 5-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_5_smooth?(3)
+      true
+  
+      iex> Math.is_5_smooth?(40)
+      true
+  
+      iex> Math.is_5_smooth?(107)
+      false
+  
+      iex> Math.is_5_smooth?(2020)
+      false
+  """
+  def is_5_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 5)
+  
+  @doc """
+  Check if an integer `n` is 7-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_7_smooth?(3)
+      true
+  
+      iex> Math.is_7_smooth?(40)
+      true
+  
+      iex> Math.is_7_smooth?(107)
+      false
+  
+      iex> Math.is_7_smooth?(2020)
+      false
+  """
+  def is_7_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 7)
+
+  @doc """
+  Check if an integer `n` is 11-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_11_smooth?(3)
+      true
+  
+      iex> Math.is_11_smooth?(40)
+      true
+  
+      iex> Math.is_11_smooth?(107)
+      false
+  
+      iex> Math.is_11_smooth?(2020)
+      false
+  """
+  def is_11_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 11)
+  
+  @doc """
+  Check if an integer `n` is 13-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_13_smooth?(3)
+      true
+  
+      iex> Math.is_13_smooth?(40)
+      true
+  
+      iex> Math.is_13_smooth?(107)
+      false
+  
+      iex> Math.is_13_smooth?(2020)
+      false
+  """
+  def is_13_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 13)
+  
+  @doc """
+  Check if an integer `n` is 17-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_17_smooth?(3)
+      true
+  
+      iex> Math.is_17_smooth?(40)
+      true
+  
+      iex> Math.is_17_smooth?(107)
+      false
+  
+      iex> Math.is_17_smooth?(2020)
+      false
+  """
+  def is_17_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 17)
+  
+  @doc """
+  Check if an integer `n` is 19-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_19_smooth?(3)
+      true
+  
+      iex> Math.is_19_smooth?(40)
+      true
+  
+      iex> Math.is_19_smooth?(107)
+      false
+  
+      iex> Math.is_19_smooth?(2020)
+      false
+  """
+  def is_19_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 19)
+  
+  @doc """
+  Check if an integer `n` is 23-smooth.
+  
+  See `is_b_smooth?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_23_smooth?(3)
+      true
+  
+      iex> Math.is_23_smooth?(40)
+      true
+  
+      iex> Math.is_23_smooth?(107)
+      false
+  
+      iex> Math.is_23_smooth?(2020)
+      false
+  """
+  def is_23_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 23)
+  
+  @doc """
+  Determine if an integer `n` is `b`-smooth, a composite of prime factors less than or equal to `b`.
+  
+  Numbers can be `b`-smooth for any `b` that is prime. For instance, the number `8` is 3-smooth, as
+  it's factors would be: `1^1 * 2^3 * 3^0`, whereas `15` is not 3-smooth, as it's factors would be
+  `1^1 * 2^0 * 3^1 * 5^1` - it has prime factors whose value is greater than `3`.
+  
+  ## Shortcut Functions
+  
+  There are a collection of pre-defined predicate functions for checking b-smooth for the primes `3` to `23`:
+  
+      - `is_3_smooth?/1`
+      - `is_5_smooth?/1`
+      - `is_7_smooth?/1`
+      - `is_11_smooth?/1`
+      - `is_13_smooth?/1`
+      - `is_17_smooth?/1`
+      - `is_19_smooth?/1`
+      - `is_23_smooth?/1`
+  
+  ## Examples
+  
+      iex> Math.is_b_smooth?(1944, 3)
+      true
+      
+      iex> Math.is_b_smooth?(101, 5)
+      false
+  
+      iex> Math.is_b_smooth?(705, 47)
+      true
+  """
+  def is_b_smooth?(n, b) when is_integer(n) and is_integer(b) and b > 2 and n > 0 do
+      if !is_prime?(b) do
+          raise ArgumentError, message: "b parameter must be prime"
+      else
+          prime_factors(n)
+          |> Enum.filter(
+              fn fac -> 
+                  fac > b
+              end
+          )
+          |> length() == 0
+          
+      end
+      
+  end
+  
   @doc """
   Find the Aliquot Sum of `n`.
   

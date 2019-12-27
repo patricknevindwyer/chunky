@@ -4,6 +4,110 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_b_smooth?/2" do
+      test "not prime" do
+          assert_raise ArgumentError, fn ->
+             Math.is_b_smooth?(4, 20) 
+          end
+      end      
+  end
+  
+  describe "is_3_smooth?/1" do
+      test "yes" do
+          [1, 2, 3, 4, 6, 8, 144] 
+          |> Enum.each(fn n -> assert Math.is_3_smooth?(n) end)
+      end
+      
+      test "no" do
+          [5, 7, 10, 65, 513]
+          |> Enum.each(fn n -> assert !Math.is_3_smooth?(n) end)
+      end
+  end
+  
+  describe "is_5_smooth?/1" do
+      test "yes" do
+          [1, 3, 5, 9, 128, 375] 
+          |> Enum.each(fn n -> assert Math.is_5_smooth?(n) end)
+      end
+      
+      test "no" do
+          [13, 14, 124, 280]
+          |> Enum.each(fn n -> assert !Math.is_5_smooth?(n) end)
+      end      
+  end
+
+  describe "is_7_smooth?/1" do
+      test "yes" do
+          [4, 7, 16, 24, 49, 150, 180] 
+          |> Enum.each(fn n -> assert Math.is_7_smooth?(n) end)
+      end
+      
+      test "no" do
+          [19, 31, 130, 155, 190]
+          |> Enum.each(fn n -> assert !Math.is_7_smooth?(n) end)
+      end      
+  end
+  
+  describe "is_11_smooth?/1" do
+      test "yes" do
+          [5, 12, 56, 60, 121] 
+          |> Enum.each(fn n -> assert Math.is_11_smooth?(n) end)
+      end
+      
+      test "no" do
+          [13, 58, 102, 124, 138]
+          |> Enum.each(fn n -> assert !Math.is_11_smooth?(n) end)
+      end      
+  end
+  
+  describe "is_13_smooth?/1" do
+      test "yes" do
+          [6, 14, 24, 28, 44, 98] 
+          |> Enum.each(fn n -> assert Math.is_13_smooth?(n) end)
+      end
+      
+      test "no" do
+          [19, 38, 51, 94, 106]
+          |> Enum.each(fn n -> assert !Math.is_13_smooth?(n) end)
+      end      
+  end
+  
+  describe "is_17_smooth?/1" do
+      test "yes" do
+          [9, 17, 21, 54, 63, 80, 105] 
+          |> Enum.each(fn n -> assert Math.is_17_smooth?(n) end)
+      end
+      
+      test "no" do
+          [19, 29, 43, 92, 103]
+          |> Enum.each(fn n -> assert !Math.is_17_smooth?(n) end)
+      end      
+  end
+  
+  describe "is_19_smooth?/1" do
+      test "yes" do
+          [8, 20, 36, 52, 68, 91, 100] 
+          |> Enum.each(fn n -> assert Math.is_19_smooth?(n) end)
+      end
+      
+      test "no" do
+          [23, 47, 67, 79, 92, 97]
+          |> Enum.each(fn n -> assert !Math.is_19_smooth?(n) end)
+      end      
+  end
+  
+  describe "is_23_smooth?/1" do
+      test "yes" do
+          [8, 33, 50, 65, 77, 90, 95] 
+          |> Enum.each(fn n -> assert Math.is_23_smooth?(n) end)
+      end
+      
+      test "no" do
+          [29, 37, 47, 53, 67, 83]
+          |> Enum.each(fn n -> assert !Math.is_23_smooth?(n) end)
+      end      
+  end
+  
   describe "is_achilles_number?/1" do
       
       test "1" do

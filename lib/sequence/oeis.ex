@@ -242,7 +242,7 @@ defmodule Chunky.Sequence.OEIS do
 
     length(covered) / length(mapped_seq)
   end
-
+  
   @doc """
   Print out a coverage report for named sequence groups (like CORE) in the OEIS
   sequence support modules.
