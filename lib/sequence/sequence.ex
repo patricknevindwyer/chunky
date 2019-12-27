@@ -889,6 +889,23 @@ defmodule Chunky.Sequence do
   end
 
   @doc """
+  Retrieve sequence reference data from a sequence description dictionary, like those returned
+  by `available/1` and `available/0`.
+  
+  ## Examples
+  
+      iex> %{module: Chunky.Sequence.OEIS.Factors, sequence: :a052486} |> Sequence.get_references()
+      [{:oeis, :a052486, "https://oeis.org/A052486"}, {:wikipedia, :achilles_number, "https://en.wikipedia.org/wiki/Achilles_number"}]
+  """
+  def get_references(%{sequence: seq_atom, module: mod_atom}) when is_atom(seq_atom) and is_atom(mod_atom) do
+      full_fun = "create_sequence_#{seq_atom}" |> String.to_atom()
+
+      attrs = attributes_for_function(mod_atom, full_fun, 1)
+
+      attrs |> Map.get(:references, [])      
+  end
+  
+  @doc """
   Check if a sequence instance has a reference to a specific source.
 
   See also `get_references/1`.
