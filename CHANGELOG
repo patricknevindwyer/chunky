@@ -31,11 +31,14 @@
   - is_powerful_number?/1 - Is a number `n` a powerful number?
   - product_of_prime_factors/1 - Number theoretical function for product of prime factor exponents of `n`
   - is_highly_powerful_number?/1 - Is a number a _highly powerful_ number?
-  - is_perfect_power?/1
-  - is_perfect_square?/1
-  - is_perfect_cube?/1
-  - is_root_of?/2
-  - is_achilles_number?/1
+  - is_perfect_power?/1 - Is integer `n` a perfect power?
+  - is_perfect_square?/1 - Is integer `n` a perfect square?
+  - is_perfect_cube?/1 - Is integer `n` a perfect cube?
+  - is_root_of?/2 - Is integer `n` any k-th root of `m`?
+  - is_achilles_number?/1 - Is integer `n` an achilles number?
+  
+ - Chunky.Sequence
+  - drop/2 - Like Enum.drop
   
 ### New Sequences
  

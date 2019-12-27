@@ -94,6 +94,7 @@ defmodule Chunky.Sequence do
 
   ## Manipulating Sequences
 
+   - `drop/2` - Drop N values from the front of the sequence
    - `map/2` - Apply a function to values in a sequence, and collect the result
    - `next/1` - Retrieve the next sequence value and updated sequence struct as a tuple
    - `next!/1` - Retrieve the next sequence as just an updated sequence struct
@@ -300,6 +301,22 @@ defmodule Chunky.Sequence do
     {rest, l_seq} = take(u_seq, count - 1)
 
     {[n] ++ rest, l_seq}
+  end
+  
+  @doc """
+  Drop values from the front of the sequence, returning the updated
+  sequence struct. Like `Enum.drop/2`.
+  
+  ## Examples
+  
+      iex> seq = Sequence.create(Sequence.Basic, :whole_numbers)
+      iex> seq |> Sequence.drop(10) |> Sequence.take!(10)
+      [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  """
+  def drop(%Sequence{}=sequence, 0), do: sequence
+  def drop(%Sequence{}=sequence, count) when is_integer(count) and count > 1 do
+      {_v, u_seq} = take(sequence, count)
+      u_seq
   end
 
   @doc """

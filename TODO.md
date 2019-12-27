@@ -28,6 +28,7 @@
   
  - Additions
   - add Sigma-21 through 24
+  - add Panarithmetic Numbers (https://oeis.org/A005153)
   - add an OEIS.Factors module
  
   - Sequence.drop(seq, quant)
@@ -36,10 +37,20 @@
     
  - Large Numbers
   - mod_pow fails on large enough numbers
+  - random/rand/randit on large numbers will lose precision/drop values
+  - what other common functions are doing an int->float or int->float->int loss?
 
  - Modulo Arithmetic
   
  - Sequences
+  - b-smooth:
+   - extend doctest in Factors for top N known in OEIS
+ 
+ - tool - download JSON of sequence, build formatted @doc string and @doc attrs
+ 
+  - OEIS.find/1 or Sequence.find/1 to lookup by ref number/name
+  - Sequence.create from module def map
+  
   - Future Sequences
    - https://oeis.org/A005237 - Numbers n such that n and n+1 have the same number of divisors.
    - Divisor sequences - https://en.wikipedia.org/wiki/Category:Divisor_function
