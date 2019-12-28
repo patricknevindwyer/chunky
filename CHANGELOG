@@ -15,10 +15,20 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.10.0
 
-OEIS Core Coverage: 7.91%
-OEIS Total Sequences: 71
+```
+OEIS Coverage
+        144 total sequences
+By Module
+        Elixir.Chunky.Sequence.OEIS - 3 sequences
+        Elixir.Chunky.Sequence.OEIS.Core - 24 sequences
+        Elixir.Chunky.Sequence.OEIS.Factors - 96 sequences
+        Elixir.Chunky.Sequence.OEIS.Primes - 1 sequences
+        Elixir.Chunky.Sequence.OEIS.Sigma - 20 sequences
+Sequence Groups
+        OEIS Core Sequences - 25 / 177 (14.12%)
+```
 
 ### Enhancements
 
