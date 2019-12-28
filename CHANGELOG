@@ -23,6 +23,8 @@
   - mobius_function/1 - Classical mobius function
   - omega/1 - Count of distinct prime factors
   - bigomega/1 - Count of distinct prime factors, with multiplicity
+  - greatest_prime_factor/1 - largest prime factor of `n`
+  - least_prime_factor/1 - smallest prime factor of `n`
   
 ### New Sequences
 

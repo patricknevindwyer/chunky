@@ -12,7 +12,9 @@ defmodule Chunky.Math do
    - `pow/2` - Integer exponentiation
    - `prime_factors/1` - Factorize an integer into prime factors
    - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
-
+   - `least_prime_factor/1` - Find the smallest prime factor of `n`
+   - `greatest_prime_factor/1` - Find the largest prime factor of `n`
+  
   ## Number Theory
 
    - `is_prime?/1` - Test if an integer is prime
@@ -359,6 +361,46 @@ defmodule Chunky.Math do
       prime_factors(n) -- [1]
       |> Enum.uniq()
       |> length()
+  end
+  
+  @doc """
+  Find the `lpf(n)` or _least prime factor_.
+  
+  ## Examples
+  
+      iex> Math.least_prime_factor(1)
+      1
+      
+      iex> Math.least_prime_factor(39)
+      3
+  
+      iex> Math.least_prime_factor(99973)
+      257
+  """
+  def least_prime_factor(1), do: 1
+  def least_prime_factor(n) when is_integer(n) and n > 0 do
+      prime_factors(n) -- [1]
+      |> Enum.min()
+  end
+  
+  @doc """
+  Find the `gpf(n)` or _greatest prime factor_.
+  
+  ## Examples
+  
+      iex> Math.greatest_prime_factor(1)
+      1
+  
+      iex> Math.greatest_prime_factor(39)
+      13
+  
+      iex> Math.greatest_prime_factor(99973)
+      389
+  """
+  def greatest_prime_factor(1), do: 1
+  def greatest_prime_factor(n) when is_integer(n) and n > 0 do
+      prime_factors(n) -- [1]
+      |> Enum.max()
   end
   
   @doc """

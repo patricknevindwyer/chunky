@@ -4,6 +4,36 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "least_prime_factor/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 999, 9999, 99999]
+          os = [1, 2, 3, 19, 3, 3, 3]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.least_prime_factor(n) == o
+              end
+          )          
+          
+      end
+  end
+  
+  describe "greatest_prime_factor/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 999, 9999, 99999]
+          os = [1, 2, 3, 19, 37, 101, 271]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.greatest_prime_factor(n) == o
+              end
+          )          
+          
+      end
+  end
+  
   describe "omega/1" do
       test "value tests" do
           ns = [1, 2, 9, 19, 999, 9999, 99999]
