@@ -14,7 +14,7 @@ defmodule Chunky.Math do
    - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
    - `least_prime_factor/1` - Find the smallest prime factor of `n`
    - `greatest_prime_factor/1` - Find the largest prime factor of `n`
-  
+
   ## Number Theory
 
    - `is_prime?/1` - Test if an integer is prime
@@ -46,7 +46,7 @@ defmodule Chunky.Math do
    - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
    - `is_power_of?/2` - Is `n` a power of `m`?
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
-  
+
   ## Cryptographic Math
 
    - `is_b_smooth?/2` - Is `n` prime factor smooth up to `b` - all prime factors <= `b`  
@@ -198,26 +198,24 @@ defmodule Chunky.Math do
   def is_coprime?(a, b) when is_integer(a) and is_integer(b) and a > 0 and b > 0 do
     Integer.gcd(a, b) == 1
   end
-  
+
   @doc """
   Check if `n` is a _sphenic number_, the product of three distinct primes.
-  
+
   ## Example
-  
+
       iex> Math.is_sphenic_number?(4)
       false
-  
+
       iex> Math.is_sphenic_number?(66)
       true
-  
+
       iex> Math.is_sphenic_number?(51339)
       true
   """
   def is_sphenic_number?(n) when is_integer(n) and n > 0 do
-     
-      facs = Math.prime_factors(n) -- [1]
-      length(facs) == 3 && length(Enum.uniq(facs)) == 3
-      
+    facs = Math.prime_factors(n) -- [1]
+    length(facs) == 3 && length(Enum.uniq(facs)) == 3
   end
 
   @doc """
@@ -263,28 +261,28 @@ defmodule Chunky.Math do
     Fraction.multiply(n, c_f)
     |> Fraction.get_whole()
   end
-  
+
   @doc """
   Jordan totient function `Jk(n)`.
-  
+
   The Jordan totient is a generalized form of the Euler totient function, where `J1(n) = Φ(n)`. The
   Jordan totient is a positive integer `m` of `k`-tuples that are co-prime to `n`.
-  
+
   Calculating the totient is a semi-closed form of a Dirichlet series/Euler product, and is dependent
   on the size of `n` for factorization and `k` for exponentiation.
-  
+
   ## Examples
-  
+
   Finding `J2(3)`:
-  
+
         iex> Math.jordan_totient(3, 2)
         8
-  
+
   Finding `J9(7)`:
-  
+
         iex> Math.jordan_totient(7, 9)
         40353606
-  
+
   Finding `J10(9999)`:
       
         iex> Math.jordan_totient(9999, 10)
@@ -292,239 +290,238 @@ defmodule Chunky.Math do
         
   """
   def jordan_totient(n, k) when is_integer(n) and n > 0 and is_integer(k) and k > 0 do
-      # ref: https://en.wikipedia.org/wiki/Jordan%27s_totient_function#Definition
-      
-      # find prime factors, reduce to factors > 1
-      p_fs =
-        (prime_factors(n)
-         |> Enum.uniq()) --
-          [1]
+    # ref: https://en.wikipedia.org/wiki/Jordan%27s_totient_function#Definition
 
-      # run an eulerian product
-      c_f =
-        p_fs
-        |> Enum.map(fn p_f ->
-            
-            # take p_f to the k
-            pfk = Math.pow(p_f, k)
-            Fraction.subtract(1, Fraction.new(1, pfk))
-            
-        end)
+    # find prime factors, reduce to factors > 1
+    p_fs =
+      (prime_factors(n)
+       |> Enum.uniq()) --
+        [1]
 
-        # reduce 1/pK via multiplication
-        |> Enum.reduce(Fraction.new(1, 1), fn x, acc -> Fraction.multiply(x, acc) end)
+    # run an eulerian product
+    c_f =
+      p_fs
+      |> Enum.map(fn p_f ->
+        # take p_f to the k
+        pfk = Math.pow(p_f, k)
+        Fraction.subtract(1, Fraction.new(1, pfk))
+      end)
 
-      # now the result should be N*(continued fraction eulerian product)
-      # but first we take n to the k
-      Math.pow(n, k)
-      |> Fraction.multiply(c_f)
-      |> Fraction.get_whole()
+      # reduce 1/pK via multiplication
+      |> Enum.reduce(Fraction.new(1, 1), fn x, acc -> Fraction.multiply(x, acc) end)
+
+    # now the result should be N*(continued fraction eulerian product)
+    # but first we take n to the k
+    Math.pow(n, k)
+    |> Fraction.multiply(c_f)
+    |> Fraction.get_whole()
   end
 
   @doc """
   The classical Möbius function `μ(n)`.
-  
+
   From [Möbius Function](https://en.wikipedia.org/wiki/Möbius_function) on Wikipedia:
-  
+
   For any positive integer n, define μ(n) as the sum of the primitive nth roots of unity. It has values in {−1, 0, 1} depending on the factorization of n into prime factors:
-  
+
    - μ(n) = 1 if n is a square-free positive integer with an even number of prime factors.
    - μ(n) = −1 if n is a square-free positive integer with an odd number of prime factors.
    - μ(n) = 0 if n has a squared prime factor.
-  
+
   ## Examples
-  
+
       iex> Math.mobius_function(1)
       1
-  
+
       iex> Math.mobius_function(24)
       0
-  
+
       iex> Math.mobius_function(99999)
       0
   """
   def mobius_function(1), do: 1
+
   def mobius_function(n) when is_integer(n) and n > 0 do
-      
-      # prime factors, dropping 1
-      p_fs = prime_factors(n) -- [1]
-      
-      # build the grouping of factors
-      p_gs = p_fs |> Enum.group_by(fn p_f -> p_f end)
-      
-      # how big is the largest PF group?
-      largest_p_gs = p_gs |> Enum.map(fn {_base, quant} -> length(quant) end) |> Enum.max()
-      
-      # how many factors are there?
-      count_p_fs = length(p_fs)
-      
-      cond do
-         largest_p_gs > 1 -> 0
-         Integer.is_even(count_p_fs) -> 1
-         true -> -1
-      end
+    # prime factors, dropping 1
+    p_fs = prime_factors(n) -- [1]
+
+    # build the grouping of factors
+    p_gs = p_fs |> Enum.group_by(fn p_f -> p_f end)
+
+    # how big is the largest PF group?
+    largest_p_gs = p_gs |> Enum.map(fn {_base, quant} -> length(quant) end) |> Enum.max()
+
+    # how many factors are there?
+    count_p_fs = length(p_fs)
+
+    cond do
+      largest_p_gs > 1 -> 0
+      Integer.is_even(count_p_fs) -> 1
+      true -> -1
+    end
   end
-  
+
   @doc """
   Check if an integer `n` has no factors greater than `1` that are perfect squares.
-  
+
   ## Examples
-  
+
       iex> Math.is_squarefree?(3)
       true
       
       iex> Math.is_squarefree?(8)
       false
-  
+
       iex> Math.is_squarefree?(99935)
       true
-  
+
   """
   def is_squarefree?(1), do: true
+
   def is_squarefree?(n) when is_integer(n) and n > 0 do
-      factors(n) -- prime_factors(n)
-      |> Enum.uniq()
-      |> Enum.filter(fn c_f -> is_perfect_square?(c_f) end)
-      |> length() == 0
+    (factors(n) -- prime_factors(n))
+    |> Enum.uniq()
+    |> Enum.filter(fn c_f -> is_perfect_square?(c_f) end)
+    |> length() == 0
   end
-  
+
   @doc """
   Check if an integer `n` has no factors greater than `1` that are perfect cubes.
-  
+
   ## Examples
-  
+
       iex> Math.is_cubefree?(3)
       true
-  
+
       iex> Math.is_cubefree?(64)
       false
-  
+
       iex> Math.is_cubefree?(2744)
       false
   """
   def is_cubefree?(1), do: true
+
   def is_cubefree?(n) when is_integer(n) and n > 0 do
-      
-      factors(n) -- prime_factors(n)
-      |> Enum.uniq()
-      |> Enum.filter(fn c_f -> is_perfect_cube?(c_f) end)
-      |> length() == 0
-      
+    (factors(n) -- prime_factors(n))
+    |> Enum.uniq()
+    |> Enum.filter(fn c_f -> is_perfect_cube?(c_f) end)
+    |> length() == 0
   end
-  
+
   @doc """
   Calculate `ω(n)` - the number of distinct prime factors of `n`.
-  
+
   See also `bigomega/1` - number of total prime factors of `n`.
-  
+
   ## Examples
-  
+
       iex> Math.omega(3)
       1
       
       iex> Math.omega(15)
       2
-  
+
       iex> Math.omega(25)
       1
-  
+
       iex> Math.omega(99960)
       5
   """
   def omega(n) when is_integer(n) and n > 0 do
-      
-      prime_factors(n) -- [1]
-      |> Enum.uniq()
-      |> length()
+    (prime_factors(n) -- [1])
+    |> Enum.uniq()
+    |> length()
   end
-  
+
   @doc """
   Find the radical of an integer `n`.
-  
+
   Also called the _square-free kernel_, or written as `rad(n)`, the radical of an integer is
   the product of the distinct primes of `n`.
-  
+
   ## Examples
-  
+
       iex> Math.radical(1)
       1
-  
+
       iex> Math.radical(504)
       42
-  
+
       iex> Math.radical(99960)
       3570
   """
   def radical(n) when is_integer(n) and n > 0 do
-     prime_factors(n)
-     |> Enum.uniq()
-     |> Enum.reduce(1, fn x, acc -> x * acc end) 
+    prime_factors(n)
+    |> Enum.uniq()
+    |> Enum.reduce(1, fn x, acc -> x * acc end)
   end
-  
+
   @doc """
   Find the `lpf(n)` or _least prime factor_.
-  
+
   ## Examples
-  
+
       iex> Math.least_prime_factor(1)
       1
       
       iex> Math.least_prime_factor(39)
       3
-  
+
       iex> Math.least_prime_factor(99973)
       257
   """
   def least_prime_factor(1), do: 1
+
   def least_prime_factor(n) when is_integer(n) and n > 0 do
-      prime_factors(n) -- [1]
-      |> Enum.min()
+    (prime_factors(n) -- [1])
+    |> Enum.min()
   end
-  
+
   @doc """
   Find the `gpf(n)` or _greatest prime factor_.
-  
+
   ## Examples
-  
+
       iex> Math.greatest_prime_factor(1)
       1
-  
+
       iex> Math.greatest_prime_factor(39)
       13
-  
+
       iex> Math.greatest_prime_factor(99973)
       389
   """
   def greatest_prime_factor(1), do: 1
+
   def greatest_prime_factor(n) when is_integer(n) and n > 0 do
-      prime_factors(n) -- [1]
-      |> Enum.max()
+    (prime_factors(n) -- [1])
+    |> Enum.max()
   end
-  
+
   @doc """
   Calculate `Ω(n)` - number of distinct prime factors, with multiplicity.
-  
+
   See also `omega/1` - number of distinct prime factors.
-  
+
   ## Examples
-  
+
       iex> Math.bigomega(3)
       1
       
       iex> Math.bigomega(15)
       2
-  
+
       iex> Math.bigomega(25)
       2
-  
+
       iex> Math.bigomega(99960)
       8
   """
   def bigomega(n) when is_integer(n) and n > 0 do
-     prime_factors(n) -- [1]
-     |> length() 
+    (prime_factors(n) -- [1])
+    |> length()
   end
-  
+
   @doc """
   Check if an integer `n` is 3-smooth.
 
@@ -792,44 +789,41 @@ defmodule Chunky.Math do
 
   @doc """
   Count the exponents of the prime factors of `n`.
-  
+
   This function counts the exponents on the prime factors of `n`, for example the
   number `2,025,000` can be factored to: `[2, 2, 2, 3, 3, 3, 3, 5, 5, 5, 5, 5]`
   or `2^3 * 3^4 * 5^5`, hence the exponent of `2` is `3`, the exponent of `3` is
   `4`, and the exponent of `5` is `5`.
-  
+
   As a simpler example, the prime factors of `49` are `[7, 7]`, or `7^2`, so the
   result of `prime_factor_exponents(49)` would be `%{7 => 2}`
-  
+
   ## Examples
-  
+
       iex> Math.prime_factor_exponents(2)
       %{2 => 1}
-  
+
       iex> Math.prime_factor_exponents(8)
       %{2 => 3}
-  
+
       iex> Math.prime_factor_exponents(2025000)
       %{2 => 3, 3 => 4, 5 => 5}
-  
+
       iex> Math.prime_factor_exponents(49)
       %{7 => 2}
   """
   def prime_factor_exponents(n) when is_integer(n) and n > 0 do
-      
-      # find the prime factors
-      Math.prime_factors(n) -- [1]
+    # find the prime factors
+    (Math.prime_factors(n) -- [1])
 
-      # group by factor - this is effectively finding the exponent of the factor
-      |> Enum.group_by(fn i -> i end)
+    # group by factor - this is effectively finding the exponent of the factor
+    |> Enum.group_by(fn i -> i end)
 
-      # map to the length of the group (extract the exponent)
-      |> Enum.map(fn {base, exp} -> {base, length(exp)} end)
-      
-      |> Map.new()
-      
+    # map to the length of the group (extract the exponent)
+    |> Enum.map(fn {base, exp} -> {base, length(exp)} end)
+    |> Map.new()
   end
-  
+
   @doc """
   Calculate the sigma-1 (or `σ1(n)`), also known as sum-of-divisors of an integer.
 
@@ -876,28 +870,28 @@ defmodule Chunky.Math do
     |> Enum.map(fn fac -> pow(fac, p) end)
     |> Enum.sum()
   end
-  
+
   @doc """
   The tau (number of divisors) function.
-  
+
   Also written as `𝜏(n)` or `sigma(n, 0)`, this is a shortcut to `sigma/2`.
-  
+
   ## Examples
-  
+
       iex> Math.tau(9)
       3
-  
+
       iex> Math.tau(34)
       4
-  
+
       iex> Math.tau(50)
       6
-  
+
       iex> Math.tau(3402)
       24
   """
   def tau(n) when is_integer(n) and n > 0 do
-     sigma(n, 0) 
+    sigma(n, 0)
   end
 
   @doc """
@@ -1139,20 +1133,20 @@ defmodule Chunky.Math do
 
   @doc """
   Check if `n` is a power of `m`.
-  
+
   This is partially the inverse of `is_root_of?/2`.
-  
+
   ## Examples
-  
+
       iex> Math.is_power_of?(8, 2)
       true
-  
+
       iex> Math.is_power_of?(243, 3)
       true
-  
+
       iex> Math.is_power_of?(9, 2)
       false
-  
+
       iex> Math.is_power_of?(2, 2)
       true
       
@@ -1161,10 +1155,11 @@ defmodule Chunky.Math do
   """
   def is_power_of?(n, m) when n == m, do: true
   def is_power_of?(1, _m), do: true
+
   def is_power_of?(n, m) do
-      is_root_of?(m, n)
+    is_root_of?(m, n)
   end
-  
+
   @doc """
   Check if `n` is any `k`-th root of `m`, where `k > 2`.
 

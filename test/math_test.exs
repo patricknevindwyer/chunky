@@ -5,299 +5,252 @@ defmodule Chunky.MathTest do
   doctest Chunky.Math
 
   describe "is_sphenic_number?/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 700, 4543, 28438, 51322, 51334]
-          os = [false, false, false, false, false, true, true, true, false]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.is_sphenic_number?(n) == o
-              end
-          )                    
-      end            
+    test "value tests" do
+      ns = [1, 2, 9, 19, 700, 4543, 28438, 51322, 51334]
+      os = [false, false, false, false, false, true, true, true, false]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.is_sphenic_number?(n) == o
+      end)
+    end
   end
-  
+
   describe "tau/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 700, 4545, 88688]
-          os = [1, 2, 3, 2, 18, 12, 20]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.tau(n) == o
-              end
-          )                    
-      end      
+    test "value tests" do
+      ns = [1, 2, 9, 19, 700, 4545, 88688]
+      os = [1, 2, 3, 2, 18, 12, 20]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.tau(n) == o
+      end)
+    end
   end
-  
+
   describe "is_cubefree?" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 64, 700, 2400, 4545, 88688]
-          os = [true, true, true, true, false, true, false, true, false]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.is_cubefree?(n) == o
-              end
-          )                    
-      end      
+    test "value tests" do
+      ns = [1, 2, 9, 19, 64, 700, 2400, 4545, 88688]
+      os = [true, true, true, true, false, true, false, true, false]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.is_cubefree?(n) == o
+      end)
+    end
   end
-  
+
   describe "prime_factor_exponents/1" do
-      test "value tests" do
-          ns = [49, 8, 33480062757]
-          os = [%{7 => 2}, %{2 => 3}, %{3 => 2, 37 => 3, 271 => 2}]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {c, o} ->
-                  assert Math.prime_factor_exponents(c) == o
-              end
-          )                    
-      end      
-      
+    test "value tests" do
+      ns = [49, 8, 33_480_062_757]
+      os = [%{7 => 2}, %{2 => 3}, %{3 => 2, 37 => 3, 271 => 2}]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {c, o} ->
+        assert Math.prime_factor_exponents(c) == o
+      end)
+    end
   end
-  
+
   describe "is_power_of?/2" do
-      test "value tests" do
-          ns = [{8, 2}, {2401, 7}, {144, 12}, {867, 17}]
-          os = [true, true, true, false]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {{c, b}, o} ->
-                  assert Math.is_power_of?(c, b) == o
-              end
-          )                    
-      end      
+    test "value tests" do
+      ns = [{8, 2}, {2401, 7}, {144, 12}, {867, 17}]
+      os = [true, true, true, false]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{c, b}, o} ->
+        assert Math.is_power_of?(c, b) == o
+      end)
+    end
   end
-  
+
   describe "is_squarefree?/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 700, 2400, 4545, 88688]
-          os = [true, true, false, true, false, false, false, false]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.is_squarefree?(n) == o
-              end
-          )                    
-      end
-      
+    test "value tests" do
+      ns = [1, 2, 9, 19, 700, 2400, 4545, 88688]
+      os = [true, true, false, true, false, false, false, false]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.is_squarefree?(n) == o
+      end)
+    end
   end
-  
+
   describe "radical/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 700, 4545, 88688]
-          os = [1, 2, 3, 19, 70, 1515, 11086]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.radical(n) == o
-              end
-          )                    
-      end
-      
+    test "value tests" do
+      ns = [1, 2, 9, 19, 700, 4545, 88688]
+      os = [1, 2, 3, 19, 70, 1515, 11086]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.radical(n) == o
+      end)
+    end
   end
-  
+
   describe "least_prime_factor/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 999, 9999, 99999]
-          os = [1, 2, 3, 19, 3, 3, 3]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.least_prime_factor(n) == o
-              end
-          )          
-          
-      end
+    test "value tests" do
+      ns = [1, 2, 9, 19, 999, 9999, 99999]
+      os = [1, 2, 3, 19, 3, 3, 3]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.least_prime_factor(n) == o
+      end)
+    end
   end
-  
+
   describe "greatest_prime_factor/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 999, 9999, 99999]
-          os = [1, 2, 3, 19, 37, 101, 271]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.greatest_prime_factor(n) == o
-              end
-          )          
-          
-      end
+    test "value tests" do
+      ns = [1, 2, 9, 19, 999, 9999, 99999]
+      os = [1, 2, 3, 19, 37, 101, 271]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.greatest_prime_factor(n) == o
+      end)
+    end
   end
-  
+
   describe "omega/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 999, 9999, 99999]
-          os = [0, 1, 1, 1, 2, 3, 3]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.omega(n) == o
-              end
-          )          
-      end
+    test "value tests" do
+      ns = [1, 2, 9, 19, 999, 9999, 99999]
+      os = [0, 1, 1, 1, 2, 3, 3]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.omega(n) == o
+      end)
+    end
   end
-  
+
   describe "bigomega/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 999, 9999, 99999]
-          os = [0, 1, 2, 1, 4, 4, 4]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.bigomega(n) == o
-              end
-          )          
-      end
+    test "value tests" do
+      ns = [1, 2, 9, 19, 999, 9999, 99999]
+      os = [0, 1, 2, 1, 4, 4, 4]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.bigomega(n) == o
+      end)
+    end
   end
-  
+
   describe "mobius_function/1" do
-      test "1" do
-          assert Math.mobius_function(1) == 1
-      end
-      
-      test "5" do
-          assert Math.mobius_function(5) == -1
-      end
-      
-      test "27" do
-          assert Math.mobius_function(27) == 0
-      end
-          
+    test "1" do
+      assert Math.mobius_function(1) == 1
+    end
+
+    test "5" do
+      assert Math.mobius_function(5) == -1
+    end
+
+    test "27" do
+      assert Math.mobius_function(27) == 0
+    end
   end
-  
+
   describe "jordan_totient/2" do
-      test "j_2" do
-          k = 2
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 3, 72, 576, 886464]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )
-      end
-      
-      test "j_3" do
-          k = 3
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 7, 868, 22568, 960058008]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )
-          
-      end
-      
-      test "j_4" do
-          k = 4
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 15, 9360, 748800, 983709100800]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )          
-      end
-      
-      test "j_5" do
-          k = 5
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 31, 96844, 23436248, 990915284398248]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )          
-      end
-      
-      test "j_6" do
-          k = 6
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 63, 984312, 716579136, 992651447419579584]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )          
-      end
-      
-      test "j_7" do
-          k = 7
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 127, 9921748, 21688941128, 992566908799084488888]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )          
-      end
-      
-      test "j_8" do
-          k = 8
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 255, 99609120, 653435827200, 991876743346590471859200]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )          
-      end
-      
-      test "j_9" do
-          k = 9
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 511, 998046364, 19643548536248, 990985566285083759262811848]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )          
-      end
-      
-      test "j_10" do
-          k = 10
-          ns = [1, 2, 10, 30, 999]
-          os = [1, 1023, 9990233352, 589903298968896, 990028113712767365061852506304]
-          
-          Enum.zip(ns, os)
-          |> Enum.each(
-              fn {n, o} ->
-                  assert Math.jordan_totient(n, k) == o
-              end
-          )          
-      end
+    test "j_2" do
+      k = 2
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 3, 72, 576, 886_464]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_3" do
+      k = 3
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 7, 868, 22568, 960_058_008]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_4" do
+      k = 4
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 15, 9360, 748_800, 983_709_100_800]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_5" do
+      k = 5
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 31, 96844, 23_436_248, 990_915_284_398_248]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_6" do
+      k = 6
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 63, 984_312, 716_579_136, 992_651_447_419_579_584]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_7" do
+      k = 7
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 127, 9_921_748, 21_688_941_128, 992_566_908_799_084_488_888]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_8" do
+      k = 8
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 255, 99_609_120, 653_435_827_200, 991_876_743_346_590_471_859_200]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_9" do
+      k = 9
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 511, 998_046_364, 19_643_548_536_248, 990_985_566_285_083_759_262_811_848]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
+
+    test "j_10" do
+      k = 10
+      ns = [1, 2, 10, 30, 999]
+      os = [1, 1023, 9_990_233_352, 589_903_298_968_896, 990_028_113_712_767_365_061_852_506_304]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jordan_totient(n, k) == o
+      end)
+    end
   end
-  
+
   describe "is_coprime?/2" do
     test "any 1" do
       assert Math.is_coprime?(1, 24)

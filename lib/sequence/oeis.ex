@@ -240,7 +240,11 @@ defmodule Chunky.Sequence.OEIS do
       mapped_seq
       |> Enum.filter(fn cov -> cov end)
 
-    %{covered: length(covered), total: length(mapped_seq), percent: length(covered) / length(mapped_seq)}
+    %{
+      covered: length(covered),
+      total: length(mapped_seq),
+      percent: length(covered) / length(mapped_seq)
+    }
   end
 
   @doc """
@@ -256,7 +260,7 @@ defmodule Chunky.Sequence.OEIS do
     IO.puts("\t#{length(oeis_sequences)} total sequences")
 
     IO.puts("By Module")
-    
+
     # group by module
     oeis_sequences
     |> Enum.group_by(fn %{module: mod} -> mod end)
@@ -265,7 +269,7 @@ defmodule Chunky.Sequence.OEIS do
     end)
 
     IO.puts("Sequence Groups")
-    
+
     # build and report specific sequence group coverage
     [
       {Sequence.OEIS, :keyword_core}
@@ -281,7 +285,9 @@ defmodule Chunky.Sequence.OEIS do
       {nom, cov}
     end)
     |> Enum.each(fn {nom, cov} ->
-      IO.puts("\t#{nom} - #{cov.covered} / #{cov.total} (#{(cov.percent * 100.0) |> Float.round(2)}%)")
+      IO.puts(
+        "\t#{nom} - #{cov.covered} / #{cov.total} (#{(cov.percent * 100.0) |> Float.round(2)}%)"
+      )
     end)
 
     IO.puts("Sequences")

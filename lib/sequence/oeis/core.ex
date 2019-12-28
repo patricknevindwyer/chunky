@@ -532,7 +532,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a000203(idx) do
     Math.sigma(idx)
   end
-  
+
   @doc """
   OEIS Sequence `A000244` - Powers of 3.
 
@@ -558,14 +558,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Powers of 3.",
        references: [{:oeis, :a000244, "https://oeis.org/A000244"}]
   def create_sequence_a000244(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000244/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000244/1)
   end
 
   @doc offset: 0
   def seq_a000244(idx) do
-      Math.pow(3, idx)
+    Math.pow(3, idx)
   end
-  
+
   @doc """
   OEIS Sequence `A000290` - The squares: a(n) = n^2.
 
@@ -590,12 +590,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "The squares: a(n) = n^2.",
        references: [{:oeis, :a000290, "https://oeis.org/A000290"}]
   def create_sequence_a000290(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000290/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000290/1)
   end
 
   @doc offset: 0
   def seq_a000290(idx) do
-      Math.pow(idx, 2)
+    Math.pow(idx, 2)
   end
 
   @doc """
@@ -623,14 +623,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Powers of 4: a(n) = 4^n.",
        references: [{:oeis, :a000302, "https://oeis.org/A000302"}]
   def create_sequence_a000302(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000302/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000302/1)
   end
 
   @doc offset: 0
   def seq_a000302(idx) do
-      Math.pow(4, idx)
+    Math.pow(4, idx)
   end
-  
+
   @doc """
   OEIS Sequence `A000396` - Perfect Numbers
 
@@ -683,14 +683,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "The cubes: a(n) = n^3.",
        references: [{:oeis, :a000578, "https://oeis.org/A000578"}]
   def create_sequence_a000578(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000578/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000578/1)
   end
 
   @doc offset: 0
   def seq_a000578(idx) do
-      Math.pow(idx, 3)
+    Math.pow(idx, 3)
   end
-  
+
   @doc """
 
   OEIS Sequence `A000593` - Sum of Odd Divisors of N
@@ -792,7 +792,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a001157(idx) do
     Math.sigma(idx, 2)
   end
-  
+
   @doc """
   OEIS Sequence `A001221` - Number of distinct primes dividing n (also called omega(n)).
 
@@ -817,12 +817,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Number of distinct primes dividing n (also called omega(n)).",
        references: [{:oeis, :a001221, "https://oeis.org/A001221"}]
   def create_sequence_a001221(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001221/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001221/1)
   end
 
   @doc offset: 1
   def seq_a001221(idx) do
-      Math.omega(idx)
+    Math.omega(idx)
   end
 
   @doc """
@@ -846,15 +846,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 1,
-       sequence: "Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).",
+       sequence:
+         "Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).",
        references: [{:oeis, :a001222, "https://oeis.org/A001222"}]
   def create_sequence_a001222(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001222/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001222/1)
   end
 
   @doc offset: 1
   def seq_a001222(idx) do
-      Math.bigomega(idx)
+    Math.bigomega(idx)
   end
 
   @doc """
@@ -882,12 +883,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Semiprimes (or biprimes): products of two primes.",
        references: [{:oeis, :a001358, "https://oeis.org/A001358"}]
   def create_sequence_a001358(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001358/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001358/2)
   end
 
   @doc offset: 1
   def seq_a001358(_idx, last) do
-      Math.next_number(fn candidate -> Math.bigomega(candidate) == 2 end, last)
+    Math.next_number(fn candidate -> Math.bigomega(candidate) == 2 end, last)
   end
 
   @doc """
@@ -915,14 +916,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Dedekind psi function: n * Product_{p|n, p prime} (1 + 1/p).",
        references: [{:oeis, :a001615, "https://oeis.org/A001615"}]
   def create_sequence_a001615(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001615/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001615/1)
   end
 
   @doc offset: 1
   def seq_a001615(idx) do
-      div(Math.jordan_totient(idx, 2), Math.jordan_totient(idx, 1))
+    div(Math.jordan_totient(idx, 2), Math.jordan_totient(idx, 1))
   end
-  
+
   @doc """
   OEIS Sequence `A005100` - Deficient Numbers
 
@@ -986,7 +987,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a005101(_idx, last) do
     Math.next_abundant(last)
   end
-  
+
   @doc """
   OEIS Sequence `A005117` - Squarefree numbers: numbers that are not divisible by a square greater than 1.
 
@@ -1011,14 +1012,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Squarefree numbers: numbers that are not divisible by a square greater than 1.",
        references: [{:oeis, :a005117, "https://oeis.org/A005117"}]
   def create_sequence_a005117(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005117/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005117/2)
   end
 
   @doc offset: 1
   def seq_a005117(_idx, last) do
-      Math.next_number(&Math.is_squarefree?/1, last)
+    Math.next_number(&Math.is_squarefree?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A006530` - Gpf(n): greatest prime dividing n
 
@@ -1043,14 +1044,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Gpf(n): greatest prime dividing n",
        references: [{:oeis, :a006530, "https://oeis.org/A006530"}]
   def create_sequence_a006530(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006530/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006530/1)
   end
 
   @doc offset: 1
   def seq_a006530(idx) do
-      Math.greatest_prime_factor(idx)
+    Math.greatest_prime_factor(idx)
   end
-  
+
   @doc """
   OEIS Sequence `A008683` - Möbius (or Moebius) function mu(n)
 
@@ -1071,17 +1072,18 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 1,
-       sequence: "Möbius (or Moebius) function mu(n). mu(1) = 1; mu(n) = (-1)^k if n is the product of k different primes; otherwise mu(n) = 0.",
+       sequence:
+         "Möbius (or Moebius) function mu(n). mu(1) = 1; mu(n) = (-1)^k if n is the product of k different primes; otherwise mu(n) = 0.",
        references: [{:oeis, :a008683, "https://oeis.org/A008683"}]
   def create_sequence_a008683(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008683/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008683/1)
   end
 
   @doc offset: 1
   def seq_a008683(idx) do
-      Math.mobius_function(idx)
+    Math.mobius_function(idx)
   end
-  
+
   @doc """
   OEIS Sequence `A020639` - Lpf(n): least prime dividing
 
@@ -1105,11 +1107,11 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Lpf(n): least prime dividing n",
        references: [{:oeis, :a020639, "https://oeis.org/A020639"}]
   def create_sequence_a020639(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a020639/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a020639/1)
   end
 
   @doc offset: 1
   def seq_a020639(idx) do
-      Math.least_prime_factor(idx)
+    Math.least_prime_factor(idx)
   end
 end
