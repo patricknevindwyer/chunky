@@ -53,6 +53,8 @@
  - A008683 - Möbius (or Moebius) function mu(n)
  - A001221 - Number of distinct primes dividing n (also called omega(n))
  - A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n))
+ - A006530 - Gpf(n): greatest prime dividing n
+ - A020639 - Lpf(n): least prime dividing n
  
 
 ## v0.9.0

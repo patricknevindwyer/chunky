@@ -19,7 +19,9 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
+   - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
+   - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -815,6 +817,38 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
   
   @doc """
+  OEIS Sequence `A006530` - Gpf(n): greatest prime dividing n
+
+  From [OEIS A006530](https://oeis.org/A006530):
+
+  > Gpf(n): greatest prime dividing n, for n >= 2; a(1)=1.
+  > (Formerly M0428)
+
+  **Sequence IDs**: `:a006530`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a006530) |> Sequence.take!(86)
+      [1,2,3,2,5,3,7,2,3,5,11,3,13,7,5,2,17,3,19,5,7,11,23,3,5,13,3,7,29,5,31,2,11,17,7,3,37,19,13,5,41,7,43,11,5,23,47,3,7,5,17,13,53,3,11,7,19,29,59,5,61,31,7,2,13,11,67,17,23,7,71,3,73,37,5,19,11,13,79,5,3,41,83,7,17,43]
+
+  """
+  @doc offset: 1,
+       sequence: "Gpf(n): greatest prime dividing n",
+       references: [{:oeis, :a006530, "https://oeis.org/A006530"}]
+  def create_sequence_a006530(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006530/1)
+  end
+
+  @doc offset: 1
+  def seq_a006530(idx) do
+      Math.greatest_prime_factor(idx)
+  end
+  
+  @doc """
   OEIS Sequence `A008683` - Möbius (or Moebius) function mu(n)
 
   From [OEIS A008683](https://oeis.org/A008683):
@@ -843,5 +877,36 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a008683(idx) do
       Math.mobius_function(idx)
+  end
+  
+  @doc """
+  OEIS Sequence `A020639` - Lpf(n): least prime dividing
+
+  From [OEIS A020639](https://oeis.org/A020639):
+
+  > Lpf(n): least prime dividing n (when n > 1); a(1) = 1.
+
+  **Sequence IDs**: `:a020639`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a020639) |> Sequence.take!(97)
+      [1,2,3,2,5,2,7,2,3,2,11,2,13,2,3,2,17,2,19,2,3,2,23,2,5,2,3,2,29,2,31,2,3,2,5,2,37,2,3,2,41,2,43,2,3,2,47,2,7,2,3,2,53,2,5,2,3,2,59,2,61,2,3,2,5,2,67,2,3,2,71,2,73,2,3,2,7,2,79,2,3,2,83,2,5,2,3,2,89,2,7,2,3,2,5,2,97]
+
+  """
+  @doc offset: 1,
+       sequence: "Lpf(n): least prime dividing n",
+       references: [{:oeis, :a020639, "https://oeis.org/A020639"}]
+  def create_sequence_a020639(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a020639/1)
+  end
+
+  @doc offset: 1
+  def seq_a020639(idx) do
+      Math.least_prime_factor(idx)
   end
 end
