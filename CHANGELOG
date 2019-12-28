@@ -21,6 +21,8 @@
  - Chunky.Math
   - jordan_totient/2 - Jordan totient `J-k(n)`
   - mobius_function/1 - Classical mobius function
+  - omega/1 - Count of distinct prime factors
+  - bigomega/1 - Count of distinct prime factors, with multiplicity
   
 ### New Sequences
 
@@ -47,6 +49,8 @@
  - A160960 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 12
  - A001615 - Dedekind psi function
  - A008683 - Möbius (or Moebius) function mu(n)
+ - A001221 - Number of distinct primes dividing n (also called omega(n))
+ - A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n))
  
 
 ## v0.9.0

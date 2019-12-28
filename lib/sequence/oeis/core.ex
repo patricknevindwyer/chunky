@@ -14,6 +14,8 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
+   - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
+   - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
@@ -649,6 +651,70 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a001157(idx) do
     Math.sigma(idx, 2)
+  end
+  
+  @doc """
+  OEIS Sequence `A001221` - Number of distinct primes dividing n (also called omega(n)).
+
+  From [OEIS A001221](https://oeis.org/A001221):
+
+  > Number of distinct primes dividing n (also called omega(n)).
+  > (Formerly M0056 N0019)
+
+  **Sequence IDs**: `:a001221`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001221) |> Sequence.take!(111)
+      [0,1,1,1,1,2,1,1,1,2,1,2,1,2,2,1,1,2,1,2,2,2,1,2,1,2,1,2,1,3,1,1,2,2,2,2,1,2,2,2,1,3,1,2,2,2,1,2,1,2,2,2,1,2,2,2,2,2,1,3,1,2,2,1,2,3,1,2,2,3,1,2,1,2,2,2,2,3,1,2,1,2,1,3,2,2,2,2,1,3,2,2,2,2,2,2,1,2,2,2,1,3,1,2,3,2,1,2,1,3,2]
+
+  """
+  @doc offset: 1,
+       sequence: "Number of distinct primes dividing n (also called omega(n)).",
+       references: [{:oeis, :a001221, "https://oeis.org/A001221"}]
+  def create_sequence_a001221(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001221/1)
+  end
+
+  @doc offset: 1
+  def seq_a001221(idx) do
+      Math.omega(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A001222` - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).
+
+  From [OEIS A001222](https://oeis.org/A001222):
+
+  > Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).
+  > (Formerly M0094 N0031)
+
+  **Sequence IDs**: `:a001222`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001222) |> Sequence.take!(111)
+      [0,1,1,2,1,2,1,3,2,2,1,3,1,2,2,4,1,3,1,3,2,2,1,4,2,2,3,3,1,3,1,5,2,2,2,4,1,2,2,4,1,3,1,3,3,2,1,5,2,3,2,3,1,4,2,4,2,2,1,4,1,2,3,6,2,3,1,3,2,3,1,5,1,2,3,3,2,3,1,5,4,2,1,4,2,2,2,4,1,4,2,3,2,2,2,6,1,3,3,4,1,3,1,4,3,2,1,5,1,3,2]
+
+  """
+  @doc offset: 1,
+       sequence: "Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).",
+       references: [{:oeis, :a001222, "https://oeis.org/A001222"}]
+  def create_sequence_a001222(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001222/1)
+  end
+
+  @doc offset: 1
+  def seq_a001222(idx) do
+      Math.bigomega(idx)
   end
 
   @doc """
