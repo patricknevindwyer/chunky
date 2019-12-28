@@ -35,6 +35,8 @@ defmodule Chunky.Math do
    - `totient/1` - Calculate Euler's totient for `n`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
    - `mobius_function/1` - Classical Mobius Function
+   - `omega/1` - Omega function - count of distinct primes
+   - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
   
   ## Cryptographic Math
 
@@ -331,6 +333,56 @@ defmodule Chunky.Math do
          Integer.is_even(count_p_fs) -> 1
          true -> -1
       end
+  end
+  
+  @doc """
+  Calculate `ω(n)` - the number of distinct prime factors of `n`.
+  
+  See also `bigomega/1` - number of total prime factors of `n`.
+  
+  ## Examples
+  
+      iex> Math.omega(3)
+      1
+      
+      iex> Math.omega(15)
+      2
+  
+      iex> Math.omega(25)
+      1
+  
+      iex> Math.omega(99960)
+      5
+  """
+  def omega(n) when is_integer(n) and n > 0 do
+      
+      prime_factors(n) -- [1]
+      |> Enum.uniq()
+      |> length()
+  end
+  
+  @doc """
+  Calculate `Ω(n)` - number of distinct prime factors, with multiplicity.
+  
+  See also `omega/1` - number of distinct prime factors.
+  
+  ## Examples
+  
+      iex> Math.bigomega(3)
+      1
+      
+      iex> Math.bigomega(15)
+      2
+  
+      iex> Math.bigomega(25)
+      2
+  
+      iex> Math.bigomega(99960)
+      8
+  """
+  def bigomega(n) when is_integer(n) and n > 0 do
+     prime_factors(n) -- [1]
+     |> length() 
   end
   
   @doc """

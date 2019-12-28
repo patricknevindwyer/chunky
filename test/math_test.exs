@@ -4,6 +4,34 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "omega/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 999, 9999, 99999]
+          os = [0, 1, 1, 1, 2, 3, 3]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.omega(n) == o
+              end
+          )          
+      end
+  end
+  
+  describe "bigomega/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 999, 9999, 99999]
+          os = [0, 1, 2, 1, 4, 4, 4]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.bigomega(n) == o
+              end
+          )          
+      end
+  end
+  
   describe "mobius_function/1" do
       test "1" do
           assert Math.mobius_function(1) == 1
