@@ -1,5 +1,5 @@
 defmodule Chunky.GridTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Chunky.Grid
 
   alias Chunky.Grid

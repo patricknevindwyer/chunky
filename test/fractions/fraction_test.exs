@@ -1,5 +1,5 @@
 defmodule Chunky.FractionTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias Chunky.Fraction
 
   doctest Chunky.Fraction, import: true

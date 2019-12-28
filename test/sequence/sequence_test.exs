@@ -1,5 +1,5 @@
 defmodule Chunky.SequenceTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   alias Chunky.Sequence
   doctest Chunky.Sequence
