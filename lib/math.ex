@@ -289,6 +289,50 @@ defmodule Chunky.Math do
   end
 
   @doc """
+  The classical Möbius function `μ(n)`.
+  
+  From [Möbius Function](https://en.wikipedia.org/wiki/Möbius_function) on Wikipedia:
+  
+  For any positive integer n, define μ(n) as the sum of the primitive nth roots of unity. It has values in {−1, 0, 1} depending on the factorization of n into prime factors:
+  
+   - μ(n) = 1 if n is a square-free positive integer with an even number of prime factors.
+   - μ(n) = −1 if n is a square-free positive integer with an odd number of prime factors.
+   - μ(n) = 0 if n has a squared prime factor.
+  
+  ## Examples
+  
+      iex> Math.mobius_function(1)
+      1
+  
+      iex> Math.mobius_function(24)
+      0
+  
+      iex> Math.mobius_function(99999)
+      0
+  """
+  def mobius_function(1), do: 1
+  def mobius_function(n) when is_integer(n) and n > 0 do
+      
+      # prime factors, dropping 1
+      p_fs = prime_factors(n) -- [1]
+      
+      # build the grouping of factors
+      p_gs = p_fs |> Enum.group_by(fn p_f -> p_f end)
+      
+      # how big is the largest PF group?
+      largest_p_gs = p_gs |> Enum.map(fn {_base, quant} -> length(quant) end) |> Enum.max()
+      
+      # how many factors are there?
+      count_p_fs = length(p_fs)
+      
+      cond do
+         largest_p_gs > 1 -> 0
+         Integer.is_even(count_p_fs) -> 1
+         true -> -1
+      end
+  end
+  
+  @doc """
   Check if an integer `n` is 3-smooth.
 
   See `is_b_smooth?/2` for more details.

@@ -17,6 +17,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
+   - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -745,5 +746,36 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1, fill_value: 1
   def seq_a005101(_idx, last) do
     Math.next_abundant(last)
+  end
+  
+  @doc """
+  OEIS Sequence `A008683` - Möbius (or Moebius) function mu(n)
+
+  From [OEIS A008683](https://oeis.org/A008683):
+
+  > Möbius (or Moebius) function mu(n). mu(1) = 1; mu(n) = (-1)^k if n is the product of k different primes; otherwise mu(n) = 0.
+
+  **Sequence IDs**: `:a008683`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a008683) |> Sequence.take!(78)
+      [1,-1,-1,0,-1,1,-1,0,0,1,-1,0,-1,1,1,0,-1,0,-1,0,1,1,-1,0,0,1,0,0,-1,-1,-1,0,1,1,1,0,-1,1,1,0,-1,-1,-1,0,0,1,-1,0,0,0,1,0,-1,0,1,0,1,1,-1,0,-1,1,0,0,1,-1,-1,0,1,-1,-1,0,-1,1,0,0,1,-1]
+
+  """
+  @doc offset: 1,
+       sequence: "Möbius (or Moebius) function mu(n). mu(1) = 1; mu(n) = (-1)^k if n is the product of k different primes; otherwise mu(n) = 0.",
+       references: [{:oeis, :a008683, "https://oeis.org/A008683"}]
+  def create_sequence_a008683(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008683/1)
+  end
+
+  @doc offset: 1
+  def seq_a008683(idx) do
+      Math.mobius_function(idx)
   end
 end

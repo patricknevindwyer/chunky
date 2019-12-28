@@ -4,6 +4,21 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "mobius_function/1" do
+      test "1" do
+          assert Math.mobius_function(1) == 1
+      end
+      
+      test "5" do
+          assert Math.mobius_function(5) == -1
+      end
+      
+      test "27" do
+          assert Math.mobius_function(27) == 0
+      end
+          
+  end
+  
   describe "jordan_totient/2" do
       test "j_2" do
           k = 2

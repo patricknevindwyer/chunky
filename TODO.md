@@ -30,7 +30,7 @@
  - Additions
   - add Sigma-21 through 24
   - add Panarithmetic Numbers (https://oeis.org/A005153)
-  - add an OEIS.Factors module
+  - add van Mangoldt function (https://en.wikipedia.org/wiki/Von_Mangoldt_function) and related series
  
   - Sequence.at(seq, idx)
   - add Math.partition(int) for [0, 250] - use sequence a000041
