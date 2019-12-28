@@ -28,6 +28,7 @@ defmodule Chunky.Math do
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `sigma/2` - Generalized Sigma function for integers
+   - `tau/1` - Tau function, number of divisors of `n`
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
    - `is_perfect_power?/1` - Is `n` a perfect power?
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
@@ -39,6 +40,12 @@ defmodule Chunky.Math do
    - `mobius_function/1` - Classical Mobius Function
    - `omega/1` - Omega function - count of distinct primes
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
+   - `is_squarefree?/1` - Are any factors of `n` perfect squares?
+   - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
+   - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
+   - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
+   - `is_power_of?/2` - Is `n` a power of `m`?
+   - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
   
   ## Cryptographic Math
 
@@ -191,6 +198,27 @@ defmodule Chunky.Math do
   def is_coprime?(a, b) when is_integer(a) and is_integer(b) and a > 0 and b > 0 do
     Integer.gcd(a, b) == 1
   end
+  
+  @doc """
+  Check if `n` is a _sphenic number_, the product of three distinct primes.
+  
+  ## Example
+  
+      iex> Math.is_sphenic_number?(4)
+      false
+  
+      iex> Math.is_sphenic_number?(66)
+      true
+  
+      iex> Math.is_sphenic_number?(51339)
+      true
+  """
+  def is_sphenic_number?(n) when is_integer(n) and n > 0 do
+     
+      facs = Math.prime_factors(n) -- [1]
+      length(facs) == 3 && length(Enum.uniq(facs)) == 3
+      
+  end
 
   @doc """
   Euler's totient function for `n`.
@@ -338,6 +366,53 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Check if an integer `n` has no factors greater than `1` that are perfect squares.
+  
+  ## Examples
+  
+      iex> Math.is_squarefree?(3)
+      true
+      
+      iex> Math.is_squarefree?(8)
+      false
+  
+      iex> Math.is_squarefree?(99935)
+      true
+  
+  """
+  def is_squarefree?(1), do: true
+  def is_squarefree?(n) when is_integer(n) and n > 0 do
+      factors(n) -- prime_factors(n)
+      |> Enum.uniq()
+      |> Enum.filter(fn c_f -> is_perfect_square?(c_f) end)
+      |> length() == 0
+  end
+  
+  @doc """
+  Check if an integer `n` has no factors greater than `1` that are perfect cubes.
+  
+  ## Examples
+  
+      iex> Math.is_cubefree?(3)
+      true
+  
+      iex> Math.is_cubefree?(64)
+      false
+  
+      iex> Math.is_cubefree?(2744)
+      false
+  """
+  def is_cubefree?(1), do: true
+  def is_cubefree?(n) when is_integer(n) and n > 0 do
+      
+      factors(n) -- prime_factors(n)
+      |> Enum.uniq()
+      |> Enum.filter(fn c_f -> is_perfect_cube?(c_f) end)
+      |> length() == 0
+      
+  end
+  
+  @doc """
   Calculate `ω(n)` - the number of distinct prime factors of `n`.
   
   See also `bigomega/1` - number of total prime factors of `n`.
@@ -361,6 +436,29 @@ defmodule Chunky.Math do
       prime_factors(n) -- [1]
       |> Enum.uniq()
       |> length()
+  end
+  
+  @doc """
+  Find the radical of an integer `n`.
+  
+  Also called the _square-free kernel_, or written as `rad(n)`, the radical of an integer is
+  the product of the distinct primes of `n`.
+  
+  ## Examples
+  
+      iex> Math.radical(1)
+      1
+  
+      iex> Math.radical(504)
+      42
+  
+      iex> Math.radical(99960)
+      3570
+  """
+  def radical(n) when is_integer(n) and n > 0 do
+     prime_factors(n)
+     |> Enum.uniq()
+     |> Enum.reduce(1, fn x, acc -> x * acc end) 
   end
   
   @doc """
@@ -693,6 +791,46 @@ defmodule Chunky.Math do
   end
 
   @doc """
+  Count the exponents of the prime factors of `n`.
+  
+  This function counts the exponents on the prime factors of `n`, for example the
+  number `2,025,000` can be factored to: `[2, 2, 2, 3, 3, 3, 3, 5, 5, 5, 5, 5]`
+  or `2^3 * 3^4 * 5^5`, hence the exponent of `2` is `3`, the exponent of `3` is
+  `4`, and the exponent of `5` is `5`.
+  
+  As a simpler example, the prime factors of `49` are `[7, 7]`, or `7^2`, so the
+  result of `prime_factor_exponents(49)` would be `%{7 => 2}`
+  
+  ## Examples
+  
+      iex> Math.prime_factor_exponents(2)
+      %{2 => 1}
+  
+      iex> Math.prime_factor_exponents(8)
+      %{2 => 3}
+  
+      iex> Math.prime_factor_exponents(2025000)
+      %{2 => 3, 3 => 4, 5 => 5}
+  
+      iex> Math.prime_factor_exponents(49)
+      %{7 => 2}
+  """
+  def prime_factor_exponents(n) when is_integer(n) and n > 0 do
+      
+      # find the prime factors
+      Math.prime_factors(n) -- [1]
+
+      # group by factor - this is effectively finding the exponent of the factor
+      |> Enum.group_by(fn i -> i end)
+
+      # map to the length of the group (extract the exponent)
+      |> Enum.map(fn {base, exp} -> {base, length(exp)} end)
+      
+      |> Map.new()
+      
+  end
+  
+  @doc """
   Calculate the sigma-1 (or `σ1(n)`), also known as sum-of-divisors of an integer.
 
   This is all of the divisors of `n` summed.
@@ -737,6 +875,29 @@ defmodule Chunky.Math do
     factors(n)
     |> Enum.map(fn fac -> pow(fac, p) end)
     |> Enum.sum()
+  end
+  
+  @doc """
+  The tau (number of divisors) function.
+  
+  Also written as `𝜏(n)` or `sigma(n, 0)`, this is a shortcut to `sigma/2`.
+  
+  ## Examples
+  
+      iex> Math.tau(9)
+      3
+  
+      iex> Math.tau(34)
+      4
+  
+      iex> Math.tau(50)
+      6
+  
+      iex> Math.tau(3402)
+      24
+  """
+  def tau(n) when is_integer(n) and n > 0 do
+     sigma(n, 0) 
   end
 
   @doc """
@@ -976,6 +1137,34 @@ defmodule Chunky.Math do
     is_powerful_number?(n) and !is_perfect_power?(n)
   end
 
+  @doc """
+  Check if `n` is a power of `m`.
+  
+  This is partially the inverse of `is_root_of?/2`.
+  
+  ## Examples
+  
+      iex> Math.is_power_of?(8, 2)
+      true
+  
+      iex> Math.is_power_of?(243, 3)
+      true
+  
+      iex> Math.is_power_of?(9, 2)
+      false
+  
+      iex> Math.is_power_of?(2, 2)
+      true
+      
+      iex> Math.is_power_of?(1, 17)
+      true
+  """
+  def is_power_of?(n, m) when n == m, do: true
+  def is_power_of?(1, _m), do: true
+  def is_power_of?(n, m) do
+      is_root_of?(m, n)
+  end
+  
   @doc """
   Check if `n` is any `k`-th root of `m`, where `k > 2`.
 

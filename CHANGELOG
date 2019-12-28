@@ -29,6 +29,13 @@ OEIS Total Sequences: 71
   - bigomega/1 - Count of distinct prime factors, with multiplicity
   - greatest_prime_factor/1 - largest prime factor of `n`
   - least_prime_factor/1 - smallest prime factor of `n`
+  - tau/1 - Tau function, number of divisors of `n`
+  - is_squarefree?/1 - Are any factors of `n` perfect squares?
+  - is_cubefree?/1 - Are any factors of `n` perfect cubes?
+  - radical/1 - Square-free kernel, or `rad(n)` - product of distict prime factors
+  - prime_factor_exponents/1 - Find the exponents of all prime factors of `n`
+  - is_power_of?/2 - Is `n` a power of `m`?
+  - is_sphenic_number?/1 - Is `n` the product of three distinct primes?
   
 ### New Sequences
 
@@ -59,6 +66,73 @@ OEIS Total Sequences: 71
  - A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n))
  - A006530 - Gpf(n): greatest prime dividing n
  - A020639 - Lpf(n): least prime dividing n
+ - A000244 - Powers of 3
+ - A000290 - The squares: a(n) = n^2
+ - A000302 - Powers of 4: a(n) = 4^n
+ - A000578 - The cubes: a(n) = n^3.
+ - A001358 - Semiprimes (or biprimes): products of two primes
+ - A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1
+ - A000037 - Numbers that are not squares
+ - A000977 - Numbers that are divisible by at least three different primes
+ - A004709 - Cubefree numbers: numbers that are not divisible by any cube > 1
+ - A006881 - Squarefree semiprimes: Numbers that are the product of two distinct primes
+ - A007018 - a(n) = a(n-1)^2 + a(n-1), a(0)=1
+ - A007304 - Sphenic numbers: products of 3 distinct primes
+ - A007412 - The noncubes: n + [ (n + [ n^{1/3} ])^{1/3} ]
+ - A007774 - Numbers that are divisible by exactly 2 different primes
+ - A007947 - Largest squarefree number dividing n
+ - A008966 - 1 if n is squarefree, else 0.
+ - A013929 - Numbers that are not squarefree.
+ - A014612 - Numbers that are the product of exactly three primes, including multiplicity.
+ - A014613 - Numbers that are products of 4 primes
+ - A014614 - Numbers that are products of 5 primes
+ - A030513 - Numbers with 4 divisors
+ - A030515 - Numbers with exactly 6 divisors
+ - A033273 - Number of nonprime divisors of n
+ - A033942 - At least 3 prime factors (counted with multiplicity).
+ - A033987 - Numbers that are divisible by at least 4 primes (counted with multiplicity)
+ - A033992 - Numbers that are divisible by exactly three different primes
+ - A033993 - Numbers that are divisible by exactly four different primes
+ - A036537 - Numbers whose number of divisors is a power of 2.
+ - A037143 - Numbers with at most 2 prime factors (counted with multiplicity).
+ - A038109 - Divisible exactly by the square of a prime.
+ - A039956 - Even squarefree numbers.
+ - A046099 - Numbers that are not cubefree. Numbers divisible by a cube greater than 1. 
+ - A046306 - Numbers that are divisible by exactly 6 primes with multiplicity.
+ - A046308 - Numbers that are divisible by exactly 7 primes counting multiplicity.
+ - A046310 - Numbers that are divisible by exactly 8 primes counting multiplicity
+ - A046312 - Numbers that are divisible by exactly 9 primes with multiplicity
+ - A046314 - Numbers that are divisible by exactly 10 primes with multiplicity
+ - A046321 - Odd numbers divisible by exactly 8 primes (counted with multiplicity)
+ - A046386 - Products of four distinct primes
+ - A046387 - Products of 5 distinct primes
+ - A046660 - Excess of n = Ω(n) - ω(n)
+ - A048272 - Number of odd divisors of n minus number of even divisors of n
+ - A051270 - Numbers that are divisible by exactly 5 different primes
+ - A056911 - Odd squarefree numbers.
+ - A059269 - Numbers n for which tau(n) is divisible by 3.
+ - A067259 - Cubefree numbers which are not squarefree
+ - A067885 - Product of 6 distinct primes
+ - A069272 - 11-almost primes (generalization of semiprimes)
+ - A069273 - 12-almost primes (generalization of semiprimes)
+ - A069274 - 13-almost primes (generalization of semiprimes)
+ - A069275 - 14-almost primes (generalization of semiprimes)
+ - A069276 - 15-almost primes (generalization of semiprimes)
+ - A069277 - 16-almost primes (generalization of semiprimes)
+ - A069278 - 17-almost primes (generalization of semiprimes)
+ - A069279 - Products of exactly 18 primes (generalization of semiprimes)
+ - A069280 - 19-almost primes (generalization of semiprimes)
+ - A069281 - 20-almost primes (generalization of semiprimes)
+ - A074969 - Numbers with six distinct prime divisors
+ - A076479 - a(n) = mu(rad(n)), where mu is the Moebius-function
+ - A117805 - Start with 3. Square the previous term and subtract it.
+ - A123321 - Products of 7 distinct primes
+ - A123322 - Products of 8 distinct primes
+ - A130897 - Numbers that are not exponentially squarefree.
+ - A162643 - Numbers such that their number of divisors is not a power of 2.
+ - A209061 - Exponentially squarefree numbers
+ - A211337 - Numbers n for which the number of divisors, tau(n), is congruent to 1 modulo 3
+ - A211338 - Numbers n for which the number of divisors, tau(n), is congruent to 2 modulo 3
  
 
 ## v0.9.0

@@ -26,6 +26,13 @@
   - `Chunky.chunk_runs/1` - Chunk an enumerable by runs of duplicate values
  - TODO: nPr
   
+## Generator for new Sequences  
+```elixir
+OEIS.Util.generate_sequence_stub("A076479", sequence_for_function: true, in_module: Chunky.Sequence.OEIS.Factors)
+```  
+
+ - long run tests
+  - move specific long run data tests into separate modules to run in async mode with everything else
   
  - Additions
   - add Sigma-21 through 24

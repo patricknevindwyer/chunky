@@ -1,9 +1,110 @@
 defmodule Chunky.MathTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_sphenic_number?/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 700, 4543, 28438, 51322, 51334]
+          os = [false, false, false, false, false, true, true, true, false]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.is_sphenic_number?(n) == o
+              end
+          )                    
+      end            
+  end
+  
+  describe "tau/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 700, 4545, 88688]
+          os = [1, 2, 3, 2, 18, 12, 20]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.tau(n) == o
+              end
+          )                    
+      end      
+  end
+  
+  describe "is_cubefree?" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 64, 700, 2400, 4545, 88688]
+          os = [true, true, true, true, false, true, false, true, false]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.is_cubefree?(n) == o
+              end
+          )                    
+      end      
+  end
+  
+  describe "prime_factor_exponents/1" do
+      test "value tests" do
+          ns = [49, 8, 33480062757]
+          os = [%{7 => 2}, %{2 => 3}, %{3 => 2, 37 => 3, 271 => 2}]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {c, o} ->
+                  assert Math.prime_factor_exponents(c) == o
+              end
+          )                    
+      end      
+      
+  end
+  
+  describe "is_power_of?/2" do
+      test "value tests" do
+          ns = [{8, 2}, {2401, 7}, {144, 12}, {867, 17}]
+          os = [true, true, true, false]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {{c, b}, o} ->
+                  assert Math.is_power_of?(c, b) == o
+              end
+          )                    
+      end      
+  end
+  
+  describe "is_squarefree?/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 700, 2400, 4545, 88688]
+          os = [true, true, false, true, false, false, false, false]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.is_squarefree?(n) == o
+              end
+          )                    
+      end
+      
+  end
+  
+  describe "radical/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 700, 4545, 88688]
+          os = [1, 2, 3, 19, 70, 1515, 11086]
+          
+          Enum.zip(ns, os)
+          |> Enum.each(
+              fn {n, o} ->
+                  assert Math.radical(n) == o
+              end
+          )                    
+      end
+      
+  end
+  
   describe "least_prime_factor/1" do
       test "value tests" do
           ns = [1, 2, 9, 19, 999, 9999, 99999]

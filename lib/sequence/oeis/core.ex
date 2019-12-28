@@ -10,18 +10,25 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
+   - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
+   - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
+   - [A000302 - Powers of 4: a(n) = 4^n](https://oeis.org/A000302) - `:a000302` - `create_sequence_a000302/1`
    - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
+   - [A000578 - The cubes: a(n) = n^3.](https://oeis.org/A000578) - `:a000578` - `create_sequence_a000578/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
    - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
    - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
+   - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
+   - [A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1](https://oeis.org/A005117) - `:a005117` - `create_sequence_a005117/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
+
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -525,7 +532,105 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a000203(idx) do
     Math.sigma(idx)
   end
+  
+  @doc """
+  OEIS Sequence `A000244` - Powers of 3.
 
+  From [OEIS A000244](https://oeis.org/A000244):
+
+  > Powers of 3.
+  > (Formerly M2807 N1129)
+
+  **Sequence IDs**: `:a000244`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000244) |> Sequence.take!(28)
+      [1,3,9,27,81,243,729,2187,6561,19683,59049,177147,531441,1594323,4782969,14348907,43046721,129140163,387420489,1162261467,3486784401,10460353203,31381059609,94143178827,282429536481,847288609443,2541865828329,7625597484987]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Powers of 3.",
+       references: [{:oeis, :a000244, "https://oeis.org/A000244"}]
+  def create_sequence_a000244(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000244/1)
+  end
+
+  @doc offset: 0
+  def seq_a000244(idx) do
+      Math.pow(3, idx)
+  end
+  
+  @doc """
+  OEIS Sequence `A000290` - The squares: a(n) = n^2.
+
+  From [OEIS A000290](https://oeis.org/A000290):
+
+  > The squares: a(n) = n^2.
+  > (Formerly M3356 N1350)
+
+  **Sequence IDs**: `:a000290`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000290) |> Sequence.take!(51)
+      [0,1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289,324,361,400,441,484,529,576,625,676,729,784,841,900,961,1024,1089,1156,1225,1296,1369,1444,1521,1600,1681,1764,1849,1936,2025,2116,2209,2304,2401,2500]
+
+  """
+  @doc offset: 0,
+       sequence: "The squares: a(n) = n^2.",
+       references: [{:oeis, :a000290, "https://oeis.org/A000290"}]
+  def create_sequence_a000290(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000290/1)
+  end
+
+  @doc offset: 0
+  def seq_a000290(idx) do
+      Math.pow(idx, 2)
+  end
+
+  @doc """
+  OEIS Sequence `A000302` - Powers of 4: a(n) = 4^n.
+
+  From [OEIS A000302](https://oeis.org/A000302):
+
+  > Powers of 4: a(n) = 4^n.
+  > (Formerly M3518 N1428)
+
+  **Sequence IDs**: `:a000302`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000302) |> Sequence.take!(25)
+      [1,4,16,64,256,1024,4096,16384,65536,262144,1048576,4194304,16777216,67108864,268435456,1073741824,4294967296,17179869184,68719476736,274877906944,1099511627776,4398046511104,17592186044416,70368744177664,281474976710656]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Powers of 4: a(n) = 4^n.",
+       references: [{:oeis, :a000302, "https://oeis.org/A000302"}]
+  def create_sequence_a000302(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000302/1)
+  end
+
+  @doc offset: 0
+  def seq_a000302(idx) do
+      Math.pow(4, idx)
+  end
+  
   @doc """
   OEIS Sequence `A000396` - Perfect Numbers
 
@@ -553,6 +658,39 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_list(@data_a000396)
   end
 
+  @doc """
+  OEIS Sequence `A000578` - The cubes: a(n) = n^3.
+
+  From [OEIS A000578](https://oeis.org/A000578):
+
+  > The cubes: a(n) = n^3.
+  > (Formerly M4499 N1905)
+
+  **Sequence IDs**: `:a000578`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000578) |> Sequence.take!(41)
+      [0,1,8,27,64,125,216,343,512,729,1000,1331,1728,2197,2744,3375,4096,4913,5832,6859,8000,9261,10648,12167,13824,15625,17576,19683,21952,24389,27000,29791,32768,35937,39304,42875,46656,50653,54872,59319,64000]
+
+
+  """
+  @doc offset: 0,
+       sequence: "The cubes: a(n) = n^3.",
+       references: [{:oeis, :a000578, "https://oeis.org/A000578"}]
+  def create_sequence_a000578(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000578/1)
+  end
+
+  @doc offset: 0
+  def seq_a000578(idx) do
+      Math.pow(idx, 3)
+  end
+  
   @doc """
 
   OEIS Sequence `A000593` - Sum of Odd Divisors of N
@@ -720,6 +858,39 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A001358` - Semiprimes (or biprimes): products of two primes.
+
+  From [OEIS A001358](https://oeis.org/A001358):
+
+  > Semiprimes (or biprimes): products of two primes.
+  > (Formerly M3274 N1323)
+
+  **Sequence IDs**: `:a001358`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001358) |> Sequence.take!(61)
+      [4,6,9,10,14,15,21,22,25,26,33,34,35,38,39,46,49,51,55,57,58,62,65,69,74,77,82,85,86,87,91,93,94,95,106,111,115,118,119,121,122,123,129,133,134,141,142,143,145,146,155,158,159,161,166,169,177,178,183,185,187]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Semiprimes (or biprimes): products of two primes.",
+       references: [{:oeis, :a001358, "https://oeis.org/A001358"}]
+  def create_sequence_a001358(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001358/2)
+  end
+
+  @doc offset: 1
+  def seq_a001358(_idx, last) do
+      Math.next_number(fn candidate -> Math.bigomega(candidate) == 2 end, last)
+  end
+
+  @doc """
   OEIS Sequence `A001615` - Dedekind psi function: n * Product_{p|n, p prime} (1 + 1/p).
 
   From [OEIS A001615](https://oeis.org/A001615):
@@ -814,6 +985,38 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1, fill_value: 1
   def seq_a005101(_idx, last) do
     Math.next_abundant(last)
+  end
+  
+  @doc """
+  OEIS Sequence `A005117` - Squarefree numbers: numbers that are not divisible by a square greater than 1.
+
+  From [OEIS A005117](https://oeis.org/A005117):
+
+  > Squarefree numbers: numbers that are not divisible by a square greater than 1.
+  > (Formerly M0617)
+
+  **Sequence IDs**: `:a005117`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a005117) |> Sequence.take!(71)
+      [1,2,3,5,6,7,10,11,13,14,15,17,19,21,22,23,26,29,30,31,33,34,35,37,38,39,41,42,43,46,47,51,53,55,57,58,59,61,62,65,66,67,69,70,71,73,74,77,78,79,82,83,85,86,87,89,91,93,94,95,97,101,102,103,105,106,107,109,110,111,113]
+
+  """
+  @doc offset: 1,
+       sequence: "Squarefree numbers: numbers that are not divisible by a square greater than 1.",
+       references: [{:oeis, :a005117, "https://oeis.org/A005117"}]
+  def create_sequence_a005117(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005117/2)
+  end
+
+  @doc offset: 1
+  def seq_a005117(_idx, last) do
+      Math.next_number(&Math.is_squarefree?/1, last)
   end
   
   @doc """
