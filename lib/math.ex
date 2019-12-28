@@ -34,6 +34,7 @@ defmodule Chunky.Math do
    - `is_achilles_number?/1` - Is `n` an Achilles Number?
    - `totient/1` - Calculate Euler's totient for `n`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
+   - `mobius_function/1` - Classical Mobius Function
   
   ## Cryptographic Math
 
