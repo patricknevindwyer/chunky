@@ -2,6 +2,78 @@ defmodule Chunky.Sequence.OEIS.Util do
   @moduledoc """
   Utilities for developing sequences.
   """
+  
+  def crawl_keywords(keys) when is_list(keys) do
+     
+     # encode the keywords
+     keyword_query = keys
+     |> Enum.map(fn k -> "keyword:#{k}" end)
+     |> Enum.join("+")
+     
+     # get all pages, keeping ID, name, keywords
+     get_search_result(keyword_query)
+  end
+  
+  defp get_search_result(keyword_query, offset \\ 0) do
+     
+      # sleep for a little bit so we're not mean to oeis.org
+      Process.sleep(250)
+      
+      # build the full query term
+      query = "q=#{keyword_query}&fmt=json&start=#{offset}"
+      
+      # request
+      raw = HTTPoison.get!("https://oeis.org/search?#{query}").body
+      %{"results" => results, "count" => total_results} = raw |> Jason.decode!()
+      
+      # recurse while page count < total pages
+      current_page = div(offset, 10) + 1
+      total_pages = Float.ceil(total_results / 10) |> Kernel.trunc()
+      
+      if current_page < total_pages do
+         translate_results(results) ++ get_search_result(keyword_query, offset + 10) 
+      else
+          translate_results(results)
+      end
+     
+  end
+  
+  defp translate_results(results_list) do
+      results_list |> Enum.map(&translate_result/1)
+  end
+  
+  defp translate_result(%{}=result) do
+      # number (decimal - need to pad it out)
+      # id (optional)
+      # data
+      # name
+      # offset
+      
+      # basic data extraction
+      %{
+          "number" => numb_int,
+          "data" => raw_data,
+          "name" => name,
+          "offset" => offset_raw
+      } = result
+          
+      # parse the offset
+      [offset,_] = offset_raw |> String.split(",")
+      
+      # ooptional data
+      id = Map.get(result, "id", "")
+      
+      # reformat number into something useful
+      numb_str = "#{numb_int}" |> String.pad_leading(6, "0")
+      
+      %{
+          seq_id: "A#{numb_str}",
+          id: id,
+          name: name,
+          offset: offset,
+          data: raw_data
+      }
+  end
 
   def generate_sequence_stub(seq_id, opts \\ []) do
     include_seq_func = opts |> Keyword.get(:sequence_for_function, false)

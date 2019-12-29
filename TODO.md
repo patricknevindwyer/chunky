@@ -27,19 +27,43 @@
  - TODO: nPr
   
 ## Generator for new Sequences  
+
 ```elixir
 OEIS.Util.generate_sequence_stub("A076479", sequence_for_function: true, in_module: Chunky.Sequence.OEIS.Factors)
+OEIS.Util.generate_sequence_stub("A076479", sequence_for_list: true, in_module: Chunky.Sequence.OEIS.Core)
 ```  
 
- - long run tests
-  - move specific long run data tests into separate modules to run in async mode with everything else
+## Crawling Search
+
+```
+OEIS.Util.crawl_keywords(["core", "hard"])
+```
+
+
+
+ - Documentation Updates
+  - break out predicate functions in Math
   
+    
  - Additions
   - add Sigma-21 through 24
+  - add 5^n through 48^n
+  - builder for particular list sequences
+   - list builder
+   - fini, hard, bref modules
+  - add coverage checks for specific list sequence groups
+  
+  - zeta function
+  - more core sequences
+   
   - add Panarithmetic Numbers (https://oeis.org/A005153)
   - add van Mangoldt function (https://en.wikipedia.org/wiki/Von_Mangoldt_function) and related series
  
   - Sequence.at(seq, idx)
+  - Sequence.take_with/3  (take with filter predicate)
+  - Sequence.take_without/3
+  - Sequence.take_groups
+  
   - add Math.partition(int) for [0, 250] - use sequence a000041
     
  - Large Numbers
