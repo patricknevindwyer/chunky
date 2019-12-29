@@ -669,7 +669,7 @@ defmodule Chunky.Sequence do
       iex> Sequence.create(Sequence.OEIS, :fibonacci) |> Sequence.is_finite?()
       false
 
-      iex> Sequence.create(Sequence.OEIS.Core, :a000041) |> Sequence.is_finite?()
+      iex> Sequence.create(Sequence.OEIS.Core, :a000001) |> Sequence.is_finite?()
       true
 
   """

@@ -69,6 +69,7 @@ defmodule Chunky.Math do
   require Integer
   alias Chunky.Math
   alias Chunky.Fraction
+  alias Chunky.CacheAgent
 
   @rand_max Kernel.trunc(:math.pow(2, 63))
 
@@ -953,11 +954,75 @@ defmodule Chunky.Math do
         end
     ) 
     |> Enum.sum()
-    
+
     Math.pow(n, 4) * sigma(n, 1) - 24 * sum_term
-      
+ 
   end
   
+  @doc """
+  Count the number of partitions of `n`.
+    
+  A partition of `n` is the set of ways of creating a sum of `n`. For example, `4` has a partition
+  count of `5`, as it can be represented as the following sums:
+  
+   - `4`
+   - `3 + 1`
+   - `2 + 2`
+   - `2 + 1 + 1`
+   - `1 + 1 + 1 + 1`
+  
+  This is a recursive form of the Partition Function, yielding an exact answer, but computationally
+  intensive for larger numbers. Because this function is exponentially recursive, it uses a value
+  cache that persists as a named Agent, which is used by any call to `partition_count`. On a reasonably
+  fast computer this results in the following execution times for different values of `n`:
+  
+  |  `n`  |  Seconds  |
+  |-------|-----------|
+  | 10    |   0.021   |
+  | 100   |   0.071   |
+  | 1000  |   7.301   |
+  | 2500  |  43.616   |
+  | 3000  |  61.921   |
+  | 5000  | 185.277   |
+  
+  ## Examples
+  
+      iex> Math.partition_count(1)
+      1
+  
+      iex> Math.partition_count(10)
+      42
+      
+      iex> Math.partition_count(100)
+      190569292
+  
+      iex> Math.partition_count(416)
+      17873792969689876004
+  
+  """
+  def partition_count(0), do: 1
+  def partition_count(1), do: 1
+  def partition_count(n) when is_integer(n) and n > 1 do
+      
+      # start and check our cache for our value
+      CacheAgent.start_link(:partition_count)
+      if CacheAgent.has?(:partition_count, n) do
+          CacheAgent.get(:partition_count, n)
+      else
+          # a(n) = (1/n) * Sum_{k=0..n-1} sigma(n-k)*a(k)  
+          sum_part = 0..n - 1
+          |> Enum.map(
+              fn k -> 
+                  sigma(n - k, 1) * partition_count(k)
+              end
+          )
+          |> Enum.sum()
+     
+          p = Fraction.new(1, n) |> Fraction.multiply(sum_part) |> Fraction.get_whole()
+          CacheAgent.put(:partition_count, n, p)
+          p
+      end 
+  end
   
   @doc """
   Determine if a positive integer is prime.

@@ -19,8 +19,11 @@
 
 ### Enhancements
 
+ - added Chunky.CacheAgent - caching agent for particularly recursive functions
  - Chunky.Math
   - ramanujan_tau/1 - Find the ramanujan tau error value for `n`
+  - partition_count/1 - Recursive (and cached) Partition Function for `n`
+  
   
 ### New Sequences
 
@@ -36,6 +39,7 @@
    - A005470 - Number of unlabeled planar simple graphs with n nodes
    - A006966 - Number of lattices on n unlabeled nodes
    - A055512 - Lattices with n labeled elements
+   - updated A000041 - Partitions of `n` is now calculated, instead of list based
     
 
 ## v0.10.0

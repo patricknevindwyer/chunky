@@ -3,6 +3,18 @@ defmodule Chunky.MathTest do
 
   alias Chunky.Math
   doctest Chunky.Math
+  
+  describe "partition_count/1" do
+     test "value tests" do
+         ns = [1, 2, 9, 19, 100, 220]
+         os = [1, 2, 30, 490, 190569292, 21248279009367]
+
+         Enum.zip(ns, os)
+         |> Enum.each(fn {n, o} ->
+           assert Math.partition_count(n) == o
+         end)
+     end 
+  end
 
   describe "ramanujan_tau/1" do
       test "value tests" do
@@ -13,8 +25,7 @@ defmodule Chunky.MathTest do
         |> Enum.each(fn {n, o} ->
           assert Math.ramanujan_tau(n) == o
         end)
-      end
-      
+      end      
   end
   
   describe "is_sphenic_number?/1" do
