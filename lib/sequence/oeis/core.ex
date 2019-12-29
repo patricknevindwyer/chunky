@@ -5,9 +5,14 @@ defmodule Chunky.Sequence.OEIS.Core do
   ## Available Sequences
 
    - [A000001 - Number of groups of order n](https://oeis.org/A000001) - `:a000001` - `create_sequence_a000001/1`
+   - [A000004 - The zero sequence](https://oeis.org/A000004) - `:a000004` - `create_sequence_a000004/1`
    - [A000005 - Divisors of N](https://oeis.org/A000005) - `:a000005` - `create_sequence_a000005/1`
+   - [A000007 - The characteristic function of {0}: a(n) = 0^n](https://oeis.org/A000007) - `:a000007` - `create_sequence_a000007/1`
    - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
    - [A000010 - Euler's totient function](https://oeis.org/A000010) - `:a000010` - `create_sequence_a000010/1`
+   - [A000012 - The simplest sequence of positive numbers: the all 1's sequence](https://oeis.org/A000012) - `:a000012` - `create_sequence_a000012/1`
+   - [A000027 - The positive integers](https://oeis.org/A000027) - `:a000027` - `create_sequence_a000027/1`
+   - [A000035 - Period 2: repeat [0, 1]; a(n) = n mod 2](https://oeis.org/A000035) - `:a000035` - `create_sequence_a000035/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
@@ -20,6 +25,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000302 - Powers of 4: a(n) = 4^n](https://oeis.org/A000302) - `:a000302` - `create_sequence_a000302/1`
    - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
    - [A000578 - The cubes: a(n) = n^3.](https://oeis.org/A000578) - `:a000578` - `create_sequence_a000578/1`
+   - [A000583 - Fourth powers: a(n) = n^4.](https://oeis.org/A000583) - `:a000583` - `create_sequence_a000583/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
    - [A000609 - Number of threshold functions of n or fewer variables](https://oeis.org/A000609) - `:a000609` - `create_sequence_a000609/1`
    - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
@@ -40,6 +46,8 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
+
+
 
 
   """
@@ -355,6 +363,40 @@ defmodule Chunky.Sequence.OEIS.Core do
 
 
   @doc """
+  OEIS Sequence `A000004` - The zero sequence.
+
+  From [OEIS A000004](https://oeis.org/A000004):
+
+  > The zero sequence.
+  > (Formerly M0000)
+
+  **Sequence IDs**: `:a000004`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000004) |> Sequence.take!(102)
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+
+  """
+  @doc offset: 0,
+       sequence: "The zero sequence.",
+       references: [{:oeis, :a000004, "https://oeis.org/A000004"}]
+  def create_sequence_a000004(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000004/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000004(_idx) do
+      0
+  end
+  
+  @doc """
   OEIS Sequence `A000005` - Number of divisors of N, simga-0(n), `𝝈0(n)`.
 
   From [OEIS A000005](https://oeis.org/A000005):
@@ -385,6 +427,44 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a000005(idx) do
     Math.sigma(idx, 0)
+  end
+  
+  @doc """
+  OEIS Sequence `A000007` - The characteristic function of {0}: a(n) = 0^n.
+
+  From [OEIS A000007](https://oeis.org/A000007):
+
+  > The characteristic function of {0}: a(n) = 0^n.
+  > (Formerly M0002)
+
+  **Sequence IDs**: `:a000007`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000007) |> Sequence.take!(105)
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+
+  """
+  @doc offset: 0,
+       sequence: "The characteristic function of {0}: a(n) = 0^n.",
+       references: [{:oeis, :a000007, "https://oeis.org/A000007"}]
+  def create_sequence_a000007(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000007/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000007(idx) do
+      if idx == 0 do
+          1
+      else
+          0
+      end
   end
 
   @doc """
@@ -485,7 +565,109 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a000010(idx) do
     Math.totient(idx)
   end
+  
+  @doc """
+  OEIS Sequence `A000012` - The simplest sequence of positive numbers: the all 1's sequence.
 
+  From [OEIS A000012](https://oeis.org/A000012):
+
+  > The simplest sequence of positive numbers: the all 1's sequence.
+  > (Formerly M0003)
+
+  **Sequence IDs**: `:a000012`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000012) |> Sequence.take!(90)
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+
+
+  """
+  @doc offset: 0,
+       sequence: "The simplest sequence of positive numbers: the all 1's sequence.",
+       references: [{:oeis, :a000012, "https://oeis.org/A000012"}]
+  def create_sequence_a000012(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000012/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000012(_idx) do
+      1
+  end
+
+  @doc """
+  OEIS Sequence `A000027` - The positive integers
+
+  From [OEIS A000027](https://oeis.org/A000027):
+
+  > The positive integers. Also called the natural numbers, the whole numbers or the counting numbers, but these terms are ambiguous.
+  > (Formerly M0472 N0173)
+
+  **Sequence IDs**: `:a000027`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000027) |> Sequence.take!(77)
+      [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77]
+
+
+  """
+  @doc offset: 1,
+       sequence: "The positive integers",
+       references: [{:oeis, :a000027, "https://oeis.org/A000027"}]
+  def create_sequence_a000027(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000027/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a000027(idx) do
+      idx  
+  end
+  
+  @doc """
+  OEIS Sequence `A000035` - Period 2: repeat [0, 1]
+
+  From [OEIS A000035](https://oeis.org/A000035):
+
+  > Period 2: repeat [0, 1]; a(n) = n mod 2; parity of n.
+  > (Formerly M0001)
+
+  **Sequence IDs**: `:a000035`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000035) |> Sequence.take!(105)
+      [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Period 2: repeat [0, 1]; a(n) = n mod 2",
+       references: [{:oeis, :a000035, "https://oeis.org/A000035"}]
+  def create_sequence_a000035(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000035/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000035(idx) do
+      rem(idx, 2)
+  end
+  
   @doc """
   OEIS Sequence `A000041` - Partitions of integer N
 
@@ -854,6 +1036,40 @@ defmodule Chunky.Sequence.OEIS.Core do
     Math.pow(idx, 3)
   end
 
+  @doc """
+  OEIS Sequence `A000583` - Fourth powers: a(n) = n^4
+
+  From [OEIS A000583](https://oeis.org/A000583):
+
+  > Fourth powers: a(n) = n^4.
+  > (Formerly M5004 N2154)
+
+  **Sequence IDs**: `:a000583`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000583) |> Sequence.take!(34)
+      [0,1,16,81,256,625,1296,2401,4096,6561,10000,14641,20736,28561,38416,50625,65536,83521,104976,130321,160000,194481,234256,279841,331776,390625,456976,531441,614656,707281,810000,923521,1048576,1185921]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Fourth powers: a(n) = n^4.",
+       references: [{:oeis, :a000583, "https://oeis.org/A000583"}]
+  def create_sequence_a000583(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000583/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000583(idx) do
+      Math.pow(idx, 4)
+  end
+  
   @doc """
 
   OEIS Sequence `A000593` - Sum of Odd Divisors of N
