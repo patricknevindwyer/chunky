@@ -39,6 +39,10 @@ OEIS.Util.generate_sequence_stub("A076479", sequence_for_list: true, in_module: 
 OEIS.Util.crawl_keywords(["core", "hard"])
 ```
 
+```
+OEIS.Util.crawl_keywords(["core", "hard"]) |> Enum.map(fn %{seq_id: seq_id} -> "#{seq_id |> String.downcase()}" |> String.to_atom() end) |> Enum.sort() |> IO.inspect(limit: :infinity)
+```
+
 
 
  - Documentation Updates

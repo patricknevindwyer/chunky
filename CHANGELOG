@@ -21,6 +21,18 @@
 
 ### New Sequences
 
+   - A000001 - Number of groups of order n
+   - A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.
+   - A000105 - Number of free polyominoes (or square animals) with n cells
+   - A000109 - Number of simplicial polyhedra with n nodes
+   - A000112 - Number of partially ordered sets ("posets") with n unlabeled elements
+   - A000609 - Number of threshold functions of n or fewer variables
+   - A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements
+   - A002106 - Number of transitive permutation groups of degree n
+   - A003094 - Number of unlabeled connected planar simple graphs with n nodes
+   - A005470 - Number of unlabeled planar simple graphs with n nodes
+   - A006966 - Number of lattices on n unlabeled nodes
+   - A055512 - Lattices with n labeled elements
 
 
 ## v0.10.0

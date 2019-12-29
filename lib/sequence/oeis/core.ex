@@ -4,12 +4,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   ## Available Sequences
 
+   - [A000001 - Number of groups of order n](https://oeis.org/A000001) - `:a000001` - `create_sequence_a000001/1`
    - [A000005 - Divisors of N](https://oeis.org/A000005) - `:a000005` - `create_sequence_a000005/1`
    - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
    - [A000010 - Euler's totient function](https://oeis.org/A000010) - `:a000010` - `create_sequence_a000010/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
+   - [A000105 - Number of free polyominoes (or square animals) with n cells](https://oeis.org/A000105) - `:a000105` - `create_sequence_a000105/1`
+   - [A000109 - Number of simplicial polyhedra with n nodes](https://oeis.org/A000109) - `:a000109` - `create_sequence_a000109/1`
+   - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
    - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
    - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
@@ -17,18 +21,25 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
    - [A000578 - The cubes: a(n) = n^3.](https://oeis.org/A000578) - `:a000578` - `create_sequence_a000578/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
+   - [A000609 - Number of threshold functions of n or fewer variables](https://oeis.org/A000609) - `:a000609` - `create_sequence_a000609/1`
+   - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
    - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
    - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
    - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
+   - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
+   - [A003094 - Number of unlabeled connected planar simple graphs with n nodes](https://oeis.org/A003094) - `:a003094` - `create_sequence_a003094/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
    - [A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1](https://oeis.org/A005117) - `:a005117` - `create_sequence_a005117/1`
+   - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
+   - [A006966 - Number of lattices on n unlabeled nodes](https://oeis.org/A006966) - `:a006966` - `create_sequence_a006966/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
+   - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
 
 
   """
@@ -36,6 +47,9 @@ defmodule Chunky.Sequence.OEIS.Core do
   alias Chunky.Math
 
   require Integer
+
+  # raw data for A000001 - Number of groups of order n.
+  @data_a000001 [0,1,1,1,2,1,2,1,5,2,2,1,5,1,2,1,14,1,5,1,5,2,2,1,15,2,2,5,4,1,4,1,51,1,2,1,14,1,2,2,14,1,6,1,4,2,2,1,52,2,5,1,5,1,15,2,13,2,2,1,13,1,2,4,267,1,4,1,5,1,4,1,50,1,2,3,4,1,6,1,52,15,2,1,15,1,2,1,12,1,10,1,4,2]
 
   # raw data for the A000041 - Partitions of N
   @data_a000041 [
@@ -295,6 +309,15 @@ defmodule Chunky.Sequence.OEIS.Core do
   # raw data for A000043 - Mersenne Primes Exponents
   @data_a000043 [2,3,5,7,13,17,19,31,61,89,107,127,521,607,1279,2203,2281,3217,4253,4423,9689,9941,11213,19937,21701,23209,44497,86243,110503,132049,216091,756839,859433,1257787,1398269,2976221,3021377,6972593,13466917,20996011,24036583,25964951,30402457,32582657,37156667,42643801,43112609]
   
+  # raw data for A000105 - Number of free polyominoes (or square animals) with n cells.
+  @data_a000105 [1,1,1,2,5,12,35,108,369,1285,4655,17073,63600,238591,901971,3426576,13079255,50107909,192622052,742624232,2870671950,11123060678,43191857688,168047007728,654999700403,2557227044764,9999088822075,39153010938487,153511100594603]
+
+  # raw data for A000109 - Number of simplicial polyhedra with n nodes; simple planar graphs with 3n-6 edges; maximal simple planar graphs; 3-connected planar triangulations; 3-connected triangulations of the sphere; 3-connected cubic planar graphs.
+  @data_a000109 [1,1,1,2,5,14,50,233,1249,7595,49566,339722,2406841,17490241,129664753,977526957,7475907149,57896349553,453382272049,3585853662949,28615703421545]
+
+  # raw data for A000112 - Number of partially ordered sets ("posets") with n unlabeled elements.
+  @data_a000112 [1,1,2,5,16,63,318,2045,16999,183231,2567284,46749427,1104891746,33823827452,1338193159771,68275077901156,4483130665195087]
+
   # raw data for A000396 - Perfect Numbers
   @data_a000396 [
     6,
@@ -308,6 +331,28 @@ defmodule Chunky.Sequence.OEIS.Core do
     2_658_455_991_569_831_744_654_692_615_953_842_176,
     191_561_942_608_236_107_294_793_378_084_303_638_130_997_321_548_169_216
   ]
+
+  # raw data for A000609 - Number of threshold functions of n or fewer variables.
+  @data_a000609 [2,4,14,104,1882,94572,15028134,8378070864,17561539552946,144130531453121108]
+
+  # raw data for A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements.
+  @data_a000798 [1,1,4,29,355,6942,209527,9535241,642779354,63260289423,8977053873043,1816846038736192,519355571065774021,207881393656668953041,115617051977054267807460,88736269118586244492485121,93411113411710039565210494095,134137950093337880672321868725846,261492535743634374805066126901117203]
+
+  # raw data for A002106 - Number of transitive permutation groups of degree n.
+  @data_a002106 [1,1,2,5,5,16,7,50,34,45,8,301,9,63,104,1954,10,983,8,1117,164,59,7,25000,211,96,2392,1854,8,5712,12,2801324,162,115,407,121279,11,76,306,315842,10,9491,10,2113,10923,56,6]
+
+  # raw data for A003094 - Number of unlabeled connected planar simple graphs with n nodes.
+  @data_a003094 [1,1,1,2,6,20,99,646,5974,71885,1052805,17449299,313372298]
+
+  # raw data for A005470 - Number of unlabeled planar simple graphs with n nodes.
+  @data_a005470 [1,1,2,4,11,33,142,822,6966,79853,1140916,18681008,333312451]
+
+  # raw data for A006966 - Number of lattices on n unlabeled nodes.
+  @data_a006966 [1,1,1,1,2,5,15,53,222,1078,5994,37622,262776,2018305,16873364,152233518,1471613387,15150569446,165269824761,1901910625578,23003059864006]
+
+  # raw data for A055512 - Lattices with n labeled elements.
+  @data_a055512 [1,1,2,6,36,380,6390,157962,5396888,243179064,13938711210,987858368750,84613071940452,8597251494954564,1020353444641839854,139627532137612581090,21788453795572514675760,3840596246648027262079472,758435490711709577216754642]
+
 
   @doc """
   OEIS Sequence `A000005` - Number of divisors of N, simga-0(n), `𝝈0(n)`.
@@ -532,6 +577,92 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   def seq_a000079(idx) do
     :math.pow(2, idx) |> Kernel.trunc()
+  end
+
+  @doc """
+  OEIS Sequence `A000105` - Number of free polyominoes (or square animals) with n cells.
+
+  From [OEIS A000105](https://oeis.org/A000105):
+
+  > Number of free polyominoes (or square animals) with n cells.
+  > (Formerly M1425 N0561)
+
+  **Sequence IDs**: `:a000105`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000105) |> Sequence.take!(29)
+      [1,1,1,2,5,12,35,108,369,1285,4655,17073,63600,238591,901971,3426576,13079255,50107909,192622052,742624232,2870671950,11123060678,43191857688,168047007728,654999700403,2557227044764,9999088822075,39153010938487,153511100594603]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of free polyominoes (or square animals) with n cells",
+       references: [{:oeis, :a000105, "https://oeis.org/A000105"}]
+  def create_sequence_a000105(_opts) do
+          sequence_for_list(@data_a000105)
+  end
+
+  @doc """
+  OEIS Sequence `A000109` - Number of simplicial polyhedra with n nodes
+
+  From [OEIS A000109](https://oeis.org/A000109):
+
+  > Number of simplicial polyhedra with n nodes; 
+  > simple planar graphs with 3n-6 edges; maximal simple planar graphs; 
+  > 3-connected planar triangulations; 3-connected triangulations of the sphere; 
+  > 3-connected cubic planar graphs.
+  > (Formerly M1469 N0580)
+
+  **Sequence IDs**: `:a000109`
+
+  **Finite**: False
+
+  **Offset**: 3
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000109) |> Sequence.take!(21)
+      [1,1,1,2,5,14,50,233,1249,7595,49566,339722,2406841,17490241,129664753,977526957,7475907149,57896349553,453382272049,3585853662949,28615703421545]
+
+  """
+  @doc offset: 3,
+       sequence: "Number of simplicial polyhedra with n nodes",
+       references: [{:oeis, :a000109, "https://oeis.org/A000109"}]
+  def create_sequence_a000109(_opts) do
+          sequence_for_list(@data_a000109)
+  end
+
+  @doc """
+  OEIS Sequence `A000112` - Number of partially ordered sets ("posets") with n unlabeled elements.
+
+  From [OEIS A000112](https://oeis.org/A000112):
+
+  > Number of partially ordered sets ("posets") with n unlabeled elements.
+  > (Formerly M1495 N0588)
+
+  **Sequence IDs**: `:a000112`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000112) |> Sequence.take!(17)
+      [1,1,2,5,16,63,318,2045,16999,183231,2567284,46749427,1104891746,33823827452,1338193159771,68275077901156,4483130665195087]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of partially ordered sets ('posets') with n unlabeled elements.",
+       references: [{:oeis, :a000112, "https://oeis.org/A000112"}]
+  def create_sequence_a000112(_opts) do
+          sequence_for_list(@data_a000112)
   end
 
   @doc """
@@ -1145,5 +1276,229 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a020639(idx) do
     Math.least_prime_factor(idx)
+  end
+  
+  @doc """
+  OEIS Sequence `A000001` - Number of groups of order n.
+
+  From [OEIS A000001](https://oeis.org/A000001):
+
+  > Number of groups of order n.
+  > (Formerly M0098 N0035)
+
+  **Sequence IDs**: `:a000001`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000001) |> Sequence.take!(94)
+      [0,1,1,1,2,1,2,1,5,2,2,1,5,1,2,1,14,1,5,1,5,2,2,1,15,2,2,5,4,1,4,1,51,1,2,1,14,1,2,2,14,1,6,1,4,2,2,1,52,2,5,1,5,1,15,2,13,2,2,1,13,1,2,4,267,1,4,1,5,1,4,1,50,1,2,3,4,1,6,1,52,15,2,1,15,1,2,1,12,1,10,1,4,2]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of groups of order n.",
+       references: [{:oeis, :a000001, "https://oeis.org/A000001"}]
+  def create_sequence_a000001(_opts) do
+          sequence_for_list(@data_a000001)
+  end
+
+  @doc """
+  OEIS Sequence `A000609` - Number of threshold functions of n or fewer variables.
+
+  From [OEIS A000609](https://oeis.org/A000609):
+
+  > Number of threshold functions of n or fewer variables.
+  > (Formerly M1285 N0492)
+
+  **Sequence IDs**: `:a000609`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000609) |> Sequence.take!(10)
+      [2,4,14,104,1882,94572,15028134,8378070864,17561539552946,144130531453121108]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of threshold functions of n or fewer variables.",
+       references: [{:oeis, :a000609, "https://oeis.org/A000609"}]
+  def create_sequence_a000609(_opts) do
+          sequence_for_list(@data_a000609)
+  end
+
+  @doc """
+  OEIS Sequence `A000798` - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements.
+
+  From [OEIS A000798](https://oeis.org/A000798):
+
+  > Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements.
+  > (Formerly M3631 N1476)
+
+  **Sequence IDs**: `:a000798`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000798) |> Sequence.take!(19)
+      [1,1,4,29,355,6942,209527,9535241,642779354,63260289423,8977053873043,1816846038736192,519355571065774021,207881393656668953041,115617051977054267807460,88736269118586244492485121,93411113411710039565210494095,134137950093337880672321868725846,261492535743634374805066126901117203]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements.",
+       references: [{:oeis, :a000798, "https://oeis.org/A000798"}]
+  def create_sequence_a000798(_opts) do
+          sequence_for_list(@data_a000798)
+  end
+
+  @doc """
+  OEIS Sequence `A002106` - Number of transitive permutation groups of degree n.
+
+  From [OEIS A002106](https://oeis.org/A002106):
+
+  > Number of transitive permutation groups of degree n.
+  > (Formerly M1316 N0504)
+
+  **Sequence IDs**: `:a002106`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002106) |> Sequence.take!(47)
+      [1,1,2,5,5,16,7,50,34,45,8,301,9,63,104,1954,10,983,8,1117,164,59,7,25000,211,96,2392,1854,8,5712,12,2801324,162,115,407,121279,11,76,306,315842,10,9491,10,2113,10923,56,6]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of transitive permutation groups of degree n.",
+       references: [{:oeis, :a002106, "https://oeis.org/A002106"}]
+  def create_sequence_a002106(_opts) do
+          sequence_for_list(@data_a002106)
+  end
+
+  @doc """
+  OEIS Sequence `A003094` - Number of unlabeled connected planar simple graphs with n nodes.
+
+  From [OEIS A003094](https://oeis.org/A003094):
+
+  > Number of unlabeled connected planar simple graphs with n nodes.
+  > (Formerly M1652)
+
+  **Sequence IDs**: `:a003094`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a003094) |> Sequence.take!(13)
+      [1,1,1,2,6,20,99,646,5974,71885,1052805,17449299,313372298]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of unlabeled connected planar simple graphs with n nodes.",
+       references: [{:oeis, :a003094, "https://oeis.org/A003094"}]
+  def create_sequence_a003094(_opts) do
+          sequence_for_list(@data_a003094)
+  end
+
+  @doc """
+  OEIS Sequence `A005470` - Number of unlabeled planar simple graphs with n nodes.
+
+  From [OEIS A005470](https://oeis.org/A005470):
+
+  > Number of unlabeled planar simple graphs with n nodes.
+  > (Formerly M1252)
+
+  **Sequence IDs**: `:a005470`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a005470) |> Sequence.take!(13)
+      [1,1,2,4,11,33,142,822,6966,79853,1140916,18681008,333312451]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of unlabeled planar simple graphs with n nodes.",
+       references: [{:oeis, :a005470, "https://oeis.org/A005470"}]
+  def create_sequence_a005470(_opts) do
+          sequence_for_list(@data_a005470)
+  end
+
+  @doc """
+  OEIS Sequence `A006966` - Number of lattices on n unlabeled nodes.
+
+  From [OEIS A006966](https://oeis.org/A006966):
+
+  > Number of lattices on n unlabeled nodes.
+  > (Formerly M1486)
+
+  **Sequence IDs**: `:a006966`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a006966) |> Sequence.take!(21)
+      [1,1,1,1,2,5,15,53,222,1078,5994,37622,262776,2018305,16873364,152233518,1471613387,15150569446,165269824761,1901910625578,23003059864006]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of lattices on n unlabeled nodes.",
+       references: [{:oeis, :a006966, "https://oeis.org/A006966"}]
+  def create_sequence_a006966(_opts) do
+          sequence_for_list(@data_a006966)
+  end
+
+  @doc """
+  OEIS Sequence `A055512` - Lattices with n labeled elements.
+
+  From [OEIS A055512](https://oeis.org/A055512):
+
+  > Lattices with n labeled elements.
+  > (Formerly )
+
+  **Sequence IDs**: `:a055512`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a055512) |> Sequence.take!(19)
+      [1,1,2,6,36,380,6390,157962,5396888,243179064,13938711210,987858368750,84613071940452,8597251494954564,1020353444641839854,139627532137612581090,21788453795572514675760,3840596246648027262079472,758435490711709577216754642]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Lattices with n labeled elements.",
+       references: [{:oeis, :a055512, "https://oeis.org/A055512"}]
+  def create_sequence_a055512(_opts) do
+          sequence_for_list(@data_a055512)
   end
 end
