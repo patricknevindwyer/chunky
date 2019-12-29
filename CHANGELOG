@@ -19,6 +19,9 @@
 
 ### Enhancements
 
+ - Chunky.Math
+  - ramanujan_tau/1 - Find the ramanujan tau error value for `n`
+  
 ### New Sequences
 
    - A000001 - Number of groups of order n
@@ -33,7 +36,7 @@
    - A005470 - Number of unlabeled planar simple graphs with n nodes
    - A006966 - Number of lattices on n unlabeled nodes
    - A055512 - Lattices with n labeled elements
-
+    
 
 ## v0.10.0
 

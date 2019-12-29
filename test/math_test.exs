@@ -4,6 +4,19 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "ramanujan_tau/1" do
+      test "value tests" do
+        ns = [1, 2, 9, 19, 700, 4545, 16001]
+        os = [1, -24, -113643, 10661420, -628483682444800, -44868357938934070380, -115858115573561490511998]
+
+        Enum.zip(ns, os)
+        |> Enum.each(fn {n, o} ->
+          assert Math.ramanujan_tau(n) == o
+        end)
+      end
+      
+  end
+  
   describe "is_sphenic_number?/1" do
     test "value tests" do
       ns = [1, 2, 9, 19, 700, 4543, 28438, 51322, 51334]

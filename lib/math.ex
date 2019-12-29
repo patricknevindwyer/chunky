@@ -865,6 +865,7 @@ defmodule Chunky.Math do
       iex> Math.sigma(24, 0)
       8
   """
+  def sigma(0, 1), do: 1
   def sigma(n, p) when is_integer(n) and is_integer(p) and n > 0 and p >= 0 do
     factors(n)
     |> Enum.map(fn fac -> pow(fac, p) end)
@@ -894,6 +895,70 @@ defmodule Chunky.Math do
     sigma(n, 0)
   end
 
+  @doc """
+  Calculate the Ramanujan Tau function for `n`.
+  
+  The Ramanujan Tau function is defined as:
+  
+      ![Ramanujan Tau](https://wikimedia.org/api/rest_v1/media/math/render/svg/846fc5e7ae7e57f2df206054ea0aba4124e6f124)
+  
+  It's use in mathematics is noted by Wikipedia as
+  
+  > an "error term" involved in counting the number of ways of expressing an integer as a sum of 24 squares
+  
+  When calculating the Nth term of the Ramanujan Tau, this function uses a summation form (developed in GP/Pari 
+  by [Joerg Arndt](https://oeis.org/wiki/User:Joerg_Arndt)), that looks like:
+  
+  ```
+  a(n) = 
+        n^4 * sigma(n) 
+      - 24 * 
+          sum(
+              k = 1, 
+              n - 1, 
+              (
+                    35 * k^4 
+                  - 52 * k^3 * n 
+                  + 18 * k^2 * n^2
+              ) 
+              * sigma(k) 
+              * sigma(n - k)
+          )
+  ```
+  
+  Note that the summation in `sum(k = 1, n - 1, ...` is linear to the size of `n`.
+  
+  ## Examples
+  
+      iex> Math.ramanujan_tau(1)
+      1
+  
+      iex> Math.ramanujan_tau(15)
+      1217160
+  
+      iex> Math.ramanujan_tau(460)
+      -132549189534720
+  
+  """
+  def ramanujan_tau(1), do: 1
+  def ramanujan_tau(n) when is_integer(n) and n > 0 do
+  
+      # Using the gp/pari formula from [Joerg Arndt](https://oeis.org/wiki/User:Joerg_Arndt)
+      # a(n) = n^4 * sigma(n) - 24 * sum(k=1, n-1, (35*k^4 - 52*k^3*n + 18*k^2*n^2) * sigma(k) * sigma(n-k))
+
+    sum_term  = 1..n - 1
+    |> Enum.map(
+        fn k -> 
+            (35 * Math.pow(k, 4) - 52 * Math.pow(k, 3) * n + 18 * Math.pow(k, 2) * Math.pow(n, 2)) * sigma(k, 1) * sigma(n - k, 1)
+        end
+    ) 
+    |> Enum.sum()
+    
+    Math.pow(n, 4) * sigma(n, 1) - 24 * sum_term
+      
+  end
+  
+  
   @doc """
   Determine if a positive integer is prime.
 
