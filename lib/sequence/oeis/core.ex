@@ -8,6 +8,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
    - [A000010 - Euler's totient function](https://oeis.org/A000010) - `:a000010` - `create_sequence_a000010/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
+   - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
    - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
@@ -291,6 +292,9 @@ defmodule Chunky.Sequence.OEIS.Core do
     230_793_554_364_681
   ]
 
+  # raw data for A000043 - Mersenne Primes Exponents
+  @data_a000043 [2,3,5,7,13,17,19,31,61,89,107,127,521,607,1279,2203,2281,3217,4253,4423,9689,9941,11213,19937,21701,23209,44497,86243,110503,132049,216091,756839,859433,1257787,1398269,2976221,3021377,6972593,13466917,20996011,24036583,25964951,30402457,32582657,37156667,42643801,43112609]
+  
   # raw data for A000396 - Perfect Numbers
   @data_a000396 [
     6,
@@ -470,6 +474,34 @@ defmodule Chunky.Sequence.OEIS.Core do
        ]
   def create_sequence_a000041(_opts) do
     sequence_for_list(@data_a000041)
+  end
+  
+  @doc """
+  OEIS Sequence `A000043` - Mersenne exponents: primes p such that 2^p - 1 is prime
+
+  From [OEIS A000043](https://oeis.org/A000043):
+
+  > Mersenne exponents: primes p such that 2^p - 1 is prime. Then 2^p - 1 is called a Mersenne prime.
+  > (Formerly M0672 N0248)
+
+  **Sequence IDs**: `:a000043`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000043) |> Sequence.take!(47)
+      [2,3,5,7,13,17,19,31,61,89,107,127,521,607,1279,2203,2281,3217,4253,4423,9689,9941,11213,19937,21701,23209,44497,86243,110503,132049,216091,756839,859433,1257787,1398269,2976221,3021377,6972593,13466917,20996011,24036583,25964951,30402457,32582657,37156667,42643801,43112609]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Mersenne exponents: primes p such that 2^p - 1 is prime",
+       references: [{:oeis, :a000043, "https://oeis.org/A000043"}]
+  def create_sequence_a000043(_opts) do
+          sequence_for_list(@data_a000043)
   end
 
   @doc """

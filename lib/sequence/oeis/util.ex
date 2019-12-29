@@ -5,7 +5,7 @@ defmodule Chunky.Sequence.OEIS.Util do
 
   def generate_sequence_stub(seq_id, opts \\ []) do
     include_seq_func = opts |> Keyword.get(:sequence_for_function, false)
-    _include_list = opts |> Keyword.get(:sequence_for_list, false)
+    include_list = opts |> Keyword.get(:sequence_for_list, false)
     in_module = opts |> Keyword.get(:in_module, Chunky.Sequence.OEIS.Core)
 
     # Build clean sequence IDs
@@ -51,7 +51,13 @@ defmodule Chunky.Sequence.OEIS.Util do
       seq_id_lower
     }/1`
     """)
-
+    
+    if include_list do
+        IO.puts("== SEQUENCE DATA ==\n")
+        IO.puts("# raw data for #{seq_id_upper} - #{seq_name}")
+        IO.puts("@data_#{seq_id_lower} [#{sample_data_raw}]\n")
+    end
+    
     IO.puts("== SEQUENCE FUNCTION ==\n")
     # Function top
     IO.puts(
@@ -91,8 +97,12 @@ defmodule Chunky.Sequence.OEIS.Util do
     if include_seq_func do
       IO.puts("\tsequence_for_function(&#{in_module}.#{seq_function_name}/1)")
     end
+    
+    if include_list do
+       IO.puts("\tsequence_for_list(@data_#{seq_id_lower})") 
+    end
 
-    IO.puts("end")
+    IO.puts("end\n")
 
     # do we need to add in the sequence function?
     if include_seq_func do
@@ -109,15 +119,21 @@ defmodule Chunky.Sequence.OEIS.Util do
     test_data = sample_data_raw |> String.split(",") |> Enum.take(10) |> Enum.join(", ")
 
     # test case data
-    IO.puts("== TEST CASE ==")
-
+    IO.puts("\n== TEST CASE ==")
+    
+    label_as_finite = if include_list do
+        "true"
+    else
+        "false"
+    end
+    
     IO.puts("""
     %{
       module: #{in_module},
       sequence: :#{seq_id_lower},
       opts: [],
       values: [#{test_data}],
-      finite: false,
+      finite: #{label_as_finite},
       first_index: #{seq_offset}
     },
     """)
