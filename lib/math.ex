@@ -46,7 +46,11 @@ defmodule Chunky.Math do
    - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
    - `is_power_of?/2` - Is `n` a power of `m`?
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
-
+   - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
+   - `partition_count/1` - Number of ways to partition `n` into sums
+   - `abelian_group_count/1` - Number of Abelian groups of order `n`
+   - `p_adic_valuation/2` - The _p-adic_ valuation function (for prime `p` and integer `n`)
+  
   ## Cryptographic Math
 
    - `is_b_smooth?/2` - Is `n` prime factor smooth up to `b` - all prime factors <= `b`  

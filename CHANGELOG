@@ -23,6 +23,8 @@
  - Chunky.Math
   - ramanujan_tau/1 - Find the ramanujan tau error value for `n`
   - partition_count/1 - Recursive (and cached) Partition Function for `n`
+  - abelian_group_count/1 - Number of Abelian groups of order `n`
+  - p_adic_valuation/2 - The _p-adic_ valuation function (for prime `p` and integer `n`)
   
   
 ### New Sequences
