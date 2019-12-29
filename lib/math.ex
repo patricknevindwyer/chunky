@@ -988,6 +988,81 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Find the _p-adic_ valuation of `n`.
+  
+  From [p-adic order](https://en.wikipedia.org/wiki/P-adic_order) on Wikipedia:
+  
+  > In number theory, for a given prime number p, the p-adic order or p-adic valuation of a non-zero integer n is the highest exponent `ν`
+  > such that `p^ν` divides `n`.
+  
+  The `p` value for `p_adic_valuation` **must** be prime. By defintion the `p-adic` value of `0` is
+  always _infinity_.
+  
+  ## Examples
+  
+  A handful of examples for `3-adic`, `5-adic`, and `7-adic` valuation, though _any_ prime number
+  can be used as the `p` value:
+  
+  2-adic valutions:
+  
+      iex> Math.p_adic_valuation(2, 1)
+      0
+  
+      iex> Math.p_adic_valuation(2, 24)
+      3
+  
+      iex> Math.p_adic_valuation(2, 9728)
+      9
+  
+  3-adic valutions:
+  
+      iex> Math.p_adic_valuation(3, 137)
+      0
+  
+      iex> Math.p_adic_valuation(3, 999)
+      3
+  
+  7-adic valutions
+      
+      iex> Math.p_adic_valuation(7, 686)
+      3
+  
+      iex> Math.p_adic_valuation(7, 980)
+      2
+  """
+  def p_adic_valuation(_, 0), do: :infinity
+  def p_adic_valuation(p, n) when is_integer(p) and is_integer(n) and p > 1 and n > 0 do
+     if !is_prime?(p) do
+         raise ArgumentError, message: "p value of p-adic valuation must be prime" 
+     end
+     
+     # walk the possible exponents of p^v
+     exps = 1..p_adic_max_v(p, 1, n)
+     |> Enum.filter(
+         fn v -> 
+             
+             # does p^v divide N?
+             rem(n, Math.pow(p, v)) == 0
+         end
+     )
+     
+     if length(exps) == 0 do
+         0
+     else
+         Enum.max(exps)
+     end
+     
+  end
+  
+  defp p_adic_max_v(p, v, n) do
+     if Math.pow(p, v) > n do
+         v
+     else
+         p_adic_max_v(p, v + 1, n)
+     end 
+  end
+  
+  @doc """
   Count the number of partitions of `n`.
     
   A partition of `n` is the set of ways of creating a sum of `n`. For example, `4` has a partition

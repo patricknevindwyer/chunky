@@ -3,7 +3,19 @@ defmodule Chunky.MathTest do
 
   alias Chunky.Math
   doctest Chunky.Math
+    
+  describe "p_adic_valuation/2" do
+      test "value tests" do
+          ns = [{2, 2}, {3, 0}, {3, 33}, {5, 31250}, {7, 49}, {11, 7073843073}]
+          os = [1, :infinity, 1, 6, 2, 9]
 
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{p, n}, o} ->
+            assert Math.p_adic_valuation(p, n) == o
+          end)
+      end       
+  end
+  
   describe "abelian_groups_count/1" do
       test "value tests" do
           ns = [1, 2, 9, 19, 100, 220, 4444, 10000]

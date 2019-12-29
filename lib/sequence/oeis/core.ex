@@ -29,12 +29,16 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
    - [A000594 - Ramanujan's tau function](https://oeis.org/A000594) - `:a000594` - `create_sequence_a000594/1`
    - [A000609 - Number of threshold functions of n or fewer variables](https://oeis.org/A000609) - `:a000609` - `create_sequence_a000609/1`
+   - [A000688 - Number of Abelian groups of order n](https://oeis.org/A000688) - `:a000688` - `create_sequence_a000688/1`
    - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
    - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
    - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
+   - [A001227 - Number of odd divisors of n.](https://oeis.org/A001227) - `:a001227` - `create_sequence_a001227/1`
    - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
+   - [A001477 - The nonnegative integers.](https://oeis.org/A001477) - `:a001477` - `create_sequence_a001477/1`
+   - [A001511 - The ruler function: 2^a(n) divides 2n](https://oeis.org/A001511) - `:a001511` - `create_sequence_a001511/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
    - [A003094 - Number of unlabeled connected planar simple graphs with n nodes](https://oeis.org/A003094) - `:a003094` - `create_sequence_a003094/1`
@@ -47,8 +51,6 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
-
-
 
 
   """
@@ -1024,6 +1026,42 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A001227` - Number of odd divisors of n.
+
+  From [OEIS A001227](https://oeis.org/A001227):
+
+  > Number of odd divisors of n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a001227`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001227) |> Sequence.take!(105)
+      [1,1,2,1,2,2,2,1,3,2,2,2,2,2,4,1,2,3,2,2,4,2,2,2,3,2,4,2,2,4,2,1,4,2,4,3,2,2,4,2,2,4,2,2,6,2,2,2,3,3,4,2,2,4,4,2,4,2,2,4,2,2,6,1,4,4,2,2,4,4,2,3,2,2,6,2,4,4,2,2,5,2,2,4,4,2,4,2,2,6,4,2,4,2,4,2,2,3,6,3,2,4,2,2,8]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of odd divisors of n.",
+       references: [{:oeis, :a001227, "https://oeis.org/A001227"}]
+  def create_sequence_a001227(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001227/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a001227(idx) do
+      Math.factors(idx)
+      |> Enum.filter(fn c -> Integer.is_odd(c) end)
+      |> length()
+  end
+
+  @doc """
   OEIS Sequence `A001358` - Semiprimes (or biprimes): products of two primes.
 
   From [OEIS A001358](https://oeis.org/A001358):
@@ -1054,6 +1092,72 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a001358(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 2 end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A001477` - The nonnegative integers.
+
+  From [OEIS A001477](https://oeis.org/A001477):
+
+  > The nonnegative integers.
+  > (Formerly )
+
+  **Sequence IDs**: `:a001477`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001477) |> Sequence.take!(78)
+      [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77]
+
+  """
+  @doc offset: 0,
+       sequence: "The nonnegative integers.",
+       references: [{:oeis, :a001477, "https://oeis.org/A001477"}]
+  def create_sequence_a001477(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001477/1)
+  end
+
+  @doc offset: 0
+  def seq_a001477(idx) do
+      idx
+  end
+
+  @doc """
+  OEIS Sequence `A001511` - The ruler function: 2^a(n) divides 2n
+
+  From [OEIS A001511](https://oeis.org/A001511):
+
+  > The ruler function: 2^a(n) divides 2n. Or, a(n) = 2-adic valuation of 2n.
+  > (Formerly M0127 N0051)
+
+  **Sequence IDs**: `:a001511`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001511) |> Sequence.take!(105)
+      [1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,5,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,6,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,5,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,7,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,5,1,2,1,3,1,2,1,4,1,2,1,3,1,2,1,6,1,2,1,3,1,2,1,4,1]
+
+
+  """
+  @doc offset: 1,
+       sequence: "The ruler function: 2^a(n) divides 2n",
+       references: [{:oeis, :a001511, "https://oeis.org/A001511"}]
+  def create_sequence_a001511(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001511/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a001511(idx) do
+      Math.p_adic_valuation(2, idx * 2)
   end
 
   @doc """
@@ -1336,6 +1440,39 @@ defmodule Chunky.Sequence.OEIS.Core do
           sequence_for_list(@data_a000609)
   end
 
+  @doc """
+  OEIS Sequence `A000688` - Number of Abelian groups of order n
+
+  From [OEIS A000688](https://oeis.org/A000688):
+
+  > Number of Abelian groups of order n; number of factorizations of n into prime powers.
+  > (Formerly M0064 N0020)
+
+  **Sequence IDs**: `:a000688`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000688) |> Sequence.take!(107)
+      [1,1,1,2,1,1,1,3,2,1,1,2,1,1,1,5,1,2,1,2,1,1,1,3,2,1,3,2,1,1,1,7,1,1,1,4,1,1,1,3,1,1,1,2,2,1,1,5,2,2,1,2,1,3,1,3,1,1,1,2,1,1,2,11,1,1,1,2,1,1,1,6,1,1,2,2,1,1,1,5,5,1,1,2,1,1,1,3,1,2,1,2,1,1,1,7,1,2,2,4,1,1,1,3,1,1,1]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of Abelian groups of order n; number of factorizations of n into prime powers.",
+       references: [{:oeis, :a000688, "https://oeis.org/A000688"}]
+  def create_sequence_a000688(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000688/1)
+  end
+
+  @doc offset: 1
+  def seq_a000688(idx) do
+      Math.abelian_groups_count(idx)
+  end
+  
   @doc """
   OEIS Sequence `A000798` - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements.
 

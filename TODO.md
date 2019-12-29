@@ -29,8 +29,8 @@
 ## Generator for new Sequences  
 
 ```elixir
-OEIS.Util.generate_sequence_stub("A076479", sequence_for_function: true, in_module: Chunky.Sequence.OEIS.Factors)
-OEIS.Util.generate_sequence_stub("A076479", sequence_for_list: true, in_module: Chunky.Sequence.OEIS.Core)
+"A000688" |> OEIS.Util.generate_sequence_stub(sequence_for_function: true, in_module: Chunky.Sequence.OEIS.Core)
+"A000688" |> OEIS.Util.generate_sequence_stub(sequence_for_list: true, in_module: Chunky.Sequence.OEIS.Core)
 ```  
 
 ## Finding Sequences to work on
