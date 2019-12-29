@@ -39,6 +39,16 @@ OEIS.Util.generate_sequence_stub("A076479", sequence_for_list: true, in_module: 
 OEIS.missing_sequences(OEIS, :keyword_core_mult)
 ```
 
+## Timing things
+
+```elixir
+alias Chunky.Math
+st = Time.utc_now()
+Math.partition_count(5000)
+ed = Time.utc_now()
+Time.diff(ed, st, :millisecond)
+```
+
 ## Crawling Search
 
 ```

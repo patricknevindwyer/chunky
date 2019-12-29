@@ -3,7 +3,20 @@ defmodule Chunky.MathTest do
 
   alias Chunky.Math
   doctest Chunky.Math
-  
+
+  describe "abelian_groups_count/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 100, 220, 4444, 10000]
+          os = [1, 1, 2, 1, 4, 2, 2, 25]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.abelian_groups_count(n) == o
+          end)
+      end 
+      
+  end
+    
   describe "partition_count/1" do
      test "value tests" do
          ns = [1, 2, 9, 19, 100, 220]

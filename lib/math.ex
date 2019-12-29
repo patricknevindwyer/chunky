@@ -960,6 +960,34 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Count the number of Abelian groups of order `n`.
+  
+  An Abelian group is a commutative group of elements in Abstract Algebra; this function counts the
+  number of Abelian groups of a certain size. 
+  
+  This implementation of size counting for Abelian groups of order `n` is based on finding
+  the number of _partitions_ (see `partition_count/1`) of the exponents of the prime factors
+  of `n`. For instance, when `n` is `144`, the prime factorization is `2^4 * 3^2`, with exponents `4`
+  and `2`. Finding the product of the partitions of the exponents via `p(4) * p(2)` yields `5 * 2`, or `10`.
+  
+  ## Examples
+  
+      iex> Math.abelian_groups_count(1)
+      1
+  
+      iex> Math.abelian_groups_count(9984)
+      22
+  """
+  def abelian_groups_count(1), do: 1
+  def abelian_groups_count(n) when is_integer(n) and n > 0 do
+     
+     prime_factor_exponents(n)
+     |> Enum.map(fn {_base, e} -> partition_count(e) end)
+     |> Enum.reduce(1, fn x, acc -> x * acc end) 
+     
+  end
+  
+  @doc """
   Count the number of partitions of `n`.
     
   A partition of `n` is the set of ways of creating a sum of `n`. For example, `4` has a partition
