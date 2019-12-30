@@ -56,7 +56,7 @@ OEIS.Util.crawl_keywords(["core", "hard"])
 ```
 
 ```
-OEIS.Util.crawl_keywords(["core", "mult"]) |> Enum.map(fn %{seq_id: seq_id} -> "#{seq_id |> String.downcase()}" |> String.to_atom() end) |> Enum.sort() |> IO.inspect(limit: :infinity)
+OEIS.Util.crawl_keywords(["core", "nonn"]) |> Enum.map(fn %{seq_id: seq_id} -> "#{seq_id |> String.downcase()}" |> String.to_atom() end) |> Enum.sort() |> IO.inspect(limit: :infinity)
 ```
 
 

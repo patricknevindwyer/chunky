@@ -13,59 +13,65 @@ defmodule Chunky.Math do
   ## Factorization and Divisors
 
    - `factors/1` - All divisors for an integer
+   - `is_power_of?/2` - Is `n` a power of `m`?
+   - `is_root_of?/2` - Check if `m` is a k-th root of `n`
    - `prime_factors/1` - Factorize an integer into prime factors
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `tau/1` - Tau function, number of divisors of `n`
 
   ## Primes
   
-   - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
-   - `least_prime_factor/1` - Find the smallest prime factor of `n`
    - `greatest_prime_factor/1` - Find the largest prime factor of `n`
+   - `least_prime_factor/1` - Find the smallest prime factor of `n`
    - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
+   - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
   
   ## Predicates
   
-   - `is_prime?/1` - Test if an integer is prime
-   - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
-   - `is_perfect?/1` - Test if an integer is _perfect_
    - `is_abundant?/1` - Test if an integer is _abundant_
-   - `is_deficient?/1` - Test if an integer is _deficient_
+   - `is_achilles_number?/1` - Is `n` an Achilles Number?
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
-   - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
+   - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
+   - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
-   - `is_perfect_power?/1` - Is `n` a perfect power?
-   - `is_root_of?/2` - Check if `m` is a k-th root of `n`
-   - `is_perfect_square?/1` - Is `n` a perfect square?
+   - `is_perfect?/1` - Test if an integer is _perfect_
    - `is_perfect_cube?/1` - Is `m` a perfect square?
-   - `is_achilles_number?/1` - Is `n` an Achilles Number?
-   - `is_squarefree?/1` - Are any factors of `n` perfect squares?
-   - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
-   - `is_power_of?/2` - Is `n` a power of `m`?
+   - `is_perfect_power?/1` - Is `n` a perfect power?
+   - `is_perfect_square?/1` - Is `n` a perfect square?
+   - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
+   - `is_prime?/1` - Test if an integer is prime
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
-    
+   - `is_squarefree?/1` - Are any factors of `n` perfect squares?
+
+
   ## Number Theory
   
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
-   - `sigma/2` - Generalized Sigma function for integers
-   - `totient/1` - Calculate Euler's totient for `n`
+   - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
+   - `divisors_of_form_mx_plus_b/3` - Divisors of `n` that conform to values of `mx + b`
+   - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
    - `mobius_function/1` - Classical Mobius Function
    - `omega/1` - Omega function - count of distinct primes
-   - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
-   - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
-   - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
    - `partition_count/1` - Number of ways to partition `n` into sums
    - `p_adic_valuation/2` - The _p-adic_ valuation function (for prime `p` and integer `n`)
+   - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
+   - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
+   - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
+   - `sigma/2` - Generalized Sigma function for integers
+   - `totient/1` - Calculate Euler's totient for `n`
+
   
   ## Abstract Algebra
 
    - `abelian_group_count/1` - Number of Abelian groups of order `n`
+
   
   ## Differential Topology
   
    - `hurwitz_radon_number/1` - Calculate the Hurwitz-Radon number for `n`
+
   
   ## Cryptography
 
@@ -81,9 +87,9 @@ defmodule Chunky.Math do
 
   ## Number Generation
 
-   - `next_number/2` - Use a number theory predicate to find the next integer in a sequence
    - `next_abundant/1` - Find the next abundant number after `n`
    - `next_deficient/1` - Find the next deficient number after `n`
+   - `next_number/2` - Use a number theory predicate to find the next integer in a sequence
   """
 
   require Integer
