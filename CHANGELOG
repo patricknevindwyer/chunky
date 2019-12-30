@@ -33,6 +33,7 @@
   - euler_zig_zag/1 - Permutation set sizes
   - factorial/1 - Factorial `n!`
   - binomial/2 - Binomial coefficient over `(n k)`
+  - wedderburn_etherington_number/1 - Count of permutations of binary rooted trees of size `n`
   
   
 ### New Sequences

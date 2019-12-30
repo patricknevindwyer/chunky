@@ -4,6 +4,18 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "wedderburn_etherington_number/1" do
+      test "test values" do
+          ns = [1, 2, 9, 19, 43, 100, 200, 300]
+          os = [1, 1, 46, 127912, 111146809165122, 1019560119620720464013531852138491082, 1141702678822176831157009785526651690179398155888199965734911032502338584734, 1972666500548256069567265504055115733765719122240464770401890754621349706143463425967160618093669965967626678829167]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.wedderburn_etherington_number(n) == o
+          end)          
+      end
+  end
+  
   describe "binomial/2" do
       test "test values" do
           ns = [{5, 3}, {10, 5}, {15, 13}, {20, 8}, {34, 17}]

@@ -37,6 +37,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
+   - [A001190 - Wedderburn-Etherington numbers: unlabeled binary rooted trees](https://oeis.org/A001190) - `:a001190` - `create_sequence_a001190/1`
    - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
    - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
    - [A001227 - Number of odd divisors of n.](https://oeis.org/A001227) - `:a001227` - `create_sequence_a001227/1`
@@ -1105,6 +1106,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a001157(idx) do
     Math.sigma(idx, 2)
+  end
+
+  @doc """
+  OEIS Sequence `A001190` - Wedderburn-Etherington numbers: unlabeled binary rooted trees (every node has out-degree 0 or 2) with n endpoints (and 2n-1 nodes in all).
+
+  From [OEIS A001190](https://oeis.org/A001190):
+
+  > Wedderburn-Etherington numbers: unlabeled binary rooted trees (every node has out-degree 0 or 2) with n endpoints (and 2n-1 nodes in all).
+  > (Formerly M0790 N0298)
+
+  **Sequence IDs**: `:a001190`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001190) |> Sequence.take!(35)
+      [0,1,1,1,2,3,6,11,23,46,98,207,451,983,2179,4850,10905,24631,56011,127912,293547,676157,1563372,3626149,8436379,19680277,46026618,107890609,253450711,596572387,1406818759,3323236238,7862958391,18632325319,44214569100]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Wedderburn-Etherington numbers: unlabeled binary rooted trees (every node has out-degree 0 or 2) with n endpoints (and 2n-1 nodes in all).",
+       references: [{:oeis, :a001190, "https://oeis.org/A001190"}]
+  def create_sequence_a001190(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001190/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001190(idx) do
+      Math.wedderburn_etherington_number(idx)
   end
 
   @doc """

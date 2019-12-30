@@ -44,9 +44,10 @@ OEIS.missing_sequences(OEIS, :keyword_core_mult)
 ```elixir
 alias Chunky.Math
 st = Time.utc_now()
-Math.partition_count(5000)
+Math.wedderburn_etherington_number(30)
 ed = Time.utc_now()
 Time.diff(ed, st, :millisecond)
+
 ```
 
 ## Crawling Search

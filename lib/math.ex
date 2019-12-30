@@ -68,6 +68,7 @@ defmodule Chunky.Math do
    - `binomial/2` - Compute the binomial coefficient over `(n k)`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
+   - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
   
   ## Graph Theory
   
@@ -585,6 +586,109 @@ defmodule Chunky.Math do
       |> Enum.reduce(1, fn x, acc -> Fraction.multiply(x, acc) end)
       |> Fraction.get_whole()
   end
+  
+  @doc """
+  Calculate the Wedderburn-Etherington number for `n`.
+  
+  In combinatorics, the Wedderburn-Etherington number is used to determine the size
+  of certain sets of Binary Trees. Other uses include (via [Wikipedia](https://en.wikipedia.org/wiki/Wedderburn–Etherington_number) and
+  [OEIS A001190](https://oeis.org/A001190)):
+  
+   - Otter Trees - the number of unordered rooted trees with n leaves in which all nodes including the root have either zero or exactly two children.
+   - Planted Trees - the number of unordered rooted trees with n nodes in which the root has degree zero or one and all other nodes have at most two children.
+   - The number of different ways of organizing a single-elimination tournament for n players
+   - Number of colorations of Kn (complete graph of order n) with n-1 colors such that no triangle is three-colored
+  
+  Calculation of the Wedderburn-Etherington number is done via a recurrence relationship for odd `n`:
+  
+   ![Wedderburn-Etherington for Odd N](https://wikimedia.org/api/rest_v1/media/math/render/svg/2840c45affaa88907f57ffcb16aa5887adf7c8de)
+  
+  and even `n`:
+  
+   ![Wedderburn-Etherington for Even N](https://wikimedia.org/api/rest_v1/media/math/render/svg/c0d95535d780adb26ddcc780dbb59bab0c495d19)
+  
+  Because these relations are _highly_ recursive, this implementation uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.wedderburn_etherington_number(3)
+      1
+
+      iex> Math.wedderburn_etherington_number(5)
+      3
+      
+      iex> Math.wedderburn_etherington_number(9)
+      46
+
+      iex> Math.wedderburn_etherington_number(45)
+      639754054803187
+
+      iex> Math.wedderburn_etherington_number(300)
+      1972666500548256069567265504055115733765719122240464770401890754621349706143463425967160618093669965967626678829167
+  
+  """
+  def wedderburn_etherington_number(0), do: 0
+  def wedderburn_etherington_number(n) when is_integer(n) and n < 4, do: 1
+  
+  def wedderburn_etherington_number(n) when is_integer(n) and Integer.is_odd(n) do
+      
+      # start the cache
+      CacheAgent.start_link(:wedderburn_etherington_number)
+      
+      if CacheAgent.has?(:wedderburn_etherington_number, n) do
+          CacheAgent.get(:wedderburn_etherington_number, n)
+      else
+
+          # odd case is based on recurrence relation of 2n - 1
+          sub_n = div(n + 1, 2)
+      
+          wen = 1..sub_n - 1
+          |> Enum.map(
+              fn i -> 
+                  wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i - 1)
+              end
+          )
+          |> Enum.sum()
+          
+          CacheAgent.put(:wedderburn_etherington_number, n, wen)
+          wen
+      end
+      
+  end
+  
+  def wedderburn_etherington_number(n) when is_integer(n) and Integer.is_even(n) do
+      
+      # start the cache
+      CacheAgent.start_link(:wedderburn_etherington_number)
+      
+      if CacheAgent.has?(:wedderburn_etherington_number, n) do
+         CacheAgent.get(:wedderburn_etherington_number, n) 
+      else
+          # even case is based on recurrence relation of 2n
+          sub_n = div(n, 2)
+      
+          # determine the summation portion
+          sum_part = 1..sub_n - 1
+          |> Enum.map(
+              fn i -> 
+                  wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i)
+              end
+          )
+          |> Enum.sum()
+      
+          # fractional portion
+          s_n = wedderburn_etherington_number(sub_n)
+          frac_part = div(s_n * (s_n + 1), 2)
+      
+          wen = frac_part + sum_part
+          
+          CacheAgent.put(:wedderburn_etherington_number, n, wen)
+          wen
+          
+      end
+      
+  end
+  
   
   @doc """
   Euler's totient function for `n`.
