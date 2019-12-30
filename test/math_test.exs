@@ -3,7 +3,46 @@ defmodule Chunky.MathTest do
 
   alias Chunky.Math
   doctest Chunky.Math
-    
+
+  describe "hurwitz_radon_number/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 100, 220, 4444, 10000]
+          os = [1, 2, 1, 1, 4, 4, 4, 9]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.hurwitz_radon_number(n) == o
+          end)
+      end
+  end
+  
+  describe "divisors_of_form_mx_plus_b/3" do
+      test "value tests" do
+          # m, b, n
+          ns = [{2, 1, 1}, {2, 1, 21}, {2, 9, 8}, {5, 7, 7}, {5, 7, 57}]
+          os = [[1], [1, 3, 7, 21], [], [7], [57]]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{m, b, n}, o} ->
+            assert Math.divisors_of_form_mx_plus_b(m, b, n) == o
+          end)
+      end
+  end
+  
+  describe "is_of_mx_plus_b/3" do
+      test "value tests" do
+          # m, b, n
+          ns = [{4, 3, 1}, {4, 3, 7}, {4, 3, 321}, {13, 5, 44}, {13, 5, 45}]
+          os = [false, true, false, true, false]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{m, b, n}, o} ->
+            assert Math.is_of_mx_plus_b?(m, b, n) == o
+          end)
+          
+      end
+  end
+      
   describe "p_adic_valuation/2" do
       test "value tests" do
           ns = [{2, 2}, {3, 0}, {3, 33}, {5, 31250}, {7, 49}, {11, 7073843073}]
@@ -13,6 +52,10 @@ defmodule Chunky.MathTest do
           |> Enum.each(fn {{p, n}, o} ->
             assert Math.p_adic_valuation(p, n) == o
           end)
+      end
+      
+      test "must be prime" do
+         assert_raise ArgumentError, fn -> Math.p_adic_valuation(4, 37) end 
       end       
   end
   
@@ -25,8 +68,7 @@ defmodule Chunky.MathTest do
           |> Enum.each(fn {n, o} ->
             assert Math.abelian_groups_count(n) == o
           end)
-      end 
-      
+      end       
   end
     
   describe "partition_count/1" do

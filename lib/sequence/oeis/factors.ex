@@ -26,6 +26,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A014612 - Numbers that are the product of exactly three primes, including multiplicity.](https://oeis.org/A014612) - `:a014612` - `create_sequence_a014612/1`
    - [A014613 - Numbers that are products of 4 primes](https://oeis.org/A014613) - `:a014613` - `create_sequence_a014613/1`
    - [A014614 - Numbers that are products of 5 primes](https://oeis.org/A014614) - `:a014614` - `create_sequence_a014614/1`
+   - [A001826 - Number of divisors of n of form 4k+1](https://oeis.org/A001826) - `:a001826` - `create_sequence_a001826/1`
+   - [A001842 - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3))](https://oeis.org/A001842) - `:a001842` - `create_sequence_a001842/1`
    - [A030513 - Numbers with 4 divisors](https://oeis.org/A030513) - `:a030513` - `create_sequence_a030513/1`
    - [A030515 - Numbers with exactly 6 divisors](https://oeis.org/A030515) - `:a030515` - `create_sequence_a030515/1`
    - [A033273 - Number of nonprime divisors of n](https://oeis.org/A033273) - `:a033273` - `create_sequence_a033273/1`
@@ -100,6 +102,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A209061 - Exponentially squarefree numbers](https://oeis.org/A209061) - `:a209061` - `create_sequence_a209061/1`
    - [A211337 - Numbers n for which the number of divisors, tau(n), is congruent to 1 modulo 3](https://oeis.org/A211337) - `:a211337` - `create_sequence_a211337/1`
    - [A211338 - Numbers n for which the number of divisors, tau(n), is congruent to 2 modulo 3](https://oeis.org/A211338) - `:a211338` - `create_sequence_a211338/1`
+
 
 
   """
@@ -924,6 +927,78 @@ defmodule Chunky.Sequence.OEIS.Factors do
   @doc offset: 1
   def seq_a014614(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 5 end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A001826` - Number of divisors of n of form 4k+1.
+
+  From [OEIS A001826](https://oeis.org/A001826):
+
+  > Number of divisors of n of form 4k+1.
+  > (Formerly )
+
+  **Sequence IDs**: `:a001826`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a001826) |> Sequence.take!(105)
+      [1,1,1,1,2,1,1,1,2,2,1,1,2,1,2,1,2,2,1,2,2,1,1,1,3,2,2,1,2,2,1,1,2,2,2,2,2,1,2,2,2,2,1,1,4,1,1,1,2,3,2,2,2,2,2,1,2,2,1,2,2,1,3,1,4,2,1,2,2,2,1,2,2,2,3,1,2,2,1,2,3,2,1,2,4,1,2,1,2,4,2,1,2,1,2,1,2,2,3,3,2,2,1,2,4]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of divisors of n of form 4k+1",
+       references: [{:oeis, :a001826, "https://oeis.org/A001826"}]
+  def create_sequence_a001826(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001826/1)
+  end 
+
+
+  @doc offset: 1
+  def seq_a001826(idx) do
+      Math.divisors_of_form_mx_plus_b(4, 1, idx) |> length()
+  end
+
+  @doc """
+  OEIS Sequence `A001842` - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3)).
+
+  From [OEIS A001842](https://oeis.org/A001842):
+
+  > Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3)).
+  > (Formerly )
+
+  **Sequence IDs**: `:a001842`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a001842) |> Sequence.take!(87)
+      [0,0,0,1,0,0,1,1,0,1,0,1,1,0,1,2,0,0,1,1,0,2,1,1,1,0,0,2,1,0,2,1,0,2,0,2,1,0,1,2,0,0,2,1,1,2,1,1,1,1,0,2,0,0,2,2,1,2,0,1,2,0,1,3,0,0,2,1,0,2,2,1,1,0,0,3,1,2,2,1,0,2,0,1,2,0,1]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3)).",
+       references: [{:oeis, :a001842, "https://oeis.org/A001842"}]
+  def create_sequence_a001842(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001842/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001842(idx) do
+      if idx == 0 do 
+          0
+      else
+          Math.divisors_of_form_mx_plus_b(4, 3, idx) |> length()
+      end
   end
 
   @doc """

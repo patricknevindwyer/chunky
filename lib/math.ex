@@ -8,15 +8,24 @@ defmodule Chunky.Math do
 
   ## Integer Arithmetic
 
-   - `factors/1` - All divisors for an integer
    - `pow/2` - Integer exponentiation
+
+  ## Factorization and Divisors
+
+   - `factors/1` - All divisors for an integer
    - `prime_factors/1` - Factorize an integer into prime factors
+   - `sigma/1` - Sigma-1 function (sum of divisors)
+   - `tau/1` - Tau function, number of divisors of `n`
+
+  ## Primes
+  
    - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
    - `least_prime_factor/1` - Find the smallest prime factor of `n`
    - `greatest_prime_factor/1` - Find the largest prime factor of `n`
-
-  ## Number Theory
-
+   - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
+  
+  ## Predicates
+  
    - `is_prime?/1` - Test if an integer is prime
    - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
    - `is_perfect?/1` - Test if an integer is _perfect_
@@ -26,32 +35,39 @@ defmodule Chunky.Math do
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
-   - `sigma/1` - Sigma-1 function (sum of divisors)
-   - `sigma/2` - Generalized Sigma function for integers
-   - `tau/1` - Tau function, number of divisors of `n`
-   - `aliquot_sum/1` - Find the Aliquot Sum of `n`
    - `is_perfect_power?/1` - Is `n` a perfect power?
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
    - `is_perfect_square?/1` - Is `n` a perfect square?
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_achilles_number?/1` - Is `n` an Achilles Number?
+   - `is_squarefree?/1` - Are any factors of `n` perfect squares?
+   - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
+   - `is_power_of?/2` - Is `n` a power of `m`?
+   - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
+    
+  ## Number Theory
+  
+   - `aliquot_sum/1` - Find the Aliquot Sum of `n`
+   - `sigma/2` - Generalized Sigma function for integers
    - `totient/1` - Calculate Euler's totient for `n`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
    - `mobius_function/1` - Classical Mobius Function
    - `omega/1` - Omega function - count of distinct primes
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
-   - `is_squarefree?/1` - Are any factors of `n` perfect squares?
-   - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
    - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
-   - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
-   - `is_power_of?/2` - Is `n` a power of `m`?
-   - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
    - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
    - `partition_count/1` - Number of ways to partition `n` into sums
-   - `abelian_group_count/1` - Number of Abelian groups of order `n`
    - `p_adic_valuation/2` - The _p-adic_ valuation function (for prime `p` and integer `n`)
   
-  ## Cryptographic Math
+  ## Abstract Algebra
+
+   - `abelian_group_count/1` - Number of Abelian groups of order `n`
+  
+  ## Differential Topology
+  
+   - `hurwitz_radon_number/1` - Calculate the Hurwitz-Radon number for `n`
+  
+  ## Cryptography
 
    - `is_b_smooth?/2` - Is `n` prime factor smooth up to `b` - all prime factors <= `b`  
    - `is_3_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 3)`
@@ -222,7 +238,95 @@ defmodule Chunky.Math do
     facs = Math.prime_factors(n) -- [1]
     length(facs) == 3 && length(Enum.uniq(facs)) == 3
   end
+  
+  
+  @doc """
+  Determine if `n` is a value of the form `mx + b` or `mk + b`, for specific
+  values of `m` and `b`.
+  
+  This function checks if an integer `n` is of a specific form, and is not
+  an interpolation of the line formula.
+  
+  ## Examples
+  
+  Check if numbers are of the form `4k + 3`:
+  
+      iex> Math.is_of_mx_plus_b?(4, 3, 1)
+      false
+  
+      iex> Math.is_of_mx_plus_b?(4, 3, 27)
+      true
+  
+      iex> Math.is_of_mx_plus_b?(4, 3, 447)
+      true
+  """
+  def is_of_mx_plus_b?(m, b, n, x \\ 0) do
+      v = (m * x) + b
+      cond do
+         v == n -> true
+         v < n -> false || is_of_mx_plus_b?(m, b, n, x + 1) 
+         true -> false
+      end
+  end
+  
+  @doc """
+  Find all divisors of `n` of the form `mx + b`.
+  
+  ## Examples
+  
+      iex> Math.divisors_of_form_mx_plus_b(4, 1, 5)
+      [1, 5]
+  
+      iex> Math.divisors_of_form_mx_plus_b(4, 1, 45)
+      [1, 5, 9, 45]
+  
+      iex> Math.divisors_of_form_mx_plus_b(4, 3, 4)
+      []
+  
+      iex> Math.divisors_of_form_mx_plus_b(4, 3, 9975)
+      [3, 7, 15, 19, 35, 75, 95, 175, 399, 475, 1995, 9975]
+  """
+  def divisors_of_form_mx_plus_b(m, b, n) do
+     
+     # find divisors
+     factors(n)
+     
+     # filter to form
+     |> Enum.filter(fn f -> is_of_mx_plus_b?(m, b, f) end)
+     
+  end
 
+  @doc """
+  Calculate the Hurwitz-Radon number for `n`, the number of independent vector
+  fields on a sphere in `n`-dimensional euclidean space.
+  
+  See [Vector fields on spheres](https://en.wikipedia.org/wiki/Vector_fields_on_spheres) for more
+  information.
+  
+  This function uses a set of `2-adic` calculations to compute `n` in a closed form.
+  
+  ## Examples
+  
+      iex> Math.hurwitz_radon_number(9)
+      1
+  
+      iex> Math.hurwitz_radon_number(32)
+      10
+  
+      iex> Math.hurwitz_radon_number(288)
+      10
+  
+      iex> Math.hurwitz_radon_number(9600)
+      16
+  
+  """
+  def hurwitz_radon_number(n) when is_integer(n) and n > 0 do
+     # a(n)=8*(valuation(n, 2)\4)+2^(valuation(n, 2)%4)    
+     #  [Paul D Hanna](https://oeis.org/wiki/User:Paul_D._Hanna)
+     
+     8 * div(p_adic_valuation(2, n), 4) + Math.pow(2, rem(p_adic_valuation(2, n), 4))
+  end
+  
   @doc """
   Euler's totient function for `n`.
 

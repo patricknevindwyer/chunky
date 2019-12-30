@@ -68,6 +68,12 @@ OEIS.Util.crawl_keywords(["core", "mult"]) |> Enum.map(fn %{seq_id: seq_id} -> "
  - Additions
   - add Sigma-21 through 24
   - add 5^n through 48^n
+  - p-adic groups
+   - 2-adic https://oeis.org/A007814
+   - 3-adic https://oeis.org/A007949
+   - 5-adic https://oeis.org/A112765
+   - 7-adic https://oeis.org/A214411
+  
   - builder for particular list sequences
    - list builder
    - fini, hard, bref modules

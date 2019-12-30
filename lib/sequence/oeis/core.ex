@@ -41,7 +41,9 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001511 - The ruler function: 2^a(n) divides 2n](https://oeis.org/A001511) - `:a001511` - `create_sequence_a001511/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
+   - [A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters](https://oeis.org/A002654) - `:a002654` - `create_sequence_a002654/1`
    - [A003094 - Number of unlabeled connected planar simple graphs with n nodes](https://oeis.org/A003094) - `:a003094` - `create_sequence_a003094/1`
+   - [A003484 - Radon function, also called Hurwitz-Radon numbers](https://oeis.org/A003484) - `:a003484` - `create_sequence_a003484/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
    - [A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1](https://oeis.org/A005117) - `:a005117` - `create_sequence_a005117/1`
@@ -51,6 +53,9 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
+
+
+
 
 
   """
@@ -1194,6 +1199,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A003484` - Radon function, also called Hurwitz-Radon numbers.
+
+  From [OEIS A003484](https://oeis.org/A003484):
+
+  > Radon function, also called Hurwitz-Radon numbers.
+  > (Formerly M0161)
+
+  **Sequence IDs**: `:a003484`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a003484) |> Sequence.take!(102)
+      [1,2,1,4,1,2,1,8,1,2,1,4,1,2,1,9,1,2,1,4,1,2,1,8,1,2,1,4,1,2,1,10,1,2,1,4,1,2,1,8,1,2,1,4,1,2,1,9,1,2,1,4,1,2,1,8,1,2,1,4,1,2,1,12,1,2,1,4,1,2,1,8,1,2,1,4,1,2,1,9,1,2,1,4,1,2,1,8,1,2,1,4,1,2,1,10,1,2,1,4,1,2]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Radon function, also called Hurwitz-Radon numbers.",
+       references: [{:oeis, :a003484, "https://oeis.org/A003484"}]
+  def create_sequence_a003484(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a003484/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a003484(idx) do
+      Math.hurwitz_radon_number(idx)
+  end
+
+  @doc """
   OEIS Sequence `A005100` - Deficient Numbers
 
   From [OEIS A005100](https://oeis.org/A005100):
@@ -1527,6 +1566,40 @@ defmodule Chunky.Sequence.OEIS.Core do
        references: [{:oeis, :a002106, "https://oeis.org/A002106"}]
   def create_sequence_a002106(_opts) do
           sequence_for_list(@data_a002106)
+  end
+
+  @doc """
+  OEIS Sequence `A002654` - Number of ways of writing n as a sum of at most two nonzero squares, where order matters
+
+  From [OEIS A002654](https://oeis.org/A002654):
+
+  > Number of ways of writing n as a sum of at most two nonzero squares, where order matters; also (number of divisors of n of form 4m+1) - (number of divisors of form 4m+3).
+  > (Formerly M0012 N0001)
+
+  **Sequence IDs**: `:a002654`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002654) |> Sequence.take!(105)
+      [1,1,0,1,2,0,0,1,1,2,0,0,2,0,0,1,2,1,0,2,0,0,0,0,3,2,0,0,2,0,0,1,0,2,0,1,2,0,0,2,2,0,0,0,2,0,0,0,1,3,0,2,2,0,0,0,0,2,0,0,2,0,0,1,4,0,0,2,0,0,0,1,2,2,0,0,0,0,0,2,1,2,0,0,4,0,0,0,2,2,0,0,0,0,0,0,2,1,0,3,2,0,0,2,0]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of ways of writing n as a sum of at most two nonzero squares, where order matters",
+       references: [{:oeis, :a002654, "https://oeis.org/A002654"}]
+  def create_sequence_a002654(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002654/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a002654(idx) do
+      length(Math.divisors_of_form_mx_plus_b(4, 1, idx)) - length(Math.divisors_of_form_mx_plus_b(4, 3, idx))
   end
 
   @doc """
