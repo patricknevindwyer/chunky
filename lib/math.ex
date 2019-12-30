@@ -9,6 +9,7 @@ defmodule Chunky.Math do
   ## Integer Arithmetic
 
    - `pow/2` - Integer exponentiation
+   - `factorial/1` - Factorial (`n!`) of `n`
 
   ## Factorization and Divisors
 
@@ -62,6 +63,12 @@ defmodule Chunky.Math do
    - `sigma/2` - Generalized Sigma function for integers
    - `totient/1` - Calculate Euler's totient for `n`
 
+  ## Combinatorics
+  
+   - `binomial/2` - Compute the binomial coefficient over `(n k)`
+   - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
+   - `euler_zig_zag/1` - Calculate the size of certain set permutations
+  
   ## Graph Theory
   
    - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes.
@@ -229,6 +236,130 @@ defmodule Chunky.Math do
     Integer.gcd(a, b) == 1
   end
 
+  @doc """
+  The _factorial_ of `n`, or `n!`.
+  
+  A factorial of `n` is the product of `n * (n - 1) * (n - 2) * ... 1`.
+  
+  This implementation uses a cache to speed up efficiency.
+  
+  ## Examples
+  
+      iex> Math.factorial(1)
+      1
+      
+      iex> Math.factorial(10)
+      3628800
+  
+      iex> Math.factorial(20)
+      2432902008176640000
+  
+      iex> Math.factorial(100)
+      93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+  """
+  def factorial(0), do: 1
+  def factorial(1), do: 1
+  def factorial(n) when is_integer(n) and n > 1 do
+  
+      CacheAgent.start_link(:factorial)
+      
+      if CacheAgent.has?(:factorial, n) do
+          CacheAgent.get(:factorial, n)
+      else
+          f = n * factorial(n - 1)
+          CacheAgent.put(:factorial, n, f)
+          f
+      end
+  end
+  
+  @doc """
+  Calculate the binomial coefficient (n k).
+  
+  The binomial coefficient function determines the coefficient on the `x^k` term in the polynomial expansion
+  of `(1 + x)^n`. 
+  
+  Rather than run a full expansion, this function relies on the simple formula:
+  
+  ![Binomial coefficient](https://wikimedia.org/api/rest_v1/media/math/render/svg/a2457a7ef3c77831e34e06a1fe17a80b84a03181)
+  
+  As the `factorial/1` function in Chunky.Math uses a cached speed up strategy, the calculation of the
+  binomial by this method is fairly efficient.
+  
+  ## Examples
+  
+      iex> Math.binomial(7, 3)
+      35
+  
+      iex> Math.binomial(20, 3)
+      1140
+  
+      iex> Math.binomial(20, 10)
+      184756
+  
+      iex> Math.binomial(100, 50)
+      100891344545564193334812497256
+  """
+  def binomial(n, k) do
+      
+      # n! / (k! * (n - k)!)
+      div(factorial(n), (factorial(k) * factorial(n - k)))
+  end
+  
+  @doc """
+  Calculate the Euler _zig zag_, or up/down, number for `n`.
+  
+  The zig zag set is used in combinatorics to count the size of alternating sets of permutations.
+  
+  Other noted uses of the zig zag numbers (via OEIS [A000111](https://oeis.org/A000111)):
+  
+   - Number of linear extensions of the "zig-zag" poset.
+   - Number of increasing 0-1-2 trees on n vertices. 
+   - ... the number of refinements of partitions.
+   - For n >= 2, a(n-2) = number of permutations w of an ordered n-set
+   - The number of binary, rooted, unlabeled histories with n+1 leaves
+  
+  As the calculation of the Euler Zig Zag is multiply recursive, this implementation
+  uses a cache for efficiency. 
+  
+  ## Examples
+  
+      iex> Math.euler_zig_zag(1)
+      1
+  
+      iex> Math.euler_zig_zag(10)
+      50521
+  
+      iex> Math.euler_zig_zag(20)
+      370371188237525
+  
+      iex> Math.euler_zig_zag(99)
+      45608516616801111821043829531451697185581949239892414478770427720660171869441004793654782298700276817088804993740898668991870306963423232
+  """
+  def euler_zig_zag(n) when is_integer(n) and n >=0 and n <= 2, do: 1
+  def euler_zig_zag(n) when is_integer(n) and n > 2 do
+      
+      #a(n) = (Sum_{k=0..n - 1} binomial(n - 1, k) * a(k)*a(n - 1-k)) / 2    
+      
+      CacheAgent.start_link(:euler_zig_zag)
+      if CacheAgent.has?(:euler_zig_zag, n) do
+          CacheAgent.get(:euler_zig_zag, n)
+      else
+          bin_sum = 0..n-1
+          |> Enum.map(
+              fn k -> 
+                  binomial(n - 1, k) * euler_zig_zag(k) * euler_zig_zag(n - 1 - k)
+              end
+          )
+          |> Enum.sum()
+      
+          ezz = div(bin_sum, 2)
+          CacheAgent.put(:euler_zig_zag, n, ezz)
+          ezz
+      end
+      
+      
+  end
+  
   @doc """
   Check if `n` is a _sphenic number_, the product of three distinct primes.
 
@@ -413,6 +544,46 @@ defmodule Chunky.Math do
      #  [Paul D Hanna](https://oeis.org/wiki/User:Paul_D._Hanna)
      
      8 * div(p_adic_valuation(2, n), 4) + Math.pow(2, rem(p_adic_valuation(2, n), 4))
+  end
+  
+  @doc """
+  Find the Catalan number of `n`, `C(n)`.
+  
+  In combinatorial math, the Catalan numbers occur in a wide range of counting problems.
+  
+  ![Catalan Number](https://wikimedia.org/api/rest_v1/media/math/render/svg/58374aa2b2e2c016a5b313e2bbd59940a2e1a5f9)
+  
+  Rather than the factorial or binomial expansion, this implementation uses a product over
+  fractional parts to avoid recursion and precision loss.
+  
+  ## Examples
+  
+      iex> Math.catalan_number(2)
+      2
+  
+      iex> Math.catalan_number(20)
+      6564120420
+  
+      iex> Math.catalan_number(100)
+      896519947090131496687170070074100632420837521538745909320
+  
+      iex> Math.catalan_number(256)
+      1838728806050447178945542295919013188631170099776194095631629802153953581076132688111479765113051517392441367036708073775588228430597313880732554755142
+  """
+  def catalan_number(0), do: 1
+  def catalan_number(1), do: 1
+  def catalan_number(2), do: 2
+  def catalan_number(n) when is_integer(n) and n > 2 do
+      
+      # fractional product over n and k
+      2..n
+      |> Enum.map(
+          fn k -> 
+              Fraction.new(n + k, k)
+          end
+      )
+      |> Enum.reduce(1, fn x, acc -> Fraction.multiply(x, acc) end)
+      |> Fraction.get_whole()
   end
   
   @doc """

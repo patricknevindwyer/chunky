@@ -4,6 +4,54 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "binomial/2" do
+      test "test values" do
+          ns = [{5, 3}, {10, 5}, {15, 13}, {20, 8}, {34, 17}]
+          os = [10, 252, 105, 125970, 2333606220]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, k}, o} ->
+            assert Math.binomial(n, k) == o
+          end)
+      end
+  end
+  
+  describe "euler_zig_zag/1" do
+      test "test values" do
+          ns = [1, 2, 9, 19, 43]
+          os = [1, 1, 7936, 29088885112832, 283727921907431909304183316295787837183229952]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.euler_zig_zag(n) == o
+          end)
+      end
+  end
+  
+  describe "factorial/1" do
+      test "test values" do
+          ns = [1, 2, 9, 19, 43]
+          os = [1, 2, 362880, 121645100408832000, 60415263063373835637355132068513997507264512000000000]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.factorial(n) == o
+          end)
+      end
+  end
+  
+  describe "catalan_number/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 43, 100, 220]
+          os = [1, 2, 4862, 1767263190, 150853479205085351660700, 896519947090131496687170070074100632420837521538745909320, 488396770681524153646181537427091091406855932349115171518830851118786972757066959025507879092427258325815216144577359863995360800]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.catalan_number(n) == o
+          end)
+      end
+  end
+  
   describe "rooted_tree_count/1" do
       test "value tests" do
           ns = [1, 2, 9, 19, 43, 100, 220]

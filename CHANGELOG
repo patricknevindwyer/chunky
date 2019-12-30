@@ -28,7 +28,11 @@
   - rooted_tree_count/1 - Rooted trees of N nodes
   - is_of_form_mx_plus_b/3 - Does number have form `mx + b` for strict values of `m` and `b`?
   - divisors_of_form_mx_plus_b/3 - Find divisors of `n` that are of form `mx + b`
-  - hurwitz_radon_number - find the hurwitz-radon number of `n`
+  - hurwitz_radon_number/1 - find the hurwitz-radon number of `n`
+  - catalan_number/1 - Find `C(n)`, the Catalan number, of `n`
+  - euler_zig_zag/1 - Permutation set sizes
+  - factorial/1 - Factorial `n!`
+  - binomial/2 - Binomial coefficient over `(n k)`
   
   
 ### New Sequences

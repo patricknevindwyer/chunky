@@ -18,6 +18,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000081 - Number of unlabeled rooted trees with n nodes](https://oeis.org/A000081) - `:a000081` - `create_sequence_a000081/1`
    - [A000105 - Number of free polyominoes (or square animals) with n cells](https://oeis.org/A000105) - `:a000105` - `create_sequence_a000105/1`
+   - [A000108 - Catalan numbers: C(n), Also called Segner numbers.](https://oeis.org/A000108) - `:a000108` - `create_sequence_a000108/1`
    - [A000109 - Number of simplicial polyhedra with n nodes](https://oeis.org/A000109) - `:a000109` - `create_sequence_a000109/1`
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
@@ -54,6 +55,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
+
 
 
 
@@ -581,6 +583,40 @@ defmodule Chunky.Sequence.OEIS.Core do
        references: [{:oeis, :a000105, "https://oeis.org/A000105"}]
   def create_sequence_a000105(_opts) do
           sequence_for_list(@data_a000105)
+  end
+
+  @doc """
+  OEIS Sequence `A000108` - Catalan numbers: C(n) = binomial(2n,n)/(n+1) = (2n)!/(n!(n+1)!). Also called Segner numbers.
+
+  From [OEIS A000108](https://oeis.org/A000108):
+
+  > Catalan numbers: C(n) = binomial(2n,n)/(n+1) = (2n)!/(n!(n+1)!). Also called Segner numbers.
+  > (Formerly M1459 N0577)
+
+  **Sequence IDs**: `:a000108`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000108) |> Sequence.take!(31)
+      [1,1,2,5,14,42,132,429,1430,4862,16796,58786,208012,742900,2674440,9694845,35357670,129644790,477638700,1767263190,6564120420,24466267020,91482563640,343059613650,1289904147324,4861946401452,18367353072152,69533550916004,263747951750360,1002242216651368,3814986502092304]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Catalan numbers: C(n) = binomial(2n,n)/(n+1) = (2n)!/(n!(n+1)!). Also called Segner numbers.",
+       references: [{:oeis, :a000108, "https://oeis.org/A000108"}]
+  def create_sequence_a000108(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000108/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000108(idx) do
+      Math.catalan_number(idx)
   end
 
   @doc """
