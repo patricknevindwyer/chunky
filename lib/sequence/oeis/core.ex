@@ -5,6 +5,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   ## Available Sequences
 
    - [A000001 - Number of groups of order n](https://oeis.org/A000001) - `:a000001` - `create_sequence_a000001/1`
+   - [A000002 - Kolakoski sequence](https://oeis.org/A000002) - `:a000002` - `create_sequence_a000002/1`
    - [A000004 - The zero sequence](https://oeis.org/A000004) - `:a000004` - `create_sequence_a000004/1`
    - [A000005 - Divisors of N](https://oeis.org/A000005) - `:a000005` - `create_sequence_a000005/1`
    - [A000007 - The characteristic function of {0}: a(n) = 0^n](https://oeis.org/A000007) - `:a000007` - `create_sequence_a000007/1`
@@ -123,6 +124,62 @@ defmodule Chunky.Sequence.OEIS.Core do
   # raw data for A055512 - Lattices with n labeled elements.
   @data_a055512 [1,1,2,6,36,380,6390,157962,5396888,243179064,13938711210,987858368750,84613071940452,8597251494954564,1020353444641839854,139627532137612581090,21788453795572514675760,3840596246648027262079472,758435490711709577216754642]
 
+
+  @doc """
+  OEIS Sequence `A000002` - Kolakoski sequence
+
+  From [OEIS A000002](https://oeis.org/A000002):
+
+  > Kolakoski sequence: a(n) is length of n-th run; a(1) = 1; sequence consists just of 1's and 2's.
+  > (Formerly M0190 N0070)
+
+  **Sequence IDs**: `:a000002`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000002) |> Sequence.take!(108)
+      [1,2,2,1,1,2,1,2,2,1,2,2,1,1,2,1,1,2,2,1,2,1,1,2,1,2,2,1,1,2,1,1,2,1,2,2,1,2,2,1,1,2,1,2,2,1,2,1,1,2,1,1,2,2,1,2,2,1,1,2,1,2,2,1,2,2,1,1,2,1,1,2,1,2,2,1,2,1,1,2,2,1,2,2,1,1,2,1,2,2,1,2,2,1,1,2,1,1,2,2,1,2,1,1,2,1,2,2]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Kolakoski sequence",
+       references: [{:oeis, :a000002, "https://oeis.org/A000002"}]
+  def create_sequence_a000002(_opts) do
+      %{
+          next_fn: &seq_a000002/3,
+          data: %{
+              k: Math.start_kolakoski_sequence(),
+              idx: -1
+          }
+      }
+  end
+  
+  def seq_a000002(:init, data, _value) do
+     %{
+         data: data,
+         value: 0
+     } 
+  end
+  
+  def seq_a000002(:next, %{k: k_seq, idx: last_idx}, _val) do
+     
+      # what index are we looking for
+      idx = last_idx + 1
+      
+      # make sure our sequence is long enough
+      {seq, _, _} = next_k_seq = Math.extend_kolakoski_sequence_to_length(k_seq, idx + 1)
+      
+      %{
+          data: %{k: next_k_seq, idx: idx},
+          value: Enum.at(seq, idx)
+      }
+      
+  end
 
   @doc """
   OEIS Sequence `A000004` - The zero sequence.
