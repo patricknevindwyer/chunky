@@ -4,6 +4,54 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "triangle_position_for_element/1" do
+      test "test values" do
+          ns = [1, 2, 9, 19]
+          os = [{2, 0}, {2, 1}, {4, 3}, {6, 4}]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.triangle_position_for_element(n) == o
+          end)                
+      end          
+  end
+  
+  describe "triangle_row_for_element/1" do
+      test "test values" do
+          ns = [1, 2, 9, 19]
+          os = [2, 2, 4, 6]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.triangle_row_for_element(n) == o
+          end)                
+      end                
+  end
+  
+  describe "eulerian_number/2" do
+      test "test values" do
+          ns = [{1, 0}, {4, 2}, {6, 3}, {6, 7}, {9, 4}]
+          os = [1, 11, 302, 0, 156190]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.eulerian_number(n, m) == o
+          end)                
+      end                      
+  end
+  
+  describe "triangle_number/1" do
+      test "test values" do
+          ns = [1, 2, 9, 19, 43, 100, 200, 300, 754, 9000]
+          os = [1, 3, 45, 190, 946, 5050, 20100, 45150, 284635, 40504500]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.triangle_number(n) == o
+          end)                
+      end    
+  end
+  
   describe "wedderburn_etherington_number/1" do
       test "test values" do
           ns = [1, 2, 9, 19, 43, 100, 200, 300]

@@ -24,6 +24,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
    - [A000142 - Factorial numbers: n! = 1*2*3*4*...*n ](https://oeis.org/A000142) - `:a000142` - `create_sequence_a000142/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
+   - [A000217 - Triangular numbers: a(n) = binomial(n+1,2)](https://oeis.org/A000217) - `:a000217` - `create_sequence_a000217/1`
    - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
    - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
    - [A000302 - Powers of 4: a(n) = 4^n](https://oeis.org/A000302) - `:a000302` - `create_sequence_a000302/1`
@@ -55,6 +56,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
    - [A006966 - Number of lattices on n unlabeled nodes](https://oeis.org/A006966) - `:a006966` - `create_sequence_a006966/1`
+   - [A008292 - Triangle of Eulerian numbers T(n,k)](https://oeis.org/A008292) - `:a008292` - `create_sequence_a008292/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
@@ -778,6 +780,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a000203(idx) do
     Math.sigma(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000217` - Triangular numbers: a(n) = binomial(n+1,2)
+
+  From [OEIS A000217](https://oeis.org/A000217):
+
+  > Triangular numbers: a(n) = binomial(n+1,2) = n(n+1)/2 = 0 + 1 + 2 + ... + n.
+  > (Formerly M2535 N1002)
+
+  **Sequence IDs**: `:a000217`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000217) |> Sequence.take!(54)
+      [0,1,3,6,10,15,21,28,36,45,55,66,78,91,105,120,136,153,171,190,210,231,253,276,300,325,351,378,406,435,465,496,528,561,595,630,666,703,741,780,820,861,903,946,990,1035,1081,1128,1176,1225,1275,1326,1378,1431]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Triangular numbers: a(n) = binomial(n+1,2) = n(n+1)/2 = 0 + 1 + 2 + ... + n.",
+       references: [{:oeis, :a000217, "https://oeis.org/A000217"}] 
+  def create_sequence_a000217(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000217/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000217(idx) do
+      Math.triangle_number(idx)
   end
 
   @doc """
@@ -1535,6 +1571,41 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a006530(idx) do
     Math.greatest_prime_factor(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A008292` - Triangle of Eulerian numbers T(n,k) (n >= 1, 1 <= k <= n) read by rows.
+
+  From [OEIS A008292](https://oeis.org/A008292):
+
+  > Triangle of Eulerian numbers T(n,k) (n >= 1, 1 <= k <= n) read by rows.
+  > (Formerly )
+
+  **Sequence IDs**: `:a008292`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a008292) |> Sequence.take!(55)
+      [1,1,1,1,4,1,1,11,11,1,1,26,66,26,1,1,57,302,302,57,1,1,120,1191,2416,1191,120,1,1,247,4293,15619,15619,4293,247,1,1,502,14608,88234,156190,88234,14608,502,1,1,1013,47840,455192,1310354,1310354,455192,47840,1013,1]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Triangle of Eulerian numbers T(n,k) (n >= 1, 1 <= k <= n) read by rows.",
+       references: [{:oeis, :a008292, "https://oeis.org/A008292"}]
+  def create_sequence_a008292(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008292/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a008292(idx) do
+      {n, m} = Math.triangle_position_for_element(idx - 1)
+      Math.eulerian_number(n, m)
   end
 
   @doc """

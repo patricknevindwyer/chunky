@@ -62,11 +62,15 @@ defmodule Chunky.Math do
    - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
    - `sigma/2` - Generalized Sigma function for integers
    - `totient/1` - Calculate Euler's totient for `n`
+   - `triangle_number/1` - Number of elements in a triangle of `n` rows
+   - `triangle_row_for_element/1` - Row in triangle for `n`-th element
+   - `triangle_position_for_element/1` - Position in triangel for `n`-th element
 
   ## Combinatorics
   
    - `binomial/2` - Compute the binomial coefficient over `(n k)`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
+   - `eulerian_number/2` - `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` elements are greater than the previous element
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
   
@@ -274,6 +278,132 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Find the triangle or triangular number of `n`.
+  
+  The triangle number is the number of elements in the triangular arrangement of elements
+  with `n` elements on a side. 
+  
+  ## Examples
+  
+      iex> Math.triangle_number(0)
+      0
+  
+      iex> Math.triangle_number(4)
+      10
+
+      iex> Math.triangle_number(50)
+      1275
+        
+      iex> Math.triangle_number(475)
+      113050
+
+      iex> Math.triangle_number(29999)
+      449985000
+
+  """
+  def triangle_number(0), do: 0
+  def triangle_number(1), do: 1
+  def triangle_number(n) when is_integer(n) and n > 1 do
+      div(n * (n + 1), 2)
+  end
+  
+  @doc """
+  Find the triangle row and offset for the `n`th item in a triangle.
+  
+  Given an element or number triangle with a single element at the root, counting rows
+  from 1, and elements from 0, this function will determine at which row and offset the `n`-th
+  element will occur.
+  
+  So, given the triangle:
+  
+  ```
+        *
+       * *
+      * * *
+     * + * *
+    * * * * *
+   * * * * * *
+  ```
+  
+  The `+` is the 8th item (index 7) in the triangle, and is on row 4, offset `1` from the left
+  
+    iex> Math.triangle_position_for_element(7)
+    {4, 1}
+  
+  ## Examples
+  
+      iex> Math.triangle_position_for_element(0)
+      {1, 0}
+
+      iex> Math.triangle_position_for_element(11)
+      {5, 1}
+
+      iex> Math.triangle_position_for_element(20)
+      {6, 5}
+    
+      iex> Math.triangle_position_for_element(32003)
+      {253, 125}
+  
+  """
+  def triangle_position_for_element(n) when is_integer(n) and n >= 0 do
+      
+      row = triangle_row_for_element(n)
+      col = n - triangle_number(row - 1)
+      
+      {row, col}
+  end
+  
+  @doc """
+  Calculate the row in which the `n`-th element would be in an element triangle.
+  
+  Given an element or number triangle with a single element at the root, counting rows
+  from 1, and elements from 0, this function will determine at which row the `n`-th
+  element will occur.
+  
+  So, given the triangle:
+  
+  ```
+        *
+       * *
+      * * *
+     * + * *
+    * * * * *
+   * * * * * *
+  ```
+  
+  The `+` is the 8th item (index 7) in the triangle, and is on row 4:
+  
+    iex> Math.triangle_row_for_element(7)
+    4
+  
+  ## Examples
+  
+      iex> Math.triangle_row_for_element(0)
+      1
+  
+      iex> Math.triangle_row_for_element(11)
+      5
+      
+      iex> Math.triangle_row_for_element(20)
+      6
+
+      iex> Math.triangle_row_for_element(30130)
+      245
+
+  """
+  def triangle_row_for_element(n) when is_integer(n) and n >= 0 do
+      check_triangle_row(n, 1)
+  end
+  
+  defp check_triangle_row(n, row) do
+     if triangle_number(row) > n do
+         row
+     else
+         check_triangle_row(n, row + 1)
+     end 
+  end
+  
+  @doc """
   Calculate the binomial coefficient (n k).
   
   The binomial coefficient function determines the coefficient on the `x^k` term in the polynomial expansion
@@ -304,6 +434,66 @@ defmodule Chunky.Math do
       
       # n! / (k! * (n - k)!)
       div(factorial(n), (factorial(k) * factorial(n - k)))
+  end
+  
+  @doc """
+  Calculate the Eulerian Number `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` 
+  elements are greater than the previous element.
+  
+  The Eulerian numbers form the Euler triangle:
+  
+  ```
+                   1								
+               1       1							
+            1      4       1						
+         1     11      11     1					
+      1     26     66     26    1
+    1    57    302    302    57   1	
+  ```
+  
+  Where `n` is the row (starting at 1) and `m` is the offset in the row (starting at 0). So the value `66` is at
+  row 5, offset 2:
+  
+      iex> Math.eulerian_number(5, 2)
+      66
+  
+  The sum of values at row `n` is `n!`
+  
+  This implementation of Eulerian Number calculation uses a recursive algorithm with caching for efficiency.
+  
+  ## Examples
+  
+      iex> Math.eulerian_number(5, 4)
+      1
+
+      iex> Math.eulerian_number(7, 4)
+      1191
+
+      iex> Math.eulerian_number(9, 3)
+      88234
+
+      iex> Math.eulerian_number(25, 13)
+      3334612565134607644610436
+  
+  """
+  def eulerian_number(_n, 0), do: 1
+  def eulerian_number(n, m) when is_integer(n) and is_integer(m) and m >= n, do: 0
+  def eulerian_number(n, m) do
+      
+      CacheAgent.start_link(:eulerian_number)
+      
+      if CacheAgent.has?(:eulerian_number, {n, m}) do
+          CacheAgent.get(:eulerian_number, {n, m})
+      else
+          # We use the recursive definition so we can take advantage of caching
+          # A(n, m) = (n - m) * A(n - 1, m - 1) + (m + 1) * A(n - 1, m)      
+          e_n = (n - m) * eulerian_number(n - 1, m - 1) + (m + 1) * eulerian_number(n - 1, m)
+          
+          # cache and return
+          CacheAgent.put(:eulerian_number, {n, m}, e_n)
+          e_n
+      end
+      
   end
   
   @doc """
