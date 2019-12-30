@@ -20,7 +20,9 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000105 - Number of free polyominoes (or square animals) with n cells](https://oeis.org/A000105) - `:a000105` - `create_sequence_a000105/1`
    - [A000108 - Catalan numbers: C(n), Also called Segner numbers.](https://oeis.org/A000108) - `:a000108` - `create_sequence_a000108/1`
    - [A000109 - Number of simplicial polyhedra with n nodes](https://oeis.org/A000109) - `:a000109` - `create_sequence_a000109/1`
+   - [A000111 - Euler or up/down numbers](https://oeis.org/A000111) - `:a000111` - `create_sequence_a000111/1`
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
+   - [A000142 - Factorial numbers: n! = 1*2*3*4*...*n ](https://oeis.org/A000142) - `:a000142` - `create_sequence_a000142/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
    - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
    - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
@@ -55,6 +57,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
+
 
 
 
@@ -650,6 +653,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000111` - Euler or up/down numbers: e.g.f. sec(x) + tan(x). Also for n >= 2, half the number of alternating permutations on n letters (A001250).
+
+  From [OEIS A000111](https://oeis.org/A000111):
+
+  > Euler or up/down numbers: e.g.f. sec(x) + tan(x). Also for n >= 2, half the number of alternating permutations on n letters (A001250).
+  > (Formerly M1492 N0587)
+
+  **Sequence IDs**: `:a000111` 
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000111) |> Sequence.take!(27)
+      [1,1,1,2,5,16,61,272,1385,7936,50521,353792,2702765,22368256,199360981,1903757312,19391512145,209865342976,2404879675441,29088885112832,370371188237525,4951498053124096,69348874393137901,1015423886506852352,15514534163557086905,246921480190207983616,4087072509293123892361]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Euler or up/down numbers: e.g.f. sec(x) + tan(x). Also for n >= 2, half the number of alternating permutations on n letters (A001250).",
+       references: [{:oeis, :a000111, "https://oeis.org/A000111"}]
+  def create_sequence_a000111(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000111/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000111(idx) do
+      Math.euler_zig_zag(idx)
+  end
+
+  @doc """
   OEIS Sequence `A000112` - Number of partially ordered sets ("posets") with n unlabeled elements.
 
   From [OEIS A000112](https://oeis.org/A000112):
@@ -675,6 +712,40 @@ defmodule Chunky.Sequence.OEIS.Core do
        references: [{:oeis, :a000112, "https://oeis.org/A000112"}]
   def create_sequence_a000112(_opts) do
           sequence_for_list(@data_a000112)
+  end
+
+  @doc """
+  OEIS Sequence `A000142` - Factorial numbers: n! = 1*2*3*4*...*n
+
+  From [OEIS A000142](https://oeis.org/A000142):
+
+  > Factorial numbers: n! = 1*2*3*4*...*n (order of symmetric group S_n, number of permutations of n letters).
+  > (Formerly M1675 N0659)
+
+  **Sequence IDs**: `:a000142`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000142) |> Sequence.take!(23)
+      [1,1,2,6,24,120,720,5040,40320,362880,3628800,39916800,479001600,6227020800,87178291200,1307674368000,20922789888000,355687428096000,6402373705728000,121645100408832000,2432902008176640000,51090942171709440000,1124000727777607680000]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Factorial numbers: n! = 1*2*3*4*...*n",
+       references: [{:oeis, :a000142, "https://oeis.org/A000142"}]
+  def create_sequence_a000142(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000142/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000142(idx) do
+      Math.factorial(idx)
   end
 
   @doc """
