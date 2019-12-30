@@ -1,17 +1,24 @@
 defmodule Chunky.Math do
   @moduledoc """
-  Extended integer and float mathematical functions and operations.
-
+  Integer math, number theory, factorization, prime numbers, and numerical analysis predicates.
+  
+  
   ## Modular Arithmetic
-
+  
+  Pure integer operations for Modular Arithmetic.
+  
    - `pow/3` - Integer power in modular exponentiation
 
   ## Integer Arithmetic
+  
+  Arithmetic functions for pure integer operations.
 
    - `pow/2` - Integer exponentiation
    - `factorial/1` - Factorial (`n!`) of `n`
 
   ## Factorization and Divisors
+  
+  Work with divisors and prime factors.
 
    - `factors/1` - All divisors for an integer
    - `is_power_of?/2` - Is `n` a power of `m`?
@@ -22,12 +29,18 @@ defmodule Chunky.Math do
 
   ## Primes
   
+  Analyze, test, and generate prime numbers.
+  
    - `greatest_prime_factor/1` - Find the largest prime factor of `n`
    - `least_prime_factor/1` - Find the smallest prime factor of `n`
    - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
    - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
   
   ## Predicates
+  
+  Assess integers using _predicate_ functions. Every predicate function takes a single
+  integer, and returns a boolean. These predicates span all areas of integer math, from
+  number theory, to factorization and primes, to combinatorics and beyond.
   
    - `is_abundant?/1` - Test if an integer is _abundant_
    - `is_achilles_number?/1` - Is `n` an Achilles Number?
@@ -47,6 +60,8 @@ defmodule Chunky.Math do
 
 
   ## Number Theory
+  
+  Functions related to [Number Theory](https://en.wikipedia.org/wiki/Number_theory) operations over the integers.
   
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
@@ -68,6 +83,8 @@ defmodule Chunky.Math do
 
   ## Combinatorics
   
+  Functions dealing with [Combinatorics](https://en.wikipedia.org/wiki/Combinatorics), permutation calculations, and related topics.
+  
    - `binomial/2` - Compute the binomial coefficient over `(n k)`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
    - `eulerian_number/2` - `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` elements are greater than the previous element
@@ -77,10 +94,14 @@ defmodule Chunky.Math do
   
   ## Graph Theory
   
+  Analyze numbers related to graph theory and trees.
+  
    - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes.
   
   
   ## Fractals
+  
+  Integer fractals, and related number sets.
   
    - `start_kolakoski_sequence/1` - Initialize the structure for a Kolakoski sequence
    - `extend_kolakoski_sequence/1` - Extend a Kolakoski sequence by one iteration
@@ -88,16 +109,22 @@ defmodule Chunky.Math do
   
   
   ## Abstract Algebra
+  
+  Functions, numbers, and set counting related to [Abstract Algebra](https://en.wikipedia.org/wiki/Abstract_algebra).
 
    - `abelian_group_count/1` - Number of Abelian groups of order `n`
 
   
   ## Differential Topology
   
+  Manifolds, differential geometry, and [differential topology](https://en.wikipedia.org/wiki/Differential_topology) functions.
+  
    - `hurwitz_radon_number/1` - Calculate the Hurwitz-Radon number for `n`
 
   
   ## Cryptography
+  
+  Functions related to cryptographc analysis, factorization in cryptography, and numeric constructions.
 
    - `is_b_smooth?/2` - Is `n` prime factor smooth up to `b` - all prime factors <= `b`  
    - `is_3_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 3)`
@@ -110,6 +137,8 @@ defmodule Chunky.Math do
    - `is_23_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 23)`
 
   ## Number Generation
+  
+  Number sequence iteration functions used by the `Chunky.Sequence` library.
 
    - `next_abundant/1` - Find the next abundant number after `n`
    - `next_deficient/1` - Find the next deficient number after `n`
