@@ -36,7 +36,7 @@
 ## Finding Sequences to work on
 
 ```elixir
-OEIS.missing_sequences(OEIS, :keyword_core_mult)
+OEIS.missing_sequences(OEIS, :keyword_core_easy) |> Enum.sort()
 ```
 
 ## Timing things
@@ -67,6 +67,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   
     
  - Additions
+  - generalize the Kolakowski sequence functions to any alphabet
   - add Sigma-21 through 24
   - add 5^n through 48^n
   - p-adic groups

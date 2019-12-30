@@ -74,9 +74,18 @@ defmodule Chunky.Math do
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
   
+  
   ## Graph Theory
   
    - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes.
+  
+  
+  ## Fractals
+  
+   - `start_kolakoski_sequence/1` - Initialize the structure for a Kolakoski sequence
+   - `extend_kolakoski_sequence/1` - Extend a Kolakoski sequence by one iteration
+   - `extend_kolakoski_sequence_to_length/2` - Extend a Kolakoski sequence to be _at least_ the given length
+  
   
   ## Abstract Algebra
 
@@ -977,6 +986,104 @@ defmodule Chunky.Math do
     Math.pow(n, k)
     |> Fraction.multiply(c_f)
     |> Fraction.get_whole()
+  end
+  
+  @doc """
+  Create a Kolakoski Sequence over the default alphabet of [1, 2]. 
+  
+  A [Kolakoski Sequence](https://en.wikipedia.org/wiki/Kolakoski_sequence) is a self-describing, **Run Length Encoding**
+  over a specific alphabet of integers. The first values of the sequence are:
+  
+  ```
+  1,2,2,1,1,2,1,2,2,1,2,...
+  ```
+  
+  In the OEIS catalog, this is sequence [A000002](https://oeis.org/A000002).
+  
+  This sequence, unlike most others, does not extend by a single value at a time, rather by a length
+  related to the size of the alphabet. 
+  
+  See also `extend_kolakoski_sequence/1` and `extend_kolakoski_sequence_to_size/2` for ways to
+  work with the sequence. The data returned by this function, and the other Kolakoski
+  functions, carries the calculated sequence, the iteration number, and the alphabet, all of which
+  are required for generating new values for the sequence.
+  
+  See also `Chunky.Sequence.OEIS.Core` and the `A000002` sequence.
+  
+  ## Examples
+  
+      iex> Math.start_kolakoski_sequence()
+      {[], 0, {1, 2}}
+  
+      iex> Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence()
+      {[1], 1, {1, 2}}
+  
+      iex> Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence_to_length(20)
+      {[1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2, 2, 1], 13, {1, 2}}
+  
+  """
+  def start_kolakoski_sequence(alphabet \\ {1, 2}) do
+     {[], 0, alphabet} 
+  end
+  
+  @doc """
+  Extend a Kolakoski sequence by one iteration.
+  
+  Each iteration of the sequence will add one, or more, elements to the sequence.
+  
+  See `start_kolakoski_sequence/1` and `extend_kolakoski_sequence_to_length/2`.
+  
+  ## Examples
+  
+      iex> Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence()
+      {[1], 1, {1, 2}}
+  
+  """
+  def extend_kolakoski_sequence({[], 0, alphabet}), do: {[1], 1, alphabet}
+  def extend_kolakoski_sequence({[1], 1, alphabet}), do: {[1, 2, 2], 2, alphabet}
+  def extend_kolakoski_sequence({seq, iter, alphabet}) when is_list(seq) and is_integer(iter) do
+      
+      xi = Enum.at(seq, iter)
+      
+      if Integer.is_odd(iter + 1) do
+          # outputs 1's 
+          {seq ++ repeat(1, xi), iter + 1, alphabet}
+      else
+          # outputs 2's
+          {seq ++ repeat(2, xi), iter + 1, alphabet}
+      end
+      
+  end
+  
+  @doc """
+  Extend a Kolakoski sequence by successive iterations until the sequence is _at least_
+  the given length.
+  
+  As each iteration of the sequence will add one _or more_ elements to the sequence, the
+  best guarantee that can be made is that the newly extended sequence will have _at least_
+  a certain number of elements.
+  
+  ## Examples
+  
+      iex> Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence_to_length(23)
+      {[1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 1], 15, {1, 2}}
+  
+      iex> {seq, _, _} = Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence_to_length(26)
+      iex> length(seq)
+      27
+  
+  """
+  def extend_kolakoski_sequence_to_length({seq, _, _}=k_seq, size) when is_integer(size) do
+     if length(seq) >= size do
+         k_seq 
+     else
+         k_seq |> extend_kolakoski_sequence() |> extend_kolakoski_sequence_to_length(size)
+     end
+  end
+  
+  defp repeat(n, 1), do: [n]
+  defp repeat(n, c) do
+      [n] ++ repeat(n, c - 1)
   end
 
   @doc """

@@ -3,7 +3,33 @@ defmodule Chunky.MathTest do
 
   alias Chunky.Math
   doctest Chunky.Math
-
+    
+  describe "kolakoski sequences" do
+         
+      test "start_kolakoski_sequence/1" do
+          assert Math.start_kolakoski_sequence() == {[], 0, {1, 2}}
+      end
+      
+      test "extend_kolakoski_sequence/1" do
+          
+          assert Math.start_kolakoski_sequence() 
+          |> Math.extend_kolakoski_sequence() == {[1], 1, {1, 2}}
+          
+          assert Math.start_kolakoski_sequence() 
+          |> Math.extend_kolakoski_sequence() 
+          |> Math.extend_kolakoski_sequence() == {[1, 2, 2], 2, {1, 2}}
+          
+          assert Math.start_kolakoski_sequence() 
+          |> Math.extend_kolakoski_sequence() 
+          |> Math.extend_kolakoski_sequence() 
+          |> Math.extend_kolakoski_sequence() == {[1, 2, 2, 1, 1], 3, {1, 2}}
+      end
+      
+      test "extend_kolakoski_sequence_to_length/2" do
+          assert Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence_to_length(30) == {[1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 1, 1, 2], 20, {1, 2}}
+      end
+  end
+  
   describe "triangle_position_for_element/1" do
       test "test values" do
           ns = [1, 2, 9, 19]
