@@ -62,6 +62,9 @@ defmodule Chunky.Math do
    - `sigma/2` - Generalized Sigma function for integers
    - `totient/1` - Calculate Euler's totient for `n`
 
+  ## Graph Theory
+  
+   - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes.
   
   ## Abstract Algebra
 
@@ -245,6 +248,85 @@ defmodule Chunky.Math do
     length(facs) == 3 && length(Enum.uniq(facs)) == 3
   end
   
+  @doc """
+  The number of unlabeled, or planted, trees with `n` nodes.
+  
+  Alternative definitions:
+  
+   - Sometimes called [Polya Trees](https://projecteuclid.org/download/pdfview_1/euclid.cbms/1362163749)
+   - Number of ways of arranging n-1 nonoverlapping circles
+   - Number of connected multigraphs of order n without cycles except for one loop
+  
+  This function is _highly_ recursive, and in this implementation uses a cache
+  to increase efficiency.
+  
+  ## Examples
+  
+      iex> Math.rooted_tree_count(2)
+      1
+  
+      iex> Math.rooted_tree_count(21)
+      35221832
+  
+      iex> Math.rooted_tree_count(53)
+      10078062032127180323468
+  
+      iex> Math.rooted_tree_count(150)
+      9550651408538850116424040916940356193332141892140610711711231180087
+  """
+  def rooted_tree_count(n) when is_integer(n) and n >= 0 and n < 2, do: n
+  def rooted_tree_count(n) when is_integer(n) and n >= 2 do
+
+      # def a(n):
+      #     if n < 2: return n
+      #     return add(
+      #         add( d * a(d) for d in divisors(j) )
+      #         * a(n-j) for j in (1..n-1)
+      #     ) / (n - 1)
+      #  ref: sage version via [Peter Luschny](https://oeis.org/wiki/User:Peter_Luschny)
+
+      CacheAgent.start_link(:rooted_tree_count)
+      
+      if CacheAgent.has?(:rooted_tree_count, n) do
+         CacheAgent.get(:rooted_tree_count, n) 
+      else
+          
+          # iterate up to n - 1
+          part_a = 1..n-1
+
+          |> Enum.map(
+              fn j -> 
+              
+                  # iterate divisors of j
+                  inner = factors(j)
+                  |> Enum.map(
+                      fn d -> 
+                          d * rooted_tree_count(d)
+                      end
+                  )
+              
+                  # add result of d in divisors(j)
+                  |> Enum.sum() 
+              
+                  # tail tree count term with (n - j)
+                  inner * rooted_tree_count(n - j)
+              
+              end
+          )
+      
+          # add result of j in (1..n-1)
+          |> Enum.sum()
+      
+          # final division
+          ans = div(part_a, n - 1)
+          
+          # cache and return
+          CacheAgent.put(:rooted_tree_count, n, ans)
+          ans
+          
+      end
+
+  end
   
   @doc """
   Determine if `n` is a value of the form `mx + b` or `mk + b`, for specific

@@ -4,6 +4,18 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "rooted_tree_count/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 43, 100, 220]
+          os = [1, 1, 286, 4688676, 271097737169671824, 51384328351659326880337136395054298255277970, 4757010736205951296379181392778931809047934415149223874825669806143414483354636665310702400385569088]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.rooted_tree_count(n) == o
+          end)
+      end
+  end
+  
   describe "hurwitz_radon_number/1" do
       test "value tests" do
           ns = [1, 2, 9, 19, 100, 220, 4444, 10000]

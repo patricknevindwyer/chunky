@@ -16,6 +16,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
+   - [A000081 - Number of unlabeled rooted trees with n nodes](https://oeis.org/A000081) - `:a000081` - `create_sequence_a000081/1`
    - [A000105 - Number of free polyominoes (or square animals) with n cells](https://oeis.org/A000105) - `:a000105` - `create_sequence_a000105/1`
    - [A000109 - Number of simplicial polyhedra with n nodes](https://oeis.org/A000109) - `:a000109` - `create_sequence_a000109/1`
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
@@ -518,6 +519,40 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   def seq_a000079(idx) do
     :math.pow(2, idx) |> Kernel.trunc()
+  end
+
+  @doc """
+  OEIS Sequence `A000081` - Number of unlabeled rooted trees with n nodes
+
+  From [OEIS A000081](https://oeis.org/A000081):
+
+  > Number of unlabeled rooted trees with n nodes (or connected functions with a fixed point).
+  > (Formerly M1180 N0454)
+
+  **Sequence IDs**: `:a000081`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000081) |> Sequence.take!(31)
+      [0,1,1,2,4,9,20,48,115,286,719,1842,4766,12486,32973,87811,235381,634847,1721159,4688676,12826228,35221832,97055181,268282855,743724984,2067174645,5759636510,16083734329,45007066269,126186554308,354426847597]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of unlabeled rooted trees with n nodes",
+       references: [{:oeis, :a000081, "https://oeis.org/A000081"}]
+  def create_sequence_a000081(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000081/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000081(idx) do
+      Math.rooted_tree_count(idx)
   end
 
   @doc """
