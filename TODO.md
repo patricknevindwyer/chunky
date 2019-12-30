@@ -65,6 +65,8 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  - Documentation Updates
   - break out predicate functions in Math
   
+ - macros
+  - develop a macro for wrapping the "start, check, store in Cache"
     
  - Additions
   - generalize the Kolakowski sequence functions to any alphabet

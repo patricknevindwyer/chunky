@@ -68,6 +68,7 @@ defmodule Chunky.Math do
    - `divisors_of_form_mx_plus_b/3` - Divisors of `n` that conform to values of `mx + b`
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
+   - `lucas_number/1` - Find the `n`-th Lucas Number
    - `mobius_function/1` - Classical Mobius Function
    - `omega/1` - Omega function - count of distinct primes
    - `partition_count/1` - Number of ways to partition `n` into sums
@@ -606,6 +607,39 @@ defmodule Chunky.Math do
   def is_sphenic_number?(n) when is_integer(n) and n > 0 do
     facs = Math.prime_factors(n) -- [1]
     length(facs) == 3 && length(Enum.uniq(facs)) == 3
+  end
+  
+  @doc """
+  Find the `n`-th Lucas Number.
+  
+  The Lucas Number is a recursive sequence, similar to the Fibonacci sequence, with alternative
+  starting values. The successive values in the Lucas sequence form a ratio that approaches the Golden Ratio.
+  
+  This implementation uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.lucas_number(4)
+      7
+      
+      iex> Math.lucas_number(203)
+      2657608295638762232902023676028758508503879
+  
+  """
+  def lucas_number(0), do: 2
+  def lucas_number(1), do: 1
+  def lucas_number(n) when is_integer(n) and n > 1 do
+      
+      CacheAgent.start_link(:lucas_number)
+      
+      if CacheAgent.has?(:lucas_number, n) do
+          CacheAgent.get(:lucas_number, n)
+      else
+          ln = lucas_number(n - 1) + lucas_number(n - 2)
+          CacheAgent.put(:lucas_number, n, ln)
+          ln
+      end
+
   end
   
   @doc """
