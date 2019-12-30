@@ -25,6 +25,10 @@
   - partition_count/1 - Recursive (and cached) Partition Function for `n`
   - abelian_group_count/1 - Number of Abelian groups of order `n`
   - p_adic_valuation/2 - The _p-adic_ valuation function (for prime `p` and integer `n`)
+  - rooted_tree_count/1 - Rooted trees of N nodes
+  - is_of_form_mx_plus_b/3 - Does number have form `mx + b` for strict values of `m` and `b`?
+  - divisors_of_form_mx_plus_b/3 - Find divisors of `n` that are of form `mx + b`
+  - hurwitz_radon_number - find the hurwitz-radon number of `n`
   
   
 ### New Sequences
