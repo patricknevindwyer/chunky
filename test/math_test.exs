@@ -4,6 +4,42 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "bell_number/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 34, 100, 147]
+          os = [1, 2, 15, 678570, 21195039388640360462388656799, 47585391276764833658790768841387207826363669686825611466616334637559114497892442622672724044217756306953557882560751, 105156800343983010552547656344945491574041280244184432430133843554686245715459827371093731289128542228165675393103402951288190918619357951493545423343641404314554745774904879716269578343285]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.bell_number(n) == o
+          end)                
+      end
+  end
+  
+  describe "involutions_count/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 10, 34, 100, 147]
+          os = [1, 2, 10, 9496, 881687990282453393920, 24053347438333478953622433243028232812964119825419485684849162710512551427284402176, 2475448358774062960868863450602202717975845052092209591546502999631342824778997697905916546469257102103646243105102706951299019046912]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.involutions_count(n) == o
+          end)                
+      end
+  end
+  
+  describe "is_odious_number?/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 12345, 987654321, 987654323]
+          os = [true, true, false, true, false, true, false]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.is_odious_number?(n) == o
+          end)                
+      end    
+  end
+  
   describe "is_prime_fast?/1" do
       test "value tests" do
           ns = [1, 2, 9, 19, 123456789, 987654321, 987654323]

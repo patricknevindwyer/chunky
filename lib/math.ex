@@ -49,12 +49,14 @@ defmodule Chunky.Math do
    - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
+   - `is_odious_number?/1` - Does binary expansion of `n` have odd number of `1`s?
    - `is_perfect?/1` - Test if an integer is _perfect_
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_perfect_power?/1` - Is `n` a perfect power?
    - `is_perfect_square?/1` - Is `n` a perfect square?
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `is_prime?/1` - Test if an integer is prime
+   - `is_prime_fast?/1` - Alternative prime test, faster in specific cases of `n`
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
    - `is_squarefree?/1` - Are any factors of `n` perfect squares?
 
@@ -86,10 +88,12 @@ defmodule Chunky.Math do
   
   Functions dealing with [Combinatorics](https://en.wikipedia.org/wiki/Combinatorics), permutation calculations, and related topics.
   
+   - `bell_number/1` - Compute the number of partitions of a set of size `n`
    - `binomial/2` - Compute the binomial coefficient over `(n k)`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
    - `eulerian_number/2` - `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` elements are greater than the previous element
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
+   - `involutions_count/1` - Number of self-inverse permutations of `n` elements
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
   
   
@@ -473,6 +477,49 @@ defmodule Chunky.Math do
       
       # n! / (k! * (n - k)!)
       div(factorial(n), (factorial(k) * factorial(n - k)))
+  end
+  
+  @doc """
+  Calculate the Bell Number of `n`, or the number of possible partitions of a set of size `n`.
+  
+  This function implementation relies on caching for efficiency.
+  
+  ## Examples
+  
+      iex> Math.bell_number(3)
+      5
+
+      iex> Math.bell_number(10)
+      115975
+
+      iex> Math.bell_number(15)
+      1382958545
+
+      iex> Math.bell_number(35)
+      281600203019560266563340426570
+  
+  """
+  def bell_number(0), do: 1
+  def bell_number(1), do: 1
+  def bell_number(n) when is_integer(n) and n > 1 do
+     # a(n+1) = Sum_{k=0..n} a(k)*binomial(n, k)  
+     CacheAgent.start_link(:bell_number)
+     
+     if CacheAgent.has?(:bell_number, n) do
+         CacheAgent.get(:bell_number, n)
+     else
+         
+         b_n = 0..n - 1
+         |> Enum.map(
+             fn k -> 
+                 bell_number(k) * binomial(n - 1, k)
+             end
+         )
+         |> Enum.sum()
+         
+         CacheAgent.put(:bell_number, n, b_n)
+         b_n
+     end
   end
   
   @doc """
@@ -2055,6 +2102,76 @@ defmodule Chunky.Math do
   def is_arithmetic_number?(n) when is_integer(n) and n > 0 do
     divs = Math.factors(n)
     rem(divs |> Enum.sum(), length(divs)) == 0
+  end
+  
+  @doc """
+  Odious numbers have an odd number of `1`s in their binary expansion.
+  
+  See definition on [MathWorld](http://mathworld.wolfram.com/OdiousNumber.html) or [Wikipedia](https://en.wikipedia.org/wiki/Odious_number).
+  
+  ## Examples
+  
+      iex> Math.is_odious_number?(2)
+      true
+
+      iex> Math.is_odious_number?(37)
+      true
+
+      iex> Math.is_odious_number?(144)
+      false
+
+      iex> Math.is_odious_number?(280)
+      true
+
+      iex> Math.is_odious_number?(19897)
+      true
+  
+  """
+  def is_odious_number?(i) when is_integer(i) and i > 0 do
+     ones = i
+     |> Integer.digits(2)
+     |> Enum.filter(fn d -> d == 1 end)
+     |> Enum.sum() 
+     
+     rem(ones, 2) == 1
+  end
+  
+  @doc """
+  Find the number of involutions, or self-inverse permutations, on `n` elements.
+  
+  Also known as [Permutation Involution](http://mathworld.wolfram.com/PermutationInvolution.html).
+  
+  This implementation is based on a recursive calculation, and so uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.involutions_count(1)
+      1
+
+      iex> Math.involutions_count(10)
+      9496
+
+      iex> Math.involutions_count(100)
+      24053347438333478953622433243028232812964119825419485684849162710512551427284402176
+
+      iex> Math.involutions_count(234)
+      60000243887036070789348415368171135887062020098670503272477698436854394126572492217644586010812169497365274140196122299728842304082915845220986966530354668079910372211697866503760297656388279100434472952800147699927974040547172024320
+  
+  
+  """
+  def involutions_count(0), do: 1
+  def involutions_count(1), do: 1
+  def involutions_count(n) when n > 1 do
+     # a(n) = a(n-1) + (n-1)*a(n-2), n>1.
+     CacheAgent.start_link(:involutions_count)
+     
+     if CacheAgent.has?(:involutions_count, n) do
+         CacheAgent.get(:involutions_count, n)
+     else
+        a_n = involutions_count(n - 1) + (n - 1) * involutions_count(n - 2) 
+        CacheAgent.put(:involutions_count, n, a_n)
+        a_n
+     end
   end
 
   @doc """

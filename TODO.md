@@ -44,7 +44,7 @@ OEIS.missing_sequences(OEIS, :keyword_core_easy) |> Enum.sort()
 ```elixir
 alias Chunky.Math
 st = Time.utc_now()
-Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000040) |> Sequence.take!(50000)
+Math.is_prime?(lp)
 ed = Time.utc_now()
 Time.diff(ed, st, :millisecond)
 
@@ -73,7 +73,8 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   
  - macros
   - develop a macro for wrapping the "start, check, store in Cache"
-    
+  - we're not really using caches right - we aren't rooting the Agent in a supervisor structure, so it isn't seeing data across processes
+  
  - Additions
   - generalize the Kolakowski sequence functions to any alphabet
   - add Sigma-21 through 24

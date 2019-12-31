@@ -18,11 +18,14 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000040 - The prime numbers.](https://oeis.org/A000040) - `:a000040` - `create_sequence_a000040/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
+   - [A000069 - Odious numbers: numbers with an odd number of 1's in their binary expansion](https://oeis.org/A000069) - `:a000069` - `create_sequence_a000069/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000081 - Number of unlabeled rooted trees with n nodes](https://oeis.org/A000081) - `:a000081` - `create_sequence_a000081/1`
+   - [A000085 - Number of self-inverse permutations on n letters, also known as involutions](https://oeis.org/A000085) - `:a000085` - `create_sequence_a000085/1`
    - [A000105 - Number of free polyominoes (or square animals) with n cells](https://oeis.org/A000105) - `:a000105` - `create_sequence_a000105/1`
    - [A000108 - Catalan numbers: C(n), Also called Segner numbers.](https://oeis.org/A000108) - `:a000108` - `create_sequence_a000108/1`
    - [A000109 - Number of simplicial polyhedra with n nodes](https://oeis.org/A000109) - `:a000109` - `create_sequence_a000109/1`
+   - [A000110 - Bell or exponential numbers: number of ways to partition a set of n labeled elements](https://oeis.org/A000110) - `:a000110` - `create_sequence_a000110/1`
    - [A000111 - Euler or up/down numbers](https://oeis.org/A000111) - `:a000111` - `create_sequence_a000111/1`
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
    - [A000142 - Factorial numbers: n! = 1*2*3*4*...*n ](https://oeis.org/A000142) - `:a000142` - `create_sequence_a000142/1`
@@ -636,6 +639,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000069` - Odious numbers: numbers with an odd number of 1's in their binary expansion.
+
+  From [OEIS A000069](https://oeis.org/A000069):
+
+  > Odious numbers: numbers with an odd number of 1's in their binary expansion.
+  > (Formerly M1031 N0388)
+
+  **Sequence IDs**: `:a000069`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000069) |> Sequence.take!(65)
+      [1,2,4,7,8,11,13,14,16,19,21,22,25,26,28,31,32,35,37,38,41,42,44,47,49,50,52,55,56,59,61,62,64,67,69,70,73,74,76,79,81,82,84,87,88,91,93,94,97,98,100,103,104,107,109,110,112,115,117,118,121,122,124,127,128]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Odious numbers: numbers with an odd number of 1's in their binary expansion.",
+       references: [{:oeis, :a000069, "https://oeis.org/A000069"}]
+  def create_sequence_a000069(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000069/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a000069(_idx, last) do
+      Math.next_number(&Math.is_odious_number?/1, last)
+  end
+
+  @doc """
   OEIS Sequence `A000079` - Powers of 2 `a(n) = 2^n`
 
   From [OEIS A000009](https://oeis.org/A000009):
@@ -699,6 +736,40 @@ defmodule Chunky.Sequence.OEIS.Core do
       Math.rooted_tree_count(idx)
   end
 
+  @doc """
+  OEIS Sequence `A000085` - Number of self-inverse permutations on n letters, also known as involutions; number of standard Young tableaux with n cells.
+
+  From [OEIS A000085](https://oeis.org/A000085):
+
+  > Number of self-inverse permutations on n letters, also known as involutions; number of standard Young tableaux with n cells.
+  > (Formerly M1221 N0469)
+
+  **Sequence IDs**: `:a000085`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000085) |> Sequence.take!(28)
+      [1,1,2,4,10,26,76,232,764,2620,9496,35696,140152,568504,2390480,10349536,46206736,211799312,997313824,4809701440,23758664096,119952692896,618884638912,3257843882624,17492190577600,95680443760576,532985208200576,3020676745975552]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of self-inverse permutations on n letters, also known as involutions; number of standard Young tableaux with n cells.",
+       references: [{:oeis, :a000085, "https://oeis.org/A000085"}]
+  def create_sequence_a000085(_opts) do 
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000085/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000085(idx) do
+      Math.involutions_count(idx)
+  end
+  
   @doc """
   OEIS Sequence `A000105` - Number of free polyominoes (or square animals) with n cells.
 
@@ -789,6 +860,40 @@ defmodule Chunky.Sequence.OEIS.Core do
        references: [{:oeis, :a000109, "https://oeis.org/A000109"}]
   def create_sequence_a000109(_opts) do
           sequence_for_list(@data_a000109)
+  end
+
+  @doc """
+  OEIS Sequence `A000110` - Bell or exponential numbers: number of ways to partition a set of n labeled elements.
+
+  From [OEIS A000110](https://oeis.org/A000110):
+
+  > Bell or exponential numbers: number of ways to partition a set of n labeled elements.
+  > (Formerly M1484 N0585)
+
+  **Sequence IDs**: `:a000110`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000110) |> Sequence.take!(27)
+      [1,1,2,5,15,52,203,877,4140,21147,115975,678570,4213597,27644437,190899322,1382958545,10480142147,82864869804,682076806159,5832742205057,51724158235372,474869816156751,4506715738447323,44152005855084346,445958869294805289,4638590332229999353,49631246523618756274]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Bell or exponential numbers: number of ways to partition a set of n labeled elements.",
+       references: [{:oeis, :a000110, "https://oeis.org/A000110"}]
+  def create_sequence_a000110(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000110/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000110(idx) do
+      Math.bell_number(idx)
   end
 
   @doc """
