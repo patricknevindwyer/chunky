@@ -44,11 +44,17 @@ OEIS.missing_sequences(OEIS, :keyword_core_easy) |> Enum.sort()
 ```elixir
 alias Chunky.Math
 st = Time.utc_now()
-Math.wedderburn_etherington_number(30)
+Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000040) |> Sequence.take!(50000)
 ed = Time.utc_now()
 Time.diff(ed, st, :millisecond)
 
 ```
+
+
+50,000 with is_prime? - 29.874 seconds
+50,000 with is_prime_fast? /1000 cache - 26.993 seconds
+50,000 with is_prime_fast? /10,000 cache - 29.774 seconds
+50,000 with is_prime_fast? /100 cache
 
 ## Crawling Search
 

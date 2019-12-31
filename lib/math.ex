@@ -1985,7 +1985,56 @@ defmodule Chunky.Math do
       _ -> miller_rabin?(i, 40)
     end
   end
-
+  
+  @doc """
+  Determine if a positive integer is prime. 
+  
+  This function uses a cache of the first 100 primes as a first stage sieve and comparison set. In some
+  cases using this method will result in a speed up over using `is_prime?/1`:
+  
+   - For numbers < 542, `is_prime_fast?/1` is a MapSet membership check
+   - When iterating integers for prime candidates, `is_prime_fast?/1` can show an ~9% speed up over `is_prime?/1`
+  
+  In all cases, `is_prime_fast?/1` falls back to calling `is_prime?` and the Miller-Rabin primality test code
+  in cases where the prime cache cannot conclusively prove or disprove primality.
+  
+  ## Examples
+  
+      iex> 1299601 |> Math.is_prime_fast?()
+      true
+  
+      iex> 1237940039285380274899124225 |> Math.is_prime_fast?()
+      false
+  """
+  @first_primes_list [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157,163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241,251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347,349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439,443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541]
+  @first_primes_mapset MapSet.new(@first_primes_list)
+  def is_prime_fast?(i) when is_integer(i) and i < 2, do: false
+  def is_prime_fast?(2), do: true
+  def is_prime_fast?(i) when is_integer(i) and i > 2 and Integer.is_even(i), do: false
+  def is_prime_fast?(i) when is_integer(i) and i > 2 do
+     if i < 542 do
+        @first_primes_mapset |> MapSet.member?(i) 
+     else
+         # partial sieve, this is a fast reject sieve
+         if is_factored_by_first_primes?(@first_primes_list, i) do
+             false
+         else
+             # now miller rabin if we haven't bailed yet
+             is_prime?(i)
+         end
+     end
+  end
+  
+  defp is_factored_by_first_primes?([], _i), do: false
+  defp is_factored_by_first_primes?([h | rest], i) do
+     if rem(i, h) == 0 do
+         true
+     else
+         is_factored_by_first_primes?(rest, i)
+     end 
+  end
+  
+  
   @doc """
   Determine if an integer is an _arithmetic number_.
 
@@ -2419,12 +2468,12 @@ defmodule Chunky.Math do
       iex> Math.next_number(&Math.is_abundant?/1, 60)
       66
   """
-  def next_number(property_func, n)
+  def next_number(property_func, n, step \\ 1)
       when is_function(property_func, 1) and is_integer(n) and n >= 0 do
     if property_func.(n + 1) do
       n + 1
     else
-      next_number(property_func, n + 1)
+      next_number(property_func, n + 1, step)
     end
   end
 

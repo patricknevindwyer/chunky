@@ -4,6 +4,18 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "is_prime_fast?/1" do
+      test "value tests" do
+          ns = [1, 2, 9, 19, 123456789, 987654321, 987654323]
+          os = [false, true, false, true, false, false, true]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.is_prime_fast?(n) == o
+          end)                
+      end    
+  end
+  
   describe "lucas_number/1" do
       test "value tests" do
           ns = [1, 2, 9, 19, 200, 2000]

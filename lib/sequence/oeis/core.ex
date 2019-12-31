@@ -13,7 +13,9 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000010 - Euler's totient function](https://oeis.org/A000010) - `:a000010` - `create_sequence_a000010/1`
    - [A000012 - The simplest sequence of positive numbers: the all 1's sequence](https://oeis.org/A000012) - `:a000012` - `create_sequence_a000012/1`
    - [A000027 - The positive integers](https://oeis.org/A000027) - `:a000027` - `create_sequence_a000027/1`
+   - [A000032 - Lucas numbers beginning at 2](https://oeis.org/A000032) - `:a000032` - `create_sequence_a000032/1`
    - [A000035 - Period 2: repeat [0, 1]; a(n) = n mod 2](https://oeis.org/A000035) - `:a000035` - `create_sequence_a000035/1`
+   - [A000040 - The prime numbers.](https://oeis.org/A000040) - `:a000040` - `create_sequence_a000040/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
@@ -454,6 +456,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
   
   @doc """
+  OEIS Sequence `A000032` - Lucas numbers beginning at 2: L(n) = L(n-1) + L(n-2), L(0) = 2, L(1) = 1.
+
+  From [OEIS A000032](https://oeis.org/A000032):
+
+  > Lucas numbers beginning at 2: L(n) = L(n-1) + L(n-2), L(0) = 2, L(1) = 1.
+  > (Formerly M0155)
+
+  **Sequence IDs**: `:a000032`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000032) |> Sequence.take!(39)
+      [2,1,3,4,7,11,18,29,47,76,123,199,322,521,843,1364,2207,3571,5778,9349,15127,24476,39603,64079,103682,167761,271443,439204,710647,1149851,1860498,3010349,4870847,7881196,12752043,20633239,33385282,54018521,87403803]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Lucas numbers beginning at 2: L(n) = L(n-1) + L(n-2), L(0) = 2, L(1) = 1.",
+       references: [{:oeis, :a000032, "https://oeis.org/A000032"}]
+  def create_sequence_a000032(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000032/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000032(idx) do
+      Math.lucas_number(idx)
+  end
+  
+  @doc """
   OEIS Sequence `A000035` - Period 2: repeat [0, 1]
 
   From [OEIS A000035](https://oeis.org/A000035):
@@ -485,6 +521,49 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a000035(idx) do
       rem(idx, 2)
+  end
+  
+  @doc """
+  OEIS Sequence `A000040` - The prime numbers.
+
+  From [OEIS A000040](https://oeis.org/A000040):
+
+  > The prime numbers.
+  > (Formerly M0652 N0241)
+
+  **Sequence IDs**: `:a000040`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000040) |> Sequence.take!(58)
+      [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271]
+
+
+  """
+  @doc offset: 1,
+       sequence: "The prime numbers.",
+       references: [{:oeis, :a000040, "https://oeis.org/A000040"}]
+  def create_sequence_a000040(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000040/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a000040(idx, last) do
+    
+      case idx do
+         1 -> 2
+         
+         2 -> 3
+         
+         _ -> 
+             Math.next_number(&Math.is_prime_fast?/1, last, 2) 
+         
+      end
   end
   
   @doc """
