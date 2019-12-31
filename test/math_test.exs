@@ -4,6 +4,18 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "hamming_weight/1" do
+      test "value tests" do
+          ns = [{10, 2}, {10, 10}, {9999, 2}, {1234567890, 2}, {1234567890, 10}]
+          os = [2, 1, 8, 12, 9]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, b}, o} ->
+            assert Math.hamming_weight(n, b) == o
+          end)                
+      end
+  end
+  
   describe "bell_number/1" do
       test "value tests" do
           ns = [1, 2, 4, 11, 34, 100, 147]

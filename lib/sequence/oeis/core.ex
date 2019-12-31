@@ -28,6 +28,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000110 - Bell or exponential numbers: number of ways to partition a set of n labeled elements](https://oeis.org/A000110) - `:a000110` - `create_sequence_a000110/1`
    - [A000111 - Euler or up/down numbers](https://oeis.org/A000111) - `:a000111` - `create_sequence_a000111/1`
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
+   - [A000120 - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n)](https://oeis.org/A000120) - `:a000120` - `create_sequence_a000120/1`
    - [A000142 - Factorial numbers: n! = 1*2*3*4*...*n ](https://oeis.org/A000142) - `:a000142` - `create_sequence_a000142/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
    - [A000217 - Triangular numbers: a(n) = binomial(n+1,2)](https://oeis.org/A000217) - `:a000217` - `create_sequence_a000217/1`
@@ -956,6 +957,40 @@ defmodule Chunky.Sequence.OEIS.Core do
        references: [{:oeis, :a000112, "https://oeis.org/A000112"}]
   def create_sequence_a000112(_opts) do
           sequence_for_list(@data_a000112)
+  end
+
+  @doc """
+  OEIS Sequence `A000120` - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n).
+
+  From [OEIS A000120](https://oeis.org/A000120):
+
+  > 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n).
+  > (Formerly M0105 N0041)
+
+  **Sequence IDs**: `:a000120`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000120) |> Sequence.take!(105)
+      [0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,2,3,3,4,3,4,4,5,3]
+
+
+  """
+  @doc offset: 0,
+       sequence: "1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n).",
+       references: [{:oeis, :a000120, "https://oeis.org/A000120"}]
+  def create_sequence_a000120(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000120/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000120(idx) do 
+      Math.hamming_weight(idx)
   end
 
   @doc """

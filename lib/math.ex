@@ -68,6 +68,7 @@ defmodule Chunky.Math do
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
    - `divisors_of_form_mx_plus_b/3` - Divisors of `n` that conform to values of `mx + b`
+   - `hamming_weight/2` - Find the Hamming Weight, the count of digits not `0`, in different base representations of `n`
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
    - `lucas_number/1` - Find the `n`-th Lucas Number
@@ -2102,6 +2103,36 @@ defmodule Chunky.Math do
   def is_arithmetic_number?(n) when is_integer(n) and n > 0 do
     divs = Math.factors(n)
     rem(divs |> Enum.sum(), length(divs)) == 0
+  end
+  
+  @doc """
+  Find the Hamming Weight of `n` in a specific numeric base.
+  
+  By default, the Hamming Weight is calculated in Base 2.
+  
+  Hamming weight, binary weight, population count, or (in binary) bit summation, is the number of symbols
+  in a given base representation of an integer that _are not_ `0`. See [Hamming Weight](https://en.wikipedia.org/wiki/Hamming_weight).
+  
+  ## Examples
+  
+      iex> Math.hamming_weight(29)
+      4
+      
+      iex> Math.hamming_weight(29, 10)
+      2
+      
+      iex> Math.hamming_weight(100)
+      3
+  
+      iex> Math.hamming_weight(100, 10)
+      1
+  
+  """
+  def hamming_weight(n, base \\ 2) do
+     n
+     |> Integer.digits(base)
+     |> Enum.filter(fn d -> d != 0 end)
+     |> length() 
   end
   
   @doc """
