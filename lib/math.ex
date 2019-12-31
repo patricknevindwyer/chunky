@@ -76,6 +76,7 @@ defmodule Chunky.Math do
    - `omega/1` - Omega function - count of distinct primes
    - `partition_count/1` - Number of ways to partition `n` into sums
    - `p_adic_valuation/2` - The _p-adic_ valuation function (for prime `p` and integer `n`)
+   - `pell_number/1` - Find the `n`-th denominator in the infinite sequence of fractional approximations of `sqrt(2)`
    - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
    - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
    - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
@@ -92,9 +93,12 @@ defmodule Chunky.Math do
    - `bell_number/1` - Compute the number of partitions of a set of size `n`
    - `binomial/2` - Compute the binomial coefficient over `(n k)`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
+   - `derangement_count/1` - Number of derangements of set size `n`, or _subfactorial n_
    - `eulerian_number/2` - `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` elements are greater than the previous element
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
    - `involutions_count/1` - Number of self-inverse permutations of `n` elements
+   - `ordered_subsets_count/1` - Count the number of partitions of a set of size `n` into any number of ordered lists.
+   - `plane_partition_count/1` - Number of plane partitions with sum `n`
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
   
   
@@ -102,7 +106,9 @@ defmodule Chunky.Math do
   
   Analyze numbers related to graph theory and trees.
   
-   - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes.
+   - `labeled_rooted_forests_count/1` - Number of labeled, rooted forests with `n` nodes
+   - `labeled_rooted_trees_count/1` - Number of labeled, rooted trees with `n` nodes
+   - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes
   
   
   ## Fractals
@@ -155,7 +161,8 @@ defmodule Chunky.Math do
   alias Chunky.Math
   alias Chunky.Fraction
   alias Chunky.CacheAgent
-
+  require Chunky.CacheAgent
+  
   @rand_max Kernel.trunc(:math.pow(2, 63))
 
   @doc """
@@ -448,6 +455,70 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Count the maximum number of pieces that can be made from `n` cuts of a disk.
+  
+  Also called the Central Polygonal Numbers, Pizza Numbers, or the Lazy Caterer's Sequence.
+  
+  ## Examples
+  
+      iex> Math.pancake_cut_max(1)
+      2
+  
+      iex> Math.pancake_cut_max(3)
+      7
+
+      iex> Math.pancake_cut_max(7)
+      29
+
+      iex> Math.pancake_cut_max(24)
+      301
+      
+  """
+  def pancake_cut_max(n) do
+      div(n * n + n + 2, 2)
+  end
+  
+  @doc """
+  Count the number of partitions of a set into any number of ordered lists.
+  
+  Also known as the sum of all sizes of _k-subsets_ of original set of size `n`.
+  
+  This implementation is based on a recurrence relation:
+  
+  ```
+  A(n) = (2 * n - 1) * A(n - 1) - (n - 1) * (n - 2) * A(n - 2)
+  ```
+  
+  As this is a highly recursive relation, a cache is used for efficiency.
+  
+  ## Examples
+  
+      iex> Math.ordered_subsets_count(1)
+      1
+
+      iex> Math.ordered_subsets_count(3)
+      13
+
+      iex> Math.ordered_subsets_count(11)
+      824073141
+
+      iex> Math.ordered_subsets_count(30)
+      197987401295571718915006598239796851
+  
+  
+  """
+  def ordered_subsets_count(0), do: 1
+  def ordered_subsets_count(1), do: 1
+  def ordered_subsets_count(n) when is_integer(n) and n > 1 do
+  
+    # a(n) = (2*n-1)*a(n-1) - (n-1)*(n-2)*a(n-2).    
+    CacheAgent.cache_as(:ordered_subsets_count, n) do
+        (2 * n - 1) * ordered_subsets_count(n - 1) - (n - 1) * (n - 2) * ordered_subsets_count(n - 2)
+    end
+    
+  end
+  
+  @doc """
   Calculate the binomial coefficient (n k).
   
   The binomial coefficient function determines the coefficient on the `x^k` term in the polynomial expansion
@@ -521,6 +592,46 @@ defmodule Chunky.Math do
          CacheAgent.put(:bell_number, n, b_n)
          b_n
      end
+  end
+  
+  @doc """
+  Find the Pell Number for `n`.
+  
+  Pell numbers are an infinite sequence of integers that form the denominators of increasingly
+  accurate fractional representations of `sqrt(2)`. See [Pell Number](https://en.wikipedia.org/wiki/Pell_number) on
+  Wikipedia or [Pell Number](http://mathworld.wolfram.com/PellNumber.html) on MathWorld.
+  
+  Calculating the Pell numbers takes a similar recursive form to calculating the Fibonacci sequence:
+  
+  ```
+  Pell(n) = 2 * Pell(n - 1) + Pell(n - 2)
+  ```
+  
+  This implementation uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.pell_number(1)
+      1
+
+      iex> Math.pell_number(10)
+      2378
+
+      iex> Math.pell_number(67)
+      15646814150613670132332869
+
+      iex> Math.pell_number(123)
+      42644625325266431622582204734101084193553730205
+  
+  """
+  def pell_number(0), do: 0
+  def pell_number(1), do: 1
+  def pell_number(n) when is_integer(n) and n > 1 do
+      
+      CacheAgent.cache_as(:pell_number, n) do
+          2 * pell_number(n - 1) + pell_number(n - 2)          
+      end
+      
   end
   
   @doc """
@@ -688,6 +799,59 @@ defmodule Chunky.Math do
           ln
       end
 
+  end
+  
+  @doc """
+  Count the number of planar partitions with sum `n`.
+  
+  Via [Plane partition](https://en.wikipedia.org/wiki/Plane_partition):
+  
+  > in combinatorics, a plane partition is a two-dimensional array of nonnegative integers `π{i,j}`
+  > (with positive integer indices i and j) that is nonincreasing in both indices.
+  
+  The generalized formula for counting the number of plane partitions is
+  
+   ![Plane Partitions](https://wikimedia.org/api/rest_v1/media/math/render/svg/6a47dc6d5f1c5433e41e61d5a9c1c32301d8a0ad)
+  
+  This implementation uses the recurrence relationship:
+  
+  ```
+  PL(n) = sum{1..n:k} PL(n - k) * sigma-2(k)
+  ```
+  
+  As this is a deeply recursive recurrence, this implementation uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.plane_partition_count(1)
+      1
+
+      iex> Math.plane_partition_count(7)
+      86
+
+      iex> Math.plane_partition_count(13)
+      2485
+
+      iex> Math.plane_partition_count(34)
+      28175955
+  
+  """
+  def plane_partition_count(0), do: 1
+  def plane_partition_count(1), do: 1
+  def plane_partition_count(n) when is_integer(n) and n > 1 do
+      
+      # Working from the recurrence relation:
+      # a(n) = sum{1..n:k} a(n - k) * sigma(k, 2)
+      CacheAgent.cache_as(:plane_partition_count, n) do
+          a = 1..n
+          |> Enum.map(
+              fn k -> 
+                  plane_partition_count(n - k) * sigma(k, 2)
+              end
+          )
+          |> Enum.sum()
+          div(a, n)
+      end
   end
   
   @doc """
@@ -895,6 +1059,57 @@ defmodule Chunky.Math do
       )
       |> Enum.reduce(1, fn x, acc -> Fraction.multiply(x, acc) end)
       |> Fraction.get_whole()
+  end
+  
+  @doc """
+  Count the number of labeled, rooted trees with `n` nodes.
+  
+  A rooted tree will have exactly one path between any two nodes, and the total number of such
+  trees with `n` nodes is `n^(n - 1)`.
+  
+  ## Examples
+  
+      iex> Math.labeled_rooted_trees_count(1)
+      1
+
+      iex> Math.labeled_rooted_trees_count(5)
+      625
+
+      iex> Math.labeled_rooted_trees_count(17)
+      48661191875666868481
+
+      iex> Math.labeled_rooted_trees_count(29)
+      88540901833145211536614766025207452637361
+  
+  
+  """
+  def labeled_rooted_trees_count(n) when is_integer(n) and n > 0 do
+      Math.pow(n, n - 1)
+  end
+  
+  @doc """
+  Count the number of labeled, rooted forests with `n` nodes.
+  
+  A rooted forest will have _at most_ one path between any two nodes, and the total number of
+  such forets with `n` nodes is `(n + 1)^(n - 1)` (a generalization of the Cayley formula).
+  
+  ## Examples
+  
+      iex> Math.labeled_rooted_forests_count(1)
+      1
+    
+      iex> Math.labeled_rooted_forests_count(3)
+      16
+
+      iex> Math.labeled_rooted_forests_count(11)
+      61917364224
+
+      iex> Math.labeled_rooted_forests_count(32)
+      118558347188026655500106547231096910504441858017
+  
+  """
+  def labeled_rooted_forests_count(n) when is_integer(n) and n > 0 do
+      Math.pow(n + 1, n - 1)
   end
   
   @doc """
@@ -2165,6 +2380,34 @@ defmodule Chunky.Math do
      |> Enum.sum() 
      
      rem(ones, 2) == 1
+  end
+  
+  @doc """
+  Find the number of derangements of a set of size `n`.
+  
+  A derangement of a set is a permutation of the set, such that no element is in its original 
+  position. Also called the _subfactorial of n_, the _recontres number_, or _de Montmor_ number.
+  
+  This implementation uses the Euler recurrence, `a(n) = n * a(n - 1) + -1^n`.
+  
+  ## Examples
+  
+      iex> Math.derangement_count(1)
+      0
+
+      iex> Math.derangement_count(8)
+      14833
+
+      iex> Math.derangement_count(17)
+      130850092279664
+
+      iex> Math.derangement_count(134)
+      733162663744579191293964143415001307906325722892139819974619962654978249255036185299413091417144999745154783570225783145979302466795277487832988219926200862943908125847693470304687165754228414941338831577093697357593753008645129
+  
+  """
+  def derangement_count(0), do: 1
+  def derangement_count(n) when is_integer(n) and n > 0 do
+      n * derangement_count(n - 1) + Math.pow(-1, n)
   end
   
   @doc """

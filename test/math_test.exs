@@ -4,6 +4,90 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "ordered_subsets_count/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 29, 45]
+          os = [1, 3, 73, 824073141, 5628563759710900871382077742916173, 776245524984802767383175984672148286143987976321467492834141]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.ordered_subsets_count(n) == o
+          end)                
+      end            
+  end
+
+  describe "plane_partition_count/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 29, 100]
+          os = [1, 3, 13, 859, 3759612, 59206066030052023]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.plane_partition_count(n) == o
+          end)                
+      end            
+  end
+  
+  describe "labeled_rooted_trees_count/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 34, 100]
+          os = [1, 2, 64, 25937424601, 345783497216724000335707367685598692782880644399104, 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.labeled_rooted_trees_count(n) == o
+          end)                
+      end      
+  end
+  
+  describe "labeled_rooted_forests_count/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 34, 100]
+          os = [1, 3, 125, 61917364224, 900006121921754037511662394623272120952606201171875, 2678033494476758508185341297829238449186077606713864135534852523878318330996771563801441598363113456409263875004787765032797220611552796316638577448808416388296810715999386219563695959264034497519901]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.labeled_rooted_forests_count(n) == o
+          end)                
+      end      
+  end
+  
+  describe "derangement_count/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 34, 100, 147]
+          os = [0, 1, 9, 14684570, 108610077126170304674801654684367969729, 34332795984163804765195977526776142032365783805375784983543400282685180793327632432791396429850988990237345920155783984828001486412574060553756854137069878601, 6354182529461228439362627488637815690308570187502862289893858427824542236490821946255866597772954422697421757080919849848382395878829003118855732545163300007535700030711152156622841482633473711406810220556925471380221976041654127479763464570970969891058994]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.derangement_count(n) == o
+          end)                
+      end      
+  end
+  
+  describe "pell_number/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 34, 100, 147]
+          os = [1, 2, 12, 5741, 3654502875938, 66992092050551637663438906713182313772, 65536123822357661887786970118390510778951948386497100245]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.pell_number(n) == o
+          end)                
+      end      
+  end
+  
+  describe "pancake_cut_max/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 34, 100, 147]
+          os = [2, 4, 11, 67, 596, 5051, 10879]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.pancake_cut_max(n) == o
+          end)                
+      end
+  end
+  
   describe "hamming_weight/1" do
       test "value tests" do
           ns = [{10, 2}, {10, 10}, {9999, 2}, {1234567890, 2}, {1234567890, 10}]

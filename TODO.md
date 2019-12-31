@@ -72,7 +72,8 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - break out predicate functions in Math
   
  - macros
-  - develop a macro for wrapping the "start, check, store in Cache"
+  - update cache based functions to use CacheAgent.cache_as/3 macro
+  
   - we're not really using caches right - we aren't rooting the Agent in a supervisor structure, so it isn't seeing data across processes
   
  - Additions

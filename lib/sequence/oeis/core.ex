@@ -29,10 +29,18 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000111 - Euler or up/down numbers](https://oeis.org/A000111) - `:a000111` - `create_sequence_a000111/1`
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
    - [A000120 - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n)](https://oeis.org/A000120) - `:a000120` - `create_sequence_a000120/1`
+   - [A000124 - Central polygonal numbers (the Lazy Caterer's sequence)](https://oeis.org/A000124) - `:a000124` - `create_sequence_a000124/1`
+   - [A000129 - Pell numbers: a(n) = 2*a(n-1) + a(n-2)](https://oeis.org/A000129) - `:a000129` - `create_sequence_a000129/1`
    - [A000142 - Factorial numbers: n! = 1*2*3*4*...*n ](https://oeis.org/A000142) - `:a000142` - `create_sequence_a000142/1`
+   - [A000166 - Subfactorial or rencontres numbers, or derangements of `n`](https://oeis.org/A000166) - `:a000166` - `create_sequence_a000166/1`
+   - [A000169 - Number of labeled rooted trees with n nodes: n^(n-1)](https://oeis.org/A000169) - `:a000169` - `create_sequence_a000169/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
+   - [A000204 - Lucas numbers (beginning with 1)](https://oeis.org/A000204) - `:a000204` - `create_sequence_a000204/1`
    - [A000217 - Triangular numbers: a(n) = binomial(n+1,2)](https://oeis.org/A000217) - `:a000217` - `create_sequence_a000217/1`
+   - [A000219 - Number of planar partitions (or plane partitions) of n](https://oeis.org/A000219) - `:a000219` - `create_sequence_a000219/1`
+   - [A000225 - a(n) = 2^n - 1](https://oeis.org/A000225) - `:a000225` - `create_sequence_a000225/1`
    - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
+   - [A000262 - Number of "sets of lists"](https://oeis.org/A000262) - `:a000262` - `create_sequence_a000262/1`
    - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
    - [A000302 - Powers of 4: a(n) = 4^n](https://oeis.org/A000302) - `:a000302` - `create_sequence_a000302/1`
    - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
@@ -67,7 +75,6 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
-
 
 
 
@@ -994,6 +1001,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000124` - Central polygonal numbers (the Lazy Caterer's sequence): n(n+1)/2 + 1; or, maximal number of pieces formed when slicing a pancake with n cuts.
+
+  From [OEIS A000124](https://oeis.org/A000124):
+
+  > Central polygonal numbers (the Lazy Caterer's sequence): n(n+1)/2 + 1; or, maximal number of pieces formed when slicing a pancake with n cuts.
+  > (Formerly M1041 N0391)
+
+  **Sequence IDs**: `:a000124`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000124) |> Sequence.take!(53)
+      [1,2,4,7,11,16,22,29,37,46,56,67,79,92,106,121,137,154,172,191,211,232,254,277,301,326,352,379,407,436,466,497,529,562,596,631,667,704,742,781,821,862,904,947,991,1036,1082,1129,1177,1226,1276,1327,1379]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Central polygonal numbers (the Lazy Caterer's sequence): n(n+1)/2 + 1; or, maximal number of pieces formed when slicing a pancake with n cuts.",
+       references: [{:oeis, :a000124, "https://oeis.org/A000124"}]
+  def create_sequence_a000124(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000124/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000124(idx) do
+      Math.pancake_cut_max(idx)
+  end
+
+  @doc """
   OEIS Sequence `A000142` - Factorial numbers: n! = 1*2*3*4*...*n
 
   From [OEIS A000142](https://oeis.org/A000142):
@@ -1028,6 +1069,108 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000129` - Pell numbers: a(0) = 0, a(1) = 1; for n > 1, a(n) = 2*a(n-1) + a(n-2).
+
+  From [OEIS A000129](https://oeis.org/A000129):
+
+  > Pell numbers: a(0) = 0, a(1) = 1; for n > 1, a(n) = 2*a(n-1) + a(n-2).
+  > (Formerly M1413 N0552)
+
+  **Sequence IDs**: `:a000129`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000129) |> Sequence.take!(32)
+      [0,1,2,5,12,29,70,169,408,985,2378,5741,13860,33461,80782,195025,470832,1136689,2744210,6625109,15994428,38613965,93222358,225058681,543339720,1311738121,3166815962,7645370045,18457556052,44560482149,107578520350,259717522849]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Pell numbers: a(0) = 0, a(1) = 1; for n > 1, a(n) = 2*a(n-1) + a(n-2).",
+       references: [{:oeis, :a000129, "https://oeis.org/A000129"}] 
+  def create_sequence_a000129(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000129/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000129(idx) do
+      Math.pell_number(idx)
+  end
+  
+  @doc """
+  OEIS Sequence `A000166` - Subfactorial or rencontres numbers, or derangements: number of permutations of n elements with no fixed points.
+
+  From [OEIS A000166](https://oeis.org/A000166):
+
+  > Subfactorial or rencontres numbers, or derangements: number of permutations of n elements with no fixed points.
+  > (Formerly M1937 N0766)
+
+  **Sequence IDs**: `:a000166`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000166) |> Sequence.take!(24)
+      [1,0,1,2,9,44,265,1854,14833,133496,1334961,14684570,176214841,2290792932,32071101049,481066515734,7697064251745,130850092279664,2355301661033953,44750731559645106,895014631192902121,18795307255050944540,413496759611120779881,9510425471055777937262]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Subfactorial or rencontres numbers, or derangements: number of permutations of n elements with no fixed points.",
+       references: [{:oeis, :a000166, "https://oeis.org/A000166"}]
+  def create_sequence_a000166(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000166/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000166(idx) do
+      Math.derangement_count(idx)
+  end
+  
+  @doc """
+  OEIS Sequence `A000169` - Number of labeled rooted trees with n nodes: n^(n-1).
+
+  From [OEIS A000169](https://oeis.org/A000169):
+
+  > Number of labeled rooted trees with n nodes: n^(n-1).
+  > (Formerly M1946 N0771)
+
+  **Sequence IDs**: `:a000169`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000169) |> Sequence.take!(20)
+      [1,2,9,64,625,7776,117649,2097152,43046721,1000000000,25937424601,743008370688,23298085122481,793714773254144,29192926025390625,1152921504606846976,48661191875666868481,2185911559738696531968,104127350297911241532841,5242880000000000000000000]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of labeled rooted trees with n nodes: n^(n-1).",
+       references: [{:oeis, :a000169, "https://oeis.org/A000169"}]
+  def create_sequence_a000169(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000169/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a000169(idx) do
+      Math.labeled_rooted_trees_count(idx)
+  end
+  
+  @doc """
   OEIS Sequence `A000203` - Sum of Divisors `σ1(n)`
 
   From [OEIS A000203](https://oeis.org/A000203):
@@ -1056,6 +1199,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a000203(idx) do
     Math.sigma(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000204` - Lucas numbers (beginning with 1)
+
+  From [OEIS A000204](https://oeis.org/A000204):
+
+  > Lucas numbers (beginning with 1): L(n) = L(n-1) + L(n-2) with L(1) = 1, L(2) = 3.
+  > (Formerly M2341 N0924)
+
+  **Sequence IDs**: `:a000204`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000204) |> Sequence.take!(39)
+      [1,3,4,7,11,18,29,47,76,123,199,322,521,843,1364,2207,3571,5778,9349,15127,24476,39603,64079,103682,167761,271443,439204,710647,1149851,1860498,3010349,4870847,7881196,12752043,20633239,33385282,54018521,87403803,141422324]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Lucas numbers (beginning with 1)",
+       references: [{:oeis, :a000204, "https://oeis.org/A000204"}]
+  def create_sequence_a000204(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000204/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a000204(idx) do
+      Math.lucas_number(idx)
   end
 
   @doc """
@@ -1093,6 +1270,74 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000219` - Number of planar partitions (or plane partitions) of n.
+
+  From [OEIS A000219](https://oeis.org/A000219):
+
+  > Number of planar partitions (or plane partitions) of n.
+  > (Formerly M2566 N1016)
+
+  **Sequence IDs**: `:a000219`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000219) |> Sequence.take!(41)
+      [1,1,3,6,13,24,48,86,160,282,500,859,1479,2485,4167,6879,11297,18334,29601,47330,75278,118794,186475,290783,451194,696033,1068745,1632658,2483234,3759612,5668963,8512309,12733429,18974973,28175955,41691046,61484961,90379784,132441995,193487501,281846923]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of planar partitions (or plane partitions) of n.",
+       references: [{:oeis, :a000219, "https://oeis.org/A000219"}]
+  def create_sequence_a000219(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000219/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000219(idx) do
+      Math.plane_partition_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000225` - a(n) = 2^n - 1. (Sometimes called Mersenne numbers, although that name is usually reserved for A001348.)
+
+  From [OEIS A000225](https://oeis.org/A000225):
+
+  > a(n) = 2^n - 1. (Sometimes called Mersenne numbers, although that name is usually reserved for A001348.)
+  > (Formerly M2655 N1059)
+
+  **Sequence IDs**: `:a000225`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000225) |> Sequence.take!(33)
+      [0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767,65535,131071,262143,524287,1048575,2097151,4194303,8388607,16777215,33554431,67108863,134217727,268435455,536870911,1073741823,2147483647,4294967295]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = 2^n - 1. (Sometimes called Mersenne numbers, although that name is usually reserved for A001348.)",
+       references: [{:oeis, :a000225, "https://oeis.org/A000225"}]
+  def create_sequence_a000225(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000225/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000225(idx) do
+      Math.pow(2, idx) - 1
+  end
+
+  @doc """
   OEIS Sequence `A000244` - Powers of 3.
 
   From [OEIS A000244](https://oeis.org/A000244):
@@ -1123,6 +1368,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a000244(idx) do
     Math.pow(3, idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000262` - Number of "sets of lists"
+
+  From [OEIS A000262](https://oeis.org/A000262):
+
+  > Number of "sets of lists": number of partitions of {1,...,n} into any number of lists, where a list means an ordered subset.
+  > (Formerly M2950 N1190)
+
+  **Sequence IDs**: `:a000262`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000262) |> Sequence.take!(22)
+      [1,1,3,13,73,501,4051,37633,394353,4596553,58941091,824073141,12470162233,202976401213,3535017524403,65573803186921,1290434218669921,26846616451246353,588633468315403843,13564373693588558173,327697927886085654441,8281153039765859726341]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of 'sets of lists'",
+       references: [{:oeis, :a000262, "https://oeis.org/A000262"}]
+  def create_sequence_a000262(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000262/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000262(idx) do
+      Math.ordered_subsets_count(idx)
   end
 
   @doc """

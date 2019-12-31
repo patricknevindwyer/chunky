@@ -27,6 +27,19 @@ defmodule Chunky.CacheAgent do
     """
    use Agent
    
+   defmacro cache_as(name, key, do: expression) do
+      quote do
+         Chunky.CacheAgent.start_link(unquote(name))
+         if Chunky.CacheAgent.has?(unquote(name), unquote(key)) do
+             Chunky.CacheAgent.get(unquote(name), unquote(key))
+         else
+             v = unquote(expression)
+             Chunky.CacheAgent.put(unquote(name), unquote(key), v)
+             v
+         end
+      end 
+   end
+   
    @doc """
    Start a cache for a particular atom. Calling multiple times with the same atom will
    return the original named cache, and isn't harmful.
@@ -52,7 +65,9 @@ defmodule Chunky.CacheAgent do
    Retrieve a value from the cache by key.
    """
    def get(cache, key) do
-      Agent.get(cache, fn state -> state |> Map.get(key) end) 
+      Agent.get(cache, fn state -> 
+          state |> Map.get(key) 
+      end) 
    end
    
    @doc """
