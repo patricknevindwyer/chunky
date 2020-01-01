@@ -779,8 +779,8 @@ defmodule Chunky.Fraction do
   def power(%Fraction{} = fraction, int, opts) when is_integer(int) and int >= 0 do
     simp = opts |> Keyword.get(:simplify, false)
 
-    p_num = Math.pow(fraction.num, int) |> Kernel.trunc()
-    p_den = Math.pow(fraction.den, int) |> Kernel.trunc()
+    p_num = Math.pow(fraction.num, int)
+    p_den = Math.pow(fraction.den, int)
 
     p_frac = Fraction.new(p_num, p_den)
 
@@ -832,8 +832,8 @@ defmodule Chunky.Fraction do
     # that will build the final result as an irration number.
 
     # first we try and run the numbers through in fractional mode
-    num_powed = Math.pow(fraction_a.num, f_pow) |> Kernel.trunc()
-    den_powed = Math.pow(fraction_a.den, f_pow) |> Kernel.trunc()
+    num_powed = Math.pow(fraction_a.num, f_pow)
+    den_powed = Math.pow(fraction_a.den, f_pow)
 
     case {
       integer_nth_root?(num_powed, f_root, epsilon),
@@ -1058,8 +1058,8 @@ defmodule Chunky.Fraction do
       b_mult = div(new_base, fraction_b.den)
 
       {
-        Fraction.new(Kernel.trunc(fraction_a.num * a_mult), new_base),
-        Fraction.new(Kernel.trunc(fraction_b.num * b_mult), new_base)
+        Fraction.new(fraction_a.num * a_mult, new_base),
+        Fraction.new(fraction_b.num * b_mult, new_base)
       }
     end
   end
@@ -1105,7 +1105,7 @@ defmodule Chunky.Fraction do
     fracs
     |> Enum.map(fn frac ->
       f_mult = div(new_base, frac.den)
-      Fraction.new(Kernel.trunc(frac.num * f_mult), new_base)
+      Fraction.new(frac.num * f_mult, new_base)
     end)
   end
 
