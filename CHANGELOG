@@ -35,7 +35,7 @@
   - binomial/2 - Binomial coefficient over `(n k)`
   - wedderburn_etherington_number/1 - Count of permutations of binary rooted trees of size `n`
   - functions for calculating positions in euler/pascal/element triangles
-  - euler_number/2
+  - eulerian_number/2
   
   
 ### New Sequences

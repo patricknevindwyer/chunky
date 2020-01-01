@@ -5,6 +5,42 @@ defmodule Chunky.MathTest do
   alias Chunky.Fraction
   doctest Chunky.Math
 
+  describe "euler_zig/1" do
+      test "value tests" do
+          ns = [0, 4, 18, 41]
+          os = [1, 1385, 41222060339517702122347079671259045, 50131049408109796612908693678881009420083336722220539765973596236561571401154699761552253189084809951554801]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.euler_zig(n) == o
+          end)                
+      end            
+  end
+  
+  describe "euler_number/1" do
+      test "value tests" do
+          ns = [0, 4, 18, 41]
+          os = [1, 5, -2404879675441, 0]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.euler_number(n) == o
+          end)                
+      end            
+  end
+  
+  describe "euler_polynomial/2" do
+      test "value tests" do
+          ns = [{1, 4}, {8, Fraction.new(1, 2)}, {3, 1}]
+          os = [%Fraction{num: 7, den: 2}, %Fraction{den: 65536, num: 354560}, %Fraction{num: -2, den: 8}]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.euler_polynomial(n, m) == o
+          end)                
+      end            
+  end
+  
   describe "square_pyramidal_number/1" do
       test "value tests" do
           ns = [3, 13, 33, 73, 777]

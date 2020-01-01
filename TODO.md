@@ -51,11 +51,6 @@ Time.diff(ed, st, :millisecond)
 ```
 
 
-50,000 with is_prime? - 29.874 seconds
-50,000 with is_prime_fast? /1000 cache - 26.993 seconds
-50,000 with is_prime_fast? /10,000 cache - 29.774 seconds
-50,000 with is_prime_fast? /100 cache
-
 ## Crawling Search
 
 ```
@@ -65,19 +60,21 @@ OEIS.Util.crawl_keywords(["core", "hard"])
 ```
 OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> "#{seq_id |> String.downcase()}" |> String.to_atom() end) |> Enum.sort() |> IO.inspect(limit: :infinity)
 ```
-
-
-
- - Documentation Updates
-  - break out predicate functions in Math
-  
+   
+ - move integer math functions in fractions out to math library
+ 
+ - move fibonacci out of main OEIS module
+      
  - macros
   - update cache based functions to use CacheAgent.cache_as/3 macro
   
+ - Caching
   - we're not really using caches right - we aren't rooting the Agent in a supervisor structure, so it isn't seeing data across processes
+  - add option for global cache as part of supervisor?
+  
   
  - Additions
-  - generalize the Kolakowski sequence functions to any alphabet
+  - generalize the Kolakoski sequence functions to any alphabet
   - add Sigma-21 through 24
   - add 5^n through 48^n
   - p-adic groups

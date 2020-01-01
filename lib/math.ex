@@ -83,7 +83,6 @@ defmodule Chunky.Math do
    - `pentagonal_number/1` - Find the `n`-th pentagonal number
    - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
    - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
-   - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
    - `sigma/2` - Generalized Sigma function for integers
    - `square_pyramidal_number/1` - Number of elements in an `n x n` stacked square pyramid
    - `tetrahedral_number/1` - Find the `n`-th tetrahedral number
@@ -92,16 +91,24 @@ defmodule Chunky.Math do
    - `triangle_row_for_element/1` - Row in triangle for `n`-th element
    - `triangle_position_for_element/1` - Position in triangel for `n`-th element
 
+  ## Polynomials
+  
+   - `binomial/2` - Compute the binomial coefficient over `(n k)`
+   - `euler_polynomial/2` -   Calculate the Euler polynomial `E_m(x)`
+   - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
+
+  
   ## Combinatorics
   
   Functions dealing with [Combinatorics](https://en.wikipedia.org/wiki/Combinatorics), permutation calculations, and related topics.
   
    - `bell_number/1` - Compute the number of partitions of a set of size `n`
-   - `binomial/2` - Compute the binomial coefficient over `(n k)`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
    - `derangement_count/1` - Number of derangements of set size `n`, or _subfactorial n_
    - `endomorphism_count/1` - Number of endomorphisms of a set of size `n`
+   - `euler_number/1` - Find the `n`-th Euler number. Also written `EulerE`.
    - `eulerian_number/2` - `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` elements are greater than the previous element
+   - `euler_zig/1` - Find the `n`-th Euler _zig_ number
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
    - `involutions_count/1` - Number of self-inverse permutations of `n` elements
    - `ordered_subsets_count/1` - Count the number of partitions of a set of size `n` into any number of ordered lists.
