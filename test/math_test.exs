@@ -2,7 +2,90 @@ defmodule Chunky.MathTest do
   use ExUnit.Case, async: true
 
   alias Chunky.Math
+  alias Chunky.Fraction
   doctest Chunky.Math
+
+  describe "square_pyramidal_number/1" do
+      test "value tests" do
+          ns = [3, 13, 33, 73, 777]
+          os = [14, 819, 12529, 132349, 156667805]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.square_pyramidal_number(n) == o
+          end)                
+      end            
+  end
+  
+  describe "pentagonal_number/1" do
+      test "value tests" do
+          ns = [3, 13, 33, 73, 777]
+          os = [12, 247, 1617, 7957, 905205]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.pentagonal_number(n) == o
+          end)                
+      end            
+  end
+  
+  describe "endomorphism_count/1" do
+      test "value tests" do
+          ns = [3, 13, 33, 73]
+          os = [27, 302875106592253, 129110040087761027839616029934664535539337183380513, 10533405146807286720373659460502060785759379112212598116064998418834781689316645387966435364502141349866164216580595609788325190062013833]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.endomorphism_count(n) == o
+          end)                
+      end            
+  end
+  
+  describe "tetrahedral_number/1" do
+      test "value tests" do
+          ns = [1, 3, 30, 300, 3000]
+          os = [1, 10, 4960, 4545100, 4504501000]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.tetrahedral_number(n) == o
+          end)                
+      end            
+  end
+  
+  describe "rising_factorial/2" do
+      test "value tests" do
+          ns = [{3, 4}, {5, 7}, {9, 13}, {21, 30}]
+          os = [360, 1663200, 1267136462592000, 12501158328406120266757143916231576780800000000]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.rising_factorial(n, m) == o
+          end)                
+      end            
+  end
+  
+  describe "falling_factorial/2" do
+      ns = [{4, 3}, {7, 5}, {13, 9}, {30, 21}]
+      os = [24, 2520, 259459200, 730965773291972714496000000]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.falling_factorial(n, m) == o
+      end)                
+  end
+  
+  describe "cayley_number/1" do
+      test "value tests" do
+          ns = [1, 2, 4, 11, 29, 45]
+          os = [1, 1, 16, 2357947691, 3053134545970524535745336759489912159909, 122500565161156121231925522170574167775076830366742797195911407470703125]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.cayley_number(n) == o
+          end)                
+      end            
+  end
 
   describe "ordered_subsets_count/1" do
       test "value tests" do

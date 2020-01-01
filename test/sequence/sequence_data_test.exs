@@ -355,6 +355,14 @@ defmodule Chunky.SequenceDataTest do
     },
     %{
       module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a000272,
+      opts: [],
+      values: [1, 1, 1, 3, 16, 125, 1296, 16807, 262144, 4782969],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
       sequence: :a000290,
       opts: [],
       values: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81],
@@ -363,9 +371,49 @@ defmodule Chunky.SequenceDataTest do
     },
     %{
       module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a000292,
+      opts: [],
+      values: [0, 1, 4, 10, 20, 35, 56, 84, 120, 165],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
       sequence: :a000302,
       opts: [],
       values: [1, 4, 16, 64, 256, 1024, 4096, 16384, 65536, 262_144],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a000312,
+      opts: [],
+      values: [1, 1, 4, 27, 256, 3125, 46656, 823543, 16777216, 387420489],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a000326,
+      opts: [],
+      values: [0, 1, 5, 12, 22, 35, 51, 70, 92, 117],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a000330,
+      opts: [],
+      values: [0, 1, 5, 14, 30, 55, 91, 140, 204, 285],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a000364,
+      opts: [],
+      values: [1, 1, 5, 61, 1385, 50521, 2702765, 199360981, 19391512145, 2404879675441],
       finite: false,
       first_index: 0
     },

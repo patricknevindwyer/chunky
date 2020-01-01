@@ -41,8 +41,14 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000225 - a(n) = 2^n - 1](https://oeis.org/A000225) - `:a000225` - `create_sequence_a000225/1`
    - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
    - [A000262 - Number of "sets of lists"](https://oeis.org/A000262) - `:a000262` - `create_sequence_a000262/1`
+   - [A000272 - Number of trees on n labeled nodes](https://oeis.org/A000272) - `:a000272` - `create_sequence_a000272/1`
    - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
+   - [A000292 - Tetrahedral (or triangular pyramidal) numbers](https://oeis.org/A000292) - `:a000292` - `create_sequence_a000292/1`
    - [A000302 - Powers of 4: a(n) = 4^n](https://oeis.org/A000302) - `:a000302` - `create_sequence_a000302/1`
+   - [A000312 - a(n) = n^n; number of labeled mappings from n points to themselves](https://oeis.org/A000312) - `:a000312` - `create_sequence_a000312/1`
+   - [A000326 - Pentagonal numbers: a(n) = n*(3*n-1)/2.](https://oeis.org/A000326) - `:a000326` - `create_sequence_a000326/1`
+   - [A000330 - Square pyramidal numbers](https://oeis.org/A000330) - `:a000330` - `create_sequence_a000330/1`
+   - [A000364 - Euler (or secant or "Zig") numbers](https://oeis.org/A000364) - `:a000364` - `create_sequence_a000364/1`
    - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
    - [A000578 - The cubes: a(n) = n^3.](https://oeis.org/A000578) - `:a000578` - `create_sequence_a000578/1`
    - [A000583 - Fourth powers: a(n) = n^4.](https://oeis.org/A000583) - `:a000583` - `create_sequence_a000583/1`
@@ -75,6 +81,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
+
 
 
 
@@ -1405,6 +1412,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000272` - Number of trees on n labeled nodes: n^(n-2) with a(0)=1.
+
+  From [OEIS A000272](https://oeis.org/A000272):
+
+  > Number of trees on n labeled nodes: n^(n-2) with a(0)=1.
+  > (Formerly M3027 N1227)
+
+  **Sequence IDs**: `:a000272`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000272) |> Sequence.take!(20)
+      [1,1,1,3,16,125,1296,16807,262144,4782969,100000000,2357947691,61917364224,1792160394037,56693912375296,1946195068359375,72057594037927936,2862423051509815793,121439531096594251776,5480386857784802185939]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of trees on n labeled nodes: n^(n-2) with a(0)=1.",
+       references: [{:oeis, :a000272, "https://oeis.org/A000272"}]
+  def create_sequence_a000272(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000272/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000272(idx) do
+      Math.cayley_number(idx)
+  end
+
+  @doc """
   OEIS Sequence `A000290` - The squares: a(n) = n^2.
 
   From [OEIS A000290](https://oeis.org/A000290):
@@ -1434,6 +1475,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a000290(idx) do
     Math.pow(idx, 2)
+  end
+
+  @doc """
+  OEIS Sequence `A000292` - Tetrahedral (or triangular pyramidal) numbers: a(n) = C(n+2,3) = n*(n+1)*(n+2)/6.
+
+  From [OEIS A000292](https://oeis.org/A000292):
+
+  > Tetrahedral (or triangular pyramidal) numbers: a(n) = C(n+2,3) = n*(n+1)*(n+2)/6.
+  > (Formerly M3382 N1363)
+
+  **Sequence IDs**: `:a000292`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000292) |> Sequence.take!(45)
+      [0,1,4,10,20,35,56,84,120,165,220,286,364,455,560,680,816,969,1140,1330,1540,1771,2024,2300,2600,2925,3276,3654,4060,4495,4960,5456,5984,6545,7140,7770,8436,9139,9880,10660,11480,12341,13244,14190,15180]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Tetrahedral (or triangular pyramidal) numbers: a(n) = C(n+2,3) = n*(n+1)*(n+2)/6.",
+       references: [{:oeis, :a000292, "https://oeis.org/A000292"}]
+  def create_sequence_a000292(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000292/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000292(idx) do
+      Math.tetrahedral_number(idx)
   end
 
   @doc """
@@ -1467,6 +1542,142 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a000302(idx) do
     Math.pow(4, idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000312` - a(n) = n^n; number of labeled mappings from n points to themselves (endofunctions).
+
+  From [OEIS A000312](https://oeis.org/A000312):
+
+  > a(n) = n^n; number of labeled mappings from n points to themselves (endofunctions).
+  > (Formerly M3619 N1469)
+
+  **Sequence IDs**: `:a000312`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000312) |> Sequence.take!(18)
+      [1,1,4,27,256,3125,46656,823543,16777216,387420489,10000000000,285311670611,8916100448256,302875106592253,11112006825558016,437893890380859375,18446744073709551616,827240261886336764177]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = n^n; number of labeled mappings from n points to themselves (endofunctions).",
+       references: [{:oeis, :a000312, "https://oeis.org/A000312"}]
+  def create_sequence_a000312(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000312/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000312(idx) do
+      Math.endomorphism_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000326` - Pentagonal numbers: a(n) = n*(3*n-1)/2.
+
+  From [OEIS A000326](https://oeis.org/A000326):
+
+  > Pentagonal numbers: a(n) = n*(3*n-1)/2.
+  > (Formerly M3818 N1562)
+
+  **Sequence IDs**: `:a000326`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000326) |> Sequence.take!(47)
+      [0,1,5,12,22,35,51,70,92,117,145,176,210,247,287,330,376,425,477,532,590,651,715,782,852,925,1001,1080,1162,1247,1335,1426,1520,1617,1717,1820,1926,2035,2147,2262,2380,2501,2625,2752,2882,3015,3151]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Pentagonal numbers: a(n) = n*(3*n-1)/2.",
+       references: [{:oeis, :a000326, "https://oeis.org/A000326"}]
+  def create_sequence_a000326(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000326/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000326(idx) do
+      Math.pentagonal_number(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000330` - Square pyramidal numbers: a(n) = 0^2 + 1^2 + 2^2 + ... + n^2 = n*(n+1)*(2*n+1)/6.
+
+  From [OEIS A000330](https://oeis.org/A000330):
+
+  > Square pyramidal numbers: a(n) = 0^2 + 1^2 + 2^2 + ... + n^2 = n*(n+1)*(2*n+1)/6.
+  > (Formerly M3844 N1574)
+
+  **Sequence IDs**: `:a000330`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000330) |> Sequence.take!(45)
+      [0,1,5,14,30,55,91,140,204,285,385,506,650,819,1015,1240,1496,1785,2109,2470,2870,3311,3795,4324,4900,5525,6201,6930,7714,8555,9455,10416,11440,12529,13685,14910,16206,17575,19019,20540,22140,23821,25585,27434,29370]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Square pyramidal numbers: a(n) = 0^2 + 1^2 + 2^2 + ... + n^2 = n*(n+1)*(2*n+1)/6.",
+       references: [{:oeis, :a000330, "https://oeis.org/A000330"}]
+  def create_sequence_a000330(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000330/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000330(idx) do
+      Math.square_pyramidal_number(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000364` - Euler (or secant or "Zig") numbers: e.g.f. (even powers only) sec(x) = 1/cos(x).
+
+  From [OEIS A000364](https://oeis.org/A000364):
+
+  > Euler (or secant or "Zig") numbers: e.g.f. (even powers only) sec(x) = 1/cos(x).
+  > (Formerly M4019 N1667)
+
+  **Sequence IDs**: `:a000364`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000364) |> Sequence.take!(17)
+      [1,1,5,61,1385,50521,2702765,199360981,19391512145,2404879675441,370371188237525,69348874393137901,15514534163557086905,4087072509293123892361,1252259641403629865468285,441543893249023104553682821,177519391579539289436664789665]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Euler (or secant or 'Zig') numbers",
+       references: [{:oeis, :a000364, "https://oeis.org/A000364"}]
+  def create_sequence_a000364(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000364/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000364(idx) do
+      Math.euler_zig(idx)
   end
 
   @doc """

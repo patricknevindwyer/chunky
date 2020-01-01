@@ -15,6 +15,9 @@ defmodule Chunky.Math do
 
    - `pow/2` - Integer exponentiation
    - `factorial/1` - Factorial (`n!`) of `n`
+   - `rising_factorial/2` - Rising factorial of `n^(m)`
+   - `falling_factorial/2` - Falling factorial of `(n)m`
+  
 
   ## Factorization and Divisors
   
@@ -77,10 +80,13 @@ defmodule Chunky.Math do
    - `partition_count/1` - Number of ways to partition `n` into sums
    - `p_adic_valuation/2` - The _p-adic_ valuation function (for prime `p` and integer `n`)
    - `pell_number/1` - Find the `n`-th denominator in the infinite sequence of fractional approximations of `sqrt(2)`
+   - `pentagonal_number/1` - Find the `n`-th pentagonal number
    - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
    - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
    - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
    - `sigma/2` - Generalized Sigma function for integers
+   - `square_pyramidal_number/1` - Number of elements in an `n x n` stacked square pyramid
+   - `tetrahedral_number/1` - Find the `n`-th tetrahedral number
    - `totient/1` - Calculate Euler's totient for `n`
    - `triangle_number/1` - Number of elements in a triangle of `n` rows
    - `triangle_row_for_element/1` - Row in triangle for `n`-th element
@@ -94,6 +100,7 @@ defmodule Chunky.Math do
    - `binomial/2` - Compute the binomial coefficient over `(n k)`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
    - `derangement_count/1` - Number of derangements of set size `n`, or _subfactorial n_
+   - `endomorphism_count/1` - Number of endomorphisms of a set of size `n`
    - `eulerian_number/2` - `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` elements are greater than the previous element
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
    - `involutions_count/1` - Number of self-inverse permutations of `n` elements
@@ -106,6 +113,7 @@ defmodule Chunky.Math do
   
   Analyze numbers related to graph theory and trees.
   
+   - `cayley_number/1` - Number of trees for `n` labeled vertices
    - `labeled_rooted_forests_count/1` - Number of labeled, rooted forests with `n` nodes
    - `labeled_rooted_trees_count/1` - Number of labeled, rooted trees with `n` nodes
    - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes
@@ -329,6 +337,167 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Caculate the rising factorial `n^(m)`.
+  
+  Also called the Pochhammer function, Pochhammer polynomial, ascending factorial, or upper factorial, 
+  this is the polynomial expansion:
+  
+   ![Rising Factorial](https://wikimedia.org/api/rest_v1/media/math/render/svg/582bbc9f3d2d7a530c5a7efd9ab60fb76d3390a7)
+  
+  ## Examples
+  
+      iex> Math.rising_factorial(3, 0)
+      1
+  
+      iex> Math.rising_factorial(4, 3)
+      120
+
+      iex> Math.rising_factorial(7, 5)
+      55440
+
+      iex> Math.rising_factorial(11, 13)
+      7124122778572800
+
+  """
+  def rising_factorial(_n, 0), do: 1
+  def rising_factorial(n, m) do
+      0..m-1
+      |> Enum.map(
+          fn k -> 
+              n + k
+          end
+      )
+      |> Enum.reduce(1, fn x, acc -> x * acc end)
+  end
+  
+  @doc """
+  Calculate the falling factorial `(n)m`.
+  
+  Also called the descending factorial, falling sequential product, or lower factorial, this is the polynomial
+  expansion:
+  
+   ![falling factorial](https://wikimedia.org/api/rest_v1/media/math/render/svg/3c904ddd2ae9825f11215663784898e30ead84bb)
+  
+  ## Examples
+  
+      iex> Math.falling_factorial(4, 0)
+      1
+
+      iex> Math.falling_factorial(6, 3)
+      120
+
+      iex> Math.falling_factorial(8, 10)
+      0
+
+      iex> Math.falling_factorial(21, 7)
+      586051200
+  
+  """
+  def falling_factorial(_n, 0), do: 1
+  def falling_factorial(n, m) do
+      0..m-1
+      |> Enum.map(
+          fn k -> 
+              n - k
+          end
+      )
+      |> Enum.reduce(1, fn x, acc -> x * acc end)      
+  end
+  
+  @doc """
+  Find the `n`-th tetrahedral number.
+  
+  Tetrahedral numbers can be represented as a sum of triangular numbers:
+  
+   ![Tetrahedral summation](https://wikimedia.org/api/rest_v1/media/math/render/svg/f75ff3f01f58729aafe89087b0001ac84d1ca766)
+  
+  or a binomial:
+  
+   ![Tetrahedral binomial](https://wikimedia.org/api/rest_v1/media/math/render/svg/d91b89cbba8e06657f7f2734a9f6d250f1b00d46)
+  
+  or as a rising factorial:
+  
+   ![Tetrahedral rising factorial](https://wikimedia.org/api/rest_v1/media/math/render/svg/cd0d400f129098e951207d52c19a470d610b0606)
+  
+  This implementation uses the rising factorial, which reduces to just addition and multiplication operations.
+  
+  ## Examples
+  
+      iex> Math.tetrahedral_number(0)
+      0
+
+      iex> Math.tetrahedral_number(34)
+      7140
+
+      iex> Math.tetrahedral_number(47)
+      18424
+
+      iex> Math.tetrahedral_number(9876)
+      160591999876
+  
+  """
+  def tetrahedral_number(0), do: 0
+  def tetrahedral_number(n) when is_integer(n) and n > 0 do
+      div(rising_factorial(n, 3), 6)
+  end
+  
+  @doc """
+  Find the `n`-th pentagonal number.
+  
+  See [Pentagonal number](https://en.wikipedia.org/wiki/Pentagonal_number) for a useful visualization of how
+  pentagonal numbers grow.
+  
+  ## Examples
+  
+      iex> Math.pentagonal_number(0)
+      0
+
+      iex> Math.pentagonal_number(30)
+      1335
+
+      iex> Math.pentagonal_number(300)
+      134850
+
+      iex> Math.pentagonal_number(874)
+      1145377
+  
+  """
+  def pentagonal_number(0), do: 0
+  def pentagonal_number(n) when is_integer(n) and n > 0 do
+      div(3 * n * n - n, 2)
+  end
+  
+  @doc """
+  Find the `n`-th _square_ pyramidal number.
+  
+  The number of elements in a square stacked pyramid `n` levels tall, or `n x n` at the base.
+  
+  Via [Pyramidal square number](https://en.wikipedia.org/wiki/Square_pyramidal_number) on Wikipedia:
+  
+  >  Square pyramidal numbers also solve the problem of counting 
+  > the number of squares in an n × n grid
+  
+  ## Examples
+  
+      iex> Math.square_pyramidal_number(0)
+      0
+
+      iex> Math.square_pyramidal_number(20)
+      2870
+
+      iex> Math.square_pyramidal_number(147)
+      1069670
+
+      iex> Math.square_pyramidal_number(970)
+      304694945
+  
+  """
+  def square_pyramidal_number(0), do: 0
+  def square_pyramidal_number(n) when is_integer(n) and n >= 0 do
+     div(n * (n + 1) * (2 * n + 1), 6)
+  end
+  
+  @doc """
   Find the triangle or triangular number of `n`.
   
   The triangle number is the number of elements in the triangular arrangement of elements
@@ -476,6 +645,37 @@ defmodule Chunky.Math do
   """
   def pancake_cut_max(n) do
       div(n * n + n + 2, 2)
+  end
+  
+  @doc """
+  Calculate Cayley's formula for `n` - the number of trees on `n` labeled vertices.
+  
+  This formula also works for:
+  
+   - number of spanning trees of a complete graph with labeled vertices
+   - number of transitive subtree acyclic digraphs on n-1 vertices
+   - counts parking functions
+   - the number of nilpotent partial bijections (of an n-element set)
+  
+  ## Examples
+  
+      iex> Math.cayley_number(1)
+      1
+
+      iex> Math.cayley_number(5)
+      125
+
+      iex> Math.cayley_number(18)
+      121439531096594251776
+
+      iex> Math.cayley_number(37)  
+      7710105884424969623139759010953858981831553019262380893
+  
+  """
+  def cayley_number(0), do: 1
+  def cayley_number(1), do: 1
+  def cayley_number(n) when is_integer(n) and n > 1 do
+      Math.pow(n, n - 2)
   end
   
   @doc """
@@ -635,6 +835,30 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Count the number of endofunctions (as endomorphisms) for a set of size `n`.
+  
+  This counts endofunctions as an endomorphism over the set of size `n`, which is equivalent to `n^n`.
+  
+  ## Examples
+  
+      iex> Math.endomorphism_count(0)
+      1
+
+      iex> Math.endomorphism_count(4)
+      256
+
+      iex> Math.endomorphism_count(40)
+      12089258196146291747061760000000000000000000000000000000000000000
+
+      iex> Math.endomorphism_count(123)
+      114374367934617190099880295228066276746218078451850229775887975052369504785666896446606568365201542169649974727730628842345343196581134895919942820874449837212099476648958359023796078549041949007807220625356526926729664064846685758382803707100766740220839267
+  
+  """
+  def endomorphism_count(n) when is_integer(n) and n >= 0 do
+     Math.pow(n, n) 
+  end
+  
+  @doc """
   Calculate the Eulerian Number `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` 
   elements are greater than the previous element.
   
@@ -747,6 +971,132 @@ defmodule Chunky.Math do
       end
       
       
+  end
+  
+  @doc """
+  Find the `n`-th Euler _zig_ number.
+  
+  Values for this function are based on the relation of the zig numbers to Euler Numbers, of
+  the form `ezig(n) = abs(EulerE(2n))`
+  
+  ## Examples
+  
+      iex> Math.euler_zig(0)
+      1
+
+      iex> Math.euler_zig(2)
+      5
+
+      iex> Math.euler_zig(10)
+      370371188237525
+  
+  """
+  def euler_zig(n) do
+     abs(euler_number(n * 2))
+  end
+  
+  @doc """
+  Find the `n`-th Euler number. Also written `EulerE`.
+  
+  This calculation of the `n`-th Euler number is based on the Euler Polynomial:
+  
+  ```
+  E_n(1/2) * 2^n
+  ```
+  
+  such that the 6th Euler Number would be:
+  
+  ```
+  E_6(1/2) * 2^6
+  ```
+  
+  or `-61`
+  
+  ## Examples
+  
+      iex> Math.euler_number(0)
+      1
+  
+      iex> Math.euler_number(3)
+      0
+  
+      iex> Math.euler_number(6)
+      -61
+      
+      iex> Math.euler_number(16)
+      19391512145
+
+      iex> Math.euler_number(64)
+      45358103330017889174746887871567762366351861519470368881468843837919695760705
+  
+  
+  """
+  def euler_number(0), do: 1
+  def euler_number(n) when n > 0 do
+      
+      # eulerE(n) implies euler_polynomial(n, 1/2)
+      euler_polynomial(n, Fraction.new(1, 2)) |> Fraction.multiply(Math.pow(2, n)) |> Fraction.get_whole()
+  end
+    
+  @doc """
+  Calculate the Euler polynomial `E_m(x)`.
+  
+  This calculate is based on the explicit double summation:
+  
+   ![Euler Polynomial](https://wikimedia.org/api/rest_v1/media/math/render/svg/366c7fd491d5020bb3b39a761f965f8b9f608c13)
+  
+  In this implementation the value of `x` is always converted to a fraction before calculations
+  begin.
+  
+  ## Examples
+  
+      iex> Math.euler_polynomial(6, Fraction.new(1, 2))
+      %Chunky.Fraction{den: 4096, num: -3904}
+
+      iex> Math.euler_polynomial(6, 4) |> Fraction.get_whole()
+      1332
+
+      iex> Math.euler_polynomial(2, 15) |> Fraction.get_whole()
+      210
+
+      iex> Math.euler_polynomial(8, Fraction.new(1, 3))
+      %Chunky.Fraction{den: 1679616, num: 7869952}
+  
+  """
+  def euler_polynomial(m, x) when is_integer(x) do
+      euler_polynomial(m, Fraction.new(x))
+  end
+  
+  def euler_polynomial(m, %Fraction{}=x) do
+     
+     # hoo boy.
+     # e<m>(x) = sum {0..m:n} (1 / 2^n * sum {0..n:k} (-1)^k * binomial(n k) * (x + k)^m)
+     
+     0..m
+     |> Enum.map(
+         fn n -> 
+             
+             # fractional first sum
+             frac = Fraction.new(1, Math.pow(2, n))
+             
+             # run the inner summation
+             inner_sum = 0..n
+             |> Enum.map(
+                 fn k -> 
+                     
+                     # fractional inner summation components
+                     carry = Math.pow(-1, k) * binomial(n, k)
+                     Fraction.add(x, k) |> Fraction.power(m) |> Fraction.multiply(carry)
+                 end
+             )
+             |> Fraction.sum()
+             
+             # fraction times inner sum
+             Fraction.multiply(frac, inner_sum)
+         end
+     )
+     |> Fraction.sum()
+
   end
   
   @doc """
