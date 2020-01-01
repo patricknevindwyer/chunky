@@ -198,7 +198,8 @@ defmodule Chunky.Fraction do
   defstruct [:num, :den]
 
   alias Chunky.Fraction
-
+  alias Chunky.Math
+  
   @doc """
   Create a new fraction from two integers.
 
@@ -778,8 +779,8 @@ defmodule Chunky.Fraction do
   def power(%Fraction{} = fraction, int, opts) when is_integer(int) and int >= 0 do
     simp = opts |> Keyword.get(:simplify, false)
 
-    p_num = :math.pow(fraction.num, int) |> Kernel.trunc()
-    p_den = :math.pow(fraction.den, int) |> Kernel.trunc()
+    p_num = Math.pow(fraction.num, int) |> Kernel.trunc()
+    p_den = Math.pow(fraction.den, int) |> Kernel.trunc()
 
     p_frac = Fraction.new(p_num, p_den)
 
@@ -831,8 +832,8 @@ defmodule Chunky.Fraction do
     # that will build the final result as an irration number.
 
     # first we try and run the numbers through in fractional mode
-    num_powed = :math.pow(fraction_a.num, f_pow) |> Kernel.trunc()
-    den_powed = :math.pow(fraction_a.den, f_pow) |> Kernel.trunc()
+    num_powed = Math.pow(fraction_a.num, f_pow) |> Kernel.trunc()
+    den_powed = Math.pow(fraction_a.den, f_pow) |> Kernel.trunc()
 
     case {
       integer_nth_root?(num_powed, f_root, epsilon),
@@ -1053,8 +1054,8 @@ defmodule Chunky.Fraction do
       {fraction_a, fraction_b}
     else
       new_base = lcm(fraction_a.den, fraction_b.den)
-      a_mult = new_base / fraction_a.den
-      b_mult = new_base / fraction_b.den
+      a_mult = div(new_base, fraction_a.den)
+      b_mult = div(new_base, fraction_b.den)
 
       {
         Fraction.new(Kernel.trunc(fraction_a.num * a_mult), new_base),
@@ -1087,6 +1088,7 @@ defmodule Chunky.Fraction do
        ]
 
   """
+  def normalize_all([f]), do: [f]
   def normalize_all(list) when is_list(list) do
     # convert everything to fractions, if they aren't already
     fracs = list |> fractionalize()
@@ -1102,7 +1104,7 @@ defmodule Chunky.Fraction do
     # iterate and normalize everything
     fracs
     |> Enum.map(fn frac ->
-      f_mult = new_base / frac.den
+      f_mult = div(new_base, frac.den)
       Fraction.new(Kernel.trunc(frac.num * f_mult), new_base)
     end)
   end
