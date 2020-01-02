@@ -9,6 +9,11 @@ defmodule Chunky.Math do
   
    - `pow/3` - Integer power in modular exponentiation
 
+  
+  ## Generating Functions
+  
+   - `digits_of_pi/1` - Generate `n` digits of pi, as a large integer
+  
   ## Integer Arithmetic
   
   Arithmetic functions for pure integer operations.
@@ -30,14 +35,17 @@ defmodule Chunky.Math do
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `tau/1` - Tau function, number of divisors of `n`
 
+
   ## Primes
   
   Analyze, test, and generate prime numbers.
   
    - `greatest_prime_factor/1` - Find the largest prime factor of `n`
+   - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
    - `least_prime_factor/1` - Find the smallest prime factor of `n`
    - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
-   - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
+   - `prime_pi/1` - Prime counting function, number of primes less than or equal `n`
+  
   
   ## Predicates
   
@@ -91,10 +99,12 @@ defmodule Chunky.Math do
    - `triangle_row_for_element/1` - Row in triangle for `n`-th element
    - `triangle_position_for_element/1` - Position in triangel for `n`-th element
 
+
   ## Polynomials
   
    - `binomial/2` - Compute the binomial coefficient over `(n k)`
-   - `euler_polynomial/2` -   Calculate the Euler polynomial `E_m(x)`
+   - `euler_polynomial/2` - Calculate the Euler polynomial `E_m(x)`
+   - `j_invariant_q_coefficient/1` - Find the `n`-th coefficient of the _q_ expansion of the modular J invariant function.
    - `ramanujan_tau/1` - Find Ramanujan's Tau of `n`
 
   
@@ -110,6 +120,7 @@ defmodule Chunky.Math do
    - `eulerian_number/2` - `A(n, m)`, the number of permutations of the numbers 1 to `n` in which exactly `m` elements are greater than the previous element
    - `euler_zig/1` - Find the `n`-th Euler _zig_ number
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
+   - `fubini_number/1` - Find the `n`-th Fubini number, the number of ordered partitions of a set size `n`
    - `involutions_count/1` - Number of self-inverse permutations of `n` elements
    - `ordered_subsets_count/1` - Count the number of partitions of a set of size `n` into any number of ordered lists.
    - `plane_partition_count/1` - Number of plane partitions with sum `n`
@@ -162,6 +173,7 @@ defmodule Chunky.Math do
    - `is_17_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 17)`
    - `is_19_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 19)`
    - `is_23_smooth?/1` - Predicate shortcut for `is_b_smooth?(n, 23)`
+
 
   ## Number Generation
   
@@ -344,6 +356,97 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Count the number of primes less than or equal to `n`.
+  
+  Sometimes written `pi(n)` or `π(n)`, this is the prime counting function.
+  
+  This impementation uses a summation over fractions of the `sigma/1` function. If the
+  counting function needs to be applied over a sequence of numbers, it is more efficient
+  to use the OEIS A000720 sequence from `Chunky.Sequences.OEIS.Core`, as it unrolls the
+  continued summation using historic values:
+  
+  ```elixir
+  counter = Sequence.create(Sequence.OEIS.Core, :a000720)
+  ```
+  
+  ## Examples
+  
+      iex> Math.prime_pi(1)
+      0
+
+      iex> Math.prime_pi(38)
+      12
+
+      iex> Math.prime_pi(945)
+      160
+
+      iex> Math.prime_pi(100000)
+      9592
+  
+  """
+  def prime_pi(1), do: 0
+  def prime_pi(n) do
+     # a(n) = Sum_{i=2..n} floor((i+1)/A000203(i)). 
+     2..n
+     |> Enum.map(
+         fn i -> 
+             Fraction.new(i + 1, sigma(i)) |> Fraction.get_whole()
+         end
+     )
+     |> Enum.sum()
+  end
+  
+  @doc """
+  Generate `n` digits of pi, as a single large integer.
+  
+  This function uses a non-digit extraction version of Bailey-Borwein-Plouffe summation
+  for generating accurate digits of Pi in base 10. This uses a summation over fractional
+  values to maintain precision:
+  
+   ![BBP Formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/a675e5ac4cf478f78b22b812c974d14acbdde1a9)
+  
+  Using this formula, it is possible to create many hundreds of digits of Pi in less than a second. Generating
+  5,000 digits takes roughly 30 seconds.
+  
+  ## Examples
+  
+      iex> Math.digits_of_pi(3)
+      314
+  
+      iex> Math.digits_of_pi(31)
+      3141592653589793238462643383279
+  
+      iex> Math.digits_of_pi(45)
+      314159265358979323846264338327950288419716939
+  
+  """
+  def digits_of_pi(1), do: 3
+  def digits_of_pi(2), do: 31
+  def digits_of_pi(3), do: 314
+  def digits_of_pi(n) when n > 3 do
+      # Pi = Sum_{n>=0} (1/16^n) * (4/(8*n+1) - 2/(8*n+4) - 1/(8*n+5) - 1/(8*n+6))
+      0..n
+      |> Enum.map(
+          fn k -> 
+              
+              m_0 = Fraction.new(1, Math.pow(16, k))
+              
+              f_1 = Fraction.new(4, 8 * k + 1)
+              f_2 = Fraction.new(2, 8 * k + 4)
+              f_3 = Fraction.new(1, 8 * k + 5)
+              f_4 = Fraction.new(1, 8 * k + 6)
+              
+              f_0 = Fraction.subtract(f_1, f_2) |> Fraction.subtract(f_3) |> Fraction.subtract(f_4)
+              
+              Fraction.multiply(m_0, f_0)
+              
+          end
+      )
+      |> Fraction.sum()     
+      |> Fraction.multiply(Math.pow(10, n - 1)) |> Fraction.get_whole()
+  end
+  
+  @doc """
   Caculate the rising factorial `n^(m)`.
   
   Also called the Pochhammer function, Pochhammer polynomial, ascending factorial, or upper factorial, 
@@ -409,6 +512,48 @@ defmodule Chunky.Math do
           end
       )
       |> Enum.reduce(1, fn x, acc -> x * acc end)      
+  end
+
+  @doc """
+  Find the `n`-th Fubini number, the number of ordered partitions of a set size `n`.
+  
+  The Fubini numbers are also useful as (via [OEIS A000670](https://oeis.org/search?q=a000670&sort=&language=&go=Search)):
+  
+   - the number of preferential arrangements of n labeled elements
+   - the number of weak orders on n labeled elements
+   - the number of ways n competitors can rank in a competition, allowing for the possibility of ties
+   - the number of chains of subsets starting with the empty set and ending with a set of n distinct objects
+   - the number of 'factor sequences' of N for the case in which N is a product of n distinct primes
+  
+  This implementation is recursive and relies on `binomial/2`, so it uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.fubini_number(0)
+      1
+
+      iex> Math.fubini_number(3)
+      13
+
+      iex> Math.fubini_number(19)
+      92801587319328411133
+
+      iex> Math.fubini_number(52)
+      11012069943086163504795579947992458193990796847590859607173763880168176185195
+  
+  """  
+  def fubini_number(0), do: 1
+  def fubini_number(n) when is_integer(n) and n > 0 do
+     CacheAgent.cache_as(:fubini_number, n) do
+         # a(n) = Sum_{k=1..n} binomial(n, k)*a(n-k), a(0) = 1 
+         1..n
+         |> Enum.map(
+             fn k -> 
+                 binomial(n, k) * fubini_number(n - k)
+             end
+         )
+         |> Enum.sum()
+     end
   end
   
   @doc """
@@ -2512,6 +2657,56 @@ defmodule Chunky.Math do
          p_adic_max_v(p, v + 1, n)
      end 
   end
+  
+  @doc """
+  Find the `n`-th coefficient of the _q_ expansion of the modular J invariant function.
+  
+  The Laurent series of the q-expansion begins:
+  
+   ![q-expansion fourier transform](https://wikimedia.org/api/rest_v1/media/math/render/svg/008db1b5f38a2d653aa56b2930705d30c40a97e1)
+  
+  This function finds the `n`-th `q` coefficient using a recursive relation to the sigma-5 and sigma-3
+  of components of the expansion.
+  
+  Because this implementation is recursive, it uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.j_invariant_q_coefficient(-1)
+      1
+
+      iex> Math.j_invariant_q_coefficient(10)
+      22567393309593600
+
+      iex> Math.j_invariant_q_coefficient(20)
+      189449976248893390028800
+
+      iex> Math.j_invariant_q_coefficient(121)
+      20834019715817024229638765444619811002731409879518705977860
+  
+  """
+  def j_invariant_q_coefficient(-1), do: 1
+  def j_invariant_q_coefficient(n) do
+     # a(n) = (1/(n+1))*Sum_{k=1..n+1} (504*A001160(k) - 240*(n-k) * A001158(k)) * a(n-k) 
+     # A001160 = sigma-5 
+     # A001158 = sigma-3
+     
+     CacheAgent.cache_as(:j_invariant_q_coefficient, n) do
+         # gather the summation
+         sum_term = 1..n+1
+         |> Enum.map(
+             fn k -> 
+                 (504 * sigma(k, 5) - 240 * (n - k) * sigma(k, 3)) * j_invariant_q_coefficient(n - k)
+             end
+         )
+         |> Enum.sum()
+     
+         # build the fractional component and complete
+         Fraction.new(1, n + 1) |> Fraction.multiply(sum_term) |> Fraction.get_whole()
+     end
+     
+  end
+  
   
   @doc """
   Count the number of partitions of `n`.

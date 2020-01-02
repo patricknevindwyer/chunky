@@ -44,7 +44,7 @@ OEIS.missing_sequences(OEIS, :keyword_core_easy) |> Enum.sort()
 ```elixir
 alias Chunky.Math
 st = Time.utc_now()
-Math.is_prime?(lp)
+Math.digits_of_pi(5000)
 ed = Time.utc_now()
 Time.diff(ed, st, :millisecond)
 

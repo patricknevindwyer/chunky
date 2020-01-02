@@ -50,12 +50,15 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000330 - Square pyramidal numbers](https://oeis.org/A000330) - `:a000330` - `create_sequence_a000330/1`
    - [A000364 - Euler (or secant or "Zig") numbers](https://oeis.org/A000364) - `:a000364` - `create_sequence_a000364/1`
    - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
+   - [A000521 - Coefficients of modular function j as power series in q = e^(2 Pi i t)](https://oeis.org/A000521) - `:a000521` - `create_sequence_a000521/1`
    - [A000578 - The cubes: a(n) = n^3.](https://oeis.org/A000578) - `:a000578` - `create_sequence_a000578/1`
    - [A000583 - Fourth powers: a(n) = n^4.](https://oeis.org/A000583) - `:a000583` - `create_sequence_a000583/1`
    - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
    - [A000594 - Ramanujan's tau function](https://oeis.org/A000594) - `:a000594` - `create_sequence_a000594/1`
    - [A000609 - Number of threshold functions of n or fewer variables](https://oeis.org/A000609) - `:a000609` - `create_sequence_a000609/1`
+   - [A000670 - Fubini numbers](https://oeis.org/A000670) - `:a000670` - `create_sequence_a000670/1`
    - [A000688 - Number of Abelian groups of order n](https://oeis.org/A000688) - `:a000688` - `create_sequence_a000688/1`
+   - [A000720 - pi(n), the number of primes <= n.](https://oeis.org/A000720) - `:a000720` - `create_sequence_a000720/1`
    - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
@@ -91,7 +94,8 @@ defmodule Chunky.Sequence.OEIS.Core do
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
   alias Chunky.Math
-
+  alias Chunky.Fraction
+  
   require Integer
 
   # raw data for A000001 - Number of groups of order n.
@@ -1708,6 +1712,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000521` - Coefficients of modular function j as power series in q = e^(2 Pi i t)
+
+  From [OEIS A000521](https://oeis.org/A000521):
+
+  > Coefficients of modular function j as power series in q = e^(2 Pi i t). Another name is the elliptic modular invariant J(tau).
+  > (Formerly M5477 N2372)
+
+  **Sequence IDs**: `:a000521`
+
+  **Finite**: False
+
+  **Offset**: -1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000521) |> Sequence.take!(17)
+      [1,744,196884,21493760,864299970,20245856256,333202640600,4252023300096,44656994071935,401490886656000,3176440229784420,22567393309593600,146211911499519294,874313719685775360,4872010111798142520,25497827389410525184,126142916465781843075]
+
+
+  """
+  @doc offset: -1,
+       sequence: "Coefficients of modular function j as power series in q = e^(2 Pi i t)",
+       references: [{:oeis, :a000521, "https://oeis.org/A000521"}]
+  def create_sequence_a000521(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000521/1)
+  end
+
+
+  @doc offset: -1
+  def seq_a000521(idx) do
+      Math.j_invariant_q_coefficient(idx)
+  end
+
+  @doc """
   OEIS Sequence `A000578` - The cubes: a(n) = n^3.
 
   From [OEIS A000578](https://oeis.org/A000578):
@@ -2494,6 +2532,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   end
 
   @doc """
+  OEIS Sequence `A000670` - Fubini numbers: number of preferential arrangements of n labeled elements; or number of weak orders on n labeled elements; or number of ordered partitions of [n].
+
+  From [OEIS A000670](https://oeis.org/A000670):
+
+  > Fubini numbers: number of preferential arrangements of n labeled elements; or number of weak orders on n labeled elements; or number of ordered partitions of [n].
+  > (Formerly M2952 N1191)
+
+  **Sequence IDs**: `:a000670`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000670) |> Sequence.take!(21)
+      [1,1,3,13,75,541,4683,47293,545835,7087261,102247563,1622632573,28091567595,526858348381,10641342970443,230283190977853,5315654681981355,130370767029135901,3385534663256845323,92801587319328411133,2677687796244384203115]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Fubini numbers: number of preferential arrangements of n labeled elements; or number of weak orders on n labeled elements; or number of ordered partitions of [n].",
+       references: [{:oeis, :a000670, "https://oeis.org/A000670"}]
+  def create_sequence_a000670(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000670/1)
+  end
+
+
+  @doc offset: 0 
+  def seq_a000670(idx) do
+      Math.fubini_number(idx)
+  end
+
+  @doc """
   OEIS Sequence `A000688` - Number of Abelian groups of order n
 
   From [OEIS A000688](https://oeis.org/A000688):
@@ -2524,6 +2596,44 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a000688(idx) do
       Math.abelian_groups_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000720` - pi(n), the number of primes <= n
+
+  From [OEIS A000720](https://oeis.org/A000720):
+
+  > pi(n), the number of primes <= n. Sometimes called PrimePi(n) to distinguish it from the number 3.14159...
+  > (Formerly M0256 N0090)
+
+  **Sequence IDs**: `:a000720`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000720) |> Sequence.take!(78)
+      [0,1,2,2,3,3,4,4,4,4,5,5,6,6,6,6,7,7,8,8,8,8,9,9,9,9,9,9,10,10,11,11,11,11,11,11,12,12,12,12,13,13,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,17,17,18,18,18,18,18,18,19,19,19,19,20,20,21,21,21,21,21,21]
+
+
+  """
+  @doc offset: 1,
+       sequence: "pi(n), the number of primes <= n",
+       references: [{:oeis, :a000720, "https://oeis.org/A000720"}]
+  def create_sequence_a000720(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000720/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a000720(idx, last) do
+      if idx == 1 do
+          0
+      else
+         last + (Fraction.new(idx + 1, Math.sigma(idx)) |> Fraction.get_whole())
+      end
   end
   
   @doc """

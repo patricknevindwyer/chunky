@@ -5,6 +5,55 @@ defmodule Chunky.MathTest do
   alias Chunky.Fraction
   doctest Chunky.Math
 
+  describe "digits_of_pi/1" do
+      test "value tests" do
+          ns = [1, 3, 10, 50]
+          os = [3, 314, 3141592653, 31415926535897932384626433832795028841971693993751]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.digits_of_pi(n) == o
+          end)                
+      end                  
+  end
+  
+  describe "prime_pi/1" do
+      test "value tests" do
+          ns = [1, 10, 100, 1000]
+          os = [0, 4, 25, 168]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.prime_pi(n) == o
+          end)                
+      end                  
+      
+  end
+  
+  describe "fubini_number/1" do
+      test "value tests" do
+          ns = [0, 4, 18, 41]
+          os = [1, 75, 3385534663256845323, 81045623051154285047127402304207782853156976521592907421]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.fubini_number(n) == o
+          end)                
+      end                  
+  end
+  
+  describe "j_invariant_q_coefficient/1" do
+      test "value tests" do
+          ns = [0, 4, 18, 41]
+          os = [744, 20245856256, 11459912788444786513920, 3827767751739363485065598331130120]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.j_invariant_q_coefficient(n) == o
+          end)                
+      end            
+  end
+  
   describe "euler_zig/1" do
       test "value tests" do
           ns = [0, 4, 18, 41]
