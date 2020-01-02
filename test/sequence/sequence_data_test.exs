@@ -510,6 +510,14 @@ defmodule Chunky.SequenceDataTest do
     },
     %{
       module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a000796,
+      opts: [],
+      values: [3, 1, 4, 1, 5, 9, 2, 6, 5, 3],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
       sequence: :a000798,
       opts: [],
       values: [1, 1, 4, 29, 355, 6942, 209527, 9535241, 642779354, 63260289423],

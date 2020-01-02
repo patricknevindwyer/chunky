@@ -447,6 +447,47 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Carry forward calculation of the next digit of Pi.
+  
+  The `next_digit_of_pi/0` and `next_digit_of_pi/1` functions provide a digit-at-a-time
+  iterative generation of digits of Pi, accurate to at least 3,000 digits. This is useful
+  for on demand generation of digits, but it does require a carry forward state value.
+  
+  Use like:
+  
+  ```elixir
+  {digit_0, carry} = next_digit_of_pi()
+  {digit_1, carry} = next_digit_of_pi(carry)
+  {digit_2, carry} = next_digit_of_pi(carry)
+  ...
+  ```
+  
+  This version of the Pi digit generation function will likely be updated in a future
+  release to use a base-16 algorithm that is accurate for a larger number of digits.
+  """
+  def next_digit_of_pi() do
+      calc_pi(1, 0, 1, 1, 3, 3)
+  end
+  
+  @doc """
+  See `next_digit_of_pi/0`.
+  
+  """
+  def next_digit_of_pi({q, r, t, k, n, l}) do
+     calc_pi(q, r, t, k, n, l) 
+  end
+
+  # fast continuous pi calculation - seems to be a variant of the Chudnovsky's algorithm
+  # via http://rosettacode.org/wiki/Pi#Elixir  
+  defp calc_pi(q,r,t,k,n,l) when (4*q + r - t) < n*t do
+    {n, {q*10, 10*(r-n*t), t, k, div(10*(3*q+r), t) - 10*n, l}}
+  end
+  
+  defp calc_pi(q,r,t,k,_n,l) do
+    calc_pi(q*k, (2*q+r)*l, t*l, k+1, div(q*7*k+2+r*l, t*l), l+2)
+  end
+  
+  @doc """
   Caculate the rising factorial `n^(m)`.
   
   Also called the Pochhammer function, Pochhammer polynomial, ascending factorial, or upper factorial, 

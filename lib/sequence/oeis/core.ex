@@ -59,6 +59,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000670 - Fubini numbers](https://oeis.org/A000670) - `:a000670` - `create_sequence_a000670/1`
    - [A000688 - Number of Abelian groups of order n](https://oeis.org/A000688) - `:a000688` - `create_sequence_a000688/1`
    - [A000720 - pi(n), the number of primes <= n.](https://oeis.org/A000720) - `:a000720` - `create_sequence_a000720/1`
+   - [A000796 - Decimal expansion of Pi](https://oeis.org/A000796) - `:a000796` - `create_sequence_a000796/1`
    - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
@@ -2635,6 +2636,61 @@ defmodule Chunky.Sequence.OEIS.Core do
          last + (Fraction.new(idx + 1, Math.sigma(idx)) |> Fraction.get_whole())
       end
   end
+
+  @doc """
+  OEIS Sequence `A000796` - Decimal expansion of Pi (or digits of Pi).
+
+  From [OEIS A000796](https://oeis.org/A000796):
+
+  > Decimal expansion of Pi (or digits of Pi).
+  > (Formerly M2218 N0880)
+
+  **Sequence IDs**: `:a000796`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000796) |> Sequence.take!(105)
+      [3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0,5,8,2,0,9,7,4,9,4,4,5,9,2,3,0,7,8,1,6,4,0,6,2,8,6,2,0,8,9,9,8,6,2,8,0,3,4,8,2,5,3,4,2,1,1,7,0,6,7,9,8,2,1,4]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Decimal expansion of Pi (or digits of Pi).",
+       references: [{:oeis, :a000796, "https://oeis.org/A000796"}]
+  def create_sequence_a000796(_opts) do
+      %{
+          next_fn: &Chunky.Sequence.OEIS.Core.seq_a000796/3,
+          data: %{carry: {1, 0, 1, 1, 3, 3}, idx: 0}
+      }
+  end
+
+  def seq_a000796(:init, data, _val) do
+      %{
+          data: data,
+          value: 0
+      }
+  end
+  
+  def seq_a000796(:next, %{carry: carry, idx: idx}=data, _value) do
+      
+      {v, n_carry} = if idx == 0 do
+          Math.next_digit_of_pi()
+      else
+          Math.next_digit_of_pi(carry)
+      end
+      
+      %{
+          data: data |> Map.merge(%{carry: n_carry, idx: idx + 1}),
+          value: v
+      }
+     
+  end
+  
+  
   
   @doc """
   OEIS Sequence `A000798` - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements.
