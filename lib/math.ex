@@ -10,7 +10,7 @@ defmodule Chunky.Math do
    - `pow/3` - Integer power in modular exponentiation
 
   
-  ## Generating Functions
+  ## Generating Constants
   
    - `digits_of_pi/1` - Generate `n` digits of pi, as a large integer
   
