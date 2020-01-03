@@ -61,20 +61,28 @@ defmodule Chunky.Math do
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
    - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
    - `is_deficient?/1` - Test if an integer is _deficient_
+   - `is_even?/1` - Is an integer even?
    - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
+   - `is_negative?/1` - Is an integer a negative number?
+   - `is_odd?/1` - Is an integer odd?
    - `is_odious_number?/1` - Does binary expansion of `n` have odd number of `1`s?
    - `is_perfect?/1` - Test if an integer is _perfect_
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_perfect_power?/1` - Is `n` a perfect power?
    - `is_perfect_square?/1` - Is `n` a perfect square?
+   - `is_positive?/1` - Is an integer a positive number?
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `is_prime?/1` - Test if an integer is prime
    - `is_prime_fast?/1` - Alternative prime test, faster in specific cases of `n`
    - `is_prime_power?/1` - Check if `n` is a power `m` of a prime, where `m` >= 1.
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
    - `is_squarefree?/1` - Are any factors of `n` perfect squares?
+   - `is_zero?/1` - Is an integer `0`?
 
+  All of the predicates can be used to analyze an integer with:
+  
+   - `analyze_number/2` - Apply all 1-arity predicates to an integer, and collect resulting labels
 
   ## Number Theory
 
@@ -1431,6 +1439,7 @@ defmodule Chunky.Math do
       iex> Math.is_sphenic_number?(51339)
       true
   """
+  def is_sphenic_number?(n) when is_integer(n) and n <= 0, do: false
   def is_sphenic_number?(n) when is_integer(n) and n > 0 do
     facs = Math.prime_factors(n) -- [1]
     length(facs) == 3 && length(Enum.uniq(facs)) == 3
@@ -2242,7 +2251,7 @@ defmodule Chunky.Math do
 
   """
   def is_squarefree?(1), do: true
-
+  def is_squarefree?(n) when is_integer(n) and n <= 0, do: false
   def is_squarefree?(n) when is_integer(n) and n > 0 do
     (factors(n) -- prime_factors(n))
     |> Enum.uniq()
@@ -2265,7 +2274,7 @@ defmodule Chunky.Math do
       false
   """
   def is_cubefree?(1), do: true
-
+  def is_cubefree?(n) when is_integer(n) and n <= 0, do: false
   def is_cubefree?(n) when is_integer(n) and n > 0 do
     (factors(n) -- prime_factors(n))
     |> Enum.uniq()
@@ -2406,6 +2415,7 @@ defmodule Chunky.Math do
       iex> Math.is_3_smooth?(2020)
       false
   """
+  def is_3_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_3_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 3)
 
   @doc """
@@ -2427,6 +2437,7 @@ defmodule Chunky.Math do
       iex> Math.is_5_smooth?(2020)
       false
   """
+  def is_5_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_5_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 5)
 
   @doc """
@@ -2448,6 +2459,7 @@ defmodule Chunky.Math do
       iex> Math.is_7_smooth?(2020)
       false
   """
+  def is_7_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_7_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 7)
 
   @doc """
@@ -2469,6 +2481,7 @@ defmodule Chunky.Math do
       iex> Math.is_11_smooth?(2020)
       false
   """
+  def is_11_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_11_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 11)
 
   @doc """
@@ -2490,6 +2503,7 @@ defmodule Chunky.Math do
       iex> Math.is_13_smooth?(2020)
       false
   """
+  def is_13_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_13_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 13)
 
   @doc """
@@ -2511,6 +2525,7 @@ defmodule Chunky.Math do
       iex> Math.is_17_smooth?(2020)
       false
   """
+  def is_17_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_17_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 17)
 
   @doc """
@@ -2532,6 +2547,7 @@ defmodule Chunky.Math do
       iex> Math.is_19_smooth?(2020)
       false
   """
+  def is_19_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_19_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 19)
 
   @doc """
@@ -2553,6 +2569,7 @@ defmodule Chunky.Math do
       iex> Math.is_23_smooth?(2020)
       false
   """
+  def is_23_smooth?(n) when is_integer(n) and n <= 0, do: false
   def is_23_smooth?(n) when is_integer(n) and n > 0, do: is_b_smooth?(n, 23)
 
   @doc """
@@ -3232,6 +3249,7 @@ defmodule Chunky.Math do
       iex> Math.is_arithmetic_number?(12953)
       true
   """
+  def is_arithmetic_number?(n) when is_integer(n) and n <= 0, do: false
   def is_arithmetic_number?(n) when is_integer(n) and n > 0 do
     divs = Math.factors(n)
     rem(divs |> Enum.sum(), length(divs)) == 0
@@ -3290,6 +3308,7 @@ defmodule Chunky.Math do
       true
 
   """
+  def is_odious_number?(n) when is_integer(n) and n <= 0, do: false
   def is_odious_number?(i) when is_integer(i) and i > 0 do
     ones =
       i
@@ -3390,6 +3409,7 @@ defmodule Chunky.Math do
       true
 
   """
+  def is_abundant?(n) when is_integer(n) and n <= 0, do: false
   def is_abundant?(n) when is_integer(n) and n > 0 do
     sigma(n) > 2 * n
   end
@@ -3422,7 +3442,7 @@ defmodule Chunky.Math do
       true
   """
   def is_highly_abundant?(1), do: true
-
+  def is_highly_abundant?(n) when is_integer(n) and n <= 0, do: false
   def is_highly_abundant?(n) when is_integer(n) and n > 1 do
     s_n = sigma(n)
 
@@ -3512,8 +3532,8 @@ defmodule Chunky.Math do
 
   """
   def is_prime_power?(1), do: true
-
-  def is_prime_power?(n) do
+  def is_prime_power?(n) when is_integer(n) and n <= 0, do: false
+  def is_prime_power?(n) when is_integer(n) and n > 0 do
     # find all factors
     case prime_factors(n) do
       # is this a prime itself?
@@ -3558,7 +3578,7 @@ defmodule Chunky.Math do
       false
   """
   def is_perfect_power?(1), do: true
-
+  def is_perfect_power?(n) when is_integer(n) and n <= 0, do: false
   def is_perfect_power?(n) when is_integer(n) and n > 0 do
     # find all factors
     # drop 1 and N
@@ -3601,7 +3621,7 @@ defmodule Chunky.Math do
       false
   """
   def is_achilles_number?(n) when is_integer(n) and n <= 71, do: false
-
+  
   def is_achilles_number?(n) when is_integer(n) and n > 71 do
     is_powerful_number?(n) and !is_perfect_power?(n)
   end
@@ -3692,7 +3712,7 @@ defmodule Chunky.Math do
       true
   """
   def is_highly_powerful_number?(1), do: true
-
+  def is_highly_powerful_number?(n) when is_integer(n) and n <= 0, do: false
   def is_highly_powerful_number?(n) when is_integer(n) and n > 1 do
     # find prod of prim factors exponents for N
     ppfe_n = product_of_prime_factor_exponents(n)
@@ -3752,6 +3772,7 @@ defmodule Chunky.Math do
       iex> Math.is_perfect?(33550336)
       true
   """
+  def is_perfect?(n) when is_integer(n) and n <= 0, do: false
   def is_perfect?(n) when is_integer(n) and n > 0 do
     sigma(n) == 2 * n
   end
@@ -3780,6 +3801,7 @@ defmodule Chunky.Math do
       iex> Math.is_deficient?(60)
       false
   """
+  def is_deficient?(n) when is_integer(n) and n <= 0, do: false
   def is_deficient?(n) when is_integer(n) and n > 0 do
     sigma(n) < 2 * n
   end
@@ -3806,6 +3828,7 @@ defmodule Chunky.Math do
       iex> Math.is_powerful_number?(970)
       false
   """
+  def is_powerful_number?(n) when is_integer(n) and n <= 0, do: false
   def is_powerful_number?(n) when is_integer(n) and n > 0 do
     p_fs = prime_factors(n) |> Enum.uniq()
 
@@ -3818,6 +3841,187 @@ defmodule Chunky.Math do
     |> length() == 0
   end
 
+  @doc """
+  Apply all 1-arity predicates to `n`, and collect the resulting labels.
+  
+  This function uses the names of all of the predicate functions as sources for labels, and collects
+  the resulting labels from a number being analyzed. This will work with all integers in the range `(-∞..0..+∞)`.
+  
+  Some predicate functions can take a long time to run depending on the size of `n`, so the `analyze_number/2` function
+  uses a timeout for each predicate. See the `predicate_wait_time` option for more details.
+  
+  ## Options
+  
+   - `skip_smooth` - Boolean, default `false`. If `true`, skip all predicates of form `is_#_smooth?/1`
+   - `predicate_wait_time` - Integer, default `100`. Maximum number of milliseconds to wait for an answer from each predicate function
+  
+  ## Examples
+  
+      iex> Math.analyze_number(2048)
+      [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
+
+      iex> Math.analyze_number(2048, skip_smooth: true)
+      [:deficient, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
+
+      iex> Math.analyze_number(-37)
+      [:negative, :odd]
+
+      iex> Math.analyze_number(0)
+      [:even, :zero]
+  
+      iex> Math.analyze_number(105840, skip_smooth: true)
+      [:abundant, :arithmetic_number, :even, :odious_number, :positive]
+
+      iex> Math.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
+      [:abundant, :arithmetic_number, :even, :highly_abundant, :odious_number, :positive]
+  
+  """
+  def analyze_number(n, opts \\ []) when is_integer(n) do
+  
+      # how long are we waiting for each predicate
+      wait_time = opts |> Keyword.get(:predicate_wait_time, 100)
+      
+      # are we skipping smooth functions?
+      skip_smooth = opts |> Keyword.get(:skip_smooth, false)
+
+      skip_list = if skip_smooth do
+          [:is_3_smooth?, :is_5_smooth?, :is_7_smooth?, :is_11_smooth?, :is_13_smooth?, :is_17_smooth?, :is_19_smooth?, :is_23_smooth?]
+      else
+         [] 
+      end
+
+      # what functions are we skipping?
+      skip_set = MapSet.new([:is_prime_fast?] ++ skip_list)
+      
+      # find all predicates
+      Chunky.Math.__info__(:functions)
+      |> Enum.filter(fn {func, arity} ->
+          
+          # take these apart and find is_*?/1 functions
+          f_name = func |> Atom.to_string()
+          
+          String.starts_with?(f_name, "is_") && String.ends_with?(f_name, "?") && arity == 1
+      end)
+      
+      # reject anything in our skip set
+      |> Enum.reject(fn {func, _arity} -> skip_set |> MapSet.member?(func) end)
+      # map to funct/name pairs
+      |> Enum.map(fn {func, _arity} -> 
+          
+          f_atom = func |> Atom.to_string() |> String.slice(3..-2) |> String.to_atom()
+          {func, f_atom}
+      end)
+      
+      # apply and filter
+      |> Enum.filter(fn {func, _name} -> 
+          
+          pred_task = Task.async(fn -> 
+              apply(Chunky.Math, func, [n])
+          end)
+                    
+          case Task.yield(pred_task, wait_time) || Task.shutdown(pred_task) do
+             
+             {:ok, result} -> 
+                 # ran to completion
+                 result
+             
+             nil ->
+                 # timed out
+                 false
+          end
+          
+      end)
+      
+      # map to names
+      |> Enum.map(fn {_func, name} -> name end)
+      |> Enum.sort()
+  end
+  
+  @doc """
+  Determine if a number is a positive integer.
+  
+  ## Examples
+  
+      iex> Math.is_positive?(4)
+      true
+      
+      iex> Math.is_positive?(-3)
+      false
+  
+      iex> Math.is_positive?(0)
+      false
+  """
+  def is_positive?(n) when is_integer(n) and n > 0, do: true
+  def is_positive?(n) when is_integer(n), do: false
+  
+  @doc """
+  Determine if a number is a negative integer.
+  
+  ## Examples
+  
+      iex> Math.is_negative?(-34)
+      true
+      
+      iex> Math.is_negative?(0)
+      false
+  
+      iex> Math.is_negative?(34)
+      false
+  """
+  def is_negative?(n) when is_integer(n) and n < 0, do: true
+  def is_negative?(n) when is_integer(n), do: false
+  
+  @doc """
+  Predicate version of `is_even/1` Integer guard.
+  
+  ## Examples
+  
+      iex> Math.is_even?(34)
+      true
+  
+      iex> Math.is_even?(0)
+      false
+  
+      iex> Math.is_even?(3)
+      false
+  """
+  def is_even?(n) when Integer.is_even(n), do: true
+  def is_even?(n) when is_integer(n), do: false
+  
+  @doc """
+  Predicate version of `is_odd?/1` Integer guard.
+  
+  ## Examples
+  
+      iex> Math.is_odd?(33)
+      true
+  
+      iex> Math.is_odd?(0)
+      false
+  
+      iex> Math.is_odd?(34)
+      false
+  """
+  def is_odd?(n) when Integer.is_odd(n), do: true
+  def is_odd?(n) when is_integer(n), do: false
+  
+  @doc """
+  Predicate for testing for `0`
+  
+  ## Examples
+  
+      iex> Math.is_zero?(0)
+      true
+      
+      iex> Math.is_zero?(34)
+      false
+  
+      iex> Math.is_zero?(-34)
+      false
+  """
+  def is_zero?(0), do: true
+  def is_zero?(n) when is_integer(n), do: false
+  
   @doc """
   Apply a number theoretic property test to integers to find the next number
   in a sequence.

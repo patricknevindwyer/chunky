@@ -63,21 +63,35 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
  
- - x remove httpoison/jason deps - causes compile warnings in distributed version, or make the explicit all envs
-
- - new main readme for hexdocs
-  
+ 
+ - do we need an :infinity value?
+ 
+ - check predicates - some _could_ apply to odd numbers
  - move integer math functions in fractions out to math library
- 
+
  - move fibonacci out of main OEIS module
- 
- - x hit 50% core coverage
       
  - macros
   - update cache based functions to use CacheAgent.cache_as/3 macro
+
+ - new main readme for hexdocs / updated readme for GitHub  
   
-  
-  
+ - Sequence.at/2
+  - check for overflow of finite lists
+ 
+ - new modes for sequence stub generator
+  - verbose sequence
+ 
+ - sequence start/restart functions
+  - start as alias to next!, just ticks over to first value
+ 
+ - sequence manipulations
+  - map
+  - filter
+  - sum
+  - zip
+  - with_index
+ 
  - testing and validation
   - credo
   - typespecs

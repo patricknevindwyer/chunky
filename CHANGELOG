@@ -15,6 +15,19 @@
 
 # CHANGELOG
 
+## v0.*.*
+
+### Enhancements
+
+ - Chunky.Math
+  - `analyze_number/2` - Run all predicates against `n` to generate labels for `n`
+  - `is_odd?/1` - New predicate
+  - `is_even?/1` - New predicate
+  - `is_zero?/1` - New predicate
+  - `is_positive?/1` - New predicate
+  - `is_negative?/1` - New predicate
+  - all predicates of form `is_*?/1` now work for all integers in range `(-∞..+∞)
+
 ## v0.11.0
 
 ```
