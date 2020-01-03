@@ -60,13 +60,30 @@ OEIS.Util.crawl_keywords(["core", "hard"])
 ```
 OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> "#{seq_id |> String.downcase()}" |> String.to_atom() end) |> Enum.sort() |> IO.inspect(limit: :infinity)
 ```
-   
+ 
+## TODO
+ 
+ - remove httpoison/jason deps - causes compile warnings in distributed version, or make the explicit all envs
+
+ - new main readme for hexdocs
+  
  - move integer math functions in fractions out to math library
  
  - move fibonacci out of main OEIS module
+ 
+ - hit 50% core coverage
       
  - macros
   - update cache based functions to use CacheAgent.cache_as/3 macro
+  
+  
+  
+ - testing and validation
+  - credo
+  - typespecs
+  - dialyzer
+  - circle/ci integration
+  
   
  - Caching
   - we're not really using caches right - we aren't rooting the Agent in a supervisor structure, so it isn't seeing data across processes

@@ -61,6 +61,13 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000720 - pi(n), the number of primes <= n.](https://oeis.org/A000720) - `:a000720` - `create_sequence_a000720/1`
    - [A000796 - Decimal expansion of Pi](https://oeis.org/A000796) - `:a000796` - `create_sequence_a000796/1`
    - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
+   - [A000959 - Lucky numbers](https://oeis.org/A000959) - `:a000959` - `create_sequence_a000959/1`
+   - [A000961 - Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1)](https://oeis.org/A000961) - `:a000961` - `create_sequence_a000961/1`
+   - [A000984 - Central binomial coefficients: binomial(2*n,n)](https://oeis.org/A000984) - `:a000984` - `create_sequence_a000984/1`
+   - [A001003 - Schroeder's second problem; also called super-Catalan numbers or little Schroeder numbers](https://oeis.org/A001003) - `:a001003` - `create_sequence_a001003/1`
+   - [A001006 - Motzkin numbers: number of ways of drawing any number of nonintersecting chords joining n points on a circle](https://oeis.org/A001006) - `:a001006` - `create_sequence_a001006/1`
+   - [A001045 - Jacobsthal sequence (or Jacobsthal numbers)](https://oeis.org/A001045) - `:a001045` - `create_sequence_a001045/1`
+   - [A001055 - The multiplicative partition function: number of ways of factoring n with all factors greater than 1](https://oeis.org/A001055) - `:a001055` - `create_sequence_a001055/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
    - [A001190 - Wedderburn-Etherington numbers: unlabeled binary rooted trees](https://oeis.org/A001190) - `:a001190` - `create_sequence_a001190/1`
@@ -1883,6 +1890,271 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a000594(idx) do      
       Math.ramanujan_tau(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000959` - Lucky numbers.
+
+  From [OEIS A000959](https://oeis.org/A000959):
+
+  > Lucky numbers.
+  > (Formerly M2616 N1035)
+
+  **Sequence IDs**: `:a000959`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000959) |> Sequence.take!(57)
+      [1,3,7,9,13,15,21,25,31,33,37,43,49,51,63,67,69,73,75,79,87,93,99,105,111,115,127,129,133,135,141,151,159,163,169,171,189,193,195,201,205,211,219,223,231,235,237,241,259,261,267,273,283,285,289,297,303]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Lucky numbers.",
+       references: [{:oeis, :a000959, "https://oeis.org/A000959"}]
+  def create_sequence_a000959(_opts) do
+      %{
+          next_fn: &Chunky.Sequence.OEIS.Core.seq_a000959/3,
+          data: %{inc_by: 10, init_with: 10, idx: 0}
+      }
+  end
+
+  def seq_a000959(:init, data, _v) do
+    
+      # setup our initial cache of values
+      %{
+          data: data |> Map.put(:numbers, Math.lucky_numbers(data.init_with)),
+          value: 0
+      }
+      
+  end
+  
+  def seq_a000959(:next, %{idx: idx}=data, _v) do
+     
+     # is our current index too small? 
+     numbers = if length(data.numbers) <= idx do
+         # regen with a bigger list
+         Math.lucky_numbers(length(data.numbers) + data.inc_by)
+     else
+         # our cache is big enough
+         data.numbers 
+     end
+     
+     # get our value
+     v = numbers |> Enum.at(idx)
+     
+     # stash data, and return
+     %{
+         data: data |> Map.merge(%{idx: idx + 1, numbers: numbers}),
+         value: v
+     }
+  end
+
+  @doc """
+  OEIS Sequence `A000961` - Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1).
+
+  From [OEIS A000961](https://oeis.org/A000961):
+
+  > Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1).
+  > (Formerly M0517 N0185)
+
+  **Sequence IDs**: `:a000961`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000961) |> Sequence.take!(64)
+      [1,2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,47,49,53,59,61,64,67,71,73,79,81,83,89,97,101,103,107,109,113,121,125,127,128,131,137,139,149,151,157,163,167,169,173,179,181,191,193,197,199,211,223,227]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1).",
+       references: [{:oeis, :a000961, "https://oeis.org/A000961"}]
+  def create_sequence_a000961(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000961/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a000961(_idx, last) do
+      Math.next_number(&Math.is_prime_power?/1, last)
+  end
+
+  @doc """
+  OEIS Sequence `A000984` - Central binomial coefficients: binomial(2*n,n) = (2*n)!/(n!)^2.
+
+  From [OEIS A000984](https://oeis.org/A000984):
+
+  > Central binomial coefficients: binomial(2*n,n) = (2*n)!/(n!)^2.
+  > (Formerly M1645 N0643)
+
+  **Sequence IDs**: `:a000984`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000984) |> Sequence.take!(28)
+      [1,2,6,20,70,252,924,3432,12870,48620,184756,705432,2704156,10400600,40116600,155117520,601080390,2333606220,9075135300,35345263800,137846528820,538257874440,2104098963720,8233430727600,32247603683100,126410606437752,495918532948104,1946939425648112]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Central binomial coefficients: binomial(2*n,n) = (2*n)!/(n!)^2.",
+       references: [{:oeis, :a000984, "https://oeis.org/A000984"}]
+  def create_sequence_a000984(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000984/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000984(idx) do
+      Math.binomial(2 * idx, idx)
+  end
+
+  @doc """
+  OEIS Sequence `A001003` - Schroeder's second problem (generalized parentheses); also called super-Catalan numbers or little Schroeder numbers.
+
+  From [OEIS A001003](https://oeis.org/A001003):
+
+  > Schroeder's second problem (generalized parentheses); also called super-Catalan numbers or little Schroeder numbers.
+  > (Formerly M2898 N1163)
+
+  **Sequence IDs**: `:a001003`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001003) |> Sequence.take!(24)
+      [1,1,3,11,45,197,903,4279,20793,103049,518859,2646723,13648869,71039373,372693519,1968801519,10463578353,55909013009,300159426963,1618362158587,8759309660445,47574827600981,259215937709463,1416461675464871]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Schroeder's second problem (generalized parentheses); also called super-Catalan numbers or little Schroeder numbers.",
+       references: [{:oeis, :a001003, "https://oeis.org/A001003"}]
+  def create_sequence_a001003(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001003/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001003(idx) do
+      Math.hipparchus_number(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A001006` - Motzkin numbers
+
+  From [OEIS A001006](https://oeis.org/A001006):
+
+  > Motzkin numbers: number of ways of drawing any number of nonintersecting chords joining n (labeled) points on a circle.
+  > (Formerly M1184 N0456)
+
+  **Sequence IDs**: `:a001006`
+
+  **Finite**: False
+
+  **Offset**: 0 
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001006) |> Sequence.take!(30)
+      [1,1,2,4,9,21,51,127,323,835,2188,5798,15511,41835,113634,310572,853467,2356779,6536382,18199284,50852019,142547559,400763223,1129760415,3192727797,9043402501,25669818476,73007772802,208023278209,593742784829]
+
+  """
+  @doc offset: 0,
+       sequence: "Motzkin numbers: number of ways of drawing any number of nonintersecting chords joining n (labeled) points on a circle.",
+       references: [{:oeis, :a001006, "https://oeis.org/A001006"}]
+  def create_sequence_a001006(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001006/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001006(idx) do
+      Math.motzkin_number(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A001045` - Jacobsthal sequence (or Jacobsthal numbers)
+
+  From [OEIS A001045](https://oeis.org/A001045):
+
+  > Jacobsthal sequence (or Jacobsthal numbers): a(n) = a(n-1) + 2*a(n-2), with a(0) = 0, a(1) = 1.
+  > (Formerly M2482 N0983)
+
+  **Sequence IDs**: `:a001045`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001045) |> Sequence.take!(35)
+      [0,1,1,3,5,11,21,43,85,171,341,683,1365,2731,5461,10923,21845,43691,87381,174763,349525,699051,1398101,2796203,5592405,11184811,22369621,44739243,89478485,178956971,357913941,715827883,1431655765,2863311531,5726623061]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Jacobsthal sequence (or Jacobsthal numbers)",
+       references: [{:oeis, :a001045, "https://oeis.org/A001045"}]
+  def create_sequence_a001045(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001045/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001045(idx) do
+      Math.jacobsthal_number(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A001055` - The multiplicative partition function: number of ways of factoring n with all factors greater than 1 (a(1) = 1 by convention).
+
+  From [OEIS A001055](https://oeis.org/A001055):
+
+  > The multiplicative partition function: number of ways of factoring n with all factors greater than 1 (a(1) = 1 by convention).
+  > (Formerly M0095 N0032)
+
+  **Sequence IDs**: `:a001055`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001055) |> Sequence.take!(103)
+      [1,1,1,2,1,2,1,3,2,2,1,4,1,2,2,5,1,4,1,4,2,2,1,7,2,2,3,4,1,5,1,7,2,2,2,9,1,2,2,7,1,5,1,4,4,2,1,12,2,4,2,4,1,7,2,7,2,2,1,11,1,2,4,11,2,5,1,4,2,5,1,16,1,2,4,4,2,5,1,12,5,2,1,11,2,2,2,7,1,11,2,4,2,2,2,19,1,4,4,9,1,5,1]
+
+
+  """
+  @doc offset: 1,
+       sequence: "The multiplicative partition function: number of ways of factoring n with all factors greater than 1 (a(1) = 1 by convention).",
+       references: [{:oeis, :a001055, "https://oeis.org/A001055"}]
+  def create_sequence_a001055(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001055/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a001055(idx) do
+      Math.factorization_count(idx)
   end
 
   @doc """

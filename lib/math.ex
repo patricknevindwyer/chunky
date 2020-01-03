@@ -13,6 +13,8 @@ defmodule Chunky.Math do
   ## Generating Constants
   
    - `digits_of_pi/1` - Generate `n` digits of pi, as a large integer
+   - `next_digit_of_pi/0` and `next_digit_of_pi/1` - A state carrying digit generator for Pi
+  
   
   ## Integer Arithmetic
   
@@ -28,6 +30,7 @@ defmodule Chunky.Math do
   
   Work with divisors and prime factors.
 
+   - `factorization_count/1` - Count the number of possible factorizations of `n`.
    - `factors/1` - All divisors for an integer
    - `is_power_of?/2` - Is `n` a power of `m`?
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
@@ -68,6 +71,7 @@ defmodule Chunky.Math do
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `is_prime?/1` - Test if an integer is prime
    - `is_prime_fast?/1` - Alternative prime test, faster in specific cases of `n`
+   - `is_prime_power?/1` - Check if `n` is a power `m` of a prime, where `m` >= 1.
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
    - `is_squarefree?/1` - Are any factors of `n` perfect squares?
 
@@ -83,6 +87,7 @@ defmodule Chunky.Math do
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
    - `lucas_number/1` - Find the `n`-th Lucas Number
+   - `lucky_numbers/1` - Generate the first `n` Lucky Numbers
    - `mobius_function/1` - Classical Mobius Function
    - `omega/1` - Omega function - count of distinct primes
    - `partition_count/1` - Number of ways to partition `n` into sums
@@ -121,7 +126,10 @@ defmodule Chunky.Math do
    - `euler_zig/1` - Find the `n`-th Euler _zig_ number
    - `euler_zig_zag/1` - Calculate the size of certain set permutations
    - `fubini_number/1` - Find the `n`-th Fubini number, the number of ordered partitions of a set size `n`
+   - `hipparchus_number/1` - Find the `n`-th Hipparchus/Schroeder/super-Catalan number
    - `involutions_count/1` - Number of self-inverse permutations of `n` elements
+   - `jacobsthal_number/1` - Calculate the `n`-th Jacobsthal number
+   - `motzkin_number/1` - The number of different ways of drawing non-intersecting chords between `n` points on a circle
    - `ordered_subsets_count/1` - Count the number of partitions of a set of size `n` into any number of ordered lists.
    - `plane_partition_count/1` - Number of plane partitions with sum `n`
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
@@ -295,6 +303,50 @@ defmodule Chunky.Math do
   defp decomposition(n, k, acc) when rem(n, k) == 0, do: decomposition(div(n, k), k, [k | acc])
   defp decomposition(n, k, acc), do: decomposition(n, k + 1, acc)
 
+  @doc """
+  Count the number of possible factorizations of `n`.
+  
+  This counts a number as a factor of itself, as well as multi-set factorizations. So `8`
+  has `3` factorizations; `8`, `2*4`, and `2*2*2`.
+  
+  ## Examples
+  
+      iex> Math.factorization_count(1)
+      1
+
+      iex> Math.factorization_count(30)
+      5
+
+      iex> Math.factorization_count(286)
+      5
+  
+      iex> Math.factorization_count(9984)
+      254
+  
+  """
+  def factorization_count(n) when is_integer(n) and n > 0, do: factorization_count(n, n)
+  defp factorization_count(n, m) do
+
+      # based on the Python version by [Indranil Ghosh](https://oeis.org/wiki/User:Indranil_Ghosh)
+      if is_prime?(n) do
+          if n <= m do
+              1
+          else
+              0
+          end
+      else
+          s = factors(n) -- [1, n]
+          |> Enum.filter(fn d -> d <= m end)
+          |> Enum.map(fn d -> factorization_count(div(n, d), d) end)
+          |> Enum.sum()
+          
+          if n <= m do
+              s + 1
+          else
+              s
+          end
+      end
+  end
   @doc """
   Determine if two numbers, `a` and `b`, are co-prime.
 
@@ -485,6 +537,93 @@ defmodule Chunky.Math do
   
   defp calc_pi(q,r,t,k,_n,l) do
     calc_pi(q*k, (2*q+r)*l, t*l, k+1, div(q*7*k+2+r*l, t*l), l+2)
+  end
+  
+  @doc """
+  Generate the first `n` Lucky Numbers.
+  
+  The [Lucky Numbers](http://mathworld.wolfram.com/LuckyNumber.html) are generated as a sequential sieve, like the
+  prime Sieve of Eratosthenes. This makes generating the `n`th term as a digit extraction of negligble utility, as
+  it would require generating the preceding terms as part of the sieve process.
+  
+  Instead, this function takes advantage of the fact that the ratio of numbers before and after sieving grows at
+  approximately the natural log of the size of the starting list. I.e., if we want `n` lucky numbers, we need a
+  starting list of approximately `n * log(m)` integers. We can solve for `m` via a fast gradient. This will generally
+  result in calculating more digits than necessary, but only by a small margin - extra digits are truncated in the
+  returned list.
+
+  ## Examples
+  
+        iex> Math.lucky_numbers(5)
+        [1, 3, 7, 9, 13]
+        
+        iex> Math.lucky_numbers(10)
+        [1, 3, 7, 9, 13, 15, 21, 25, 31, 33]
+        
+        iex> Math.lucky_numbers(20)
+        [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79]
+
+        iex> Math.lucky_numbers(30)
+        [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105, 111, 115, 127, 129, 133, 135]
+  
+  """
+  def lucky_numbers(n) do
+      
+     1..estimate_candidate_pool_size(n)
+     |> Enum.to_list
+     
+     # first stage sieve is fine with enum
+     |> Enum.take_every(2) 
+     
+     # second stage sieve is recursive
+     |> drop_from(1)
+     
+     # take only as many as we need
+     |> Enum.take(n)
+  end
+  
+  # run the lucky number sieve drop
+  defp drop_from(candidates, idx) do
+     
+     if idx >= length(candidates) do
+         candidates
+     else
+         
+         # what number/cycle are we removing
+         iter = candidates |> Enum.at(idx)
+         
+         
+         # pad out because take every always takes the 0th item
+         remove = ([0] ++ candidates) |> Enum.take_every(iter)
+         
+         # continue
+         drop_from(candidates -- remove, idx + 1)
+     end 
+  end
+  
+  # y = x/ln(x)
+  # x - y * ln(x) = 0
+  defp estimate_candidate_pool_size(y) when y < 10 do
+      pool_estimate(10, 3) |> Kernel.trunc()
+  end
+  
+  defp estimate_candidate_pool_size(y) do
+      pool_estimate(y, 10) |> Kernel.trunc()
+  end
+  
+  defp pool_estimate(y, x, e \\ 1) do
+      v = x - y * :math.log(x)
+      if abs(v) < e do
+          x
+      else
+          
+          step = :math.log(abs(v)) |> Kernel.trunc() |> max(1)
+          if v < 0 do
+              pool_estimate(y, x + step, e)
+          else
+              pool_estimate(y, x - step, e)
+          end 
+      end
   end
   
   @doc """
@@ -1565,6 +1704,135 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Find the `n`-th Hipparchus number.
+  
+  Also known as **Schröder–Hipparchus** numbers, **super-Catalan** numbers, or the **little Schröder** numbers.
+  
+  In combinatorics, the Hipparchus numbers are useful for (via [Schröder–Hipparchus number](https://en.wikipedia.org/wiki/Schröder–Hipparchus_number) on Wikipedia):
+  
+   - The _nth_ number in the sequence counts the number of different ways of subdividing of a polygon with `n + 1` sides into smaller polygons by adding diagonals of the original polygon.
+   - The _nth_ number counts the number of different plane trees with `n` leaves and with all internal vertices having two or more children.
+   - The _nth_ number counts the number of different ways of inserting parentheses into a sequence of `n` symbols, with each pair of parentheses surrounding two or more symbols or parenthesized groups, and without any parentheses surrounding the entire sequence.
+   - The _nth_ number counts the number of faces of all dimensions of an associahedron `Kn + 1` of dimension `n − 1`, including the associahedron itself as a face, but not including the empty set. For instance, the two-dimensional associahedron K4 is a pentagon; it has five vertices, five faces, and one whole associahedron, for a total of 11 faces.
+  
+  Sometimes denoted by `S(n)`, this implementation is based on the recurrence relationship:
+  
+  ```
+  (n+1) * S(n) = (6*n-3) * S(n-1) - (n-2) * S(n-2)
+  ```
+  
+  Because of the double recurrence, this implementation uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.hipparchus_number(4)
+      45
+
+      iex> Math.hipparchus_number(10)
+      518859
+
+      iex> Math.hipparchus_number(36)
+      6593381114984955663097869
+
+      iex> Math.hipparchus_number(180)
+      104947841676596807726623444466946904465025819465719020148363699314181613887673617931952223933467760579812079483371393916388262613163133
+  
+  """
+  def hipparchus_number(0), do: 1
+  def hipparchus_number(1), do: 1
+  def hipparchus_number(2), do: 3
+  def hipparchus_number(n) when is_integer(n) and n > 2 do
+     
+     #(n+1) * a(n) = (6*n-3) * a(n-1) - (n-2) * a(n-2) if n>1. a(0) = a(1) = 1.
+
+     CacheAgent.cache_as(:hipparchus_number, n) do
+        
+        # recurrences
+        p_a = (6 * n - 3)  * hipparchus_number(n - 1)
+        p_b = (n - 2) * hipparchus_number(n - 2)
+        
+        # isolation
+        div(p_a - p_b, n + 1)
+        
+     end
+  end
+  
+  @doc """
+  Calculate the `n`-th Motzkin number.
+  
+  In combinatorics, number theory, and geometry, the Motzkin number is used to find (via [Wikipedia](https://en.wikipedia.org/wiki/Motzkin_number) and [OEIS A001006](https://oeis.org/A001006)):
+  
+   - the number of different ways of drawing non-intersecting chords between `n` points on a circle
+   - the number of routes on the upper right quadrant of a grid from coordinate (0, 0) to coordinate (`n`, 0) in `n` steps if one is allowed to move only to the right (up, down or straight)
+   - the number of involutions of {1,2,...,`n`} having genus 0
+   - a wide variety of limits in sequence combinatorics and sub-sequence generation
+  
+  Motzkin numbers, for this implementation, are found via binomials (see `binomial/2`) and Catalan numbers (see `catalan_number/1`):
+  
+   ![Motzkin Number](https://wikimedia.org/api/rest_v1/media/math/render/svg/bb720a1ad038049569101610065cc75e4153f42a)
+  
+  ## Examples
+  
+      iex> Math.motzkin_number(1)
+      1
+
+      iex> Math.motzkin_number(15)
+      310572
+
+      iex> Math.motzkin_number(57)
+      5127391665653918424581931
+  
+      iex> Math.motzkin_number(132)
+      906269136562156220773088044844995547011445535121944413744427
+  
+  """
+  def motzkin_number(0), do: 1
+  def motzkin_number(1), do: 1
+  def motzkin_number(n) when is_integer(n) and n > 1 do
+     
+     # sum{0, floor(n / 2): k} binomial(n, 2k) * C(k)
+     0..div(n, 2)
+     |> Enum.map(
+         fn k -> 
+             
+             binomial(n, 2 * k) * catalan_number(k)
+             
+         end
+     )
+     |> Enum.sum()
+  end
+  
+  @doc """
+  Find the `n`-th Jacobsthal number.
+  
+  These numbers are sometimes used in combinatorics for counting tiling variations, as well as having applications in number theory.
+  
+  The Jacobsthal numbers are a recurrence relation similar to the Fibonacci numbers, following the pattern:
+  
+   ![Jacobsthal Number](https://wikimedia.org/api/rest_v1/media/math/render/svg/9f8f7a97f76059ef3761bd66e22c2f63973e3061)
+  
+  For this implementation, a closed form is used instead of a recurrence.
+  
+  ## Examples
+  
+        iex> Math.jacobsthal_number(0)
+        0
+
+        iex> Math.jacobsthal_number(10)
+        341
+
+        iex> Math.jacobsthal_number(100)
+        422550200076076467165567735125
+
+        iex> Math.jacobsthal_number(250)
+        603083798111021851164432213586916186735781170133544604372174916707880883541
+  
+  """
+  def jacobsthal_number(n) when is_integer(n) and n >= 0 do
+     div(Math.pow(2, n) - Math.pow(-1, n), 3)
+  end
+  
+  @doc """
   Find the Catalan number of `n`, `C(n)`.
   
   In combinatorial math, the Catalan numbers occur in a wide range of counting problems.
@@ -1603,6 +1871,8 @@ defmodule Chunky.Math do
       |> Enum.reduce(1, fn x, acc -> Fraction.multiply(x, acc) end)
       |> Fraction.get_whole()
   end
+  
+
   
   @doc """
   Count the number of labeled, rooted trees with `n` nodes.
@@ -3162,6 +3432,60 @@ defmodule Chunky.Math do
     |> length() > 0
   end
 
+  @doc """
+  Check if `n` is a power `m` of a prime, where `m` >= 1.
+  
+  This is functionally a combination of `is_perfect_power?/1` and `is_prime?/1`, but
+  interleaves the factorization, leading to a speed up over using the two functions
+  independently.
+  
+  ## Examples
+  
+      iex> Math.is_prime_power?(2)
+      true
+  
+      iex> Math.is_prime_power?(9)
+      true
+      
+      iex> Math.is_prime_power?(10)
+      false
+  
+      iex> Math.is_prime_power?(144)
+      false
+  
+  """
+  def is_prime_power?(1), do: true
+  def is_prime_power?(n) do
+      
+      # find all factors
+      case prime_factors(n) do
+          
+          # is this a prime itself?
+          [1, ^n] -> true
+          
+          # see if these are prime perfect powers
+          p_fs ->
+              # drop 1 and N
+              (p_fs -- [1, n])
+
+              # drop duplicates
+              |> Enum.uniq()
+
+              # check if any are roots
+              |> Enum.filter(fn fac ->
+                if fac * fac <= n do
+                  is_root_of?(fac, n)
+                else
+                  false
+                end
+              end)
+              |> length() > 0
+              
+      end
+      
+      
+  end
+  
   @doc """
   Check if `n` is a _perfect power_.
 

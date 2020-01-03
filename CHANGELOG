@@ -40,21 +40,69 @@
   
 ### New Sequences
 
-   - A000001 - Number of groups of order n
-   - A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.
-   - A000105 - Number of free polyominoes (or square animals) with n cells
-   - A000109 - Number of simplicial polyhedra with n nodes
-   - A000112 - Number of partially ordered sets ("posets") with n unlabeled elements
-   - A000609 - Number of threshold functions of n or fewer variables
-   - A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements
-   - A002106 - Number of transitive permutation groups of degree n
-   - A003094 - Number of unlabeled connected planar simple graphs with n nodes
-   - A005470 - Number of unlabeled planar simple graphs with n nodes
-   - A006966 - Number of lattices on n unlabeled nodes
-   - A055512 - Lattices with n labeled elements
-   - updated A000041 - Partitions of `n` is now calculated, instead of list based
-    
+ - OEIS Core
+     - A000001 - Number of groups of order n
+     - A000002 - Kolakoski sequence
+     - A000004 - The zero sequence
+     - A000007 - The characteristic function of {0}: a(n) = 0^n
+     - A000012 - The simplest sequence of positive numbers: the all 1's sequence
+     - A000027 - The positive integers
+     - A000032 - Lucas numbers beginning at 2
+     - A000035 - Period 2: repeat [0, 1]
+     - A000040 - The prime numbers.
+     - A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.
+     - A000069 - Odious numbers: numbers with an odd number of 1's in their binary expansion
+     - A000081 - Number of unlabeled rooted trees with n nodes
+     - A000085 - Number of self-inverse permutations on n letters, also known as involutions
+     - A000105 - Number of free polyominoes (or square animals) with n cells
+     - A000108 - Catalan numbers: C(n), Also called Segner numbers.
+     - A000109 - Number of simplicial polyhedra with n nodes
+     - A000110 - Bell or exponential numbers: number of ways to partition a set of n labeled elements
+     - A000111 - Euler or up/down numbers
+     - A000112 - Number of partially ordered sets ("posets") with n unlabeled elements
+     - A000120 - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n)
+     - A000124 - Central polygonal numbers (the Lazy Caterer's sequence)
+     - A000129 - Pell numbers: a(n) = 2*a(n-1) + a(n-2)
+     - A000142 - Factorial numbers: n! = 1*2*3*4*...*n 
+     - A000166 - Subfactorial or rencontres numbers, or derangements of `n`
+     - A000169 - Number of labeled rooted trees with n nodes: n^(n-1)
+     - A000204 - Lucas numbers (beginning with 1)
+     - A000217 - Triangular numbers: a(n) = binomial(n+1,2)
+     - A000219 - Number of planar partitions (or plane partitions) of n
+     - A000225 - a(n) = 2^n - 1
+     - A000262 - Number of "sets of lists"
+     - A000272 - Number of trees on n labeled nodes
+     - A000292 - Tetrahedral (or triangular pyramidal) numbers
+     - A000312 - a(n) = n^n; number of labeled mappings from n points to themselves
+     - A000326 - Pentagonal numbers: a(n) = n*(3*n-1)/2.
+     - A000330 - Square pyramidal numbers
+     - A000364 - Euler (or secant or "Zig") numbers
+     - A000521 - Coefficients of modular function j as power series in q = e^(2 Pi i t)
+     - A000583 - Fourth powers: a(n) = n^4.
+     - A000594 - Ramanujan's tau function
+     - A000609 - Number of threshold functions of n or fewer variables
+     - A000670 - Fubini numbers
+     - A000688 - Number of Abelian groups of order n
+     - A000720 - pi(n), the number of primes <= n.
+     - A000796 - Decimal expansion of Pi
+     - A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements
+     - A001190 - Wedderburn-Etherington numbers: unlabeled binary rooted trees
+     - A001227 - Number of odd divisors of n.
+     - A001477 - The nonnegative integers.
+     - A001511 - The ruler function: 2^a(n) divides 2n
+     - A002106 - Number of transitive permutation groups of degree n
+     - A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters
+     - A003094 - Number of unlabeled connected planar simple graphs with n nodes
+     - A003484 - Radon function, also called Hurwitz-Radon numbers
+     - A005470 - Number of unlabeled planar simple graphs with n nodes
+     - A006966 - Number of lattices on n unlabeled nodes
+     - A008292 - Triangle of Eulerian numbers T(n,k)
+     - A055512 - Lattices with n labeled elements
 
+ - OEIS Factors
+ 
+     - A001826 - Number of divisors of n of form 4k+1
+     - A001842 - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3))
 ## v0.10.0
 
 ```

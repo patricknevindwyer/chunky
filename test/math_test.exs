@@ -5,6 +5,85 @@ defmodule Chunky.MathTest do
   alias Chunky.Fraction
   doctest Chunky.Math
 
+  describe "factorization_count/1" do
+      test "value tests" do
+          ns = [1, 2, 3, 5, 7, 32, 370, 4100, 6444]
+          os = [1, 1, 1, 1, 1, 7, 5, 26, 26]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.factorization_count(n) == o
+          end)                
+      end                  
+  end
+
+  describe "jacobsthal_number/1" do
+      test "value tests" do
+          ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
+          os = [0, 1, 1, 3, 11, 43, 1431655765, 45812984491, 733007751851, 6148914691236517205]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.jacobsthal_number(n) == o
+          end)                
+      end                  
+  end
+
+  describe "motzkin_number/1" do
+      test "value tests" do
+          ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
+          os = [1, 1, 2, 4, 21, 127, 13933569346707, 2750016719520991, 192137918101841817, 9468017265749942384739441267]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.motzkin_number(n) == o
+          end)                
+      end                  
+  end
+  
+  describe "hipparchus_number/1" do
+      test "value tests" do
+          ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
+          os = [1, 1, 3, 11, 197, 4279, 6791142807106951594977, 36912754633401605027088357, 36626471726431599611696929449, 7685617405888261934325439002849455215101480897]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.hipparchus_number(n) == o
+          end)                
+      end                  
+  end
+  
+  describe "is_prime_power?/1" do
+      test "value tests" do
+          ns = [1, 2, 3, 5, 7, 32, 37, 41, 64]
+          os = [true, true, true, true, true, true, true, true]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.is_prime_power?(n) == o
+          end)                
+      end                  
+  end
+  
+  describe "lucky_numbers/1" do
+      test "value tests" do
+          ns = [1, 3, 7, 10, 25, 40]
+          os = [
+              [1],
+              [1, 3, 7],
+              [1, 3, 7, 9, 13, 15, 21],
+              [1, 3, 7, 9, 13, 15, 21, 25, 31, 33],
+              [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105, 111],
+              [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105, 111, 115, 127, 129, 133, 135, 141, 151, 159, 163, 169, 171, 189, 193, 195, 201]
+          ]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {n, o} ->
+            assert Math.lucky_numbers(n) == o
+          end)                
+      end                  
+  end
+  
   describe "digits_of_pi/1" do
       test "value tests" do
           ns = [1, 3, 10, 50]
