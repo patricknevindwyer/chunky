@@ -18,31 +18,214 @@ defmodule Chunky.Sequence.OEIS do
   import Chunky.Sequence, only: [sequence_for_function: 1, sequence_for_list: 1]
   alias Chunky.Sequence
 
-  @data_keyword_core_hard [:a000001, :a000043, :a000105, :a000109, :a000112, :a000609, :a000798, :a002106, :a003094, :a005470, :a006966, :a055512]
-  @data_keyword_core_easy [:a000040, :a000045, :a000217, :a000203, :a000108, :a000005, :a000010, :a000041, :a000079, :a000290, :a000142, :a000012, :a007318, :a000027, :a001222, :a001358, :a001221, :a000720, :a002110, :a000120, :a000032, :a005117, :a008683, :a000225, :a000110, :a002275, :a005408, :a000009, :a002808, :a000007, :a000984, :a000796, :a006530, :a000578, :a020639, :a000961, :a001477, :a000292, :a000244, :a005843, :a002378, :a000129, :a001045, :a000081, :a008277, :a002113, :a010060, :a001147, :a000035, :a000326, :a000312, :a001006, :a049310, :a000166, :a000330, :a001065, :a000302, :a001055, :a025487, :a000085, :a002620, :a001405, :a000124, :a001906, :a004526, :a001764, :a070939, :a001333, :a001511, :a000521, :a000670, :a001157, :a001519, :a002487, :a003418, :a001700, :a001227, :a000204, :a027642, :a000169, :a000959, :a018252, :a000583, :a000069, :a000004, :a000002, :a002426, :a000111, :a001969, :a000219, :a002322, :a006882, :a000364, :a005101, :a006318, :a000272, :a000262, :a000593, :a001003, :a001615, :a000594, :a000055, :a001037, :a001481, :a002033, :a005100, :a000182, :a000031, :a001462, :a246655, :a008279, :a001190, :a005811, :a004018, :a001057, :a000123, :a003136, :a000311, :a000688, :a000602, :a000793, :a074206, :a000048, :a002530, :a001285, :a000161, :a002654, :a005130, :a002572, :a000029, :a038567, :a002531, :a000014, :a002083, :a004011, :a001699, :a001489, :a006894, :a000140, :a003484, :a002658, :a005230, :a035099, :a038568, :a001478, :a005588]
-  @data_keyword_core_mult [:a000004, :a000005, :a000007, :a000010, :a000012, :a000027, :a000035, :a000203, :a000290, :a000578, :a000583, :a000593, :a000594, :a000688, :a001157, :a001227, :a001477, :a001511, :a001615, :a002654, :a003484, :a008683]
+  @data_keyword_core_hard [
+    :a000001,
+    :a000043,
+    :a000105,
+    :a000109,
+    :a000112,
+    :a000609,
+    :a000798,
+    :a002106,
+    :a003094,
+    :a005470,
+    :a006966,
+    :a055512
+  ]
+  @data_keyword_core_easy [
+    :a000040,
+    :a000045,
+    :a000217,
+    :a000203,
+    :a000108,
+    :a000005,
+    :a000010,
+    :a000041,
+    :a000079,
+    :a000290,
+    :a000142,
+    :a000012,
+    :a007318,
+    :a000027,
+    :a001222,
+    :a001358,
+    :a001221,
+    :a000720,
+    :a002110,
+    :a000120,
+    :a000032,
+    :a005117,
+    :a008683,
+    :a000225,
+    :a000110,
+    :a002275,
+    :a005408,
+    :a000009,
+    :a002808,
+    :a000007,
+    :a000984,
+    :a000796,
+    :a006530,
+    :a000578,
+    :a020639,
+    :a000961,
+    :a001477,
+    :a000292,
+    :a000244,
+    :a005843,
+    :a002378,
+    :a000129,
+    :a001045,
+    :a000081,
+    :a008277,
+    :a002113,
+    :a010060,
+    :a001147,
+    :a000035,
+    :a000326,
+    :a000312,
+    :a001006,
+    :a049310,
+    :a000166,
+    :a000330,
+    :a001065,
+    :a000302,
+    :a001055,
+    :a025487,
+    :a000085,
+    :a002620,
+    :a001405,
+    :a000124,
+    :a001906,
+    :a004526,
+    :a001764,
+    :a070939,
+    :a001333,
+    :a001511,
+    :a000521,
+    :a000670,
+    :a001157,
+    :a001519,
+    :a002487,
+    :a003418,
+    :a001700,
+    :a001227,
+    :a000204,
+    :a027642,
+    :a000169,
+    :a000959,
+    :a018252,
+    :a000583,
+    :a000069,
+    :a000004,
+    :a000002,
+    :a002426,
+    :a000111,
+    :a001969,
+    :a000219,
+    :a002322,
+    :a006882,
+    :a000364,
+    :a005101,
+    :a006318,
+    :a000272,
+    :a000262,
+    :a000593,
+    :a001003,
+    :a001615,
+    :a000594,
+    :a000055,
+    :a001037,
+    :a001481,
+    :a002033,
+    :a005100,
+    :a000182,
+    :a000031,
+    :a001462,
+    :a246655,
+    :a008279,
+    :a001190,
+    :a005811,
+    :a004018,
+    :a001057,
+    :a000123,
+    :a003136,
+    :a000311,
+    :a000688,
+    :a000602,
+    :a000793,
+    :a074206,
+    :a000048,
+    :a002530,
+    :a001285,
+    :a000161,
+    :a002654,
+    :a005130,
+    :a002572,
+    :a000029,
+    :a038567,
+    :a002531,
+    :a000014,
+    :a002083,
+    :a004011,
+    :a001699,
+    :a001489,
+    :a006894,
+    :a000140,
+    :a003484,
+    :a002658,
+    :a005230,
+    :a035099,
+    :a038568,
+    :a001478,
+    :a005588
+  ]
+  @data_keyword_core_mult [
+    :a000004,
+    :a000005,
+    :a000007,
+    :a000010,
+    :a000012,
+    :a000027,
+    :a000035,
+    :a000203,
+    :a000290,
+    :a000578,
+    :a000583,
+    :a000593,
+    :a000594,
+    :a000688,
+    :a001157,
+    :a001227,
+    :a001477,
+    :a001511,
+    :a001615,
+    :a002654,
+    :a003484,
+    :a008683
+  ]
   @data_keyword_core_eigen [:a000081, :a000108, :a000111, :a001190, :a008292]
-  
+
   @doc sequence: "OEIS Core::Hard Sequences"
   def create_sequence_keyword_core_hard(_opts) do
-     sequence_for_list(@data_keyword_core_hard) 
+    sequence_for_list(@data_keyword_core_hard)
   end
-  
+
   @doc sequence: "OEIS Core::Easy Sequences"
   def create_sequence_keyword_core_easy(_opts) do
-     sequence_for_list(@data_keyword_core_easy) 
+    sequence_for_list(@data_keyword_core_easy)
   end
 
   @doc sequence: "OEIS Core::Multiplicative Sequences"
   def create_sequence_keyword_core_mult(_opts) do
-     sequence_for_list(@data_keyword_core_mult) 
+    sequence_for_list(@data_keyword_core_mult)
   end
-  
+
   @doc sequence: "OEIS Core::Eigen Sequences"
   def create_sequence_keyword_core_eigen(_opts) do
-     sequence_for_list(@data_keyword_core_eigen) 
+    sequence_for_list(@data_keyword_core_eigen)
   end
-  
+
   @doc """
   The Online Encyclopedia of Integer Sequences list of Core Sequences. 
 
@@ -266,10 +449,11 @@ defmodule Chunky.Sequence.OEIS do
       |> Enum.filter(fn cov -> cov end)
 
     # build the list of atoms of uncovered/missing sequences
-    missing_seqs = sequence_list
-    |> Sequence.take!(100)
-    |> Enum.filter(fn sequence -> !Enum.member?(all_sequences, sequence) end)
-      
+    missing_seqs =
+      sequence_list
+      |> Sequence.take!(100)
+      |> Enum.filter(fn sequence -> !Enum.member?(all_sequences, sequence) end)
+
     %{
       covered: length(covered),
       total: length(mapped_seq),
@@ -277,15 +461,16 @@ defmodule Chunky.Sequence.OEIS do
       missing_sequences: missing_seqs
     }
   end
-  
+
   @doc """
   Find the next 100 missing sequences from a coverage set
   """
   def missing_sequences(mod, seq) do
-     Sequence.create(mod, seq) |> missing_sequences() 
+    Sequence.create(mod, seq) |> missing_sequences()
   end
+
   def missing_sequences(%Sequence{} = sequence_list) do
-     (sequence_list |> coverage()).missing_sequences
+    (sequence_list |> coverage()).missing_sequences
   end
 
   @doc """
@@ -346,7 +531,6 @@ defmodule Chunky.Sequence.OEIS do
     |> Enum.map(fn seq_row -> "\t#{seq_row |> Enum.join(" ")}" end)
     |> Enum.join("\n")
     |> IO.puts()
-    
   end
 
   defp has_oeis_reference?(seq_def) do

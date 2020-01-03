@@ -199,7 +199,7 @@ defmodule Chunky.Fraction do
 
   alias Chunky.Fraction
   alias Chunky.Math
-  
+
   @doc """
   Create a new fraction from two integers.
 
@@ -1089,6 +1089,7 @@ defmodule Chunky.Fraction do
 
   """
   def normalize_all([f]), do: [f]
+
   def normalize_all(list) when is_list(list) do
     # convert everything to fractions, if they aren't already
     fracs = list |> fractionalize()

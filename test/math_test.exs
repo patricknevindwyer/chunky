@@ -6,644 +6,944 @@ defmodule Chunky.MathTest do
   doctest Chunky.Math
 
   describe "factorization_count/1" do
-      test "value tests" do
-          ns = [1, 2, 3, 5, 7, 32, 370, 4100, 6444]
-          os = [1, 1, 1, 1, 1, 7, 5, 26, 26]
+    test "value tests" do
+      ns = [1, 2, 3, 5, 7, 32, 370, 4100, 6444]
+      os = [1, 1, 1, 1, 1, 7, 5, 26, 26]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.factorization_count(n) == o
-          end)                
-      end                  
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.factorization_count(n) == o
+      end)
+    end
   end
 
   describe "jacobsthal_number/1" do
-      test "value tests" do
-          ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
-          os = [0, 1, 1, 3, 11, 43, 1431655765, 45812984491, 733007751851, 6148914691236517205]
+    test "value tests" do
+      ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.jacobsthal_number(n) == o
-          end)                
-      end                  
+      os = [
+        0,
+        1,
+        1,
+        3,
+        11,
+        43,
+        1_431_655_765,
+        45_812_984_491,
+        733_007_751_851,
+        6_148_914_691_236_517_205
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.jacobsthal_number(n) == o
+      end)
+    end
   end
 
   describe "motzkin_number/1" do
-      test "value tests" do
-          ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
-          os = [1, 1, 2, 4, 21, 127, 13933569346707, 2750016719520991, 192137918101841817, 9468017265749942384739441267]
+    test "value tests" do
+      ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.motzkin_number(n) == o
-          end)                
-      end                  
+      os = [
+        1,
+        1,
+        2,
+        4,
+        21,
+        127,
+        13_933_569_346_707,
+        2_750_016_719_520_991,
+        192_137_918_101_841_817,
+        9_468_017_265_749_942_384_739_441_267
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.motzkin_number(n) == o
+      end)
+    end
   end
-  
+
   describe "hipparchus_number/1" do
-      test "value tests" do
-          ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
-          os = [1, 1, 3, 11, 197, 4279, 6791142807106951594977, 36912754633401605027088357, 36626471726431599611696929449, 7685617405888261934325439002849455215101480897]
+    test "value tests" do
+      ns = [0, 1, 2, 3, 5, 7, 32, 37, 41, 64]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.hipparchus_number(n) == o
-          end)                
-      end                  
+      os = [
+        1,
+        1,
+        3,
+        11,
+        197,
+        4279,
+        6_791_142_807_106_951_594_977,
+        36_912_754_633_401_605_027_088_357,
+        36_626_471_726_431_599_611_696_929_449,
+        7_685_617_405_888_261_934_325_439_002_849_455_215_101_480_897
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.hipparchus_number(n) == o
+      end)
+    end
   end
-  
+
   describe "is_prime_power?/1" do
-      test "value tests" do
-          ns = [1, 2, 3, 5, 7, 32, 37, 41, 64]
-          os = [true, true, true, true, true, true, true, true]
+    test "value tests" do
+      ns = [1, 2, 3, 5, 7, 32, 37, 41, 64]
+      os = [true, true, true, true, true, true, true, true]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.is_prime_power?(n) == o
-          end)                
-      end                  
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.is_prime_power?(n) == o
+      end)
+    end
   end
-  
+
   describe "lucky_numbers/1" do
-      test "value tests" do
-          ns = [1, 3, 7, 10, 25, 40]
-          os = [
-              [1],
-              [1, 3, 7],
-              [1, 3, 7, 9, 13, 15, 21],
-              [1, 3, 7, 9, 13, 15, 21, 25, 31, 33],
-              [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105, 111],
-              [1, 3, 7, 9, 13, 15, 21, 25, 31, 33, 37, 43, 49, 51, 63, 67, 69, 73, 75, 79, 87, 93, 99, 105, 111, 115, 127, 129, 133, 135, 141, 151, 159, 163, 169, 171, 189, 193, 195, 201]
-          ]
+    test "value tests" do
+      ns = [1, 3, 7, 10, 25, 40]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.lucky_numbers(n) == o
-          end)                
-      end                  
+      os = [
+        [1],
+        [1, 3, 7],
+        [1, 3, 7, 9, 13, 15, 21],
+        [1, 3, 7, 9, 13, 15, 21, 25, 31, 33],
+        [
+          1,
+          3,
+          7,
+          9,
+          13,
+          15,
+          21,
+          25,
+          31,
+          33,
+          37,
+          43,
+          49,
+          51,
+          63,
+          67,
+          69,
+          73,
+          75,
+          79,
+          87,
+          93,
+          99,
+          105,
+          111
+        ],
+        [
+          1,
+          3,
+          7,
+          9,
+          13,
+          15,
+          21,
+          25,
+          31,
+          33,
+          37,
+          43,
+          49,
+          51,
+          63,
+          67,
+          69,
+          73,
+          75,
+          79,
+          87,
+          93,
+          99,
+          105,
+          111,
+          115,
+          127,
+          129,
+          133,
+          135,
+          141,
+          151,
+          159,
+          163,
+          169,
+          171,
+          189,
+          193,
+          195,
+          201
+        ]
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.lucky_numbers(n) == o
+      end)
+    end
   end
-  
+
   describe "digits_of_pi/1" do
-      test "value tests" do
-          ns = [1, 3, 10, 50]
-          os = [3, 314, 3141592653, 31415926535897932384626433832795028841971693993751]
+    test "value tests" do
+      ns = [1, 3, 10, 50]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.digits_of_pi(n) == o
-          end)                
-      end                  
+      os = [
+        3,
+        314,
+        3_141_592_653,
+        31_415_926_535_897_932_384_626_433_832_795_028_841_971_693_993_751
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.digits_of_pi(n) == o
+      end)
+    end
   end
-  
+
   describe "prime_pi/1" do
-      test "value tests" do
-          ns = [1, 10, 100, 1000]
-          os = [0, 4, 25, 168]
+    test "value tests" do
+      ns = [1, 10, 100, 1000]
+      os = [0, 4, 25, 168]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.prime_pi(n) == o
-          end)                
-      end                  
-      
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.prime_pi(n) == o
+      end)
+    end
   end
-  
+
   describe "fubini_number/1" do
-      test "value tests" do
-          ns = [0, 4, 18, 41]
-          os = [1, 75, 3385534663256845323, 81045623051154285047127402304207782853156976521592907421]
+    test "value tests" do
+      ns = [0, 4, 18, 41]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.fubini_number(n) == o
-          end)                
-      end                  
+      os = [
+        1,
+        75,
+        3_385_534_663_256_845_323,
+        81_045_623_051_154_285_047_127_402_304_207_782_853_156_976_521_592_907_421
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.fubini_number(n) == o
+      end)
+    end
   end
-  
+
   describe "j_invariant_q_coefficient/1" do
-      test "value tests" do
-          ns = [0, 4, 18, 41]
-          os = [744, 20245856256, 11459912788444786513920, 3827767751739363485065598331130120]
+    test "value tests" do
+      ns = [0, 4, 18, 41]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.j_invariant_q_coefficient(n) == o
-          end)                
-      end            
+      os = [
+        744,
+        20_245_856_256,
+        11_459_912_788_444_786_513_920,
+        3_827_767_751_739_363_485_065_598_331_130_120
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.j_invariant_q_coefficient(n) == o
+      end)
+    end
   end
-  
+
   describe "euler_zig/1" do
-      test "value tests" do
-          ns = [0, 4, 18, 41]
-          os = [1, 1385, 41222060339517702122347079671259045, 50131049408109796612908693678881009420083336722220539765973596236561571401154699761552253189084809951554801]
+    test "value tests" do
+      ns = [0, 4, 18, 41]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.euler_zig(n) == o
-          end)                
-      end            
+      os = [
+        1,
+        1385,
+        41_222_060_339_517_702_122_347_079_671_259_045,
+        50_131_049_408_109_796_612_908_693_678_881_009_420_083_336_722_220_539_765_973_596_236_561_571_401_154_699_761_552_253_189_084_809_951_554_801
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.euler_zig(n) == o
+      end)
+    end
   end
-  
+
   describe "euler_number/1" do
-      test "value tests" do
-          ns = [0, 4, 18, 41]
-          os = [1, 5, -2404879675441, 0]
+    test "value tests" do
+      ns = [0, 4, 18, 41]
+      os = [1, 5, -2_404_879_675_441, 0]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.euler_number(n) == o
-          end)                
-      end            
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.euler_number(n) == o
+      end)
+    end
   end
-  
+
   describe "euler_polynomial/2" do
-      test "value tests" do
-          ns = [{1, 4}, {8, Fraction.new(1, 2)}, {3, 1}]
-          os = [%Fraction{num: 7, den: 2}, %Fraction{den: 65536, num: 354560}, %Fraction{num: -2, den: 8}]
+    test "value tests" do
+      ns = [{1, 4}, {8, Fraction.new(1, 2)}, {3, 1}]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.euler_polynomial(n, m) == o
-          end)                
-      end            
-  end
-  
-  describe "square_pyramidal_number/1" do
-      test "value tests" do
-          ns = [3, 13, 33, 73, 777]
-          os = [14, 819, 12529, 132349, 156667805]
-
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.square_pyramidal_number(n) == o
-          end)                
-      end            
-  end
-  
-  describe "pentagonal_number/1" do
-      test "value tests" do
-          ns = [3, 13, 33, 73, 777]
-          os = [12, 247, 1617, 7957, 905205]
-
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.pentagonal_number(n) == o
-          end)                
-      end            
-  end
-  
-  describe "endomorphism_count/1" do
-      test "value tests" do
-          ns = [3, 13, 33, 73]
-          os = [27, 302875106592253, 129110040087761027839616029934664535539337183380513, 10533405146807286720373659460502060785759379112212598116064998418834781689316645387966435364502141349866164216580595609788325190062013833]
-
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.endomorphism_count(n) == o
-          end)                
-      end            
-  end
-  
-  describe "tetrahedral_number/1" do
-      test "value tests" do
-          ns = [1, 3, 30, 300, 3000]
-          os = [1, 10, 4960, 4545100, 4504501000]
-
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.tetrahedral_number(n) == o
-          end)                
-      end            
-  end
-  
-  describe "rising_factorial/2" do
-      test "value tests" do
-          ns = [{3, 4}, {5, 7}, {9, 13}, {21, 30}]
-          os = [360, 1663200, 1267136462592000, 12501158328406120266757143916231576780800000000]
-
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.rising_factorial(n, m) == o
-          end)                
-      end            
-  end
-  
-  describe "falling_factorial/2" do
-      ns = [{4, 3}, {7, 5}, {13, 9}, {30, 21}]
-      os = [24, 2520, 259459200, 730965773291972714496000000]
+      os = [
+        %Fraction{num: 7, den: 2},
+        %Fraction{den: 65536, num: 354_560},
+        %Fraction{num: -2, den: 8}
+      ]
 
       Enum.zip(ns, os)
       |> Enum.each(fn {{n, m}, o} ->
-        assert Math.falling_factorial(n, m) == o
-      end)                
+        assert Math.euler_polynomial(n, m) == o
+      end)
+    end
   end
-  
-  describe "cayley_number/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 29, 45]
-          os = [1, 1, 16, 2357947691, 3053134545970524535745336759489912159909, 122500565161156121231925522170574167775076830366742797195911407470703125]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.cayley_number(n) == o
-          end)                
-      end            
+  describe "square_pyramidal_number/1" do
+    test "value tests" do
+      ns = [3, 13, 33, 73, 777]
+      os = [14, 819, 12529, 132_349, 156_667_805]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.square_pyramidal_number(n) == o
+      end)
+    end
+  end
+
+  describe "pentagonal_number/1" do
+    test "value tests" do
+      ns = [3, 13, 33, 73, 777]
+      os = [12, 247, 1617, 7957, 905_205]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.pentagonal_number(n) == o
+      end)
+    end
+  end
+
+  describe "endomorphism_count/1" do
+    test "value tests" do
+      ns = [3, 13, 33, 73]
+
+      os = [
+        27,
+        302_875_106_592_253,
+        129_110_040_087_761_027_839_616_029_934_664_535_539_337_183_380_513,
+        10_533_405_146_807_286_720_373_659_460_502_060_785_759_379_112_212_598_116_064_998_418_834_781_689_316_645_387_966_435_364_502_141_349_866_164_216_580_595_609_788_325_190_062_013_833
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.endomorphism_count(n) == o
+      end)
+    end
+  end
+
+  describe "tetrahedral_number/1" do
+    test "value tests" do
+      ns = [1, 3, 30, 300, 3000]
+      os = [1, 10, 4960, 4_545_100, 4_504_501_000]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.tetrahedral_number(n) == o
+      end)
+    end
+  end
+
+  describe "rising_factorial/2" do
+    test "value tests" do
+      ns = [{3, 4}, {5, 7}, {9, 13}, {21, 30}]
+
+      os = [
+        360,
+        1_663_200,
+        1_267_136_462_592_000,
+        12_501_158_328_406_120_266_757_143_916_231_576_780_800_000_000
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.rising_factorial(n, m) == o
+      end)
+    end
+  end
+
+  describe "falling_factorial/2" do
+    ns = [{4, 3}, {7, 5}, {13, 9}, {30, 21}]
+    os = [24, 2520, 259_459_200, 730_965_773_291_972_714_496_000_000]
+
+    Enum.zip(ns, os)
+    |> Enum.each(fn {{n, m}, o} ->
+      assert Math.falling_factorial(n, m) == o
+    end)
+  end
+
+  describe "cayley_number/1" do
+    test "value tests" do
+      ns = [1, 2, 4, 11, 29, 45]
+
+      os = [
+        1,
+        1,
+        16,
+        2_357_947_691,
+        3_053_134_545_970_524_535_745_336_759_489_912_159_909,
+        122_500_565_161_156_121_231_925_522_170_574_167_775_076_830_366_742_797_195_911_407_470_703_125
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.cayley_number(n) == o
+      end)
+    end
   end
 
   describe "ordered_subsets_count/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 29, 45]
-          os = [1, 3, 73, 824073141, 5628563759710900871382077742916173, 776245524984802767383175984672148286143987976321467492834141]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 29, 45]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.ordered_subsets_count(n) == o
-          end)                
-      end            
+      os = [
+        1,
+        3,
+        73,
+        824_073_141,
+        5_628_563_759_710_900_871_382_077_742_916_173,
+        776_245_524_984_802_767_383_175_984_672_148_286_143_987_976_321_467_492_834_141
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.ordered_subsets_count(n) == o
+      end)
+    end
   end
 
   describe "plane_partition_count/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 29, 100]
-          os = [1, 3, 13, 859, 3759612, 59206066030052023]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 29, 100]
+      os = [1, 3, 13, 859, 3_759_612, 59_206_066_030_052_023]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.plane_partition_count(n) == o
-          end)                
-      end            
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.plane_partition_count(n) == o
+      end)
+    end
   end
-  
+
   describe "labeled_rooted_trees_count/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 34, 100]
-          os = [1, 2, 64, 25937424601, 345783497216724000335707367685598692782880644399104, 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 34, 100]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.labeled_rooted_trees_count(n) == o
-          end)                
-      end      
+      os = [
+        1,
+        2,
+        64,
+        25_937_424_601,
+        345_783_497_216_724_000_335_707_367_685_598_692_782_880_644_399_104,
+        1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.labeled_rooted_trees_count(n) == o
+      end)
+    end
   end
-  
+
   describe "labeled_rooted_forests_count/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 34, 100]
-          os = [1, 3, 125, 61917364224, 900006121921754037511662394623272120952606201171875, 2678033494476758508185341297829238449186077606713864135534852523878318330996771563801441598363113456409263875004787765032797220611552796316638577448808416388296810715999386219563695959264034497519901]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 34, 100]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.labeled_rooted_forests_count(n) == o
-          end)                
-      end      
+      os = [
+        1,
+        3,
+        125,
+        61_917_364_224,
+        900_006_121_921_754_037_511_662_394_623_272_120_952_606_201_171_875,
+        2_678_033_494_476_758_508_185_341_297_829_238_449_186_077_606_713_864_135_534_852_523_878_318_330_996_771_563_801_441_598_363_113_456_409_263_875_004_787_765_032_797_220_611_552_796_316_638_577_448_808_416_388_296_810_715_999_386_219_563_695_959_264_034_497_519_901
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.labeled_rooted_forests_count(n) == o
+      end)
+    end
   end
-  
+
   describe "derangement_count/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 34, 100, 147]
-          os = [0, 1, 9, 14684570, 108610077126170304674801654684367969729, 34332795984163804765195977526776142032365783805375784983543400282685180793327632432791396429850988990237345920155783984828001486412574060553756854137069878601, 6354182529461228439362627488637815690308570187502862289893858427824542236490821946255866597772954422697421757080919849848382395878829003118855732545163300007535700030711152156622841482633473711406810220556925471380221976041654127479763464570970969891058994]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 34, 100, 147]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.derangement_count(n) == o
-          end)                
-      end      
+      os = [
+        0,
+        1,
+        9,
+        14_684_570,
+        108_610_077_126_170_304_674_801_654_684_367_969_729,
+        34_332_795_984_163_804_765_195_977_526_776_142_032_365_783_805_375_784_983_543_400_282_685_180_793_327_632_432_791_396_429_850_988_990_237_345_920_155_783_984_828_001_486_412_574_060_553_756_854_137_069_878_601,
+        6_354_182_529_461_228_439_362_627_488_637_815_690_308_570_187_502_862_289_893_858_427_824_542_236_490_821_946_255_866_597_772_954_422_697_421_757_080_919_849_848_382_395_878_829_003_118_855_732_545_163_300_007_535_700_030_711_152_156_622_841_482_633_473_711_406_810_220_556_925_471_380_221_976_041_654_127_479_763_464_570_970_969_891_058_994
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.derangement_count(n) == o
+      end)
+    end
   end
-  
+
   describe "pell_number/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 34, 100, 147]
-          os = [1, 2, 12, 5741, 3654502875938, 66992092050551637663438906713182313772, 65536123822357661887786970118390510778951948386497100245]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 34, 100, 147]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.pell_number(n) == o
-          end)                
-      end      
+      os = [
+        1,
+        2,
+        12,
+        5741,
+        3_654_502_875_938,
+        66_992_092_050_551_637_663_438_906_713_182_313_772,
+        65_536_123_822_357_661_887_786_970_118_390_510_778_951_948_386_497_100_245
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.pell_number(n) == o
+      end)
+    end
   end
-  
+
   describe "pancake_cut_max/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 34, 100, 147]
-          os = [2, 4, 11, 67, 596, 5051, 10879]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 34, 100, 147]
+      os = [2, 4, 11, 67, 596, 5051, 10879]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.pancake_cut_max(n) == o
-          end)                
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.pancake_cut_max(n) == o
+      end)
+    end
   end
-  
+
   describe "hamming_weight/1" do
-      test "value tests" do
-          ns = [{10, 2}, {10, 10}, {9999, 2}, {1234567890, 2}, {1234567890, 10}]
-          os = [2, 1, 8, 12, 9]
+    test "value tests" do
+      ns = [{10, 2}, {10, 10}, {9999, 2}, {1_234_567_890, 2}, {1_234_567_890, 10}]
+      os = [2, 1, 8, 12, 9]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, b}, o} ->
-            assert Math.hamming_weight(n, b) == o
-          end)                
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, b}, o} ->
+        assert Math.hamming_weight(n, b) == o
+      end)
+    end
   end
-  
+
   describe "bell_number/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 11, 34, 100, 147]
-          os = [1, 2, 15, 678570, 21195039388640360462388656799, 47585391276764833658790768841387207826363669686825611466616334637559114497892442622672724044217756306953557882560751, 105156800343983010552547656344945491574041280244184432430133843554686245715459827371093731289128542228165675393103402951288190918619357951493545423343641404314554745774904879716269578343285]
+    test "value tests" do
+      ns = [1, 2, 4, 11, 34, 100, 147]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.bell_number(n) == o
-          end)                
-      end
+      os = [
+        1,
+        2,
+        15,
+        678_570,
+        21_195_039_388_640_360_462_388_656_799,
+        47_585_391_276_764_833_658_790_768_841_387_207_826_363_669_686_825_611_466_616_334_637_559_114_497_892_442_622_672_724_044_217_756_306_953_557_882_560_751,
+        105_156_800_343_983_010_552_547_656_344_945_491_574_041_280_244_184_432_430_133_843_554_686_245_715_459_827_371_093_731_289_128_542_228_165_675_393_103_402_951_288_190_918_619_357_951_493_545_423_343_641_404_314_554_745_774_904_879_716_269_578_343_285
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.bell_number(n) == o
+      end)
+    end
   end
-  
+
   describe "involutions_count/1" do
-      test "value tests" do
-          ns = [1, 2, 4, 10, 34, 100, 147]
-          os = [1, 2, 10, 9496, 881687990282453393920, 24053347438333478953622433243028232812964119825419485684849162710512551427284402176, 2475448358774062960868863450602202717975845052092209591546502999631342824778997697905916546469257102103646243105102706951299019046912]
+    test "value tests" do
+      ns = [1, 2, 4, 10, 34, 100, 147]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.involutions_count(n) == o
-          end)                
-      end
+      os = [
+        1,
+        2,
+        10,
+        9496,
+        881_687_990_282_453_393_920,
+        24_053_347_438_333_478_953_622_433_243_028_232_812_964_119_825_419_485_684_849_162_710_512_551_427_284_402_176,
+        2_475_448_358_774_062_960_868_863_450_602_202_717_975_845_052_092_209_591_546_502_999_631_342_824_778_997_697_905_916_546_469_257_102_103_646_243_105_102_706_951_299_019_046_912
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.involutions_count(n) == o
+      end)
+    end
   end
-  
+
   describe "is_odious_number?/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 12345, 987654321, 987654323]
-          os = [true, true, false, true, false, true, false]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 12345, 987_654_321, 987_654_323]
+      os = [true, true, false, true, false, true, false]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.is_odious_number?(n) == o
-          end)                
-      end    
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.is_odious_number?(n) == o
+      end)
+    end
   end
-  
+
   describe "is_prime_fast?/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 123456789, 987654321, 987654323]
-          os = [false, true, false, true, false, false, true]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 123_456_789, 987_654_321, 987_654_323]
+      os = [false, true, false, true, false, false, true]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.is_prime_fast?(n) == o
-          end)                
-      end    
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.is_prime_fast?(n) == o
+      end)
+    end
   end
-  
+
   describe "lucas_number/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 200, 2000]
-          os = [1, 3, 76, 9349, 627376215338105766356982006981782561278127, 9446708185759308415384067495999677431530963218480368032804826598281856324445977322684945038267086094364761366000137291348836189673785457326607903364013465483957273836804336595888397782139002535468799414419546535346394066447256463745311310661259359973909189379826722425332112242554370313063917929424669185186291673823764654829513873821477637371237697744102254002802127905427315493403711022179894479121632130910668828127]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 200, 2000]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.lucas_number(n) == o
-          end)                
-      end
+      os = [
+        1,
+        3,
+        76,
+        9349,
+        627_376_215_338_105_766_356_982_006_981_782_561_278_127,
+        9_446_708_185_759_308_415_384_067_495_999_677_431_530_963_218_480_368_032_804_826_598_281_856_324_445_977_322_684_945_038_267_086_094_364_761_366_000_137_291_348_836_189_673_785_457_326_607_903_364_013_465_483_957_273_836_804_336_595_888_397_782_139_002_535_468_799_414_419_546_535_346_394_066_447_256_463_745_311_310_661_259_359_973_909_189_379_826_722_425_332_112_242_554_370_313_063_917_929_424_669_185_186_291_673_823_764_654_829_513_873_821_477_637_371_237_697_744_102_254_002_802_127_905_427_315_493_403_711_022_179_894_479_121_632_130_910_668_828_127
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.lucas_number(n) == o
+      end)
+    end
   end
-      
+
   describe "kolakoski sequences" do
-         
-      test "start_kolakoski_sequence/1" do
-          assert Math.start_kolakoski_sequence() == {[], 0, {1, 2}}
-      end
-      
-      test "extend_kolakoski_sequence/1" do
-          
-          assert Math.start_kolakoski_sequence() 
-          |> Math.extend_kolakoski_sequence() == {[1], 1, {1, 2}}
-          
-          assert Math.start_kolakoski_sequence() 
-          |> Math.extend_kolakoski_sequence() 
-          |> Math.extend_kolakoski_sequence() == {[1, 2, 2], 2, {1, 2}}
-          
-          assert Math.start_kolakoski_sequence() 
-          |> Math.extend_kolakoski_sequence() 
-          |> Math.extend_kolakoski_sequence() 
-          |> Math.extend_kolakoski_sequence() == {[1, 2, 2, 1, 1], 3, {1, 2}}
-      end
-      
-      test "extend_kolakoski_sequence_to_length/2" do
-          assert Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence_to_length(30) == {[1, 2, 2, 1, 1, 2, 1, 2, 2, 1, 2, 2, 1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 1, 1, 2], 20, {1, 2}}
-      end
+    test "start_kolakoski_sequence/1" do
+      assert Math.start_kolakoski_sequence() == {[], 0, {1, 2}}
+    end
+
+    test "extend_kolakoski_sequence/1" do
+      assert Math.start_kolakoski_sequence()
+             |> Math.extend_kolakoski_sequence() == {[1], 1, {1, 2}}
+
+      assert Math.start_kolakoski_sequence()
+             |> Math.extend_kolakoski_sequence()
+             |> Math.extend_kolakoski_sequence() == {[1, 2, 2], 2, {1, 2}}
+
+      assert Math.start_kolakoski_sequence()
+             |> Math.extend_kolakoski_sequence()
+             |> Math.extend_kolakoski_sequence()
+             |> Math.extend_kolakoski_sequence() == {[1, 2, 2, 1, 1], 3, {1, 2}}
+    end
+
+    test "extend_kolakoski_sequence_to_length/2" do
+      assert Math.start_kolakoski_sequence() |> Math.extend_kolakoski_sequence_to_length(30) ==
+               {[
+                  1,
+                  2,
+                  2,
+                  1,
+                  1,
+                  2,
+                  1,
+                  2,
+                  2,
+                  1,
+                  2,
+                  2,
+                  1,
+                  1,
+                  2,
+                  1,
+                  1,
+                  2,
+                  2,
+                  1,
+                  2,
+                  1,
+                  1,
+                  2,
+                  1,
+                  2,
+                  2,
+                  1,
+                  1,
+                  2
+                ], 20, {1, 2}}
+    end
   end
-  
+
   describe "triangle_position_for_element/1" do
-      test "test values" do
-          ns = [1, 2, 9, 19]
-          os = [{2, 0}, {2, 1}, {4, 3}, {6, 4}]
+    test "test values" do
+      ns = [1, 2, 9, 19]
+      os = [{2, 0}, {2, 1}, {4, 3}, {6, 4}]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.triangle_position_for_element(n) == o
-          end)                
-      end          
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.triangle_position_for_element(n) == o
+      end)
+    end
   end
-  
+
   describe "triangle_row_for_element/1" do
-      test "test values" do
-          ns = [1, 2, 9, 19]
-          os = [2, 2, 4, 6]
+    test "test values" do
+      ns = [1, 2, 9, 19]
+      os = [2, 2, 4, 6]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.triangle_row_for_element(n) == o
-          end)                
-      end                
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.triangle_row_for_element(n) == o
+      end)
+    end
   end
-  
+
   describe "eulerian_number/2" do
-      test "test values" do
-          ns = [{1, 0}, {4, 2}, {6, 3}, {6, 7}, {9, 4}]
-          os = [1, 11, 302, 0, 156190]
+    test "test values" do
+      ns = [{1, 0}, {4, 2}, {6, 3}, {6, 7}, {9, 4}]
+      os = [1, 11, 302, 0, 156_190]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.eulerian_number(n, m) == o
-          end)                
-      end                      
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.eulerian_number(n, m) == o
+      end)
+    end
   end
-  
+
   describe "triangle_number/1" do
-      test "test values" do
-          ns = [1, 2, 9, 19, 43, 100, 200, 300, 754, 9000]
-          os = [1, 3, 45, 190, 946, 5050, 20100, 45150, 284635, 40504500]
+    test "test values" do
+      ns = [1, 2, 9, 19, 43, 100, 200, 300, 754, 9000]
+      os = [1, 3, 45, 190, 946, 5050, 20100, 45150, 284_635, 40_504_500]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.triangle_number(n) == o
-          end)                
-      end    
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.triangle_number(n) == o
+      end)
+    end
   end
-  
+
   describe "wedderburn_etherington_number/1" do
-      test "test values" do
-          ns = [1, 2, 9, 19, 43, 100, 200, 300]
-          os = [1, 1, 46, 127912, 111146809165122, 1019560119620720464013531852138491082, 1141702678822176831157009785526651690179398155888199965734911032502338584734, 1972666500548256069567265504055115733765719122240464770401890754621349706143463425967160618093669965967626678829167]
+    test "test values" do
+      ns = [1, 2, 9, 19, 43, 100, 200, 300]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.wedderburn_etherington_number(n) == o
-          end)          
-      end
+      os = [
+        1,
+        1,
+        46,
+        127_912,
+        111_146_809_165_122,
+        1_019_560_119_620_720_464_013_531_852_138_491_082,
+        1_141_702_678_822_176_831_157_009_785_526_651_690_179_398_155_888_199_965_734_911_032_502_338_584_734,
+        1_972_666_500_548_256_069_567_265_504_055_115_733_765_719_122_240_464_770_401_890_754_621_349_706_143_463_425_967_160_618_093_669_965_967_626_678_829_167
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.wedderburn_etherington_number(n) == o
+      end)
+    end
   end
-  
+
   describe "binomial/2" do
-      test "test values" do
-          ns = [{5, 3}, {10, 5}, {15, 13}, {20, 8}, {34, 17}]
-          os = [10, 252, 105, 125970, 2333606220]
+    test "test values" do
+      ns = [{5, 3}, {10, 5}, {15, 13}, {20, 8}, {34, 17}]
+      os = [10, 252, 105, 125_970, 2_333_606_220]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, k}, o} ->
-            assert Math.binomial(n, k) == o
-          end)
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, k}, o} ->
+        assert Math.binomial(n, k) == o
+      end)
+    end
   end
-  
+
   describe "euler_zig_zag/1" do
-      test "test values" do
-          ns = [1, 2, 9, 19, 43]
-          os = [1, 1, 7936, 29088885112832, 283727921907431909304183316295787837183229952]
+    test "test values" do
+      ns = [1, 2, 9, 19, 43]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.euler_zig_zag(n) == o
-          end)
-      end
+      os = [
+        1,
+        1,
+        7936,
+        29_088_885_112_832,
+        283_727_921_907_431_909_304_183_316_295_787_837_183_229_952
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.euler_zig_zag(n) == o
+      end)
+    end
   end
-  
+
   describe "factorial/1" do
-      test "test values" do
-          ns = [1, 2, 9, 19, 43]
-          os = [1, 2, 362880, 121645100408832000, 60415263063373835637355132068513997507264512000000000]
+    test "test values" do
+      ns = [1, 2, 9, 19, 43]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.factorial(n) == o
-          end)
-      end
+      os = [
+        1,
+        2,
+        362_880,
+        121_645_100_408_832_000,
+        60_415_263_063_373_835_637_355_132_068_513_997_507_264_512_000_000_000
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.factorial(n) == o
+      end)
+    end
   end
-  
+
   describe "catalan_number/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 43, 100, 220]
-          os = [1, 2, 4862, 1767263190, 150853479205085351660700, 896519947090131496687170070074100632420837521538745909320, 488396770681524153646181537427091091406855932349115171518830851118786972757066959025507879092427258325815216144577359863995360800]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 43, 100, 220]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.catalan_number(n) == o
-          end)
-      end
+      os = [
+        1,
+        2,
+        4862,
+        1_767_263_190,
+        150_853_479_205_085_351_660_700,
+        896_519_947_090_131_496_687_170_070_074_100_632_420_837_521_538_745_909_320,
+        488_396_770_681_524_153_646_181_537_427_091_091_406_855_932_349_115_171_518_830_851_118_786_972_757_066_959_025_507_879_092_427_258_325_815_216_144_577_359_863_995_360_800
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.catalan_number(n) == o
+      end)
+    end
   end
-  
+
   describe "rooted_tree_count/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 43, 100, 220]
-          os = [1, 1, 286, 4688676, 271097737169671824, 51384328351659326880337136395054298255277970, 4757010736205951296379181392778931809047934415149223874825669806143414483354636665310702400385569088]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 43, 100, 220]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.rooted_tree_count(n) == o
-          end)
-      end
+      os = [
+        1,
+        1,
+        286,
+        4_688_676,
+        271_097_737_169_671_824,
+        51_384_328_351_659_326_880_337_136_395_054_298_255_277_970,
+        4_757_010_736_205_951_296_379_181_392_778_931_809_047_934_415_149_223_874_825_669_806_143_414_483_354_636_665_310_702_400_385_569_088
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.rooted_tree_count(n) == o
+      end)
+    end
   end
-  
+
   describe "hurwitz_radon_number/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 100, 220, 4444, 10000]
-          os = [1, 2, 1, 1, 4, 4, 4, 9]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 100, 220, 4444, 10000]
+      os = [1, 2, 1, 1, 4, 4, 4, 9]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.hurwitz_radon_number(n) == o
-          end)
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.hurwitz_radon_number(n) == o
+      end)
+    end
   end
-  
+
   describe "divisors_of_form_mx_plus_b/3" do
-      test "value tests" do
-          # m, b, n
-          ns = [{2, 1, 1}, {2, 1, 21}, {2, 9, 8}, {5, 7, 7}, {5, 7, 57}]
-          os = [[1], [1, 3, 7, 21], [], [7], [57]]
+    test "value tests" do
+      # m, b, n
+      ns = [{2, 1, 1}, {2, 1, 21}, {2, 9, 8}, {5, 7, 7}, {5, 7, 57}]
+      os = [[1], [1, 3, 7, 21], [], [7], [57]]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{m, b, n}, o} ->
-            assert Math.divisors_of_form_mx_plus_b(m, b, n) == o
-          end)
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{m, b, n}, o} ->
+        assert Math.divisors_of_form_mx_plus_b(m, b, n) == o
+      end)
+    end
   end
-  
+
   describe "is_of_mx_plus_b/3" do
-      test "value tests" do
-          # m, b, n
-          ns = [{4, 3, 1}, {4, 3, 7}, {4, 3, 321}, {13, 5, 44}, {13, 5, 45}]
-          os = [false, true, false, true, false]
+    test "value tests" do
+      # m, b, n
+      ns = [{4, 3, 1}, {4, 3, 7}, {4, 3, 321}, {13, 5, 44}, {13, 5, 45}]
+      os = [false, true, false, true, false]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{m, b, n}, o} ->
-            assert Math.is_of_mx_plus_b?(m, b, n) == o
-          end)
-          
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{m, b, n}, o} ->
+        assert Math.is_of_mx_plus_b?(m, b, n) == o
+      end)
+    end
   end
-      
+
   describe "p_adic_valuation/2" do
-      test "value tests" do
-          ns = [{2, 2}, {3, 0}, {3, 33}, {5, 31250}, {7, 49}, {11, 7073843073}]
-          os = [1, :infinity, 1, 6, 2, 9]
+    test "value tests" do
+      ns = [{2, 2}, {3, 0}, {3, 33}, {5, 31250}, {7, 49}, {11, 7_073_843_073}]
+      os = [1, :infinity, 1, 6, 2, 9]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{p, n}, o} ->
-            assert Math.p_adic_valuation(p, n) == o
-          end)
-      end
-      
-      test "must be prime" do
-         assert_raise ArgumentError, fn -> Math.p_adic_valuation(4, 37) end 
-      end       
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{p, n}, o} ->
+        assert Math.p_adic_valuation(p, n) == o
+      end)
+    end
+
+    test "must be prime" do
+      assert_raise ArgumentError, fn -> Math.p_adic_valuation(4, 37) end
+    end
   end
-  
+
   describe "abelian_groups_count/1" do
-      test "value tests" do
-          ns = [1, 2, 9, 19, 100, 220, 4444, 10000]
-          os = [1, 1, 2, 1, 4, 2, 2, 25]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 100, 220, 4444, 10000]
+      os = [1, 1, 2, 1, 4, 2, 2, 25]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.abelian_groups_count(n) == o
-          end)
-      end       
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.abelian_groups_count(n) == o
+      end)
+    end
   end
-    
-  describe "partition_count/1" do
-     test "value tests" do
-         ns = [1, 2, 9, 19, 100, 220]
-         os = [1, 2, 30, 490, 190569292, 21248279009367]
 
-         Enum.zip(ns, os)
-         |> Enum.each(fn {n, o} ->
-           assert Math.partition_count(n) == o
-         end)
-     end 
+  describe "partition_count/1" do
+    test "value tests" do
+      ns = [1, 2, 9, 19, 100, 220]
+      os = [1, 2, 30, 490, 190_569_292, 21_248_279_009_367]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.partition_count(n) == o
+      end)
+    end
   end
 
   describe "ramanujan_tau/1" do
-      test "value tests" do
-        ns = [1, 2, 9, 19, 700, 4545, 16001]
-        os = [1, -24, -113643, 10661420, -628483682444800, -44868357938934070380, -115858115573561490511998]
+    test "value tests" do
+      ns = [1, 2, 9, 19, 700, 4545, 16001]
 
-        Enum.zip(ns, os)
-        |> Enum.each(fn {n, o} ->
-          assert Math.ramanujan_tau(n) == o
-        end)
-      end      
+      os = [
+        1,
+        -24,
+        -113_643,
+        10_661_420,
+        -628_483_682_444_800,
+        -44_868_357_938_934_070_380,
+        -115_858_115_573_561_490_511_998
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.ramanujan_tau(n) == o
+      end)
+    end
   end
-  
+
   describe "is_sphenic_number?/1" do
     test "value tests" do
       ns = [1, 2, 9, 19, 700, 4543, 28438, 51322, 51334]

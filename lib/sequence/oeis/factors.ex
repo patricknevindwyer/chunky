@@ -954,13 +954,12 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Number of divisors of n of form 4k+1",
        references: [{:oeis, :a001826, "https://oeis.org/A001826"}]
   def create_sequence_a001826(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001826/1)
-  end 
-
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001826/1)
+  end
 
   @doc offset: 1
   def seq_a001826(idx) do
-      Math.divisors_of_form_mx_plus_b(4, 1, idx) |> length()
+    Math.divisors_of_form_mx_plus_b(4, 1, idx) |> length()
   end
 
   @doc """
@@ -988,17 +987,16 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3)).",
        references: [{:oeis, :a001842, "https://oeis.org/A001842"}]
   def create_sequence_a001842(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001842/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001842/1)
   end
-
 
   @doc offset: 0
   def seq_a001842(idx) do
-      if idx == 0 do 
-          0
-      else
-          Math.divisors_of_form_mx_plus_b(4, 3, idx) |> length()
-      end
+    if idx == 0 do
+      0
+    else
+      Math.divisors_of_form_mx_plus_b(4, 3, idx) |> length()
+    end
   end
 
   @doc """
