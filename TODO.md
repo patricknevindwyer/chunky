@@ -63,7 +63,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
  
- - remove httpoison/jason deps - causes compile warnings in distributed version, or make the explicit all envs
+ - x remove httpoison/jason deps - causes compile warnings in distributed version, or make the explicit all envs
 
  - new main readme for hexdocs
   
@@ -71,7 +71,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
  - move fibonacci out of main OEIS module
  
- - hit 50% core coverage
+ - x hit 50% core coverage
       
  - macros
   - update cache based functions to use CacheAgent.cache_as/3 macro
