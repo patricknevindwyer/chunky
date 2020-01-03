@@ -15,7 +15,24 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.11.0
+
+```
+OEIS Coverage
+        210 total sequences
+By Module
+        Elixir.Chunky.Sequence.OEIS - 3 sequences
+        Elixir.Chunky.Sequence.OEIS.Core - 88 sequences
+        Elixir.Chunky.Sequence.OEIS.Factors - 98 sequences
+        Elixir.Chunky.Sequence.OEIS.Primes - 1 sequences
+        Elixir.Chunky.Sequence.OEIS.Sigma - 20 sequences
+Sequence Groups
+        OEIS Core Sequences - 89 / 177 (50.28%)
+        OEIS Core::Easy Sequences - 75 / 146 (51.37%)
+        OEIS Core::Hard Sequences - 12 / 12 (100.0%)
+        OEIS Core::Multiplicative Sequences - 22 / 22 (100.0%)
+        OEIS Core::Eigen Sequences - 5 / 5 (100.0%)
+```
 
 ### Enhancements
 
@@ -36,6 +53,9 @@
   - wedderburn_etherington_number/1 - Count of permutations of binary rooted trees of size `n`
   - functions for calculating positions in euler/pascal/element triangles
   - eulerian_number/2
+  - euler_number
+  - combinatorics counting methods
+  - ...
   
   
 ### New Sequences
@@ -103,6 +123,8 @@
  
      - A001826 - Number of divisors of n of form 4k+1
      - A001842 - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3))
+     
+     
 ## v0.10.0
 
 ```
