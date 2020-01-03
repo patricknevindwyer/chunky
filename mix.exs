@@ -27,8 +27,8 @@ defmodule Chunky.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.14", only: :dev, runtime: false},
-      {:httpoison, "~> 1.6"},
-      {:jason, "~> 1.1"}
+      {:httpoison, "~> 1.6", only: [:dev, :test]},
+      {:jason, "~> 1.1", only: [:dev, :test]}
     ]
   end
 
@@ -36,6 +36,7 @@ defmodule Chunky.MixProject do
     [
       licenses: ["BSD-3-Clause"],
       files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      exclude_patterns: ["lib/sequences/oeis/util.ex"],
       links: %{"GitHub" => "https://github.com/patricknevindwyer/chunky"},
       maintainers: ["Patrick Dwyer"]
     ]
