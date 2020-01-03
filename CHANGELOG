@@ -15,7 +15,7 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.11.1
 
 ### Enhancements
 
@@ -27,6 +27,7 @@
   - `is_positive?/1` - New predicate
   - `is_negative?/1` - New predicate
   - all predicates of form `is_*?/1` now work for all integers in range `(-∞..+∞)
+
 
 ## v0.11.0
 

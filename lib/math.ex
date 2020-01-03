@@ -3980,7 +3980,7 @@ defmodule Chunky.Math do
       true
   
       iex> Math.is_even?(0)
-      false
+      true
   
       iex> Math.is_even?(3)
       false
