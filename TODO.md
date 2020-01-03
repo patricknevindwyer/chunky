@@ -63,10 +63,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
  
- 
- - do we need an :infinity value?
- 
- - check predicates - some _could_ apply to odd numbers
+
  - move integer math functions in fractions out to math library
 
  - move fibonacci out of main OEIS module
@@ -75,6 +72,12 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - update cache based functions to use CacheAgent.cache_as/3 macro
 
  - new main readme for hexdocs / updated readme for GitHub  
+
+
+ 
+ - do we need an :infinity value?
+ 
+ - check predicates - some _could_ apply to odd numbers
   
  - Sequence.at/2
   - check for overflow of finite lists
@@ -92,12 +95,48 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - zip
   - with_index
  
+ - fraction updates
+  - Is zero
+  - Is positive
+  - Is negative
+  - Is whole
+  - Is greater than one (or less than negative one
+
+ -  Functions:
+  - abs
+  - Floor/ceil
+ 
  - testing and validation
   - credo
   - typespecs
   - dialyzer
   - circle/ci integration
   
+```
+In aliases
+
+     quality: ["format", "credo --strict", "sobelow --config", "dialyzer", "test”]
+
+In project:
+
+    aliases: aliases(),
+      deps: deps(),
+
+      # static analysis/code quality
+      elixirc_options: [warnings_as_errors: true],
+      dialyzer: [
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+        ignore_warnings: ".dialyzer_ignore.exs"
+      ]
+
+In .dialyzer_ingore.exs:
+
+[
+  {":0:unknown_function Function ExUnit.Callbacks.__merge__/3 does not exist."},
+  {":0:unknown_function Function ExUnit.CaseTemplate.__proxy__/2 does not exist."},
+  {":0:unknown_function Function Mix.env/0 does not exist."}
+]
+```  
   
  - Caching
   - we're not really using caches right - we aren't rooting the Agent in a supervisor structure, so it isn't seeing data across processes
