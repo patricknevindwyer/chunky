@@ -4,7 +4,7 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   alias Chunky.Fraction
   doctest Chunky.Math
-  
+
   describe "factorization_count/1" do
     test "value tests" do
       ns = [1, 2, 3, 5, 7, 32, 370, 4100, 6444]
