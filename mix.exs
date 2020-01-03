@@ -1,7 +1,7 @@
 defmodule Chunky.MixProject do
   use Mix.Project
 
-  @version "0.11.1"
+  @version "0.11.2"
 
   def project do
     [
@@ -10,7 +10,7 @@ defmodule Chunky.MixProject do
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      description: "Fractions, Grids, and Combinatorics for Elixir",
+      description: "Fractions, Math, Grids, and Combinatorics for Elixir",
       source_url: "https://github.com/patricknevindwyer/chunky",
       homepage_url: "https://github.com/patricknevindwyer/chunky",
       package: package(),
@@ -36,7 +36,7 @@ defmodule Chunky.MixProject do
     [
       licenses: ["BSD-3-Clause"],
       files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
-      exclude_patterns: ["lib/sequences/oeis/util.ex"],
+      exclude_patterns: ["lib/sequence/oeis/util.ex"],
       links: %{"GitHub" => "https://github.com/patricknevindwyer/chunky"},
       maintainers: ["Patrick Dwyer"]
     ]

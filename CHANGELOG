@@ -15,6 +15,15 @@
 
 # CHANGELOG
 
+## v0.*.*
+
+### Build/Development changes
+
+ - Module requiring HTTPoison and Jason excluded from packaging
+ - HTTPoison and Jason moved to `dev` and `test` only requirements
+ 
+ 
+
 ## v0.11.1
 
 ### Enhancements
