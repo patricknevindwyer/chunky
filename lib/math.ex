@@ -416,15 +416,11 @@ defmodule Chunky.Math do
   def factorial(1), do: 1
 
   def factorial(n) when is_integer(n) and n > 1 do
-    CacheAgent.start_link(:factorial)
-
-    if CacheAgent.has?(:factorial, n) do
-      CacheAgent.get(:factorial, n)
-    else
-      f = n * factorial(n - 1)
-      CacheAgent.put(:factorial, n, f)
-      f
-    end
+      
+      CacheAgent.cache_as :factorial, n do
+          n * factorial(n - 1)
+      end
+      
   end
 
   @doc """
@@ -1122,21 +1118,15 @@ defmodule Chunky.Math do
 
   def bell_number(n) when is_integer(n) and n > 1 do
     # a(n+1) = Sum_{k=0..n} a(k)*binomial(n, k)  
-    CacheAgent.start_link(:bell_number)
-
-    if CacheAgent.has?(:bell_number, n) do
-      CacheAgent.get(:bell_number, n)
-    else
-      b_n =
+    
+    CacheAgent.cache_as :bell_number, n do
         0..(n - 1)
         |> Enum.map(fn k ->
           bell_number(k) * binomial(n - 1, k)
         end)
-        |> Enum.sum()
-
-      CacheAgent.put(:bell_number, n, b_n)
-      b_n
+        |> Enum.sum()        
     end
+    
   end
 
   @doc """
@@ -1246,19 +1236,11 @@ defmodule Chunky.Math do
   def eulerian_number(n, m) when is_integer(n) and is_integer(m) and m >= n, do: 0
 
   def eulerian_number(n, m) do
-    CacheAgent.start_link(:eulerian_number)
-
-    if CacheAgent.has?(:eulerian_number, {n, m}) do
-      CacheAgent.get(:eulerian_number, {n, m})
-    else
-      # We use the recursive definition so we can take advantage of caching
-      # A(n, m) = (n - m) * A(n - 1, m - 1) + (m + 1) * A(n - 1, m)      
-      e_n = (n - m) * eulerian_number(n - 1, m - 1) + (m + 1) * eulerian_number(n - 1, m)
-
-      # cache and return
-      CacheAgent.put(:eulerian_number, {n, m}, e_n)
-      e_n
-    end
+      
+      CacheAgent.cache_as :eulerian_number, {n, m} do
+          (n - m) * eulerian_number(n - 1, m - 1) + (m + 1) * eulerian_number(n - 1, m)
+      end
+      
   end
 
   @doc """
@@ -1296,22 +1278,18 @@ defmodule Chunky.Math do
   def euler_zig_zag(n) when is_integer(n) and n > 2 do
     # a(n) = (Sum_{k=0..n - 1} binomial(n - 1, k) * a(k)*a(n - 1-k)) / 2    
 
-    CacheAgent.start_link(:euler_zig_zag)
+    CacheAgent.cache_as :euler_zig_zag, n do
+        bin_sum =
+          0..(n - 1)
+          |> Enum.map(fn k ->
+            binomial(n - 1, k) * euler_zig_zag(k) * euler_zig_zag(n - 1 - k)
+          end)
+          |> Enum.sum()
 
-    if CacheAgent.has?(:euler_zig_zag, n) do
-      CacheAgent.get(:euler_zig_zag, n)
-    else
-      bin_sum =
-        0..(n - 1)
-        |> Enum.map(fn k ->
-          binomial(n - 1, k) * euler_zig_zag(k) * euler_zig_zag(n - 1 - k)
-        end)
-        |> Enum.sum()
-
-      ezz = div(bin_sum, 2)
-      CacheAgent.put(:euler_zig_zag, n, ezz)
-      ezz
+        div(bin_sum, 2)
+        
     end
+    
   end
 
   @doc """
@@ -1477,15 +1455,9 @@ defmodule Chunky.Math do
   def lucas_number(1), do: 1
 
   def lucas_number(n) when is_integer(n) and n > 1 do
-    CacheAgent.start_link(:lucas_number)
-
-    if CacheAgent.has?(:lucas_number, n) do
-      CacheAgent.get(:lucas_number, n)
-    else
-      ln = lucas_number(n - 1) + lucas_number(n - 2)
-      CacheAgent.put(:lucas_number, n, ln)
-      ln
-    end
+      CacheAgent.cache_as :lucas_number, n do
+          lucas_number(n - 1) + lucas_number(n - 2)          
+      end
   end
 
   @doc """
@@ -1570,47 +1542,35 @@ defmodule Chunky.Math do
   def rooted_tree_count(n) when is_integer(n) and n >= 0 and n < 2, do: n
 
   def rooted_tree_count(n) when is_integer(n) and n >= 2 do
-    # def a(n):
-    #     if n < 2: return n
-    #     return add(
-    #         add( d * a(d) for d in divisors(j) )
-    #         * a(n-j) for j in (1..n-1)
-    #     ) / (n - 1)
     #  ref: sage version via [Peter Luschny](https://oeis.org/wiki/User:Peter_Luschny)
 
-    CacheAgent.start_link(:rooted_tree_count)
+    CacheAgent.cache_as :rooted_tree_count, n do
+        # iterate up to n - 1
+        part_a =
+          1..(n - 1)
+          |> Enum.map(fn j ->
+            # iterate divisors of j
+            inner =
+              factors(j)
+              |> Enum.map(fn d ->
+                d * rooted_tree_count(d)
+              end)
 
-    if CacheAgent.has?(:rooted_tree_count, n) do
-      CacheAgent.get(:rooted_tree_count, n)
-    else
-      # iterate up to n - 1
-      part_a =
-        1..(n - 1)
-        |> Enum.map(fn j ->
-          # iterate divisors of j
-          inner =
-            factors(j)
-            |> Enum.map(fn d ->
-              d * rooted_tree_count(d)
-            end)
+              # add result of d in divisors(j)
+              |> Enum.sum()
 
-            # add result of d in divisors(j)
-            |> Enum.sum()
+            # tail tree count term with (n - j)
+            inner * rooted_tree_count(n - j)
+          end)
 
-          # tail tree count term with (n - j)
-          inner * rooted_tree_count(n - j)
-        end)
+          # add result of j in (1..n-1)
+          |> Enum.sum()
 
-        # add result of j in (1..n-1)
-        |> Enum.sum()
-
-      # final division
-      ans = div(part_a, n - 1)
-
-      # cache and return
-      CacheAgent.put(:rooted_tree_count, n, ans)
-      ans
+        # final division
+        div(part_a, n - 1)
+        
     end
+    
   end
 
   @doc """
@@ -1955,54 +1915,43 @@ defmodule Chunky.Math do
   def wedderburn_etherington_number(n) when is_integer(n) and n < 4, do: 1
 
   def wedderburn_etherington_number(n) when is_integer(n) and Integer.is_odd(n) do
-    # start the cache
-    CacheAgent.start_link(:wedderburn_etherington_number)
+      
+      CacheAgent.cache_as :wedderburn_etherington_number, n do
+          # odd case is based on recurrence relation of 2n - 1
+          sub_n = div(n + 1, 2)
 
-    if CacheAgent.has?(:wedderburn_etherington_number, n) do
-      CacheAgent.get(:wedderburn_etherington_number, n)
-    else
-      # odd case is based on recurrence relation of 2n - 1
-      sub_n = div(n + 1, 2)
-
-      wen =
-        1..(sub_n - 1)
-        |> Enum.map(fn i ->
-          wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i - 1)
-        end)
-        |> Enum.sum()
-
-      CacheAgent.put(:wedderburn_etherington_number, n, wen)
-      wen
-    end
+            1..(sub_n - 1)
+            |> Enum.map(fn i ->
+              wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i - 1)
+            end)
+            |> Enum.sum()
+          
+      end
+      
   end
 
   def wedderburn_etherington_number(n) when is_integer(n) and Integer.is_even(n) do
-    # start the cache
-    CacheAgent.start_link(:wedderburn_etherington_number)
+      
+      CacheAgent.cache_as :wedderburn_etherington_number, n do
+          # even case is based on recurrence relation of 2n
+          sub_n = div(n, 2)
 
-    if CacheAgent.has?(:wedderburn_etherington_number, n) do
-      CacheAgent.get(:wedderburn_etherington_number, n)
-    else
-      # even case is based on recurrence relation of 2n
-      sub_n = div(n, 2)
+          # determine the summation portion
+          sum_part =
+            1..(sub_n - 1)
+            |> Enum.map(fn i ->
+              wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i)
+            end)
+            |> Enum.sum()
 
-      # determine the summation portion
-      sum_part =
-        1..(sub_n - 1)
-        |> Enum.map(fn i ->
-          wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i)
-        end)
-        |> Enum.sum()
+          # fractional portion
+          s_n = wedderburn_etherington_number(sub_n)
+          frac_part = div(s_n * (s_n + 1), 2)
 
-      # fractional portion
-      s_n = wedderburn_etherington_number(sub_n)
-      frac_part = div(s_n * (s_n + 1), 2)
-
-      wen = frac_part + sum_part
-
-      CacheAgent.put(:wedderburn_etherington_number, n, wen)
-      wen
-    end
+          frac_part + sum_part
+          
+      end
+      
   end
 
   @doc """
@@ -3046,24 +2995,20 @@ defmodule Chunky.Math do
   def partition_count(1), do: 1
 
   def partition_count(n) when is_integer(n) and n > 1 do
-    # start and check our cache for our value
-    CacheAgent.start_link(:partition_count)
+      
+      CacheAgent.cache_as :partition_count, n do
+          # a(n) = (1/n) * Sum_{k=0..n-1} sigma(n-k)*a(k)  
+          sum_part =
+            0..(n - 1)
+            |> Enum.map(fn k ->
+              sigma(n - k, 1) * partition_count(k)
+            end)
+            |> Enum.sum()
 
-    if CacheAgent.has?(:partition_count, n) do
-      CacheAgent.get(:partition_count, n)
-    else
-      # a(n) = (1/n) * Sum_{k=0..n-1} sigma(n-k)*a(k)  
-      sum_part =
-        0..(n - 1)
-        |> Enum.map(fn k ->
-          sigma(n - k, 1) * partition_count(k)
-        end)
-        |> Enum.sum()
-
-      p = Fraction.new(1, n) |> Fraction.multiply(sum_part) |> Fraction.get_whole()
-      CacheAgent.put(:partition_count, n, p)
-      p
-    end
+          Fraction.new(1, n) |> Fraction.multiply(sum_part) |> Fraction.get_whole()
+          
+      end
+      
   end
 
   @doc """
@@ -3390,16 +3335,12 @@ defmodule Chunky.Math do
   def involutions_count(1), do: 1
 
   def involutions_count(n) when n > 1 do
-    # a(n) = a(n-1) + (n-1)*a(n-2), n>1.
-    CacheAgent.start_link(:involutions_count)
-
-    if CacheAgent.has?(:involutions_count, n) do
-      CacheAgent.get(:involutions_count, n)
-    else
-      a_n = involutions_count(n - 1) + (n - 1) * involutions_count(n - 2)
-      CacheAgent.put(:involutions_count, n, a_n)
-      a_n
-    end
+      
+      CacheAgent.cache_as :involutions_count, n do
+          # a(n) = a(n-1) + (n-1)*a(n-2), n>1.
+          involutions_count(n - 1) + (n - 1) * involutions_count(n - 2)
+      end
+      
   end
 
   @doc """

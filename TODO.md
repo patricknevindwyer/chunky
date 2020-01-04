@@ -63,10 +63,41 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
          
- - macros
-  - update cache based functions to use CacheAgent.cache_as/3 macro
-
  - new main readme for hexdocs / updated readme for GitHub  
+
+
+ - sequence start/restart functions
+  - start as alias to next!, just ticks over to first value
+ 
+ - sequence manipulations
+  - map
+  - filter
+  - sum
+  - zip
+  - with_index
+  - take with drop (count)
+  - drop while (with count)
+  - reject (with count)
+  
+  - or do we build sequence manipulations as combinators of some kind, like a pipeline, like streams
+  
+ - Sequence.at/2
+  - check for overflow of finite lists
+ 
+ - fraction updates
+  - x Is zero
+  - x Is positive
+  - x Is negative
+  - Is whole
+  - Is greater than one (or less) than negative one
+  - is within/close to
+
+ - Fraction Functions:
+  - abs
+  - Floor/ceil
+ 
+
+
 
  - summation macro?
   - smart output, or selective output (fraction vs integer vs get_whole)
@@ -79,32 +110,9 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
  - check predicates - some _could_ apply to odd numbers
   
- - Sequence.at/2
-  - check for overflow of finite lists
  
  - new modes for sequence stub generator
   - verbose sequence
- 
- - sequence start/restart functions
-  - start as alias to next!, just ticks over to first value
- 
- - sequence manipulations
-  - map
-  - filter
-  - sum
-  - zip
-  - with_index
- 
- - fraction updates
-  - x Is zero
-  - x Is positive
-  - x Is negative
-  - Is whole
-  - Is greater than one (or less) than negative one
-
- -  Functions:
-  - abs
-  - Floor/ceil
  
  - testing and validation
   - typespecs
