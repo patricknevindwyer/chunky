@@ -23,7 +23,9 @@
  - HTTPoison and Jason moved to `dev` and `test` only requirements
  - Credo is now being used for style/consistency checks (with specific configuration to make credo run in a reasonable time frame)
  
-### Enhancments
+### Libraries
+
+ - Refactored Fractions.lcm/1 and Fractions.lcm/2 to Math.lcm/1 and Math.lcm/2
 
 ### Sequences
 

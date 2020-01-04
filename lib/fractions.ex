@@ -176,16 +176,12 @@ defmodule Chunky.Fraction do
   Integer math functions that support fraction functions and manipulations.
 
     - `integer_nth_root?/3` - Determine if an integer has a specific `n-th` root
-    - `lcm/1` - Least common multiple of a list of integers
-    - `lcm/2` - Least common multiple of two integers
     - `nth_root/3` - Floating point `n-th` root of an integer
 
   ```elixir
   iex> 64 |> Fraction.integer_nth_root?(3)
   {true, 4}
 
-  iex> Fraction.lcm([3, 4, 5])
-  60
   ```
 
   ## Float Math
@@ -451,7 +447,7 @@ defmodule Chunky.Fraction do
   def add(%Fraction{} = fraction_a, %Fraction{} = fraction_b, opts) do
     simp = opts |> Keyword.get(:simplify, false)
 
-    new_base = lcm(fraction_a.den, fraction_b.den)
+    new_base = Math.lcm(fraction_a.den, fraction_b.den)
     a_mult = div(new_base, fraction_a.den)
     b_mult = div(new_base, fraction_b.den)
 
@@ -511,7 +507,7 @@ defmodule Chunky.Fraction do
   def subtract(%Fraction{} = fraction_a, %Fraction{} = fraction_b, opts) do
     simp = opts |> Keyword.get(:simplify, false)
 
-    new_base = lcm(fraction_a.den, fraction_b.den)
+    new_base = Math.lcm(fraction_a.den, fraction_b.den)
     a_mult = div(new_base, fraction_a.den)
     b_mult = div(new_base, fraction_b.den)
 
@@ -1053,7 +1049,7 @@ defmodule Chunky.Fraction do
     if fraction_a.den == fraction_b.den do
       {fraction_a, fraction_b}
     else
-      new_base = lcm(fraction_a.den, fraction_b.den)
+      new_base = Math.lcm(fraction_a.den, fraction_b.den)
       a_mult = div(new_base, fraction_a.den)
       b_mult = div(new_base, fraction_b.den)
 
@@ -1100,7 +1096,7 @@ defmodule Chunky.Fraction do
       |> Enum.map(fn f -> f.den end)
 
     # find our new base
-    new_base = lcm(denoms)
+    new_base = Math.lcm(denoms)
 
     # iterate and normalize everything
     fracs
@@ -1692,18 +1688,4 @@ defmodule Chunky.Fraction do
   defp fixed_point(_, guess, tolerance, next) when abs(guess - next) < tolerance, do: next
   defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
 
-  @doc """
-  Find the **least common multiple** of two integers or a list of integers.
-
-  ## Example
-
-      iex> lcm(5, 7)
-      35
-      
-      iex> lcm([3, 5, 7, 11, 13, 17])
-      255255
-  """
-  def lcm([a, b]), do: lcm(a, b)
-  def lcm([a | rest]), do: lcm(a, lcm(rest))
-  def lcm(a, b) when is_integer(a) and is_integer(b), do: div(abs(a * b), Integer.gcd(a, b))
 end

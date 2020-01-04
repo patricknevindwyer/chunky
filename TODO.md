@@ -65,12 +65,14 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 
  - move integer math functions in fractions out to math library
-      
+  - x lcm
+  - nth_root
+  - integer_nth_root?
+        
  - macros
   - update cache based functions to use CacheAgent.cache_as/3 macro
 
  - new main readme for hexdocs / updated readme for GitHub  
-
 
  
  - do we need an :infinity value?

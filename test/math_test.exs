@@ -5,6 +5,38 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "lcm/2" do
+      test "value tests" do
+          ns = [{1, 1}, {1, 10}, {2, 10}, {3, 5}, {1299379, 1299437}]
+          os = [1, 10, 10, 15, 1_688_461_149_623]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.lcm(n, m) == o
+          end)
+      end
+      
+      test "negatives" do
+          ns = [{-1, 1}, {-2, -5}, {-2, 5}, {-2, 2}, {1299379, -1299437}]
+          os = [1, 10, 10, 2, 1_688_461_149_623]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.lcm(n, m) == o
+          end)      
+      end
+      
+      test "zero" do
+          ns = [{-1, 0}, {0, -5}, {0, 5}, {0, 0}, {1299379, 0}]
+          os = [1, 10, 10, 2, 1_688_461_149_623]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, _o} ->
+            assert Math.lcm(n, m) == 0
+          end)      
+      end
+  end
+  
   describe "factorization_count/1" do
     test "value tests" do
       ns = [1, 2, 3, 5, 7, 32, 370, 4100, 6444]

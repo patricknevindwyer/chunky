@@ -24,7 +24,8 @@ defmodule Chunky.Math do
    - `factorial/1` - Factorial (`n!`) of `n`
    - `rising_factorial/2` - Rising factorial of `n^(m)`
    - `falling_factorial/2` - Falling factorial of `(n)m`
-
+   - `lcm/2` - Least common multiple of `n` and `m`
+   - `lcm/1` - Least common multiple of a list of integers
 
   ## Factorization and Divisors
 
@@ -4170,4 +4171,55 @@ defmodule Chunky.Math do
       false
     end
   end
+  
+  @doc """
+  Find the _least common multiple_ of a list of integers.
+  
+  By definition **LCM** is a composable function, such that finding the least common
+  multiple of a list of integers `[a, b, c, d]` is `lcm(a, lcm(b, lcm(c, d)))`.
+
+  ## Example
+
+      iex> Math.lcm([3, 5, 7, 11, 13, 17])
+      255255
+      
+      iex> Math.lcm([2, 4, 8])
+      8
+  
+      iex> Math.lcm([1, 3, 27])
+      27
+      
+      iex> Math.lcm([1, 3, 37, 0, 145])
+      0
+  """
+  def lcm([a, b]), do: lcm(a, b)
+  def lcm([a | rest]), do: lcm(a, lcm(rest))
+  
+  @doc """
+  Find the _least commom multiple_ of two integers.
+  
+  The **LCM** of two integers `n` and `m` is the smallest number `b` that is divisible
+  by both `n` and `m` with no remainder - or satisfies the relationship `b/n = 0, b/m = 0`.
+  
+  ## Examples
+  
+      iex> Math.lcm(2, 3)
+      6
+  
+      iex> Math.lcm(10, 5)
+      10
+  
+      iex> Math.lcm(17, 29)
+      493
+  
+      iex> Math.lcm(14, 230)
+      1610
+  
+      iex> Math.lcm(257, 0)
+      0
+  """
+  def lcm(_a, 0), do: 0
+  def lcm(0, _b), do: 0
+  def lcm(a, b) when is_integer(a) and is_integer(b), do: div(abs(a * b), Integer.gcd(a, b))
+  
 end
