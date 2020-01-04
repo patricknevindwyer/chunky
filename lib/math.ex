@@ -26,7 +26,16 @@ defmodule Chunky.Math do
    - `falling_factorial/2` - Falling factorial of `(n)m`
    - `lcm/2` - Least common multiple of `n` and `m`
    - `lcm/1` - Least common multiple of a list of integers
+   - `integer_nth_root?/3` - Determine if an integer has a specific `n-th` root
+   - `integer_nth_root/3` - Find the `n`-th integer root, if it exists
 
+
+  ## Float Arithmetic
+  
+   - `nth_root/3` - Floating point `n-th` root of an integer
+   - `floats_equal?/3` - Determine if two floats are equal, within an error bound
+  
+  
   ## Factorization and Divisors
 
   Work with divisors and prime factors.
@@ -4222,4 +4231,134 @@ defmodule Chunky.Math do
   def lcm(0, _b), do: 0
   def lcm(a, b) when is_integer(a) and is_integer(b), do: div(abs(a * b), Integer.gcd(a, b))
   
+  @doc """
+  Generalized floating point nth root, from:
+
+      https://github.com/acmeism/RosettaCodeData/blob/master/Task/Nth-root/Elixir/nth-root.elixir
+
+  based on a fast converging Newton's Method process.
+  
+  Note: Because the `nth_root` function is based on floating point operations, it _will_ lose
+  precision and introduce error for integers larger than ~16 digits
+
+  ## Options
+
+   - `precision` - **Float**. Default `1.0e-7`. Precision to which root is calculated.
+
+  ## Examples
+
+      iex> Math.nth_root(8, 3)
+      2.0
+
+      iex> Math.nth_root(27, 3)
+      3.0
+
+      iex> Math.nth_root(78125, 7)
+      5.0
+  
+      iex> Math.nth_root(104, 3)
+      4.702669375441515
+  """
+  def nth_root(x, n, precision \\ 1.0e-7)
+  def nth_root(0, _, _), do: 0
+  def nth_root(_, 0, _), do: :zero_root_undefined
+  def nth_root(x, n, precision) do
+    f = fn prev ->
+      ((n - 1) * prev + x / :math.pow(prev, n - 1)) / n
+    end
+
+    fixed_point(f, x, precision, f.(x))
+  end
+
+  defp fixed_point(_, guess, tolerance, next) when abs(guess - next) < tolerance, do: next
+  defp fixed_point(f, _guess, tolerance, next) do
+       fixed_point(f, next, tolerance, f.(next))
+   end
+
+  @doc """
+  Compare two floating points number using an epsilon error boundary.
+
+  ## Example
+
+      iex> Math.floats_equal?(3.11, 3.1)
+      false
+
+      iex> Math.floats_equal?(3.11, 3.1, 0.05)
+      true
+  
+      iex> Math.floats_equal?(104.9999999, 104.9999996)
+      true
+  """
+  def floats_equal?(a, b, epsilon \\ 1.0e-6) do
+    abs(a - b) < epsilon
+  end
+
+  @doc """
+  Determine if the n-th root of a number is a whole integer, returning a boolean and the 
+  root value.
+
+  If the result n-th root is within `epsilon` of a whole
+  integer, we consider the result an integer n-th root. 
+  This calcualtion runs the fast converging n-th root at a higher
+  epsilon than it's configured to use for comparison and testing of the
+  result value. 
+
+  ## Options
+
+   - `epsilon` - **Float**. Default `1.0e-6`. Error bounds for calculating float equality.
+
+  ## Examples
+
+      iex> Math.integer_nth_root(27, 3)
+      {true, 3}
+
+      iex> Math.integer_nth_root(1234, 6)
+      {false, :no_integer_nth_root, 3.2750594908836885}
+  
+      iex> Math.integer_nth_root(33_038_369_407, 5)
+      {true, 127}
+  """
+  def integer_nth_root(x, n, epsilon \\ 1.0e-6) when is_integer(x) and is_integer(n) do
+      
+      case nth_root(x, n, epsilon * 0.001) do
+          0 -> 
+              {true, 0}
+          
+          :zero_root_undefined -> 
+              {false, :zero_root_undefined}
+          
+          root ->
+              i_root = Float.round(root)
+
+              if abs(root - i_root) < epsilon do
+                {true, Kernel.trunc(i_root)}
+              else
+                {false, :no_integer_nth_root, root}
+              end
+              
+      end
+  end
+  
+  @doc """
+  Predicate version of `integer_nth_root/3` - does `x` have an integer `n`-th root.
+  
+  ## Examples
+  
+      iex> Math.integer_nth_root?(27, 3)
+      true
+
+      iex> Math.integer_nth_root?(1234, 6)
+      false
+  
+      iex> Math.integer_nth_root?(33_038_369_407, 5)
+      true
+
+  """
+  def integer_nth_root?(x, n, epsilon \\ 1.0e-6) do
+     case integer_nth_root(x, n, epsilon) do
+        {true, _} -> true
+        _ -> false
+     end 
+  end
+    
 end

@@ -171,24 +171,6 @@ defmodule Chunky.Fraction do
   false
   ```
 
-  ## Integer Math
-
-  Integer math functions that support fraction functions and manipulations.
-
-    - `integer_nth_root?/3` - Determine if an integer has a specific `n-th` root
-    - `nth_root/3` - Floating point `n-th` root of an integer
-
-  ```elixir
-  iex> 64 |> Fraction.integer_nth_root?(3)
-  {true, 4}
-
-  ```
-
-  ## Float Math
-
-    - `floats_equal/3` - Determine if two floats are equal, within an error bound
-
-
   """
 
   defstruct [:num, :den]
@@ -832,8 +814,8 @@ defmodule Chunky.Fraction do
     den_powed = Math.pow(fraction_a.den, f_pow)
 
     case {
-      integer_nth_root?(num_powed, f_root, epsilon),
-      integer_nth_root?(den_powed, f_root, epsilon)
+      Math.integer_nth_root(num_powed, f_root, epsilon),
+      Math.integer_nth_root(den_powed, f_root, epsilon)
     } do
       {{true, num_i_root}, {true, den_i_root}} ->
         if simp do
@@ -1607,85 +1589,5 @@ defmodule Chunky.Fraction do
 
   """
   def is_zero?(%Fraction{} = fraction), do: fraction.num == 0
-
-  @doc """
-  Determine if the n-th root of a number is a whole integer.
-
-  If the result n-th root is within `epsilon` of a whole
-  integer, we consider the result an integer n-th root. 
-  This calcualtion runs the fast converging n-th root at a higher
-  epsilon than it's configured to use for comparison and testing of the
-  result value. 
-
-  ## Options
-
-   - `epsilon` - **Float**. Default `1.0e-6`. Error bounds for calculating float equality.
-
-  ## Examples
-
-      iex> Fraction.integer_nth_root?(27, 3)
-      {true, 3}
-
-      iex> Fraction.integer_nth_root?(1234, 6)
-      {false, :no_integer_nth_root, 3.2750594908836885}
-  """
-  def integer_nth_root?(x, n, epsilon \\ 1.0e-6) do
-    root = nth_root(x, n, epsilon * 0.001)
-    i_root = Float.round(root)
-
-    if abs(root - i_root) < epsilon do
-      {true, Kernel.trunc(i_root)}
-    else
-      {false, :no_integer_nth_root, root}
-    end
-  end
-
-  @doc """
-  Compare two floating points number using an epsilon error boundary.
-
-  ## Example
-
-      iex> floats_equal?(3.11, 3.1)
-      false
-
-      iex> floats_equal?(3.11, 3.1, 0.05)
-      true
-  """
-  def floats_equal?(a, b, epsilon \\ 1.0e-6) do
-    abs(a - b) < epsilon
-  end
-
-  @doc """
-  Generalized integer nth root, from:
-
-      https://github.com/acmeism/RosettaCodeData/blob/master/Task/Nth-root/Elixir/nth-root.elixir
-
-  based on a fast converging Newton's Method process.
-
-  ## Options
-
-   - `precision` - **Float**. Default `1.0e-7`. Precision to which root is calculated.
-
-  ## Examples
-
-      iex> nth_root(8, 3)
-      2.0
-
-      iex> nth_root(27, 3)
-      3.0
-
-      iex> nth_root(78125, 7)
-      5.0
-  """
-  def nth_root(x, n, precision \\ 1.0e-7) do
-    f = fn prev ->
-      ((n - 1) * prev + x / :math.pow(prev, n - 1)) / n
-    end
-
-    fixed_point(f, x, precision, f.(x))
-  end
-
-  defp fixed_point(_, guess, tolerance, next) when abs(guess - next) < tolerance, do: next
-  defp fixed_point(f, _, tolerance, next), do: fixed_point(f, next, tolerance, f.(next))
 
 end

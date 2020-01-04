@@ -26,6 +26,7 @@
 ### Libraries
 
  - Refactored Fractions.lcm/1 and Fractions.lcm/2 to Math.lcm/1 and Math.lcm/2
+ - Refactored nth_root/3, integer_nth_root?/3, and floats_equal?/3 from Fractions to Math
 
 ### Sequences
 

@@ -1,7 +1,8 @@
 defmodule Chunky.FractionTest do
   use ExUnit.Case, async: true
   alias Chunky.Fraction
-
+  alias Chunky.Math
+  
   doctest Chunky.Fraction, import: true
 
   describe "String.Chars protocol" do
@@ -16,19 +17,19 @@ defmodule Chunky.FractionTest do
     end
 
     test "negative" do
-      assert Fraction.new(-3, 4) |> Fraction.to_float() |> Fraction.floats_equal?(-0.75)
+      assert Fraction.new(-3, 4) |> Fraction.to_float() |> Math.floats_equal?(-0.75)
     end
 
     test "positive" do
-      assert Fraction.new(1, 16) |> Fraction.to_float() |> Fraction.floats_equal?(0.0625)
+      assert Fraction.new(1, 16) |> Fraction.to_float() |> Math.floats_equal?(0.0625)
     end
 
     test "precision" do
-      assert Fraction.new(22, 7) |> Fraction.to_float() |> Fraction.floats_equal?(3.14) == false
+      assert Fraction.new(22, 7) |> Fraction.to_float() |> Math.floats_equal?(3.14) == false
 
       assert Fraction.new(22, 7)
              |> Fraction.to_float(precision: 2)
-             |> Fraction.floats_equal?(3.14)
+             |> Math.floats_equal?(3.14)
     end
   end
 

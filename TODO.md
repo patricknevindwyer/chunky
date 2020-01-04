@@ -62,18 +62,18 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ```
  
 ## TODO
- 
-
- - move integer math functions in fractions out to math library
-  - x lcm
-  - nth_root
-  - integer_nth_root?
-        
+         
  - macros
   - update cache based functions to use CacheAgent.cache_as/3 macro
 
  - new main readme for hexdocs / updated readme for GitHub  
 
+ - summation macro?
+  - smart output, or selective output (fraction vs integer vs get_whole)
+  - smart aggregator/summation
+ - product macro?
+  - smart output, or selective output (fraction vs integer vs get_whole)
+  - smart reduction/product
  
  - do we need an :infinity value?
  
@@ -96,11 +96,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - with_index
  
  - fraction updates
-  - Is zero
-  - Is positive
-  - Is negative
+  - x Is zero
+  - x Is positive
+  - x Is negative
   - Is whole
-  - Is greater than one (or less than negative one
+  - Is greater than one (or less) than negative one
 
  -  Functions:
   - abs

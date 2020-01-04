@@ -5,6 +5,65 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "nth_root/3" do
+      test "value tests" do
+          ns = [{8, 3}, {8, 5}, {104_976, 4}]
+          os = [2.0, 1.5157165665103982, 18.0]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.nth_root(n, m) == o
+          end)
+      end      
+      
+      test "edge tests" do
+          ns = [{-8, 3}, {0, 5}, {137, 0}]
+          os = [-2.0, 0, :zero_root_undefined]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.nth_root(n, m) == o
+          end)
+      end      
+      
+  end
+  
+  describe "integer_nth_root?/3" do
+      test "value tests" do
+          ns = [{8, 3}, {8, 5}, {104_976, 4}, {-8, 3}, {0, 5}, {137, 0}]
+          os = [true, false, true, true, true, false]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.integer_nth_root?(n, m) == o
+          end)
+      end
+  end
+  
+  describe "integer_nth_root/3" do
+      test "value tests" do
+          ns = [{8, 3}, {8, 5}, {104_976, 4}, {-8, 3}, {0, 5}, {137, 0}]
+          os = [{true, 2}, {false, :no_integer_nth_root, 1.5157165665103982}, {true, 18}, {true, -2}, {true, 0}, {false, :zero_root_undefined}]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.integer_nth_root(n, m) == o
+          end)
+      end
+  end
+  
+  describe "floats_equal?/3" do
+      test "value tests" do
+          ns = [{3.0, 3.0}, {3.1, 3.0}, {3.000000001, 3.0}, {-3.0, 3.0}, {2.999999999, 3.0}]
+          os = [true, false, true, false, true]
+
+          Enum.zip(ns, os)
+          |> Enum.each(fn {{n, m}, o} ->
+            assert Math.floats_equal?(n, m) == o
+          end)
+      end
+  end
+  
   describe "lcm/2" do
       test "value tests" do
           ns = [{1, 1}, {1, 10}, {2, 10}, {3, 5}, {1299379, 1299437}]
