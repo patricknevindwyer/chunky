@@ -21,8 +21,9 @@
         # You can give explicit globs or simply directories.
         # In the latter case `**/*.{ex,exs}` will be used.
         #
-        included: ["lib/", "src/", "test/", "web/", "apps/"],
-        excluded: [~r"/_build/", ~r"/deps/", ~r"/node_modules/"]
+        # included: ["lib/math.ex", "lib/fractions.ex", "lib/sequence/sequence.ex"],
+        include: ["lib/"],
+        excluded: [~r"/_build/", ~r"/deps/", ~r"/node_modules/", ~r"/doc"]
       },
       #
       # Load and configure plugins here:
@@ -56,11 +57,11 @@
         ## Consistency Checks
         #
         {Credo.Check.Consistency.ExceptionNames, []},
-        {Credo.Check.Consistency.LineEndings, []},
+        {Credo.Check.Consistency.LineEndings, false},
         {Credo.Check.Consistency.ParameterPatternMatching, []},
-        {Credo.Check.Consistency.SpaceAroundOperators, []},
-        {Credo.Check.Consistency.SpaceInParentheses, []},
-        {Credo.Check.Consistency.TabsOrSpaces, []},
+        {Credo.Check.Consistency.SpaceAroundOperators, false},
+        {Credo.Check.Consistency.SpaceInParentheses, false},
+        {Credo.Check.Consistency.TabsOrSpaces, false},
 
         #
         ## Design Checks
@@ -82,37 +83,37 @@
         #
         {Credo.Check.Readability.AliasOrder, []},
         {Credo.Check.Readability.FunctionNames, []},
-        {Credo.Check.Readability.LargeNumbers, []},
-        {Credo.Check.Readability.MaxLineLength, [priority: :low, max_length: 120]},
-        {Credo.Check.Readability.ModuleAttributeNames, []},
-        {Credo.Check.Readability.ModuleDoc, []},
-        {Credo.Check.Readability.ModuleNames, []},
-        {Credo.Check.Readability.ParenthesesInCondition, []},
-        {Credo.Check.Readability.ParenthesesOnZeroArityDefs, []},
-        {Credo.Check.Readability.PredicateFunctionNames, []},
-        {Credo.Check.Readability.PreferImplicitTry, []},
-        {Credo.Check.Readability.RedundantBlankLines, []},
-        {Credo.Check.Readability.Semicolons, []},
-        {Credo.Check.Readability.SpaceAfterCommas, []},
-        {Credo.Check.Readability.StringSigils, []},
-        {Credo.Check.Readability.TrailingBlankLine, []},
-        {Credo.Check.Readability.TrailingWhiteSpace, []},
+        {Credo.Check.Readability.LargeNumbers, false},
+        {Credo.Check.Readability.MaxLineLength, false},
+        {Credo.Check.Readability.ModuleAttributeNames, false},
+        {Credo.Check.Readability.ModuleDoc, false},
+        {Credo.Check.Readability.ModuleNames, false},
+        {Credo.Check.Readability.ParenthesesInCondition, false},
+        {Credo.Check.Readability.ParenthesesOnZeroArityDefs, false},
+        {Credo.Check.Readability.PredicateFunctionNames, false},
+        {Credo.Check.Readability.PreferImplicitTry, false},
+        {Credo.Check.Readability.RedundantBlankLines, false},
+        {Credo.Check.Readability.Semicolons, false},
+        {Credo.Check.Readability.SpaceAfterCommas, false},
+        {Credo.Check.Readability.StringSigils, false},
+        {Credo.Check.Readability.TrailingBlankLine, false},
+        {Credo.Check.Readability.TrailingWhiteSpace, false},
         # TODO: enable by default in Credo 1.1
         {Credo.Check.Readability.UnnecessaryAliasExpansion, false},
-        {Credo.Check.Readability.VariableNames, []},
+        {Credo.Check.Readability.VariableNames, false},
 
         #
         ## Refactoring Opportunities
         #
         {Credo.Check.Refactor.CondStatements, []},
-        {Credo.Check.Refactor.CyclomaticComplexity, []},
+        {Credo.Check.Refactor.CyclomaticComplexity, false},
         {Credo.Check.Refactor.FunctionArity, []},
         {Credo.Check.Refactor.LongQuoteBlocks, []},
         {Credo.Check.Refactor.MapInto, false},
         {Credo.Check.Refactor.MatchInCondition, []},
         {Credo.Check.Refactor.NegatedConditionsInUnless, []},
         {Credo.Check.Refactor.NegatedConditionsWithElse, []},
-        {Credo.Check.Refactor.Nesting, []},
+        {Credo.Check.Refactor.Nesting, [max_nesting: 3]},
         {Credo.Check.Refactor.UnlessWithElse, []},
         {Credo.Check.Refactor.WithClauses, []},
 

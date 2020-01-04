@@ -201,9 +201,9 @@ defmodule Chunky.Math do
   """
 
   require Integer
-  alias Chunky.Math
-  alias Chunky.Fraction
   alias Chunky.CacheAgent
+  alias Chunky.Fraction
+  alias Chunky.Math
   require Chunky.CacheAgent
 
   @rand_max Kernel.trunc(:math.pow(2, 63))

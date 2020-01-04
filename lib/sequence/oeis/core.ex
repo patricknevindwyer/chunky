@@ -101,8 +101,8 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
-  alias Chunky.Math
   alias Chunky.Fraction
+  alias Chunky.Math
 
   require Integer
 

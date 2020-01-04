@@ -107,7 +107,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - Floor/ceil
  
  - testing and validation
-  - credo
+  - x credo
   - typespecs
   - dialyzer
   - circle/ci integration

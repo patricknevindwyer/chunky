@@ -1,3 +1,4 @@
+# credo:disable-for-this-file Credo.Check.Design.AliasUsage
 defmodule Chunky.Sequence.OEIS.Primes do
   @moduledoc """
   OEIS Sequences dealing with Primes. For related sequences, see `Chunky.Sequences.OEIS.Factors`

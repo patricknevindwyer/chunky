@@ -1,8 +1,8 @@
 defmodule Chunky.MathTest do
   use ExUnit.Case, async: true
 
-  alias Chunky.Math
   alias Chunky.Fraction
+  alias Chunky.Math
   doctest Chunky.Math
 
   describe "factorization_count/1" do

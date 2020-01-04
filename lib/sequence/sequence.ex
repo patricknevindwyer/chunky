@@ -1084,13 +1084,17 @@ defmodule Chunky.Sequence do
            fn_name == function && fn_arity == arity
          end)
          |> Enum.map(fn {_, _, _, _, attr_map} ->
-           case attr_map do
-             %{sequence: seq_desc} -> seq_desc
-             _ -> ""
-           end
+             extract_sequence_description(attr_map)
          end) do
       [] -> "no description"
       [desc | _] -> desc
     end
+  end
+  
+  defp extract_sequence_description(attribute_map) do
+      case attribute_map do
+        %{sequence: seq_desc} -> seq_desc
+        _ -> ""
+      end      
   end
 end

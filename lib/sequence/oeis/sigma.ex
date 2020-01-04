@@ -1,3 +1,4 @@
+# credo:disable-for-this-file Credo.Check.Design.AliasUsage
 defmodule Chunky.Sequence.OEIS.Sigma do
   @moduledoc """
   OEIS Sequences for Sigma values. 
