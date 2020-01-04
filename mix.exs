@@ -14,7 +14,8 @@ defmodule Chunky.MixProject do
       source_url: "https://github.com/patricknevindwyer/chunky",
       homepage_url: "https://github.com/patricknevindwyer/chunky",
       package: package(),
-      docs: docs()
+      docs: docs(),
+      aliases: aliases()
     ]
   end
 
@@ -26,12 +27,22 @@ defmodule Chunky.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+        
+      # dev only/test only
       {:ex_doc, "~> 0.14", only: :dev, runtime: false},
       {:httpoison, "~> 1.6", only: [:dev, :test]},
-      {:jason, "~> 1.1", only: [:dev, :test]}
+      {:jason, "~> 1.1", only: [:dev, :test]},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 
+  defp aliases do
+      [
+          # quality: ["credo --strict", "dialyzer", "test”]
+          assess: ["credo --strict"]
+      ]
+  end
+  
   defp package do
     [
       licenses: ["BSD-3-Clause"],
