@@ -2607,7 +2607,7 @@ defmodule Chunky.Math do
       true
   """
   def is_b_smooth?(n, b) when is_integer(n) and is_integer(b) and b > 2 and n > 0 do
-    if !is_prime?(b) do
+    if is_prime?(b) == false do
       raise ArgumentError, message: "b parameter must be prime"
     else
       prime_factors(n)
@@ -2928,7 +2928,7 @@ defmodule Chunky.Math do
         rem(n, Math.pow(p, v)) == 0
       end)
 
-    if length(exps) == 0 do
+    if Enum.empty?(exps) do
       0
     else
       Enum.max(exps)
@@ -4160,8 +4160,12 @@ defmodule Chunky.Math do
   defp miller_rabin(n, x, r) do
     x = Math.pow(x, 2, n)
 
-    unless x == 1 do
-      unless x == n - 1, do: miller_rabin(n, x, r - 1), else: true
+    if x != 1 do
+        if x != n - 1 do
+           miller_rabin(n, x, r - 1) 
+       else
+            true
+        end
     else
       false
     end

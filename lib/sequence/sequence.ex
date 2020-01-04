@@ -606,7 +606,7 @@ defmodule Chunky.Sequence do
         :next ->
           # do we have any more values?
           cond do
-            length(n_data.list) == 0 ->
+            Enum.empty?(n_data.list) ->
               {:last, %{data: n_data, value: 0}}
 
             n_data.index + 1 == length(n_data.list) ->
