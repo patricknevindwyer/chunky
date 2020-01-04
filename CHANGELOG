@@ -21,8 +21,14 @@
 
  - Module requiring HTTPoison and Jason excluded from packaging
  - HTTPoison and Jason moved to `dev` and `test` only requirements
+ - Credo is now being used for style/consistency checks (with specific configuration to make credo run in a reasonable time frame)
  
- 
+### Enhancments
+
+### Sequences
+
+ - Moved A000045/Fibonacci from Sequence.OEIS to Sequence.OEIS.Core
+  
 
 ## v0.11.1
 

@@ -111,7 +111,7 @@ defmodule Chunky.Sequence do
   Sequences can be built in three different ways:
 
    - Verbose Iterators (See `Sequence.Basic.create_sequence_whole_numbers/1`)
-   - Simple Functions (See `sequence_for_function/1` and `Sequence.OEIS.create_sequence_a000045/1`)
+   - Simple Functions (See `sequence_for_function/1` and `Sequence.OEIS.Core.create_sequence_a000045/1`)
    - Static Lists (See `sequence_for_list/1` and `Sequence.Basic.create_sequence_empty/1`)
 
   All three ways of developing sequences have things in common:
@@ -279,7 +279,7 @@ defmodule Chunky.Sequence do
       iex> values
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-      iex> seq = Sequence.create(Sequence.OEIS, :fibonacci)
+      iex> seq = Sequence.create(Sequence.OEIS.Core, :fibonacci)
       iex> {values, _n_seq} = seq |> Sequence.take(10)
       iex> values
       [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
@@ -666,7 +666,7 @@ defmodule Chunky.Sequence do
 
   ## Examples
 
-      iex> Sequence.create(Sequence.OEIS, :fibonacci) |> Sequence.is_finite?()
+      iex> Sequence.create(Sequence.OEIS.Core, :fibonacci) |> Sequence.is_finite?()
       false
 
       iex> Sequence.create(Sequence.OEIS.Core, :a000001) |> Sequence.is_finite?()
@@ -743,7 +743,7 @@ defmodule Chunky.Sequence do
       iex> seq |> Sequence.readable_name()
       "Empty sequence: []"
 
-      iex> seq = Sequence.create(Sequence.OEIS, :fibonacci)
+      iex> seq = Sequence.create(Sequence.OEIS.Core, :fibonacci)
       iex> seq |> Sequence.take!(10)
       [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
@@ -828,10 +828,10 @@ defmodule Chunky.Sequence do
 
   ## Example
 
-      iex> seq = Sequence.create(Sequence.OEIS, :a000045)
+      iex> seq = Sequence.create(Sequence.OEIS.Core, :a000045)
       iex> seq |> Sequence.is_instance?({Sequence.OEIS, :a000066})
       false
-      iex> seq |> Sequence.is_instance?({Sequence.OEIS, :a000045})
+      iex> seq |> Sequence.is_instance?({Sequence.OEIS.Core, :a000045})
       true
       
   """
@@ -846,10 +846,10 @@ defmodule Chunky.Sequence do
 
   ## Example
 
-      iex> seq = Sequence.create(Sequence.OEIS, :a000045)
+      iex> seq = Sequence.create(Sequence.OEIS.Core, :a000045)
       iex> seq |> Sequence.is_instance?(Sequence.OEIS, :a000066)
       false
-      iex> seq |> Sequence.is_instance?(Sequence.OEIS, :a000045)
+      iex> seq |> Sequence.is_instance?(Sequence.OEIS.Core, :a000045)
       true
       
   """
@@ -862,10 +862,10 @@ defmodule Chunky.Sequence do
 
   ## Example
 
-      iex> Sequence.is_available?(Sequence.OEIS, :fibonacci)
+      iex> Sequence.is_available?(Sequence.OEIS.Core, :fibonacci)
       true
 
-      iex> Sequence.is_available?(Sequence.OEIS, :quadronacci)
+      iex> Sequence.is_available?(Sequence.OEIS.Core, :quadronacci)
       false
 
   """
@@ -934,10 +934,10 @@ defmodule Chunky.Sequence do
       iex> Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.has_reference?(:wolfram)
       true
 
-      iex> Sequence.create(Sequence.OEIS, :a000045) |> Sequence.has_reference?(:oeis)
+      iex> Sequence.create(Sequence.OEIS.Core, :a000045) |> Sequence.has_reference?(:oeis)
       true
 
-      iex> Sequence.create(Sequence.OEIS, :a000045) |> Sequence.has_reference?(:wolfram)
+      iex> Sequence.create(Sequence.OEIS.Core, :a000045) |> Sequence.has_reference?(:wolfram)
       false
 
   """
@@ -952,7 +952,7 @@ defmodule Chunky.Sequence do
 
   ## Example
 
-      iex> Sequence.create(Sequence.OEIS, :a000045) |> Sequence.readable_name()
+      iex> Sequence.create(Sequence.OEIS.Core, :a000045) |> Sequence.readable_name()
       "OEIS A000045 - Fibonacci Numbers [0, 1, 1, 2, 3, 5, ...]"
 
   """

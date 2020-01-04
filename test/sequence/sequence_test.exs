@@ -101,14 +101,14 @@ defmodule Chunky.SequenceTest do
 
   describe "get_references/1" do
     test "oeis refs" do
-      assert %Sequence{} = seq = Sequence.create(Sequence.OEIS, :fibonacci)
+      assert %Sequence{} = seq = Sequence.create(Sequence.OEIS.Core, :fibonacci)
       assert Sequence.get_references(seq) == [{:oeis, :a000045, "https://oeis.org/A000045"}]
     end
   end
 
   describe "has_reference?/2" do
     test "oeis refs" do
-      assert %Sequence{} = seq = Sequence.create(Sequence.OEIS, :fibonacci)
+      assert %Sequence{} = seq = Sequence.create(Sequence.OEIS.Core, :fibonacci)
       assert Sequence.has_reference?(seq, :oeis)
     end
 

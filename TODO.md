@@ -65,8 +65,6 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 
  - move integer math functions in fractions out to math library
-
- - move fibonacci out of main OEIS module
       
  - macros
   - update cache based functions to use CacheAgent.cache_as/3 macro
@@ -107,7 +105,6 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - Floor/ceil
  
  - testing and validation
-  - x credo
   - typespecs
   - dialyzer
   - circle/ci integration

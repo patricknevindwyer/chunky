@@ -45,14 +45,14 @@ defmodule Chunky.SequenceDataTest do
 
     # Sequence.OEIS
     %{
-      module: Chunky.Sequence.OEIS,
+      module: Chunky.Sequence.OEIS.Core,
       sequence: :a000045,
       opts: [],
       values: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34],
       finite: false
     },
     %{
-      module: Chunky.Sequence.OEIS,
+      module: Chunky.Sequence.OEIS.Core,
       sequence: :fibonacci,
       opts: [],
       values: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34],
