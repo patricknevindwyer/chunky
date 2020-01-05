@@ -744,6 +744,19 @@ defmodule Chunky.Fraction do
 
   """
   def power(a, b, opts \\ [])
+  
+  # coercions
+  def power(str_a, str_b, opts) when is_binary(str_a) and is_binary(str_b), do: power(new(str_a), new(str_b), opts)
+  def power(float_a, float_b, opts) when is_float(float_a) and is_float(float_b), do: power(new(float_a), new(float_b), opts)
+
+  def power(float, int, opts) when is_float(float) and is_integer(int), do: power(new(float), new(int), opts)
+  def power(int, float, opts) when is_float(float) and is_integer(int), do: power(new(int), new(float), opts)
+  
+  def power(str, float, opts) when is_binary(str) and is_float(float), do: power(new(str), new(float), opts)
+  def power(float, str, opts) when is_binary(str) and is_float(float), do: power(new(float), new(str), opts)
+
+  def power(str, int, opts) when is_binary(str) and is_integer(int), do: power(new(str), new(int), opts)
+  def power(int, str, opts) when is_binary(str) and is_integer(int), do: power(new(int), new(str), opts)
 
   # fractional base, negative integer power
   def power(%Fraction{} = fraction, int, opts) when is_integer(int) and int < 0 do
@@ -786,11 +799,14 @@ defmodule Chunky.Fraction do
   end
 
   # fractional base, positive fractional power
-  def power(%Fraction{} = fraction_a, %Fraction{} = fraction_b, opts) do
+  def power(%Fraction{} = fraction_a_pre, %Fraction{} = fraction_b, opts) do
     simp = opts |> Keyword.get(:simplify, false)
     allow_irs = opts |> Keyword.get(:allow_irrational, false)
     epsilon = opts |> Keyword.get(:epsilon, 1.0e-7)
-
+    
+    # we need to simplify fraction A going in
+    fraction_a = fraction_a_pre |> simplify()
+    
     # break our fractional power into the power and root segments
     f_pow = fraction_b.num
     f_root = fraction_b.den

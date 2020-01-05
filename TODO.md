@@ -65,12 +65,21 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
          
 
  - add OEIS stats to library or oeis docs
- 
- 
- - Fractional powers don't work sometimes (like Fraction.power("80/5", "1/4") which should be 2)
- - Fractional powers don't accept coercion values
 
-
+ - fraction
+  - coercion values in power
+  - within x (basically float_equal?)
+  - abs
+  - floor
+  - ceil
+  - inc/dec numerator
+  - inc/dec denominator
+  - inc/dec both
+  - Is whole
+  - Is greater than one (or less) than negative one
+  - is within/close to
+  - in range (like clamp)
+  - clamp with range value
 
  - sequence start/restart functions
   - start as alias to next!, just ticks over to first value
@@ -81,36 +90,31 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - sum
   - zip
   - with_index
-  - take with drop (count)
+  - take with drop (count) (filter/reject)
   - drop while (with count)
   - reject (with count)
+  - add max_time or some way to short-circuit when an item takes too long to get/filter/etc
+  - add an agent as a wrapper around sequence state
+  - have a total_time/max_time, for doing larger operations (take, etc)
+  - take while item time < some time
   
   - or do we build sequence manipulations as combinators of some kind, like a pipeline, like streams
   
  - Sequence.at/2
   - check for overflow of finite lists
  
- - fraction updates
-  - x Is zero
-  - x Is positive
-  - x Is negative
-  - Is whole
-  - Is greater than one (or less) than negative one
-  - is within/close to
-
- - Fraction Functions:
-  - abs
-  - Floor/ceil
- 
-
 
 
  - summation macro?
   - smart output, or selective output (fraction vs integer vs get_whole)
   - smart aggregator/summation
+  
  - product macro?
   - smart output, or selective output (fraction vs integer vs get_whole)
   - smart reduction/product
+ 
+ - later do integral/derivative or similar
+ - infinite summation with boundary check/condition
  
  - do we need an :infinity value?
  

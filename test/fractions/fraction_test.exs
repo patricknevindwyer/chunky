@@ -1107,13 +1107,111 @@ defmodule Chunky.FractionTest do
     end
   end
 
+  describe "power/3 - reducables" do
+    # These are fractionals that _should_ have proper roots
+
+    test "need simplification" do
+        ins = [{"80/5", "1/4"}]
+        outs = ["2/1"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)
+    end
+    
+  end
+  
+  describe "power/3 - coercion values" do
+    test "string ^ string" do
+        ins = [{"2", "8/4"}, {"4/5", "3"}]
+        outs = ["4/1", "64/125"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)
+    end
+    
+    test "string ^ int" do
+        ins = [{"2/1", 3}, {"4/5", 2}]
+        outs = ["8/1", "16/25"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)        
+    end
+    
+    test "string ^ float" do
+        ins = [{"16", 0.5}, {"4/5", 3.0}]
+        outs = ["4/1", "64/125"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            # IO.puts("#{b}^#{e} == #{o}")
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)
+    end
+    
+    test "int ^ string" do
+        ins = [{64, "1/3"}, {4, "0.5"}]
+        outs = ["4/1", "2/1"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)        
+    end
+    
+    test "int ^ float" do
+        ins = [{16, 0.5}, {4, 3.5}]
+        outs = ["4/1", "128/1"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)
+    end
+    
+    test "float ^ string" do
+        ins = [{16.0, "1/2"}, {0.8, "3.0"}]
+        outs = ["4/1", "64/125"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)
+    end
+    
+    test "float ^ int" do
+        ins = [{0.75, 2}, {-3.5, 4}]
+        outs = ["9/16", "2401/16"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)
+    end    
+    
+    test "float ^ float" do
+        ins = [{0.75, 2.0}, {-3.5, 4.0}]
+        outs = ["9/16", "2401/16"]
+        
+        Enum.zip(ins, outs)
+        |> Enum.each(fn {{b, e}, o} -> 
+            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+        end)        
+    end
+  end
+  
   describe "power/3 - frac ^ frac" do
     test "fractional roots" do
       test_cases = [
-        %{fraction: {4, 16}, power: {1, 2}, result: {2, 4}, opts: []},
+        %{fraction: {4, 16}, power: {1, 2}, result: {1, 2}, opts: []},
         %{fraction: {4, 16}, power: {1, 2}, result: {1, 2}, opts: [simplify: true]},
         %{fraction: {8, 27}, power: {1, 3}, result: {2, 3}, opts: []},
-        %{fraction: {8, 8}, power: {2, 3}, result: {4, 4}, opts: []},
+        %{fraction: {8, 8}, power: {2, 3}, result: {1, 1}, opts: []},
         %{fraction: {8, 8}, power: {2, 3}, result: {1, 1}, opts: [simplify: true]},
 
         # so. SO. I randomly plugged these in for the "irrationals, not allowed" section. Pulled
