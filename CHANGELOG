@@ -16,13 +16,14 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.11.2
 
 ### Build/Development changes
 
  - Module requiring HTTPoison and Jason excluded from packaging
  - HTTPoison and Jason moved to `dev` and `test` only requirements
  - Credo is now being used for style/consistency checks (with specific configuration to make credo run in a reasonable time frame)
+ - new documentation as main page for hexdocs (library.md)
  
 ### Libraries
 

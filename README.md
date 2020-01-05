@@ -43,7 +43,7 @@ Install by adding `chunky` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:chunky, "~> 0.11.1"}
+    {:chunky, "~> 0.11.2"}
   ]
 end
 ```

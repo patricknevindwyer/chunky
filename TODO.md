@@ -64,7 +64,9 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ## TODO
          
 
-
+ - add OEIS stats to library or oeis docs
+ 
+ 
  - Fractional powers don't work sometimes (like Fraction.power("80/5", "1/4") which should be 2)
  - Fractional powers don't accept coercion values
 
