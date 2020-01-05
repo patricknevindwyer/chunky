@@ -773,7 +773,7 @@ defmodule Chunky.Sequence do
       
   The function name within a module can also be used to identify a sequence, as all 
   sequence generation functions follow the format `create_sequence_*`. The OEIS `fibonacci`
-  sequence is indirectly created via the function `Chunky.Sequence.OEIS.create_sequence_fibonacci/1`.
+  sequence is indirectly created via the function `Chunky.Sequence.OEIS.Core.create_sequence_fibonacci/1`.
   """
   def create(module, seq_name, opts \\ []) when is_atom(seq_name) do
     case Code.ensure_loaded?(module) do

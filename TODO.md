@@ -63,7 +63,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
          
- - new main readme for hexdocs / updated readme for GitHub  
+
+
+ - Fractional powers don't work sometimes (like Fraction.power("80/5", "1/4") which should be 2)
+ - Fractional powers don't accept coercion values
+
 
 
  - sequence start/restart functions
@@ -119,6 +123,13 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - dialyzer
   - circle/ci integration
   
+  
+ - Move combinations/permutations to a new modules
+ - add combinatorics functions that match the sequence iterators for different combinatorics
+  - involutions
+  - derangements
+  - etc
+   
 ```
 In aliases
 

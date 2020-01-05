@@ -55,13 +55,13 @@ defmodule Chunky.MixProject do
 
   defp docs do
     [
-      main: "readme",
+      main: "library",
       name: "Chunky",
       source_ref: "v#{@version}",
       canonical: "http://hexdocs.pm/chunky",
       source_url: "https://github.com/patricknevindwyer/chunky",
       extras: [
-        "README.md"
+        "library.md"
       ]
     ]
   end

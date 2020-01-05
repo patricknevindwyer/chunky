@@ -7,6 +7,7 @@
  - version bump in mix.exs
  - version bump in README.md
  - version bump in CHANGELOG
+ - version bump in library.md
  - update OEIS stats for release version
  - git tag -a v0.x.x -m "v0.x.x - summary"
  - git push

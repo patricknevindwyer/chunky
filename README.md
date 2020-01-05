@@ -53,8 +53,7 @@ Chunky documentation can be found on Hexdocs at [https://hexdocs.pm/chunky](http
 
 ## Documentation
 
- - [Fractions](/chunky/Chunky.Fraction.html#content)
- - [Math](/chunky/Chunky.Math.html#content)
- - [Sequences](/chunky/Chunky.Sequences.html#content)
- - [Grids](https://hexdocs.pm/chunky/Chunky.Grid.html#content)
+ - [Fractions](https://hexdocs.pm/chunky/Chunky.Fraction.html#content)
+ - [Math](https://hexdocs.pm/chunky/Chunky.Math.html#content)
+ - [Sequences](https://hexdocs.pm/chunky/Chunky.Sequences.html#content)
  - [Combinitorics](https://hexdocs.pm/chunky/Chunky.html#content)
