@@ -27,7 +27,6 @@ defmodule Chunky.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-        
       # dev only/test only
       {:ex_doc, "~> 0.14", only: :dev, runtime: false},
       {:httpoison, "~> 1.6", only: [:dev, :test]},
@@ -37,12 +36,12 @@ defmodule Chunky.MixProject do
   end
 
   defp aliases do
-      [
-          # quality: ["credo --strict", "dialyzer", "test”]
-          assess: ["credo --strict"]
-      ]
+    [
+      # quality: ["credo --strict", "dialyzer", "test”]
+      assess: ["credo --strict"]
+    ]
   end
-  
+
   defp package do
     [
       licenses: ["BSD-3-Clause"],

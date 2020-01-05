@@ -6,96 +6,103 @@ defmodule Chunky.MathTest do
   doctest Chunky.Math
 
   describe "nth_root/3" do
-      test "value tests" do
-          ns = [{8, 3}, {8, 5}, {104_976, 4}]
-          os = [2.0, 1.5157165665103982, 18.0]
+    test "value tests" do
+      ns = [{8, 3}, {8, 5}, {104_976, 4}]
+      os = [2.0, 1.5157165665103982, 18.0]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.nth_root(n, m) == o
-          end)
-      end      
-      
-      test "edge tests" do
-          ns = [{-8, 3}, {0, 5}, {137, 0}]
-          os = [-2.0, 0, :zero_root_undefined]
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.nth_root(n, m) == o
+      end)
+    end
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.nth_root(n, m) == o
-          end)
-      end      
-      
+    test "edge tests" do
+      ns = [{-8, 3}, {0, 5}, {137, 0}]
+      os = [-2.0, 0, :zero_root_undefined]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.nth_root(n, m) == o
+      end)
+    end
   end
-  
+
   describe "integer_nth_root?/3" do
-      test "value tests" do
-          ns = [{8, 3}, {8, 5}, {104_976, 4}, {-8, 3}, {0, 5}, {137, 0}]
-          os = [true, false, true, true, true, false]
+    test "value tests" do
+      ns = [{8, 3}, {8, 5}, {104_976, 4}, {-8, 3}, {0, 5}, {137, 0}]
+      os = [true, false, true, true, true, false]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.integer_nth_root?(n, m) == o
-          end)
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.integer_nth_root?(n, m) == o
+      end)
+    end
   end
-  
+
   describe "integer_nth_root/3" do
-      test "value tests" do
-          ns = [{8, 3}, {8, 5}, {104_976, 4}, {-8, 3}, {0, 5}, {137, 0}]
-          os = [{true, 2}, {false, :no_integer_nth_root, 1.5157165665103982}, {true, 18}, {true, -2}, {true, 0}, {false, :zero_root_undefined}]
+    test "value tests" do
+      ns = [{8, 3}, {8, 5}, {104_976, 4}, {-8, 3}, {0, 5}, {137, 0}]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.integer_nth_root(n, m) == o
-          end)
-      end
+      os = [
+        {true, 2},
+        {false, :no_integer_nth_root, 1.5157165665103982},
+        {true, 18},
+        {true, -2},
+        {true, 0},
+        {false, :zero_root_undefined}
+      ]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.integer_nth_root(n, m) == o
+      end)
+    end
   end
-  
+
   describe "floats_equal?/3" do
-      test "value tests" do
-          ns = [{3.0, 3.0}, {3.1, 3.0}, {3.000000001, 3.0}, {-3.0, 3.0}, {2.999999999, 3.0}]
-          os = [true, false, true, false, true]
+    test "value tests" do
+      ns = [{3.0, 3.0}, {3.1, 3.0}, {3.000000001, 3.0}, {-3.0, 3.0}, {2.999999999, 3.0}]
+      os = [true, false, true, false, true]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.floats_equal?(n, m) == o
-          end)
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.floats_equal?(n, m) == o
+      end)
+    end
   end
-  
+
   describe "lcm/2" do
-      test "value tests" do
-          ns = [{1, 1}, {1, 10}, {2, 10}, {3, 5}, {1299379, 1299437}]
-          os = [1, 10, 10, 15, 1_688_461_149_623]
+    test "value tests" do
+      ns = [{1, 1}, {1, 10}, {2, 10}, {3, 5}, {1_299_379, 1_299_437}]
+      os = [1, 10, 10, 15, 1_688_461_149_623]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.lcm(n, m) == o
-          end)
-      end
-      
-      test "negatives" do
-          ns = [{-1, 1}, {-2, -5}, {-2, 5}, {-2, 2}, {1299379, -1299437}]
-          os = [1, 10, 10, 2, 1_688_461_149_623]
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.lcm(n, m) == o
+      end)
+    end
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, o} ->
-            assert Math.lcm(n, m) == o
-          end)      
-      end
-      
-      test "zero" do
-          ns = [{-1, 0}, {0, -5}, {0, 5}, {0, 0}, {1299379, 0}]
-          os = [1, 10, 10, 2, 1_688_461_149_623]
+    test "negatives" do
+      ns = [{-1, 1}, {-2, -5}, {-2, 5}, {-2, 2}, {1_299_379, -1_299_437}]
+      os = [1, 10, 10, 2, 1_688_461_149_623]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {{n, m}, _o} ->
-            assert Math.lcm(n, m) == 0
-          end)      
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, o} ->
+        assert Math.lcm(n, m) == o
+      end)
+    end
+
+    test "zero" do
+      ns = [{-1, 0}, {0, -5}, {0, 5}, {0, 0}, {1_299_379, 0}]
+      os = [1, 10, 10, 2, 1_688_461_149_623]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, m}, _o} ->
+        assert Math.lcm(n, m) == 0
+      end)
+    end
   end
-  
+
   describe "factorization_count/1" do
     test "value tests" do
       ns = [1, 2, 3, 5, 7, 32, 370, 4100, 6444]

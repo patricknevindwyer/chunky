@@ -1589,5 +1589,4 @@ defmodule Chunky.Fraction do
 
   """
   def is_zero?(%Fraction{} = fraction), do: fraction.num == 0
-
 end

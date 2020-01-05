@@ -2,7 +2,7 @@ defmodule Chunky.FractionTest do
   use ExUnit.Case, async: true
   alias Chunky.Fraction
   alias Chunky.Math
-  
+
   doctest Chunky.Fraction, import: true
 
   describe "String.Chars protocol" do

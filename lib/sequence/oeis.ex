@@ -538,5 +538,4 @@ defmodule Chunky.Sequence.OEIS do
     |> Enum.filter(fn {src, _, _} -> src == :oeis end)
     |> length() > 0
   end
-
 end

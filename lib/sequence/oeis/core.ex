@@ -989,7 +989,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def create_sequence_a000043(_opts) do
     sequence_for_list(@data_a000043)
   end
-  
+
   @doc """
   OEIS Sequence `A000045` - Fibonacci numbers
 

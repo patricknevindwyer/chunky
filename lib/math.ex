@@ -31,11 +31,11 @@ defmodule Chunky.Math do
 
 
   ## Float Arithmetic
-  
+
    - `nth_root/3` - Floating point `n-th` root of an integer
    - `floats_equal?/3` - Determine if two floats are equal, within an error bound
-  
-  
+
+
   ## Factorization and Divisors
 
   Work with divisors and prime factors.
@@ -416,11 +416,9 @@ defmodule Chunky.Math do
   def factorial(1), do: 1
 
   def factorial(n) when is_integer(n) and n > 1 do
-      
-      CacheAgent.cache_as :factorial, n do
-          n * factorial(n - 1)
-      end
-      
+    CacheAgent.cache_as :factorial, n do
+      n * factorial(n - 1)
+    end
   end
 
   @doc """
@@ -1118,15 +1116,14 @@ defmodule Chunky.Math do
 
   def bell_number(n) when is_integer(n) and n > 1 do
     # a(n+1) = Sum_{k=0..n} a(k)*binomial(n, k)  
-    
+
     CacheAgent.cache_as :bell_number, n do
-        0..(n - 1)
-        |> Enum.map(fn k ->
-          bell_number(k) * binomial(n - 1, k)
-        end)
-        |> Enum.sum()        
+      0..(n - 1)
+      |> Enum.map(fn k ->
+        bell_number(k) * binomial(n - 1, k)
+      end)
+      |> Enum.sum()
     end
-    
   end
 
   @doc """
@@ -1236,11 +1233,9 @@ defmodule Chunky.Math do
   def eulerian_number(n, m) when is_integer(n) and is_integer(m) and m >= n, do: 0
 
   def eulerian_number(n, m) do
-      
-      CacheAgent.cache_as :eulerian_number, {n, m} do
-          (n - m) * eulerian_number(n - 1, m - 1) + (m + 1) * eulerian_number(n - 1, m)
-      end
-      
+    CacheAgent.cache_as :eulerian_number, {n, m} do
+      (n - m) * eulerian_number(n - 1, m - 1) + (m + 1) * eulerian_number(n - 1, m)
+    end
   end
 
   @doc """
@@ -1279,17 +1274,15 @@ defmodule Chunky.Math do
     # a(n) = (Sum_{k=0..n - 1} binomial(n - 1, k) * a(k)*a(n - 1-k)) / 2    
 
     CacheAgent.cache_as :euler_zig_zag, n do
-        bin_sum =
-          0..(n - 1)
-          |> Enum.map(fn k ->
-            binomial(n - 1, k) * euler_zig_zag(k) * euler_zig_zag(n - 1 - k)
-          end)
-          |> Enum.sum()
+      bin_sum =
+        0..(n - 1)
+        |> Enum.map(fn k ->
+          binomial(n - 1, k) * euler_zig_zag(k) * euler_zig_zag(n - 1 - k)
+        end)
+        |> Enum.sum()
 
-        div(bin_sum, 2)
-        
+      div(bin_sum, 2)
     end
-    
   end
 
   @doc """
@@ -1455,9 +1448,9 @@ defmodule Chunky.Math do
   def lucas_number(1), do: 1
 
   def lucas_number(n) when is_integer(n) and n > 1 do
-      CacheAgent.cache_as :lucas_number, n do
-          lucas_number(n - 1) + lucas_number(n - 2)          
-      end
+    CacheAgent.cache_as :lucas_number, n do
+      lucas_number(n - 1) + lucas_number(n - 2)
+    end
   end
 
   @doc """
@@ -1545,32 +1538,30 @@ defmodule Chunky.Math do
     #  ref: sage version via [Peter Luschny](https://oeis.org/wiki/User:Peter_Luschny)
 
     CacheAgent.cache_as :rooted_tree_count, n do
-        # iterate up to n - 1
-        part_a =
-          1..(n - 1)
-          |> Enum.map(fn j ->
-            # iterate divisors of j
-            inner =
-              factors(j)
-              |> Enum.map(fn d ->
-                d * rooted_tree_count(d)
-              end)
+      # iterate up to n - 1
+      part_a =
+        1..(n - 1)
+        |> Enum.map(fn j ->
+          # iterate divisors of j
+          inner =
+            factors(j)
+            |> Enum.map(fn d ->
+              d * rooted_tree_count(d)
+            end)
 
-              # add result of d in divisors(j)
-              |> Enum.sum()
+            # add result of d in divisors(j)
+            |> Enum.sum()
 
-            # tail tree count term with (n - j)
-            inner * rooted_tree_count(n - j)
-          end)
+          # tail tree count term with (n - j)
+          inner * rooted_tree_count(n - j)
+        end)
 
-          # add result of j in (1..n-1)
-          |> Enum.sum()
+        # add result of j in (1..n-1)
+        |> Enum.sum()
 
-        # final division
-        div(part_a, n - 1)
-        
+      # final division
+      div(part_a, n - 1)
     end
-    
   end
 
   @doc """
@@ -1915,43 +1906,37 @@ defmodule Chunky.Math do
   def wedderburn_etherington_number(n) when is_integer(n) and n < 4, do: 1
 
   def wedderburn_etherington_number(n) when is_integer(n) and Integer.is_odd(n) do
-      
-      CacheAgent.cache_as :wedderburn_etherington_number, n do
-          # odd case is based on recurrence relation of 2n - 1
-          sub_n = div(n + 1, 2)
+    CacheAgent.cache_as :wedderburn_etherington_number, n do
+      # odd case is based on recurrence relation of 2n - 1
+      sub_n = div(n + 1, 2)
 
-            1..(sub_n - 1)
-            |> Enum.map(fn i ->
-              wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i - 1)
-            end)
-            |> Enum.sum()
-          
-      end
-      
+      1..(sub_n - 1)
+      |> Enum.map(fn i ->
+        wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i - 1)
+      end)
+      |> Enum.sum()
+    end
   end
 
   def wedderburn_etherington_number(n) when is_integer(n) and Integer.is_even(n) do
-      
-      CacheAgent.cache_as :wedderburn_etherington_number, n do
-          # even case is based on recurrence relation of 2n
-          sub_n = div(n, 2)
+    CacheAgent.cache_as :wedderburn_etherington_number, n do
+      # even case is based on recurrence relation of 2n
+      sub_n = div(n, 2)
 
-          # determine the summation portion
-          sum_part =
-            1..(sub_n - 1)
-            |> Enum.map(fn i ->
-              wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i)
-            end)
-            |> Enum.sum()
+      # determine the summation portion
+      sum_part =
+        1..(sub_n - 1)
+        |> Enum.map(fn i ->
+          wedderburn_etherington_number(i) * wedderburn_etherington_number(2 * sub_n - i)
+        end)
+        |> Enum.sum()
 
-          # fractional portion
-          s_n = wedderburn_etherington_number(sub_n)
-          frac_part = div(s_n * (s_n + 1), 2)
+      # fractional portion
+      s_n = wedderburn_etherington_number(sub_n)
+      frac_part = div(s_n * (s_n + 1), 2)
 
-          frac_part + sum_part
-          
-      end
-      
+      frac_part + sum_part
+    end
   end
 
   @doc """
@@ -2995,20 +2980,17 @@ defmodule Chunky.Math do
   def partition_count(1), do: 1
 
   def partition_count(n) when is_integer(n) and n > 1 do
-      
-      CacheAgent.cache_as :partition_count, n do
-          # a(n) = (1/n) * Sum_{k=0..n-1} sigma(n-k)*a(k)  
-          sum_part =
-            0..(n - 1)
-            |> Enum.map(fn k ->
-              sigma(n - k, 1) * partition_count(k)
-            end)
-            |> Enum.sum()
+    CacheAgent.cache_as :partition_count, n do
+      # a(n) = (1/n) * Sum_{k=0..n-1} sigma(n-k)*a(k)  
+      sum_part =
+        0..(n - 1)
+        |> Enum.map(fn k ->
+          sigma(n - k, 1) * partition_count(k)
+        end)
+        |> Enum.sum()
 
-          Fraction.new(1, n) |> Fraction.multiply(sum_part) |> Fraction.get_whole()
-          
-      end
-      
+      Fraction.new(1, n) |> Fraction.multiply(sum_part) |> Fraction.get_whole()
+    end
   end
 
   @doc """
@@ -3335,12 +3317,10 @@ defmodule Chunky.Math do
   def involutions_count(1), do: 1
 
   def involutions_count(n) when n > 1 do
-      
-      CacheAgent.cache_as :involutions_count, n do
-          # a(n) = a(n-1) + (n-1)*a(n-2), n>1.
-          involutions_count(n - 1) + (n - 1) * involutions_count(n - 2)
-      end
-      
+    CacheAgent.cache_as :involutions_count, n do
+      # a(n) = a(n-1) + (n-1)*a(n-2), n>1.
+      involutions_count(n - 1) + (n - 1) * involutions_count(n - 2)
+    end
   end
 
   @doc """
@@ -4112,19 +4092,19 @@ defmodule Chunky.Math do
     x = Math.pow(x, 2, n)
 
     if x != 1 do
-        if x != n - 1 do
-           miller_rabin(n, x, r - 1) 
-       else
-            true
-        end
+      if x != n - 1 do
+        miller_rabin(n, x, r - 1)
+      else
+        true
+      end
     else
       false
     end
   end
-  
+
   @doc """
   Find the _least common multiple_ of a list of integers.
-  
+
   By definition **LCM** is a composable function, such that finding the least common
   multiple of a list of integers `[a, b, c, d]` is `lcm(a, lcm(b, lcm(c, d)))`.
 
@@ -4135,7 +4115,7 @@ defmodule Chunky.Math do
       
       iex> Math.lcm([2, 4, 8])
       8
-  
+
       iex> Math.lcm([1, 3, 27])
       27
       
@@ -4144,41 +4124,41 @@ defmodule Chunky.Math do
   """
   def lcm([a, b]), do: lcm(a, b)
   def lcm([a | rest]), do: lcm(a, lcm(rest))
-  
+
   @doc """
   Find the _least commom multiple_ of two integers.
-  
+
   The **LCM** of two integers `n` and `m` is the smallest number `b` that is divisible
   by both `n` and `m` with no remainder - or satisfies the relationship `b/n = 0, b/m = 0`.
-  
+
   ## Examples
-  
+
       iex> Math.lcm(2, 3)
       6
-  
+
       iex> Math.lcm(10, 5)
       10
-  
+
       iex> Math.lcm(17, 29)
       493
-  
+
       iex> Math.lcm(14, 230)
       1610
-  
+
       iex> Math.lcm(257, 0)
       0
   """
   def lcm(_a, 0), do: 0
   def lcm(0, _b), do: 0
   def lcm(a, b) when is_integer(a) and is_integer(b), do: div(abs(a * b), Integer.gcd(a, b))
-  
+
   @doc """
   Generalized floating point nth root, from:
 
       https://github.com/acmeism/RosettaCodeData/blob/master/Task/Nth-root/Elixir/nth-root.elixir
 
   based on a fast converging Newton's Method process.
-  
+
   Note: Because the `nth_root` function is based on floating point operations, it _will_ lose
   precision and introduce error for integers larger than ~16 digits
 
@@ -4196,13 +4176,14 @@ defmodule Chunky.Math do
 
       iex> Math.nth_root(78125, 7)
       5.0
-  
+
       iex> Math.nth_root(104, 3)
       4.702669375441515
   """
   def nth_root(x, n, precision \\ 1.0e-7)
   def nth_root(0, _, _), do: 0
   def nth_root(_, 0, _), do: :zero_root_undefined
+
   def nth_root(x, n, precision) do
     f = fn prev ->
       ((n - 1) * prev + x / :math.pow(prev, n - 1)) / n
@@ -4212,9 +4193,10 @@ defmodule Chunky.Math do
   end
 
   defp fixed_point(_, guess, tolerance, next) when abs(guess - next) < tolerance, do: next
+
   defp fixed_point(f, _guess, tolerance, next) do
-       fixed_point(f, next, tolerance, f.(next))
-   end
+    fixed_point(f, next, tolerance, f.(next))
+  end
 
   @doc """
   Compare two floating points number using an epsilon error boundary.
@@ -4226,7 +4208,7 @@ defmodule Chunky.Math do
 
       iex> Math.floats_equal?(3.11, 3.1, 0.05)
       true
-  
+
       iex> Math.floats_equal?(104.9999999, 104.9999996)
       true
   """
@@ -4255,51 +4237,48 @@ defmodule Chunky.Math do
 
       iex> Math.integer_nth_root(1234, 6)
       {false, :no_integer_nth_root, 3.2750594908836885}
-  
+
       iex> Math.integer_nth_root(33_038_369_407, 5)
       {true, 127}
   """
   def integer_nth_root(x, n, epsilon \\ 1.0e-6) when is_integer(x) and is_integer(n) do
-      
-      case nth_root(x, n, epsilon * 0.001) do
-          0 -> 
-              {true, 0}
-          
-          :zero_root_undefined -> 
-              {false, :zero_root_undefined}
-          
-          root ->
-              i_root = Float.round(root)
+    case nth_root(x, n, epsilon * 0.001) do
+      0 ->
+        {true, 0}
 
-              if abs(root - i_root) < epsilon do
-                {true, Kernel.trunc(i_root)}
-              else
-                {false, :no_integer_nth_root, root}
-              end
-              
-      end
+      :zero_root_undefined ->
+        {false, :zero_root_undefined}
+
+      root ->
+        i_root = Float.round(root)
+
+        if abs(root - i_root) < epsilon do
+          {true, Kernel.trunc(i_root)}
+        else
+          {false, :no_integer_nth_root, root}
+        end
+    end
   end
-  
+
   @doc """
   Predicate version of `integer_nth_root/3` - does `x` have an integer `n`-th root.
-  
+
   ## Examples
-  
+
       iex> Math.integer_nth_root?(27, 3)
       true
 
       iex> Math.integer_nth_root?(1234, 6)
       false
-  
+
       iex> Math.integer_nth_root?(33_038_369_407, 5)
       true
 
   """
   def integer_nth_root?(x, n, epsilon \\ 1.0e-6) do
-     case integer_nth_root(x, n, epsilon) do
-        {true, _} -> true
-        _ -> false
-     end 
+    case integer_nth_root(x, n, epsilon) do
+      {true, _} -> true
+      _ -> false
+    end
   end
-    
 end
