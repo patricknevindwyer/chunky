@@ -25,6 +25,9 @@
   - power/3 now handles coercion values for string, int, and float
   - fixed reducable values not having proper fractional results (previously returned :no_fractional_power)
   - Added absolute_value/1
+  - Added near_equal?/3
+  
+  
 
 ## v0.11.2
 

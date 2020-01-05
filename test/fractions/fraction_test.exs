@@ -5,6 +5,27 @@ defmodule Chunky.FractionTest do
 
   doctest Chunky.Fraction, import: true
 
+  describe "near_equal?/3" do
+      test "value tests" do
+          ins = [
+              {"1/4", "2/4", 1}, {"-1/4", "3/4", 1}, {"-1/4", "-4/4", 1}, {"1/10", "2/10", "1/10"}, 
+              {"1/12", "2/12", 0.1}, {"-1/4", "5/4", 1}, {"1/10", "3/10", "1/9"}, {"9/5", "7/5", "1/4"},
+              {"1/5", "2/5", -0.5}
+          ]
+          outs = [
+              true, true, true, true, 
+              true, false, false, false,
+              true
+          ]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {{l, r, e}, o} -> 
+              assert Fraction.near_equal?(Fraction.new(l), Fraction.new(r), Fraction.new(e)) == o
+          end)
+          
+      end
+  end
+  
   describe "abs/1" do
       test "value tests" do
           ins = ["-3/4", "4/1", -3]

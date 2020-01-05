@@ -104,7 +104,8 @@ defmodule Chunky.Fraction do
     - `gte?/2` - Greater than or equal (`>=`) comparison between two fractions, or a fraction and an integer
     - `lt?/2` - Less than (`<`) comparison between two fractions, or a fraction and an integer
     - `lte?/2` - Less than or equal (`<=`) comparison between two fractions, or a fraction and an integer
-
+    - `near_equal?/3` - Test if the difference between two fractions is less than or equal to another fraction
+  
   ```elixir
   iex> Fraction.gt?(Fraction.new(7, 8), Fraction.new(8, 9))
   false
@@ -1588,6 +1589,36 @@ defmodule Chunky.Fraction do
   def eq?(%Fraction{} = fraction_a, tup) when is_tuple(tup), do: eq?(fraction_a, new(tup))
   def eq?(tup, %Fraction{} = fraction_b) when is_tuple(tup), do: eq?(new(tup), fraction_b)
 
+  @doc """
+  Determine if two fractions close enough in value.
+  
+  This is similar to doing floating point comparison, where an _epsilon_ value is used to determine
+  if two values are within a given range of each other.
+  
+  In this case, we test if the difference between the first two fractions is less than or equal
+  to the third fraction. So, if we wanted to determine if `3/2` and `5/3` were within `1/4` of each
+  other, or had a difference less than or equal to `1/4`:
+  
+        iex> Fraction.near_equal?("3/2", "5/3", "1/4") 
+        true
+
+  ## Examples
+  
+        iex> Fraction.near_equal?("1/10", "8/10", 0.05)
+        false
+  
+        iex> Fraction.near_equal?("-1/3", "4/3", 2)
+        true
+  
+  """
+  def near_equal?(%Fraction{} = fraction_a, %Fraction{} = fraction_b, %Fraction{} = fraction_epsilon) do
+      subtract(fraction_a, fraction_b) |> absolute_value() |> lte?(absolute_value(fraction_epsilon))
+  end
+  
+  def near_equal?(a, b, e) do
+      near_equal?(new(a), new(b), new(e)) 
+  end
+  
   @doc """
   Determine if a fraction is negative.
 
