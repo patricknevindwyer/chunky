@@ -5,6 +5,122 @@ defmodule Chunky.FractionTest do
 
   doctest Chunky.Fraction, import: true
 
+  describe "increment/2" do
+      test "numerator" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+          outs = ["2/4", "6/4", "17/4", "-2/4", "-4/4", "1/4", "0/3"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.increment(:numerator) |> Fraction.eq?(Fraction.new(o))
+          end)          
+      end
+      
+      test "num" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+          outs = ["2/4", "6/4", "17/4", "-2/4", "-4/4", "1/4", "0/3"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.increment(:num) |> Fraction.eq?(Fraction.new(o))
+          end)                    
+      end
+
+      test "denominator" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+          outs = ["1/5", "5/5", "16/5", "-3/5", "-5/5", "0/5"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.increment(:denominator) |> Fraction.eq?(Fraction.new(o))
+          end)          
+      end
+      
+      test "den" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+          outs = ["1/5", "5/5", "16/5", "-3/5", "-5/5", "0/5"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.increment(:den) |> Fraction.eq?(Fraction.new(o))
+          end)                    
+      end
+            
+  end
+  
+  describe "decrement/2" do
+      test "numerator" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+          outs = ["0/4", "4/4", "15/4", "-4/4", "-6/4", "-1/4", "-2/3"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.decrement(:numerator) |> Fraction.eq?(Fraction.new(o))
+          end)          
+      end
+      
+      test "num" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+          outs = ["0/4", "4/4", "15/4", "-4/4", "-6/4", "-1/4", "-2/3"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.decrement(:num) |> Fraction.eq?(Fraction.new(o))
+          end)                    
+      end
+
+      test "denominator" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+          outs = ["1/3", "5/3", "16/3", "-3/3", "-5/3", "0/3"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.decrement(:denominator) |> Fraction.eq?(Fraction.new(o))
+          end)          
+      end
+      
+      test "den" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+          outs = ["1/3", "5/3", "16/3", "-3/3", "-5/3", "0/3"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.decrement(:den) |> Fraction.eq?(Fraction.new(o))
+          end)                    
+      end
+      
+      test "denominator to zero" do
+          
+          assert Fraction.new("3/1") |> Fraction.decrement(:den) == {:error, :invalid_denominator}
+      end
+  end
+  
+  describe "floor/1" do
+      test "value tests" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+          outs = ["0/4", "4/4", "16/4", "-4/4", "-8/4", "0/4"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.floor() |> Fraction.eq?(Fraction.new(o))
+          end)
+          
+      end
+  end
+  
+  describe "ceiling/1" do
+      test "value tests" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+          outs = ["4/4", "8/4", "16/4", "0/4", "-4/4", "0/4"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.ceiling() |> Fraction.eq?(Fraction.new(o))
+          end)
+          
+      end          
+  end
+  
   describe "near_equal?/3" do
       test "value tests" do
           ins = [

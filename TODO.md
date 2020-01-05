@@ -71,17 +71,19 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x coercion values in power
   - x abs
   - x within x (basically float_equal?)
-  - floor
-  - ceil
-  - inc/dec numerator
-  - inc/dec denominator
+  - x floor
+  - x ceil
+  - x inc/dec numerator
+  - x inc/dec denominator
   - inc/dec both
-  - Is whole
+  - x Is whole
   - Is greater than one (or less) than negative one
   - is within/close to
   - in range (like clamp)
   - clamp with range value
   - guard: coercible?
+  - round/1
+  - round/2 (nearest fractional part)
   
  - sequence start/restart functions
   - start as alias to next!, just ticks over to first value

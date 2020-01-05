@@ -80,7 +80,11 @@ defmodule Chunky.Fraction do
 
     - `absolute_value/1` - Absolute value `|v|` of fraction
     - `add/3` - Add two fractions, or a fraction and a value compatible with `new/1`
+    - `ceiling/1` - Round a fraction up to the nearest whole value
+    - `decrement/2` - Decrement the numerator or denominator by one
     - `divide/3` - Divide two fractions, or a fraction and a value compatible with `new/1`
+    - `floor/1` - Round a fraction down to the nearest whole value
+    - `increment/2` - Increment the numerator or denominator by one
     - `max_of/2` - Find the larger of two fractions, or a fraction and a value compatible with `new/1`
     - `min_of/2` - Find the smaller of two fractions, or a fraction and value compatible with `new/1`
     - `multiply/3` - Multiply two fractions, or a fraction and a value compatible with `new/1`
@@ -690,6 +694,158 @@ defmodule Chunky.Fraction do
         end
     end
   end
+  
+  @doc """
+  Increment the numerator or denominator by one.
+  
+  This is not necessarily an arithmatically valid operation, rather it directly increments the
+  numerator or denominator.
+  
+  Valid `mode` values are: `:num`, `:numerator`, `:den`, or `:denominator`. Note that when incrementing
+  a negative value by the numerator, the value will move towards `0`, not towards the negative.
+  
+  ## Examples
+  
+      iex> Fraction.new("7/11") |> Fraction.increment(:num)
+      %Fraction{num: 8, den: 11}
+  
+      iex> Fraction.new("-5/9") |> Fraction.increment(:den)
+      %Fraction{num: -5, den: 10}
+  
+      iex> Fraction.new("-7/3") |> Fraction.increment(:numerator)
+      %Fraction{num: -6, den: 3}
+  """
+  def increment(%Fraction{num: num, den: den}, mode) do
+      
+      case mode do
+         :num -> new(num + 1, den)
+         :numerator -> new(num + 1, den)
+         :den -> new(num, den + 1)
+         :denominator -> new(num, den + 1) 
+         _ -> {:error, :invalid_increment_mode}
+      end
+      
+  end
+  
+  @doc """
+  Decrement the numerator or denominator by one.
+
+  This is not necessarily an arithmatically valid operation, rather it directly decrements the
+  numerator or denominator. If the decrement would create an invalid denominator, it will return
+  an error instead.
+  
+  Valid `mode` values are: `:num`, `:numerator`, `:den`, or `:denominator`. Note that when decrementing
+  a negative value by the numerator, the value will move away from `0`, towards the negative.
+  
+  ## Examples
+  
+      iex> Fraction.new("7/11") |> Fraction.decrement(:num)
+      %Fraction{num: 6, den: 11}
+  
+      iex> Fraction.new("-5/9") |> Fraction.decrement(:den)
+      %Fraction{num: -5, den: 8}
+  
+      iex> Fraction.new("-7/3") |> Fraction.decrement(:numerator)
+      %Fraction{num: -8, den: 3}
+  
+      iex> Fraction.new("47/1") |> Fraction.decrement(:denominator)
+      {:error, :invalid_denominator}
+  """
+  def decrement(%Fraction{num: num, den: den}, mode) do
+      
+      case mode do
+          :num -> new(num - 1, den)
+          :numerator -> new(num - 1, den)
+          :den -> 
+              
+              cond do
+                 den == 1 -> {:error, :invalid_denominator} 
+                 true -> new(num, den - 1)
+              end
+              
+          :denominator -> 
+              
+              cond do
+                 den == 1 -> {:error, :invalid_denominator} 
+                 true -> new(num, den - 1)
+              end
+              
+          _ -> {:error, :invalid_decrement_mode}          
+      end
+  end
+  
+  @doc """
+  Find the floor of a fractional value.
+  
+  The floor of `n`, or `⌊n⌋`, rounds a fractional value _down_ to the nearest whole value.
+  
+  ## Examples
+  
+      iex> Fraction.new("17/8") |> Fraction.floor()
+      %Fraction{num: 16, den: 8}
+  
+      iex> Fraction.new("3/5") |> Fraction.floor()
+      %Fraction{num: 0, den: 5}
+  
+      iex> Fraction.new("-17/9") |> Fraction.floor()
+      %Fraction{num: -18, den: 9}
+  
+  """
+  def floor(%Fraction{}=fraction) do
+  
+      cond do
+         is_whole?(fraction) -> fraction
+         is_positive?(fraction) -> 
+             
+             # floor just removes remainder
+             subtract(fraction, get_remainder(fraction))
+             
+         is_negative?(fraction) -> 
+             
+             # floor goes towards negative
+             add(fraction, absolute_value(fraction |> get_remainder())) |> subtract(1)
+
+         true -> fraction
+      end
+      
+  end
+  
+  @doc """
+  Find the ceiling of a fractional value.
+  
+  The ceiling of `n`, or `⌈n⌉`, rounds a fractional value _up_ to the nearest whole value.
+  
+  ## Examples
+  
+      iex> Fraction.new("7/8") |> Fraction.ceiling()
+      %Fraction{num: 8, den: 8}
+  
+      iex> Fraction.new("0/17") |> Fraction.ceiling()
+      %Fraction{num: 0, den: 17}
+  
+      iex> Fraction.new("-47/3") |> Fraction.ceiling()
+      %Fraction{num: -45, den: 3}
+  """
+  def ceiling(%Fraction{}=fraction) do
+      
+      cond do
+         is_whole?(fraction) -> fraction
+         
+         is_positive?(fraction) -> 
+             
+             # moves up to next whole
+             bump = subtract(1, fraction |> get_remainder())
+             add(fraction, bump)
+         
+         is_negative?(fraction) -> 
+             
+             # just removes remainder
+             fraction |> get_remainder() |> absolute_value() |> add(fraction)
+         
+         true -> fraction 
+      end
+  end
+  
 
   @doc """
   Use fractions in power/exponent calculations.

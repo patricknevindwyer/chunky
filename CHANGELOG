@@ -26,7 +26,8 @@
   - fixed reducable values not having proper fractional results (previously returned :no_fractional_power)
   - Added absolute_value/1
   - Added near_equal?/3
-  
+  - Added floor/1 and ceiling/1
+  - Added increment/2 and decrement/2
   
 
 ## v0.11.2
