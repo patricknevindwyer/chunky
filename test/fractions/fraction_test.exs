@@ -5,6 +5,19 @@ defmodule Chunky.FractionTest do
 
   doctest Chunky.Fraction, import: true
 
+  describe "abs/1" do
+      test "value tests" do
+          ins = ["-3/4", "4/1", -3]
+          outs = ["3/4", "4/1", "3/1"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.absolute_value() |> Fraction.eq?(Fraction.new(o))
+          end)
+          
+      end
+  end
+  
   describe "String.Chars protocol" do
     test "to_string" do
       assert "#{Fraction.new(3, 5)}" == "3/5"

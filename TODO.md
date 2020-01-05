@@ -65,11 +65,12 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
          
 
  - add OEIS stats to library or oeis docs
+ 
 
  - fraction
-  - coercion values in power
+  - x coercion values in power
+  - x abs
   - within x (basically float_equal?)
-  - abs
   - floor
   - ceil
   - inc/dec numerator

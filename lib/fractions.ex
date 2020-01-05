@@ -42,6 +42,7 @@ defmodule Chunky.Fraction do
    - `min_of/2`
    - `min_max_of/1`
    - `normalize_all/1`
+   - `power/3`
    - `sort/2`
    - `sum/1`
    - `uniq/2`
@@ -77,6 +78,7 @@ defmodule Chunky.Fraction do
   Standard math functions that work with two fractions, or a fraction and an integer. Options
   allow for automatic simplification and control over how certain operations work.
 
+    - `absolute_value/1` - Absolute value `|v|` of fraction
     - `add/3` - Add two fractions, or a fraction and a value compatible with `new/1`
     - `divide/3` - Divide two fractions, or a fraction and a value compatible with `new/1`
     - `max_of/2` - Find the larger of two fractions, or a fraction and a value compatible with `new/1`
@@ -741,6 +743,9 @@ defmodule Chunky.Fraction do
 
       iex> Fraction.power(9, Fraction.new(7, 13), allow_irrational: true)
       3.26454673038995
+  
+      iex> Fraction.power("3/8", 2.0)
+      %Fraction{num: 9, den: 64}
 
   """
   def power(a, b, opts \\ [])
@@ -861,6 +866,19 @@ defmodule Chunky.Fraction do
           {:error, :no_fractional_power}
         end
     end
+  end
+  
+  @doc """
+  Get the absolute value of a fraction.
+  
+  ## Examples
+  
+      iex> Fraction.new("-34/9") |> Fraction.absolute_value()
+      %Fraction{num: 34, den: 9}
+  
+  """
+  def absolute_value(%Fraction{num: num, den: den}) do
+      new(abs(num), den)
   end
 
   @doc """
