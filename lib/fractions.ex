@@ -26,7 +26,9 @@ defmodule Chunky.Fraction do
   the basic math functions) or as part of a list (aggregate functions):
 
    - `add/3`
+   - `ceiling/1`
    - `divide/3`
+   - `floor/1`
    - `multiply/3`
    - `subtract/3`
    - `gt?/2`
@@ -46,6 +48,8 @@ defmodule Chunky.Fraction do
    - `sort/2`
    - `sum/1`
    - `uniq/2`
+   - `within?/3`
+  
 
   ## Creating Fractions
 
@@ -109,6 +113,9 @@ defmodule Chunky.Fraction do
     - `lt?/2` - Less than (`<`) comparison between two fractions, or a fraction and an integer
     - `lte?/2` - Less than or equal (`<=`) comparison between two fractions, or a fraction and an integer
     - `near_equal?/3` - Test if the difference between two fractions is less than or equal to another fraction
+    - `within?/2` - Test if a fraction is within the specified Range
+    - `within?/3` - Test if a fraction is within the lower and upper value bounds
+  
   
   ```elixir
   iex> Fraction.gt?(Fraction.new(7, 8), Fraction.new(8, 9))
@@ -185,6 +192,9 @@ defmodule Chunky.Fraction do
   alias Chunky.Fraction
   alias Chunky.Math
 
+
+  defguard is_coercible?(value) when is_number(value) or is_binary(value) or (is_tuple(value) and tuple_size(value) == 2)
+  
   @doc """
   Create a new fraction from two integers.
 
@@ -785,6 +795,46 @@ defmodule Chunky.Fraction do
               
           _ -> {:error, :invalid_decrement_mode}          
       end
+  end
+  
+  @doc """
+  Determine if a fraction falls within a specific range.
+  
+  ## Examples
+  
+      iex> Fraction.new("22/7") |> Fraction.within?(3..4)
+      true
+  
+      iex> Fraction.new("3/5") |> Fraction.within?(-1..1)
+      true
+  """
+  def within?(%Fraction{}=fraction, %Range{}=range) do
+     f..l = range
+     within?(fraction, f, l) 
+  end  
+  
+  @doc """
+  Determine if a fraction falls within a specified lower and upper bound.
+  
+  This test is inclusive of the lower and upper bounds. The low and high value of the 
+  range to test can be specified as any coercible value.
+  
+  ## Examples
+  
+      iex> Fraction.new("22/7") |> Fraction.within?(3, 4.5)
+      true
+  
+      iex> Fraction.new("-4/3") |> Fraction.within?("-10/3", "-4/3")
+      true
+  
+  
+  """
+  def within?(%Fraction{}=fraction, %Fraction{}=low, %Fraction{}=hi) do
+     gte?(fraction, low) && lte?(fraction, hi) 
+  end
+  
+  def within?(%Fraction{}=fraction, low, hi) when is_coercible?(low) and is_coercible?(hi) do
+      within?(fraction, new(low), new(hi))
   end
   
   @doc """

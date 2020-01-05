@@ -29,6 +29,8 @@
   - Added floor/1 and ceiling/1
   - Added increment/2 and decrement/2
   - increment/2 and decrement/2 support `:both` option
+  - Added within?/3 and within?/2
+  - added type guard: is_coercible?
   
 
 ## v0.11.2

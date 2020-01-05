@@ -5,6 +5,313 @@ defmodule Chunky.FractionTest do
 
   doctest Chunky.Fraction, import: true
 
+  describe "is_coercible?/1" do
+  
+      test "int" do
+         assert Fraction.is_coercible?(3) 
+      end
+      
+      test "float" do
+          assert Fraction.is_coercible?(3.3) 
+      end
+      
+      test "binary" do
+          assert Fraction.is_coercible?("22/3") 
+      end
+      
+      test "tuples" do
+          assert Fraction.is_coercible?({1, 3}) 
+      end
+      
+  end
+  
+  describe "within/3" do
+      
+      test "fraction/fraction" do
+          
+          f_a = Fraction.new(22, 7)
+          f_b = Fraction.new(-22, 5)
+          
+          f_low = Fraction.new(-100, 2)
+          f_zero = Fraction.new(0, 3)
+          f_hi = Fraction.new(30, 3)
+         
+          # in
+          assert Fraction.within?(f_a, f_zero, f_hi)
+          assert Fraction.within?(f_a, f_low, f_hi)
+          
+          assert Fraction.within?(f_b, f_low, f_zero)
+          assert Fraction.within?(f_b, f_low, f_hi)
+          
+          # out
+          assert Fraction.within?(f_a, f_low, f_zero) == false
+          assert Fraction.within?(f_b, f_zero, f_hi) == false
+      end
+      
+      test "int/int" do
+          
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, 0, 2) == true
+          assert Fraction.within?(f_b, -2, 0) == true
+          
+          # out
+          assert Fraction.within?(f_a, -2, 0) == false
+          assert Fraction.within?(f_b, 0, 2) == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, 1, 2) == true
+          assert Fraction.within?(f_b, 1, 2) == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, -2, -1) == false
+          assert Fraction.within?(f_b, -2, -1) == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, -2, 2) == true
+          assert Fraction.within?(f_b, -2, 2) == true
+          
+      end
+      
+      test "int/float" do
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, 0, 2.2) == true
+          assert Fraction.within?(f_b, -2, 0.1) == true
+          
+          # out
+          assert Fraction.within?(f_a, -2, 0.2) == false
+          assert Fraction.within?(f_b, 0, 2.2) == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, 1, 2.3) == true
+          assert Fraction.within?(f_b, 1, 2.3) == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, -2, -1.1) == false
+          assert Fraction.within?(f_b, -2, -1.1) == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, -2, 2.3) == true
+          assert Fraction.within?(f_b, -2, 2.3) == true
+          
+      end
+      
+      test "float/int" do
+          
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, 0.0, 2) == true
+          assert Fraction.within?(f_b, -2.1, 0) == true
+          
+          # out
+          assert Fraction.within?(f_a, -2.2, 0) == false
+          assert Fraction.within?(f_b, 0.1, 2) == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, 1.04, 2) == true
+          assert Fraction.within?(f_b, 1.32, 2) == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, -2.5, -1) == false
+          assert Fraction.within?(f_b, -2.5, -1) == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, -2.3, 2) == true
+          assert Fraction.within?(f_b, -2.3, 2) == true
+          
+      end
+      
+      test "str/str" do
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, "0/1", "2/1") == true
+          assert Fraction.within?(f_b, "-2/1", "0/1") == true
+          
+          # out
+          assert Fraction.within?(f_a, "-2/1", "0/1") == false
+          assert Fraction.within?(f_b, "0/1", "2/1") == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, "1/1", "2/1") == true
+          assert Fraction.within?(f_b, "1/1", "2/1") == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, "-2/1", "-1/1") == false
+          assert Fraction.within?(f_b, "-2/1", "-1/1") == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, "-2/1", "2/1") == true
+          assert Fraction.within?(f_b, "-2/1", "2/1") == true
+          
+      end
+      
+      test "str/int" do
+
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, "0/1", 2) == true
+          assert Fraction.within?(f_b, "-2/1", 0) == true
+          
+          # out
+          assert Fraction.within?(f_a, "-2/1", 0) == false
+          assert Fraction.within?(f_b, "0/1", 2) == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, "1/1", 2) == true
+          assert Fraction.within?(f_b, "1/1", 2) == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, "-2/1", -1) == false
+          assert Fraction.within?(f_b, "-2/1", -1) == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, "-2/1", 2) == true
+          assert Fraction.within?(f_b, "-2/1", 2) == true
+          
+      end
+      
+      test "str/float" do
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, "0/1", 2.1) == true
+          assert Fraction.within?(f_b, "-2/1", 0.1) == true
+          
+          # out
+          assert Fraction.within?(f_a, "-2/1", 0.1) == false
+          assert Fraction.within?(f_b, "0/1", 2.1) == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, "1/1", 2.2) == true
+          assert Fraction.within?(f_b, "1/1", 2.2) == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, "-2/1", -1.1) == false
+          assert Fraction.within?(f_b, "-2/1", -1.1) == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, "-2/1", 2.4) == true
+          assert Fraction.within?(f_b, "-2/1", 2.4) == true
+          
+          
+      end
+      
+      test "int/str" do
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, 0, "2/1") == true
+          assert Fraction.within?(f_b, -2, "0/1") == true
+          
+          # out
+          assert Fraction.within?(f_a, -2, "0/1") == false
+          assert Fraction.within?(f_b, 0, "2/1") == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, 1, "2/1") == true
+          assert Fraction.within?(f_b, 1, "2/1") == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, -2, "-1/1") == false
+          assert Fraction.within?(f_b, -2, "-1/1") == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, -2, "2/1") == true
+          assert Fraction.within?(f_b, -2, "2/1") == true
+          
+      end
+      
+      test "float/str" do
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, 0.1, "2/1") == true
+          assert Fraction.within?(f_b, -2.1, "0/1") == true
+          
+          # out
+          assert Fraction.within?(f_a, -2.1, "0/1") == false
+          assert Fraction.within?(f_b, 0.1, "2/1") == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, 1.1, "2/1") == true
+          assert Fraction.within?(f_b, 1.1, "2/1") == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, -2.1, "-1/1") == false
+          assert Fraction.within?(f_b, -2.1, "-1/1") == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, -2.1, "2/1") == true
+          assert Fraction.within?(f_b, -2.1, "2/1") == true
+          
+      end
+      
+      test "float/float" do
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, 0.1, 2.1) == true
+          assert Fraction.within?(f_b, -2.1, 0.1) == true
+          
+          # out
+          assert Fraction.within?(f_a, -2.1, 0.1) == false
+          assert Fraction.within?(f_b, 0.1, 2.1) == false
+          
+          # pos/pos
+          assert Fraction.within?(f_a, 1.1, 2.1) == true
+          assert Fraction.within?(f_b, 1.1, 2.1) == false
+          
+          # neg/neg
+          assert Fraction.within?(f_a, -2.1, -1.1) == false
+          assert Fraction.within?(f_b, -2.1, -1.1) == true
+          
+          # neg/pos
+          assert Fraction.within?(f_a, -2.1, 2.2) == true
+          assert Fraction.within?(f_b, -2.1, 2.2) == true
+          
+      end
+      
+      test "range" do
+          f_a = Fraction.new("5/4")
+          f_b = Fraction.new("-5/4")
+          
+          # in
+          assert Fraction.within?(f_a, 0..2)
+          assert Fraction.within?(f_b, -2..0)
+          
+          # out
+          assert Fraction.within?(f_a, 3..4) == false
+          assert Fraction.within?(f_b, -4..-3) == false
+          
+          # pos pos
+          assert Fraction.within?(f_a, 1..100)
+          assert Fraction.within?(f_b, 3..30) == false
+          
+          # neg pos
+          assert Fraction.within?(f_a, -100..100)
+          assert Fraction.within?(f_b, -20..20)
+          
+          # neg neg
+          assert Fraction.within?(f_a, -100..-3) == false
+          assert Fraction.within?(f_b, -30..-1)
+      end
+  end
+  
   describe "increment/2" do
       test "numerator" do
           ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]

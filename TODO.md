@@ -77,11 +77,9 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x inc/dec denominator
   - x inc/dec both
   - x Is whole
-  - Is greater than one (or less) than negative one
-  - is within/close to
-  - in range (like clamp)
+  - x in range (like clamp)
   - clamp with range value
-  - guard: coercible?
+  - x guard: coercible?
   - round/1
   - round/2 (nearest fractional part)
   
@@ -107,6 +105,9 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  - Sequence.at/2
   - check for overflow of finite lists
  
+ - Fractions
+  - update all coercion compatible functions to use single entry form
+      def <> (a, b) when is_coercible?(a) and is_coercible?(b)
 
 
  - summation macro?
