@@ -45,6 +45,17 @@ defmodule Chunky.FractionTest do
               assert Fraction.new(i) |> Fraction.increment(:den) |> Fraction.eq?(Fraction.new(o))
           end)                    
       end
+      
+      test "both" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/1"]
+          outs = ["2/5", "6/5", "17/5", "-2/5", "-4/5", "1/5", "0/2"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.increment(:both) |> Fraction.eq?(Fraction.new(o))
+          end)                    
+          
+      end
             
   end
   
@@ -89,9 +100,24 @@ defmodule Chunky.FractionTest do
           end)                    
       end
       
+      test "both" do
+          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+          outs = ["0/3", "4/3", "15/3", "-4/3", "-6/3", "-1/3"]
+        
+          Enum.zip(ins, outs)
+          |> Enum.each(fn {i, o} -> 
+              assert Fraction.new(i) |> Fraction.decrement(:both) |> Fraction.eq?(Fraction.new(o))
+          end)                    
+          
+      end
+      
+      
       test "denominator to zero" do
           
           assert Fraction.new("3/1") |> Fraction.decrement(:den) == {:error, :invalid_denominator}
+          assert Fraction.new("3/1") |> Fraction.decrement(:both) == {:error, :invalid_denominator}
+          assert Fraction.new("-1/1") |> Fraction.decrement(:both) == {:error, :invalid_denominator}
+          
       end
   end
   

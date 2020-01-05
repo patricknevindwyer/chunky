@@ -701,7 +701,7 @@ defmodule Chunky.Fraction do
   This is not necessarily an arithmatically valid operation, rather it directly increments the
   numerator or denominator.
   
-  Valid `mode` values are: `:num`, `:numerator`, `:den`, or `:denominator`. Note that when incrementing
+  Valid `mode` values are: `:both`, `:num`, `:numerator`, `:den`, or `:denominator`. Note that when incrementing
   a negative value by the numerator, the value will move towards `0`, not towards the negative.
   
   ## Examples
@@ -714,6 +714,9 @@ defmodule Chunky.Fraction do
   
       iex> Fraction.new("-7/3") |> Fraction.increment(:numerator)
       %Fraction{num: -6, den: 3}
+  
+      iex> Fraction.new("21/6") |> Fraction.increment(:both)
+      %Fraction{num: 22, den: 7}
   """
   def increment(%Fraction{num: num, den: den}, mode) do
       
@@ -721,7 +724,8 @@ defmodule Chunky.Fraction do
          :num -> new(num + 1, den)
          :numerator -> new(num + 1, den)
          :den -> new(num, den + 1)
-         :denominator -> new(num, den + 1) 
+         :denominator -> new(num, den + 1)
+         :both -> new(num + 1, den + 1)
          _ -> {:error, :invalid_increment_mode}
       end
       
@@ -734,7 +738,7 @@ defmodule Chunky.Fraction do
   numerator or denominator. If the decrement would create an invalid denominator, it will return
   an error instead.
   
-  Valid `mode` values are: `:num`, `:numerator`, `:den`, or `:denominator`. Note that when decrementing
+  Valid `mode` values are: `:both`, `:num`, `:numerator`, `:den`, or `:denominator`. Note that when decrementing
   a negative value by the numerator, the value will move away from `0`, towards the negative.
   
   ## Examples
@@ -750,6 +754,9 @@ defmodule Chunky.Fraction do
   
       iex> Fraction.new("47/1") |> Fraction.decrement(:denominator)
       {:error, :invalid_denominator}
+  
+      iex> Fraction.new("-21/4") |> Fraction.decrement(:both)
+      %Fraction{num: -22, den: 3}
   """
   def decrement(%Fraction{num: num, den: den}, mode) do
       
@@ -768,6 +775,12 @@ defmodule Chunky.Fraction do
               cond do
                  den == 1 -> {:error, :invalid_denominator} 
                  true -> new(num, den - 1)
+              end
+              
+          :both -> 
+              cond do
+                 den == 1 -> {:error, :invalid_denominator} 
+                 true -> new(num - 1, den - 1)
               end
               
           _ -> {:error, :invalid_decrement_mode}          

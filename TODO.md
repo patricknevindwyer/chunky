@@ -75,7 +75,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x ceil
   - x inc/dec numerator
   - x inc/dec denominator
-  - inc/dec both
+  - x inc/dec both
   - x Is whole
   - Is greater than one (or less) than negative one
   - is within/close to
