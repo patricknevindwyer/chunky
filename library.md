@@ -73,6 +73,7 @@ in:
 
  - `Chunky.Sequence.OEIS.Core` - The OEIS [Core]() sequences.
  - `Chunky.Sequence.OEIS.Factors` - OEIS non-core sequences dealing with integer factors and factorization
+ - `Chunky.Sequence.OEIS.Powers` - OEIS non-core sequences dealing with powers and simple polynomials
  - `Chunky.Sequence.OEIS.Primes` - OEIS non-core sequences dealing with primes
  - `Chunky.Sequence.OEIS.Sigma` - OEIS non-core sequences related to the Sigma functions
 

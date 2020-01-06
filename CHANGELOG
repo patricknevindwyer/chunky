@@ -41,6 +41,12 @@
  - new module Chunky.Timeout
   - macro: with_timeout/2   
 
+### Sequences
+
+ - Added new sequence module OEIS.Powers
+  - A000051 - a(n) = 2^n + 1
+  
+  
 ## v0.11.2
 
 ### Build/Development changes

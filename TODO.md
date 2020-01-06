@@ -62,27 +62,31 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ```
  
 ## TODO
-             
- - Sequence functions that iterate need to use a timeout
-  - next
-  - drop
-  - take
+ 
+ - add some power sequences             
                
  - sequence manipulations
   - map
   - filter
   - sum
+  - reject (with count)
+  - take while item time < some time
+  - drop while (with count) or time
+  - count option vs time option
+  
+ - Sequence composition  
   - zip
   - with_index
-  - take with drop (count) (filter/reject)
-  - drop while (with count)
-  - reject (with count)
   - add max_time or some way to short-circuit when an item takes too long to get/filter/etc
   - add an agent as a wrapper around sequence state
   - have a total_time/max_time, for doing larger operations (take, etc)
-  - take while item time < some time
   
   - or do we build sequence manipulations as combinators of some kind, like a pipeline, like streams
+
+ - Sequence functions that iterate need to use a timeout
+  - next
+  - drop
+  - take
   
  
  - Fractions

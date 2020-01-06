@@ -8,9 +8,11 @@ defmodule Chunky.Sequence.OEIS do
   ## Available Modules
 
    - `Chunky.Sequence.OEIS.Core` - OEIS `core` Keyword sequences
-   - `Chunky.Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
-   - `Chunky.Sequence.OEIS.Primes` - Primes and related sequences
    - `Chunky.Sequence.OEIS.Factors` - Factorizations and divisors
+   - `Chunky.Sequence.OEIS.Powers` - Powers and simple polynomials
+   - `Chunky.Sequence.OEIS.Primes` - Primes and related sequences
+   - `Chunky.Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
+
 
   ## Coverage
   

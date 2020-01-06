@@ -11,6 +11,7 @@ defmodule Chunky.SequenceDataTest do
   doctest Chunky.Sequence.OEIS.Sigma
   doctest Chunky.Sequence.OEIS.Factors
   doctest Chunky.Sequence.OEIS.Primes
+  doctest Chunky.Sequence.OEIS.Powers
 
   @sequences [
     # Sequence.Basic
@@ -1915,6 +1916,16 @@ defmodule Chunky.SequenceDataTest do
       values: [2, 3, 5, 7, 11, 13, 16, 17, 19, 23],
       finite: false,
       first_index: 1
+    },
+    
+    # Sequence.OEIS.Powers
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Powers,
+      sequence: :a000051,
+      opts: [],
+      values: [2, 3, 5, 9, 17, 33, 65, 129, 257, 513],
+      finite: false,
+      first_index: 0
     },
 
     # Sequence.Test
