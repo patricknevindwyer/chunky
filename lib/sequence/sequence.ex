@@ -267,6 +267,8 @@ defmodule Chunky.Sequence do
 
   defstruct [:next_fn, :data, :index, :value, :finished, :instance, :finite, :init_opts]
 
+  require Chunky.Timeout
+  
   alias Chunky.Sequence
 
   @doc """
@@ -377,11 +379,18 @@ defmodule Chunky.Sequence do
   If a sequence is _finite_. and the index provided is beyond the end of the sequence, a
   `nil` value is returned.
   
+  This function uses a _timeout_ during processing - if iterating to and retrieving the
+  target value takes longer than the timeout, the return value from the function will
+  be `:timeout`. The default timeout is 1,000 milliseconds.
+  
+  ## Options
+  
+   - `timeout`. Integer. Default `1_000`. Number of milliseconds to iterate for a value before stopping
+  
   ## Examples
   
       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
-      iex> {v, seq} = seq |> Sequence.at(10)
-      iex> v
+      iex> seq |> Sequence.at(10)
       11
       iex> seq.index
       0
@@ -389,24 +398,39 @@ defmodule Chunky.Sequence do
       1
   
       iex> seq = Sequence.create(Sequence.Basic, :decimal_digits) |> Sequence.start()
-      iex> {v, seq} = seq |> Sequence.at(20)
-      iex> v
+      iex> seq |> Sequence.at(20)
       nil
       iex> seq.index
       0
       iex> seq.value
       0
+  
+      iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
+      iex> seq |> Sequence.at(1_000_000, timeout: 5)
+      :timeout
   """
-  def at(%Sequence{} = seq, idx) do
+  def at(%Sequence{} = seq, idx, opts \\ []) do
           
-      # drop up to idx
-      u_seq = seq |> drop(idx)
+      timeout = opts |> Keyword.get(:timeout, 1_000)
+              
+      # do our processing with a timeout
+      got = Chunky.Timeout.with_timeout timeout do
+          # drop up to idx
+          u_seq = seq |> drop(idx)
       
-      # make sure we're not past the end
-      if u_seq.finished do
-          {nil, seq}
-      else
-          {u_seq.value, seq}
+          # make sure we're not past the end
+          if u_seq.finished do
+              nil
+          else
+              u_seq.value
+          end
+      end
+      
+      # did we get a final value?
+      case got do
+         {:timeout, nil} -> :timeout
+         {:ok, nil} -> nil
+         {:ok, v} -> v
       end
       
   end

@@ -18,11 +18,9 @@ defmodule Chunky.SequenceTest do
      test "infinite" do
          seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
          
-         {v, a_seq} = seq |> Sequence.at(10)
+         v = seq |> Sequence.at(10)
          
          assert v == 11
-         assert a_seq.index == seq.index
-         assert a_seq.value == seq.value
      end
      
      test "finite" do
@@ -30,19 +28,24 @@ defmodule Chunky.SequenceTest do
          seq = Sequence.create(Sequence.Basic, :decimal_digits) |> Sequence.start()
          
          # within bounds
-         {v, a_seq} = seq |> Sequence.at(0)
+         v = seq |> Sequence.at(0)
          assert v == 0
-         assert a_seq.index == seq.index
-         assert a_seq.value == seq.value
          
          # outside bounds
-         {v, b_seq} = seq |> Sequence.at(20)
-         assert v == nil
-         assert b_seq.index == seq.index
-         assert b_seq.value == seq.value
-         
+         v = seq |> Sequence.at(20)
+         assert v == nil         
          
      end 
+     
+     test "timeout" do
+         
+         seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
+         
+         v = seq |> Sequence.at(1_000_000, timeout: 5)
+         
+         assert v == :timeout
+         
+     end
   end
 
   describe "restart!/1" do
