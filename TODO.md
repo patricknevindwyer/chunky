@@ -62,9 +62,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ```
  
 ## TODO
-            
- - Sequence.at/2 needs a timeout option
-  - default to returning the current sequence and a :timeout value
+             
+ - Sequence functions that iterate need to use a timeout
+  - next
+  - drop
+  - take
                
  - sequence manipulations
   - map

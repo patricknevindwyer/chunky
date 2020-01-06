@@ -37,7 +37,9 @@
  - Sequence
   - added `start/1` function as alias to `next!/1`
   - added `restart/1` function
-  - added `at/2` similar to Enum.at   
+  - added `at/2` similar to Enum.at
+ - new module Chunky.Timeout
+  - macro: with_timeout/2   
 
 ## v0.11.2
 
