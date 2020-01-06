@@ -62,9 +62,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ```
  
 ## TODO
-         
- - add OEIS stats to library or oeis docs
-   
+            
  - sequence start/restart functions
   - start as alias to next!, just ticks over to first value
 
