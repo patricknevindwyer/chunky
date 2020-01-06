@@ -36,7 +36,8 @@
   - added round/1 for rounding to nearest whole value
  - Sequence
   - added `start/1` function as alias to `next!/1`
-  - added `restart/1` function   
+  - added `restart/1` function
+  - added `at/2` similar to Enum.at   
 
 ## v0.11.2
 

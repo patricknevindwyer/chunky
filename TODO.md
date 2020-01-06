@@ -63,9 +63,9 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
             
- - Sequence.at/2
-  - check for overflow of finite lists
- 
+ - Sequence.at/2 needs a timeout option
+  - default to returning the current sequence and a :timeout value
+               
  - sequence manipulations
   - map
   - filter

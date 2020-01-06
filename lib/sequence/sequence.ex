@@ -92,8 +92,9 @@ defmodule Chunky.Sequence do
    - `has_reference?/2` - Check if a sequence has a specific reference source
    - `readable_name/1` - Find the human readable name of a sequence
 
-  ## Manipulating Sequences
+  ## Enumerating / Manipulating Sequences
 
+   - `at/2` - Access the `n`-th value of a sequence from the current location
    - `drop/2` - Drop N values from the front of the sequence
    - `map/2` - Apply a function to values in a sequence, and collect the result
    - `next/1` - Retrieve the next sequence value and updated sequence struct as a tuple
@@ -366,6 +367,50 @@ defmodule Chunky.Sequence do
     res
   end
 
+  @doc """
+  Find a value in the sequence offset from the current location.
+  
+  Like `Enum.at`, this function retrieves the value at the given index, offset from the current
+  location in the sequence. This _does not_ advance the sequence iterator, and so provides
+  different functionality than simply calling `drop(n) |> take(1)`.
+  
+  If a sequence is _finite_. and the index provided is beyond the end of the sequence, a
+  `nil` value is returned.
+  
+  ## Examples
+  
+      iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
+      iex> {v, seq} = seq |> Sequence.at(10)
+      iex> v
+      11
+      iex> seq.index
+      0
+      iex> seq.value
+      1
+  
+      iex> seq = Sequence.create(Sequence.Basic, :decimal_digits) |> Sequence.start()
+      iex> {v, seq} = seq |> Sequence.at(20)
+      iex> v
+      nil
+      iex> seq.index
+      0
+      iex> seq.value
+      0
+  """
+  def at(%Sequence{} = seq, idx) do
+          
+      # drop up to idx
+      u_seq = seq |> drop(idx)
+      
+      # make sure we're not past the end
+      if u_seq.finished do
+          {nil, seq}
+      else
+          {u_seq.value, seq}
+      end
+      
+  end
+  
   @doc """
   Create a new sequence from a simple function and an information function. 
 
