@@ -98,6 +98,8 @@ defmodule Chunky.Sequence do
    - `map/2` - Apply a function to values in a sequence, and collect the result
    - `next/1` - Retrieve the next sequence value and updated sequence struct as a tuple
    - `next!/1` - Retrieve the next sequence as just an updated sequence struct
+   - `restart!/1` - Restart a sequence at it's initial value/index
+   - `start/1` - Start iteration of a sequence
    - `take/2` - Like `Enum.take/2` - retrieve a list of values from a sequence
    - `take!/2` - Like `take/2`, but only return the updated sequence struct
 
@@ -262,7 +264,7 @@ defmodule Chunky.Sequence do
 
   """
 
-  defstruct [:next_fn, :data, :index, :value, :finished, :instance, :finite]
+  defstruct [:next_fn, :data, :index, :value, :finished, :instance, :finite, :init_opts]
 
   alias Chunky.Sequence
 
@@ -726,6 +728,46 @@ defmodule Chunky.Sequence do
         {value, %{sequence | data: data, value: value, finished: true, index: sequence.index + 1}}
     end
   end
+  
+  @doc """
+  Start iteration of a created sequence. This is an alias of `next!/1`.
+  
+  For readability it can be useful to have a separate _start_ function to call on a newly
+  generated sequence.
+  
+  ## Examples
+      
+      iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
+      iex> seq.value
+      1
+      iex> seq.index
+      0
+  """
+  def start(%Sequence{} = sequence) do
+     sequence |> next!() 
+  end
+  
+  @doc """
+  Restart a sequence that has already been iterated.
+  
+  This returns a new instance of the sequence, as it would be initialized
+  from `create/3`.
+  
+  ## Examples
+  
+      iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start() |> Sequence.drop(30)
+      iex> seq.value
+      31
+      iex> seq = seq |> Sequence.restart!()
+      iex> seq.value
+      1
+  """
+  def restart!(%Sequence{} = sequence) do
+      
+      {mod, seq} = sequence.instance
+      create(mod, seq, sequence.init_opts) |> start()
+      
+  end
 
   # initialize a sequence, setting up the "pre" state of the full sequence
   defp init(%Sequence{} = sequence) do
@@ -809,7 +851,8 @@ defmodule Chunky.Sequence do
             index: -1 + offset_adjustment,
             finished: false,
             instance: {module, seq_name},
-            finite: seq_finite
+            finite: seq_finite,
+            init_opts: opts
           }
           |> init()
         else

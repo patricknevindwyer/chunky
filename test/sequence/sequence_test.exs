@@ -14,6 +14,20 @@ defmodule Chunky.SequenceTest do
     }
   ]
 
+  describe "restart!/1" do
+      test "restart drops back to first value" do
+         @sequences
+         |> Enum.each(fn seq -> 
+             assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence)
+             sequence = sequence |> Sequence.start() |> Sequence.drop(5)
+             assert sequence.value == seq.values |> Enum.at(5)
+             
+             assert %Sequence{} = sequence = sequence |> Sequence.restart!()
+             assert sequence.value == seq.values |> Enum.at(0)
+         end) 
+      end
+  end
+  
   describe "create/3" do
     test "valid sequence" do
       @sequences

@@ -34,7 +34,9 @@
   - added type guard: is_coercible?
   - all new fraction functions from this release support type coercion (using is_coercible?/1)
   - added round/1 for rounding to nearest whole value
-  
+ - Sequence
+  - added `start/1` function as alias to `next!/1`
+  - added `restart/1` function   
 
 ## v0.11.2
 

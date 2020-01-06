@@ -63,9 +63,6 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
             
- - sequence start/restart functions
-  - start as alias to next!, just ticks over to first value
-
  - Sequence.at/2
   - check for overflow of finite lists
  
