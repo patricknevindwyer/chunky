@@ -25,6 +25,7 @@ defmodule Chunky.Fraction do
   The following functions support mixed types as parameters, either positionally (like
   the basic math functions) or as part of a list (aggregate functions):
 
+   - `absolute_value/1`
    - `add/3`
    - `ceiling/1`
    - `divide/3`
@@ -45,9 +46,11 @@ defmodule Chunky.Fraction do
    - `min_max_of/1`
    - `normalize_all/1`
    - `power/3`
+   - `round/1`
    - `sort/2`
    - `sum/1`
    - `uniq/2`
+   - `within?/2`
    - `within?/3`
   
 
@@ -93,6 +96,7 @@ defmodule Chunky.Fraction do
     - `min_of/2` - Find the smaller of two fractions, or a fraction and value compatible with `new/1`
     - `multiply/3` - Multiply two fractions, or a fraction and a value compatible with `new/1`
     - `power/3` - Take a fraction or an integer to the power of a fraction or an integer
+    - `round/1` - Round to the nearest whole value
     - `subtract/3` - Subtract two fractions, or a fraction and a value compatible with `new/1`
 
   ```elixir
@@ -798,7 +802,46 @@ defmodule Chunky.Fraction do
   end
   
   @doc """
+  Round a fraction to the nearest whole value.
+  
+  This round function uses the "round half away from zero" strategy, which differs from standard
+  IEEE-754 floating point rounding mode, as we don't lose precision as fractions grow. Using this
+  round method avoids introducing even/odd bias over multiple calculations.
+  
+  **Supports Type Coercion?**: ✅
+  
+  ## Examples
+  
+      iex> Fraction.round("22/7")
+      %Fraction{num: 21, den: 7}
+      
+      iex> Fraction.round("-13/8")
+      %Fraction{num: -16, den: 8}
+
+  """
+  def round(%Fraction{}=fraction) do
+     
+     # get the fractional part, and determine if we're at the round up stage
+     frac = fraction |> get_remainder() |> absolute_value()
+     round_up = gte?(frac, "1/2")
+     
+     cond do
+        is_whole?(fraction) -> fraction
+        is_positive?(fraction) && round_up -> fraction |> Fraction.ceiling()
+        is_positive?(fraction) -> fraction |> Fraction.floor()
+        is_negative?(fraction) && round_up -> fraction |> Fraction.floor()
+        is_negative?(fraction) -> fraction |> Fraction.ceiling()
+        true -> fraction
+     end 
+  end
+  
+  def round(value) when is_coercible?(value), do: Fraction.round(new(value))
+  
+  @doc """
   Determine if a fraction falls within a specific range.
+  
+  **Supports Type Coercion?**: ✅
+
   
   ## Examples
   
@@ -807,11 +850,18 @@ defmodule Chunky.Fraction do
   
       iex> Fraction.new("3/5") |> Fraction.within?(-1..1)
       true
+  
+      iex> Fraction.within?(3.1, 1..5)
+      true
   """
   def within?(%Fraction{}=fraction, %Range{}=range) do
      f..l = range
      within?(fraction, f, l) 
   end  
+  
+  def within?(val, %Range{}=range) when is_coercible?(val) do
+     within?(new(val), range) 
+  end
   
   @doc """
   Determine if a fraction falls within a specified lower and upper bound.
@@ -819,6 +869,8 @@ defmodule Chunky.Fraction do
   This test is inclusive of the lower and upper bounds. The low and high value of the 
   range to test can be specified as any coercible value.
   
+  **Supports Type Coercion?**: ✅
+
   ## Examples
   
       iex> Fraction.new("22/7") |> Fraction.within?(3, 4.5)
@@ -827,7 +879,8 @@ defmodule Chunky.Fraction do
       iex> Fraction.new("-4/3") |> Fraction.within?("-10/3", "-4/3")
       true
   
-  
+      iex> Fraction.within?("22/7", -3, 4)
+      true
   """
   def within?(%Fraction{}=fraction, %Fraction{}=low, %Fraction{}=hi) do
      gte?(fraction, low) && lte?(fraction, hi) 
@@ -837,11 +890,17 @@ defmodule Chunky.Fraction do
       within?(fraction, new(low), new(hi))
   end
   
+  def within?(val, low, hi) when is_coercible?(val) and is_coercible?(low) and is_coercible?(hi) do
+     within?(new(val), new(low), new(hi)) 
+  end
+  
   @doc """
   Find the floor of a fractional value.
   
   The floor of `n`, or `⌊n⌋`, rounds a fractional value _down_ to the nearest whole value.
   
+  **Supports Type Coercion?**: ✅
+
   ## Examples
   
       iex> Fraction.new("17/8") |> Fraction.floor()
@@ -852,6 +911,9 @@ defmodule Chunky.Fraction do
   
       iex> Fraction.new("-17/9") |> Fraction.floor()
       %Fraction{num: -18, den: 9}
+  
+      iex> Fraction.floor("31/8")
+      %Fraction{num: 24, den: 8}
   
   """
   def floor(%Fraction{}=fraction) do
@@ -873,11 +935,17 @@ defmodule Chunky.Fraction do
       
   end
   
+  def floor(value) when is_coercible?(value) do
+     Fraction.floor(new(value)) 
+  end
+  
   @doc """
   Find the ceiling of a fractional value.
   
   The ceiling of `n`, or `⌈n⌉`, rounds a fractional value _up_ to the nearest whole value.
   
+  **Supports Type Coercion?**: ✅
+
   ## Examples
   
       iex> Fraction.new("7/8") |> Fraction.ceiling()
@@ -888,6 +956,9 @@ defmodule Chunky.Fraction do
   
       iex> Fraction.new("-47/3") |> Fraction.ceiling()
       %Fraction{num: -45, den: 3}
+  
+      iex> Fraction.ceiling(-3.5)
+      %Fraction{num: -30, den: 10}
   """
   def ceiling(%Fraction{}=fraction) do
       
@@ -909,6 +980,9 @@ defmodule Chunky.Fraction do
       end
   end
   
+  def ceiling(value) when is_coercible?(value) do
+     ceiling(new(value)) 
+  end
 
   @doc """
   Use fractions in power/exponent calculations.
@@ -1091,14 +1165,23 @@ defmodule Chunky.Fraction do
   @doc """
   Get the absolute value of a fraction.
   
+  **Supports Type Coercion?**: ✅
+
   ## Examples
   
       iex> Fraction.new("-34/9") |> Fraction.absolute_value()
       %Fraction{num: 34, den: 9}
   
+      iex> Fraction.absolute_value("-44/7")
+      %Fraction{num: 44, den: 7}
+  
   """
   def absolute_value(%Fraction{num: num, den: den}) do
       new(abs(num), den)
+  end
+  
+  def absolute_value(value) when is_coercible?(value) do
+      absolute_value(new(value))
   end
 
   @doc """

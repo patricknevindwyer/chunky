@@ -31,6 +31,8 @@
   - increment/2 and decrement/2 support `:both` option
   - Added within?/3 and within?/2
   - added type guard: is_coercible?
+  - all new fraction functions from this release support type coercion (using is_coercible?/1)
+  - added round/1 for rounding to nearest whole value
   
 
 ## v0.11.2

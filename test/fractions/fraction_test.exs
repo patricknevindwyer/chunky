@@ -5,6 +5,22 @@ defmodule Chunky.FractionTest do
 
   doctest Chunky.Fraction, import: true
 
+  describe "round/1" do
+      test "fraction" do
+          assert Fraction.new(22, 7) |> Fraction.round() |> Fraction.eq?(Fraction.new(21, 7))
+      end
+      
+      test "value test" do
+         ins = ["1/2", "2/4", "3/4", "1/4", "5/9", "13/8", "11/8", "-3/4", "-6/4", "-1/4"] 
+         ots = ["2/2", "4/4", "4/4", "0/4", "9/9", "16/8", "8/8", "-4/4", "-8/4", "0/4"]
+         
+         Enum.zip(ins, ots)
+         |> Enum.each(fn {i, o} -> 
+             assert Fraction.round(i) |> Fraction.eq?(o)
+         end)
+      end
+  end
+  
   describe "is_coercible?/1" do
   
       test "int" do

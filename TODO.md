@@ -63,28 +63,13 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
          
-
  - add OEIS stats to library or oeis docs
- 
-
- - fraction
-  - x coercion values in power
-  - x abs
-  - x within x (basically float_equal?)
-  - x floor
-  - x ceil
-  - x inc/dec numerator
-  - x inc/dec denominator
-  - x inc/dec both
-  - x Is whole
-  - x in range (like clamp)
-  - clamp with range value
-  - x guard: coercible?
-  - round/1
-  - round/2 (nearest fractional part)
-  
+   
  - sequence start/restart functions
   - start as alias to next!, just ticks over to first value
+
+ - Sequence.at/2
+  - check for overflow of finite lists
  
  - sequence manipulations
   - map
@@ -102,12 +87,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   
   - or do we build sequence manipulations as combinators of some kind, like a pipeline, like streams
   
- - Sequence.at/2
-  - check for overflow of finite lists
  
  - Fractions
   - update all coercion compatible functions to use single entry form
       def <> (a, b) when is_coercible?(a) and is_coercible?(b)
+  - round/2 (nearest fractional part)
 
 
  - summation macro?
