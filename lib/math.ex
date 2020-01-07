@@ -4022,11 +4022,11 @@ defmodule Chunky.Math do
       66
   """
   def next_number(property_func, n, step \\ 1)
-      when is_function(property_func, 1) and is_integer(n) and n >= 0 do
-    if property_func.(n + 1) do
-      n + 1
+      when is_function(property_func, 1) and is_integer(n) do
+    if property_func.(n + step) do
+      n + step
     else
-      next_number(property_func, n + 1, step)
+      next_number(property_func, n + step, step)
     end
   end
 
