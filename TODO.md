@@ -88,6 +88,62 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - drop
   - take
   
+  
+ - New functions in Math
+ 
+  - Is pan digital? 
+  - Is pan digital in baseN?
+  - Negative powers (convert to inverse fractions)
+  - Is base N (has only base N digits)
+  - Is vampire number
+  - Is prime vampire number
+  - Is left truncatable prime
+  - Is right truncatable prime
+  - Is bi-direction truncatable
+  - Is deletable prime (delete digit anywhere) 
+  - Is palindromic
+  - Is palindromic in base N
+  - Build left truncatable prime of length(n)
+  - Build right truncatable prime of length(n)
+ 
+ 
+     https://en.wikipedia.org/wiki/Fibonacci_prime
+     https://en.wikipedia.org/wiki/Lucas_number#Lucas_primes
+     https://en.wikipedia.org/wiki/Pell_number#Primes_and_squares
+     https://en.wikipedia.org/wiki/Newman–Shanks–Williams_prime
+     https://en.wikipedia.org/wiki/Perrin_number#Perrin_primes
+     https://en.wikipedia.org/wiki/Wolstenholme_prime
+     https://en.wikipedia.org/wiki/Wilson_prime
+     https://en.wikipedia.org/wiki/Fortunate_number
+     https://en.wikipedia.org/wiki/Ramanujan_prime
+     https://en.wikipedia.org/wiki/Pillai_prime
+     https://en.wikipedia.org/wiki/Strong_prime
+     https://en.wikipedia.org/wiki/Stern_prime
+     https://en.wikipedia.org/wiki/Supersingular_prime_(algebraic_number_theory)
+     https://en.wikipedia.org/wiki/Good_prime
+     https://en.wikipedia.org/wiki/Super-prime
+     https://en.wikipedia.org/wiki/Higgs_prime
+     https://en.wikipedia.org/wiki/Highly_cototient_number
+     https://en.wikipedia.org/wiki/Pernicious_number
+     https://en.wikipedia.org/wiki/Interprime
+     https://en.wikipedia.org/wiki/Semiprime
+     https://en.wikipedia.org/wiki/Almost_prime
+     https://en.wikipedia.org/wiki/Carmichael_number
+     https://en.wikipedia.org/wiki/Catalan_pseudoprime
+     https://en.wikipedia.org/wiki/Elliptic_pseudoprime
+     https://en.wikipedia.org/wiki/Euler_pseudoprime
+     https://en.wikipedia.org/wiki/Euler–Jacobi_pseudoprime
+     https://en.wikipedia.org/wiki/Fermat_pseudoprime
+     https://en.wikipedia.org/wiki/Frobenius_pseudoprime
+     https://en.wikipedia.org/wiki/Lucas_pseudoprime
+     https://en.wikipedia.org/wiki/Somer–Lucas_pseudoprime
+     https://en.wikipedia.org/wiki/Strong_pseudoprime
+
+ 
+ - Fractions to Decimals
+  - duh. http://mathforum.org/library/drmath/view/58126.html
+  - Could we store this result as an integer, and increase fidelity with iteration, ala continued fractional expansions?
+   
  
  - Fractions
   - update all coercion compatible functions to use single entry form
