@@ -361,7 +361,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    end
 
 
-   @doc offset: 1
+   @doc offset: 1, fill_value: -1
    def seq_a011540(_idx, last) do
        Math.next_number(fn v -> Math.contains_number?(v, 0) end, last)    
    end

@@ -2084,7 +2084,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
    @doc offset: 0
    def seq_a085959(idx) do
-       idx * 27
+       idx * 37
    end
 
    @doc """
