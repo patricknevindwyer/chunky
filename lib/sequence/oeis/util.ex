@@ -99,6 +99,32 @@ defmodule Chunky.Sequence.OEIS.Util do
       |> Enum.each(fn seq -> Map.get(seq, section) |> IO.write() end)
     end)
   end
+  
+  def generate_function_sequences(seq_ids, opts \\ []) when is_list(seq_ids) do
+      # pass through the module
+      in_module = opts |> Keyword.get(:in_module, Chunky.Sequence.OEIS.Core)
+
+      # generate each sequene
+      sequences =
+        seq_ids
+        |> Enum.map(fn seq_id ->
+          generate_sequence_stub(seq_id, in_module: in_module, sequence_for_function: true, output: :map)
+        end)
+
+      # output the data for all in grouped sections
+      [
+        {:top, "TOP OF FILE"},
+        {:sequence, "SEQUENCE FUNCTION"},
+        {:test, "TEST CASE"}
+      ]
+      |> Enum.each(fn {section, title} ->
+        IO.puts("== #{title} ==\n")
+
+        # walk each of our sequence results
+        sequences
+        |> Enum.each(fn seq -> Map.get(seq, section) |> IO.write() end)
+      end)
+  end
 
   def generate_sequence_stub(seq_id, opts \\ []) do
     include_seq_func = opts |> Keyword.get(:sequence_for_function, false)

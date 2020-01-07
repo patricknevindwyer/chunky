@@ -100,6 +100,7 @@ defmodule Chunky.Math do
 
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
+   - `digit_sum/1` - Calculate the sum of the digits of `n`
    - `divisors_of_form_mx_plus_b/3` - Divisors of `n` that conform to values of `mx + b`
    - `hamming_weight/2` - Find the Hamming Weight, the count of digits not `0`, in different base representations of `n`
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
@@ -3971,6 +3972,43 @@ defmodule Chunky.Math do
   def is_zero?(0), do: true
   def is_zero?(n) when is_integer(n), do: false
 
+  @doc """
+  Calculate the sum of the digits of `n`.
+  
+  ## Examples
+  
+      iex> Math.digit_sum(1234)
+      10
+  
+      iex> Math.digit_sum(2048)
+      14
+      
+      iex> Math.digit_sum(1234567890987654321)
+      90
+  """
+  def digit_sum(n) when is_integer(n) do
+      n |> Integer.digits() |> Enum.sum()
+  end
+  
+  @doc """
+  Check if a number `n` contains the number `m` in it's decimal
+  digit representation.
+  
+  ## Examples
+  
+      iex> Math.contains_number?(34, 3)
+      true
+  
+      iex> Math.contains_number?(2048, 20)
+      true
+  
+      iex> Math.contains_number?(2048, 49)
+      false
+  """
+  def contains_number?(n, m) when is_integer(n) and is_integer(m) do
+      Integer.to_string(n) |> String.contains?(Integer.to_string(m))
+  end
+    
   @doc """
   Apply a number theoretic property test to integers to find the next number
   in a sequence.

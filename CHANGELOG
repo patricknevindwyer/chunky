@@ -44,8 +44,179 @@
 ### Sequences
 
  - Added new sequence module OEIS.Powers
+ - Added new sequence module OEIS.Repr
+ - New Sequences
   - A000051 - a(n) = 2^n + 1
-  
+  - A000351 - a(n) = 5^n
+  - A000400 - a(n) = 6^n
+  - A000420 - a(n) = 7^n
+  - A001018 - a(n) = 8^n
+  - A001019 - a(n) = 9^n
+  - A011557 - a(n) = 10^n
+  - A001020 - a(n) = 11^n
+  - A001021 - a(n) = 12^n
+  - A001022 - a(n) = 13^n
+  - A001023 - a(n) = 14^n
+  - A001024 - Powers of 15.
+  - A001025 - Powers of 16: a(n) = 16^n.
+  - A001026 - Powers of 17.
+  - A001027 - Powers of 18.
+  - A001029 - Powers of 19.
+  - A009964 - Powers of 20.
+  - A009965 - Powers of 21.
+  - A009966 - Powers of 22.
+  - A009967 - Powers of 23.
+  - A009968 - Powers of 24: a(n) = 24^n.
+  - A009969 - Powers of 25.
+  - A009970 - Powers of 26.
+  - A009971 - Powers of 27.
+  - A009972 - Powers of 28.
+  - A009973 - Powers of 29.
+  - A009974 - Powers of 30.
+  - A009975 - Powers of 31.
+  - A009976 - Powers of 32.
+  - A009977 - Powers of 33.
+  - A009978 - Powers of 34.
+  - A009979 - Powers of 35.
+  - A009980 - Powers of 36.
+  - A009981 - Powers of 37.
+  - A009982 - Powers of 38.
+  - A009983 - Powers of 39.
+  - A009984 - Powers of 40.
+  - A009985 - Powers of 41.
+  - A009986 - Powers of 42.
+  - A009987 - Powers of 43.
+  - A009988 - Powers of 44.
+  - A009989 - Powers of 45.
+  - A009990 - Powers of 46.
+  - A009991 - Powers of 47.
+  - A009992 - Powers of 48: a(n) = 48^n.  
+  - A008585 - a(n) = 3*n.
+  - A008586 - Multiples of 4.
+  - A008587 - Multiples of 5.
+  - A008588 - Nonnegative multiples of 6.
+  - A008589 - Multiples of 7.
+  - A008590 - Multiples of 8.
+  - A008591 - Multiples of 9.
+  - A008592 - Multiples of 10: a(n) = 10 * n.
+  - A008593 - Multiples of 11.
+  - A008594 - Multiples of 12.
+  - A008595 - Multiples of 13.
+  - A008596 - Multiples of 14.
+  - A008597 - Multiples of 15.
+  - A008598 - Multiples of 16.
+  - A008599 - Multiples of 17.
+  - A008600 - Multiples of 18.
+  - A008601 - Multiples of 19.
+  - A008602 - Multiples of 20.
+  - A008603 - Multiples of 21.
+  - A008604 - Multiples of 22.
+  - A008605 - Multiples of 23.
+  - A008606 - Multiples of 24.
+  - A008607 - Multiples of 25.
+  - A005843 - The nonnegative even numbers: a(n) = 2n.
+  - A087752 - Powers of 49.
+  - A159991 - Powers of 60.
+  - A169823 - Multiples of 60.
+  - A169825 - Multiples of 420.
+  - A169827 - Multiples of 840.
+  - A018253 - Divisors of 24.
+  - A018256 - Divisors of 36.
+  - A018261 - Divisors of 48.
+  - A018266 - Divisors of 60.
+  - A018293 - Divisors of 120.
+  - A018321 - Divisors of 180.
+  - A018350 - Divisors of 240.
+  - A018412 - Divisors of 360.
+  - A018609 - Divisors of 720.
+  - A018676 - Divisors of 840.
+  - A165412 - Divisors of 2520.
+  - A178858 - Divisors of 5040.
+  - A178859 - Divisors of 7560.
+  - A178860 - Divisors of 10080.
+  - A178861 - Divisors of 15120.
+  - A178862 - Divisors of 20160.
+  - A178863 - Divisors of 25200.
+  - A178864 - Divisors of 27720.
+  - A178877 - Divisors of 1260.
+  - A178878 - Divisors of 1680.
+  - A252994 - Multiples of 26.
+  - A305548 - a(n) = 27*n.
+  - A135628 - Multiples of 28.
+  - A195819 - Multiples of 29.
+  - A249674 - a(n) = 30*n.
+  - A135631 - Multiples of 31.
+  - A174312 - 32*n.
+  - A044102 - Multiples of 36.
+  - A085959 - Multiples of 37.
+  - A152691 - Multiples of 64.
+  - A121023 - Multiples of 3 containing a 3 in their decimal representation.
+  - A121024 - Multiples of 4 containing a 4 in their decimal representation.
+  - A121025 - Multiples of 5 containing a 5 in their decimal representation.
+  - A121026 - Multiples of 6 containing a 6 in their decimal representation.
+  - A121027 - Multiples of 7 containing a 7 in their decimal representation.
+  - A121028 - Multiples of 8 containing an 8 in their decimal representation.
+  - A121029 - Multiples of 9 containing a 9 in their decimal representation.
+  - A121030 - Multiples of 10 containing a 10 in their decimal representation.
+  - A121031 - Multiples of 11 containing an 11 in their decimal representation.
+  - A121032 - Multiples of 12 containing a 12 in their decimal representation.
+  - A121033 - Multiples of 13 containing a 13 in their decimal representation.
+  - A121034 - Multiples of 14 containing a 14 in their decimal representation.
+  - A121035 - Multiples of 15 containing a 15 in their decimal representation.
+  - A121036 - Multiples of 16 containing a 16 in their decimal representation.
+  - A121037 - Multiples of 17 containing a 17 in their decimal representation.
+  - A121038 - Multiples of 18 containing a 18 in their decimal representation.
+  - A121039 - Multiples of 19 containing a 19 in their decimal representation.
+  - A121040 - Multiples of 20 containing a 20 in their decimal representation.
+  - A062768 - Multiples of 6 such that the sum of the digits is equal to 6.
+  - A063416 - Multiples of 7 whose sum of digits is equal to 7.
+  - A063997 - Multiples of 4 whose digits add to 4.
+  - A069537 - Multiples of 2 with digit sum = 2.
+  - A069540 - Multiples of 5 with digit sum 5.
+  - A069543 - Multiples of 8 with digit sum 8.
+  - A011531 - Numbers that contain a digit 1 in their decimal representation.
+  - A011532 - Numbers that contain a 2.
+  - A011533 - Numbers that contain a 3.
+  - A011534 - Numbers that contain a 4.
+  - A011535 - Numbers that contain a 5.
+  - A011536 - Numbers that contain a 6.
+  - A011537 - Numbers that contain at least one 7.
+  - A011538 - Numbers that contain an 8.
+  - A011539 - "9ish numbers": decimal representation contains at least one nine.
+  - A011540 - Numbers that contain a digit 0.
+  - A007395 - Constant sequence: the all 2's sequence.
+  - A010701 - Constant sequence: the all 3's sequence.
+  - A010709 - Constant sequence: the all 4's sequence.
+  - A010716 - Constant sequence: the all 5's sequence.
+  - A010722 - Constant sequence: the all 6's sequence.
+  - A010727 - Constant sequence: the all 7's sequence.
+  - A010731 - Constant sequence: the all 8's sequence.
+  - A010734 - Constant sequence: the all 9's sequence.
+  - A010692 - Constant sequence: a(n) = 10.
+  - A010850 - Constant sequence: a(n) = 11.
+  - A010851 - Constant sequence: a(n) = 12.
+  - A010852 - Constant sequence: a(n) = 13.
+  - A010853 - Constant sequence: a(n) = 14.
+  - A010854 - Constant sequence: a(n) = 15.
+  - A010855 - Constant sequence: a(n) = 16.
+  - A010856 - Constant sequence: a(n) = 17.
+  - A010857 - Constant sequence: a(n) = 18.
+  - A010858 - Constant sequence: a(n) = 19.
+  - A010859 - Constant sequence: a(n) = 20.
+  - A010860 - Constant sequence: a(n) = 21.
+  - A010861 - Constant sequence: a(n) = 22.
+  - A010862 - Constant sequence: a(n) = 23.
+  - A010863 - Constant sequence: a(n) = 24.
+  - A010864 - Constant sequence: a(n) = 25.
+  - A010865 - Constant sequence: a(n) = 26.
+  - A010866 - Constant sequence: a(n) = 27.
+  - A010867 - Constant sequence: a(n) = 28.
+  - A010868 - Constant sequence: a(n) = 29.
+  - A010869 - Constant sequence: a(n) = 30.
+  - A010870 - Constant sequence: a(n) = 31.
+  - A010871 - Constant sequence: a(n) = 32.
+
+
   
 ## v0.11.2
 

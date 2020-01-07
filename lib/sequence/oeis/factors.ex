@@ -28,6 +28,16 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A014614 - Numbers that are products of 5 primes](https://oeis.org/A014614) - `:a014614` - `create_sequence_a014614/1`
    - [A001826 - Number of divisors of n of form 4k+1](https://oeis.org/A001826) - `:a001826` - `create_sequence_a001826/1`
    - [A001842 - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3))](https://oeis.org/A001842) - `:a001842` - `create_sequence_a001842/1`
+   - [A018253 - Divisors of 24.](https://oeis.org/A018253) - `:a018253` - `create_sequence_a018253/1`
+   - [A018256 - Divisors of 36.](https://oeis.org/A018256) - `:a018256` - `create_sequence_a018256/1`
+   - [A018261 - Divisors of 48.](https://oeis.org/A018261) - `:a018261` - `create_sequence_a018261/1`
+   - [A018266 - Divisors of 60.](https://oeis.org/A018266) - `:a018266` - `create_sequence_a018266/1`
+   - [A018293 - Divisors of 120.](https://oeis.org/A018293) - `:a018293` - `create_sequence_a018293/1`
+   - [A018321 - Divisors of 180.](https://oeis.org/A018321) - `:a018321` - `create_sequence_a018321/1`
+   - [A018350 - Divisors of 240.](https://oeis.org/A018350) - `:a018350` - `create_sequence_a018350/1`
+   - [A018412 - Divisors of 360.](https://oeis.org/A018412) - `:a018412` - `create_sequence_a018412/1`
+   - [A018609 - Divisors of 720.](https://oeis.org/A018609) - `:a018609` - `create_sequence_a018609/1`
+   - [A018676 - Divisors of 840.](https://oeis.org/A018676) - `:a018676` - `create_sequence_a018676/1`
    - [A030513 - Numbers with 4 divisors](https://oeis.org/A030513) - `:a030513` - `create_sequence_a030513/1`
    - [A030515 - Numbers with exactly 6 divisors](https://oeis.org/A030515) - `:a030515` - `create_sequence_a030515/1`
    - [A033273 - Number of nonprime divisors of n](https://oeis.org/A033273) - `:a033273` - `create_sequence_a033273/1`
@@ -99,6 +109,16 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A160957 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 11](https://oeis.org/A160957) - `:a160957` - `create_sequence_a160957/1`
    - [A160960 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 12](https://oeis.org/A160960) - `:a160960` - `create_sequence_a160960/1`
    - [A162643 - Numbers such that their number of divisors is not a power of 2.](https://oeis.org/A162643) - `:a162643` - `create_sequence_a162643/1`
+   - [A165412 - Divisors of 2520.](https://oeis.org/A165412) - `:a165412` - `create_sequence_a165412/1`
+   - [A178858 - Divisors of 5040.](https://oeis.org/A178858) - `:a178858` - `create_sequence_a178858/1`
+   - [A178859 - Divisors of 7560.](https://oeis.org/A178859) - `:a178859` - `create_sequence_a178859/1`
+   - [A178860 - Divisors of 10080.](https://oeis.org/A178860) - `:a178860` - `create_sequence_a178860/1`
+   - [A178861 - Divisors of 15120.](https://oeis.org/A178861) - `:a178861` - `create_sequence_a178861/1`
+   - [A178862 - Divisors of 20160.](https://oeis.org/A178862) - `:a178862` - `create_sequence_a178862/1`
+   - [A178863 - Divisors of 25200.](https://oeis.org/A178863) - `:a178863` - `create_sequence_a178863/1`
+   - [A178864 - Divisors of 27720.](https://oeis.org/A178864) - `:a178864` - `create_sequence_a178864/1`
+   - [A178877 - Divisors of 1260.](https://oeis.org/A178877) - `:a178877` - `create_sequence_a178877/1`
+   - [A178878 - Divisors of 1680.](https://oeis.org/A178878) - `:a178878` - `create_sequence_a178878/1`
    - [A209061 - Exponentially squarefree numbers](https://oeis.org/A209061) - `:a209061` - `create_sequence_a209061/1`
    - [A211337 - Numbers n for which the number of divisors, tau(n), is congruent to 1 modulo 3](https://oeis.org/A211337) - `:a211337` - `create_sequence_a211337/1`
    - [A211338 - Numbers n for which the number of divisors, tau(n), is congruent to 2 modulo 3](https://oeis.org/A211338) - `:a211338` - `create_sequence_a211338/1`
@@ -106,10 +126,73 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
 
   """
-  import Chunky.Sequence, only: [sequence_for_function: 1]
+  import Chunky.Sequence, only: [sequence_for_function: 1, sequence_for_list: 1]
   alias Chunky.Math
 
   require Integer
+
+
+
+  # raw data for A018253 - Divisors of 24.
+  @data_a018253 [1,2,3,4,6,8,12,24]
+
+  # raw data for A018256 - Divisors of 36.
+  @data_a018256 [1,2,3,4,6,9,12,18,36]
+
+  # raw data for A018261 - Divisors of 48.
+  @data_a018261 [1,2,3,4,6,8,12,16,24,48]
+
+  # raw data for A018266 - Divisors of 60.
+  @data_a018266 [1,2,3,4,5,6,10,12,15,20,30,60]
+
+  # raw data for A018293 - Divisors of 120.
+  @data_a018293 [1,2,3,4,5,6,8,10,12,15,20,24,30,40,60,120]
+
+  # raw data for A018321 - Divisors of 180.
+  @data_a018321 [1,2,3,4,5,6,9,10,12,15,18,20,30,36,45,60,90,180]
+
+  # raw data for A018350 - Divisors of 240.
+  @data_a018350 [1,2,3,4,5,6,8,10,12,15,16,20,24,30,40,48,60,80,120,240]
+
+  # raw data for A018412 - Divisors of 360.
+  @data_a018412 [1,2,3,4,5,6,8,9,10,12,15,18,20,24,30,36,40,45,60,72,90,120,180,360]
+
+  # raw data for A018609 - Divisors of 720.
+  @data_a018609 [1,2,3,4,5,6,8,9,10,12,15,16,18,20,24,30,36,40,45,48,60,72,80,90,120,144,180,240,360,720]
+
+  # raw data for A018676 - Divisors of 840.
+  @data_a018676 [1,2,3,4,5,6,7,8,10,12,14,15,20,21,24,28,30,35,40,42,56,60,70,84,105,120,140,168,210,280,420,840]
+
+  # raw data for A165412 - Divisors of 2520.
+  @data_a165412 [1,2,3,4,5,6,7,8,9,10,12,14,15,18,20,21,24,28,30,35,36,40,42,45,56,60,63,70,72,84,90,105,120,126,140,168,180,210,252,280,315,360,420,504,630,840,1260,2520]
+
+  # raw data for A178858 - Divisors of 5040.
+  @data_a178858 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,35,36,40,42,45,48,56,60,63,70,72,80,84,90,105,112,120,126,140,144,168,180,210,240,252,280,315,336,360,420,504,560,630,720,840,1008,1260,1680,2520,5040]
+
+  # raw data for A178859 - Divisors of 7560.
+  @data_a178859 [1,2,3,4,5,6,7,8,9,10,12,14,15,18,20,21,24,27,28,30,35,36,40,42,45,54,56,60,63,70,72,84,90,105,108,120,126,135,140,168,180,189,210,216,252,270,280,315,360,378,420,504,540,630,756,840,945,1080,1260,1512,1890]
+
+  # raw data for A178860 - Divisors of 10080.
+  @data_a178860 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,32,35,36,40,42,45,48,56,60,63,70,72,80,84,90,96,105,112,120,126,140,144,160,168,180,210,224,240,252,280,288,315,336,360,420,480,504,560,630,672,720,840,1008]
+
+  # raw data for A178861 - Divisors of 15120.
+  @data_a178861 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,27,28,30,35,36,40,42,45,48,54,56,60,63,70,72,80,84,90,105,108,112,120,126,135,140,144,168,180,189,210,216,240,252,270,280,315,336,360,378,420,432,504,540,560,630]
+
+  # raw data for A178862 - Divisors of 20160.
+  @data_a178862 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,32,35,36,40,42,45,48,56,60,63,64,70,72,80,84,90,96,105,112,120,126,140,144,160,168,180,192,210,224,240,252,280,288,315,320,336,360,420,448,480,504,560,576]
+
+  # raw data for A178863 - Divisors of 25200.
+  @data_a178863 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,25,28,30,35,36,40,42,45,48,50,56,60,63,70,72,75,80,84,90,100,105,112,120,126,140,144,150,168,175,180,200,210,225,240,252,280,300,315,336,350,360,400,420,450,504]
+
+  # raw data for A178864 - Divisors of 27720.
+  @data_a178864 [1,2,3,4,5,6,7,8,9,10,11,12,14,15,18,20,21,22,24,28,30,33,35,36,40,42,44,45,55,56,60,63,66,70,72,77,84,88,90,99,105,110,120,126,132,140,154,165,168,180,198,210,220,231,252,264,280,308,315,330,360,385,396,420]
+
+  # raw data for A178877 - Divisors of 1260.
+  @data_a178877 [1,2,3,4,5,6,7,9,10,12,14,15,18,20,21,28,30,35,36,42,45,60,63,70,84,90,105,126,140,180,210,252,315,420,630,1260]
+
+  # raw data for A178878 - Divisors of 1680.
+  @data_a178878 [1,2,3,4,5,6,7,8,10,12,14,15,16,20,21,24,28,30,35,40,42,48,56,60,70,80,84,105,112,120,140,168,210,240,280,336,420,560,840,1680]
+
 
   @doc """
   OEIS Sequence `A000037` - Numbers that are not squares (or, the nonsquares).
@@ -997,6 +1080,288 @@ defmodule Chunky.Sequence.OEIS.Factors do
     else
       Math.divisors_of_form_mx_plus_b(4, 3, idx) |> length()
     end
+  end
+
+
+
+  @doc """
+  OEIS Sequence `A018253` - Divisors of 24.
+
+  From [OEIS A018253](https://oeis.org/A018253):
+
+  > Divisors of 24.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018253`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018253) |> Sequence.take!(8)
+      [1,2,3,4,6,8,12,24]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 24.",
+       references: [{:oeis, :a018253, "https://oeis.org/A018253"}]
+  def create_sequence_a018253(_opts) do
+          sequence_for_list(@data_a018253)
+  end
+
+  @doc """
+  OEIS Sequence `A018256` - Divisors of 36.
+
+  From [OEIS A018256](https://oeis.org/A018256):
+
+  > Divisors of 36.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018256`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018256) |> Sequence.take!(9)
+      [1,2,3,4,6,9,12,18,36]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 36.",
+       references: [{:oeis, :a018256, "https://oeis.org/A018256"}]
+  def create_sequence_a018256(_opts) do
+          sequence_for_list(@data_a018256)
+  end
+
+  @doc """
+  OEIS Sequence `A018261` - Divisors of 48.
+
+  From [OEIS A018261](https://oeis.org/A018261):
+
+  > Divisors of 48.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018261`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018261) |> Sequence.take!(10)
+      [1,2,3,4,6,8,12,16,24,48]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 48.",
+       references: [{:oeis, :a018261, "https://oeis.org/A018261"}]
+  def create_sequence_a018261(_opts) do
+          sequence_for_list(@data_a018261)
+  end
+
+  @doc """
+  OEIS Sequence `A018266` - Divisors of 60.
+
+  From [OEIS A018266](https://oeis.org/A018266):
+
+  > Divisors of 60.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018266`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018266) |> Sequence.take!(12)
+      [1,2,3,4,5,6,10,12,15,20,30,60]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 60.",
+       references: [{:oeis, :a018266, "https://oeis.org/A018266"}]
+  def create_sequence_a018266(_opts) do
+          sequence_for_list(@data_a018266)
+  end
+
+  @doc """
+  OEIS Sequence `A018293` - Divisors of 120.
+
+  From [OEIS A018293](https://oeis.org/A018293):
+
+  > Divisors of 120.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018293`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018293) |> Sequence.take!(16)
+      [1,2,3,4,5,6,8,10,12,15,20,24,30,40,60,120]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 120.",
+       references: [{:oeis, :a018293, "https://oeis.org/A018293"}]
+  def create_sequence_a018293(_opts) do
+          sequence_for_list(@data_a018293)
+  end
+
+  @doc """
+  OEIS Sequence `A018321` - Divisors of 180.
+
+  From [OEIS A018321](https://oeis.org/A018321):
+
+  > Divisors of 180.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018321`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018321) |> Sequence.take!(18)
+      [1,2,3,4,5,6,9,10,12,15,18,20,30,36,45,60,90,180]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 180.",
+       references: [{:oeis, :a018321, "https://oeis.org/A018321"}]
+  def create_sequence_a018321(_opts) do
+          sequence_for_list(@data_a018321)
+  end
+
+  @doc """
+  OEIS Sequence `A018350` - Divisors of 240.
+
+  From [OEIS A018350](https://oeis.org/A018350):
+
+  > Divisors of 240.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018350`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018350) |> Sequence.take!(20)
+      [1,2,3,4,5,6,8,10,12,15,16,20,24,30,40,48,60,80,120,240]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 240.",
+       references: [{:oeis, :a018350, "https://oeis.org/A018350"}]
+  def create_sequence_a018350(_opts) do
+          sequence_for_list(@data_a018350)
+  end
+
+  @doc """
+  OEIS Sequence `A018412` - Divisors of 360.
+
+  From [OEIS A018412](https://oeis.org/A018412):
+
+  > Divisors of 360.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018412`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018412) |> Sequence.take!(24)
+      [1,2,3,4,5,6,8,9,10,12,15,18,20,24,30,36,40,45,60,72,90,120,180,360]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 360.",
+       references: [{:oeis, :a018412, "https://oeis.org/A018412"}]
+  def create_sequence_a018412(_opts) do
+          sequence_for_list(@data_a018412)
+  end
+
+  @doc """
+  OEIS Sequence `A018609` - Divisors of 720.
+
+  From [OEIS A018609](https://oeis.org/A018609):
+
+  > Divisors of 720.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018609`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018609) |> Sequence.take!(30)
+      [1,2,3,4,5,6,8,9,10,12,15,16,18,20,24,30,36,40,45,48,60,72,80,90,120,144,180,240,360,720]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 720.",
+       references: [{:oeis, :a018609, "https://oeis.org/A018609"}]
+  def create_sequence_a018609(_opts) do
+          sequence_for_list(@data_a018609)
+  end
+
+  @doc """
+  OEIS Sequence `A018676` - Divisors of 840.
+
+  From [OEIS A018676](https://oeis.org/A018676):
+
+  > Divisors of 840.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018676`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a018676) |> Sequence.take!(32)
+      [1,2,3,4,5,6,7,8,10,12,14,15,20,21,24,28,30,35,40,42,56,60,70,84,105,120,140,168,210,280,420,840]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 840.",
+       references: [{:oeis, :a018676, "https://oeis.org/A018676"}]
+  def create_sequence_a018676(_opts) do
+          sequence_for_list(@data_a018676)
   end
 
   @doc """
@@ -3371,6 +3736,287 @@ defmodule Chunky.Sequence.OEIS.Factors do
       end,
       last
     )
+  end
+
+
+  @doc """
+  OEIS Sequence `A165412` - Divisors of 2520.
+
+  From [OEIS A165412](https://oeis.org/A165412):
+
+  > Divisors of 2520.
+  > (Formerly )
+
+  **Sequence IDs**: `:a165412`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a165412) |> Sequence.take!(48)
+      [1,2,3,4,5,6,7,8,9,10,12,14,15,18,20,21,24,28,30,35,36,40,42,45,56,60,63,70,72,84,90,105,120,126,140,168,180,210,252,280,315,360,420,504,630,840,1260,2520]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 2520.",
+       references: [{:oeis, :a165412, "https://oeis.org/A165412"}]
+  def create_sequence_a165412(_opts) do 
+          sequence_for_list(@data_a165412)
+  end
+
+  @doc """
+  OEIS Sequence `A178858` - Divisors of 5040.
+
+  From [OEIS A178858](https://oeis.org/A178858):
+
+  > Divisors of 5040.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178858`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178858) |> Sequence.take!(60)
+      [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,35,36,40,42,45,48,56,60,63,70,72,80,84,90,105,112,120,126,140,144,168,180,210,240,252,280,315,336,360,420,504,560,630,720,840,1008,1260,1680,2520,5040]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 5040.",
+       references: [{:oeis, :a178858, "https://oeis.org/A178858"}]
+  def create_sequence_a178858(_opts) do
+          sequence_for_list(@data_a178858)
+  end
+
+  @doc """
+  OEIS Sequence `A178859` - Divisors of 7560.
+
+  From [OEIS A178859](https://oeis.org/A178859):
+
+  > Divisors of 7560.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178859`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178859) |> Sequence.take!(61)
+      [1,2,3,4,5,6,7,8,9,10,12,14,15,18,20,21,24,27,28,30,35,36,40,42,45,54,56,60,63,70,72,84,90,105,108,120,126,135,140,168,180,189,210,216,252,270,280,315,360,378,420,504,540,630,756,840,945,1080,1260,1512,1890]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 7560.",
+       references: [{:oeis, :a178859, "https://oeis.org/A178859"}]
+  def create_sequence_a178859(_opts) do
+          sequence_for_list(@data_a178859)
+  end
+
+  @doc """
+  OEIS Sequence `A178860` - Divisors of 10080.
+
+  From [OEIS A178860](https://oeis.org/A178860):
+
+  > Divisors of 10080.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178860`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178860) |> Sequence.take!(63)
+      [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,32,35,36,40,42,45,48,56,60,63,70,72,80,84,90,96,105,112,120,126,140,144,160,168,180,210,224,240,252,280,288,315,336,360,420,480,504,560,630,672,720,840,1008]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 10080.",
+       references: [{:oeis, :a178860, "https://oeis.org/A178860"}]
+  def create_sequence_a178860(_opts) do
+          sequence_for_list(@data_a178860)
+  end
+
+  @doc """
+  OEIS Sequence `A178861` - Divisors of 15120.
+
+  From [OEIS A178861](https://oeis.org/A178861):
+
+  > Divisors of 15120.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178861`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178861) |> Sequence.take!(63)
+      [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,27,28,30,35,36,40,42,45,48,54,56,60,63,70,72,80,84,90,105,108,112,120,126,135,140,144,168,180,189,210,216,240,252,270,280,315,336,360,378,420,432,504,540,560,630]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 15120.",
+       references: [{:oeis, :a178861, "https://oeis.org/A178861"}]
+  def create_sequence_a178861(_opts) do
+          sequence_for_list(@data_a178861)
+  end
+
+  @doc """
+  OEIS Sequence `A178862` - Divisors of 20160.
+
+  From [OEIS A178862](https://oeis.org/A178862):
+
+  > Divisors of 20160.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178862`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178862) |> Sequence.take!(63)
+      [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,32,35,36,40,42,45,48,56,60,63,64,70,72,80,84,90,96,105,112,120,126,140,144,160,168,180,192,210,224,240,252,280,288,315,320,336,360,420,448,480,504,560,576]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 20160.",
+       references: [{:oeis, :a178862, "https://oeis.org/A178862"}]
+  def create_sequence_a178862(_opts) do
+          sequence_for_list(@data_a178862)
+  end
+
+  @doc """
+  OEIS Sequence `A178863` - Divisors of 25200.
+
+  From [OEIS A178863](https://oeis.org/A178863):
+
+  > Divisors of 25200.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178863`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178863) |> Sequence.take!(63)
+      [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,25,28,30,35,36,40,42,45,48,50,56,60,63,70,72,75,80,84,90,100,105,112,120,126,140,144,150,168,175,180,200,210,225,240,252,280,300,315,336,350,360,400,420,450,504]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 25200.",
+       references: [{:oeis, :a178863, "https://oeis.org/A178863"}]
+  def create_sequence_a178863(_opts) do
+          sequence_for_list(@data_a178863)
+  end
+
+  @doc """
+  OEIS Sequence `A178864` - Divisors of 27720.
+
+  From [OEIS A178864](https://oeis.org/A178864):
+
+  > Divisors of 27720.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178864`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178864) |> Sequence.take!(64)
+      [1,2,3,4,5,6,7,8,9,10,11,12,14,15,18,20,21,22,24,28,30,33,35,36,40,42,44,45,55,56,60,63,66,70,72,77,84,88,90,99,105,110,120,126,132,140,154,165,168,180,198,210,220,231,252,264,280,308,315,330,360,385,396,420]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 27720.",
+       references: [{:oeis, :a178864, "https://oeis.org/A178864"}]
+  def create_sequence_a178864(_opts) do
+          sequence_for_list(@data_a178864)
+  end
+
+  @doc """
+  OEIS Sequence `A178877` - Divisors of 1260.
+
+  From [OEIS A178877](https://oeis.org/A178877):
+
+  > Divisors of 1260.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178877`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178877) |> Sequence.take!(36)
+      [1,2,3,4,5,6,7,9,10,12,14,15,18,20,21,28,30,35,36,42,45,60,63,70,84,90,105,126,140,180,210,252,315,420,630,1260]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 1260.",
+       references: [{:oeis, :a178877, "https://oeis.org/A178877"}]
+  def create_sequence_a178877(_opts) do
+          sequence_for_list(@data_a178877)
+  end 
+
+  @doc """
+  OEIS Sequence `A178878` - Divisors of 1680.
+
+  From [OEIS A178878](https://oeis.org/A178878):
+
+  > Divisors of 1680.
+  > (Formerly )
+
+  **Sequence IDs**: `:a178878`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a178878) |> Sequence.take!(40)
+      [1,2,3,4,5,6,7,8,10,12,14,15,16,20,21,24,28,30,35,40,42,48,56,60,70,80,84,105,112,120,140,168,210,240,280,336,420,560,840,1680]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Divisors of 1680.",
+       references: [{:oeis, :a178878, "https://oeis.org/A178878"}]
+  def create_sequence_a178878(_opts) do
+          sequence_for_list(@data_a178878)
   end
 
   @doc """

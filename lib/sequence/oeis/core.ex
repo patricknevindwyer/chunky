@@ -87,12 +87,14 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
    - [A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1](https://oeis.org/A005117) - `:a005117` - `create_sequence_a005117/1`
    - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
+   - [A005843 - The nonnegative even numbers: a(n) = 2n.](https://oeis.org/A005843) - `:a005843` - `create_sequence_a005843/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
    - [A006966 - Number of lattices on n unlabeled nodes](https://oeis.org/A006966) - `:a006966` - `create_sequence_a006966/1`
    - [A008292 - Triangle of Eulerian numbers T(n,k)](https://oeis.org/A008292) - `:a008292` - `create_sequence_a008292/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
+
 
 
 
@@ -2957,6 +2959,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 1
   def seq_a005117(_idx, last) do
     Math.next_number(&Math.is_squarefree?/1, last)
+  end
+
+  @doc """
+  OEIS Sequence `A005843` - The nonnegative even numbers: a(n) = 2n.
+
+  From [OEIS A005843](https://oeis.org/A005843):
+
+  > The nonnegative even numbers: a(n) = 2n.
+  > (Formerly M0985)
+
+  **Sequence IDs**: `:a005843`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a005843) |> Sequence.take!(61)
+      [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,90,92,94,96,98,100,102,104,106,108,110,112,114,116,118,120]
+
+
+  """
+  @doc offset: 0,
+       sequence: "The nonnegative even numbers: a(n) = 2n.",
+       references: [{:oeis, :a005843, "https://oeis.org/A005843"}]
+  def create_sequence_a005843(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005843/1)
+  end
+
+
+  @doc offset: 0 
+  def seq_a005843(idx) do
+      idx * 2
   end
 
   @doc """
