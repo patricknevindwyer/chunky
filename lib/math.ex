@@ -48,6 +48,11 @@ defmodule Chunky.Math do
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `tau/1` - Tau function, number of divisors of `n`
 
+  ## Digit Checks and Manipulations
+  
+   - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
+   - `digit_sum/1` - Calculate the sum of the digits of `n`
+   - `remove_digits!/3` - Remove one or more digits from `n`, returning a reconstituted number
 
   ## Primes
 
@@ -100,7 +105,6 @@ defmodule Chunky.Math do
 
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
-   - `digit_sum/1` - Calculate the sum of the digits of `n`
    - `divisors_of_form_mx_plus_b/3` - Divisors of `n` that conform to values of `mx + b`
    - `hamming_weight/2` - Find the Hamming Weight, the count of digits not `0`, in different base representations of `n`
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
