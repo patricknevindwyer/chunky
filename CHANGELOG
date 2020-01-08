@@ -247,6 +247,15 @@
   - A004726 - Delete all 7's from the sequence of nonnegative integers.
   - A004727 - Delete all 8's from the sequence of nonnegative integers.
   - A004728 - Delete all 9's from the sequence of nonnegative integers.
+  - A007088 - The binary numbers (or binary words, or binary vectors): numbers written in base 2.
+  - A007089 - Numbers in base 3.
+  - A007090 - Numbers in base 4.
+  - A007091 - Numbers in base 5.
+  - A007092 - Numbers in base 6.
+  - A007093 - Numbers in base 7.
+  - A007094 - Numbers in base 8.
+  - A007095 - Numbers in base 9.
+  - A121022 - Even numbers containing a 2 in their decimal representation.
 
 
   

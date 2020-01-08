@@ -51,8 +51,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A052414 - Numbers without 6 as a digit.](https://oeis.org/A052414) - `:a052414` - `create_sequence_a052414/1`
     - [A052419 - Numbers without 7 as a digit.](https://oeis.org/A052419) - `:a052419` - `create_sequence_a052419/1`
     - [A052421 - Numbers without 8 as a digit.](https://oeis.org/A052421) - `:a052421` - `create_sequence_a052421/1`
-
-
+    - [A121022 - Even numbers containing a 2 in their decimal representation.](https://oeis.org/A121022) - `:a121022` - `create_sequence_a121022/1`
 
 
 
@@ -1848,5 +1847,38 @@ defmodule Chunky.Sequence.OEIS.Repr do
        Math.next_number(fn v -> Math.contains_number?(v, 8) == false end, last)    
    end
    
+   @doc """
+   OEIS Sequence `A121022` - Even numbers containing a 2 in their decimal representation.
+
+   From [OEIS A121022](https://oeis.org/A121022):
+
+   > Even numbers containing a 2 in their decimal representation.
+   > (Formerly )
+
+   **Sequence IDs**: `:a121022`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a121022) |> Sequence.take!(55)
+       [2,12,20,22,24,26,28,32,42,52,62,72,82,92,102,112,120,122,124,126,128,132,142,152,162,172,182,192,200,202,204,206,208,210,212,214,216,218,220,222,224,226,228,230,232,234,236,238,240,242,244,246,248,250,252]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Even numbers containing a 2 in their decimal representation.",
+        references: [{:oeis, :a121022, "https://oeis.org/A121022"}]
+   def create_sequence_a121022(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a121022/2)
+   end
+
+
+   @doc offset: 1, fill_value: 0
+   def seq_a121022(_idx, last) do
+       Math.next_number(fn v -> Math.contains_number?(v, 2) end, last, 2) 
+   end
    
 end
