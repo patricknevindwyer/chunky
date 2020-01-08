@@ -215,6 +215,34 @@
   - A010869 - Constant sequence: a(n) = 30.
   - A010870 - Constant sequence: a(n) = 31.
   - A010871 - Constant sequence: a(n) = 32.
+  - A052382 - Numbers without 0 as a digit, a.k.a. zeroless numbers.
+  - A052383 - Numbers without 1 as a digit.
+  - A052404 - Numbers without 2 as a digit.
+  - A052405 - Numbers without 3 as a digit.
+  - A052406 - Numbers without 4 as a digit.
+  - A052413 - Numbers without 5 as a digit.
+  - A052414 - Numbers without 6 as a digit.
+  - A052419 - Numbers without 7 as a digit.
+  - A052421 - Numbers without 8 as a digit.
+  - A004176 - Omit 1's from n.
+  - A004177 - Omit 2's from n.
+  - A004178 - Omit 3's from n.
+  - A004179 - Omit 4's from n.
+  - A004180 - Omit 5's from n.
+  - A004181 - Omit 6's from n.
+  - A004182 - Omit 7's from n.
+  - A004183 - Omit 8's from n.
+  - A004184 - Omit 9's from n.
+  - A004719 - Delete all 0's from n.
+  - A004720 - Delete all digits '1' from the sequence of nonnegative integers.
+  - A004721 - Delete all 2's from the sequence of nonnegative integers.
+  - A004722 - Delete all digits 3 from the terms of the sequence of nonnegative integers.
+  - A004723 - Delete all 4's from the sequence of nonnegative integers.
+  - A004724 - Delete all 5's from the sequence of nonnegative integers.
+  - A004725 - Delete all 6's from the sequence of nonnegative integers.
+  - A004726 - Delete all 7's from the sequence of nonnegative integers.
+  - A004727 - Delete all 8's from the sequence of nonnegative integers.
+  - A004728 - Delete all 9's from the sequence of nonnegative integers.
 
 
   

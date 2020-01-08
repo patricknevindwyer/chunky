@@ -4010,6 +4010,37 @@ defmodule Chunky.Math do
   end
     
   @doc """
+  Remove all occurances of one or more digits from `n`.
+  
+  Once removed, the the remaining digits of `n` are reconstituted into a number. If
+  no digits are remaining then `0` (or a configurable value) is returned.
+  
+  ## Examples
+  
+      iex> Math.remove_digits!(123, [4, 5])
+      123
+      
+      iex> Math.remove_digits!(123, [2])
+      13
+      
+      iex> Math.remove_digits!(123, [1, 2, 3])
+      0
+      
+      iex> Math.remove_digits!(123, [1, 2, 3], empty: nil)
+      nil
+  """    
+  def remove_digits!(n, digits, opts \\ []) when is_integer(n) and is_list(digits) do
+      on_empty = Keyword.get(opts, :empty, 0)
+      
+      case Integer.digits(n)
+      |> Enum.reject(fn dig -> Enum.member?(digits, dig) end)
+      do
+          [] -> on_empty
+          f_n -> Integer.undigits(f_n)
+      end
+  end
+  
+  @doc """
   Apply a number theoretic property test to integers to find the next number
   in a sequence.
 
