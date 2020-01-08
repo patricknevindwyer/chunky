@@ -79,6 +79,7 @@ defmodule Chunky.Math do
    - `is_even?/1` - Is an integer even?
    - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
+   - `is_multiple_rhonda?/1` - Test if `n` is a Rhonda number in multiple bases
    - `is_negative?/1` - Is an integer a negative number?
    - `is_odd?/1` - Is an integer odd?
    - `is_odious_number?/1` - Does binary expansion of `n` have odd number of `1`s?
@@ -91,6 +92,18 @@ defmodule Chunky.Math do
    - `is_prime?/1` - Test if an integer is prime
    - `is_prime_fast?/1` - Alternative prime test, faster in specific cases of `n`
    - `is_prime_power?/1` - Check if `n` is a power `m` of a prime, where `m` >= 1.
+   - `is_rhonda_to_base_4?/1` - Determine if `n` is a Rhonda number to base 4
+   - `is_rhonda_to_base_6?/1` - Determine if `n` is a Rhonda number to base 6
+   - `is_rhonda_to_base_8?/1` - Determine if `n` is a Rhonda number to base 8
+   - `is_rhonda_to_base_9?/1` - Determine if `n` is a Rhonda number to base 9
+   - `is_rhonda_to_base_10?/1` - Determine if `n` is a Rhonda number to base 10
+   - `is_rhonda_to_base_12?/1` - Determine if `n` is a Rhonda number to base 12
+   - `is_rhonda_to_base_14?/1` - Determine if `n` is a Rhonda number to base 14
+   - `is_rhonda_to_base_15?/1` - Determine if `n` is a Rhonda number to base 15
+   - `is_rhonda_to_base_16?/1` - Determine if `n` is a Rhonda number to base 16
+   - `is_rhonda_to_base_20?/1` - Determine if `n` is a Rhonda number to base 20
+   - `is_rhonda_to_base_30?/1` - Determine if `n` is a Rhonda number to base 30
+   - `is_rhonda_to_base_60?/1` - Determine if `n` is a Rhonda number to base 60
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
    - `is_squarefree?/1` - Are any factors of `n` perfect squares?
    - `is_zero?/1` - Is an integer `0`?
@@ -106,8 +119,10 @@ defmodule Chunky.Math do
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
    - `divisors_of_form_mx_plus_b/3` - Divisors of `n` that conform to values of `mx + b`
+   - `get_rhonda_to/2` - Find the bases for which `n` is a Rhonda number
    - `hamming_weight/2` - Find the Hamming Weight, the count of digits not `0`, in different base representations of `n`
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
+   - `is_rhonda_to_base?/2` - Is `n` a Rhonda number to base `b`?
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
    - `lucas_number/1` - Find the `n`-th Lucas Number
    - `lucky_numbers/1` - Generate the first `n` Lucky Numbers
@@ -1777,6 +1792,314 @@ defmodule Chunky.Math do
   def jacobsthal_number(n) when is_integer(n) and n >= 0 do
     div(Math.pow(2, n) - Math.pow(-1, n), 3)
   end
+
+  @doc """
+  Check if `n` is a Rhonda number to the base `b`.
+  
+  Via [OEIS](https://oeis.org/A099542):
+  
+  > An integer n is a Rhonda number to base b if the product of its digits in base b equals b*Sum of prime factors of n (including multiplicity).
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base?(1568, 10)
+      true
+      
+      iex> Math.is_rhonda_to_base?(2048, 10)
+      false
+  
+      iex> Math.is_rhonda_to_base?(855, 6)
+      true
+  
+      iex> Math.is_rhonda_to_base?(47652, 9)
+      true
+  
+      iex> Math.is_rhonda_to_base?(91224, 60)
+      true
+  """
+  def is_rhonda_to_base?(n, _b) when n < 2, do: false
+  def is_rhonda_to_base?(n, b) when is_integer(n) and is_integer(b) and b >= 2 do
+      
+      # find the base product
+      base_prod = Integer.digits(n, b)
+      |> Enum.reduce(1, fn x, acc -> x * acc end)
+      
+      # find the factor sum
+      f_sum = (prime_factors(n) -- [1]
+      |> Enum.sum()) * b
+      
+      base_prod == f_sum
+  end
+  
+  @doc """
+  Find the bases for which `n` is a Rhonda number.
+  
+  Via [OEIS](https://oeis.org/A099542):
+  
+  > An integer n is a Rhonda number to base b if the product of its digits in base b equals b*Sum of prime factors of n (including multiplicity).
+  
+  Numbers can be Rhonda to more than one base, see [OEIS A100988](http://oeis.org/A100988). By default the `get_rhonda_to/1`
+  function evaluates all bases from 4 to 200. You can specify an alternate set of bases with
+  the `:bases` option.
+  
+  ## Options
+  
+   - `:bases` - List of Integer. Bases to evaluate.
+  
+  ## Examples
+  
+      iex> Math.get_rhonda_to(1000)
+      [16, 36]
+      
+      iex> Math.get_rhonda_to(5670)
+      [36, 106, 108, 196]
+  
+      iex> Math.get_rhonda_to(5670, bases: 100..150 |> Enum.to_list())
+      [106, 108]
+  """
+  def get_rhonda_to(n, opts \\ []) when is_integer(n) do
+      bases = opts |> Keyword.get(:bases, 4..200 |> Enum.to_list())
+      
+      # pre-calculate the base prime factor
+      f_base = (prime_factors(n) -- [1]
+      |> Enum.sum())
+      
+      bases
+      |> Enum.filter(fn base -> 
+          
+          # find the base product
+          base_prod = Integer.digits(n, base)
+          |> Enum.reduce(1, fn x, acc -> x * acc end)
+          
+          base_prod == (f_base * base)
+      end)
+  end
+  
+  @doc """
+  Check if the integer `n` is a Rhonda number to more than one base.
+  
+  This is a predicate wrapper around the `get_rhonda_to/2` function.
+  
+  ## Examples
+  
+      iex> Math.is_multiple_rhonda?(1000)
+      true
+      
+      iex> Math.is_multiple_rhonda?(1230)
+      false
+  """
+  def is_multiple_rhonda?(n) when n < 2, do: false
+  def is_multiple_rhonda?(n) when is_integer(n) do
+     case get_rhonda_to(n) do
+         [] -> false
+         [_] -> false
+         _ -> true
+     end 
+  end
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 4.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_4?(94185)
+      true
+
+      iex> Math.is_rhonda_to_base_4?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_4?(n), do: is_rhonda_to_base?(n, 4)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 6.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_6?(15104)
+      true
+
+      iex> Math.is_rhonda_to_base_4?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_6?(n), do: is_rhonda_to_base?(n, 6)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 8.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_8?(56420)
+      true
+
+      iex> Math.is_rhonda_to_base_8?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_8?(n), do: is_rhonda_to_base?(n, 8)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 9.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_9?(47652)
+      true
+
+      iex> Math.is_rhonda_to_base_9?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_9?(n), do: is_rhonda_to_base?(n, 9)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 10.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_10?(35581)
+      true
+
+      iex> Math.is_rhonda_to_base_10?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_10?(n), do: is_rhonda_to_base?(n, 10)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 12.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_12?(32742)
+      true
+
+      iex> Math.is_rhonda_to_base_12?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_12?(n), do: is_rhonda_to_base?(n, 12)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 14.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_14?(135196)
+      true
+
+      iex> Math.is_rhonda_to_base_14?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_14?(n), do: is_rhonda_to_base?(n, 14)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 15.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_15?(15873)
+      true
+
+      iex> Math.is_rhonda_to_base_15?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_15?(n), do: is_rhonda_to_base?(n, 15)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 16.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_16?(50055)
+      true
+
+      iex> Math.is_rhonda_to_base_16?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_16?(n), do: is_rhonda_to_base?(n, 16)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 20.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_20?(86591)
+      true
+
+      iex> Math.is_rhonda_to_base_20?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_20?(n), do: is_rhonda_to_base?(n, 20)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 30.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_30?(22784)
+      true
+
+      iex> Math.is_rhonda_to_base_30?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_30?(n), do: is_rhonda_to_base?(n, 30)
+  
+  @doc """
+  Determine if `n` is a Rhonda number to base 60.
+  
+  This function is a predicate version of the generalized Rhonda number 
+  predicate. See `is_rhonda_to_base?/2` for more information.
+  
+  ## Examples
+  
+      iex> Math.is_rhonda_to_base_60?(91224)
+      true
+
+      iex> Math.is_rhonda_to_base_60?(327)
+      false
+  
+  """
+  def is_rhonda_to_base_60?(n), do: is_rhonda_to_base?(n, 60)
 
   @doc """
   Find the Catalan number of `n`, `C(n)`.
@@ -3823,6 +4146,9 @@ defmodule Chunky.Math do
 
       iex> Math.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
       [:abundant, :arithmetic_number, :even, :highly_abundant, :odious_number, :positive]
+  
+      iex> Math.analyze_number(1000, skip_smooth: true)
+      [:abundant, :even, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
 
   """
   def analyze_number(n, opts \\ []) when is_integer(n) do
