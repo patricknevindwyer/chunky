@@ -7,6 +7,7 @@ defmodule Chunky.SequenceDataTest do
   alias Chunky.Sequence
   doctest Chunky.Sequence.Basic
   doctest Chunky.Sequence.OEIS
+  doctest Chunky.Sequence.OEIS.Combinatorics
   doctest Chunky.Sequence.OEIS.Constants
   doctest Chunky.Sequence.OEIS.Core
   doctest Chunky.Sequence.OEIS.Sigma
@@ -3687,6 +3688,64 @@ defmodule Chunky.SequenceDataTest do
       sequence: :a010871,
       opts: [],
       values: [32, 32, 32, 32, 32, 32, 32, 32, 32, 32],
+      finite: false,
+      first_index: 0
+    },
+    
+    ## OEIS.Combinatorics
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Combinatorics,
+      sequence: :a159981,
+      opts: [],
+      values: [1, 1, 2, 1, 2, 2, 0, 1, 2, 2],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Combinatorics,
+      sequence: :a159984,
+      opts: [],
+      values: [1, 1, 2, 0, 4, 2, 2, 4, 0, 2],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Combinatorics,
+      sequence: :a159986,
+      opts: [],
+      values: [1, 1, 2, 5, 0, 0, 6, 2, 2, 4],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Combinatorics,
+      sequence: :a159987,
+      opts: [],
+      values: [1, 1, 2, 5, 6, 2, 4, 5, 6, 6],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Combinatorics,
+      sequence: :a159988,
+      opts: [],
+      values: [1, 1, 2, 5, 3, 9, 0, 0, 0, 0],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Combinatorics,
+      sequence: :a159989,
+      opts: [],
+      values: [1, 1, 2, 5, 2, 6, 0, 9, 2, 2],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Combinatorics,
+      sequence: :a289682,
+      opts: [],
+      values: [1, 1, 2, 5, 14, 10, 4, 13, 6, 14],
       finite: false,
       first_index: 0
     },

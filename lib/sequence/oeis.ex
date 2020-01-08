@@ -7,6 +7,7 @@ defmodule Chunky.Sequence.OEIS do
 
   ## Available Modules
 
+   - `Chunky.Sequence.OEIS.Combinatorics` - Permutations, Combinations, and general Combinatorics sequences
    - `Chunky.Sequence.OEIS.Constants` - Constant values, digit expansions, and constant cycles
    - `Chunky.Sequence.OEIS.Core` - OEIS `core` Keyword sequences
    - `Chunky.Sequence.OEIS.Factors` - Factorizations and divisors

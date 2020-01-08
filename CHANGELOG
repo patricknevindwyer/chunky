@@ -53,6 +53,7 @@
 
  - Added new sequence module OEIS.Powers
  - Added new sequence module OEIS.Repr
+ - Added new sequence module OEIS.Combinatorics
  - New Sequences
   - A000051 - a(n) = 2^n + 1
   - A000351 - a(n) = 5^n
@@ -274,6 +275,13 @@
   - A255731 - Rhonda numbers in sexagesimal number system.
   - A100988 - Integers that are Rhonda numbers to more than one base.
   - A100987 - Integers that are Rhonda numbers to some base.
+  - A159981 - Catalan numbers read modulo 4 .
+  - A159984 - Catalan numbers read modulo 5 .
+  - A159986 - Catalan numbers read modulo 7 .
+  - A159987 - Catalan numbers read modulo 8.
+  - A159988 - Catalan numbers read modulo 11 .
+  - A159989 - Catalan numbers read modulo 12.
+  - A289682 - Catalan numbers read modulo 16.
 
   
 ## v0.11.2
