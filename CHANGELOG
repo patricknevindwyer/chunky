@@ -40,7 +40,11 @@
   - added `at/2` similar to Enum.at
  - new module Chunky.Timeout
   - macro: with_timeout/2   
-
+ - Math
+  - digit_sum/1
+  - contains_digit?/2
+  - remove_digits!/2
+  
 ### Sequences
 
  - Added new sequence module OEIS.Powers
