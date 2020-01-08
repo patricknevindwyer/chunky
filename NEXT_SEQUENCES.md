@@ -54,6 +54,7 @@ A069281		20-almost primes (generalization of semiprimes).
 A000788		Total number of 1's in binary expansions of 0, ..., n. 
 
 
+** Some of these are CORE sequences **
 
 A000120		1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n). 
 A023416		Number of 0's in binary expansion of n.

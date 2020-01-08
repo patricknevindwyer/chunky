@@ -52,6 +52,7 @@
   - is_rhonda_to_base_*?/1 
   - is_multiple_rhonda?/1
   - to_base/2
+  - digit_count/3
   
 ### Sequences
 
