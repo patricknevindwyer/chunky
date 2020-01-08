@@ -81,6 +81,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
    - [A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters](https://oeis.org/A002654) - `:a002654` - `create_sequence_a002654/1`
+   - [A002808 - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.](https://oeis.org/A002808) - `:a002808` - `create_sequence_a002808/1`
    - [A003094 - Number of unlabeled connected planar simple graphs with n nodes](https://oeis.org/A003094) - `:a003094` - `create_sequence_a003094/1`
    - [A003484 - Radon function, also called Hurwitz-Radon numbers](https://oeis.org/A003484) - `:a003484` - `create_sequence_a003484/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
@@ -3427,6 +3428,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a002654(idx) do
     length(Math.divisors_of_form_mx_plus_b(4, 1, idx)) -
       length(Math.divisors_of_form_mx_plus_b(4, 3, idx))
+  end
+
+  @doc """
+  OEIS Sequence `A002808` - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.
+
+  From [OEIS A002808](https://oeis.org/A002808):
+
+  > The composite numbers: numbers n of the form x*y for x > 1 and y > 1.
+  > (Formerly M3272 N1322)
+
+  **Sequence IDs**: `:a002808`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002808) |> Sequence.take!(64) 
+      [4,6,8,9,10,12,14,15,16,18,20,21,22,24,25,26,27,28,30,32,33,34,35,36,38,39,40,42,44,45,46,48,49,50,51,52,54,55,56,57,58,60,62,63,64,65,66,68,69,70,72,74,75,76,77,78,80,81,82,84,85,86,87,88]
+
+
+  """
+  @doc offset: 1,
+       sequence: "The composite numbers: numbers n of the form x*y for x > 1 and y > 1.",
+       references: [{:oeis, :a002808, "https://oeis.org/A002808"}]
+  def create_sequence_a002808(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002808/2)
+  end
+
+
+  @doc offset: 1, fill_value: 3
+  def seq_a002808(_idx, last) do
+      Math.next_number(fn v -> Math.is_prime?(v) == false end, last)
   end
 
   @doc """

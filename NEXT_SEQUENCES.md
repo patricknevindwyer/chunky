@@ -1,7 +1,7 @@
 ## Generators
 
 ```elixir 
-OEIS.Util.generate_function_sequences(~w(A159981 A159984 A159986 A159987 A159988 A159989 A289682), in_module: Chunky.Sequence.OEIS.Combinatorics)
+OEIS.Util.generate_function_sequences(~w(A255735), in_module: Chunky.Sequence.OEIS.Repr)
 OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 ```
 
@@ -11,7 +11,6 @@ OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 
 ## Core
 
-A002808		The composite numbers: numbers n of the form x*y for x > 1 and y > 1. 
 
 A001358		Semiprimes (or biprimes): products of two primes. 
 
@@ -50,32 +49,24 @@ A069281		20-almost primes (generalization of semiprimes).
 ## Repr
 
 
-A255735		Integers that are Rhonda numbers to base 18
+
+
+A000788		Total number of 1's in binary expansions of 0, ..., n. 
+
 
 
 A000120		1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n). 
 A023416		Number of 0's in binary expansion of n.
-
-A000788		Total number of 1's in binary expansions of 0, ..., n. 
-
 A071858		(Number of 1's in binary expansion of n) mod 3.
 A179868		(Number of 1's in binary expansion of n) mod 4.
-
-
 A010872		a(n) = n mod 3.
-
-
 A032924		Numbers whose ternary expansion contains no 0.
 A005823		Numbers whose ternary expansion contains no 1's. 
 A005836		Numbers n whose base 3 representation contains no 2. 
-
-
 A023705		Numbers with no 0's in base 4 expansion.
 A248910		Numbers with no zeros in base-6 representation.
 A255805		Numbers with no zeros in base-8 representation.
 A255808		Numbers with no zeros in base-9 representation.
-
-
 A001489		a(n) = -n.
 A007954		Product of decimal digits of n.
 A052040		Numbers n such that n^2 lacks the digit zero in its decimal expansion.
@@ -83,8 +74,6 @@ A067251		Numbers with no trailing zeros in decimal representation.
 A055640		Number of nonzero digits in decimal expansion of n.
 A055641		Number of zero digits in n.
 A055642		Number of digits in decimal expansion of n.
-
-
 A122840		a(n) is the number of 0s at the end of n when n is written in base 10.
 A160093		Number of digits in n, excluding any trailing zeros.
 A193238		Number of prime digits in decimal representation of n.

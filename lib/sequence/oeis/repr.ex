@@ -66,7 +66,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A255732 - Rhonda numbers in vigesimal number system.](https://oeis.org/A255732) - `:a255732` - `create_sequence_a255732/1`
     - [A255736 - Integers that are Rhonda numbers to base 30.](https://oeis.org/A255736) - `:a255736` - `create_sequence_a255736/1`
     - [A255731 - Rhonda numbers in sexagesimal number system.](https://oeis.org/A255731) - `:a255731` - `create_sequence_a255731/1`
-
+    - [A255735 - Integers that are Rhonda numbers to base 18.](https://oeis.org/A255735) - `:a255735` - `create_sequence_a255735/1`
 
    
    """ 
@@ -2375,5 +2375,44 @@ defmodule Chunky.Sequence.OEIS.Repr do
        )
    end
    
+   @doc """
+   OEIS Sequence `A255735` - Integers that are Rhonda numbers to base 18.
+
+   From [OEIS A255735](https://oeis.org/A255735):
+
+   > Integers that are Rhonda numbers to base 18.
+   > (Formerly )
+
+   **Sequence IDs**: `:a255735`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a255735) |> Sequence.take!(19)
+       [1470,3000,8918,17025,19402,20650,21120,22156,26522,36549,38354,43281,46035,48768,54229,54528,56584,58216,58224]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to base 18.",
+        references: [{:oeis, :a255735, "https://oeis.org/A255735"}]
+   def create_sequence_a255735(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255735/2)
+   end
+
+
+   @doc offset: 1, fill_value: 1400
+   def seq_a255735(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.is_rhonda_to_base?(v, 18)
+           end, 
+           last
+       )
+    
+   end
    
 end

@@ -51,6 +51,7 @@
   - get_rhonda_to/2
   - is_rhonda_to_base_*?/1 
   - is_multiple_rhonda?/1
+  - to_base/2
   
 ### Sequences
 
@@ -285,6 +286,8 @@
   - A159988 - Catalan numbers read modulo 11 .
   - A159989 - Catalan numbers read modulo 12.
   - A289682 - Catalan numbers read modulo 16.
+  - A002808 - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.
+  - A255735 - Integers that are Rhonda numbers to base 18.
 
   
 ## v0.11.2

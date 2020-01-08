@@ -48,11 +48,15 @@ defmodule Chunky.Math do
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `tau/1` - Tau function, number of divisors of `n`
 
+
   ## Digit Checks and Manipulations
   
    - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
+   - `digit_count/3` - Count digits in `n` in any base representation
    - `digit_sum/1` - Calculate the sum of the digits of `n`
    - `remove_digits!/3` - Remove one or more digits from `n`, returning a reconstituted number
+   - `to_base/2` - Convert a decimal integer to any base from 2 to 10
+
 
   ## Primes
 
@@ -2102,6 +2106,27 @@ defmodule Chunky.Math do
   def is_rhonda_to_base_60?(n), do: is_rhonda_to_base?(n, 60)
 
   @doc """
+  Convert a decimal integer into another base that can be represented by the decimal digits (i.e., any
+  base from 2 to 10).
+  
+  ## Examples
+  
+      iex> Math.to_base(123, 3)
+      11120
+  
+      iex> Math.to_base(123456789, 8)
+      726746425
+  
+      iex> Math.to_base(987654321, 2)
+      111010110111100110100010110001
+  """
+  def to_base(n, b) when is_integer(n) and is_integer(b) and b > 1 and b <= 10 do
+      n
+      |> Integer.digits(b)
+      |> Integer.undigits()
+  end
+  
+  @doc """
   Find the Catalan number of `n`, `C(n)`.
 
   In combinatorial math, the Catalan numbers occur in a wide range of counting problems.
@@ -3058,7 +3083,7 @@ defmodule Chunky.Math do
 
   The Ramanujan Tau function is defined as:
 
-      ![Ramanujan Tau](https://wikimedia.org/api/rest_v1/media/math/render/svg/846fc5e7ae7e57f2df206054ea0aba4124e6f124)
+   ![Ramanujan Tau](https://wikimedia.org/api/rest_v1/media/math/render/svg/846fc5e7ae7e57f2df206054ea0aba4124e6f124)
 
   It's use in mathematics is noted by Wikipedia as
 
@@ -4318,6 +4343,53 @@ defmodule Chunky.Math do
   """
   def digit_sum(n) when is_integer(n) do
       n |> Integer.digits() |> Enum.sum()
+  end
+  
+  @doc """
+  Count the number of specific digits in `n`.
+  
+  Using the `base` option, you can select which base the number is converted to
+  before counting digits. 
+  
+  The list of digits being counted can have one or more integers, allowing flexible
+  counting of different combinations of digits (see examples).
+  
+  ## Options
+  
+   - `base` - Integer. Default `10`. Numeric base to convert `n` to before counting.
+  
+  ## Examples
+  
+  Count how many `2`s are in a number:
+  
+      iex> Math.digit_count(200454232, [2])
+      3
+  
+  Count the even digits in a number:
+      
+      iex> Math.digit_count(123456789, [2, 4, 6, 8])
+      4
+  
+  Count the `1`s and `2`s in the ternary expansion (base 3) of a number:
+      
+      iex> Math.digit_count(245_987_340, [1, 2], base: 3)
+      12
+  
+  Count the number of `25`s in the base **60** expansion of a number:
+  
+      iex> Math.digit_count(1173840858356, [25], base: 60)
+      2
+  
+  """
+  def digit_count(n, digits, opts \\ []) when is_integer(n) and is_list(digits) do
+     
+      base = opts |> Keyword.get(:base, 10)
+      
+      abs(n)
+      |> Integer.digits(base)
+      |> Enum.filter(fn d -> Enum.member?(digits, d) end)
+      |> length()
+      
   end
   
   @doc """
