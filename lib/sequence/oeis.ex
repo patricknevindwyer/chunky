@@ -17,6 +17,12 @@ defmodule Chunky.Sequence.OEIS do
    - `Chunky.Sequence.OEIS.Repr` - Number representations, digit contents, and digit patterns
    - `Chunky.Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
 
+  ## Utility Functions
+  
+   - `coverage/0` - Show report of OEIS coverage of select sequence groups, and overall tallying of supported sequences
+   - `coverage/1` - Calculate coverage of sequences from a Sequence of OEIS identifiers
+   - `find_sequence/1` - Find an OEIS sequence by identifier
+   - `find_sequence!/1` - Find an OEIS sequence by identifier, or raise an error
 
   ## Coverage
   
@@ -516,7 +522,77 @@ defmodule Chunky.Sequence.OEIS do
       missing_sequences: missing_seqs
     }
   end
+  
+  @doc """
+  Find a sequence definition by sequence identifier.
+  
+  ## Example
+  
+      iex> Sequence.OEIS.find_sequence("A159986")
+      {:ok, %{description: "Catalan numbers read modulo 7 .", module: Chunky.Sequence.OEIS.Combinatorics, name: "A159986", sequence: :a159986}}
+  
+      iex> Sequence.OEIS.find_sequence("A999999999")
+      {:error, :not_found}
+  
+      iex> Sequence.OEIS.find_sequence(:a010853)
+      {:ok, %{description: "Constant sequence: a(n) = 14.", module: Chunky.Sequence.OEIS.Constants, name: "A010853", sequence: :a010853}}
+  """
+  def find_sequence(name) when is_binary(name) do
+      
+      case Sequence.available()
+      |> Enum.filter(fn %{name: seq_name} -> String.downcase(name) == String.downcase(seq_name) end)
+      do
+         [] -> {:error, :not_found} 
+         [seq] -> {:ok, seq}
+         _seqs -> {:error, :duplicate_sequences}
+      end
+      
+  end
+  
+  def find_sequence(name) when is_atom(name), do: find_sequence(name |> Atom.to_string())
 
+  @doc """
+  Like `find_sequence/1`, but directly return the sequence bundle, or raise an error.
+  
+  The sequece bundle can be handed directly to `Chunky.Sequence.create/1`.
+  
+  ## Example
+  
+      iex> seq = Sequence.OEIS.find_sequence!(:a159986) |> Sequence.create() |> Sequence.start()
+      iex> seq.value
+      1
+  """
+  def find_sequence!(name) when is_binary(name) do
+      case find_sequence(name) do
+         {:ok, seq} -> seq
+         _ -> raise ArgumentError, message: "no such sequence" 
+      end
+  end
+  
+  def find_sequence!(name) when is_atom(name), do: find_sequence!(name |> Atom.to_string())
+  
+  @doc """
+  Determine if a specific OEIS sequence is available.
+  
+  ## Examples
+  
+      iex> Sequence.OEIS.has_sequence?(:a159986)
+      true
+  
+      iex> Sequence.OEIS.has_sequence?("A008598")
+      true
+  
+      iex> Sequence.OEIS.has_sequence?("A99999999")
+      false
+  """
+  def has_sequence?(name) when is_binary(name) do
+      case find_sequence(name) do
+          {:ok, _} -> true
+          _ -> false
+      end
+  end
+  def has_sequence?(name) when is_atom(name), do: has_sequence?(name |> Atom.to_string())
+  
   @doc """
   Find the next 100 missing sequences from a coverage set
   """

@@ -38,6 +38,9 @@
   - added `start/1` function as alias to `next!/1`
   - added `restart/1` function
   - added `at/2` similar to Enum.at
+  - added `create/1` to initialize a new sequence from a description bundle.
+ - Sequence.OEIS
+  - added `find_sequence/1`, `find_sequence!/1`, and `has_sequence?/1`
  - new module Chunky.Timeout
   - macro: with_timeout/2   
  - Math

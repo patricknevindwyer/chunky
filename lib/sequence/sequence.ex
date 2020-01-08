@@ -932,6 +932,24 @@ defmodule Chunky.Sequence do
         :no_such_module
     end
   end
+  
+  @doc """
+  Instantiate an instance of a sequence from a sequence bundle map.
+
+  The sequence bundle map is the set of data returned for each sequence by functions 
+  like `Sequence.available/0` or `Sequence.OEIS.find_sequence!/1`. Actual instance
+  initialization and creation is handed off to `Sequence.create/3`.
+  
+  ## Examples
+  
+      iex> seq = Sequence.OEIS.find_sequence!(:a000012) |> Sequence.create()
+      iex> seq |> Sequence.readable_name()
+      "The simplest sequence of positive numbers: the all 1's sequence."
+   
+  """
+  def create(%{module: mod, sequence: seq}) do
+     create(mod, seq) 
+  end
 
   @doc """
   Check if a sequence struct is an instance of a specific sequence.
