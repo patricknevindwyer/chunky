@@ -1839,7 +1839,7 @@ defmodule Chunky.Math do
   > An integer n is a Rhonda number to base b if the product of its digits in base b equals b*Sum of prime factors of n (including multiplicity).
   
   Numbers can be Rhonda to more than one base, see [OEIS A100988](http://oeis.org/A100988). By default the `get_rhonda_to/1`
-  function evaluates all bases from 4 to 200. You can specify an alternate set of bases with
+  function evaluates all bases from 4 to 500. You can specify an alternate set of bases with
   the `:bases` option.
   
   ## Options
@@ -1858,7 +1858,7 @@ defmodule Chunky.Math do
       [106, 108]
   """
   def get_rhonda_to(n, opts \\ []) when is_integer(n) do
-      bases = opts |> Keyword.get(:bases, 4..200 |> Enum.to_list())
+      bases = opts |> Keyword.get(:bases, 4..1000 |> Enum.to_list())
       
       # pre-calculate the base prime factor
       f_base = (prime_factors(n) -- [1]

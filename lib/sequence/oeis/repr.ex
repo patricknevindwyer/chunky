@@ -51,8 +51,21 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A052414 - Numbers without 6 as a digit.](https://oeis.org/A052414) - `:a052414` - `create_sequence_a052414/1`
     - [A052419 - Numbers without 7 as a digit.](https://oeis.org/A052419) - `:a052419` - `create_sequence_a052419/1`
     - [A052421 - Numbers without 8 as a digit.](https://oeis.org/A052421) - `:a052421` - `create_sequence_a052421/1`
+    - [A099542 - Rhonda numbers to base 10.](https://oeis.org/A099542) - `:a099542` - `create_sequence_a099542/1`
+    - [A100968 - Integers n that are Rhonda numbers to base 4.](https://oeis.org/A100968) - `:a100968` - `create_sequence_a100968/1`
+    - [A100969 - Integers n that are Rhonda numbers to base 6.](https://oeis.org/A100969) - `:a100969` - `create_sequence_a100969/1`
+    - [A100970 - Integers n that are Rhonda numbers to base 8.](https://oeis.org/A100970) - `:a100970` - `create_sequence_a100970/1`
+    - [A100973 - Integers that are Rhonda numbers to base 9.](https://oeis.org/A100973) - `:a100973` - `create_sequence_a100973/1`
+    - [A100971 - Integers n that are Rhonda numbers to base 12.](https://oeis.org/A100971) - `:a100971` - `create_sequence_a100971/1`
+    - [A100972 - Integers that are Rhonda numbers to base 14.](https://oeis.org/A100972) - `:a100972` - `create_sequence_a100972/1`
+    - [A100974 - Integers that are Rhonda numbers to base 15.](https://oeis.org/A100974) - `:a100974` - `create_sequence_a100974/1`
+    - [A100975 - Integers that are Rhonda numbers to base 16.](https://oeis.org/A100975) - `:a100975` - `create_sequence_a100975/1`
+    - [A100987 - Integers that are Rhonda numbers to some base.](https://oeis.org/A100987) - `:a100987` - `create_sequence_a100987/1`
+    - [A100988 - Integers that are Rhonda numbers to more than one base.](https://oeis.org/A100988) - `:a100988` - `create_sequence_a100988/1`
     - [A121022 - Even numbers containing a 2 in their decimal representation.](https://oeis.org/A121022) - `:a121022` - `create_sequence_a121022/1`
-
+    - [A255732 - Rhonda numbers in vigesimal number system.](https://oeis.org/A255732) - `:a255732` - `create_sequence_a255732/1`
+    - [A255736 - Integers that are Rhonda numbers to base 30.](https://oeis.org/A255736) - `:a255736` - `create_sequence_a255736/1`
+    - [A255731 - Rhonda numbers in sexagesimal number system.](https://oeis.org/A255731) - `:a255731` - `create_sequence_a255731/1`
 
 
    
@@ -1880,5 +1893,487 @@ defmodule Chunky.Sequence.OEIS.Repr do
    def seq_a121022(_idx, last) do
        Math.next_number(fn v -> Math.contains_number?(v, 2) end, last, 2) 
    end
+   
+   @doc """
+   OEIS Sequence `A100968` - Integers n that are Rhonda numbers to base 4.
+
+   From [OEIS A100968](https://oeis.org/A100968):
+
+   > Integers n that are Rhonda numbers to base 4.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100968`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100968) |> Sequence.take!(7)
+       [10206,11935,12150,16031,45030,94185,113022]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers n that are Rhonda numbers to base 4.",
+        references: [{:oeis, :a100968, "https://oeis.org/A100968"}]
+   def create_sequence_a100968(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100968/2)
+   end
+
+
+   @doc offset: 1, fill_value: 10000
+   def seq_a100968(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_4?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100969` - Integers n that are Rhonda numbers to base 6.
+
+   From [OEIS A100969](https://oeis.org/A100969):
+
+   > Integers n that are Rhonda numbers to base 6.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100969`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100969) |> Sequence.take!(13)
+       [855,1029,3813,5577,7040,7304,15104,19136,35350,36992,41031,42009,60368]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers n that are Rhonda numbers to base 6.",
+        references: [{:oeis, :a100969, "https://oeis.org/A100969"}]
+   def create_sequence_a100969(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100969/2)
+   end
+
+
+   @doc offset: 1, fill_value: 800
+   def seq_a100969(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_6?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100970` - Integers n that are Rhonda numbers to base 8.
+
+   From [OEIS A100970](https://oeis.org/A100970):
+
+   > Integers n that are Rhonda numbers to base 8.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100970`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100970) |> Sequence.take!(20)
+       [1836,6318,6622,10530,14500,14739,17655,18550,25398,25956,30562,39215,39325,50875,51429,52887,55611,56420,58548,59731]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers n that are Rhonda numbers to base 8.",
+        references: [{:oeis, :a100970, "https://oeis.org/A100970"}]
+   def create_sequence_a100970(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100970/2)
+   end
+
+
+   @doc offset: 1, fill_value: 1800
+   def seq_a100970(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_8?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100973` - Integers that are Rhonda numbers to base 9.
+
+   From [OEIS A100973](https://oeis.org/A100973):
+
+   > Integers that are Rhonda numbers to base 9.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100973`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100973) |> Sequence.take!(12)
+       [15540,21054,25331,44360,44660,44733,47652,50560,54944,76857,77142,83334]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to base 9.",
+        references: [{:oeis, :a100973, "https://oeis.org/A100973"}]
+   def create_sequence_a100973(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100973/2) 
+   end
+
+
+   @doc offset: 1, fill_value: 15500
+   def seq_a100973(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_9?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A099542` - Rhonda numbers to base 10.
+
+   From [OEIS A099542](https://oeis.org/A099542):
+
+   > Rhonda numbers to base 10.
+   > (Formerly )
+
+   **Sequence IDs**: `:a099542`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a099542) |> Sequence.take!(28)
+       [1568,2835,4752,5265,5439,5664,5824,5832,8526,12985,15625,15698,19435,25284,25662,33475,34935,35581,45951,47265,47594,52374,53176,53742,54479,55272,56356,56718]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Rhonda numbers to base 10.",
+        references: [{:oeis, :a099542, "https://oeis.org/A099542"}]
+   def create_sequence_a099542(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a099542/2)
+   end
+
+
+   @doc offset: 1, fill_value: 1500
+   def seq_a099542(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_10?/1, last)    
+   end
+
+   @doc """
+   OEIS Sequence `A100971` - Integers n that are Rhonda numbers to base 12.
+
+   From [OEIS A100971](https://oeis.org/A100971):
+
+   > Integers n that are Rhonda numbers to base 12.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100971`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100971) |> Sequence.take!(35)
+       [560,800,3993,4425,4602,4888,7315,8296,9315,11849,12028,13034,14828,15052,16264,18511,18906,25619,25875,27176,32742,37264,37523,46035,50765,52338,58261,58504,59166,62002,66176,66752,66928,67195,68502]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers n that are Rhonda numbers to base 12.",
+        references: [{:oeis, :a100971, "https://oeis.org/A100971"}]
+   def create_sequence_a100971(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100971/2)
+   end
+
+
+   @doc offset: 1, fill_value: 500
+   def seq_a100971(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_12?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100972` - Integers that are Rhonda numbers to base 14.
+
+   From [OEIS A100972](https://oeis.org/A100972):
+
+   > Integers that are Rhonda numbers to base 14.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100972`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100972) |> Sequence.take!(14)
+       [11475,18655,20565,29631,31725,45387,58404,58667,59950,63945,67525,68904,91245,99603]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to base 14.",
+        references: [{:oeis, :a100972, "https://oeis.org/A100972"}]
+   def create_sequence_a100972(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100972/2)
+   end
+
+
+   @doc offset: 1, fill_value: 11400
+   def seq_a100972(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_14?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100974` - Integers that are Rhonda numbers to base 15.
+
+   From [OEIS A100974](https://oeis.org/A100974):
+
+   > Integers that are Rhonda numbers to base 15.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100974`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100974) |> Sequence.take!(22)
+       [2392,2472,11468,15873,17424,18126,19152,20079,24388,30758,31150,33004,33550,37925,39483,42550,44714,58870,59605,66950,70182,71485]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to base 15.",
+        references: [{:oeis, :a100974, "https://oeis.org/A100974"}]
+   def create_sequence_a100974(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100974/2)
+   end
+
+
+   @doc offset: 1, fill_value: 2300
+   def seq_a100974(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_15?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100975` - Integers that are Rhonda numbers to base 16.
+
+   From [OEIS A100975](https://oeis.org/A100975):
+
+   > Integers that are Rhonda numbers to base 16.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100975`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100975) |> Sequence.take!(22)
+       [1000,1134,6776,15912,19624,20043,20355,23946,26296,29070,31906,32292,34236,34521,36465,39066,50055,50986,52341,54340,58088,59541]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to base 16.",
+        references: [{:oeis, :a100975, "https://oeis.org/A100975"}]
+   def create_sequence_a100975(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100975/2)
+   end
+
+
+   @doc offset: 1, fill_value: 900
+   def seq_a100975(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_16?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A255732` - Rhonda numbers in vigesimal number system.
+
+   From [OEIS A255732](https://oeis.org/A255732):
+
+   > Rhonda numbers in vigesimal number system.
+   > (Formerly )
+
+   **Sequence IDs**: `:a255732`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a255732) |> Sequence.take!(14)
+       [1815,11050,15295,21165,22165,30702,34510,34645,42292,44165,52059,53416,65945,78430]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Rhonda numbers in vigesimal number system.",
+        references: [{:oeis, :a255732, "https://oeis.org/A255732"}]
+   def create_sequence_a255732(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255732/2)
+   end
+
+
+   @doc offset: 1, fill_value: 1800
+   def seq_a255732(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_20?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A255736` - Integers that are Rhonda numbers to base 30.
+
+   From [OEIS A255736](https://oeis.org/A255736):
+
+   > Integers that are Rhonda numbers to base 30.
+   > (Formerly )
+
+   **Sequence IDs**: `:a255736`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a255736) |> Sequence.take!(27)
+       [3024,3168,5115,5346,5950,6762,7750,7956,8470,9476,9576,9849,10360,11495,13035,13356,16335,22610,22784,23864,37515,38025,40704,40986,49887,52925,59800]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to base 30.",
+        references: [{:oeis, :a255736, "https://oeis.org/A255736"}]
+   def create_sequence_a255736(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255736/2)
+   end
+
+
+   @doc offset: 1, fill_value: 3000
+   def seq_a255736(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_30?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A255731` - Rhonda numbers in sexagesimal number system.
+
+   From [OEIS A255731](https://oeis.org/A255731):
+
+   > Rhonda numbers in sexagesimal number system.
+   > (Formerly )
+
+   **Sequence IDs**: `:a255731`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a255731) |> Sequence.take!(17)
+       [3348,3510,6750,17430,18750,18876,18944,19475,20564,21312,26550,28280,37230,38396,43940,48042,77770]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Rhonda numbers in sexagesimal number system.",
+        references: [{:oeis, :a255731, "https://oeis.org/A255731"}]
+   def create_sequence_a255731(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255731/2)
+   end
+
+
+   @doc offset: 1, fill_value: 3300
+   def seq_a255731(_idx, last) do
+       Math.next_number(&Math.is_rhonda_to_base_60?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100988` - Integers that are Rhonda numbers to more than one base.
+
+   From [OEIS A100988](https://oeis.org/A100988):
+
+   > Integers that are Rhonda numbers to more than one base.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100988`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100988) |> Sequence.take!(39)
+       [1000,2940,4200,4212,4725,5670,5824,5832,6776,6864,7040,7140,8296,9476,9633,10200,11016,11050,11160,11495,11935,12393,12474,13068,13260,13671,14014,14322,14406,15680,15750,15912,16240,16821,17056,17820,18270,18655,18700]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to more than one base.",
+        references: [{:oeis, :a100988, "https://oeis.org/A100988"}]
+   def create_sequence_a100988(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100988/2)
+   end
+
+
+   @doc offset: 1, fill_value: 900
+   def seq_a100988(_idx, last) do
+       Math.next_number(&Math.is_multiple_rhonda?/1, last)
+   end
+
+   @doc """
+   OEIS Sequence `A100987` - Integers that are Rhonda numbers to some base.
+
+   From [OEIS A100987](https://oeis.org/A100987):
+
+   > Integers that are Rhonda numbers to some base.
+   > (Formerly )
+
+   **Sequence IDs**: `:a100987`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a100987) |> Sequence.take!(44)
+       [560,756,800,855,1000,1029,1134,1470,1568,1632,1750,1815,1836,1944,1995,2080,2100,2392,2472,2662,2695,2709,2835,2940,3000,3024,3060,3087,3094,3168,3240,3264,3348,3456,3510,3600,3672,3675,3744,3750,3813,3888,3952,3976]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Integers that are Rhonda numbers to some base.",
+        references: [{:oeis, :a100987, "https://oeis.org/A100987"}]
+   def create_sequence_a100987(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100987/2)
+   end
+
+
+   @doc offset: 1, fill_value: 500
+   def seq_a100987(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.get_rhonda_to(v) |> length() > 0
+           end, 
+           last
+       )
+   end
+   
    
 end
