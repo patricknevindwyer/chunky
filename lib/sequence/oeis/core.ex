@@ -77,6 +77,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001227 - Number of odd divisors of n.](https://oeis.org/A001227) - `:a001227` - `create_sequence_a001227/1`
    - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
    - [A001477 - The nonnegative integers.](https://oeis.org/A001477) - `:a001477` - `create_sequence_a001477/1`
+   - [A001489 - a(n) = -n.](https://oeis.org/A001489) - `:a001489` - `create_sequence_a001489/1`
    - [A001511 - The ruler function: 2^a(n) divides 2n](https://oeis.org/A001511) - `:a001511` - `create_sequence_a001511/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
@@ -2765,6 +2766,40 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a001477(idx) do
     idx
+  end
+
+  @doc """
+  OEIS Sequence `A001489` - a(n) = -n.
+
+  From [OEIS A001489](https://oeis.org/A001489):
+
+  > a(n) = -n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a001489`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001489) |> Sequence.take!(66)
+      [0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-39,-40,-41,-42,-43,-44,-45,-46,-47,-48,-49,-50,-51,-52,-53,-54,-55,-56,-57,-58,-59,-60,-61,-62,-63,-64,-65]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = -n.",
+       references: [{:oeis, :a001489, "https://oeis.org/A001489"}]
+  def create_sequence_a001489(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001489/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001489(idx) do
+      idx * -1
   end
 
   @doc """

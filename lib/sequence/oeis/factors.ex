@@ -6,6 +6,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
    - [A000037 - Numbers that are not squares](https://oeis.org/A000037) - `:a000037` - `create_sequence_a000037/1`
    - [A000977 - Numbers that are divisible by at least three different primes](https://oeis.org/A000977) - `:a000977` - `create_sequence_a000977/1`
+   - [A001414 - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).](https://oeis.org/A001414) - `:a001414` - `create_sequence_a001414/1`
    - [A001597 - Perfect Powers](https://oeis.org/A001597) - `:a001597` - `create_sequence_a001597/1`
    - [A001694 - Powerful Numbers](https://oeis.org/A001694) - `:a001694` - `create_sequence_a001694/1`
    - [A002182 - Highly composite numbers: numbers with record value](https://oeis.org/A002182) - `:a002182` - `create_sequence_a002182/1`
@@ -122,6 +123,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A209061 - Exponentially squarefree numbers](https://oeis.org/A209061) - `:a209061` - `create_sequence_a209061/1`
    - [A211337 - Numbers n for which the number of divisors, tau(n), is congruent to 1 modulo 3](https://oeis.org/A211337) - `:a211337` - `create_sequence_a211337/1`
    - [A211338 - Numbers n for which the number of divisors, tau(n), is congruent to 2 modulo 3](https://oeis.org/A211338) - `:a211338` - `create_sequence_a211338/1`
+
+
 
 
 
@@ -272,6 +275,41 @@ defmodule Chunky.Sequence.OEIS.Factors do
       end,
       last
     )
+  end
+  
+  @doc """
+  OEIS Sequence `A001414` - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).
+
+  From [OEIS A001414](https://oeis.org/A001414):
+
+  > Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).
+  > (Formerly M0461 N0168)
+
+  **Sequence IDs**: `:a001414`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a001414) |> Sequence.take!(78)
+      [0,2,3,4,5,5,7,6,6,7,11,7,13,9,8,8,17,8,19,9,10,13,23,9,10,15,9,11,29,10,31,10,14,19,12,10,37,21,16,11,41,12,43,15,11,25,47,11,14,12,20,17,53,11,16,13,22,31,59,12,61,33,13,12,18,16,67,21,26,14,71,12,73,39,13,23,18,18]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).",
+       references: [{:oeis, :a001414, "https://oeis.org/A001414"}]
+  def create_sequence_a001414(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001414/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a001414(idx) do
+      Math.prime_factors(idx) -- [1]
+      |> Enum.sum()
   end
 
   @doc """

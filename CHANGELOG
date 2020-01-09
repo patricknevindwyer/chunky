@@ -311,6 +311,9 @@
   - A248910 - Numbers with no zeros in base-6 representation.
   - A255805 - Numbers with no zeros in base-8 representation.
   - A255808 - Numbers with no zeros in base-9 representation.
+  - A001414 - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).
+  - A001489 - a(n) = -n.
+
 
 
   
