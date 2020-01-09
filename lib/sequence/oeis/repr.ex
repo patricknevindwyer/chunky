@@ -5,6 +5,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    
    ## Available Sequences
 
+    - [A000788 - Total number of 1's in binary expansions of 0, ..., n.](https://oeis.org/A000788) - `:a000788` - `create_sequence_a000788/1`
     - [A004176 - Omit 1's from n.](https://oeis.org/A004176) - `:a004176` - `create_sequence_a004176/1`
     - [A004177 - Omit 2's from n.](https://oeis.org/A004177) - `:a004177` - `create_sequence_a004177/1`
     - [A004178 - Omit 3's from n.](https://oeis.org/A004178) - `:a004178` - `create_sequence_a004178/1`
@@ -24,6 +25,8 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A004726 - Delete all 7's from the sequence of nonnegative integers.](https://oeis.org/A004726) - `:a004726` - `create_sequence_a004726/1`
     - [A004727 - Delete all 8's from the sequence of nonnegative integers.](https://oeis.org/A004727) - `:a004727` - `create_sequence_a004727/1`
     - [A004728 - Delete all 9's from the sequence of nonnegative integers.](https://oeis.org/A004728) - `:a004728` - `create_sequence_a004728/1`
+    - [A005823 - Numbers whose ternary expansion contains no 1's.](https://oeis.org/A005823) - `:a005823` - `create_sequence_a005823/1`
+    - [A005836 - Numbers n whose base 3 representation contains no 2.](https://oeis.org/A005836) - `:a005836` - `create_sequence_a005836/1`
     - [A007088 - The binary numbers (or binary words, or binary vectors): numbers written in base 2.](https://oeis.org/A007088) - `:a007088` - `create_sequence_a007088/1`
     - [A007089 - Numbers in base 3.](https://oeis.org/A007089) - `:a007089` - `create_sequence_a007089/1`
     - [A007090 - Numbers in base 4.](https://oeis.org/A007090) - `:a007090` - `create_sequence_a007090/1`
@@ -32,6 +35,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A007093 - Numbers in base 7.](https://oeis.org/A007093) - `:a007093` - `create_sequence_a007093/1`
     - [A007094 - Numbers in base 8.](https://oeis.org/A007094) - `:a007094` - `create_sequence_a007094/1`
     - [A007095 - Numbers in base 9.](https://oeis.org/A007095) - `:a007095` - `create_sequence_a007095/1`
+    - [A007954 - Product of decimal digits of n.](https://oeis.org/A007954) - `:a007954` - `create_sequence_a007954/1`
     - [A011531 - Numbers that contain a digit 1 in their decimal representation.](https://oeis.org/A011531) - `:a011531` - `create_sequence_a011531/1`
     - [A011532 - Numbers that contain a 2.](https://oeis.org/A011532) - `:a011532` - `create_sequence_a011532/1`
     - [A011533 - Numbers that contain a 3.](https://oeis.org/A011533) - `:a011533` - `create_sequence_a011533/1`
@@ -52,6 +56,16 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A052419 - Numbers without 7 as a digit.](https://oeis.org/A052419) - `:a052419` - `create_sequence_a052419/1`
     - [A052421 - Numbers without 8 as a digit.](https://oeis.org/A052421) - `:a052421` - `create_sequence_a052421/1`
     - [A099542 - Rhonda numbers to base 10.](https://oeis.org/A099542) - `:a099542` - `create_sequence_a099542/1`
+    - [A010872 - a(n) = n mod 3.](https://oeis.org/A010872) - `:a010872` - `create_sequence_a010872/1`
+    - [A023416 - Number of 0's in binary expansion of n.](https://oeis.org/A023416) - `:a023416` - `create_sequence_a023416/1`
+    - [A023705 - Numbers with no 0's in base 4 expansion.](https://oeis.org/A023705) - `:a023705` - `create_sequence_a023705/1`
+    - [A032924 - Numbers whose ternary expansion contains no 0.](https://oeis.org/A032924) - `:a032924` - `create_sequence_a032924/1`
+    - [A052040 - Numbers n such that n^2 lacks the digit zero in its decimal expansion.](https://oeis.org/A052040) - `:a052040` - `create_sequence_a052040/1`
+    - [A055640 - Number of nonzero digits in decimal expansion of n.](https://oeis.org/A055640) - `:a055640` - `create_sequence_a055640/1`
+    - [A055641 - Number of zero digits in n.](https://oeis.org/A055641) - `:a055641` - `create_sequence_a055641/1`
+    - [A055642 - Number of digits in decimal expansion of n.](https://oeis.org/A055642) - `:a055642` - `create_sequence_a055642/1`
+    - [A067251 - Numbers with no trailing zeros in decimal representation.](https://oeis.org/A067251) - `:a067251` - `create_sequence_a067251/1`
+    - [A071858 - (Number of 1's in binary expansion of n) mod 3.](https://oeis.org/A071858) - `:a071858` - `create_sequence_a071858/1`
     - [A100968 - Integers n that are Rhonda numbers to base 4.](https://oeis.org/A100968) - `:a100968` - `create_sequence_a100968/1`
     - [A100969 - Integers n that are Rhonda numbers to base 6.](https://oeis.org/A100969) - `:a100969` - `create_sequence_a100969/1`
     - [A100970 - Integers n that are Rhonda numbers to base 8.](https://oeis.org/A100970) - `:a100970` - `create_sequence_a100970/1`
@@ -63,11 +77,20 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A100987 - Integers that are Rhonda numbers to some base.](https://oeis.org/A100987) - `:a100987` - `create_sequence_a100987/1`
     - [A100988 - Integers that are Rhonda numbers to more than one base.](https://oeis.org/A100988) - `:a100988` - `create_sequence_a100988/1`
     - [A121022 - Even numbers containing a 2 in their decimal representation.](https://oeis.org/A121022) - `:a121022` - `create_sequence_a121022/1`
+    - [A122840 - a(n) is the number of 0s at the end of n when n is written in base 10.](https://oeis.org/A122840) - `:a122840` - `create_sequence_a122840/1`
+    - [A160093 - Number of digits in n, excluding any trailing zeros.](https://oeis.org/A160093) - `:a160093` - `create_sequence_a160093/1`
+    - [A179868 - (Number of 1's in binary expansion of n) mod 4.](https://oeis.org/A179868) - `:a179868` - `create_sequence_a179868/1`
+    - [A193238 - Number of prime digits in decimal representation of n.](https://oeis.org/A193238) - `:a193238` - `create_sequence_a193238/1`
+    - [A196563 - Number of even digits in decimal representation of n.](https://oeis.org/A196563) - `:a196563` - `create_sequence_a196563/1`
+    - [A248910 - Numbers with no zeros in base-6 representation.](https://oeis.org/A248910) - `:a248910` - `create_sequence_a248910/1`
     - [A255732 - Rhonda numbers in vigesimal number system.](https://oeis.org/A255732) - `:a255732` - `create_sequence_a255732/1`
     - [A255736 - Integers that are Rhonda numbers to base 30.](https://oeis.org/A255736) - `:a255736` - `create_sequence_a255736/1`
     - [A255731 - Rhonda numbers in sexagesimal number system.](https://oeis.org/A255731) - `:a255731` - `create_sequence_a255731/1`
-    - [A255735 - Integers that are Rhonda numbers to base 18.](https://oeis.org/A255735) - `:a255735` - `create_sequence_a255735/1`
+    - [A255735 - Integers that are Rhonda numbers to base 18.](https://oeis.org/A255735) - `:a255735` - `create_sequence_a255735/1`   
+    - [A255805 - Numbers with no zeros in base-8 representation.](https://oeis.org/A255805) - `:a255805` - `create_sequence_a255805/1`
+    - [A255808 - Numbers with no zeros in base-9 representation.](https://oeis.org/A255808) - `:a255808` - `create_sequence_a255808/1`
 
+   
    
    """ 
    
@@ -2410,6 +2433,818 @@ defmodule Chunky.Sequence.OEIS.Repr do
            fn v -> 
                Math.is_rhonda_to_base?(v, 18)
            end, 
+           last
+       )
+    
+   end
+
+
+   @doc """
+   OEIS Sequence `A000788` - Total number of 1's in binary expansions of 0, ..., n.
+
+   From [OEIS A000788](https://oeis.org/A000788):
+
+   > Total number of 1's in binary expansions of 0, ..., n.
+   > (Formerly M0964 N0360)
+
+   **Sequence IDs**: `:a000788`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a000788) |> Sequence.take!(63)
+       [0,1,2,4,5,7,9,12,13,15,17,20,22,25,28,32,33,35,37,40,42,45,48,52,54,57,60,64,67,71,75,80,81,83,85,88,90,93,96,100,102,105,108,112,115,119,123,128,130,133,136,140,143,147,151,156,159,163,167,172,176,181,186]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Total number of 1's in binary expansions of 0, ..., n.",
+        references: [{:oeis, :a000788, "https://oeis.org/A000788"}]
+   def create_sequence_a000788(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a000788/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a000788(idx) do
+    
+       0..idx
+       |> Enum.map(fn d -> Math.digit_count(d, [1], base: 2) end)
+       |> Enum.sum()
+       
+   end
+
+   @doc """
+   OEIS Sequence `A005823` - Numbers whose ternary expansion contains no 1's.
+
+   From [OEIS A005823](https://oeis.org/A005823):
+
+   > Numbers whose ternary expansion contains no 1's.
+   > (Formerly M1567)
+
+   **Sequence IDs**: `:a005823`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a005823) |> Sequence.take!(56)
+       [0,2,6,8,18,20,24,26,54,56,60,62,72,74,78,80,162,164,168,170,180,182,186,188,216,218,222,224,234,236,240,242,486,488,492,494,504,506,510,512,540,542,546,548,558,560,564,566,648,650,654,656,666,668,672,674]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers whose ternary expansion contains no 1's.",
+        references: [{:oeis, :a005823, "https://oeis.org/A005823"}]
+   def create_sequence_a005823(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005823/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a005823(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 3) == 0
+           end,
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A005836` - Numbers n whose base 3 representation contains no 2.
+
+   From [OEIS A005836](https://oeis.org/A005836):
+
+   > Numbers n whose base 3 representation contains no 2.
+   > (Formerly M2353)
+
+   **Sequence IDs**: `:a005836`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a005836) |> Sequence.take!(58)
+       [0,1,3,4,9,10,12,13,27,28,30,31,36,37,39,40,81,82,84,85,90,91,93,94,108,109,111,112,117,118,120,121,243,244,246,247,252,253,255,256,270,271,273,274,279,280,282,283,324,325,327,328,333,334,336,337,351,352]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers n whose base 3 representation contains no 2.",
+        references: [{:oeis, :a005836, "https://oeis.org/A005836"}]
+   def create_sequence_a005836(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005836/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a005836(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 3) == 0
+           end,
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A007954` - Product of decimal digits of n.
+
+   From [OEIS A007954](https://oeis.org/A007954):
+
+   > Product of decimal digits of n.
+   > (Formerly )
+
+   **Sequence IDs**: `:a007954`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a007954) |> Sequence.take!(108)
+       [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,2,4,6,8,10,12,14,16,18,0,3,6,9,12,15,18,21,24,27,0,4,8,12,16,20,24,28,32,36,0,5,10,15,20,25,30,35,40,45,0,6,12,18,24,30,36,42,48,54,0,7,14,21,28,35,42,49,56,63,0,8,16,24,32,40,48,56,64,72,0,9,18,27,36,45,54,63,72,81,0,0,0,0,0,0,0,0]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Product of decimal digits of n.",
+        references: [{:oeis, :a007954, "https://oeis.org/A007954"}]
+   def create_sequence_a007954(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007954/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a007954(idx) do
+       idx
+       |> Integer.digits()
+       |> Enum.reduce(1, fn x, acc -> x * acc end)
+   end
+
+   @doc """
+   OEIS Sequence `A010872` - a(n) = n mod 3.
+
+   From [OEIS A010872](https://oeis.org/A010872):
+
+   > a(n) = n mod 3.
+   > (Formerly )
+
+   **Sequence IDs**: `:a010872`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a010872) |> Sequence.take!(105)
+       [0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2]
+
+
+   """
+   @doc offset: 0,
+        sequence: "a(n) = n mod 3.",
+        references: [{:oeis, :a010872, "https://oeis.org/A010872"}]
+   def create_sequence_a010872(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010872/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a010872(idx) do
+       rem(idx, 3)
+   end
+
+   @doc """
+   OEIS Sequence `A023416` - Number of 0's in binary expansion of n.
+
+   From [OEIS A023416](https://oeis.org/A023416):
+
+   > Number of 0's in binary expansion of n.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023416` 
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023416) |> Sequence.take!(105)
+       [1,0,1,0,2,1,1,0,3,2,2,1,2,1,1,0,4,3,3,2,3,2,2,1,3,2,2,1,2,1,1,0,5,4,4,3,4,3,3,2,4,3,3,2,3,2,2,1,4,3,3,2,3,2,2,1,3,2,2,1,2,1,1,0,6,5,5,4,5,4,4,3,5,4,4,3,4,3,3,2,5,4,4,3,4,3,3,2,4,3,3,2,3,2,2,1,5,4,4,3,4,3,3,2,4]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Number of 0's in binary expansion of n.",
+        references: [{:oeis, :a023416, "https://oeis.org/A023416"}]
+   def create_sequence_a023416(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023416/1)
+   end 
+
+
+   @doc offset: 0
+   def seq_a023416(idx) do
+       Math.digit_count(idx, [0], base: 2)
+   end
+
+   @doc """
+   OEIS Sequence `A023705` - Numbers with no 0's in base 4 expansion.
+
+   From [OEIS A023705](https://oeis.org/A023705):
+
+   > Numbers with no 0's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023705`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023705) |> Sequence.take!(63)
+       [1,2,3,5,6,7,9,10,11,13,14,15,21,22,23,25,26,27,29,30,31,37,38,39,41,42,43,45,46,47,53,54,55,57,58,59,61,62,63,85,86,87,89,90,91,93,94,95,101,102,103,105,106,107,109,110,111,117,118,119,121,122,123]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no 0's in base 4 expansion.",
+        references: [{:oeis, :a023705, "https://oeis.org/A023705"}]
+   def create_sequence_a023705(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023705/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023705(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 4) == 0
+           end,
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A032924` - Numbers whose ternary expansion contains no 0.
+
+   From [OEIS A032924](https://oeis.org/A032924):
+
+   > Numbers whose ternary expansion contains no 0.
+   > (Formerly )
+
+   **Sequence IDs**: `:a032924`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a032924) |> Sequence.take!(60)
+       [1,2,4,5,7,8,13,14,16,17,22,23,25,26,40,41,43,44,49,50,52,53,67,68,70,71,76,77,79,80,121,122,124,125,130,131,133,134,148,149,151,152,157,158,160,161,202,203,205,206,211,212,214,215,229,230,232,233,238,239]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers whose ternary expansion contains no 0.",
+        references: [{:oeis, :a032924, "https://oeis.org/A032924"}]
+   def create_sequence_a032924(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a032924/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a032924(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 3) == 0
+           end,
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A052040` - Numbers n such that n^2 lacks the digit zero in its decimal expansion.
+
+   From [OEIS A052040](https://oeis.org/A052040):
+
+   > Numbers n such that n^2 lacks the digit zero in its decimal expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a052040`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a052040) |> Sequence.take!(72)
+       [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29,31,34,35,36,37,38,39,41,42,43,44,46,54,56,57,58,59,61,62,63,65,66,67,68,69,72,73,74,75,76,77,79,81,82,83,85,86,87,88,89,91,92,93,94,96]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers n such that n^2 lacks the digit zero in its decimal expansion.",
+        references: [{:oeis, :a052040, "https://oeis.org/A052040"}]
+   def create_sequence_a052040(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052040/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a052040(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v * v, [0]) == 0
+           end,
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A055640` - Number of nonzero digits in decimal expansion of n.
+
+   From [OEIS A055640](https://oeis.org/A055640):
+
+   > Number of nonzero digits in decimal expansion of n.
+   > (Formerly )
+
+   **Sequence IDs**: `:a055640`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a055640) |> Sequence.take!(105)
+       [0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Number of nonzero digits in decimal expansion of n.",
+        references: [{:oeis, :a055640, "https://oeis.org/A055640"}]
+   def create_sequence_a055640(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a055640/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a055640(idx) do
+       Math.digit_count(idx, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+   end
+
+   @doc """
+   OEIS Sequence `A055641` - Number of zero digits in n.
+
+   From [OEIS A055641](https://oeis.org/A055641):
+
+   > Number of zero digits in n.
+   > (Formerly )
+
+   **Sequence IDs**: `:a055641`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a055641) |> Sequence.take!(106)
+       [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,2,1,1,1,1,1]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Number of zero digits in n.",
+        references: [{:oeis, :a055641, "https://oeis.org/A055641"}]
+   def create_sequence_a055641(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a055641/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a055641(idx) do
+       Math.digit_count(idx, [0])
+   end
+
+   @doc """
+   OEIS Sequence `A055642` - Number of digits in decimal expansion of n.
+
+   From [OEIS A055642](https://oeis.org/A055642):
+
+   > Number of digits in decimal expansion of n.
+   > (Formerly )
+
+   **Sequence IDs**: `:a055642`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a055642) |> Sequence.take!(106)
+       [1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Number of digits in decimal expansion of n.",
+        references: [{:oeis, :a055642, "https://oeis.org/A055642"}]
+   def create_sequence_a055642(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a055642/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a055642(idx) do
+       Integer.digits(idx) |> length()
+   end
+
+   @doc """
+   OEIS Sequence `A067251` - Numbers with no trailing zeros in decimal representation.
+
+   From [OEIS A067251](https://oeis.org/A067251):
+
+   > Numbers with no trailing zeros in decimal representation.
+   > (Formerly )
+
+   **Sequence IDs**: `:a067251`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a067251) |> Sequence.take!(94)
+       [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,21,22,23,24,25,26,27,28,29,31,32,33,34,35,36,37,38,39,41,42,43,44,45,46,47,48,49,51,52,53,54,55,56,57,58,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79,81,82,83,84,85,86,87,88,89,91,92,93,94,95,96,97,98,99,101,102,103,104]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no trailing zeros in decimal representation.",
+        references: [{:oeis, :a067251, "https://oeis.org/A067251"}]
+   def create_sequence_a067251(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a067251/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a067251(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               (v |> Integer.digits() |> List.last()) != 0
+           end, 
+           last)
+   end
+
+   @doc """
+   OEIS Sequence `A071858` - (Number of 1's in binary expansion of n) mod 3.
+
+   From [OEIS A071858](https://oeis.org/A071858):
+
+   > (Number of 1's in binary expansion of n) mod 3.
+   > (Formerly )
+
+   **Sequence IDs**: `:a071858`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a071858) |> Sequence.take!(105)
+       [0,1,1,2,1,2,2,0,1,2,2,0,2,0,0,1,1,2,2,0,2,0,0,1,2,0,0,1,0,1,1,2,1,2,2,0,2,0,0,1,2,0,0,1,0,1,1,2,2,0,0,1,0,1,1,2,0,1,1,2,1,2,2,0,1,2,2,0,2,0,0,1,2,0,0,1,0,1,1,2,2,0,0,1,0,1,1,2,0,1,1,2,1,2,2,0,2,0,0,1,0,1,1,2,0]
+
+
+   """
+   @doc offset: 0,
+        sequence: "(Number of 1's in binary expansion of n) mod 3.",
+        references: [{:oeis, :a071858, "https://oeis.org/A071858"}]
+   def create_sequence_a071858(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a071858/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a071858(idx) do
+       Math.digit_count(idx, [1], base: 2) |> rem(3)
+   end
+
+   @doc """
+   OEIS Sequence `A122840` - a(n) is the number of 0s at the end of n when n is written in base 10.
+
+   From [OEIS A122840](https://oeis.org/A122840):
+
+   > a(n) is the number of 0s at the end of n when n is written in base 10.
+   > (Formerly )
+
+   **Sequence IDs**: `:a122840`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a122840) |> Sequence.take!(105)
+       [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0]
+
+
+   """
+   @doc offset: 1,
+        sequence: "a(n) is the number of 0s at the end of n when n is written in base 10.",
+        references: [{:oeis, :a122840, "https://oeis.org/A122840"}]
+   def create_sequence_a122840(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a122840/1)
+   end
+
+
+   @doc offset: 1
+   def seq_a122840(idx) do
+       idx 
+       |> Integer.digits() 
+       |> Enum.reverse() 
+       |> Enum.take_while(fn v -> v == 0 end) 
+       |> length()
+   end
+
+   @doc """
+   OEIS Sequence `A160093` - Number of digits in n, excluding any trailing zeros.
+
+   From [OEIS A160093](https://oeis.org/A160093):
+
+   > Number of digits in n, excluding any trailing zeros.
+   > (Formerly )
+
+   **Sequence IDs**: `:a160093`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a160093) |> Sequence.take!(105)
+       [1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,3,3,3,3,3]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Number of digits in n, excluding any trailing zeros.",
+        references: [{:oeis, :a160093, "https://oeis.org/A160093"}]
+   def create_sequence_a160093(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a160093/1)
+   end
+
+
+   @doc offset: 1
+   def seq_a160093(idx) do
+       idx
+       |> Integer.digits()
+       |> Enum.reverse()
+       |> Enum.drop_while(fn v -> v == 0 end)
+       |> length()
+   end
+
+   @doc """
+   OEIS Sequence `A179868` - (Number of 1's in binary expansion of n) mod 4.
+
+   From [OEIS A179868](https://oeis.org/A179868):
+
+   > (Number of 1's in binary expansion of n) mod 4.
+   > (Formerly )
+
+   **Sequence IDs**: `:a179868`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a179868) |> Sequence.take!(101)
+       [0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,0,1,2,2,3,2,3,3,0,2,3,3,0,3,0,0,1,1,2,2,3,2,3,3,0,2,3,3,0,3,0,0,1,2,3,3,0,3,0,0,1,3,0,0,1,0,1,1,2,1,2,2,3,2,3,3,0,2,3,3,0,3,0,0,1,2,3,3,0,3,0,0,1,3,0,0,1,0,1,1,2,2,3,3,0,3]
+
+
+   """
+   @doc offset: 0,
+        sequence: "(Number of 1's in binary expansion of n) mod 4.",
+        references: [{:oeis, :a179868, "https://oeis.org/A179868"}]
+   def create_sequence_a179868(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a179868/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a179868(idx) do
+       Math.digit_count(idx, [1], base: 2) |> rem(4)
+   end
+
+   @doc """
+   OEIS Sequence `A193238` - Number of prime digits in decimal representation of n.
+
+   From [OEIS A193238](https://oeis.org/A193238):
+
+   > Number of prime digits in decimal representation of n.
+   > (Formerly )
+
+   **Sequence IDs**: `:a193238`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a193238) |> Sequence.take!(86)
+       [0,0,1,1,0,1,0,1,0,0,0,0,1,1,0,1,0,1,0,0,1,1,2,2,1,2,1,2,1,1,1,1,2,2,1,2,1,2,1,1,0,0,1,1,0,1,0,1,0,0,1,1,2,2,1,2,1,2,1,1,0,0,1,1,0,1,0,1,0,0,1,1,2,2,1,2,1,2,1,1,0,0,1,1,0,1]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Number of prime digits in decimal representation of n.",
+        references: [{:oeis, :a193238, "https://oeis.org/A193238"}]
+   def create_sequence_a193238(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a193238/1)
+   end
+
+
+   @doc offset: 0
+   def seq_a193238(idx) do
+       Math.digit_count(idx, [2, 3, 5, 7])
+   end
+
+   @doc """
+   OEIS Sequence `A196563` - Number of even digits in decimal representation of n.
+
+   From [OEIS A196563](https://oeis.org/A196563):
+
+   > Number of even digits in decimal representation of n.
+   > (Formerly ) 
+
+   **Sequence IDs**: `:a196563`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a196563) |> Sequence.take!(86)
+       [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,2,1,2,1,2,1,2,1,2,1,1,0,1,0,1,0,1,0,1,0,2,1,2,1,2,1,2,1,2,1,1,0,1,0,1,0,1,0,1,0,2,1,2,1,2,1,2,1,2,1,1,0,1,0,1,0,1,0,1,0,2,1,2,1,2,1]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Number of even digits in decimal representation of n.",
+        references: [{:oeis, :a196563, "https://oeis.org/A196563"}]
+   def create_sequence_a196563(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a196563/1) 
+   end
+
+
+   @doc offset: 0
+   def seq_a196563(idx) do
+       Math.digit_count(idx, [0, 2, 4, 6, 8])
+   end
+
+   @doc """
+   OEIS Sequence `A248910` - Numbers with no zeros in base-6 representation.
+
+   From [OEIS A248910](https://oeis.org/A248910):
+
+   > Numbers with no zeros in base-6 representation.
+   > (Formerly )
+
+   **Sequence IDs**: `:a248910`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a248910) |> Sequence.take!(67)
+       [1,2,3,4,5,7,8,9,10,11,13,14,15,16,17,19,20,21,22,23,25,26,27,28,29,31,32,33,34,35,43,44,45,46,47,49,50,51,52,53,55,56,57,58,59,61,62,63,64,65,67,68,69,70,71,79,80,81,82,83,85,86,87,88,89,91,92]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no zeros in base-6 representation.",
+        references: [{:oeis, :a248910, "https://oeis.org/A248910"}]
+   def create_sequence_a248910(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a248910/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a248910(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 6) == 0
+           end,
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A255805` - Numbers with no zeros in base-8 representation.
+
+   From [OEIS A255805](https://oeis.org/A255805):
+
+   > Numbers with no zeros in base-8 representation.
+   > (Formerly )
+
+   **Sequence IDs**: `:a255805`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a255805) |> Sequence.take!(67)
+       [1,2,3,4,5,6,7,9,10,11,12,13,14,15,17,18,19,20,21,22,23,25,26,27,28,29,30,31,33,34,35,36,37,38,39,41,42,43,44,45,46,47,49,50,51,52,53,54,55,57,58,59,60,61,62,63,73,74,75,76,77,78,79,81,82,83,84]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no zeros in base-8 representation.",
+        references: [{:oeis, :a255805, "https://oeis.org/A255805"}]
+   def create_sequence_a255805(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255805/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a255805(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 8) == 0
+           end,
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A255808` - Numbers with no zeros in base-9 representation.
+
+   From [OEIS A255808](https://oeis.org/A255808):
+
+   > Numbers with no zeros in base-9 representation.
+   > (Formerly )
+
+   **Sequence IDs**: `:a255808`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a255808) |> Sequence.take!(67)
+       [1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,55,56,57,58,59,60,61,62,64,65,66,67,68,69,70,71,73,74,75]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no zeros in base-9 representation.",
+        references: [{:oeis, :a255808, "https://oeis.org/A255808"}]
+   def create_sequence_a255808(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255808/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a255808(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 9) == 0
+           end,
            last
        )
     

@@ -1,7 +1,7 @@
 ## Generators
 
 ```elixir 
-OEIS.Util.generate_function_sequences(~w(A255735), in_module: Chunky.Sequence.OEIS.Repr)
+OEIS.Util.generate_function_sequences(~w(), in_module: Chunky.Sequence.OEIS.Repr)
 OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 ```
 
@@ -11,8 +11,9 @@ OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 
 ## Core
 
-
+A000120		1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n). 
 A001358		Semiprimes (or biprimes): products of two primes. 
+A001489		a(n) = -n.
 
 
 ## Powers
@@ -49,36 +50,6 @@ A069281		20-almost primes (generalization of semiprimes).
 ## Repr
 
 
-
-
-
-
-** Some of these are CORE sequences **
-
-A000120		1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n). 
-A000788		Total number of 1's in binary expansions of 0, ..., n. 
-A001489		a(n) = -n.
-A005823		Numbers whose ternary expansion contains no 1's. 
-A005836		Numbers n whose base 3 representation contains no 2. 
-A007954		Product of decimal digits of n.
-A010872		a(n) = n mod 3.
-A023416		Number of 0's in binary expansion of n.
-A023705		Numbers with no 0's in base 4 expansion.
-A032924		Numbers whose ternary expansion contains no 0.
-A052040		Numbers n such that n^2 lacks the digit zero in its decimal expansion.
-A055640		Number of nonzero digits in decimal expansion of n.
-A055641		Number of zero digits in n.
-A055642		Number of digits in decimal expansion of n.
-A067251		Numbers with no trailing zeros in decimal representation.
-A071858		(Number of 1's in binary expansion of n) mod 3.
-A122840		a(n) is the number of 0s at the end of n when n is written in base 10.
-A160093		Number of digits in n, excluding any trailing zeros.
-A179868		(Number of 1's in binary expansion of n) mod 4.
-A193238		Number of prime digits in decimal representation of n.
-A196563		Number of even digits in decimal representation of n.
-A248910		Numbers with no zeros in base-6 representation.
-A255805		Numbers with no zeros in base-8 representation.
-A255808		Numbers with no zeros in base-9 representation.
 
 
 
