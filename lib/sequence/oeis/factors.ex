@@ -134,68 +134,725 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   require Integer
 
-
-
   # raw data for A018253 - Divisors of 24.
-  @data_a018253 [1,2,3,4,6,8,12,24]
+  @data_a018253 [1, 2, 3, 4, 6, 8, 12, 24]
 
   # raw data for A018256 - Divisors of 36.
-  @data_a018256 [1,2,3,4,6,9,12,18,36]
+  @data_a018256 [1, 2, 3, 4, 6, 9, 12, 18, 36]
 
   # raw data for A018261 - Divisors of 48.
-  @data_a018261 [1,2,3,4,6,8,12,16,24,48]
+  @data_a018261 [1, 2, 3, 4, 6, 8, 12, 16, 24, 48]
 
   # raw data for A018266 - Divisors of 60.
-  @data_a018266 [1,2,3,4,5,6,10,12,15,20,30,60]
+  @data_a018266 [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]
 
   # raw data for A018293 - Divisors of 120.
-  @data_a018293 [1,2,3,4,5,6,8,10,12,15,20,24,30,40,60,120]
+  @data_a018293 [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 24, 30, 40, 60, 120]
 
   # raw data for A018321 - Divisors of 180.
-  @data_a018321 [1,2,3,4,5,6,9,10,12,15,18,20,30,36,45,60,90,180]
+  @data_a018321 [1, 2, 3, 4, 5, 6, 9, 10, 12, 15, 18, 20, 30, 36, 45, 60, 90, 180]
 
   # raw data for A018350 - Divisors of 240.
-  @data_a018350 [1,2,3,4,5,6,8,10,12,15,16,20,24,30,40,48,60,80,120,240]
+  @data_a018350 [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 16, 20, 24, 30, 40, 48, 60, 80, 120, 240]
 
   # raw data for A018412 - Divisors of 360.
-  @data_a018412 [1,2,3,4,5,6,8,9,10,12,15,18,20,24,30,36,40,45,60,72,90,120,180,360]
+  @data_a018412 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    12,
+    15,
+    18,
+    20,
+    24,
+    30,
+    36,
+    40,
+    45,
+    60,
+    72,
+    90,
+    120,
+    180,
+    360
+  ]
 
   # raw data for A018609 - Divisors of 720.
-  @data_a018609 [1,2,3,4,5,6,8,9,10,12,15,16,18,20,24,30,36,40,45,48,60,72,80,90,120,144,180,240,360,720]
+  @data_a018609 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    12,
+    15,
+    16,
+    18,
+    20,
+    24,
+    30,
+    36,
+    40,
+    45,
+    48,
+    60,
+    72,
+    80,
+    90,
+    120,
+    144,
+    180,
+    240,
+    360,
+    720
+  ]
 
   # raw data for A018676 - Divisors of 840.
-  @data_a018676 [1,2,3,4,5,6,7,8,10,12,14,15,20,21,24,28,30,35,40,42,56,60,70,84,105,120,140,168,210,280,420,840]
+  @data_a018676 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    12,
+    14,
+    15,
+    20,
+    21,
+    24,
+    28,
+    30,
+    35,
+    40,
+    42,
+    56,
+    60,
+    70,
+    84,
+    105,
+    120,
+    140,
+    168,
+    210,
+    280,
+    420,
+    840
+  ]
 
   # raw data for A165412 - Divisors of 2520.
-  @data_a165412 [1,2,3,4,5,6,7,8,9,10,12,14,15,18,20,21,24,28,30,35,36,40,42,45,56,60,63,70,72,84,90,105,120,126,140,168,180,210,252,280,315,360,420,504,630,840,1260,2520]
+  @data_a165412 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14,
+    15,
+    18,
+    20,
+    21,
+    24,
+    28,
+    30,
+    35,
+    36,
+    40,
+    42,
+    45,
+    56,
+    60,
+    63,
+    70,
+    72,
+    84,
+    90,
+    105,
+    120,
+    126,
+    140,
+    168,
+    180,
+    210,
+    252,
+    280,
+    315,
+    360,
+    420,
+    504,
+    630,
+    840,
+    1260,
+    2520
+  ]
 
   # raw data for A178858 - Divisors of 5040.
-  @data_a178858 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,35,36,40,42,45,48,56,60,63,70,72,80,84,90,105,112,120,126,140,144,168,180,210,240,252,280,315,336,360,420,504,560,630,720,840,1008,1260,1680,2520,5040]
+  @data_a178858 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14,
+    15,
+    16,
+    18,
+    20,
+    21,
+    24,
+    28,
+    30,
+    35,
+    36,
+    40,
+    42,
+    45,
+    48,
+    56,
+    60,
+    63,
+    70,
+    72,
+    80,
+    84,
+    90,
+    105,
+    112,
+    120,
+    126,
+    140,
+    144,
+    168,
+    180,
+    210,
+    240,
+    252,
+    280,
+    315,
+    336,
+    360,
+    420,
+    504,
+    560,
+    630,
+    720,
+    840,
+    1008,
+    1260,
+    1680,
+    2520,
+    5040
+  ]
 
   # raw data for A178859 - Divisors of 7560.
-  @data_a178859 [1,2,3,4,5,6,7,8,9,10,12,14,15,18,20,21,24,27,28,30,35,36,40,42,45,54,56,60,63,70,72,84,90,105,108,120,126,135,140,168,180,189,210,216,252,270,280,315,360,378,420,504,540,630,756,840,945,1080,1260,1512,1890]
+  @data_a178859 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14,
+    15,
+    18,
+    20,
+    21,
+    24,
+    27,
+    28,
+    30,
+    35,
+    36,
+    40,
+    42,
+    45,
+    54,
+    56,
+    60,
+    63,
+    70,
+    72,
+    84,
+    90,
+    105,
+    108,
+    120,
+    126,
+    135,
+    140,
+    168,
+    180,
+    189,
+    210,
+    216,
+    252,
+    270,
+    280,
+    315,
+    360,
+    378,
+    420,
+    504,
+    540,
+    630,
+    756,
+    840,
+    945,
+    1080,
+    1260,
+    1512,
+    1890
+  ]
 
   # raw data for A178860 - Divisors of 10080.
-  @data_a178860 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,32,35,36,40,42,45,48,56,60,63,70,72,80,84,90,96,105,112,120,126,140,144,160,168,180,210,224,240,252,280,288,315,336,360,420,480,504,560,630,672,720,840,1008]
+  @data_a178860 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14,
+    15,
+    16,
+    18,
+    20,
+    21,
+    24,
+    28,
+    30,
+    32,
+    35,
+    36,
+    40,
+    42,
+    45,
+    48,
+    56,
+    60,
+    63,
+    70,
+    72,
+    80,
+    84,
+    90,
+    96,
+    105,
+    112,
+    120,
+    126,
+    140,
+    144,
+    160,
+    168,
+    180,
+    210,
+    224,
+    240,
+    252,
+    280,
+    288,
+    315,
+    336,
+    360,
+    420,
+    480,
+    504,
+    560,
+    630,
+    672,
+    720,
+    840,
+    1008
+  ]
 
   # raw data for A178861 - Divisors of 15120.
-  @data_a178861 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,27,28,30,35,36,40,42,45,48,54,56,60,63,70,72,80,84,90,105,108,112,120,126,135,140,144,168,180,189,210,216,240,252,270,280,315,336,360,378,420,432,504,540,560,630]
+  @data_a178861 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14,
+    15,
+    16,
+    18,
+    20,
+    21,
+    24,
+    27,
+    28,
+    30,
+    35,
+    36,
+    40,
+    42,
+    45,
+    48,
+    54,
+    56,
+    60,
+    63,
+    70,
+    72,
+    80,
+    84,
+    90,
+    105,
+    108,
+    112,
+    120,
+    126,
+    135,
+    140,
+    144,
+    168,
+    180,
+    189,
+    210,
+    216,
+    240,
+    252,
+    270,
+    280,
+    315,
+    336,
+    360,
+    378,
+    420,
+    432,
+    504,
+    540,
+    560,
+    630
+  ]
 
   # raw data for A178862 - Divisors of 20160.
-  @data_a178862 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,28,30,32,35,36,40,42,45,48,56,60,63,64,70,72,80,84,90,96,105,112,120,126,140,144,160,168,180,192,210,224,240,252,280,288,315,320,336,360,420,448,480,504,560,576]
+  @data_a178862 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14,
+    15,
+    16,
+    18,
+    20,
+    21,
+    24,
+    28,
+    30,
+    32,
+    35,
+    36,
+    40,
+    42,
+    45,
+    48,
+    56,
+    60,
+    63,
+    64,
+    70,
+    72,
+    80,
+    84,
+    90,
+    96,
+    105,
+    112,
+    120,
+    126,
+    140,
+    144,
+    160,
+    168,
+    180,
+    192,
+    210,
+    224,
+    240,
+    252,
+    280,
+    288,
+    315,
+    320,
+    336,
+    360,
+    420,
+    448,
+    480,
+    504,
+    560,
+    576
+  ]
 
   # raw data for A178863 - Divisors of 25200.
-  @data_a178863 [1,2,3,4,5,6,7,8,9,10,12,14,15,16,18,20,21,24,25,28,30,35,36,40,42,45,48,50,56,60,63,70,72,75,80,84,90,100,105,112,120,126,140,144,150,168,175,180,200,210,225,240,252,280,300,315,336,350,360,400,420,450,504]
+  @data_a178863 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14,
+    15,
+    16,
+    18,
+    20,
+    21,
+    24,
+    25,
+    28,
+    30,
+    35,
+    36,
+    40,
+    42,
+    45,
+    48,
+    50,
+    56,
+    60,
+    63,
+    70,
+    72,
+    75,
+    80,
+    84,
+    90,
+    100,
+    105,
+    112,
+    120,
+    126,
+    140,
+    144,
+    150,
+    168,
+    175,
+    180,
+    200,
+    210,
+    225,
+    240,
+    252,
+    280,
+    300,
+    315,
+    336,
+    350,
+    360,
+    400,
+    420,
+    450,
+    504
+  ]
 
   # raw data for A178864 - Divisors of 27720.
-  @data_a178864 [1,2,3,4,5,6,7,8,9,10,11,12,14,15,18,20,21,22,24,28,30,33,35,36,40,42,44,45,55,56,60,63,66,70,72,77,84,88,90,99,105,110,120,126,132,140,154,165,168,180,198,210,220,231,252,264,280,308,315,330,360,385,396,420]
+  @data_a178864 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    18,
+    20,
+    21,
+    22,
+    24,
+    28,
+    30,
+    33,
+    35,
+    36,
+    40,
+    42,
+    44,
+    45,
+    55,
+    56,
+    60,
+    63,
+    66,
+    70,
+    72,
+    77,
+    84,
+    88,
+    90,
+    99,
+    105,
+    110,
+    120,
+    126,
+    132,
+    140,
+    154,
+    165,
+    168,
+    180,
+    198,
+    210,
+    220,
+    231,
+    252,
+    264,
+    280,
+    308,
+    315,
+    330,
+    360,
+    385,
+    396,
+    420
+  ]
 
   # raw data for A178877 - Divisors of 1260.
-  @data_a178877 [1,2,3,4,5,6,7,9,10,12,14,15,18,20,21,28,30,35,36,42,45,60,63,70,84,90,105,126,140,180,210,252,315,420,630,1260]
+  @data_a178877 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    12,
+    14,
+    15,
+    18,
+    20,
+    21,
+    28,
+    30,
+    35,
+    36,
+    42,
+    45,
+    60,
+    63,
+    70,
+    84,
+    90,
+    105,
+    126,
+    140,
+    180,
+    210,
+    252,
+    315,
+    420,
+    630,
+    1260
+  ]
 
   # raw data for A178878 - Divisors of 1680.
-  @data_a178878 [1,2,3,4,5,6,7,8,10,12,14,15,16,20,21,24,28,30,35,40,42,48,56,60,70,80,84,105,112,120,140,168,210,240,280,336,420,560,840,1680]
-
+  @data_a178878 [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    12,
+    14,
+    15,
+    16,
+    20,
+    21,
+    24,
+    28,
+    30,
+    35,
+    40,
+    42,
+    48,
+    56,
+    60,
+    70,
+    80,
+    84,
+    105,
+    112,
+    120,
+    140,
+    168,
+    210,
+    240,
+    280,
+    336,
+    420,
+    560,
+    840,
+    1680
+  ]
 
   @doc """
   OEIS Sequence `A000037` - Numbers that are not squares (or, the nonsquares).
@@ -276,7 +933,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
       last
     )
   end
-  
+
   @doc """
   OEIS Sequence `A001414` - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).
 
@@ -299,17 +956,17 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   """
   @doc offset: 1,
-       sequence: "Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).",
+       sequence:
+         "Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).",
        references: [{:oeis, :a001414, "https://oeis.org/A001414"}]
   def create_sequence_a001414(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001414/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001414/1)
   end
-
 
   @doc offset: 1
   def seq_a001414(idx) do
-      Math.prime_factors(idx) -- [1]
-      |> Enum.sum()
+    (Math.prime_factors(idx) -- [1])
+    |> Enum.sum()
   end
 
   @doc """
@@ -1120,8 +1777,6 @@ defmodule Chunky.Sequence.OEIS.Factors do
     end
   end
 
-
-
   @doc """
   OEIS Sequence `A018253` - Divisors of 24.
 
@@ -1147,7 +1802,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 24.",
        references: [{:oeis, :a018253, "https://oeis.org/A018253"}]
   def create_sequence_a018253(_opts) do
-          sequence_for_list(@data_a018253)
+    sequence_for_list(@data_a018253)
   end
 
   @doc """
@@ -1175,7 +1830,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 36.",
        references: [{:oeis, :a018256, "https://oeis.org/A018256"}]
   def create_sequence_a018256(_opts) do
-          sequence_for_list(@data_a018256)
+    sequence_for_list(@data_a018256)
   end
 
   @doc """
@@ -1203,7 +1858,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 48.",
        references: [{:oeis, :a018261, "https://oeis.org/A018261"}]
   def create_sequence_a018261(_opts) do
-          sequence_for_list(@data_a018261)
+    sequence_for_list(@data_a018261)
   end
 
   @doc """
@@ -1231,7 +1886,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 60.",
        references: [{:oeis, :a018266, "https://oeis.org/A018266"}]
   def create_sequence_a018266(_opts) do
-          sequence_for_list(@data_a018266)
+    sequence_for_list(@data_a018266)
   end
 
   @doc """
@@ -1259,7 +1914,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 120.",
        references: [{:oeis, :a018293, "https://oeis.org/A018293"}]
   def create_sequence_a018293(_opts) do
-          sequence_for_list(@data_a018293)
+    sequence_for_list(@data_a018293)
   end
 
   @doc """
@@ -1287,7 +1942,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 180.",
        references: [{:oeis, :a018321, "https://oeis.org/A018321"}]
   def create_sequence_a018321(_opts) do
-          sequence_for_list(@data_a018321)
+    sequence_for_list(@data_a018321)
   end
 
   @doc """
@@ -1315,7 +1970,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 240.",
        references: [{:oeis, :a018350, "https://oeis.org/A018350"}]
   def create_sequence_a018350(_opts) do
-          sequence_for_list(@data_a018350)
+    sequence_for_list(@data_a018350)
   end
 
   @doc """
@@ -1343,7 +1998,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 360.",
        references: [{:oeis, :a018412, "https://oeis.org/A018412"}]
   def create_sequence_a018412(_opts) do
-          sequence_for_list(@data_a018412)
+    sequence_for_list(@data_a018412)
   end
 
   @doc """
@@ -1371,7 +2026,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 720.",
        references: [{:oeis, :a018609, "https://oeis.org/A018609"}]
   def create_sequence_a018609(_opts) do
-          sequence_for_list(@data_a018609)
+    sequence_for_list(@data_a018609)
   end
 
   @doc """
@@ -1399,7 +2054,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 840.",
        references: [{:oeis, :a018676, "https://oeis.org/A018676"}]
   def create_sequence_a018676(_opts) do
-          sequence_for_list(@data_a018676)
+    sequence_for_list(@data_a018676)
   end
 
   @doc """
@@ -3776,7 +4431,6 @@ defmodule Chunky.Sequence.OEIS.Factors do
     )
   end
 
-
   @doc """
   OEIS Sequence `A165412` - Divisors of 2520.
 
@@ -3801,8 +4455,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
   @doc offset: 1,
        sequence: "Divisors of 2520.",
        references: [{:oeis, :a165412, "https://oeis.org/A165412"}]
-  def create_sequence_a165412(_opts) do 
-          sequence_for_list(@data_a165412)
+  def create_sequence_a165412(_opts) do
+    sequence_for_list(@data_a165412)
   end
 
   @doc """
@@ -3830,7 +4484,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 5040.",
        references: [{:oeis, :a178858, "https://oeis.org/A178858"}]
   def create_sequence_a178858(_opts) do
-          sequence_for_list(@data_a178858)
+    sequence_for_list(@data_a178858)
   end
 
   @doc """
@@ -3858,7 +4512,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 7560.",
        references: [{:oeis, :a178859, "https://oeis.org/A178859"}]
   def create_sequence_a178859(_opts) do
-          sequence_for_list(@data_a178859)
+    sequence_for_list(@data_a178859)
   end
 
   @doc """
@@ -3886,7 +4540,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 10080.",
        references: [{:oeis, :a178860, "https://oeis.org/A178860"}]
   def create_sequence_a178860(_opts) do
-          sequence_for_list(@data_a178860)
+    sequence_for_list(@data_a178860)
   end
 
   @doc """
@@ -3914,7 +4568,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 15120.",
        references: [{:oeis, :a178861, "https://oeis.org/A178861"}]
   def create_sequence_a178861(_opts) do
-          sequence_for_list(@data_a178861)
+    sequence_for_list(@data_a178861)
   end
 
   @doc """
@@ -3942,7 +4596,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 20160.",
        references: [{:oeis, :a178862, "https://oeis.org/A178862"}]
   def create_sequence_a178862(_opts) do
-          sequence_for_list(@data_a178862)
+    sequence_for_list(@data_a178862)
   end
 
   @doc """
@@ -3970,7 +4624,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 25200.",
        references: [{:oeis, :a178863, "https://oeis.org/A178863"}]
   def create_sequence_a178863(_opts) do
-          sequence_for_list(@data_a178863)
+    sequence_for_list(@data_a178863)
   end
 
   @doc """
@@ -3998,7 +4652,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 27720.",
        references: [{:oeis, :a178864, "https://oeis.org/A178864"}]
   def create_sequence_a178864(_opts) do
-          sequence_for_list(@data_a178864)
+    sequence_for_list(@data_a178864)
   end
 
   @doc """
@@ -4026,8 +4680,8 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 1260.",
        references: [{:oeis, :a178877, "https://oeis.org/A178877"}]
   def create_sequence_a178877(_opts) do
-          sequence_for_list(@data_a178877)
-  end 
+    sequence_for_list(@data_a178877)
+  end
 
   @doc """
   OEIS Sequence `A178878` - Divisors of 1680.
@@ -4054,7 +4708,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Divisors of 1680.",
        references: [{:oeis, :a178878, "https://oeis.org/A178878"}]
   def create_sequence_a178878(_opts) do
-          sequence_for_list(@data_a178878)
+    sequence_for_list(@data_a178878)
   end
 
   @doc """

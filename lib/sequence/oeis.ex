@@ -18,61 +18,101 @@ defmodule Chunky.Sequence.OEIS do
    - `Chunky.Sequence.OEIS.Sigma` - Sequenecs related to the Sigma (𝝈) function
 
   ## Utility Functions
-  
+
    - `coverage/0` - Show report of OEIS coverage of select sequence groups, and overall tallying of supported sequences
    - `coverage/1` - Calculate coverage of sequences from a Sequence of OEIS identifiers
    - `find_sequence/1` - Find an OEIS sequence by identifier
    - `find_sequence!/1` - Find an OEIS sequence by identifier, or raise an error
 
   ## Coverage
-  
+
   The Chunky sequence library will never have 100% coverage of OEIS sequences; there are just too many already
   listed, and too many added every year. The goal of the sequence library is to cover the OEIS Core
   set, as well as selected subsets of other keywords or topics.
-  
+
   Current coverage stats:
-  
+
   ```
     OEIS Coverage
-            210 total sequences
+            561 total sequences
     By Module
             Elixir.Chunky.Sequence.OEIS - 1 sequences
-            Elixir.Chunky.Sequence.OEIS.Core - 90 sequences
-            Elixir.Chunky.Sequence.OEIS.Factors - 98 sequences
+            Elixir.Chunky.Sequence.OEIS.Combinatorics - 7 sequences
+            Elixir.Chunky.Sequence.OEIS.Constants - 31 sequences
+            Elixir.Chunky.Sequence.OEIS.Core - 93 sequences
+            Elixir.Chunky.Sequence.OEIS.Factors - 119 sequences
+            Elixir.Chunky.Sequence.OEIS.Multiples - 60 sequences
+            Elixir.Chunky.Sequence.OEIS.Powers - 47 sequences
             Elixir.Chunky.Sequence.OEIS.Primes - 1 sequences
+            Elixir.Chunky.Sequence.OEIS.Repr - 182 sequences
             Elixir.Chunky.Sequence.OEIS.Sigma - 20 sequences
     Sequence Groups
-            OEIS Core Sequences - 89 / 177 (50.28%)
-            OEIS Core::Easy Sequences - 75 / 146 (51.37%)
+            OEIS Core Sequences - 92 / 177 (51.98%)
+            OEIS Core::Easy Sequences - 78 / 146 (53.42%)
             OEIS Core::Hard Sequences - 12 / 12 (100.0%)
             OEIS Core::Multiplicative Sequences - 22 / 22 (100.0%)
             OEIS Core::Eigen Sequences - 5 / 5 (100.0%)
   ```
-  
+
   Available/covered sequences, by OEIS ID:
-  
+
   ```
         A000001 A000002 A000004 A000005 A000007 A000009 A000010 A000012 A000027 A000032
-        A000035 A000037 A000040 A000041 A000043 A000045 A000069 A000079 A000081 A000085
-        A000105 A000108 A000109 A000110 A000111 A000112 A000120 A000124 A000129 A000142
-        A000166 A000169 A000203 A000204 A000217 A000219 A000225 A000244 A000262 A000272
-        A000290 A000292 A000302 A000312 A000326 A000330 A000364 A000396 A000521 A000578
-        A000583 A000593 A000594 A000609 A000670 A000688 A000720 A000796 A000798 A000959
-        A000961 A000977 A000984 A001003 A001006 A001045 A001055 A001065 A001157 A001158
-        A001159 A001160 A001190 A001221 A001222 A001227 A001358 A001477 A001511 A001597
-        A001615 A001694 A001826 A001842 A002093 A002106 A002182 A002473 A002654 A003094
-        A003484 A003586 A003601 A004709 A005100 A005101 A005117 A005361 A005470 A005934
-        A006530 A006881 A006966 A007018 A007304 A007412 A007434 A007774 A007947 A008292
-        A008683 A008966 A013929 A013954 A013955 A013956 A013957 A013958 A013959 A013960
-        A013961 A013962 A013963 A013964 A013965 A013966 A013967 A013968 A014612 A014613
-        A014614 A020639 A030513 A030515 A033273 A033942 A033987 A033992 A033993 A036537
-        A037143 A038109 A039956 A046099 A046306 A046308 A046310 A046312 A046314 A046321
-        A046386 A046387 A046660 A048272 A051037 A051038 A051270 A052486 A055512 A056911
-        A059269 A059376 A059377 A059378 A065958 A065959 A065960 A067259 A067885 A069091
-        A069092 A069093 A069094 A069095 A069272 A069273 A069274 A069275 A069276 A069277
-        A069278 A069279 A069280 A069281 A074969 A076479 A080197 A080681 A080682 A080683
-        A117805 A123321 A123322 A130897 A160889 A160891 A160893 A160895 A160897 A160908
-        A160953 A160957 A160960 A162511 A162643 A209061 A211337 A211338  
+        A000035 A000037 A000040 A000041 A000043 A000045 A000051 A000069 A000079 A000081
+        A000085 A000105 A000108 A000109 A000110 A000111 A000112 A000120 A000124 A000129
+        A000142 A000166 A000169 A000203 A000204 A000217 A000219 A000225 A000244 A000262
+        A000272 A000290 A000292 A000302 A000312 A000326 A000330 A000351 A000364 A000396
+        A000400 A000420 A000521 A000578 A000583 A000593 A000594 A000609 A000670 A000688
+        A000720 A000788 A000796 A000798 A000959 A000961 A000977 A000984 A001003 A001006
+        A001018 A001019 A001020 A001021 A001022 A001023 A001024 A001025 A001026 A001027
+        A001029 A001045 A001055 A001065 A001157 A001158 A001159 A001160 A001190 A001221
+        A001222 A001227 A001358 A001414 A001477 A001489 A001511 A001597 A001615 A001694
+        A001826 A001842 A002093 A002106 A002182 A002473 A002654 A002808 A003094 A003484
+        A003586 A003601 A004176 A004177 A004178 A004179 A004180 A004181 A004182 A004183
+        A004184 A004709 A004719 A004720 A004721 A004722 A004723 A004724 A004725 A004726
+        A004727 A004728 A005100 A005101 A005117 A005361 A005470 A005823 A005836 A005843
+        A005934 A006530 A006881 A006966 A007018 A007088 A007089 A007090 A007091 A007092
+        A007093 A007094 A007095 A007304 A007395 A007412 A007434 A007774 A007947 A007953
+        A007954 A008292 A008585 A008586 A008587 A008588 A008589 A008590 A008591 A008592
+        A008593 A008594 A008595 A008596 A008597 A008598 A008599 A008600 A008601 A008602
+        A008603 A008604 A008605 A008606 A008607 A008683 A008966 A009964 A009965 A009966
+        A009967 A009968 A009969 A009970 A009971 A009972 A009973 A009974 A009975 A009976
+        A009977 A009978 A009979 A009980 A009981 A009982 A009983 A009984 A009985 A009986
+        A009987 A009988 A009989 A009990 A009991 A009992 A010692 A010701 A010709 A010716
+        A010722 A010727 A010731 A010734 A010850 A010851 A010852 A010853 A010854 A010855
+        A010856 A010857 A010858 A010859 A010860 A010861 A010862 A010863 A010864 A010865
+        A010866 A010867 A010868 A010869 A010870 A010871 A010872 A011531 A011532 A011533
+        A011534 A011535 A011536 A011537 A011538 A011539 A011540 A011557 A013929 A013954
+        A013955 A013956 A013957 A013958 A013959 A013960 A013961 A013962 A013963 A013964
+        A013965 A013966 A013967 A013968 A014263 A014612 A014613 A014614 A018253 A018256
+        A018261 A018266 A018293 A018321 A018350 A018412 A018609 A018676 A020639 A023416
+        A023692 A023693 A023694 A023695 A023696 A023697 A023698 A023699 A023700 A023701
+        A023702 A023703 A023704 A023705 A023706 A023707 A023708 A023709 A023710 A023711
+        A023712 A023713 A023714 A023715 A023716 A023717 A023718 A023719 A023720 A023721
+        A023722 A023723 A023724 A023725 A023726 A023727 A023728 A023729 A023730 A023731
+        A023732 A023733 A023734 A023735 A023736 A023738 A023739 A023740 A023745 A023746
+        A023747 A023748 A023749 A023750 A023751 A023752 A023753 A023754 A023755 A023756
+        A023757 A030513 A030515 A032924 A033273 A033942 A033987 A033992 A033993 A036537
+        A037143 A038109 A039956 A043321 A044102 A046099 A046306 A046308 A046310 A046312
+        A046314 A046321 A046386 A046387 A046660 A048272 A051037 A051038 A051270 A052040
+        A052382 A052383 A052404 A052405 A052406 A052413 A052414 A052419 A052421 A052486
+        A055512 A055640 A055641 A055642 A056911 A059015 A059269 A059376 A059377 A059378
+        A062756 A062768 A063416 A063997 A065958 A065959 A065960 A067251 A067259 A067885
+        A069091 A069092 A069093 A069094 A069095 A069272 A069273 A069274 A069275 A069276
+        A069277 A069278 A069279 A069280 A069281 A069537 A069540 A069543 A071858 A074940
+        A074969 A076479 A077267 A080197 A080681 A080682 A080683 A081603 A081605 A081606
+        A085959 A087752 A097251 A097252 A097253 A097254 A097255 A097256 A097257 A097258
+        A097259 A097260 A097261 A097262 A099542 A100968 A100969 A100970 A100971 A100972
+        A100973 A100974 A100975 A100987 A100988 A102669 A102670 A102671 A102672 A102673
+        A102674 A102675 A102676 A102677 A102678 A102679 A102680 A102681 A102682 A102683
+        A102684 A117805 A121022 A121023 A121024 A121025 A121026 A121027 A121028 A121029
+        A121030 A121031 A121032 A121033 A121034 A121035 A121036 A121037 A121038 A121039
+        A121040 A122840 A123321 A123322 A130897 A135628 A135631 A152691 A159981 A159984
+        A159986 A159987 A159988 A159989 A159991 A160093 A160889 A160891 A160893 A160895
+        A160897 A160908 A160953 A160957 A160960 A162511 A162643 A165412 A169823 A169825
+        A169827 A174312 A178858 A178859 A178860 A178861 A178862 A178863 A178864 A178877
+        A178878 A179868 A193238 A195819 A196563 A209061 A211337 A211338 A248910 A249674
+        A252994 A255731 A255732 A255735 A255736 A255805 A255808 A289682 A305548
   ```
 
   """
@@ -522,77 +562,77 @@ defmodule Chunky.Sequence.OEIS do
       missing_sequences: missing_seqs
     }
   end
-  
+
   @doc """
   Find a sequence definition by sequence identifier.
-  
+
   ## Example
-  
+
       iex> Sequence.OEIS.find_sequence("A159986")
       {:ok, %{description: "Catalan numbers read modulo 7 .", module: Chunky.Sequence.OEIS.Combinatorics, name: "A159986", sequence: :a159986}}
-  
+
       iex> Sequence.OEIS.find_sequence("A999999999")
       {:error, :not_found}
-  
+
       iex> Sequence.OEIS.find_sequence(:a010853)
       {:ok, %{description: "Constant sequence: a(n) = 14.", module: Chunky.Sequence.OEIS.Constants, name: "A010853", sequence: :a010853}}
   """
   def find_sequence(name) when is_binary(name) do
-      
-      case Sequence.available()
-      |> Enum.filter(fn %{name: seq_name} -> String.downcase(name) == String.downcase(seq_name) end)
-      do
-         [] -> {:error, :not_found} 
-         [seq] -> {:ok, seq}
-         _seqs -> {:error, :duplicate_sequences}
-      end
-      
+    case Sequence.available()
+         |> Enum.filter(fn %{name: seq_name} ->
+           String.downcase(name) == String.downcase(seq_name)
+         end) do
+      [] -> {:error, :not_found}
+      [seq] -> {:ok, seq}
+      _seqs -> {:error, :duplicate_sequences}
+    end
   end
-  
+
   def find_sequence(name) when is_atom(name), do: find_sequence(name |> Atom.to_string())
 
   @doc """
   Like `find_sequence/1`, but directly return the sequence bundle, or raise an error.
-  
+
   The sequece bundle can be handed directly to `Chunky.Sequence.create/1`.
-  
+
   ## Example
-  
+
       iex> seq = Sequence.OEIS.find_sequence!(:a159986) |> Sequence.create() |> Sequence.start()
       iex> seq.value
       1
   """
   def find_sequence!(name) when is_binary(name) do
-      case find_sequence(name) do
-         {:ok, seq} -> seq
-         _ -> raise ArgumentError, message: "no such sequence" 
-      end
+    case find_sequence(name) do
+      {:ok, seq} -> seq
+      _ -> raise ArgumentError, message: "no such sequence"
+    end
   end
-  
+
   def find_sequence!(name) when is_atom(name), do: find_sequence!(name |> Atom.to_string())
-  
+
   @doc """
   Determine if a specific OEIS sequence is available.
-  
+
   ## Examples
-  
+
       iex> Sequence.OEIS.has_sequence?(:a159986)
       true
-  
+
       iex> Sequence.OEIS.has_sequence?("A008598")
       true
-  
+
       iex> Sequence.OEIS.has_sequence?("A99999999")
       false
   """
   def has_sequence?(name) when is_binary(name) do
-      case find_sequence(name) do
-          {:ok, _} -> true
-          _ -> false
-      end
+    case find_sequence(name) do
+      {:ok, _} -> true
+      _ -> false
+    end
   end
+
   def has_sequence?(name) when is_atom(name), do: has_sequence?(name |> Atom.to_string())
-  
+
   @doc """
   Find the next 100 missing sequences from a coverage set
   """

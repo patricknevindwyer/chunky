@@ -6,51 +6,124 @@ defmodule Chunky.MathTest do
   doctest Chunky.Math
 
   describe "is_multiple_rhonda?/1" do
-      test "value tests" do
-          ns = [900, 1000, 2000, 5670, 9000]
-          os = [false, true, false, true, false]
+    test "value tests" do
+      ns = [900, 1000, 2000, 5670, 9000]
+      os = [false, true, false, true, false]
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.is_multiple_rhonda?(n) == o
-          end)          
-      end
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.is_multiple_rhonda?(n) == o
+      end)
+    end
   end
-  
+
   describe "get_rhonda_to/2" do
-      test "default" do
-        ns = [1000, 2940, 5670, 3348]
-        os = [ [16, 36], [56, 76], [36, 106, 108, 196], [60]]
+    test "default" do
+      ns = [1000, 2940, 5670, 3348]
+      os = [[16, 36], [56, 76], [36, 106, 108, 196], [60]]
 
-        Enum.zip(ns, os)
-        |> Enum.each(fn {n, o} ->
-          assert Math.get_rhonda_to(n) == o
-        end)          
-      end
-      
-      test "alternate bases" do
-          ns = [1000, 2940, 5670, 3348]
-          os = [ [36], [56, 76], [36], [60]]
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.get_rhonda_to(n) == o
+      end)
+    end
 
-          Enum.zip(ns, os)
-          |> Enum.each(fn {n, o} ->
-            assert Math.get_rhonda_to(n, bases: 25..100 |> Enum.to_list()) == o
-          end)                    
-      end
+    test "alternate bases" do
+      ns = [1000, 2940, 5670, 3348]
+      os = [[36], [56, 76], [36], [60]]
+
+      Enum.zip(ns, os)
+      |> Enum.each(fn {n, o} ->
+        assert Math.get_rhonda_to(n, bases: 25..100 |> Enum.to_list()) == o
+      end)
+    end
   end
-  
+
   describe "is_rhonda_to_base?/2" do
+    test "value tests" do
+      ns = [
+        {10206, 4},
+        {11935, 4},
+        {10200, 4},
+        {855, 6},
+        {1029, 6},
+        {900, 6},
+        {1836, 8},
+        {6318, 8},
+        {5000, 8},
+        {15540, 9},
+        {21054, 9},
+        {16000, 9},
+        {1568, 10},
+        {2835, 10},
+        {2000, 10},
+        {560, 12},
+        {800, 12},
+        {700, 12},
+        {11475, 14},
+        {18655, 14},
+        {12345, 14},
+        {2392, 15},
+        {2472, 15},
+        {1450, 15},
+        {1000, 16},
+        {1134, 16},
+        {1111, 16},
+        {1815, 20},
+        {11050, 20},
+        {9000, 20},
+        {3024, 30},
+        {3168, 30},
+        {3100, 30},
+        {3348, 60},
+        {3510, 60},
+        {3400, 60}
+      ]
 
-      test "value tests" do
-        ns = [{10206, 4}, {11935, 4}, {10200, 4},{855, 6}, {1029, 6}, {900, 6},{1836, 8}, {6318, 8}, {5000, 8},{15540, 9}, {21054, 9}, {16000, 9},{1568, 10}, {2835, 10}, {2000, 10},{560, 12}, {800, 12}, {700, 12},{11475, 14}, {18655, 14}, {12345, 14},{2392, 15}, {2472, 15}, {1450, 15},{1000, 16}, {1134, 16}, {1111, 16},{1815, 20}, {11050, 20}, {9000, 20},{3024, 30}, {3168, 30}, {3100, 30},{3348, 60}, {3510, 60}, {3400, 60}]
-        os = [true, true, false,true, true, false,true, true, false,true, true, false,true, true, false,true, true, false,true, true, false,true, true, false,true, true, false,true, true, false,true, true, false,true, true, false]
+      os = [
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        false
+      ]
 
-        Enum.zip(ns, os)
-        |> Enum.each(fn {{n, b}, o} ->
-          assert Math.is_rhonda_to_base?(n, b) == o
-        end)
-      end
-      
+      Enum.zip(ns, os)
+      |> Enum.each(fn {{n, b}, o} ->
+        assert Math.is_rhonda_to_base?(n, b) == o
+      end)
+    end
   end
 
   describe "nth_root/3" do

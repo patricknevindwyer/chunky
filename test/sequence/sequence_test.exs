@@ -13,55 +13,51 @@ defmodule Chunky.SequenceTest do
       finite: false
     }
   ]
-  
+
   describe "at/2" do
-     test "infinite" do
-         seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
-         
-         v = seq |> Sequence.at(10)
-         
-         assert v == 11
-     end
-     
-     test "finite" do
-         
-         seq = Sequence.create(Sequence.Basic, :decimal_digits) |> Sequence.start()
-         
-         # within bounds
-         v = seq |> Sequence.at(0)
-         assert v == 0
-         
-         # outside bounds
-         v = seq |> Sequence.at(20)
-         assert v == nil         
-         
-     end 
-     
-     test "timeout" do
-         
-         seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
-         
-         v = seq |> Sequence.at(1_000_000, timeout: 5)
-         
-         assert v == :timeout
-         
-     end
+    test "infinite" do
+      seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
+
+      v = seq |> Sequence.at(10)
+
+      assert v == 11
+    end
+
+    test "finite" do
+      seq = Sequence.create(Sequence.Basic, :decimal_digits) |> Sequence.start()
+
+      # within bounds
+      v = seq |> Sequence.at(0)
+      assert v == 0
+
+      # outside bounds
+      v = seq |> Sequence.at(20)
+      assert v == nil
+    end
+
+    test "timeout" do
+      seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
+
+      v = seq |> Sequence.at(1_000_000, timeout: 5)
+
+      assert v == :timeout
+    end
   end
 
   describe "restart!/1" do
-      test "restart drops back to first value" do
-         @sequences
-         |> Enum.each(fn seq -> 
-             assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence)
-             sequence = sequence |> Sequence.start() |> Sequence.drop(5)
-             assert sequence.value == seq.values |> Enum.at(5)
-             
-             assert %Sequence{} = sequence = sequence |> Sequence.restart!()
-             assert sequence.value == seq.values |> Enum.at(0)
-         end) 
-      end
+    test "restart drops back to first value" do
+      @sequences
+      |> Enum.each(fn seq ->
+        assert %Sequence{} = sequence = Sequence.create(seq.module, seq.sequence)
+        sequence = sequence |> Sequence.start() |> Sequence.drop(5)
+        assert sequence.value == seq.values |> Enum.at(5)
+
+        assert %Sequence{} = sequence = sequence |> Sequence.restart!()
+        assert sequence.value == seq.values |> Enum.at(0)
+      end)
+    end
   end
-  
+
   describe "create/3" do
     test "valid sequence" do
       @sequences

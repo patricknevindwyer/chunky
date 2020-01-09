@@ -50,7 +50,7 @@ defmodule Chunky.Math do
 
 
   ## Digit Checks and Manipulations
-  
+
    - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
    - `digit_count/3` - Count digits in `n` in any base representation
    - `digit_sum/1` - Calculate the sum of the digits of `n`
@@ -416,46 +416,45 @@ defmodule Chunky.Math do
   def is_coprime?(a, b) when is_integer(a) and is_integer(b) and a > 0 and b > 0 do
     Integer.gcd(a, b) == 1
   end
-  
+
   @doc """
   Check if `n` is a _plaindrome_ in base 10.
-  
+
   See `is_plaindrome_in_base?/2` for more details.
-  
+
   ## Examples
-  
+
       iex> Math.is_plaindrome?(22367)
       true
-  
+
       iex> Math.is_plaindrome?(2048)
       false
   """
   def is_plaindrome?(n), do: is_plaindrome_in_base?(n, 10)
-  
+
   @doc """
   Check if a number `n` in numeric base `b` is a _plaindrome_. A _plaindrome_ has digits that
   never _decrease_ in value when read from left to right.
-  
+
   ## Examples
-  
+
       iex> Math.is_plaindrome_in_base?(123456, 10)
       true
       
       iex> Math.is_plaindrome_in_base?(11111, 10)
       true
-  
+
       iex> Math.is_plaindrome_in_base?(111232, 10)
       false
-  
+
       iex> Math.is_plaindrome_in_base?(9842, 3)
       true
   """
   def is_plaindrome_in_base?(n, b) when is_integer(n) and is_integer(b) and b > 1 do
-      
-      p_digits = Integer.digits(n, b)
-      s_digits = p_digits |> Enum.sort()
-      
-      p_digits == s_digits
+    p_digits = Integer.digits(n, b)
+    s_digits = p_digits |> Enum.sort()
+
+    p_digits == s_digits
   end
 
   @doc """
@@ -1842,93 +1841,96 @@ defmodule Chunky.Math do
 
   @doc """
   Check if `n` is a Rhonda number to the base `b`.
-  
+
   Via [OEIS](https://oeis.org/A099542):
-  
+
   > An integer n is a Rhonda number to base b if the product of its digits in base b equals b*Sum of prime factors of n (including multiplicity).
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base?(1568, 10)
       true
       
       iex> Math.is_rhonda_to_base?(2048, 10)
       false
-  
+
       iex> Math.is_rhonda_to_base?(855, 6)
       true
-  
+
       iex> Math.is_rhonda_to_base?(47652, 9)
       true
-  
+
       iex> Math.is_rhonda_to_base?(91224, 60)
       true
   """
   def is_rhonda_to_base?(n, _b) when n < 2, do: false
+
   def is_rhonda_to_base?(n, b) when is_integer(n) and is_integer(b) and b >= 2 do
-      
-      # find the base product
-      base_prod = Integer.digits(n, b)
+    # find the base product
+    base_prod =
+      Integer.digits(n, b)
       |> Enum.reduce(1, fn x, acc -> x * acc end)
-      
-      # find the factor sum
-      f_sum = (prime_factors(n) -- [1]
-      |> Enum.sum()) * b
-      
-      base_prod == f_sum
+
+    # find the factor sum
+    f_sum =
+      ((prime_factors(n) -- [1])
+       |> Enum.sum()) * b
+
+    base_prod == f_sum
   end
-  
+
   @doc """
   Find the bases for which `n` is a Rhonda number.
-  
+
   Via [OEIS](https://oeis.org/A099542):
-  
+
   > An integer n is a Rhonda number to base b if the product of its digits in base b equals b*Sum of prime factors of n (including multiplicity).
-  
+
   Numbers can be Rhonda to more than one base, see [OEIS A100988](http://oeis.org/A100988). By default the `get_rhonda_to/1`
   function evaluates all bases from 4 to 500. You can specify an alternate set of bases with
   the `:bases` option.
-  
+
   ## Options
-  
+
    - `:bases` - List of Integer. Bases to evaluate.
-  
+
   ## Examples
-  
+
       iex> Math.get_rhonda_to(1000)
       [16, 36]
       
       iex> Math.get_rhonda_to(5670)
       [36, 106, 108, 196]
-  
+
       iex> Math.get_rhonda_to(5670, bases: 100..150 |> Enum.to_list())
       [106, 108]
   """
   def get_rhonda_to(n, opts \\ []) when is_integer(n) do
-      bases = opts |> Keyword.get(:bases, 4..1000 |> Enum.to_list())
-      
-      # pre-calculate the base prime factor
-      f_base = (prime_factors(n) -- [1]
-      |> Enum.sum())
-      
-      bases
-      |> Enum.filter(fn base -> 
-          
-          # find the base product
-          base_prod = Integer.digits(n, base)
-          |> Enum.reduce(1, fn x, acc -> x * acc end)
-          
-          base_prod == (f_base * base)
-      end)
+    bases = opts |> Keyword.get(:bases, 4..1000 |> Enum.to_list())
+
+    # pre-calculate the base prime factor
+    f_base =
+      (prime_factors(n) -- [1])
+      |> Enum.sum()
+
+    bases
+    |> Enum.filter(fn base ->
+      # find the base product
+      base_prod =
+        Integer.digits(n, base)
+        |> Enum.reduce(1, fn x, acc -> x * acc end)
+
+      base_prod == f_base * base
+    end)
   end
-  
+
   @doc """
   Check if the integer `n` is a Rhonda number to more than one base.
-  
+
   This is a predicate wrapper around the `get_rhonda_to/2` function.
-  
+
   ## Examples
-  
+
       iex> Math.is_multiple_rhonda?(1000)
       true
       
@@ -1936,239 +1938,240 @@ defmodule Chunky.Math do
       false
   """
   def is_multiple_rhonda?(n) when n < 2, do: false
+
   def is_multiple_rhonda?(n) when is_integer(n) do
-     case get_rhonda_to(n) do
-         [] -> false
-         [_] -> false
-         _ -> true
-     end 
+    case get_rhonda_to(n) do
+      [] -> false
+      [_] -> false
+      _ -> true
+    end
   end
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 4.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_4?(94185)
       true
 
       iex> Math.is_rhonda_to_base_4?(327)
       false
-  
+
   """
   def is_rhonda_to_base_4?(n), do: is_rhonda_to_base?(n, 4)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 6.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_6?(15104)
       true
 
       iex> Math.is_rhonda_to_base_4?(327)
       false
-  
+
   """
   def is_rhonda_to_base_6?(n), do: is_rhonda_to_base?(n, 6)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 8.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_8?(56420)
       true
 
       iex> Math.is_rhonda_to_base_8?(327)
       false
-  
+
   """
   def is_rhonda_to_base_8?(n), do: is_rhonda_to_base?(n, 8)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 9.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_9?(47652)
       true
 
       iex> Math.is_rhonda_to_base_9?(327)
       false
-  
+
   """
   def is_rhonda_to_base_9?(n), do: is_rhonda_to_base?(n, 9)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 10.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_10?(35581)
       true
 
       iex> Math.is_rhonda_to_base_10?(327)
       false
-  
+
   """
   def is_rhonda_to_base_10?(n), do: is_rhonda_to_base?(n, 10)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 12.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_12?(32742)
       true
 
       iex> Math.is_rhonda_to_base_12?(327)
       false
-  
+
   """
   def is_rhonda_to_base_12?(n), do: is_rhonda_to_base?(n, 12)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 14.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_14?(135196)
       true
 
       iex> Math.is_rhonda_to_base_14?(327)
       false
-  
+
   """
   def is_rhonda_to_base_14?(n), do: is_rhonda_to_base?(n, 14)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 15.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_15?(15873)
       true
 
       iex> Math.is_rhonda_to_base_15?(327)
       false
-  
+
   """
   def is_rhonda_to_base_15?(n), do: is_rhonda_to_base?(n, 15)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 16.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_16?(50055)
       true
 
       iex> Math.is_rhonda_to_base_16?(327)
       false
-  
+
   """
   def is_rhonda_to_base_16?(n), do: is_rhonda_to_base?(n, 16)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 20.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_20?(86591)
       true
 
       iex> Math.is_rhonda_to_base_20?(327)
       false
-  
+
   """
   def is_rhonda_to_base_20?(n), do: is_rhonda_to_base?(n, 20)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 30.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_30?(22784)
       true
 
       iex> Math.is_rhonda_to_base_30?(327)
       false
-  
+
   """
   def is_rhonda_to_base_30?(n), do: is_rhonda_to_base?(n, 30)
-  
+
   @doc """
   Determine if `n` is a Rhonda number to base 60.
-  
+
   This function is a predicate version of the generalized Rhonda number 
   predicate. See `is_rhonda_to_base?/2` for more information.
-  
+
   ## Examples
-  
+
       iex> Math.is_rhonda_to_base_60?(91224)
       true
 
       iex> Math.is_rhonda_to_base_60?(327)
       false
-  
+
   """
   def is_rhonda_to_base_60?(n), do: is_rhonda_to_base?(n, 60)
 
   @doc """
   Convert a decimal integer into another base that can be represented by the decimal digits (i.e., any
   base from 2 to 10).
-  
+
   ## Examples
-  
+
       iex> Math.to_base(123, 3)
       11120
-  
+
       iex> Math.to_base(123456789, 8)
       726746425
-  
+
       iex> Math.to_base(987654321, 2)
       111010110111100110100010110001
   """
   def to_base(n, b) when is_integer(n) and is_integer(b) and b > 1 and b <= 10 do
-      n
-      |> Integer.digits(b)
-      |> Integer.undigits()
+    n
+    |> Integer.digits(b)
+    |> Integer.undigits()
   end
-  
+
   @doc """
   Find the Catalan number of `n`, `C(n)`.
 
@@ -4214,7 +4217,7 @@ defmodule Chunky.Math do
 
       iex> Math.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
       [:abundant, :arithmetic_number, :even, :highly_abundant, :odious_number, :positive]
-  
+
       iex> Math.analyze_number(1000, skip_smooth: true)
       [:abundant, :even, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
 
@@ -4372,12 +4375,12 @@ defmodule Chunky.Math do
 
   @doc """
   Calculate the sum of the digits of `n`.
-  
+
   ## Examples
-  
+
       iex> Math.digit_sum(1234)
       10
-  
+
       iex> Math.digit_sum(2048)
       14
       
@@ -4385,83 +4388,81 @@ defmodule Chunky.Math do
       90
   """
   def digit_sum(n) when is_integer(n) do
-      n |> Integer.digits() |> Enum.sum()
+    n |> Integer.digits() |> Enum.sum()
   end
-  
+
   @doc """
   Count the number of specific digits in `n`.
-  
+
   Using the `base` option, you can select which base the number is converted to
   before counting digits. 
-  
+
   The list of digits being counted can have one or more integers, allowing flexible
   counting of different combinations of digits (see examples).
-  
+
   ## Options
-  
+
    - `base` - Integer. Default `10`. Numeric base to convert `n` to before counting.
-  
+
   ## Examples
-  
+
   Count how many `2`s are in a number:
-  
+
       iex> Math.digit_count(200454232, [2])
       3
-  
+
   Count the even digits in a number:
       
       iex> Math.digit_count(123456789, [2, 4, 6, 8])
       4
-  
+
   Count the `1`s and `2`s in the ternary expansion (base 3) of a number:
       
       iex> Math.digit_count(245_987_340, [1, 2], base: 3)
       12
-  
+
   Count the number of `25`s in the base **60** expansion of a number:
-  
+
       iex> Math.digit_count(1173840858356, [25], base: 60)
       2
-  
+
   """
   def digit_count(n, digits, opts \\ []) when is_integer(n) and is_list(digits) do
-     
-      base = opts |> Keyword.get(:base, 10)
-      
-      abs(n)
-      |> Integer.digits(base)
-      |> Enum.filter(fn d -> Enum.member?(digits, d) end)
-      |> length()
-      
+    base = opts |> Keyword.get(:base, 10)
+
+    abs(n)
+    |> Integer.digits(base)
+    |> Enum.filter(fn d -> Enum.member?(digits, d) end)
+    |> length()
   end
-  
+
   @doc """
   Check if a number `n` contains the number `m` in it's decimal
   digit representation.
-  
+
   ## Examples
-  
+
       iex> Math.contains_number?(34, 3)
       true
-  
+
       iex> Math.contains_number?(2048, 20)
       true
-  
+
       iex> Math.contains_number?(2048, 49)
       false
   """
   def contains_number?(n, m) when is_integer(n) and is_integer(m) do
-      Integer.to_string(n) |> String.contains?(Integer.to_string(m))
+    Integer.to_string(n) |> String.contains?(Integer.to_string(m))
   end
-    
+
   @doc """
   Remove all occurances of one or more digits from `n`.
-  
+
   Once removed, the the remaining digits of `n` are reconstituted into a number. If
   no digits are remaining then `0` (or a configurable value) is returned.
-  
+
   ## Examples
-  
+
       iex> Math.remove_digits!(123, [4, 5])
       123
       
@@ -4473,18 +4474,17 @@ defmodule Chunky.Math do
       
       iex> Math.remove_digits!(123, [1, 2, 3], empty: nil)
       nil
-  """    
+  """
   def remove_digits!(n, digits, opts \\ []) when is_integer(n) and is_list(digits) do
-      on_empty = Keyword.get(opts, :empty, 0)
-      
-      case Integer.digits(n)
-      |> Enum.reject(fn dig -> Enum.member?(digits, dig) end)
-      do
-          [] -> on_empty
-          f_n -> Integer.undigits(f_n)
-      end
+    on_empty = Keyword.get(opts, :empty, 0)
+
+    case Integer.digits(n)
+         |> Enum.reject(fn dig -> Enum.member?(digits, dig) end) do
+      [] -> on_empty
+      f_n -> Integer.undigits(f_n)
+    end
   end
-  
+
   @doc """
   Apply a number theoretic property test to integers to find the next number
   in a sequence.

@@ -52,7 +52,7 @@ defmodule Chunky.Fraction do
    - `uniq/2`
    - `within?/2`
    - `within?/3`
-  
+
 
   ## Creating Fractions
 
@@ -119,8 +119,8 @@ defmodule Chunky.Fraction do
     - `near_equal?/3` - Test if the difference between two fractions is less than or equal to another fraction
     - `within?/2` - Test if a fraction is within the specified Range
     - `within?/3` - Test if a fraction is within the lower and upper value bounds
-  
-  
+
+
   ```elixir
   iex> Fraction.gt?(Fraction.new(7, 8), Fraction.new(8, 9))
   false
@@ -196,9 +196,10 @@ defmodule Chunky.Fraction do
   alias Chunky.Fraction
   alias Chunky.Math
 
+  defguard is_coercible?(value)
+           when is_number(value) or is_binary(value) or
+                  (is_tuple(value) and tuple_size(value) == 2)
 
-  defguard is_coercible?(value) when is_number(value) or is_binary(value) or (is_tuple(value) and tuple_size(value) == 2)
-  
   @doc """
   Create a new fraction from two integers.
 
@@ -708,110 +709,110 @@ defmodule Chunky.Fraction do
         end
     end
   end
-  
+
   @doc """
   Increment the numerator or denominator by one.
-  
+
   This is not necessarily an arithmatically valid operation, rather it directly increments the
   numerator or denominator.
-  
+
   Valid `mode` values are: `:both`, `:num`, `:numerator`, `:den`, or `:denominator`. Note that when incrementing
   a negative value by the numerator, the value will move towards `0`, not towards the negative.
-  
+
   ## Examples
-  
+
       iex> Fraction.new("7/11") |> Fraction.increment(:num)
       %Fraction{num: 8, den: 11}
-  
+
       iex> Fraction.new("-5/9") |> Fraction.increment(:den)
       %Fraction{num: -5, den: 10}
-  
+
       iex> Fraction.new("-7/3") |> Fraction.increment(:numerator)
       %Fraction{num: -6, den: 3}
-  
+
       iex> Fraction.new("21/6") |> Fraction.increment(:both)
       %Fraction{num: 22, den: 7}
   """
   def increment(%Fraction{num: num, den: den}, mode) do
-      
-      case mode do
-         :num -> new(num + 1, den)
-         :numerator -> new(num + 1, den)
-         :den -> new(num, den + 1)
-         :denominator -> new(num, den + 1)
-         :both -> new(num + 1, den + 1)
-         _ -> {:error, :invalid_increment_mode}
-      end
-      
+    case mode do
+      :num -> new(num + 1, den)
+      :numerator -> new(num + 1, den)
+      :den -> new(num, den + 1)
+      :denominator -> new(num, den + 1)
+      :both -> new(num + 1, den + 1)
+      _ -> {:error, :invalid_increment_mode}
+    end
   end
-  
+
   @doc """
   Decrement the numerator or denominator by one.
 
   This is not necessarily an arithmatically valid operation, rather it directly decrements the
   numerator or denominator. If the decrement would create an invalid denominator, it will return
   an error instead.
-  
+
   Valid `mode` values are: `:both`, `:num`, `:numerator`, `:den`, or `:denominator`. Note that when decrementing
   a negative value by the numerator, the value will move away from `0`, towards the negative.
-  
+
   ## Examples
-  
+
       iex> Fraction.new("7/11") |> Fraction.decrement(:num)
       %Fraction{num: 6, den: 11}
-  
+
       iex> Fraction.new("-5/9") |> Fraction.decrement(:den)
       %Fraction{num: -5, den: 8}
-  
+
       iex> Fraction.new("-7/3") |> Fraction.decrement(:numerator)
       %Fraction{num: -8, den: 3}
-  
+
       iex> Fraction.new("47/1") |> Fraction.decrement(:denominator)
       {:error, :invalid_denominator}
-  
+
       iex> Fraction.new("-21/4") |> Fraction.decrement(:both)
       %Fraction{num: -22, den: 3}
   """
   def decrement(%Fraction{num: num, den: den}, mode) do
-      
-      case mode do
-          :num -> new(num - 1, den)
-          :numerator -> new(num - 1, den)
-          :den -> 
-              
-              cond do
-                 den == 1 -> {:error, :invalid_denominator} 
-                 true -> new(num, den - 1)
-              end
-              
-          :denominator -> 
-              
-              cond do
-                 den == 1 -> {:error, :invalid_denominator} 
-                 true -> new(num, den - 1)
-              end
-              
-          :both -> 
-              cond do
-                 den == 1 -> {:error, :invalid_denominator} 
-                 true -> new(num - 1, den - 1)
-              end
-              
-          _ -> {:error, :invalid_decrement_mode}          
-      end
+    case mode do
+      :num ->
+        new(num - 1, den)
+
+      :numerator ->
+        new(num - 1, den)
+
+      :den ->
+        cond do
+          den == 1 -> {:error, :invalid_denominator}
+          true -> new(num, den - 1)
+        end
+
+      :denominator ->
+        cond do
+          den == 1 -> {:error, :invalid_denominator}
+          true -> new(num, den - 1)
+        end
+
+      :both ->
+        cond do
+          den == 1 -> {:error, :invalid_denominator}
+          true -> new(num - 1, den - 1)
+        end
+
+      _ ->
+        {:error, :invalid_decrement_mode}
+    end
   end
-  
+
   @doc """
   Round a fraction to the nearest whole value.
-  
+
   This round function uses the "round half away from zero" strategy, which differs from standard
   IEEE-754 floating point rounding mode, as we don't lose precision as fractions grow. Using this
   round method avoids introducing even/odd bias over multiple calculations.
-  
+
   **Supports Type Coercion?**: ✅
-  
+
   ## Examples
-  
+
       iex> Fraction.round("22/7")
       %Fraction{num: 21, den: 7}
       
@@ -819,169 +820,167 @@ defmodule Chunky.Fraction do
       %Fraction{num: -16, den: 8}
 
   """
-  def round(%Fraction{}=fraction) do
-     
-     # get the fractional part, and determine if we're at the round up stage
-     frac = fraction |> get_remainder() |> absolute_value()
-     round_up = gte?(frac, "1/2")
-     
-     cond do
-        is_whole?(fraction) -> fraction
-        is_positive?(fraction) && round_up -> fraction |> Fraction.ceiling()
-        is_positive?(fraction) -> fraction |> Fraction.floor()
-        is_negative?(fraction) && round_up -> fraction |> Fraction.floor()
-        is_negative?(fraction) -> fraction |> Fraction.ceiling()
-        true -> fraction
-     end 
+  def round(%Fraction{} = fraction) do
+    # get the fractional part, and determine if we're at the round up stage
+    frac = fraction |> get_remainder() |> absolute_value()
+    round_up = gte?(frac, "1/2")
+
+    cond do
+      is_whole?(fraction) -> fraction
+      is_positive?(fraction) && round_up -> fraction |> Fraction.ceiling()
+      is_positive?(fraction) -> fraction |> Fraction.floor()
+      is_negative?(fraction) && round_up -> fraction |> Fraction.floor()
+      is_negative?(fraction) -> fraction |> Fraction.ceiling()
+      true -> fraction
+    end
   end
-  
+
   def round(value) when is_coercible?(value), do: Fraction.round(new(value))
-  
+
   @doc """
   Determine if a fraction falls within a specific range.
-  
+
   **Supports Type Coercion?**: ✅
 
-  
+
   ## Examples
-  
+
       iex> Fraction.new("22/7") |> Fraction.within?(3..4)
       true
-  
+
       iex> Fraction.new("3/5") |> Fraction.within?(-1..1)
       true
-  
+
       iex> Fraction.within?(3.1, 1..5)
       true
   """
-  def within?(%Fraction{}=fraction, %Range{}=range) do
-     f..l = range
-     within?(fraction, f, l) 
-  end  
-  
-  def within?(val, %Range{}=range) when is_coercible?(val) do
-     within?(new(val), range) 
+  def within?(%Fraction{} = fraction, %Range{} = range) do
+    f..l = range
+    within?(fraction, f, l)
   end
-  
+
+  def within?(val, %Range{} = range) when is_coercible?(val) do
+    within?(new(val), range)
+  end
+
   @doc """
   Determine if a fraction falls within a specified lower and upper bound.
-  
+
   This test is inclusive of the lower and upper bounds. The low and high value of the 
   range to test can be specified as any coercible value.
-  
+
   **Supports Type Coercion?**: ✅
 
   ## Examples
-  
+
       iex> Fraction.new("22/7") |> Fraction.within?(3, 4.5)
       true
-  
+
       iex> Fraction.new("-4/3") |> Fraction.within?("-10/3", "-4/3")
       true
-  
+
       iex> Fraction.within?("22/7", -3, 4)
       true
   """
-  def within?(%Fraction{}=fraction, %Fraction{}=low, %Fraction{}=hi) do
-     gte?(fraction, low) && lte?(fraction, hi) 
+  def within?(%Fraction{} = fraction, %Fraction{} = low, %Fraction{} = hi) do
+    gte?(fraction, low) && lte?(fraction, hi)
   end
-  
-  def within?(%Fraction{}=fraction, low, hi) when is_coercible?(low) and is_coercible?(hi) do
-      within?(fraction, new(low), new(hi))
+
+  def within?(%Fraction{} = fraction, low, hi) when is_coercible?(low) and is_coercible?(hi) do
+    within?(fraction, new(low), new(hi))
   end
-  
-  def within?(val, low, hi) when is_coercible?(val) and is_coercible?(low) and is_coercible?(hi) do
-     within?(new(val), new(low), new(hi)) 
+
+  def within?(val, low, hi)
+      when is_coercible?(val) and is_coercible?(low) and is_coercible?(hi) do
+    within?(new(val), new(low), new(hi))
   end
-  
+
   @doc """
   Find the floor of a fractional value.
-  
+
   The floor of `n`, or `⌊n⌋`, rounds a fractional value _down_ to the nearest whole value.
-  
+
   **Supports Type Coercion?**: ✅
 
   ## Examples
-  
+
       iex> Fraction.new("17/8") |> Fraction.floor()
       %Fraction{num: 16, den: 8}
-  
+
       iex> Fraction.new("3/5") |> Fraction.floor()
       %Fraction{num: 0, den: 5}
-  
+
       iex> Fraction.new("-17/9") |> Fraction.floor()
       %Fraction{num: -18, den: 9}
-  
+
       iex> Fraction.floor("31/8")
       %Fraction{num: 24, den: 8}
-  
-  """
-  def floor(%Fraction{}=fraction) do
-  
-      cond do
-         is_whole?(fraction) -> fraction
-         is_positive?(fraction) -> 
-             
-             # floor just removes remainder
-             subtract(fraction, get_remainder(fraction))
-             
-         is_negative?(fraction) -> 
-             
-             # floor goes towards negative
-             add(fraction, absolute_value(fraction |> get_remainder())) |> subtract(1)
 
-         true -> fraction
-      end
-      
+  """
+  def floor(%Fraction{} = fraction) do
+    cond do
+      is_whole?(fraction) ->
+        fraction
+
+      is_positive?(fraction) ->
+        # floor just removes remainder
+        subtract(fraction, get_remainder(fraction))
+
+      is_negative?(fraction) ->
+        # floor goes towards negative
+        add(fraction, absolute_value(fraction |> get_remainder())) |> subtract(1)
+
+      true ->
+        fraction
+    end
   end
-  
+
   def floor(value) when is_coercible?(value) do
-     Fraction.floor(new(value)) 
+    Fraction.floor(new(value))
   end
-  
+
   @doc """
   Find the ceiling of a fractional value.
-  
+
   The ceiling of `n`, or `⌈n⌉`, rounds a fractional value _up_ to the nearest whole value.
-  
+
   **Supports Type Coercion?**: ✅
 
   ## Examples
-  
+
       iex> Fraction.new("7/8") |> Fraction.ceiling()
       %Fraction{num: 8, den: 8}
-  
+
       iex> Fraction.new("0/17") |> Fraction.ceiling()
       %Fraction{num: 0, den: 17}
-  
+
       iex> Fraction.new("-47/3") |> Fraction.ceiling()
       %Fraction{num: -45, den: 3}
-  
+
       iex> Fraction.ceiling(-3.5)
       %Fraction{num: -30, den: 10}
   """
-  def ceiling(%Fraction{}=fraction) do
-      
-      cond do
-         is_whole?(fraction) -> fraction
-         
-         is_positive?(fraction) -> 
-             
-             # moves up to next whole
-             bump = subtract(1, fraction |> get_remainder())
-             add(fraction, bump)
-         
-         is_negative?(fraction) -> 
-             
-             # just removes remainder
-             fraction |> get_remainder() |> absolute_value() |> add(fraction)
-         
-         true -> fraction 
-      end
+  def ceiling(%Fraction{} = fraction) do
+    cond do
+      is_whole?(fraction) ->
+        fraction
+
+      is_positive?(fraction) ->
+        # moves up to next whole
+        bump = subtract(1, fraction |> get_remainder())
+        add(fraction, bump)
+
+      is_negative?(fraction) ->
+        # just removes remainder
+        fraction |> get_remainder() |> absolute_value() |> add(fraction)
+
+      true ->
+        fraction
+    end
   end
-  
+
   def ceiling(value) when is_coercible?(value) do
-     ceiling(new(value)) 
+    ceiling(new(value))
   end
 
   @doc """
@@ -1037,25 +1036,37 @@ defmodule Chunky.Fraction do
 
       iex> Fraction.power(9, Fraction.new(7, 13), allow_irrational: true)
       3.26454673038995
-  
+
       iex> Fraction.power("3/8", 2.0)
       %Fraction{num: 9, den: 64}
 
   """
   def power(a, b, opts \\ [])
-  
+
   # coercions
-  def power(str_a, str_b, opts) when is_binary(str_a) and is_binary(str_b), do: power(new(str_a), new(str_b), opts)
-  def power(float_a, float_b, opts) when is_float(float_a) and is_float(float_b), do: power(new(float_a), new(float_b), opts)
+  def power(str_a, str_b, opts) when is_binary(str_a) and is_binary(str_b),
+    do: power(new(str_a), new(str_b), opts)
 
-  def power(float, int, opts) when is_float(float) and is_integer(int), do: power(new(float), new(int), opts)
-  def power(int, float, opts) when is_float(float) and is_integer(int), do: power(new(int), new(float), opts)
-  
-  def power(str, float, opts) when is_binary(str) and is_float(float), do: power(new(str), new(float), opts)
-  def power(float, str, opts) when is_binary(str) and is_float(float), do: power(new(float), new(str), opts)
+  def power(float_a, float_b, opts) when is_float(float_a) and is_float(float_b),
+    do: power(new(float_a), new(float_b), opts)
 
-  def power(str, int, opts) when is_binary(str) and is_integer(int), do: power(new(str), new(int), opts)
-  def power(int, str, opts) when is_binary(str) and is_integer(int), do: power(new(int), new(str), opts)
+  def power(float, int, opts) when is_float(float) and is_integer(int),
+    do: power(new(float), new(int), opts)
+
+  def power(int, float, opts) when is_float(float) and is_integer(int),
+    do: power(new(int), new(float), opts)
+
+  def power(str, float, opts) when is_binary(str) and is_float(float),
+    do: power(new(str), new(float), opts)
+
+  def power(float, str, opts) when is_binary(str) and is_float(float),
+    do: power(new(float), new(str), opts)
+
+  def power(str, int, opts) when is_binary(str) and is_integer(int),
+    do: power(new(str), new(int), opts)
+
+  def power(int, str, opts) when is_binary(str) and is_integer(int),
+    do: power(new(int), new(str), opts)
 
   # fractional base, negative integer power
   def power(%Fraction{} = fraction, int, opts) when is_integer(int) and int < 0 do
@@ -1102,10 +1113,10 @@ defmodule Chunky.Fraction do
     simp = opts |> Keyword.get(:simplify, false)
     allow_irs = opts |> Keyword.get(:allow_irrational, false)
     epsilon = opts |> Keyword.get(:epsilon, 1.0e-7)
-    
+
     # we need to simplify fraction A going in
     fraction_a = fraction_a_pre |> simplify()
-    
+
     # break our fractional power into the power and root segments
     f_pow = fraction_b.num
     f_root = fraction_b.den
@@ -1161,27 +1172,27 @@ defmodule Chunky.Fraction do
         end
     end
   end
-  
+
   @doc """
   Get the absolute value of a fraction.
-  
+
   **Supports Type Coercion?**: ✅
 
   ## Examples
-  
+
       iex> Fraction.new("-34/9") |> Fraction.absolute_value()
       %Fraction{num: 34, den: 9}
-  
+
       iex> Fraction.absolute_value("-44/7")
       %Fraction{num: 44, den: 7}
-  
+
   """
   def absolute_value(%Fraction{num: num, den: den}) do
-      new(abs(num), den)
+    new(abs(num), den)
   end
-  
+
   def absolute_value(value) when is_coercible?(value) do
-      absolute_value(new(value))
+    absolute_value(new(value))
   end
 
   @doc """
@@ -1893,34 +1904,38 @@ defmodule Chunky.Fraction do
 
   @doc """
   Determine if two fractions close enough in value.
-  
+
   This is similar to doing floating point comparison, where an _epsilon_ value is used to determine
   if two values are within a given range of each other.
-  
+
   In this case, we test if the difference between the first two fractions is less than or equal
   to the third fraction. So, if we wanted to determine if `3/2` and `5/3` were within `1/4` of each
   other, or had a difference less than or equal to `1/4`:
-  
+
         iex> Fraction.near_equal?("3/2", "5/3", "1/4") 
         true
 
   ## Examples
-  
+
         iex> Fraction.near_equal?("1/10", "8/10", 0.05)
         false
-  
+
         iex> Fraction.near_equal?("-1/3", "4/3", 2)
         true
-  
+
   """
-  def near_equal?(%Fraction{} = fraction_a, %Fraction{} = fraction_b, %Fraction{} = fraction_epsilon) do
-      subtract(fraction_a, fraction_b) |> absolute_value() |> lte?(absolute_value(fraction_epsilon))
+  def near_equal?(
+        %Fraction{} = fraction_a,
+        %Fraction{} = fraction_b,
+        %Fraction{} = fraction_epsilon
+      ) do
+    subtract(fraction_a, fraction_b) |> absolute_value() |> lte?(absolute_value(fraction_epsilon))
   end
-  
+
   def near_equal?(a, b, e) do
-      near_equal?(new(a), new(b), new(e)) 
+    near_equal?(new(a), new(b), new(e))
   end
-  
+
   @doc """
   Determine if a fraction is negative.
 

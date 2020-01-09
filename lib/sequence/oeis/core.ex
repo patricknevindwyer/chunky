@@ -2793,13 +2793,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "a(n) = -n.",
        references: [{:oeis, :a001489, "https://oeis.org/A001489"}]
   def create_sequence_a001489(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001489/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001489/1)
   end
-
 
   @doc offset: 0
   def seq_a001489(idx) do
-      idx * -1
+    idx * -1
   end
 
   @doc """
@@ -3022,13 +3021,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "The nonnegative even numbers: a(n) = 2n.",
        references: [{:oeis, :a005843, "https://oeis.org/A005843"}]
   def create_sequence_a005843(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005843/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005843/1)
   end
 
-
-  @doc offset: 0 
+  @doc offset: 0
   def seq_a005843(idx) do
-      idx * 2
+    idx * 2
   end
 
   @doc """
@@ -3490,13 +3488,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "The composite numbers: numbers n of the form x*y for x > 1 and y > 1.",
        references: [{:oeis, :a002808, "https://oeis.org/A002808"}]
   def create_sequence_a002808(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002808/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002808/2)
   end
-
 
   @doc offset: 1, fill_value: 3
   def seq_a002808(_idx, last) do
-      Math.next_number(fn v -> Math.is_prime?(v) == false end, last)
+    Math.next_number(fn v -> Math.is_prime?(v) == false end, last)
   end
 
   @doc """

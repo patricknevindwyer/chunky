@@ -6,504 +6,494 @@ defmodule Chunky.FractionTest do
   doctest Chunky.Fraction, import: true
 
   describe "round/1" do
-      test "fraction" do
-          assert Fraction.new(22, 7) |> Fraction.round() |> Fraction.eq?(Fraction.new(21, 7))
-      end
-      
-      test "value test" do
-         ins = ["1/2", "2/4", "3/4", "1/4", "5/9", "13/8", "11/8", "-3/4", "-6/4", "-1/4"] 
-         ots = ["2/2", "4/4", "4/4", "0/4", "9/9", "16/8", "8/8", "-4/4", "-8/4", "0/4"]
-         
-         Enum.zip(ins, ots)
-         |> Enum.each(fn {i, o} -> 
-             assert Fraction.round(i) |> Fraction.eq?(o)
-         end)
-      end
+    test "fraction" do
+      assert Fraction.new(22, 7) |> Fraction.round() |> Fraction.eq?(Fraction.new(21, 7))
+    end
+
+    test "value test" do
+      ins = ["1/2", "2/4", "3/4", "1/4", "5/9", "13/8", "11/8", "-3/4", "-6/4", "-1/4"]
+      ots = ["2/2", "4/4", "4/4", "0/4", "9/9", "16/8", "8/8", "-4/4", "-8/4", "0/4"]
+
+      Enum.zip(ins, ots)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.round(i) |> Fraction.eq?(o)
+      end)
+    end
   end
-  
+
   describe "is_coercible?/1" do
-  
-      test "int" do
-         assert Fraction.is_coercible?(3) 
-      end
-      
-      test "float" do
-          assert Fraction.is_coercible?(3.3) 
-      end
-      
-      test "binary" do
-          assert Fraction.is_coercible?("22/3") 
-      end
-      
-      test "tuples" do
-          assert Fraction.is_coercible?({1, 3}) 
-      end
-      
+    test "int" do
+      assert Fraction.is_coercible?(3)
+    end
+
+    test "float" do
+      assert Fraction.is_coercible?(3.3)
+    end
+
+    test "binary" do
+      assert Fraction.is_coercible?("22/3")
+    end
+
+    test "tuples" do
+      assert Fraction.is_coercible?({1, 3})
+    end
   end
-  
+
   describe "within/3" do
-      
-      test "fraction/fraction" do
-          
-          f_a = Fraction.new(22, 7)
-          f_b = Fraction.new(-22, 5)
-          
-          f_low = Fraction.new(-100, 2)
-          f_zero = Fraction.new(0, 3)
-          f_hi = Fraction.new(30, 3)
-         
-          # in
-          assert Fraction.within?(f_a, f_zero, f_hi)
-          assert Fraction.within?(f_a, f_low, f_hi)
-          
-          assert Fraction.within?(f_b, f_low, f_zero)
-          assert Fraction.within?(f_b, f_low, f_hi)
-          
-          # out
-          assert Fraction.within?(f_a, f_low, f_zero) == false
-          assert Fraction.within?(f_b, f_zero, f_hi) == false
-      end
-      
-      test "int/int" do
-          
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, 0, 2) == true
-          assert Fraction.within?(f_b, -2, 0) == true
-          
-          # out
-          assert Fraction.within?(f_a, -2, 0) == false
-          assert Fraction.within?(f_b, 0, 2) == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, 1, 2) == true
-          assert Fraction.within?(f_b, 1, 2) == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, -2, -1) == false
-          assert Fraction.within?(f_b, -2, -1) == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, -2, 2) == true
-          assert Fraction.within?(f_b, -2, 2) == true
-          
-      end
-      
-      test "int/float" do
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, 0, 2.2) == true
-          assert Fraction.within?(f_b, -2, 0.1) == true
-          
-          # out
-          assert Fraction.within?(f_a, -2, 0.2) == false
-          assert Fraction.within?(f_b, 0, 2.2) == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, 1, 2.3) == true
-          assert Fraction.within?(f_b, 1, 2.3) == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, -2, -1.1) == false
-          assert Fraction.within?(f_b, -2, -1.1) == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, -2, 2.3) == true
-          assert Fraction.within?(f_b, -2, 2.3) == true
-          
-      end
-      
-      test "float/int" do
-          
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, 0.0, 2) == true
-          assert Fraction.within?(f_b, -2.1, 0) == true
-          
-          # out
-          assert Fraction.within?(f_a, -2.2, 0) == false
-          assert Fraction.within?(f_b, 0.1, 2) == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, 1.04, 2) == true
-          assert Fraction.within?(f_b, 1.32, 2) == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, -2.5, -1) == false
-          assert Fraction.within?(f_b, -2.5, -1) == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, -2.3, 2) == true
-          assert Fraction.within?(f_b, -2.3, 2) == true
-          
-      end
-      
-      test "str/str" do
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, "0/1", "2/1") == true
-          assert Fraction.within?(f_b, "-2/1", "0/1") == true
-          
-          # out
-          assert Fraction.within?(f_a, "-2/1", "0/1") == false
-          assert Fraction.within?(f_b, "0/1", "2/1") == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, "1/1", "2/1") == true
-          assert Fraction.within?(f_b, "1/1", "2/1") == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, "-2/1", "-1/1") == false
-          assert Fraction.within?(f_b, "-2/1", "-1/1") == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, "-2/1", "2/1") == true
-          assert Fraction.within?(f_b, "-2/1", "2/1") == true
-          
-      end
-      
-      test "str/int" do
+    test "fraction/fraction" do
+      f_a = Fraction.new(22, 7)
+      f_b = Fraction.new(-22, 5)
 
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, "0/1", 2) == true
-          assert Fraction.within?(f_b, "-2/1", 0) == true
-          
-          # out
-          assert Fraction.within?(f_a, "-2/1", 0) == false
-          assert Fraction.within?(f_b, "0/1", 2) == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, "1/1", 2) == true
-          assert Fraction.within?(f_b, "1/1", 2) == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, "-2/1", -1) == false
-          assert Fraction.within?(f_b, "-2/1", -1) == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, "-2/1", 2) == true
-          assert Fraction.within?(f_b, "-2/1", 2) == true
-          
-      end
-      
-      test "str/float" do
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, "0/1", 2.1) == true
-          assert Fraction.within?(f_b, "-2/1", 0.1) == true
-          
-          # out
-          assert Fraction.within?(f_a, "-2/1", 0.1) == false
-          assert Fraction.within?(f_b, "0/1", 2.1) == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, "1/1", 2.2) == true
-          assert Fraction.within?(f_b, "1/1", 2.2) == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, "-2/1", -1.1) == false
-          assert Fraction.within?(f_b, "-2/1", -1.1) == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, "-2/1", 2.4) == true
-          assert Fraction.within?(f_b, "-2/1", 2.4) == true
-          
-          
-      end
-      
-      test "int/str" do
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, 0, "2/1") == true
-          assert Fraction.within?(f_b, -2, "0/1") == true
-          
-          # out
-          assert Fraction.within?(f_a, -2, "0/1") == false
-          assert Fraction.within?(f_b, 0, "2/1") == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, 1, "2/1") == true
-          assert Fraction.within?(f_b, 1, "2/1") == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, -2, "-1/1") == false
-          assert Fraction.within?(f_b, -2, "-1/1") == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, -2, "2/1") == true
-          assert Fraction.within?(f_b, -2, "2/1") == true
-          
-      end
-      
-      test "float/str" do
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, 0.1, "2/1") == true
-          assert Fraction.within?(f_b, -2.1, "0/1") == true
-          
-          # out
-          assert Fraction.within?(f_a, -2.1, "0/1") == false
-          assert Fraction.within?(f_b, 0.1, "2/1") == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, 1.1, "2/1") == true
-          assert Fraction.within?(f_b, 1.1, "2/1") == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, -2.1, "-1/1") == false
-          assert Fraction.within?(f_b, -2.1, "-1/1") == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, -2.1, "2/1") == true
-          assert Fraction.within?(f_b, -2.1, "2/1") == true
-          
-      end
-      
-      test "float/float" do
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, 0.1, 2.1) == true
-          assert Fraction.within?(f_b, -2.1, 0.1) == true
-          
-          # out
-          assert Fraction.within?(f_a, -2.1, 0.1) == false
-          assert Fraction.within?(f_b, 0.1, 2.1) == false
-          
-          # pos/pos
-          assert Fraction.within?(f_a, 1.1, 2.1) == true
-          assert Fraction.within?(f_b, 1.1, 2.1) == false
-          
-          # neg/neg
-          assert Fraction.within?(f_a, -2.1, -1.1) == false
-          assert Fraction.within?(f_b, -2.1, -1.1) == true
-          
-          # neg/pos
-          assert Fraction.within?(f_a, -2.1, 2.2) == true
-          assert Fraction.within?(f_b, -2.1, 2.2) == true
-          
-      end
-      
-      test "range" do
-          f_a = Fraction.new("5/4")
-          f_b = Fraction.new("-5/4")
-          
-          # in
-          assert Fraction.within?(f_a, 0..2)
-          assert Fraction.within?(f_b, -2..0)
-          
-          # out
-          assert Fraction.within?(f_a, 3..4) == false
-          assert Fraction.within?(f_b, -4..-3) == false
-          
-          # pos pos
-          assert Fraction.within?(f_a, 1..100)
-          assert Fraction.within?(f_b, 3..30) == false
-          
-          # neg pos
-          assert Fraction.within?(f_a, -100..100)
-          assert Fraction.within?(f_b, -20..20)
-          
-          # neg neg
-          assert Fraction.within?(f_a, -100..-3) == false
-          assert Fraction.within?(f_b, -30..-1)
-      end
+      f_low = Fraction.new(-100, 2)
+      f_zero = Fraction.new(0, 3)
+      f_hi = Fraction.new(30, 3)
+
+      # in
+      assert Fraction.within?(f_a, f_zero, f_hi)
+      assert Fraction.within?(f_a, f_low, f_hi)
+
+      assert Fraction.within?(f_b, f_low, f_zero)
+      assert Fraction.within?(f_b, f_low, f_hi)
+
+      # out
+      assert Fraction.within?(f_a, f_low, f_zero) == false
+      assert Fraction.within?(f_b, f_zero, f_hi) == false
+    end
+
+    test "int/int" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, 0, 2) == true
+      assert Fraction.within?(f_b, -2, 0) == true
+
+      # out
+      assert Fraction.within?(f_a, -2, 0) == false
+      assert Fraction.within?(f_b, 0, 2) == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, 1, 2) == true
+      assert Fraction.within?(f_b, 1, 2) == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, -2, -1) == false
+      assert Fraction.within?(f_b, -2, -1) == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, -2, 2) == true
+      assert Fraction.within?(f_b, -2, 2) == true
+    end
+
+    test "int/float" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, 0, 2.2) == true
+      assert Fraction.within?(f_b, -2, 0.1) == true
+
+      # out
+      assert Fraction.within?(f_a, -2, 0.2) == false
+      assert Fraction.within?(f_b, 0, 2.2) == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, 1, 2.3) == true
+      assert Fraction.within?(f_b, 1, 2.3) == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, -2, -1.1) == false
+      assert Fraction.within?(f_b, -2, -1.1) == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, -2, 2.3) == true
+      assert Fraction.within?(f_b, -2, 2.3) == true
+    end
+
+    test "float/int" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, 0.0, 2) == true
+      assert Fraction.within?(f_b, -2.1, 0) == true
+
+      # out
+      assert Fraction.within?(f_a, -2.2, 0) == false
+      assert Fraction.within?(f_b, 0.1, 2) == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, 1.04, 2) == true
+      assert Fraction.within?(f_b, 1.32, 2) == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, -2.5, -1) == false
+      assert Fraction.within?(f_b, -2.5, -1) == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, -2.3, 2) == true
+      assert Fraction.within?(f_b, -2.3, 2) == true
+    end
+
+    test "str/str" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, "0/1", "2/1") == true
+      assert Fraction.within?(f_b, "-2/1", "0/1") == true
+
+      # out
+      assert Fraction.within?(f_a, "-2/1", "0/1") == false
+      assert Fraction.within?(f_b, "0/1", "2/1") == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, "1/1", "2/1") == true
+      assert Fraction.within?(f_b, "1/1", "2/1") == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, "-2/1", "-1/1") == false
+      assert Fraction.within?(f_b, "-2/1", "-1/1") == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, "-2/1", "2/1") == true
+      assert Fraction.within?(f_b, "-2/1", "2/1") == true
+    end
+
+    test "str/int" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, "0/1", 2) == true
+      assert Fraction.within?(f_b, "-2/1", 0) == true
+
+      # out
+      assert Fraction.within?(f_a, "-2/1", 0) == false
+      assert Fraction.within?(f_b, "0/1", 2) == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, "1/1", 2) == true
+      assert Fraction.within?(f_b, "1/1", 2) == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, "-2/1", -1) == false
+      assert Fraction.within?(f_b, "-2/1", -1) == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, "-2/1", 2) == true
+      assert Fraction.within?(f_b, "-2/1", 2) == true
+    end
+
+    test "str/float" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, "0/1", 2.1) == true
+      assert Fraction.within?(f_b, "-2/1", 0.1) == true
+
+      # out
+      assert Fraction.within?(f_a, "-2/1", 0.1) == false
+      assert Fraction.within?(f_b, "0/1", 2.1) == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, "1/1", 2.2) == true
+      assert Fraction.within?(f_b, "1/1", 2.2) == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, "-2/1", -1.1) == false
+      assert Fraction.within?(f_b, "-2/1", -1.1) == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, "-2/1", 2.4) == true
+      assert Fraction.within?(f_b, "-2/1", 2.4) == true
+    end
+
+    test "int/str" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, 0, "2/1") == true
+      assert Fraction.within?(f_b, -2, "0/1") == true
+
+      # out
+      assert Fraction.within?(f_a, -2, "0/1") == false
+      assert Fraction.within?(f_b, 0, "2/1") == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, 1, "2/1") == true
+      assert Fraction.within?(f_b, 1, "2/1") == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, -2, "-1/1") == false
+      assert Fraction.within?(f_b, -2, "-1/1") == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, -2, "2/1") == true
+      assert Fraction.within?(f_b, -2, "2/1") == true
+    end
+
+    test "float/str" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, 0.1, "2/1") == true
+      assert Fraction.within?(f_b, -2.1, "0/1") == true
+
+      # out
+      assert Fraction.within?(f_a, -2.1, "0/1") == false
+      assert Fraction.within?(f_b, 0.1, "2/1") == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, 1.1, "2/1") == true
+      assert Fraction.within?(f_b, 1.1, "2/1") == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, -2.1, "-1/1") == false
+      assert Fraction.within?(f_b, -2.1, "-1/1") == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, -2.1, "2/1") == true
+      assert Fraction.within?(f_b, -2.1, "2/1") == true
+    end
+
+    test "float/float" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, 0.1, 2.1) == true
+      assert Fraction.within?(f_b, -2.1, 0.1) == true
+
+      # out
+      assert Fraction.within?(f_a, -2.1, 0.1) == false
+      assert Fraction.within?(f_b, 0.1, 2.1) == false
+
+      # pos/pos
+      assert Fraction.within?(f_a, 1.1, 2.1) == true
+      assert Fraction.within?(f_b, 1.1, 2.1) == false
+
+      # neg/neg
+      assert Fraction.within?(f_a, -2.1, -1.1) == false
+      assert Fraction.within?(f_b, -2.1, -1.1) == true
+
+      # neg/pos
+      assert Fraction.within?(f_a, -2.1, 2.2) == true
+      assert Fraction.within?(f_b, -2.1, 2.2) == true
+    end
+
+    test "range" do
+      f_a = Fraction.new("5/4")
+      f_b = Fraction.new("-5/4")
+
+      # in
+      assert Fraction.within?(f_a, 0..2)
+      assert Fraction.within?(f_b, -2..0)
+
+      # out
+      assert Fraction.within?(f_a, 3..4) == false
+      assert Fraction.within?(f_b, -4..-3) == false
+
+      # pos pos
+      assert Fraction.within?(f_a, 1..100)
+      assert Fraction.within?(f_b, 3..30) == false
+
+      # neg pos
+      assert Fraction.within?(f_a, -100..100)
+      assert Fraction.within?(f_b, -20..20)
+
+      # neg neg
+      assert Fraction.within?(f_a, -100..-3) == false
+      assert Fraction.within?(f_b, -30..-1)
+    end
   end
-  
+
   describe "increment/2" do
-      test "numerator" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
-          outs = ["2/4", "6/4", "17/4", "-2/4", "-4/4", "1/4", "0/3"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.increment(:numerator) |> Fraction.eq?(Fraction.new(o))
-          end)          
-      end
-      
-      test "num" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
-          outs = ["2/4", "6/4", "17/4", "-2/4", "-4/4", "1/4", "0/3"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.increment(:num) |> Fraction.eq?(Fraction.new(o))
-          end)                    
-      end
+    test "numerator" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+      outs = ["2/4", "6/4", "17/4", "-2/4", "-4/4", "1/4", "0/3"]
 
-      test "denominator" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
-          outs = ["1/5", "5/5", "16/5", "-3/5", "-5/5", "0/5"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.increment(:denominator) |> Fraction.eq?(Fraction.new(o))
-          end)          
-      end
-      
-      test "den" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
-          outs = ["1/5", "5/5", "16/5", "-3/5", "-5/5", "0/5"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.increment(:den) |> Fraction.eq?(Fraction.new(o))
-          end)                    
-      end
-      
-      test "both" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/1"]
-          outs = ["2/5", "6/5", "17/5", "-2/5", "-4/5", "1/5", "0/2"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.increment(:both) |> Fraction.eq?(Fraction.new(o))
-          end)                    
-          
-      end
-            
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.increment(:numerator) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "num" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+      outs = ["2/4", "6/4", "17/4", "-2/4", "-4/4", "1/4", "0/3"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.increment(:num) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "denominator" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+      outs = ["1/5", "5/5", "16/5", "-3/5", "-5/5", "0/5"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i)
+               |> Fraction.increment(:denominator)
+               |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "den" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+      outs = ["1/5", "5/5", "16/5", "-3/5", "-5/5", "0/5"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.increment(:den) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "both" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/1"]
+      outs = ["2/5", "6/5", "17/5", "-2/5", "-4/5", "1/5", "0/2"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.increment(:both) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
   end
-  
+
   describe "decrement/2" do
-      test "numerator" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
-          outs = ["0/4", "4/4", "15/4", "-4/4", "-6/4", "-1/4", "-2/3"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.decrement(:numerator) |> Fraction.eq?(Fraction.new(o))
-          end)          
-      end
-      
-      test "num" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
-          outs = ["0/4", "4/4", "15/4", "-4/4", "-6/4", "-1/4", "-2/3"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.decrement(:num) |> Fraction.eq?(Fraction.new(o))
-          end)                    
-      end
+    test "numerator" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+      outs = ["0/4", "4/4", "15/4", "-4/4", "-6/4", "-1/4", "-2/3"]
 
-      test "denominator" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
-          outs = ["1/3", "5/3", "16/3", "-3/3", "-5/3", "0/3"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.decrement(:denominator) |> Fraction.eq?(Fraction.new(o))
-          end)          
-      end
-      
-      test "den" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
-          outs = ["1/3", "5/3", "16/3", "-3/3", "-5/3", "0/3"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.decrement(:den) |> Fraction.eq?(Fraction.new(o))
-          end)                    
-      end
-      
-      test "both" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
-          outs = ["0/3", "4/3", "15/3", "-4/3", "-6/3", "-1/3"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.decrement(:both) |> Fraction.eq?(Fraction.new(o))
-          end)                    
-          
-      end
-      
-      
-      test "denominator to zero" do
-          
-          assert Fraction.new("3/1") |> Fraction.decrement(:den) == {:error, :invalid_denominator}
-          assert Fraction.new("3/1") |> Fraction.decrement(:both) == {:error, :invalid_denominator}
-          assert Fraction.new("-1/1") |> Fraction.decrement(:both) == {:error, :invalid_denominator}
-          
-      end
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.decrement(:numerator) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "num" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4", "-1/3"]
+      outs = ["0/4", "4/4", "15/4", "-4/4", "-6/4", "-1/4", "-2/3"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.decrement(:num) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "denominator" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+      outs = ["1/3", "5/3", "16/3", "-3/3", "-5/3", "0/3"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i)
+               |> Fraction.decrement(:denominator)
+               |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "den" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+      outs = ["1/3", "5/3", "16/3", "-3/3", "-5/3", "0/3"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.decrement(:den) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "both" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+      outs = ["0/3", "4/3", "15/3", "-4/3", "-6/3", "-1/3"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.decrement(:both) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
+    test "denominator to zero" do
+      assert Fraction.new("3/1") |> Fraction.decrement(:den) == {:error, :invalid_denominator}
+      assert Fraction.new("3/1") |> Fraction.decrement(:both) == {:error, :invalid_denominator}
+      assert Fraction.new("-1/1") |> Fraction.decrement(:both) == {:error, :invalid_denominator}
+    end
   end
-  
+
   describe "floor/1" do
-      test "value tests" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
-          outs = ["0/4", "4/4", "16/4", "-4/4", "-8/4", "0/4"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.floor() |> Fraction.eq?(Fraction.new(o))
-          end)
-          
-      end
+    test "value tests" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+      outs = ["0/4", "4/4", "16/4", "-4/4", "-8/4", "0/4"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.floor() |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
   end
-  
+
   describe "ceiling/1" do
-      test "value tests" do
-          ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
-          outs = ["4/4", "8/4", "16/4", "0/4", "-4/4", "0/4"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.ceiling() |> Fraction.eq?(Fraction.new(o))
-          end)
-          
-      end          
+    test "value tests" do
+      ins = ["1/4", "5/4", "16/4", "-3/4", "-5/4", "0/4"]
+      outs = ["4/4", "8/4", "16/4", "0/4", "-4/4", "0/4"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.ceiling() |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
   end
-  
+
   describe "near_equal?/3" do
-      test "value tests" do
-          ins = [
-              {"1/4", "2/4", 1}, {"-1/4", "3/4", 1}, {"-1/4", "-4/4", 1}, {"1/10", "2/10", "1/10"}, 
-              {"1/12", "2/12", 0.1}, {"-1/4", "5/4", 1}, {"1/10", "3/10", "1/9"}, {"9/5", "7/5", "1/4"},
-              {"1/5", "2/5", -0.5}
-          ]
-          outs = [
-              true, true, true, true, 
-              true, false, false, false,
-              true
-          ]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {{l, r, e}, o} -> 
-              assert Fraction.near_equal?(Fraction.new(l), Fraction.new(r), Fraction.new(e)) == o
-          end)
-          
-      end
+    test "value tests" do
+      ins = [
+        {"1/4", "2/4", 1},
+        {"-1/4", "3/4", 1},
+        {"-1/4", "-4/4", 1},
+        {"1/10", "2/10", "1/10"},
+        {"1/12", "2/12", 0.1},
+        {"-1/4", "5/4", 1},
+        {"1/10", "3/10", "1/9"},
+        {"9/5", "7/5", "1/4"},
+        {"1/5", "2/5", -0.5}
+      ]
+
+      outs = [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
+      ]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{l, r, e}, o} ->
+        assert Fraction.near_equal?(Fraction.new(l), Fraction.new(r), Fraction.new(e)) == o
+      end)
+    end
   end
-  
+
   describe "abs/1" do
-      test "value tests" do
-          ins = ["-3/4", "4/1", -3]
-          outs = ["3/4", "4/1", "3/1"]
-        
-          Enum.zip(ins, outs)
-          |> Enum.each(fn {i, o} -> 
-              assert Fraction.new(i) |> Fraction.absolute_value() |> Fraction.eq?(Fraction.new(o))
-          end)
-          
-      end
+    test "value tests" do
+      ins = ["-3/4", "4/1", -3]
+      outs = ["3/4", "4/1", "3/1"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {i, o} ->
+        assert Fraction.new(i) |> Fraction.absolute_value() |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
   end
-  
+
   describe "String.Chars protocol" do
     test "to_string" do
       assert "#{Fraction.new(3, 5)}" == "3/5"
@@ -1610,100 +1600,99 @@ defmodule Chunky.FractionTest do
     # These are fractionals that _should_ have proper roots
 
     test "need simplification" do
-        ins = [{"80/5", "1/4"}]
-        outs = ["2/1"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)
+      ins = [{"80/5", "1/4"}]
+      outs = ["2/1"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
-    
   end
-  
+
   describe "power/3 - coercion values" do
     test "string ^ string" do
-        ins = [{"2", "8/4"}, {"4/5", "3"}]
-        outs = ["4/1", "64/125"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)
+      ins = [{"2", "8/4"}, {"4/5", "3"}]
+      outs = ["4/1", "64/125"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
-    
+
     test "string ^ int" do
-        ins = [{"2/1", 3}, {"4/5", 2}]
-        outs = ["8/1", "16/25"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)        
+      ins = [{"2/1", 3}, {"4/5", 2}]
+      outs = ["8/1", "16/25"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
-    
+
     test "string ^ float" do
-        ins = [{"16", 0.5}, {"4/5", 3.0}]
-        outs = ["4/1", "64/125"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            # IO.puts("#{b}^#{e} == #{o}")
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)
+      ins = [{"16", 0.5}, {"4/5", 3.0}]
+      outs = ["4/1", "64/125"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        # IO.puts("#{b}^#{e} == #{o}")
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
-    
+
     test "int ^ string" do
-        ins = [{64, "1/3"}, {4, "0.5"}]
-        outs = ["4/1", "2/1"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)        
+      ins = [{64, "1/3"}, {4, "0.5"}]
+      outs = ["4/1", "2/1"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
-    
+
     test "int ^ float" do
-        ins = [{16, 0.5}, {4, 3.5}]
-        outs = ["4/1", "128/1"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)
+      ins = [{16, 0.5}, {4, 3.5}]
+      outs = ["4/1", "128/1"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
-    
+
     test "float ^ string" do
-        ins = [{16.0, "1/2"}, {0.8, "3.0"}]
-        outs = ["4/1", "64/125"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)
+      ins = [{16.0, "1/2"}, {0.8, "3.0"}]
+      outs = ["4/1", "64/125"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
-    
+
     test "float ^ int" do
-        ins = [{0.75, 2}, {-3.5, 4}]
-        outs = ["9/16", "2401/16"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)
-    end    
-    
+      ins = [{0.75, 2}, {-3.5, 4}]
+      outs = ["9/16", "2401/16"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
+    end
+
     test "float ^ float" do
-        ins = [{0.75, 2.0}, {-3.5, 4.0}]
-        outs = ["9/16", "2401/16"]
-        
-        Enum.zip(ins, outs)
-        |> Enum.each(fn {{b, e}, o} -> 
-            assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
-        end)        
+      ins = [{0.75, 2.0}, {-3.5, 4.0}]
+      outs = ["9/16", "2401/16"]
+
+      Enum.zip(ins, outs)
+      |> Enum.each(fn {{b, e}, o} ->
+        assert Fraction.power(b, e, simplify: true) |> Fraction.eq?(Fraction.new(o))
+      end)
     end
   end
-  
+
   describe "power/3 - frac ^ frac" do
     test "fractional roots" do
       test_cases = [

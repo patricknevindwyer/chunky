@@ -6,7 +6,7 @@ Install by adding `chunky` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:chunky, "~> 0.11.2"}
+    {:chunky, "~> 0.11.3"}
   ]
 end
 ```
@@ -71,11 +71,16 @@ iex> Chunky.Sequence.create(Chunky.Sequence.OEIS.Core, :a000594) |> Chunky.Seque
 See `Chunky.Sequence` for more about creating and manipulating sequences. Or find specific sequences to work with
 in:
 
- - `Chunky.Sequence.OEIS.Core` - The OEIS [Core]() sequences.
+ - `Chunky.Sequence.OEIS.Combinatorics` - Permutations, Combinations, and general Combinatorics sequences
+ - `Chunky.Sequence.OEIS.Constants` - Constant values, digit expansions, and constant cycles
+ - `Chunky.Sequence.OEIS.Core` - The OEIS [Core](https://oeis.org/search?q=keyword%3Acore) sequences.
  - `Chunky.Sequence.OEIS.Factors` - OEIS non-core sequences dealing with integer factors and factorization
+ - `Chunky.Sequence.OEIS.Multiples` - Multiples and addition sequences
  - `Chunky.Sequence.OEIS.Powers` - OEIS non-core sequences dealing with powers and simple polynomials
  - `Chunky.Sequence.OEIS.Primes` - OEIS non-core sequences dealing with primes
+ - `Chunky.Sequence.OEIS.Repr` - Number representations, digit contents, and digit patterns
  - `Chunky.Sequence.OEIS.Sigma` - OEIS non-core sequences related to the Sigma functions
+
 
 # Math
 

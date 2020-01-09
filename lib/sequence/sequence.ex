@@ -268,7 +268,7 @@ defmodule Chunky.Sequence do
   defstruct [:next_fn, :data, :index, :value, :finished, :instance, :finite, :init_opts]
 
   require Chunky.Timeout
-  
+
   alias Chunky.Sequence
 
   @doc """
@@ -371,24 +371,24 @@ defmodule Chunky.Sequence do
 
   @doc """
   Find a value in the sequence offset from the current location.
-  
+
   Like `Enum.at`, this function retrieves the value at the given index, offset from the current
   location in the sequence. This _does not_ advance the sequence iterator, and so provides
   different functionality than simply calling `drop(n) |> take(1)`.
-  
+
   If a sequence is _finite_. and the index provided is beyond the end of the sequence, a
   `nil` value is returned.
-  
+
   This function uses a _timeout_ during processing - if iterating to and retrieving the
   target value takes longer than the timeout, the return value from the function will
   be `:timeout`. The default timeout is 1,000 milliseconds.
-  
+
   ## Options
-  
+
    - `timeout`. Integer. Default `1_000`. Number of milliseconds to iterate for a value before stopping
-  
+
   ## Examples
-  
+
       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
       iex> seq |> Sequence.at(10)
       11
@@ -396,7 +396,7 @@ defmodule Chunky.Sequence do
       0
       iex> seq.value
       1
-  
+
       iex> seq = Sequence.create(Sequence.Basic, :decimal_digits) |> Sequence.start()
       iex> seq |> Sequence.at(20)
       nil
@@ -404,37 +404,36 @@ defmodule Chunky.Sequence do
       0
       iex> seq.value
       0
-  
+
       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
       iex> seq |> Sequence.at(1_000_000, timeout: 5)
       :timeout
   """
   def at(%Sequence{} = seq, idx, opts \\ []) do
-          
-      timeout = opts |> Keyword.get(:timeout, 1_000)
-              
-      # do our processing with a timeout
-      got = Chunky.Timeout.with_timeout timeout do
-          # drop up to idx
-          u_seq = seq |> drop(idx)
-      
-          # make sure we're not past the end
-          if u_seq.finished do
-              nil
-          else
-              u_seq.value
-          end
+    timeout = opts |> Keyword.get(:timeout, 1_000)
+
+    # do our processing with a timeout
+    got =
+      Chunky.Timeout.with_timeout timeout do
+        # drop up to idx
+        u_seq = seq |> drop(idx)
+
+        # make sure we're not past the end
+        if u_seq.finished do
+          nil
+        else
+          u_seq.value
+        end
       end
-      
-      # did we get a final value?
-      case got do
-         {:timeout, nil} -> :timeout
-         {:ok, nil} -> nil
-         {:ok, v} -> v
-      end
-      
+
+    # did we get a final value?
+    case got do
+      {:timeout, nil} -> :timeout
+      {:ok, nil} -> nil
+      {:ok, v} -> v
+    end
   end
-  
+
   @doc """
   Create a new sequence from a simple function and an information function. 
 
@@ -797,13 +796,13 @@ defmodule Chunky.Sequence do
         {value, %{sequence | data: data, value: value, finished: true, index: sequence.index + 1}}
     end
   end
-  
+
   @doc """
   Start iteration of a created sequence. This is an alias of `next!/1`.
-  
+
   For readability it can be useful to have a separate _start_ function to call on a newly
   generated sequence.
-  
+
   ## Examples
       
       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start()
@@ -813,17 +812,17 @@ defmodule Chunky.Sequence do
       0
   """
   def start(%Sequence{} = sequence) do
-     sequence |> next!() 
+    sequence |> next!()
   end
-  
+
   @doc """
   Restart a sequence that has already been iterated.
-  
+
   This returns a new instance of the sequence, as it would be initialized
   from `create/3`.
-  
+
   ## Examples
-  
+
       iex> seq = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.start() |> Sequence.drop(30)
       iex> seq.value
       31
@@ -832,10 +831,8 @@ defmodule Chunky.Sequence do
       1
   """
   def restart!(%Sequence{} = sequence) do
-      
-      {mod, seq} = sequence.instance
-      create(mod, seq, sequence.init_opts) |> start()
-      
+    {mod, seq} = sequence.instance
+    create(mod, seq, sequence.init_opts) |> start()
   end
 
   # initialize a sequence, setting up the "pre" state of the full sequence
@@ -932,23 +929,23 @@ defmodule Chunky.Sequence do
         :no_such_module
     end
   end
-  
+
   @doc """
   Instantiate an instance of a sequence from a sequence bundle map.
 
   The sequence bundle map is the set of data returned for each sequence by functions 
   like `Sequence.available/0` or `Sequence.OEIS.find_sequence!/1`. Actual instance
   initialization and creation is handed off to `Sequence.create/3`.
-  
+
   ## Examples
-  
+
       iex> seq = Sequence.OEIS.find_sequence!(:a000012) |> Sequence.create()
       iex> seq |> Sequence.readable_name()
       "The simplest sequence of positive numbers: the all 1's sequence."
    
   """
   def create(%{module: mod, sequence: seq}) do
-     create(mod, seq) 
+    create(mod, seq)
   end
 
   @doc """
