@@ -4000,6 +4000,439 @@ defmodule Chunky.SequenceDataTest do
       finite: false,
       first_index: 0
     },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023698,
+      opts: [],
+      values: [1093, 2551, 3037, 3199, 3253, 3271, 3277, 3279, 3281, 3283],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023699,
+      opts: [],
+      values: [2, 5, 6, 7, 11, 14, 15, 16, 18, 19],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023700,
+      opts: [],
+      values: [8, 17, 20, 23, 24, 25, 35, 44, 47, 50],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023701,
+      opts: [],
+      values: [26, 53, 62, 71, 74, 77, 78, 79, 107, 134],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023702,
+      opts: [],
+      values: [80, 161, 188, 215, 224, 233, 236, 239, 240, 241],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023703,
+      opts: [],
+      values: [242, 485, 566, 647, 674, 701, 710, 719, 722, 725],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023704,
+      opts: [],
+      values: [728, 1457, 1700, 1943, 2024, 2105, 2132, 2159, 2168, 2177],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023706,
+      opts: [],
+      values: [0, 4, 8, 12, 17, 18, 19, 20, 24, 28],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023707,
+      opts: [],
+      values: [16, 32, 48, 65, 66, 67, 68, 72, 76, 80],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023708,
+      opts: [],
+      values: [64, 128, 192, 257, 258, 259, 260, 264, 268, 272],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023709,
+      opts: [],
+      values: [0, 2, 3, 8, 10, 11, 12, 14, 15, 32],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023710,
+      opts: [],
+      values: [1, 4, 6, 7, 9, 13, 16, 18, 19, 24],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023711,
+      opts: [],
+      values: [5, 17, 20, 22, 23, 25, 29, 37, 53, 65],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023712,
+      opts: [],
+      values: [21, 69, 81, 84, 86, 87, 89, 93, 101, 117],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023713,
+      opts: [],
+      values: [0, 1, 3, 4, 5, 7, 12, 13, 15, 16],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023714,
+      opts: [],
+      values: [2, 6, 8, 9, 11, 14, 18, 22, 24, 25],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023715,
+      opts: [],
+      values: [10, 26, 34, 38, 40, 41, 43, 46, 58, 74],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023716,
+      opts: [],
+      values: [42, 106, 138, 154, 162, 166, 168, 169, 171, 174],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023717,
+      opts: [],
+      values: [0, 1, 2, 4, 5, 6, 8, 9, 10, 16],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023718,
+      opts: [],
+      values: [3, 7, 11, 12, 13, 14, 19, 23, 27, 28],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023719,
+      opts: [],
+      values: [15, 31, 47, 51, 55, 59, 60, 61, 62, 79],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023720,
+      opts: [],
+      values: [63, 127, 191, 207, 223, 239, 243, 247, 251, 252],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023721,
+      opts: [],
+      values: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023722,
+      opts: [],
+      values: [0, 5, 10, 15, 20, 26, 27, 28, 29, 30],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023723,
+      opts: [],
+      values: [25, 50, 75, 100, 126, 127, 128, 129, 130, 135],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023724,
+      opts: [],
+      values: [125, 250, 375, 500, 626, 627, 628, 629, 630, 635],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023725,
+      opts: [],
+      values: [0, 2, 3, 4, 10, 12, 13, 14, 15, 17],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023726,
+      opts: [],
+      values: [1, 5, 7, 8, 9, 11, 16, 21, 25, 27],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023727,
+      opts: [],
+      values: [6, 26, 30, 32, 33, 34, 36, 41, 46, 56],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023728,
+      opts: [],
+      values: [31, 131, 151, 155, 157, 158, 159, 161, 166, 171],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023729,
+      opts: [],
+      values: [0, 1, 3, 4, 5, 6, 8, 9, 15, 16],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023730,
+      opts: [],
+      values: [2, 7, 10, 11, 13, 14, 17, 22, 27, 32],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023731,
+      opts: [],
+      values: [12, 37, 52, 57, 60, 61, 63, 64, 67, 72],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023732,
+      opts: [],
+      values: [62, 187, 262, 287, 302, 307, 310, 311, 313, 314],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023733,
+      opts: [],
+      values: [0, 1, 2, 4, 5, 6, 7, 9, 10, 11],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023734,
+      opts: [],
+      values: [3, 8, 13, 15, 16, 17, 19, 23, 28, 33],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023735,
+      opts: [],
+      values: [18, 43, 68, 78, 83, 88, 90, 91, 92, 94],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023736,
+      opts: [],
+      values: [93, 218, 343, 393, 418, 443, 453, 458, 463, 465],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023738,
+      opts: [],
+      values: [4, 9, 14, 19, 20, 21, 22, 23, 29, 34],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023739,
+      opts: [],
+      values: [24, 49, 74, 99, 104, 109, 114, 119, 120, 121],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023740,
+      opts: [],
+      values: [124, 249, 374, 499, 524, 549, 574, 599, 604, 609],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023745,
+      opts: [],
+      values: [0, 1, 2, 4, 5, 8, 13, 14, 17, 26],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023746,
+      opts: [],
+      values: [0, 1, 2, 3, 5, 6, 7, 10, 11, 15],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023747,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 6, 7, 8, 9, 12],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023748,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023749,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 8, 9, 10],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023750,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023751,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023752,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023753,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023754,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023755,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023756,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Repr,
+      sequence: :a023757,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      finite: false,
+      first_index: 1
+    },
+    
     
     
     # OEIS.Constants

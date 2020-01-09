@@ -18,7 +18,29 @@
 # CHANGELOG
 
 
-## v0.*.*
+## v0.11.3
+
+```
+OEIS Coverage
+        561 total sequences
+By Module
+        Elixir.Chunky.Sequence.OEIS - 1 sequences
+        Elixir.Chunky.Sequence.OEIS.Combinatorics - 7 sequences
+        Elixir.Chunky.Sequence.OEIS.Constants - 31 sequences
+        Elixir.Chunky.Sequence.OEIS.Core - 93 sequences
+        Elixir.Chunky.Sequence.OEIS.Factors - 119 sequences
+        Elixir.Chunky.Sequence.OEIS.Multiples - 60 sequences
+        Elixir.Chunky.Sequence.OEIS.Powers - 47 sequences
+        Elixir.Chunky.Sequence.OEIS.Primes - 1 sequences
+        Elixir.Chunky.Sequence.OEIS.Repr - 182 sequences
+        Elixir.Chunky.Sequence.OEIS.Sigma - 20 sequences
+Sequence Groups
+        OEIS Core Sequences - 92 / 177 (51.98%)
+        OEIS Core::Easy Sequences - 78 / 146 (53.42%)
+        OEIS Core::Hard Sequences - 12 / 12 (100.0%)
+        OEIS Core::Multiplicative Sequences - 22 / 22 (100.0%)
+        OEIS Core::Eigen Sequences - 5 / 5 (100.0%)
+```
 
 ### Enhancements
 
@@ -53,6 +75,8 @@
   - is_multiple_rhonda?/1
   - to_base/2
   - digit_count/3
+  - is_plaindrome?/1
+  - is_plaindrome_in_base?/2
   
 ### Sequences
 
@@ -357,8 +381,60 @@
   - A102682 - Number of digits >= 8 in the decimal representations of all integers from 0 to n.
   - A102683 - Number of digits 9 in decimal representation of n.
   - A102684 - Number of times the digit 9 appears in the decimal representations of all integers from 0 to n.
-
-
+  - A023698 - Numbers with exactly 7 1's in ternary expansion.
+  - A023699 - Numbers with a single 2 in their ternary expansion.
+  - A023700 - Numbers with exactly 2 2's in ternary expansion.
+  - A023701 - Numbers with exactly 3 2's in their ternary expansion.
+  - A023702 - Numbers with exactly 4 2's in ternary expansion of n.
+  - A023703 - Numbers with exactly 5 2's in ternary expansion.
+  - A023704 - Numbers with exactly 6 2's in ternary expansion.
+  - A023706 - Numbers with a single 0 in their base 4 expansion.
+  - A023707 - Numbers with exactly 2 0's in base 4 expansion.
+  - A023708 - Numbers with exactly 3 0's in base 4 expansion.
+  - A023709 - Numbers with no 1's in base 4 expansion.
+  - A023710 - Numbers with a single 1 in their base 4 expansion.
+  - A023711 - Numbers with exactly 2 1's in base 4 expansion.
+  - A023712 - Numbers with exactly 3 1's in base 4 expansion.
+  - A023713 - Numbers with no 2's in base 4 expansion.
+  - A023714 - Numbers with a single 2 in their base 4 expansion.
+  - A023715 - Numbers with exactly 2 2's in base 4 expansion.
+  - A023716 - Numbers with exactly 3 2's in base 4 expansion.
+  - A023717 - Numbers with no 3's in base 4 expansion.
+  - A023718 - Numbers with a single 3 in their base 4 expansion.
+  - A023719 - Numbers with exactly two 3's in base 4 expansion.
+  - A023720 - Numbers with exactly 3 3's in base 4 expansion.
+  - A023721 - Numbers with no 0's in their base-5 expansion.
+  - A023722 - Numbers with a single 0 in their base 5 expansion.
+  - A023723 - Numbers with exactly 2 0's in base 5 expansion.
+  - A023724 - Numbers with exactly 3 0's in base 5 expansion.
+  - A023725 - Numbers with no 1's in their base-5 expansion.
+  - A023726 - Numbers with a single 1 in their base 5 expansion.
+  - A023727 - Numbers with exactly 2 1's in their base 5 expansion.
+  - A023728 - Numbers with exactly 3 1's in base 5 expansion.
+  - A023729 - Numbers with no 2's in their base-5 expansion.
+  - A023730 - Numbers with a single 2 in their base 5 expansion.
+  - A023731 - Numbers with exactly two 2's in base 5 expansion.
+  - A023732 - Numbers with exactly 3 2's in base 5 expansion.
+  - A023733 - Numbers with no 3's in base-5 expansion.
+  - A023734 - Numbers with a single 3 in their base-5 expansion.
+  - A023735 - Numbers with exactly 2 3's in their base-5 expansion.
+  - A023736 - Numbers with exactly 3 3's in their base-5 expansion.
+  - A023738 - Numbers with a single 4 in their base 5 expansion.
+  - A023739 - Numbers with exactly 2 4's in base 5 expansion.
+  - A023740 - Numbers with exactly 3 4's in base 5 expansion.
+  - A023745 - Plaindromes: numbers whose digits in base 3 are in nondecreasing order.
+  - A023746 - Plaindromes: numbers whose digits in base 4 are in nondecreasing order.
+  - A023747 - Plaindromes: numbers whose digits in base 5 are in nondecreasing order.
+  - A023748 - Plaindromes: numbers whose digits in base 6 are in nondecreasing order.
+  - A023749 - Plaindromes: numbers whose digits in base 7 are in nondecreasing order.
+  - A023750 - Plaindromes: numbers whose digits in base 8 are in nondecreasing order.
+  - A023751 - Plaindromes: numbers whose digits in base 9 are in nondecreasing order.
+  - A023752 - Plaindromes: numbers whose digits in base 11 are in nondecreasing order.
+  - A023753 - Plaindromes: numbers whose digits in base 12 are in nondecreasing order.
+  - A023754 - Plaindromes: numbers whose digits in base 13 are in nondecreasing order.
+  - A023755 - Plaindromes: numbers whose digits in base 14 are in nondecreasing order.
+  - A023756 - Plaindromes: numbers whose digits in base 15 are in nondecreasing order.
+  - A023757 - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.
 
 
 

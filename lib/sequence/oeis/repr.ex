@@ -54,6 +54,60 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A023695 - Numbers with exactly 4 1's in ternary expansion.](https://oeis.org/A023695) - `:a023695` - `create_sequence_a023695/1`
     - [A023696 - Numbers with exactly 5 1's in ternary expansion.](https://oeis.org/A023696) - `:a023696` - `create_sequence_a023696/1`
     - [A023697 - Numbers with exactly 6 1's in ternary expansion.](https://oeis.org/A023697) - `:a023697` - `create_sequence_a023697/1`
+    - [A023698 - Numbers with exactly 7 1's in ternary expansion.](https://oeis.org/A023698) - `:a023698` - `create_sequence_a023698/1`
+    - [A023699 - Numbers with a single 2 in their ternary expansion.](https://oeis.org/A023699) - `:a023699` - `create_sequence_a023699/1`
+    - [A023700 - Numbers with exactly 2 2's in ternary expansion.](https://oeis.org/A023700) - `:a023700` - `create_sequence_a023700/1`
+    - [A023701 - Numbers with exactly 3 2's in their ternary expansion.](https://oeis.org/A023701) - `:a023701` - `create_sequence_a023701/1`
+    - [A023702 - Numbers with exactly 4 2's in ternary expansion of n.](https://oeis.org/A023702) - `:a023702` - `create_sequence_a023702/1`
+    - [A023703 - Numbers with exactly 5 2's in ternary expansion.](https://oeis.org/A023703) - `:a023703` - `create_sequence_a023703/1`
+    - [A023704 - Numbers with exactly 6 2's in ternary expansion.](https://oeis.org/A023704) - `:a023704` - `create_sequence_a023704/1`
+    - [A023706 - Numbers with a single 0 in their base 4 expansion.](https://oeis.org/A023706) - `:a023706` - `create_sequence_a023706/1`
+    - [A023707 - Numbers with exactly 2 0's in base 4 expansion.](https://oeis.org/A023707) - `:a023707` - `create_sequence_a023707/1`
+    - [A023708 - Numbers with exactly 3 0's in base 4 expansion.](https://oeis.org/A023708) - `:a023708` - `create_sequence_a023708/1`
+    - [A023709 - Numbers with no 1's in base 4 expansion.](https://oeis.org/A023709) - `:a023709` - `create_sequence_a023709/1`
+    - [A023710 - Numbers with a single 1 in their base 4 expansion.](https://oeis.org/A023710) - `:a023710` - `create_sequence_a023710/1`
+    - [A023711 - Numbers with exactly 2 1's in base 4 expansion.](https://oeis.org/A023711) - `:a023711` - `create_sequence_a023711/1`
+    - [A023712 - Numbers with exactly 3 1's in base 4 expansion.](https://oeis.org/A023712) - `:a023712` - `create_sequence_a023712/1`
+    - [A023713 - Numbers with no 2's in base 4 expansion.](https://oeis.org/A023713) - `:a023713` - `create_sequence_a023713/1`
+    - [A023714 - Numbers with a single 2 in their base 4 expansion.](https://oeis.org/A023714) - `:a023714` - `create_sequence_a023714/1`
+    - [A023715 - Numbers with exactly 2 2's in base 4 expansion.](https://oeis.org/A023715) - `:a023715` - `create_sequence_a023715/1`
+    - [A023716 - Numbers with exactly 3 2's in base 4 expansion.](https://oeis.org/A023716) - `:a023716` - `create_sequence_a023716/1`
+    - [A023717 - Numbers with no 3's in base 4 expansion.](https://oeis.org/A023717) - `:a023717` - `create_sequence_a023717/1`
+    - [A023718 - Numbers with a single 3 in their base 4 expansion.](https://oeis.org/A023718) - `:a023718` - `create_sequence_a023718/1`
+    - [A023719 - Numbers with exactly two 3's in base 4 expansion.](https://oeis.org/A023719) - `:a023719` - `create_sequence_a023719/1`
+    - [A023720 - Numbers with exactly 3 3's in base 4 expansion.](https://oeis.org/A023720) - `:a023720` - `create_sequence_a023720/1`
+    - [A023721 - Numbers with no 0's in their base-5 expansion.](https://oeis.org/A023721) - `:a023721` - `create_sequence_a023721/1`
+    - [A023722 - Numbers with a single 0 in their base 5 expansion.](https://oeis.org/A023722) - `:a023722` - `create_sequence_a023722/1`
+    - [A023723 - Numbers with exactly 2 0's in base 5 expansion.](https://oeis.org/A023723) - `:a023723` - `create_sequence_a023723/1`
+    - [A023724 - Numbers with exactly 3 0's in base 5 expansion.](https://oeis.org/A023724) - `:a023724` - `create_sequence_a023724/1`
+    - [A023725 - Numbers with no 1's in their base-5 expansion.](https://oeis.org/A023725) - `:a023725` - `create_sequence_a023725/1`
+    - [A023726 - Numbers with a single 1 in their base 5 expansion.](https://oeis.org/A023726) - `:a023726` - `create_sequence_a023726/1`
+    - [A023727 - Numbers with exactly 2 1's in their base 5 expansion.](https://oeis.org/A023727) - `:a023727` - `create_sequence_a023727/1`
+    - [A023728 - Numbers with exactly 3 1's in base 5 expansion.](https://oeis.org/A023728) - `:a023728` - `create_sequence_a023728/1`
+    - [A023729 - Numbers with no 2's in their base-5 expansion.](https://oeis.org/A023729) - `:a023729` - `create_sequence_a023729/1`
+    - [A023730 - Numbers with a single 2 in their base 5 expansion.](https://oeis.org/A023730) - `:a023730` - `create_sequence_a023730/1`
+    - [A023731 - Numbers with exactly two 2's in base 5 expansion.](https://oeis.org/A023731) - `:a023731` - `create_sequence_a023731/1`
+    - [A023732 - Numbers with exactly 3 2's in base 5 expansion.](https://oeis.org/A023732) - `:a023732` - `create_sequence_a023732/1`
+    - [A023733 - Numbers with no 3's in base-5 expansion.](https://oeis.org/A023733) - `:a023733` - `create_sequence_a023733/1`
+    - [A023734 - Numbers with a single 3 in their base-5 expansion.](https://oeis.org/A023734) - `:a023734` - `create_sequence_a023734/1`
+    - [A023735 - Numbers with exactly 2 3's in their base-5 expansion.](https://oeis.org/A023735) - `:a023735` - `create_sequence_a023735/1`
+    - [A023736 - Numbers with exactly 3 3's in their base-5 expansion.](https://oeis.org/A023736) - `:a023736` - `create_sequence_a023736/1`
+    - [A023738 - Numbers with a single 4 in their base 5 expansion.](https://oeis.org/A023738) - `:a023738` - `create_sequence_a023738/1`
+    - [A023739 - Numbers with exactly 2 4's in base 5 expansion.](https://oeis.org/A023739) - `:a023739` - `create_sequence_a023739/1`
+    - [A023740 - Numbers with exactly 3 4's in base 5 expansion.](https://oeis.org/A023740) - `:a023740` - `create_sequence_a023740/1`
+    - [A023745 - Plaindromes: numbers whose digits in base 3 are in nondecreasing order.](https://oeis.org/A023745) - `:a023745` - `create_sequence_a023745/1`
+    - [A023746 - Plaindromes: numbers whose digits in base 4 are in nondecreasing order.](https://oeis.org/A023746) - `:a023746` - `create_sequence_a023746/1`
+    - [A023747 - Plaindromes: numbers whose digits in base 5 are in nondecreasing order.](https://oeis.org/A023747) - `:a023747` - `create_sequence_a023747/1`
+    - [A023748 - Plaindromes: numbers whose digits in base 6 are in nondecreasing order.](https://oeis.org/A023748) - `:a023748` - `create_sequence_a023748/1`
+    - [A023749 - Plaindromes: numbers whose digits in base 7 are in nondecreasing order.](https://oeis.org/A023749) - `:a023749` - `create_sequence_a023749/1`
+    - [A023750 - Plaindromes: numbers whose digits in base 8 are in nondecreasing order.](https://oeis.org/A023750) - `:a023750` - `create_sequence_a023750/1`
+    - [A023751 - Plaindromes: numbers whose digits in base 9 are in nondecreasing order.](https://oeis.org/A023751) - `:a023751` - `create_sequence_a023751/1`
+    - [A023752 - Plaindromes: numbers whose digits in base 11 are in nondecreasing order.](https://oeis.org/A023752) - `:a023752` - `create_sequence_a023752/1`
+    - [A023753 - Plaindromes: numbers whose digits in base 12 are in nondecreasing order.](https://oeis.org/A023753) - `:a023753` - `create_sequence_a023753/1`
+    - [A023754 - Plaindromes: numbers whose digits in base 13 are in nondecreasing order.](https://oeis.org/A023754) - `:a023754` - `create_sequence_a023754/1`
+    - [A023755 - Plaindromes: numbers whose digits in base 14 are in nondecreasing order.](https://oeis.org/A023755) - `:a023755` - `create_sequence_a023755/1`
+    - [A023756 - Plaindromes: numbers whose digits in base 15 are in nondecreasing order.](https://oeis.org/A023756) - `:a023756` - `create_sequence_a023756/1`
+    - [A023757 - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.](https://oeis.org/A023757) - `:a023757` - `create_sequence_a023757/1`
     - [A043321 - Numbers n such that number of 0's in base 3 is 1.](https://oeis.org/A043321) - `:a043321` - `create_sequence_a043321/1`
     - [A052382 - Numbers without 0 as a digit, a.k.a. zeroless numbers.](https://oeis.org/A052382) - `:a052382` - `create_sequence_a052382/1`
     - [A052383 - Numbers without 1 as a digit.](https://oeis.org/A052383) - `:a052383` - `create_sequence_a052383/1`
@@ -134,8 +188,6 @@ defmodule Chunky.Sequence.OEIS.Repr do
     - [A255805 - Numbers with no zeros in base-8 representation.](https://oeis.org/A255805) - `:a255805` - `create_sequence_a255805/1`
     - [A255808 - Numbers with no zeros in base-9 representation.](https://oeis.org/A255808) - `:a255808` - `create_sequence_a255808/1`
 
-
-   
    
    """ 
    
@@ -3563,6 +3615,2076 @@ defmodule Chunky.Sequence.OEIS.Repr do
            last
        )
    end
+
+
+   @doc """
+   OEIS Sequence `A023698` - Numbers with exactly 7 1's in ternary expansion.
+
+   From [OEIS A023698](https://oeis.org/A023698):
+
+   > Numbers with exactly 7 1's in ternary expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023698`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023698) |> Sequence.take!(36)
+       [1093,2551,3037,3199,3253,3271,3277,3279,3281,3283,3289,3307,3361,3523,4009,5467,6925,7411,7573,7627,7645,7651,7653,7655,7657,7663,7681,7735,7897,8383,8869,9031,9085,9103,9109,9111]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 7 1's in ternary expansion.",
+        references: [{:oeis, :a023698, "https://oeis.org/A023698"}]
+   def create_sequence_a023698(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023698/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023698(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 3) == 7
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023699` - Numbers with a single 2 in their ternary expansion.
+
+   From [OEIS A023699](https://oeis.org/A023699):
+
+   > Numbers with a single 2 in their ternary expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023699`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023699) |> Sequence.take!(56)
+       [2,5,6,7,11,14,15,16,18,19,21,22,29,32,33,34,38,41,42,43,45,46,48,49,54,55,57,58,63,64,66,67,83,86,87,88,92,95,96,97,99,100,102,103,110,113,114,115,119,122,123,124,126,127,129,130]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 2 in their ternary expansion.",
+        references: [{:oeis, :a023699, "https://oeis.org/A023699"}]
+   def create_sequence_a023699(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023699/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023699(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 3) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023700` - Numbers with exactly 2 2's in ternary expansion.
+
+   From [OEIS A023700](https://oeis.org/A023700):
+
+   > Numbers with exactly 2 2's in ternary expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023700`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023700) |> Sequence.take!(51)
+       [8,17,20,23,24,25,35,44,47,50,51,52,56,59,60,61,65,68,69,70,72,73,75,76,89,98,101,104,105,106,116,125,128,131,132,133,137,140,141,142,146,149,150,151,153,154,156,157,164,167,168]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 2's in ternary expansion.",
+        references: [{:oeis, :a023700, "https://oeis.org/A023700"}]
+   def create_sequence_a023700(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023700/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023700(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 3) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023701` - Numbers with exactly 3 2's in their ternary expansion.
+
+   From [OEIS A023701](https://oeis.org/A023701):
+
+   > Numbers with exactly 3 2's in their ternary expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023701`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023701) |> Sequence.take!(47)
+       [26,53,62,71,74,77,78,79,107,134,143,152,155,158,159,160,170,179,182,185,186,187,197,206,209,212,213,214,218,221,222,223,227,230,231,232,234,235,237,238,269,296,305,314,317,320,321]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 2's in their ternary expansion.",
+        references: [{:oeis, :a023701, "https://oeis.org/A023701"}]
+   def create_sequence_a023701(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023701/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023701(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 3) == 3
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023702` - Numbers with exactly 4 2's in ternary expansion of n.
+
+   From [OEIS A023702](https://oeis.org/A023702):
+
+   > Numbers with exactly 4 2's in ternary expansion of n.
+   > (Formerly ) 
+
+   **Sequence IDs**: `:a023702`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023702) |> Sequence.take!(45)
+       [80,161,188,215,224,233,236,239,240,241,323,404,431,458,467,476,479,482,483,484,512,539,548,557,560,563,564,565,593,620,629,638,641,644,645,646,656,665,668,671,672,673,683,692,695]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 4 2's in ternary expansion of n.",
+        references: [{:oeis, :a023702, "https://oeis.org/A023702"}]
+   def create_sequence_a023702(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023702/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023702(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 3) == 4
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023703` - Numbers with exactly 5 2's in ternary expansion.
+
+   From [OEIS A023703](https://oeis.org/A023703):
+
+   > Numbers with exactly 5 2's in ternary expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023703`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023703) |> Sequence.take!(38)
+       [242,485,566,647,674,701,710,719,722,725,726,727,971,1214,1295,1376,1403,1430,1439,1448,1451,1454,1455,1456,1538,1619,1646,1673,1682,1691,1694,1697,1698,1699,1781,1862,1889,1916]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 5 2's in ternary expansion.",
+        references: [{:oeis, :a023703, "https://oeis.org/A023703"}]
+   def create_sequence_a023703(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023703/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023703(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 3) == 5
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023704` - Numbers with exactly 6 2's in ternary expansion.
+
+   From [OEIS A023704](https://oeis.org/A023704):
+
+   > Numbers with exactly 6 2's in ternary expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023704`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023704) |> Sequence.take!(36)
+       [728,1457,1700,1943,2024,2105,2132,2159,2168,2177,2180,2183,2184,2185,2915,3644,3887,4130,4211,4292,4319,4346,4355,4364,4367,4370,4371,4372,4616,4859,4940,5021,5048,5075,5084,5093]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 6 2's in ternary expansion.",
+        references: [{:oeis, :a023704, "https://oeis.org/A023704"}]
+   def create_sequence_a023704(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023704/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023704(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 3) == 6
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023706` - Numbers with a single 0 in their base 4 expansion.
+
+   From [OEIS A023706](https://oeis.org/A023706):
+
+   > Numbers with a single 0 in their base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023706`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023706) |> Sequence.take!(56)
+       [0,4,8,12,17,18,19,20,24,28,33,34,35,36,40,44,49,50,51,52,56,60,69,70,71,73,74,75,77,78,79,81,82,83,84,88,92,97,98,99,100,104,108,113,114,115,116,120,124,133,134,135,137,138,139,141]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 0 in their base 4 expansion.",
+        references: [{:oeis, :a023706, "https://oeis.org/A023706"}]
+   def create_sequence_a023706(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023706/2) 
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023706(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 4) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023707` - Numbers with exactly 2 0's in base 4 expansion.
+
+   From [OEIS A023707](https://oeis.org/A023707):
+
+   > Numbers with exactly 2 0's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023707`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023707) |> Sequence.take!(48)
+       [16,32,48,65,66,67,68,72,76,80,96,112,129,130,131,132,136,140,144,160,176,193,194,195,196,200,204,208,224,240,261,262,263,265,266,267,269,270,271,273,274,275,276,280,284,289,290,291]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 0's in base 4 expansion.",
+        references: [{:oeis, :a023707, "https://oeis.org/A023707"}]
+   def create_sequence_a023707(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023707/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023707(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 4) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023708` - Numbers with exactly 3 0's in base 4 expansion.
+
+   From [OEIS A023708](https://oeis.org/A023708):
+
+   > Numbers with exactly 3 0's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023708`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023708) |> Sequence.take!(44)
+       [64,128,192,257,258,259,260,264,268,272,288,304,320,384,448,513,514,515,516,520,524,528,544,560,576,640,704,769,770,771,772,776,780,784,800,816,832,896,960,1029,1030,1031,1033,1034]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 0's in base 4 expansion.",
+        references: [{:oeis, :a023708, "https://oeis.org/A023708"}]
+   def create_sequence_a023708(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023708/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023708(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 4) == 3
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023709` - Numbers with no 1's in base 4 expansion.
+
+   From [OEIS A023709](https://oeis.org/A023709):
+
+   > Numbers with no 1's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023709`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023709) |> Sequence.take!(52)
+       [0,2,3,8,10,11,12,14,15,32,34,35,40,42,43,44,46,47,48,50,51,56,58,59,60,62,63,128,130,131,136,138,139,140,142,143,160,162,163,168,170,171,172,174,175,176,178,179,184,186,187,188]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no 1's in base 4 expansion.",
+        references: [{:oeis, :a023709, "https://oeis.org/A023709"}]
+   def create_sequence_a023709(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023709/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023709(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 4) == 0
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023710` - Numbers with a single 1 in their base 4 expansion.
+
+   From [OEIS A023710](https://oeis.org/A023710):
+
+   > Numbers with a single 1 in their base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023710`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023710) |> Sequence.take!(56)
+       [1,4,6,7,9,13,16,18,19,24,26,27,28,30,31,33,36,38,39,41,45,49,52,54,55,57,61,64,66,67,72,74,75,76,78,79,96,98,99,104,106,107,108,110,111,112,114,115,120,122,123,124,126,127,129,132]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 1 in their base 4 expansion.",
+        references: [{:oeis, :a023710, "https://oeis.org/A023710"}]
+   def create_sequence_a023710(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023710/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023710(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 4) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023711` - Numbers with exactly 2 1's in base 4 expansion.
+
+   From [OEIS A023711](https://oeis.org/A023711):
+
+   > Numbers with exactly 2 1's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023711`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023711) |> Sequence.take!(51)
+       [5,17,20,22,23,25,29,37,53,65,68,70,71,73,77,80,82,83,88,90,91,92,94,95,97,100,102,103,105,109,113,116,118,119,121,125,133,145,148,150,151,153,157,165,181,197,209,212,214,215,217]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 1's in base 4 expansion.",
+        references: [{:oeis, :a023711, "https://oeis.org/A023711"}]
+   def create_sequence_a023711(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023711/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023711(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 4) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023712` - Numbers with exactly 3 1's in base 4 expansion.
+
+   From [OEIS A023712](https://oeis.org/A023712):
+
+   > Numbers with exactly 3 1's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023712`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023712) |> Sequence.take!(47)
+       [21,69,81,84,86,87,89,93,101,117,149,213,261,273,276,278,279,281,285,293,309,321,324,326,327,329,333,336,338,339,344,346,347,348,350,351,353,356,358,359,361,365,369,372,374,375,377]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 1's in base 4 expansion.",
+        references: [{:oeis, :a023712, "https://oeis.org/A023712"}]
+   def create_sequence_a023712(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023712/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023712(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 4) == 3
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023713` - Numbers with no 2's in base 4 expansion.
+
+   From [OEIS A023713](https://oeis.org/A023713):
+
+   > Numbers with no 2's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023713`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023713) |> Sequence.take!(58)
+       [0,1,3,4,5,7,12,13,15,16,17,19,20,21,23,28,29,31,48,49,51,52,53,55,60,61,63,64,65,67,68,69,71,76,77,79,80,81,83,84,85,87,92,93,95,112,113,115,116,117,119,124,125,127,192,193,195,196]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no 2's in base 4 expansion.",
+        references: [{:oeis, :a023713, "https://oeis.org/A023713"}]
+   def create_sequence_a023713(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023713/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023713(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 4) == 0
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023714` - Numbers with a single 2 in their base 4 expansion.
+
+   From [OEIS A023714](https://oeis.org/A023714):
+
+   > Numbers with a single 2 in their base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023714`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023714) |> Sequence.take!(56)
+       [2,6,8,9,11,14,18,22,24,25,27,30,32,33,35,36,37,39,44,45,47,50,54,56,57,59,62,66,70,72,73,75,78,82,86,88,89,91,94,96,97,99,100,101,103,108,109,111,114,118,120,121,123,126,128,129]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 2 in their base 4 expansion.",
+        references: [{:oeis, :a023714, "https://oeis.org/A023714"}]
+   def create_sequence_a023714(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023714/2)
+   end 
+
+
+   @doc offset: 1
+   def seq_a023714(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 4) == 1
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023715` - Numbers with exactly 2 2's in base 4 expansion.
+
+   From [OEIS A023715](https://oeis.org/A023715):
+
+   > Numbers with exactly 2 2's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023715`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023715) |> Sequence.take!(48)
+       [10,26,34,38,40,41,43,46,58,74,90,98,102,104,105,107,110,122,130,134,136,137,139,142,146,150,152,153,155,158,160,161,163,164,165,167,172,173,175,178,182,184,185,187,190,202,218,226]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 2's in base 4 expansion.",
+        references: [{:oeis, :a023715, "https://oeis.org/A023715"}]
+   def create_sequence_a023715(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023715/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023715(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 4) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023716` - Numbers with exactly 3 2's in base 4 expansion.
+
+   From [OEIS A023716](https://oeis.org/A023716):
+
+   > Numbers with exactly 3 2's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023716`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023716) |> Sequence.take!(45)
+       [42,106,138,154,162,166,168,169,171,174,186,234,298,362,394,410,418,422,424,425,427,430,442,490,522,538,546,550,552,553,555,558,570,586,602,610,614,616,617,619,622,634,642,646,648]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 2's in base 4 expansion.",
+        references: [{:oeis, :a023716, "https://oeis.org/A023716"}]
+   def create_sequence_a023716(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023716/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023716(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 4) == 3
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023717` - Numbers with no 3's in base 4 expansion.
+
+   From [OEIS A023717](https://oeis.org/A023717):
+
+   > Numbers with no 3's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023717`
+
+   **Finite**: False
+
+   **Offset**: 0
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023717) |> Sequence.take!(59)
+       [0,1,2,4,5,6,8,9,10,16,17,18,20,21,22,24,25,26,32,33,34,36,37,38,40,41,42,64,65,66,68,69,70,72,73,74,80,81,82,84,85,86,88,89,90,96,97,98,100,101,102,104,105,106,128,129,130,132,133]
+
+
+   """
+   @doc offset: 0,
+        sequence: "Numbers with no 3's in base 4 expansion.",
+        references: [{:oeis, :a023717, "https://oeis.org/A023717"}]
+   def create_sequence_a023717(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023717/2)
+   end
+
+
+   @doc offset: 0, fill_value: -1
+   def seq_a023717(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 4) == 0
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023718` - Numbers with a single 3 in their base 4 expansion.
+
+   From [OEIS A023718](https://oeis.org/A023718):
+
+   > Numbers with a single 3 in their base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023718`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023718) |> Sequence.take!(56)
+       [3,7,11,12,13,14,19,23,27,28,29,30,35,39,43,44,45,46,48,49,50,52,53,54,56,57,58,67,71,75,76,77,78,83,87,91,92,93,94,99,103,107,108,109,110,112,113,114,116,117,118,120,121,122,131,135]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 3 in their base 4 expansion.",
+        references: [{:oeis, :a023718, "https://oeis.org/A023718"}]
+   def create_sequence_a023718(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023718/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023718(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 4) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023719` - Numbers with exactly two 3's in base 4 expansion.
+
+   From [OEIS A023719](https://oeis.org/A023719):
+
+   > Numbers with exactly two 3's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023719`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023719) |> Sequence.take!(54)
+       [15,31,47,51,55,59,60,61,62,79,95,111,115,119,123,124,125,126,143,159,175,179,183,187,188,189,190,195,199,203,204,205,206,211,215,219,220,221,222,227,231,235,236,237,238,240,241,242,244,245,246,248,249,250]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly two 3's in base 4 expansion.",
+        references: [{:oeis, :a023719, "https://oeis.org/A023719"}]
+   def create_sequence_a023719(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023719/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023719(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 4) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023720` - Numbers with exactly 3 3's in base 4 expansion.
+
+   From [OEIS A023720](https://oeis.org/A023720):
+
+   > Numbers with exactly 3 3's in base 4 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023720`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023720) |> Sequence.take!(45)
+       [63,127,191,207,223,239,243,247,251,252,253,254,319,383,447,463,479,495,499,503,507,508,509,510,575,639,703,719,735,751,755,759,763,764,765,766,783,799,815,819,823,827,828,829,830]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 3's in base 4 expansion.",
+        references: [{:oeis, :a023720, "https://oeis.org/A023720"}]
+   def create_sequence_a023720(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023720/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023720(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 4) == 3
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023721` - Numbers with no 0's in their base-5 expansion.
+
+   From [OEIS A023721](https://oeis.org/A023721):
+
+   > Numbers with no 0's in their base-5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023721`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023721) |> Sequence.take!(63)
+       [1,2,3,4,6,7,8,9,11,12,13,14,16,17,18,19,21,22,23,24,31,32,33,34,36,37,38,39,41,42,43,44,46,47,48,49,56,57,58,59,61,62,63,64,66,67,68,69,71,72,73,74,81,82,83,84,86,87,88,89,91,92,93]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no 0's in their base-5 expansion.",
+        references: [{:oeis, :a023721, "https://oeis.org/A023721"}]
+   def create_sequence_a023721(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023721/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023721(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 5) == 0
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023722` - Numbers with a single 0 in their base 5 expansion.
+
+   From [OEIS A023722](https://oeis.org/A023722):
+
+   > Numbers with a single 0 in their base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023722`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023722) |> Sequence.take!(53)
+       [0,5,10,15,20,26,27,28,29,30,35,40,45,51,52,53,54,55,60,65,70,76,77,78,79,80,85,90,95,101,102,103,104,105,110,115,120,131,132,133,134,136,137,138,139,141,142,143,144,146,147,148,149]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 0 in their base 5 expansion.",
+        references: [{:oeis, :a023722, "https://oeis.org/A023722"}]
+   def create_sequence_a023722(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023722/2) 
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023722(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 5) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023723` - Numbers with exactly 2 0's in base 5 expansion.
+
+   From [OEIS A023723](https://oeis.org/A023723):
+
+   > Numbers with exactly 2 0's in base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023723`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023723) |> Sequence.take!(46)
+       [25,50,75,100,126,127,128,129,130,135,140,145,150,175,200,225,251,252,253,254,255,260,265,270,275,300,325,350,376,377,378,379,380,385,390,395,400,425,450,475,501,502,503,504,505,510]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 0's in base 5 expansion.",
+        references: [{:oeis, :a023723, "https://oeis.org/A023723"}]
+   def create_sequence_a023723(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023723/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023723(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 5) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023724` - Numbers with exactly 3 0's in base 5 expansion.
+
+   From [OEIS A023724](https://oeis.org/A023724):
+
+   > Numbers with exactly 3 0's in base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023724`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023724) |> Sequence.take!(39)
+       [125,250,375,500,626,627,628,629,630,635,640,645,650,675,700,725,750,875,1000,1125,1251,1252,1253,1254,1255,1260,1265,1270,1275,1300,1325,1350,1375,1500,1625,1750,1876,1877,1878]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 0's in base 5 expansion.",
+        references: [{:oeis, :a023724, "https://oeis.org/A023724"}]
+   def create_sequence_a023724(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023724/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023724(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [0], base: 5) == 3
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023725` - Numbers with no 1's in their base-5 expansion.
+
+   From [OEIS A023725](https://oeis.org/A023725):
+
+   > Numbers with no 1's in their base-5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023725`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023725) |> Sequence.take!(61)
+       [0,2,3,4,10,12,13,14,15,17,18,19,20,22,23,24,50,52,53,54,60,62,63,64,65,67,68,69,70,72,73,74,75,77,78,79,85,87,88,89,90,92,93,94,95,97,98,99,100,102,103,104,110,112,113,114,115,117,118,119,120]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no 1's in their base-5 expansion.",
+        references: [{:oeis, :a023725, "https://oeis.org/A023725"}]
+   def create_sequence_a023725(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023725/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023725(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 5) == 0
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023726` - Numbers with a single 1 in their base 5 expansion.
+
+   From [OEIS A023726](https://oeis.org/A023726):
+
+   > Numbers with a single 1 in their base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023726`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023726) |> Sequence.take!(56)
+       [1,5,7,8,9,11,16,21,25,27,28,29,35,37,38,39,40,42,43,44,45,47,48,49,51,55,57,58,59,61,66,71,76,80,82,83,84,86,91,96,101,105,107,108,109,111,116,121,125,127,128,129,135,137,138,139]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 1 in their base 5 expansion.",
+        references: [{:oeis, :a023726, "https://oeis.org/A023726"}]
+   def create_sequence_a023726(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023726/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023726(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 5) == 1
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023727` - Numbers with exactly 2 1's in their base 5 expansion.
+
+   From [OEIS A023727](https://oeis.org/A023727):
+
+   > Numbers with exactly 2 1's in their base 5 expansion.
+   > (Formerly ) 
+
+   **Sequence IDs**: `:a023727`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023727) |> Sequence.take!(48)
+       [6,26,30,32,33,34,36,41,46,56,81,106,126,130,132,133,134,136,141,146,150,152,153,154,160,162,163,164,165,167,168,169,170,172,173,174,176,180,182,183,184,186,191,196,201,205,207,208]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 1's in their base 5 expansion.",
+        references: [{:oeis, :a023727, "https://oeis.org/A023727"}]
+   def create_sequence_a023727(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023727/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023727(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 5) == 2
+           end, 
+           last
+       )
+   end
+
+   @doc """
+   OEIS Sequence `A023728` - Numbers with exactly 3 1's in base 5 expansion.
+
+   From [OEIS A023728](https://oeis.org/A023728):
+
+   > Numbers with exactly 3 1's in base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023728`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023728) |> Sequence.take!(45)
+       [31,131,151,155,157,158,159,161,166,171,181,206,231,281,406,531,631,651,655,657,658,659,661,666,671,681,706,731,751,755,757,758,759,761,766,771,775,777,778,779,785,787,788,789,790]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 1's in base 5 expansion.",
+        references: [{:oeis, :a023728, "https://oeis.org/A023728"}]
+   def create_sequence_a023728(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023728/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023728(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [1], base: 5) == 3
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023729` - Numbers with no 2's in their base-5 expansion.
+
+   From [OEIS A023729](https://oeis.org/A023729):
+
+   > Numbers with no 2's in their base-5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023729`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023729) |> Sequence.take!(62)
+       [0,1,3,4,5,6,8,9,15,16,18,19,20,21,23,24,25,26,28,29,30,31,33,34,40,41,43,44,45,46,48,49,75,76,78,79,80,81,83,84,90,91,93,94,95,96,98,99,100,101,103,104,105,106,108,109,115,116,118,119,120,121]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no 2's in their base-5 expansion.",
+        references: [{:oeis, :a023729, "https://oeis.org/A023729"}]
+   def create_sequence_a023729(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023729/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023729(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 5) == 0
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023730` - Numbers with a single 2 in their base 5 expansion.
+
+   From [OEIS A023730](https://oeis.org/A023730):
+
+   > Numbers with a single 2 in their base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023730`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023730) |> Sequence.take!(56)
+       [2,7,10,11,13,14,17,22,27,32,35,36,38,39,42,47,50,51,53,54,55,56,58,59,65,66,68,69,70,71,73,74,77,82,85,86,88,89,92,97,102,107,110,111,113,114,117,122,127,132,135,136,138,139,142,147]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 2 in their base 5 expansion.",
+        references: [{:oeis, :a023730, "https://oeis.org/A023730"}]
+   def create_sequence_a023730(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023730/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023730(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 5) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023731` - Numbers with exactly two 2's in base 5 expansion.
+
+   From [OEIS A023731](https://oeis.org/A023731):
+
+   > Numbers with exactly two 2's in base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023731`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023731) |> Sequence.take!(48)
+       [12,37,52,57,60,61,63,64,67,72,87,112,137,162,177,182,185,186,188,189,192,197,212,237,252,257,260,261,263,264,267,272,277,282,285,286,288,289,292,297,300,301,303,304,305,306,308,309]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly two 2's in base 5 expansion.",
+        references: [{:oeis, :a023731, "https://oeis.org/A023731"}]
+   def create_sequence_a023731(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023731/2)
+   end 
+
+
+   @doc offset: 1
+   def seq_a023731(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 5) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023732` - Numbers with exactly 3 2's in base 5 expansion.
+
+   From [OEIS A023732](https://oeis.org/A023732):
+
+   > Numbers with exactly 3 2's in base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023732`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023732) |> Sequence.take!(42)
+       [62,187,262,287,302,307,310,311,313,314,317,322,337,362,437,562,687,812,887,912,927,932,935,936,938,939,942,947,962,987,1062,1187,1262,1287,1302,1307,1310,1311,1313,1314,1317,1322]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 2's in base 5 expansion.",
+        references: [{:oeis, :a023732, "https://oeis.org/A023732"}]
+   def create_sequence_a023732(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023732/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023732(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [2], base: 5) == 3
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023733` - Numbers with no 3's in base-5 expansion.
+
+   From [OEIS A023733](https://oeis.org/A023733):
+
+   > Numbers with no 3's in base-5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023733`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023733) |> Sequence.take!(60)
+       [0,1,2,4,5,6,7,9,10,11,12,14,20,21,22,24,25,26,27,29,30,31,32,34,35,36,37,39,45,46,47,49,50,51,52,54,55,56,57,59,60,61,62,64,70,71,72,74,100,101,102,104,105,106,107,109,110,111,112,114]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with no 3's in base-5 expansion.",
+        references: [{:oeis, :a023733, "https://oeis.org/A023733"}]
+   def create_sequence_a023733(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023733/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023733(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 5) == 0
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023734` - Numbers with a single 3 in their base-5 expansion.
+
+   From [OEIS A023734](https://oeis.org/A023734):
+
+   > Numbers with a single 3 in their base-5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023734`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023734) |> Sequence.take!(58)
+       [3,8,13,15,16,17,19,23,28,33,38,40,41,42,44,48,53,58,63,65,66,67,69,73,75,76,77,79,80,81,82,84,85,86,87,89,95,96,97,99,103,108,113,115,116,117,119,123,128,133,138,140,141,142,144,148,153,158]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 3 in their base-5 expansion.",
+        references: [{:oeis, :a023734, "https://oeis.org/A023734"}]
+   def create_sequence_a023734(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023734/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023734(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 5) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023735` - Numbers with exactly 2 3's in their base-5 expansion.
+
+   From [OEIS A023735](https://oeis.org/A023735):
+
+   > Numbers with exactly 2 3's in their base-5 expansion.
+   > (Formerly ) 
+
+   **Sequence IDs**: `:a023735`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023735) |> Sequence.take!(52)
+       [18,43,68,78,83,88,90,91,92,94,98,118,143,168,193,203,208,213,215,216,217,219,223,243,268,293,318,328,333,338,340,341,342,344,348,368,378,383,388,390,391,392,394,398,403,408,413,415,416,417,419,423]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 3's in their base-5 expansion.",
+        references: [{:oeis, :a023735, "https://oeis.org/A023735"}]
+   def create_sequence_a023735(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023735/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023735(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 5) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023736` - Numbers with exactly 3 3's in their base-5 expansion.
+
+   From [OEIS A023736](https://oeis.org/A023736):
+
+   > Numbers with exactly 3 3's in their base-5 expansion.
+   > (Formerly ) 
+
+   **Sequence IDs**: `:a023736`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023736) |> Sequence.take!(40)
+       [93,218,343,393,418,443,453,458,463,465,466,467,469,473,493,593,718,843,968,1018,1043,1068,1078,1083,1088,1090,1091,1092,1094,1098,1118,1218,1343,1468,1593,1643,1668,1693,1703,1708]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 3's in their base-5 expansion.",
+        references: [{:oeis, :a023736, "https://oeis.org/A023736"}]
+   def create_sequence_a023736(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023736/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023736(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [3], base: 5) == 3
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023738` - Numbers with a single 4 in their base 5 expansion.
+
+   From [OEIS A023738](https://oeis.org/A023738):
+
+   > Numbers with a single 4 in their base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023738`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023738) |> Sequence.take!(54)
+       [4,9,14,19,20,21,22,23,29,34,39,44,45,46,47,48,54,59,64,69,70,71,72,73,79,84,89,94,95,96,97,98,100,101,102,103,105,106,107,108,110,111,112,113,115,116,117,118,129,134,139,144,145,146]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with a single 4 in their base 5 expansion.",
+        references: [{:oeis, :a023738, "https://oeis.org/A023738"}]
+   def create_sequence_a023738(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023738/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023738(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [4], base: 5) == 1
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023739` - Numbers with exactly 2 4's in base 5 expansion.
+
+   From [OEIS A023739](https://oeis.org/A023739):
+
+   > Numbers with exactly 2 4's in base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023739`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023739) |> Sequence.take!(46)
+       [24,49,74,99,104,109,114,119,120,121,122,123,149,174,199,224,229,234,239,244,245,246,247,248,274,299,324,349,354,359,364,369,370,371,372,373,399,424,449,474,479,484,489,494,495,496]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 2 4's in base 5 expansion.",
+        references: [{:oeis, :a023739, "https://oeis.org/A023739"}]
+   def create_sequence_a023739(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023739/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023739(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [4], base: 5) == 2
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023740` - Numbers with exactly 3 4's in base 5 expansion.
+
+   From [OEIS A023740](https://oeis.org/A023740):
+
+   > Numbers with exactly 3 4's in base 5 expansion.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023740`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023740) |> Sequence.take!(40)
+       [124,249,374,499,524,549,574,599,604,609,614,619,620,621,622,623,749,874,999,1124,1149,1174,1199,1224,1229,1234,1239,1244,1245,1246,1247,1248,1374,1499,1624,1749,1774,1799,1824,1849]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Numbers with exactly 3 4's in base 5 expansion.",
+        references: [{:oeis, :a023740, "https://oeis.org/A023740"}]
+   def create_sequence_a023740(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023740/2)
+   end
+
+
+   @doc offset: 1
+   def seq_a023740(_idx, last) do
+       Math.next_number(
+           fn v -> 
+               Math.digit_count(v, [4], base: 5) == 3
+           end, 
+           last
+       )
+    
+   end
+
+   @doc """
+   OEIS Sequence `A023745` - Plaindromes: numbers whose digits in base 3 are in nondecreasing order.
+
+   From [OEIS A023745](https://oeis.org/A023745):
+
+   > Plaindromes: numbers whose digits in base 3 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023745`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023745) |> Sequence.take!(49)
+       [0,1,2,4,5,8,13,14,17,26,40,41,44,53,80,121,122,125,134,161,242,364,365,368,377,404,485,728,1093,1094,1097,1106,1133,1214,1457,2186,3280,3281,3284,3293,3320,3401,3644,4373,6560,9841,9842,9845,9854]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 3 are in nondecreasing order.",
+        references: [{:oeis, :a023745, "https://oeis.org/A023745"}]
+   def create_sequence_a023745(_opts) do 
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023745/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023745(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 3) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023746` - Plaindromes: numbers whose digits in base 4 are in nondecreasing order.
+
+   From [OEIS A023746](https://oeis.org/A023746):
+
+   > Plaindromes: numbers whose digits in base 4 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023746`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023746) |> Sequence.take!(58)
+       [0,1,2,3,5,6,7,10,11,15,21,22,23,26,27,31,42,43,47,63,85,86,87,90,91,95,106,107,111,127,170,171,175,191,255,341,342,343,346,347,351,362,363,367,383,426,427,431,447,511,682,683,687,703,767,1023,1365,1366]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 4 are in nondecreasing order.",
+        references: [{:oeis, :a023746, "https://oeis.org/A023746"}]
+   def create_sequence_a023746(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023746/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023746(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 4) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023747` - Plaindromes: numbers whose digits in base 5 are in nondecreasing order.
+
+   From [OEIS A023747](https://oeis.org/A023747):
+
+   > Plaindromes: numbers whose digits in base 5 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023747`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023747) |> Sequence.take!(60)
+       [0,1,2,3,4,6,7,8,9,12,13,14,18,19,24,31,32,33,34,37,38,39,43,44,49,62,63,64,68,69,74,93,94,99,124,156,157,158,159,162,163,164,168,169,174,187,188,189,193,194,199,218,219,224,249,312,313,314,318,319]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 5 are in nondecreasing order.",
+        references: [{:oeis, :a023747, "https://oeis.org/A023747"}]
+   def create_sequence_a023747(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023747/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023747(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 5) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023748` - Plaindromes: numbers whose digits in base 6 are in nondecreasing order.
+
+   From [OEIS A023748](https://oeis.org/A023748):
+
+   > Plaindromes: numbers whose digits in base 6 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023748`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023748) |> Sequence.take!(63)
+       [0,1,2,3,4,5,7,8,9,10,11,14,15,16,17,21,22,23,28,29,35,43,44,45,46,47,50,51,52,53,57,58,59,64,65,71,86,87,88,89,93,94,95,100,101,107,129,130,131,136,137,143,172,173,179,215,259,260,261,262,263,266,267]
+
+
+   """ 
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 6 are in nondecreasing order.",
+        references: [{:oeis, :a023748, "https://oeis.org/A023748"}]
+   def create_sequence_a023748(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023748/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023748(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 6) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023749` - Plaindromes: numbers whose digits in base 7 are in nondecreasing order.
+
+   From [OEIS A023749](https://oeis.org/A023749):
+
+   > Plaindromes: numbers whose digits in base 7 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023749`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023749) |> Sequence.take!(65)
+       [0,1,2,3,4,5,6,8,9,10,11,12,13,16,17,18,19,20,24,25,26,27,32,33,34,40,41,48,57,58,59,60,61,62,65,66,67,68,69,73,74,75,76,81,82,83,89,90,97,114,115,116,117,118,122,123,124,125,130,131,132,138,139,146,171]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 7 are in nondecreasing order.",
+        references: [{:oeis, :a023749, "https://oeis.org/A023749"}]
+   def create_sequence_a023749(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023749/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023749(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 7) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023750` - Plaindromes: numbers whose digits in base 8 are in nondecreasing order.
+
+   From [OEIS A023750](https://oeis.org/A023750):
+
+   > Plaindromes: numbers whose digits in base 8 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023750`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023750) |> Sequence.take!(66)
+       [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,18,19,20,21,22,23,27,28,29,30,31,36,37,38,39,45,46,47,54,55,63,73,74,75,76,77,78,79,82,83,84,85,86,87,91,92,93,94,95,100,101,102,103,109,110,111,118,119,127,146,147]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 8 are in nondecreasing order.",
+        references: [{:oeis, :a023750, "https://oeis.org/A023750"}]
+   def create_sequence_a023750(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023750/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023750(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 8) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023751` - Plaindromes: numbers whose digits in base 9 are in nondecreasing order.
+
+   From [OEIS A023751](https://oeis.org/A023751):
+
+   > Plaindromes: numbers whose digits in base 9 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023751`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023751) |> Sequence.take!(66)
+       [0,1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,20,21,22,23,24,25,26,30,31,32,33,34,35,40,41,42,43,44,50,51,52,53,60,61,62,70,71,80,91,92,93,94,95,96,97,98,101,102,103,104,105,106,107,111,112,113,114,115,116]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 9 are in nondecreasing order.",
+        references: [{:oeis, :a023751, "https://oeis.org/A023751"}]
+   def create_sequence_a023751(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023751/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023751(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 9) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023752` - Plaindromes: numbers whose digits in base 11 are in nondecreasing order.
+
+   From [OEIS A023752](https://oeis.org/A023752):
+
+   > Plaindromes: numbers whose digits in base 11 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023752`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023752) |> Sequence.take!(66)
+       [0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,24,25,26,27,28,29,30,31,32,36,37,38,39,40,41,42,43,48,49,50,51,52,53,54,60,61,62,63,64,65,72,73,74,75,76,84,85,86,87,96,97,98,108,109,120]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 11 are in nondecreasing order.",
+        references: [{:oeis, :a023752, "https://oeis.org/A023752"}]
+   def create_sequence_a023752(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023752/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023752(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 11) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023753` - Plaindromes: numbers whose digits in base 12 are in nondecreasing order.
+
+   From [OEIS A023753](https://oeis.org/A023753):
+
+   > Plaindromes: numbers whose digits in base 12 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023753`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023753) |> Sequence.take!(69)
+       [0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,26,27,28,29,30,31,32,33,34,35,39,40,41,42,43,44,45,46,47,52,53,54,55,56,57,58,59,65,66,67,68,69,70,71,78,79,80,81,82,83,91,92,93,94,95,104]
+
+
+   """ 
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 12 are in nondecreasing order.",
+        references: [{:oeis, :a023753, "https://oeis.org/A023753"}]
+   def create_sequence_a023753(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023753/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023753(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 12) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023754` - Plaindromes: numbers whose digits in base 13 are in nondecreasing order.
+
+   From [OEIS A023754](https://oeis.org/A023754):
+
+   > Plaindromes: numbers whose digits in base 13 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023754`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023754) |> Sequence.take!(70)
+       [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,28,29,30,31,32,33,34,35,36,37,38,42,43,44,45,46,47,48,49,50,51,56,57,58,59,60,61,62,63,64,70,71,72,73,74,75,76,77,84,85,86,87,88,89,90]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 13 are in nondecreasing order.",
+        references: [{:oeis, :a023754, "https://oeis.org/A023754"}]
+   def create_sequence_a023754(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023754/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023754(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 13) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023755` - Plaindromes: numbers whose digits in base 14 are in nondecreasing order.
+
+   From [OEIS A023755](https://oeis.org/A023755):
+
+   > Plaindromes: numbers whose digits in base 14 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023755`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023755) |> Sequence.take!(70)
+       [0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,30,31,32,33,34,35,36,37,38,39,40,41,45,46,47,48,49,50,51,52,53,54,55,60,61,62,63,64,65,66,67,68,69,75,76,77,78,79,80,81,82,83,90]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 14 are in nondecreasing order.",
+        references: [{:oeis, :a023755, "https://oeis.org/A023755"}]
+   def create_sequence_a023755(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023755/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023755(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 14) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023756` - Plaindromes: numbers whose digits in base 15 are in nondecreasing order.
+
+   From [OEIS A023756](https://oeis.org/A023756):
+
+   > Plaindromes: numbers whose digits in base 15 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023756`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023756) |> Sequence.take!(70)
+       [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,28,29,32,33,34,35,36,37,38,39,40,41,42,43,44,48,49,50,51,52,53,54,55,56,57,58,59,64,65,66,67,68,69,70,71,72,73,74,80,81,82,83,84]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 15 are in nondecreasing order.",
+        references: [{:oeis, :a023756, "https://oeis.org/A023756"}]
+   def create_sequence_a023756(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023756/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023756(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 15) end, last)
+   end
+
+   @doc """
+   OEIS Sequence `A023757` - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.
+
+   From [OEIS A023757](https://oeis.org/A023757):
+
+   > Plaindromes: numbers whose digits in base 16 are in nondecreasing order.
+   > (Formerly )
+
+   **Sequence IDs**: `:a023757`
+
+   **Finite**: False
+
+   **Offset**: 1
+
+   ## Example
+
+       iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a023757) |> Sequence.take!(70)
+       [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,34,35,36,37,38,39,40,41,42,43,44,45,46,47,51,52,53,54,55,56,57,58,59,60,61,62,63,68,69,70,71,72,73,74,75,76,77,78,79]
+
+
+   """
+   @doc offset: 1,
+        sequence: "Plaindromes: numbers whose digits in base 16 are in nondecreasing order.",
+        references: [{:oeis, :a023757, "https://oeis.org/A023757"}]
+   def create_sequence_a023757(_opts) do
+           sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023757/2)
+   end
+
+
+   @doc offset: 1, fill_value: -1
+   def seq_a023757(_idx, last) do
+       Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 16) end, last)
+   end
+
 
    @doc """
    OEIS Sequence `A023697` - Numbers with exactly 6 1's in ternary expansion.

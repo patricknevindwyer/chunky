@@ -54,6 +54,7 @@ defmodule Chunky.Math do
    - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
    - `digit_count/3` - Count digits in `n` in any base representation
    - `digit_sum/1` - Calculate the sum of the digits of `n`
+   - `is_plaindrome_in_base?/2` - Does `n` have never decreasing digits in base `b`?
    - `remove_digits!/3` - Remove one or more digits from `n`, returning a reconstituted number
    - `to_base/2` - Convert a decimal integer to any base from 2 to 10
 
@@ -91,6 +92,7 @@ defmodule Chunky.Math do
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_perfect_power?/1` - Is `n` a perfect power?
    - `is_perfect_square?/1` - Is `n` a perfect square?
+   - `is_plaindrome?/1` - Does `n` have never decreasing digits in base 10?
    - `is_positive?/1` - Is an integer a positive number?
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `is_prime?/1` - Test if an integer is prime
@@ -413,6 +415,47 @@ defmodule Chunky.Math do
   """
   def is_coprime?(a, b) when is_integer(a) and is_integer(b) and a > 0 and b > 0 do
     Integer.gcd(a, b) == 1
+  end
+  
+  @doc """
+  Check if `n` is a _plaindrome_ in base 10.
+  
+  See `is_plaindrome_in_base?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_plaindrome?(22367)
+      true
+  
+      iex> Math.is_plaindrome?(2048)
+      false
+  """
+  def is_plaindrome?(n), do: is_plaindrome_in_base?(n, 10)
+  
+  @doc """
+  Check if a number `n` in numeric base `b` is a _plaindrome_. A _plaindrome_ has digits that
+  never _decrease_ in value when read from left to right.
+  
+  ## Examples
+  
+      iex> Math.is_plaindrome_in_base?(123456, 10)
+      true
+      
+      iex> Math.is_plaindrome_in_base?(11111, 10)
+      true
+  
+      iex> Math.is_plaindrome_in_base?(111232, 10)
+      false
+  
+      iex> Math.is_plaindrome_in_base?(9842, 3)
+      true
+  """
+  def is_plaindrome_in_base?(n, b) when is_integer(n) and is_integer(b) and b > 1 do
+      
+      p_digits = Integer.digits(n, b)
+      s_digits = p_digits |> Enum.sort()
+      
+      p_digits == s_digits
   end
 
   @doc """
@@ -4164,7 +4207,7 @@ defmodule Chunky.Math do
       [:negative, :odd]
 
       iex> Math.analyze_number(0)
-      [:even, :zero]
+      [:even, :plaindrome, :zero]
 
       iex> Math.analyze_number(105840, skip_smooth: true)
       [:abundant, :arithmetic_number, :even, :odious_number, :positive]
