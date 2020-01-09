@@ -313,6 +313,52 @@
   - A255808 - Numbers with no zeros in base-9 representation.
   - A001414 - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).
   - A001489 - a(n) = -n.
+  - A007953 - Digital sum (i.e., sum of digits) of n; also called digsum(n).
+  - A014263 - Numbers that contain even digits only.
+  - A023692 - Numbers with a single 1 in their ternary expansion.
+  - A023693 - Numbers with exactly 2 1's in ternary expansion.
+  - A023694 - Numbers with exactly 3 1's in ternary expansion.
+  - A023695 - Numbers with exactly 4 1's in ternary expansion.
+  - A023696 - Numbers with exactly 5 1's in ternary expansion.
+  - A023697 - Numbers with exactly 6 1's in ternary expansion.
+  - A043321 - Numbers n such that number of 0's in base 3 is 1.
+  - A059015 - Total number of 0's in binary expansions of 0, ..., n.
+  - A062756 - Number of 1's in ternary (base 3) expansion of n.
+  - A074940 - Numbers having at least one 2 in their ternary representation.
+  - A077267 - Number of zeros in base 3 expansion of n.
+  - A081603 - Number of 2's in ternary representation of n.
+  - A081605 - Numbers having at least one 0 in their ternary representation.
+  - A081606 - Numbers having at least one 1 in their ternary representation.
+  - A097251 - Numbers whose set of base 5 digits is {0,4}.
+  - A097252 - Numbers whose set of base 6 digits is {0,5}.
+  - A097253 - Numbers whose set of base 7 digits is {0,6}.
+  - A097254 - Numbers whose set of base 8 digits is {0,7}.
+  - A097255 - Numbers whose set of base 9 digits is {0,8}.
+  - A097256 - Numbers whose set of base 10 digits is {0,9}.
+  - A097257 - Numbers whose set of base 11 digits is {0,A}, where A base 11 = 10 base 10.
+  - A097258 - Numbers whose set of base 12 digits is {0,B}, where B base 12 = 11 base 10.
+  - A097259 - Numbers whose set of base 13 digits is {0,C}, where C base 13 = 12 base 10.
+  - A097260 - Numbers whose set of base 14 digits is {0,D}, where D base 14 = 13 base 10.
+  - A097261 - Numbers whose set of base 15 digits is {0,E}, where E base 15 = 14 base 10.
+  - A097262 - Numbers whose set of base 16 digits is {0,F}, where F base 16 = 15 base 10.
+  - A102669 - Number of digits >= 2 in decimal representation of n.
+  - A102670 - Number of digits >= 2 in the decimal representations of all integers from 0 to n.
+  - A102671 - Number of digits >= 3 in decimal representation of n.
+  - A102672 - Number of digits >= 3 in the decimal representations of all integers from 0 to n.
+  - A102673 - Number of digits >= 4 in decimal representation of n.
+  - A102674 - Number of digits >= 4 in the decimal representations of all integers from 0 to n.
+  - A102675 - Number of digits >= 5 in decimal representation of n.
+  - A102676 - Number of digits >= 5 in the decimal representations of all integers from 0 to n.
+  - A102677 - Number of digits >= 6 in decimal representation of n.
+  - A102678 - Number of digits >= 6 in the decimal representations of all integers from 0 to n.
+  - A102679 - Number of digits >= 7 in decimal representation of n.
+  - A102680 - Number of digits >= 7 in the decimal representations of all integers from 0 to n.
+  - A102681 - Number of digits >= 8 in decimal representation of n.
+  - A102682 - Number of digits >= 8 in the decimal representations of all integers from 0 to n.
+  - A102683 - Number of digits 9 in decimal representation of n.
+  - A102684 - Number of times the digit 9 appears in the decimal representations of all integers from 0 to n.
+
+
 
 
 
