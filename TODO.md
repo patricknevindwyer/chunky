@@ -139,6 +139,24 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
      https://en.wikipedia.org/wiki/Somer–Lucas_pseudoprime
      https://en.wikipedia.org/wiki/Strong_pseudoprime
 
+
+Lucas numbers as primality test - Lucas Pseudo prime
+
+Lucas-Lehmer sequence n = (n - 1)^2 - 2 with n(0) = 4
+
+Lucas-lahmer primality test (2^p - 1 = m) if LL seq (p - 1) is multiple of m, def prime for Mersenne primes
+ - can use modular exponentiation
+
+
+s Highly composite number? (We can use a carry method with sigma ?)
+
+Do we have a count of all factors ?
+Factor_count = exponents_of_prime_factors() |> &(&1 + 1) |> Enum.reduce(1, fn x, acc -> x * acc end)
+
+Highly composite: consecutive prime factors, weakly decreasing powers, last prime power is 1 (two exceptions, 4 and 36)
+
+
+In Mersenne prime in form (2^n - 1) n must be prime
  
  - Fractions to Decimals
   - duh. http://mathforum.org/library/drmath/view/58126.html
