@@ -41,6 +41,7 @@ defmodule Chunky.Math do
   Work with divisors and prime factors.
 
    - `factorization_count/1` - Count the number of possible factorizations of `n`.
+   - `factor_pairs/2/` - Find pair wise factors of `n`.
    - `factors/1` - All divisors for an integer
    - `is_power_of?/2` - Is `n` a power of `m`?
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
@@ -54,7 +55,9 @@ defmodule Chunky.Math do
    - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
    - `digit_count/3` - Count digits in `n` in any base representation
    - `digit_sum/1` - Calculate the sum of the digits of `n`
+   - `is_in_base?/2` - Is `n` a valid number in base `b`?
    - `is_plaindrome_in_base?/2` - Does `n` have never decreasing digits in base `b`?
+   - `length_in_base?/2` - How many digits long is `n` in base `b`?
    - `remove_digits!/3` - Remove one or more digits from `n`, returning a reconstituted number
    - `to_base/2` - Convert a decimal integer to any base from 2 to 10
 
@@ -81,6 +84,7 @@ defmodule Chunky.Math do
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
    - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
    - `is_deficient?/1` - Test if an integer is _deficient_
+   - `is_double_vampire_number?/1` - Is `n` a vampire number whose fangs are also vampire numbers?
    - `is_even?/1` - Is an integer even?
    - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
@@ -98,6 +102,7 @@ defmodule Chunky.Math do
    - `is_prime?/1` - Test if an integer is prime
    - `is_prime_fast?/1` - Alternative prime test, faster in specific cases of `n`
    - `is_prime_power?/1` - Check if `n` is a power `m` of a prime, where `m` >= 1.
+   - `is_prime_vampire_number?/1` - Is `n` a vampire number with prime fangs?
    - `is_rhonda_to_base_4?/1` - Determine if `n` is a Rhonda number to base 4
    - `is_rhonda_to_base_6?/1` - Determine if `n` is a Rhonda number to base 6
    - `is_rhonda_to_base_8?/1` - Determine if `n` is a Rhonda number to base 8
@@ -112,6 +117,7 @@ defmodule Chunky.Math do
    - `is_rhonda_to_base_60?/1` - Determine if `n` is a Rhonda number to base 60
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
    - `is_squarefree?/1` - Are any factors of `n` perfect squares?
+   - `is_vampire_number?/1` - Is `n` a vampire number?
    - `is_zero?/1` - Is an integer `0`?
 
   All of the predicates can be used to analyze an integer with:
@@ -348,6 +354,48 @@ defmodule Chunky.Math do
   defp decomposition(n, k, acc), do: decomposition(n, k + 1, acc)
 
   @doc """
+  Find all pairs of factors of `n`, with or without duplicates.
+  
+  This is a variant of the `factors/1` function, in that it builds the full pairs
+  of factors of `n` in tuple form.
+  
+  ## Options
+  
+   - `duplicates` - Boolean. Default `false`. If `true`, include the ordered duplicates of factors (see examples)
+  
+  ## Examples
+  
+      iex> Math.factor_pairs(8)
+      [{1, 8}, {2, 4}]
+      
+      iex> Math.factor_pairs(8, duplicates: true)
+      [{1, 8}, {2, 4}, {4, 2}, {8, 1}]
+  
+      iex> Math.factor_pairs(84)
+      [1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84]
+      [{1, 84}, {2, 42}, {3, 28}, {4, 21}, {6, 14}, {7, 12}]
+  
+      
+  """
+  def factor_pairs(n, opts \\ []) do
+      
+      # are we including the pair wise duplicates?
+      dupes = opts |> Keyword.get(:duplicates, false)
+      
+      # find our factors and break everything down, taking only
+      # the parts of the original factors that we need
+      n_fs = factors(n)
+      
+      if dupes do
+          n_fs
+      else
+          n_fs |> Enum.take(n_fs |> length() |> div(2))
+      end
+      |> Enum.map(fn f -> {f, div(n, f)} end)
+      
+  end
+
+  @doc """
   Count the number of possible factorizations of `n`.
 
   This counts a number as a factor of itself, as well as multi-set factorizations. So `8`
@@ -457,6 +505,69 @@ defmodule Chunky.Math do
     p_digits == s_digits
   end
 
+  @doc """
+  Determine if `n` is _pandigital_ in base `b`.
+  
+  A number `n` is _pandigital_ when it contains all of the digits used in its base
+  _at least_ once. So in base 10 `1234567888890` is pandigital, but `123456789` is not.
+  
+  ## Examples
+  
+      iex> Math.is_pandigital_in_base?(75, 4)
+      true
+      
+      iex> Math.is_pandigital_in_base?(1182263086756, 5)
+      true
+      
+      iex> Math.is_pandigital_in_base?(2048, 10)
+      false
+  """
+  def is_pandigital_in_base?(n, b) do  
+      (Integer.digits(n, b)
+      |> Enum.uniq()
+      |> length()) == b
+  end
+  
+  @doc """
+  Check if `n` is _pandigital_ in base 10.
+  
+  See `is_pandigital_in_base?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_pandigital?(123456789)
+      false
+  
+      iex> Math.is_pandigital?(1023456789)
+      true
+  """
+  def is_pandigital?(n), do: is_pandigital_in_base?(n, 10)
+  
+  @doc """
+  Check if `n` is a valid number in base `b`.
+  
+  A number `n` that contains only valid digits in base `b` will be considered
+  to be a valid number in that base.
+  
+  ## Examples
+  
+      iex> Math.is_in_base?(123456, 5)
+      false
+      
+      iex> Math.is_in_base?(101011101, 2)
+      true
+      
+      iex> Math.is_in_base?(2430432, 6)
+      true
+  """
+  def is_in_base?(n, b) do
+      b_digits = 0..b - 1 |> Enum.to_list |> MapSet.new()
+      
+      (Integer.digits(n)
+      |> Enum.filter(fn d -> MapSet.member?(b_digits, d) == false end)
+      |> length()) == 0
+  end
+  
   @doc """
   The _factorial_ of `n`, or `n!`.
 
@@ -2150,7 +2261,210 @@ defmodule Chunky.Math do
 
   """
   def is_rhonda_to_base_60?(n), do: is_rhonda_to_base?(n, 60)
-
+  
+  @doc """
+  Check if `n` is a _true vampire number_.
+  
+  A vampire number is a number `n` that fullfils the following criteria:
+  
+   1. `n` has an even number of digits
+   2. `n` can be factored into two digits `a` and `b`
+   3. Both `a` and `b` half exactly half as many digits as `n`
+   4. One or the other of `a` or `b` can have trailing zeros, but not both
+   5. `a` and `b` contain all of the original digits of `n`, in any order, _including_ duplicated digits in `n`
+  
+  ## Examples
+  
+      iex> Math.is_vampire_number?(1260)
+      true
+      
+      iex> Math.is_vampire_number?(6000)
+      false
+  
+      iex> Math.is_vampire_number?(6880)
+      true
+      
+      iex> Math.is_vampire_number?(125500)
+      true
+  """
+  def is_vampire_number?(n) when n <= 0, do: false
+  def is_vampire_number?(n) when is_integer(n) and n > 0 do
+      
+      # even number of digits?
+      if length_in_base(n, 10) |> rem(2) == 1 do
+          false
+      else
+          
+          # find our sorted digits of N for later
+          n_digits = Integer.digits(n) |> Enum.sort()
+          
+          # find factors
+          (factor_pairs(n)
+      
+          # filter factors
+          
+          # same length
+          |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
+          
+          # can't both end in zero
+          |> Enum.filter(
+              fn {a, b} -> 
+                  a_z = Integer.digits(a) |> List.last() 
+                  b_z = Integer.digits(b) |> List.last()
+                  
+                  !(a_z == 0 && b_z == 0)
+              end
+          )
+          
+          # do we have all of our digits?
+          |> Enum.filter(
+              fn {a, b} -> 
+                  ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
+              end
+          )
+          
+          # if we have anything left over, it's a vampire
+          |> length()) > 0
+      end
+  end
+  
+  @doc """
+  Check if `n` is a _prime vampire number_.
+  
+  A _prime_ vampire number needs to mee the same criteria as a standard _vampire number_ (see `is_vampire_number?/1`),
+  with the additional criteria of:
+  
+   1. Both of the factors of `n`, `a` and `b`, must be prime
+  
+  ## Examples
+  
+      iex> Math.is_prime_vampire_number?(6881)
+      false
+      
+      iex> Math.is_prime_vampire_number?(117067)
+      true
+  
+  """
+  def is_prime_vampire_number?(n) when n <= 0, do: false
+  def is_prime_vampire_number?(n) when is_integer(n) and n > 0 do
+      # even number of digits?
+      if length_in_base(n, 10) |> rem(2) == 1 do
+          false
+      else
+          
+          # find our sorted digits of N for later
+          n_digits = Integer.digits(n) |> Enum.sort()
+          
+          # find factors
+          (factor_pairs(n)
+      
+          # filter factors
+          
+          # same length
+          |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
+          
+          # can't both end in zero
+          |> Enum.filter(
+              fn {a, b} -> 
+                  a_z = Integer.digits(a) |> List.last() 
+                  b_z = Integer.digits(b) |> List.last()
+                  
+                  !(a_z == 0 && b_z == 0)
+              end
+          )
+          
+          # both factors prime?
+          |> Enum.filter(fn {a, b} -> is_prime?(a) && is_prime?(b) end)
+          
+          # do we have all of our digits?
+          |> Enum.filter(
+              fn {a, b} -> 
+                  ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
+              end
+          )
+          
+          # if we have anything left over, it's a vampire
+          |> length()) > 0
+      end
+  end
+  
+  @doc """
+  Check of `n` is a **double** _vampire number_.
+  
+  Double vampire numbers meet all the criteria of a regular vampire number (see `is_vampire_number?/1`)
+  with the additional constraint:
+  
+   1. The two factors of `n`, `a` and `b`, must _also be_ vampire numbers
+  
+  ## Examples
+  
+      iex> Math.is_double_vampire_number?(6880)
+      false
+      
+      iex> Math.is_double_vampire_number?(1047527295416280)
+      true
+  """
+  def is_double_vampire_number?(n) when n <= 0, do: false
+  def is_double_vampire_number?(n) when is_integer(n) and n > 0 do
+      # even number of digits?
+      if length_in_base(n, 10) |> rem(2) == 1 do
+          false
+      else
+          
+          # find our sorted digits of N for later
+          n_digits = Integer.digits(n) |> Enum.sort()
+          
+          # find factors
+          (factor_pairs(n)
+      
+          # filter factors
+          
+          # same length
+          |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
+          
+          # can't both end in zero
+          |> Enum.filter(
+              fn {a, b} -> 
+                  a_z = Integer.digits(a) |> List.last() 
+                  b_z = Integer.digits(b) |> List.last()
+                  
+                  !(a_z == 0 && b_z == 0)
+              end
+          )
+          
+          # both factors must _also_ be vampire numbers
+          |> Enum.filter(fn {a, b} -> is_vampire_number?(a) && is_vampire_number?(b) end)
+          
+          # do we have all of our digits?
+          |> Enum.filter(
+              fn {a, b} -> 
+                  ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
+              end
+          )
+          
+          # if we have anything left over, it's a vampire
+          |> length()) > 0
+      end 
+  end
+  
+  @doc """
+  Determine the number of digits, or length, of a number `n` in base `b`.
+  
+  ## Examples
+  
+      iex> Math.length_in_base(12345, 10)
+      5
+  
+      iex> Math.length_in_base(2048, 2)
+      12
+      
+      iex> Math.length_in_base(123456789, 60)
+      5
+  """
+  def length_in_base(n, b) do
+     Integer.digits(n, b) |> length() 
+  end
+  
   @doc """
   Convert a decimal integer into another base that can be represented by the decimal digits (i.e., any
   base from 2 to 10).
@@ -4220,7 +4534,9 @@ defmodule Chunky.Math do
 
       iex> Math.analyze_number(1000, skip_smooth: true)
       [:abundant, :even, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
-
+    
+      iex> Math.analyze_number(1435)
+      [:arithmetic_number, :cubefree, :deficient, :odd, :odious_number, :positive, :sphenic_number, :squarefree, :vampire_number]
   """
   def analyze_number(n, opts \\ []) when is_integer(n) do
     # how long are we waiting for each predicate
