@@ -103,6 +103,7 @@ defmodule Chunky.Math do
    - `is_prime_fast?/1` - Alternative prime test, faster in specific cases of `n`
    - `is_prime_power?/1` - Check if `n` is a power `m` of a prime, where `m` >= 1.
    - `is_prime_vampire_number?/1` - Is `n` a vampire number with prime fangs?
+   - `is_pseudo_vampire_number?/1` - Is `n` a vampire number with relaxed constraints?
    - `is_rhonda_to_base_4?/1` - Determine if `n` is a Rhonda number to base 4
    - `is_rhonda_to_base_6?/1` - Determine if `n` is a Rhonda number to base 6
    - `is_rhonda_to_base_8?/1` - Determine if `n` is a Rhonda number to base 8
@@ -2261,6 +2262,62 @@ defmodule Chunky.Math do
 
   """
   def is_rhonda_to_base_60?(n), do: is_rhonda_to_base?(n, 60)
+  
+  @doc """
+  Check if `n` is a _pseudo_ vampire number.
+  
+  The pseudo-vampire numbers have more relaxed criteria than the standard
+  vampire numbers (see `is_vampire_number?/1`). Pseudo-vampires change the restrictions on the number of
+  digits in `n` and the factors `a` and `b`, such that:
+  
+   1. `n` can have an even _or odd_ number of digits
+   2. The factors `a` and `b` can be of any length, not strictly of half the length of `n`
+  
+  ## Examples
+  
+      iex> Math.is_pseudo_vampire_number?(126)
+      true
+  
+      iex> Math.is_pseudo_vampire_number?(128)
+      false
+  
+      iex> Math.is_pseudo_vampire_number?(19026)
+      true
+  
+      iex> Math.is_pseudo_vampire_number?(1025779)
+      true
+  """
+  def is_pseudo_vampire_number?(n) when n <= 0, do: false
+  def is_pseudo_vampire_number?(n) do
+      # find our sorted digits of N for later
+      n_digits = Integer.digits(n) |> Enum.sort()
+      
+      # find factors
+      (factor_pairs(n)
+  
+      # filter factors
+            
+      # can't both end in zero
+      |> Enum.filter(
+          fn {a, b} -> 
+              a_z = Integer.digits(a) |> List.last() 
+              b_z = Integer.digits(b) |> List.last()
+              
+              !(a_z == 0 && b_z == 0)
+          end
+      )
+      
+      # do we have all of our digits?
+      |> Enum.filter(
+          fn {a, b} -> 
+              ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
+          end
+      )
+      
+      # if we have anything left over, it's a vampire
+      |> length()) > 0
+      
+  end
   
   @doc """
   Check if `n` is a _true vampire number_.
@@ -4536,7 +4593,7 @@ defmodule Chunky.Math do
       [:abundant, :even, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
     
       iex> Math.analyze_number(1435)
-      [:arithmetic_number, :cubefree, :deficient, :odd, :odious_number, :positive, :sphenic_number, :squarefree, :vampire_number]
+      [:arithmetic_number, :cubefree, :deficient, :odd, :odious_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :vampire_number]
   """
   def analyze_number(n, opts \\ []) when is_integer(n) do
     # how long are we waiting for each predicate

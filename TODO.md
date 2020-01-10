@@ -70,8 +70,10 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - Is base N (has only base N digits) (needs tests)
   - factor_pairs (multiplicity: true/false) (needs tests)
   - Is vampire number (needs tests)
-  - Is prime vampire number
-  - is pseudo-vampire number
+  - Is prime vampire number (needs tests)
+  - is double vampire (needs tests)
+  - is pseudo-vampire number (needs tests)
+  
   - Is left truncatable prime
   - Is right truncatable prime
   - Is bi-direction truncatable

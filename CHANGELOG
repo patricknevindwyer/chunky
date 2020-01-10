@@ -28,7 +28,7 @@
   - factor_pairs/2
   - is_in_base?/2
   - length_in_base/2
-  
+  - is_pseudo_vampire_number?/1
 
 ## v0.11.3
 
