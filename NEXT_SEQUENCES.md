@@ -27,7 +27,7 @@ OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 
 ## Repr
 
-
+pandigitals
 
 ## Constant
 

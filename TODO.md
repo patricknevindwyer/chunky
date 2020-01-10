@@ -63,7 +63,21 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
  
- - add some power sequences             
+ - New functions in Math
+ 
+  - Is pan digital?  (needs tests)
+  - Is pan digital in baseN? (needs tests)
+  - Is base N (has only base N digits) (needs tests)
+  - factor_pairs (multiplicity: true/false) (needs tests)
+  - Is vampire number (needs tests)
+  - Is prime vampire number
+  - is pseudo-vampire number
+  - Is left truncatable prime
+  - Is right truncatable prime
+  - Is bi-direction truncatable
+  - Is deletable prime (delete digit anywhere) 
+  - Is palindromic
+  - Is palindromic in base N
                
  - sequence manipulations
   - map
@@ -88,21 +102,8 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - drop
   - take
   
-  
- - New functions in Math
- 
-  - Is pan digital? 
-  - Is pan digital in baseN?
+ - in Math  
   - Negative powers (convert to inverse fractions)
-  - Is base N (has only base N digits)
-  - Is vampire number
-  - Is prime vampire number
-  - Is left truncatable prime
-  - Is right truncatable prime
-  - Is bi-direction truncatable
-  - Is deletable prime (delete digit anywhere) 
-  - Is palindromic
-  - Is palindromic in base N
   - Build left truncatable prime of length(n)
   - Build right truncatable prime of length(n)
  

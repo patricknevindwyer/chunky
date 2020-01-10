@@ -41,7 +41,7 @@ defmodule Chunky.Math do
   Work with divisors and prime factors.
 
    - `factorization_count/1` - Count the number of possible factorizations of `n`.
-   - `factor_pairs/2/` - Find pair wise factors of `n`.
+   - `factor_pairs/2` - Find pair wise factors of `n`.
    - `factors/1` - All divisors for an integer
    - `is_power_of?/2` - Is `n` a power of `m`?
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
@@ -57,7 +57,7 @@ defmodule Chunky.Math do
    - `digit_sum/1` - Calculate the sum of the digits of `n`
    - `is_in_base?/2` - Is `n` a valid number in base `b`?
    - `is_plaindrome_in_base?/2` - Does `n` have never decreasing digits in base `b`?
-   - `length_in_base?/2` - How many digits long is `n` in base `b`?
+   - `length_in_base/2` - How many digits long is `n` in base `b`?
    - `remove_digits!/3` - Remove one or more digits from `n`, returning a reconstituted number
    - `to_base/2` - Convert a decimal integer to any base from 2 to 10
 
