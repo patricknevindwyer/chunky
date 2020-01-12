@@ -2,6 +2,7 @@ defmodule Chunky.SequenceDataTest do
   use ExUnit.Case, async: true
   require Chunky.Math.Operations
   import Chunky.Math.Operations, only: [summation: 3]
+  alias Chunky.Fraction
   
   describe "summation" do
   
@@ -57,6 +58,30 @@ defmodule Chunky.SequenceDataTest do
         
     end
     
+    test "fraction - denominators" do
+       
+       assert %Fraction{num: 137, den: 60} == (summation k, 1..5 do
+          Fraction.new(1, k) 
+       end)
+       
+    end
+    
+    test "fraction - numerators" do
+       
+       assert %Fraction{num: 15, den: 1} == (summation k, 1..5 do
+          Fraction.new(k, 1) 
+       end)
+       
+    end
+    
+    test "fraction - iterated sum - nested" do
+        assert %Fraction{num: 66, den: 6} == (summation num, 1..3 do
+           summation den, 1..3 do
+              Fraction.new(num, den) 
+           end 
+        end)
+    end
+        
   end
 
 end
