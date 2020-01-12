@@ -248,6 +248,8 @@ defmodule Chunky.Math do
   alias Chunky.Fraction
   alias Chunky.Math
   require Chunky.CacheAgent
+  # require Chunky.Math.Operations
+  # import Chunky.Math.Operations, only: [summation: 3]
 
   @rand_max Kernel.trunc(:math.pow(2, 63))
 
@@ -4345,7 +4347,7 @@ defmodule Chunky.Math do
       is_prime?(n) == false && Math.pow(a, n - 1, n) == 1
   end
   def is_pseudo_prime?(_, _), do: false    
-  
+    
   @doc """
   Determine if a positive integer is prime.
 

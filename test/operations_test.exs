@@ -1,8 +1,52 @@
 defmodule Chunky.SequenceDataTest do
   use ExUnit.Case, async: true
   require Chunky.Math.Operations
-  import Chunky.Math.Operations, only: [summation: 3]
+  import Chunky.Math.Operations, only: [summation: 3, product: 3]
   alias Chunky.Fraction
+  
+  describe "product" do
+  
+   test "int - literal, 1 to 10" do
+       assert (product k, 1..10 do
+          k 
+       end) == 3_628_800
+   end
+   
+   test "int - equation, 1 to positive" do
+       
+       assert (product k, 1..4 do
+          (k + 1) * 2
+       end) == 1920
+       
+   end
+   
+   test "int - equation, neg to -1" do
+       
+       assert (product k, -5..-1 do
+          k * 3 + 4 
+       end) == 880
+       
+   end
+   
+   test "int - equation, nested" do
+       
+       assert (product k, 1..3 do
+          product j, 4..6 do
+             j + k 
+          end 
+       end) == 35_562_240
+       
+   end
+   
+   test "fraction - literal, 1 to pos" do
+
+       assert %Fraction{num: 24, den: 256} == (product num, 1..4 do
+          Fraction.new(num, 4) 
+       end)
+             
+   end
+   
+  end
   
   describe "summation" do
   
