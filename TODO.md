@@ -65,6 +65,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
  - New functions in Math
  
+  - all need inclusion in:
+   - tests
+   - CHANGELOG
+   - TOF for Math
+   
   - Is pan digital?  (needs tests)
   - Is pan digital in baseN? (needs tests)
   - Is base N (has only base N digits) (needs tests)
@@ -74,12 +79,42 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - is double vampire (needs tests)
   - is pseudo-vampire number (needs tests)
   
-  - Is left truncatable prime
-  - Is right truncatable prime
-  - Is bi-direction truncatable
-  - Is deletable prime (delete digit anywhere) 
-  - Is palindromic
-  - Is palindromic in base N
+  - Is left truncatable prime (needs tests)
+  - Is right truncatable prime (needs tests)
+  - Is left-right-truncatable (needs tests)
+  - Is two-sided-prime (needs tests)
+  
+  - is palindromic prime (needs tests)
+  - is emirp prime (needs tests)
+  - is circular prime (needs tests) (will need repunit/1)
+  - is weakly prime (needs tests)
+
+  - Is palindromic (needs tests)
+  - Is palindromic in base N (needs tests)
+  - is strictly non-palindromic (needs tests)
+  
+  - jacobi symbol (needs docs)
+  - legendre symbol (needs docs)
+  
+  - euler pseudo-prime (needs docs)
+  - euler-jacobi pseudo-prime (needs docs)
+  
+  - is_pseudo_prime? (needs implicit base 10, needs tests, needs docs, grab all sequences)
+  
+  
+  - can we use different symbols? like summations?
+  - other pseudo-primes
+ 
+  - is it worth splitting off primes into Math.Primes?
+   - split off the new functions
+   - split off the old prime functions (except factorizations)
+ 
+ 
+  > todo
+  - Is editable prime (delete digit anywhere) 
+  
+  
+  
                
  - sequence manipulations
   - map
@@ -170,7 +205,8 @@ In Mersenne prime in form (2^n - 1) n must be prime
   - update all coercion compatible functions to use single entry form
       def <> (a, b) when is_coercible?(a) and is_coercible?(b)
   - round/2 (nearest fractional part)
-
+  - log/ln
+  - other functions
 
  - summation macro?
   - smart output, or selective output (fraction vs integer vs get_whole)
@@ -186,6 +222,13 @@ In Mersenne prime in form (2^n - 1) n must be prime
  - do we need an :infinity value?
  
  - check predicates - some _could_ apply to odd numbers
+  
+  
+  Add a whole module for modular arithmetic
+
+  Add a module for primes
+
+  Add a module for number theory
   
  
  - new modes for sequence stub generator
@@ -228,6 +271,30 @@ In .dialyzer_ingore.exs:
   {":0:unknown_function Function Mix.env/0 does not exist."}
 ]
 ```  
+  
+  
+  Approx of primes less than x
+
+  Gauss: x / ln(x)
+
+  Dirichlet: Li(x) (below)
+
+  Logarithmic integral 2-> x 1/log e dt
+
+
+  https://en.wikipedia.org/wiki/Incomplete_gamma_function
+  https://en.wikipedia.org/wiki/Logarithmic_integral_function
+  https://www.integral-calculator.com
+  
+  
+  Could we do an equation system, where an eq is parsed, and will respond with values? Could we do partial solvers?
+
+  i.e.: enter “y=2x^5-5x^3+3z^2”
+  Provide x & z, get result
+  Provide x & y, solve for result
+  Provide ranges, solve for ranges/constraints
+  Value constraints: solvable with fraction vs integer vs float
+  This would be a gateway to reducers, solvers, rewriters, etc
   
  - Caching
   - we're not really using caches right - we aren't rooting the Agent in a supervisor structure, so it isn't seeing data across processes

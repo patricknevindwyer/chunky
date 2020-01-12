@@ -3762,7 +3762,590 @@ defmodule Chunky.Math do
       Fraction.new(1, n) |> Fraction.multiply(sum_part) |> Fraction.get_whole()
     end
   end
+  
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.is_left_truncatable_prime?(967)
+      true
+  
+      iex> Math.is_left_truncatable_prime?(9137)
+      true
+      
+      iex> Math.is_left_truncatable_prime?(9656934675)
+      false
+  
+      iex> Math.is_left_truncatable_prime?(396334245663786197)
+      true
+  """
+  def is_left_truncatable_prime?(n) when n <= 0, do: false
+  def is_left_truncatable_prime?(n) when n > 0 do
+      is_prime_with_edit?(n, :left)
+  end
+  
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.is_right_truncatable_prime?(23399)
+      true
+  
+      iex> Math.is_right_truncatable_prime?(37)
+      true
+  
+      iex> Math.is_right_truncatable_prime?(59393)
+      true
+  
+      iex> Math.is_right_truncatable_prime?(59397)
+      false
+  """
+  def is_right_truncatable_prime?(n) when n <= 0, do: false
+  def is_right_truncatable_prime?(n) when n > 0 do
+      is_prime_with_edit?(n, :right)
+  end
+  
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.is_left_right_truncatable_prime?(433)
+      true
 
+      iex> Math.is_left_right_truncatable_prime?(1193)
+      true
+
+      iex> Math.is_left_right_truncatable_prime?(89)
+      true
+  
+      iex> Math.is_left_right_truncatable_prime?(7)
+      true
+  
+      iex> Math.is_left_right_truncatable_prime?(99729779)
+      true
+  
+  """
+  def is_left_right_truncatable_prime?(n) when n <= 0, do: false
+  def is_left_right_truncatable_prime?(n) when n > 0 do
+      is_prime_with_edit?(n, :both)
+  end
+  
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.is_two_sided_prime?(7)
+      true
+  
+      iex> Math.is_two_sided_prime?(313)
+      true
+  
+      iex> Math.is_two_sided_prime?(3137)
+      true
+  
+      iex> Math.is_two_sided_prime?(739397)
+      true
+  
+  """
+  def is_two_sided_prime?(n) when n <= 0, do: false
+  def is_two_sided_prime?(n) when n > 0 do
+      is_prime_with_edit?(n, :left) && is_prime_with_edit?(n, :right)
+  end
+  
+  defp is_prime_with_edit?(p, mode) do
+     
+     if (mode == :both && length_in_base(p, 10) == 2 && is_prime?(p)) || (length_in_base(p, 10) == 1 and is_prime?(p)) do
+         true
+     else 
+         if is_prime?(p) do
+             
+             case mode do
+                :left -> p |> Integer.digits() |> Enum.drop(1) |> Integer.undigits()
+                :right -> p |> Integer.digits() |> Enum.slice(0..-2) |> Integer.undigits()
+                :both -> p |> Integer.digits() |> Enum.slice(1..-2) |> Integer.undigits()
+             end
+             |> is_prime_with_edit?(mode)
+             
+         else
+             false
+         end
+     end
+  end
+  
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.is_palindromic_prime?(373)
+      true
+        
+      iex> Math.is_palindromic_prime?(78247074287)
+      true
+
+      iex> Math.is_palindromic_prime?(55)
+      false
+  
+  """
+  def is_palindromic_prime?(n) when n <= 0, do: false
+  def is_palindromic_prime?(n) when n > 0 do
+      is_prime?(n) && (n == reverse_number(n))
+  end
+  
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.is_emirp_prime?(373)
+      false
+
+      iex> Math.is_emirp_prime?(13)
+      true
+
+      iex> Math.is_emirp_prime?(983)
+      true
+
+      iex> Math.is_emirp_prime?(947351)
+      true
+  
+  """
+  def is_emirp_prime?(n) when n <= 0, do: false
+  def is_emirp_prime?(n) when n > 0 do
+      r_n = reverse_number(n)
+      is_prime?(n) && is_prime?(r_n) && n != r_n
+  end
+  
+  @doc """
+  Is `n` a circular prime?
+  
+  ## Examples
+  
+      iex> Math.is_circular_prime?(1193)
+      true
+
+      iex> Math.is_circular_prime?(3)
+      true
+
+      iex> Math.is_circular_prime?(193939)
+      true
+
+      iex> Math.is_circular_prime?(135)
+      false
+  
+  """
+  def is_circular_prime?(n) when n <= 0, do: false
+  def is_circular_prime?(n) when n > 0 do
+     rotations(n)
+     |> Enum.all?(fn v -> is_prime?(v) end) 
+  end
+
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.rotations(1234)
+      [1234, 2341, 3412, 4123]
+  
+      iex> Math.rotations(232)
+      [232, 322, 223]
+  
+      iex> Math.rotations(7)
+      [7]
+  
+      iex> Math.rotations(123456)
+      [123456, 234561, 345612, 456123, 561234, 612345]
+  """
+  def rotations(n) do
+      [n] ++ generate_rotations(n, n)
+  end
+  
+  defp generate_rotations(c, n) do
+      
+      # find the rotated number
+      rot_dig = Integer.digits(c)
+      rot = (Enum.drop(rot_dig, 1) ++ [List.first(rot_dig)]) |> Integer.undigits()
+      
+      # if we're at our original, just return
+      if rot == n do
+          []
+      else
+         [rot] ++ generate_rotations(rot, n) 
+      end
+  end
+  
+  @doc """
+  
+  ## Examples
+  
+      iex> Math.is_weakly_prime?(294001)
+      true
+
+      iex> Math.is_weakly_prime?(294007)
+      false
+        
+      iex> Math.is_weakly_prime?(3085553)
+      true
+  
+  """
+  def is_weakly_prime?(n) when n <= 0, do: false
+  def is_weakly_prime?(n) when n > 0 do
+     
+      if is_prime?(n) do
+          n_digs = Integer.digits(n)
+      
+          # generate the permutations of n
+          0..length_in_base(n, 10) - 1
+      
+          # loop over the places in the number
+          |> Enum.map(
+              fn idx -> 
+                            
+                  # loop over the digits
+                  (0..9
+                  |> Enum.map(
+                      fn sub_digit -> 
+                      
+                          # generate a new number
+                          List.update_at(n_digs, idx, fn _ -> sub_digit end)
+                          |> Integer.undigits()
+                      
+                      end
+                  ))
+              
+                  # remove our original number
+                  -- [n]
+              
+              end
+          )
+      
+          |> List.flatten()
+          |> Enum.all?(fn v -> is_prime?(v) == false end)
+      else
+          false
+      end
+  end
+  
+  @doc """
+  Reverse the digits of `n`.
+  
+  ## Examples
+  
+      iex> Math.reverse_number(12345)
+      54321
+      
+      iex> Math.reverse_number(12300)
+      321
+      
+      iex> Math.reverse_number(11)
+      11
+  """
+  def reverse_number(n) do
+     n
+     |> Integer.digits()
+     |> Enum.reverse()
+     |> Integer.undigits() 
+  end
+  
+  @doc """
+  Check if `n` is a palindromic number in base 10.
+  
+  Palindromic numbers, like palindromic words, are the same value when reversed.
+  
+  ## Examples
+  
+      iex> Math.is_palindromic?(1234)
+      false
+      
+      iex> Math.is_palindromic?(123454321)
+      true
+  
+      iex> Math.is_palindromic?(1004006004001)
+      true
+  """
+  def is_palindromic?(n) when is_integer(n) do
+     n == reverse_number(n)
+  end
+  
+  @doc """
+  Check if `n` is palindromic in base `b`.
+  
+  ## Examples
+  
+      iex> Math.is_palindromic_in_base?(27, 2)
+      true
+  
+      iex> Math.to_base(27, 2)
+      11011
+  
+      iex> Math.is_palindromic_in_base?(105, 20)
+      true      
+      
+  """
+  def is_palindromic_in_base?(n, b) do
+     digits = Integer.digits(n, b)
+     
+     digits == Enum.reverse(digits)
+  end
+  
+  @doc """
+  Check if `n` is _strictly_ non-palindromic.
+  
+  These numbers are non-palindromic in any numeric base from 2 to `n - 2`. For larger
+  numbers this can be a very expensive check.
+  
+  ## Examples
+  
+      iex> Math.is_strictly_non_palindromic?(6)
+      true
+
+      iex> Math.is_strictly_non_palindromic?(19)
+      true
+
+      iex> Math.is_strictly_non_palindromic?(80)
+      false
+
+      iex> Math.is_strictly_non_palindromic?(317)
+      true
+  
+  """
+  def is_strictly_non_palindromic?(n) when n < 4 and n > -4, do: false
+  def is_strictly_non_palindromic?(n) when is_integer(n) and (n >= 4 or n <= -4) do
+      
+      (2..abs(n) - 2
+      |> Enum.any?(fn base -> is_palindromic_in_base?(abs(n), base) end)) == false
+      
+  end
+  
+  @doc """
+  Calculate the Legendre Symbol of `(a/p)`, where `p` is prime.
+  
+  The Legendre symbol is used in number theory when working with prime numbers and
+  quadratic constructions. It was originally defined via the formula:
+  
+   ![Legendre Symbol](https://wikimedia.org/api/rest_v1/media/math/render/svg/7ad53226ea2a06b6fcd0d8f69c3a40ce3edf2407)
+  
+  ## Examples
+  
+      iex> Math.legendre_symbol(12, 3)
+      0
+
+      iex> Math.legendre_symbol(14, 11)
+      1
+
+      iex> Math.legendre_symbol(29, 31)
+      -1
+
+      iex> Math.legendre_symbol(14, 9)
+      ** (ArgumentError) p must be prime
+  
+  """
+  def legendre_symbol(a, p) when Integer.is_odd(p) do
+  
+      if is_prime?(p) do
+          case Math.pow(a, div(p - 1, 2), p) do
+             1 -> 1
+             0 -> 0
+             _ -> -1 
+          end
+      else
+          raise ArgumentError, message: "p must be prime" 
+      end
+  end
+  
+  @doc """
+  Calculate the Jacobi Symbol `(n/k)`.
+  
+  Via Wikipedia [Jacobi Symbol]():
+  
+  > The Jacobi symbol is a generalization of the Legendre symbol. Introduced by Jacobi 
+  > in 1837,[1] it is of theoretical interest in modular arithmetic and other branches 
+  > of number theory, but its main use is in computational number theory, especially 
+  > primality testing and integer factorization...
+  
+  The value of `n` can be any integer, while `k` must be a _positive_ and _odd_ integer.
+  
+  ## Examples
+  
+      iex> Math.jacobi_symbol(13, 13)
+      0
+
+      iex> Math.jacobi_symbol(2, 7)
+      1
+
+      iex> Math.jacobi_symbol(156, 3)
+      0
+
+      iex> Math.jacobi_symbol(199, 213)
+      1
+  
+  """
+  def jacobi_symbol(n, k) when is_integer(n) and Integer.is_odd(k) and k > 0 do
+      {_n, k, t} = jacobi_symbol_outer(n, k, 1)
+      
+      if k == 1 do
+          t
+      else
+          0
+      end
+  end
+  
+  defp jacobi_symbol_inner(n, k, t) when Integer.is_odd(n), do: {n, k, t}
+  defp jacobi_symbol_inner(n, k, t) when Integer.is_even(n) do
+      n = div(n, 2)
+      t = case rem(k, 8) do
+         3 -> t * -1
+         5 -> t * -1
+         _ -> t 
+      end
+      jacobi_symbol_inner(n, k, t)
+  end
+  
+  defp jacobi_symbol_outer(n, k, t) when n == 0, do: {n, k, t}
+  defp jacobi_symbol_outer(n, k, t) when n != 0 do
+      {k, n, t} = jacobi_symbol_inner(n, k, t)
+      t = if rem(n, 4) == 3 && rem(k, 4) == 3 do
+          t * -1
+      else
+          t
+      end
+      n = rem(n, k)
+      jacobi_symbol_outer(n, k, t)
+  end
+  
+  @doc """
+  Check if `n` is an Euler pseudo-prime in base 10.
+  
+  See `is_euler_pseudo_prime?/2` for a definition.
+  
+  ## Examples
+  
+      iex> Math.is_euler_pseudo_prime?(9)
+      true
+    
+      iex> Math.is_euler_pseudo_prime?(14)
+      false
+
+      iex> Math.is_euler_pseudo_prime?(33)
+      true
+
+      iex> Math.is_euler_pseudo_prime?(91)
+      true
+  
+  """
+  def is_euler_pseudo_prime?(n) when n > 1 and Integer.is_odd(n), do: is_euler_pseudo_prime?(n, 10)
+  def is_euler_pseudo_prime?(_), do: false
+  
+  @doc """
+  Check if `n` is an Euler pseudo-prime in base `a`.
+  
+  Euler pseudo-primes are similar to the more standard definition of Euler-Jacobi pseudo-primes, but only need to
+  satisfy the more permissive assertion that if `a` and `n` are coprime:
+  
+   ![Weak Euler pseudo-prime](https://wikimedia.org/api/rest_v1/media/math/render/svg/1cff79763c8950b703cb3daf38151a80b6905dc0)
+  
+  See also `is_euler_pseudo_prime?/1` for implicit base 10 check, or `is_euler_jacobi_pseudo_prime?/2` for the more
+  commonly accepted pseudo-prime check.
+  
+  ## Examples
+  
+      iex> Math.is_euler_pseudo_prime?(185, 5)
+      false
+
+      iex> Math.is_euler_pseudo_prime?(185, 6)
+      true
+
+      iex> Math.is_euler_pseudo_prime?(91, 9)
+      true
+
+      iex> Math.is_euler_pseudo_prime?(1105, 16)
+      true
+  
+  """
+  def is_euler_pseudo_prime?(n, a) when a > 1 and n > 0 and Integer.is_odd(n) do
+      m_n = n - 1
+      case Math.pow(a, div(n - 1, 2), n) do
+         1 -> true
+         ^m_n -> true
+         _ -> false 
+      end && is_coprime?(n, a) && (is_prime?(n) == false)
+  end
+  def is_euler_pseudo_prime?(_, _), do: false
+  
+  @doc """
+  Check if `n` is an Euler-Jacobi pseudo-prime to base 10.
+  
+  See `is_euler_jacobi_pseudo_prime?/2` for more.
+  
+  ## Examples
+  
+      iex> Math.is_euler_jacobi_pseudo_prime?(17)
+      false
+
+      iex> Math.is_euler_jacobi_pseudo_prime?(481)
+      true
+
+      iex> Math.is_euler_jacobi_pseudo_prime?(487)
+      false
+
+      iex> Math.is_euler_jacobi_pseudo_prime?(6601)
+      true
+
+  
+  """
+  def is_euler_jacobi_pseudo_prime?(n) when n > 1 and Integer.is_odd(n), do: is_euler_jacobi_pseudo_prime?(n, 10)
+  def is_euler_jacobi_pseudo_prime?(_), do: false
+  
+  @doc """
+  Check if `n` is an Euler-Jacobi pseudo-prime to base `a`.
+  
+  These numbers are like Euler pseudo-primes, but with a stricter congruence:
+  
+   ![Euler Jacobi pseudo-prime](https://wikimedia.org/api/rest_v1/media/math/render/svg/f13cbb4f0c18a0bf6021b8d5d0dcb92f2e9a6281)
+  
+  where ![Jacobi Symbol](https://wikimedia.org/api/rest_v1/media/math/render/svg/42ee8ba7e649c05c1a3642c7a932095c47e25353) is the Jacobi symbol (see `jacobi_symbol/1`).
+  
+  ## Examples
+  
+      iex> Math.is_euler_jacobi_pseudo_prime?(91, 10)
+      true
+
+      iex> Math.is_euler_jacobi_pseudo_prime?(52633, 12)
+      true
+
+      iex> Math.is_euler_jacobi_pseudo_prime?(15, 16)
+      true
+      
+      iex> Math.is_euler_jacobi_pseudo_prime?(169, 22)
+      true
+
+      iex> Math.is_euler_jacobi_pseudo_prime?(133, 102)
+      true
+  
+  
+  """
+  def is_euler_jacobi_pseudo_prime?(n, a) when a > 1 and n > 0 and Integer.is_odd(n) do
+      
+      # calculate the leading congruence
+      m_n = n - 1
+      part_a = case Math.pow(a, div(n - 1, 2), n) do
+          1 -> 1
+          ^m_n -> -1
+          v -> v
+      end
+      
+      # trailing congruene
+      part_b = jacobi_symbol(a, n)
+      
+      # put it all together
+      (part_a == part_b) && is_coprime?(n, a) && (is_prime?(n) == false)
+  end
+  def is_euler_jacobi_pseudo_prime?(_, _), do: false
+    
+    
+  def is_pseudo_prime?(n, a) when a > 1 and n > 1 do
+      is_prime?(n) == false && Math.pow(a, n - 1, n) == 1
+  end
+  def is_pseudo_prime?(_, _), do: false    
+  
   @doc """
   Determine if a positive integer is prime.
 
@@ -4581,7 +5164,7 @@ defmodule Chunky.Math do
       [:negative, :odd]
 
       iex> Math.analyze_number(0)
-      [:even, :plaindrome, :zero]
+      [:even, :palindromic, :plaindrome, :zero]
 
       iex> Math.analyze_number(105840, skip_smooth: true)
       [:abundant, :arithmetic_number, :even, :odious_number, :positive]
