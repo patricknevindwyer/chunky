@@ -96,6 +96,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
    - [A005843 - The nonnegative even numbers: a(n) = 2n.](https://oeis.org/A005843) - `:a005843` - `create_sequence_a005843/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
+   - [A006882 - Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.](https://oeis.org/A006882) - `:a006882` - `create_sequence_a006882/1`
    - [A006966 - Number of lattices on n unlabeled nodes](https://oeis.org/A006966) - `:a006966` - `create_sequence_a006966/1`
    - [A008292 - Triangle of Eulerian numbers T(n,k)](https://oeis.org/A008292) - `:a008292` - `create_sequence_a008292/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
@@ -3780,5 +3781,38 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a001764(idx) do
       Math.binomial(3 * idx, idx) |> div(2 * idx + 1)
   end
-  
+
+  @doc """
+  OEIS Sequence `A006882` - Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.
+
+  From [OEIS A006882](https://oeis.org/A006882):
+
+  > Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.
+  > (Formerly M0876)
+
+  **Sequence IDs**: `:a006882`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a006882) |> Sequence.take!(27)
+      [1,1,2,3,8,15,48,105,384,945,3840,10395,46080,135135,645120,2027025,10321920,34459425,185794560,654729075,3715891200,13749310575,81749606400,316234143225,1961990553600,7905853580625,51011754393600]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.",
+       references: [{:oeis, :a006882, "https://oeis.org/A006882"}]
+  def create_sequence_a006882(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006882/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a006882(idx) do
+      Math.double_factorial(idx)
+  end  
 end

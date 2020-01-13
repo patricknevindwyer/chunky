@@ -66,10 +66,6 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
  - release 0.11.5
  
- - sequences
- 
-  - 5 more core sequences
-
  - cyclops numbers     
 
  - @doc nil all the sequence functions
