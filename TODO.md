@@ -72,6 +72,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 
  - cyclops numbers     
 
+ - @doc nil all the sequence functions
 
   
  - release 0.12.0

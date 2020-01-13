@@ -70,16 +70,21 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001045 - Jacobsthal sequence (or Jacobsthal numbers)](https://oeis.org/A001045) - `:a001045` - `create_sequence_a001045/1`
    - [A001055 - The multiplicative partition function: number of ways of factoring n with all factors greater than 1](https://oeis.org/A001055) - `:a001055` - `create_sequence_a001055/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
+   - [A001147 - Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).](https://oeis.org/A001147) - `:a001147` - `create_sequence_a001147/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
    - [A001190 - Wedderburn-Etherington numbers: unlabeled binary rooted trees](https://oeis.org/A001190) - `:a001190` - `create_sequence_a001190/1`
    - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
    - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
    - [A001227 - Number of odd divisors of n.](https://oeis.org/A001227) - `:a001227` - `create_sequence_a001227/1`
    - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
+   - [A001405 - a(n) = binomial(n, floor(n/2)).](https://oeis.org/A001405) - `:a001405` - `create_sequence_a001405/1`
    - [A001477 - The nonnegative integers.](https://oeis.org/A001477) - `:a001477` - `create_sequence_a001477/1`
    - [A001489 - a(n) = -n.](https://oeis.org/A001489) - `:a001489` - `create_sequence_a001489/1`
    - [A001511 - The ruler function: 2^a(n) divides 2n](https://oeis.org/A001511) - `:a001511` - `create_sequence_a001511/1`
+   - [A001519 - a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.](https://oeis.org/A001519) - `:a001519` - `create_sequence_a001519/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
+   - [A001700 - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.](https://oeis.org/A001700) - `:a001700` - `create_sequence_a001700/1`
+   - [A001764 - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).](https://oeis.org/A001764) - `:a001764` - `create_sequence_a001764/1`
    - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
    - [A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters](https://oeis.org/A002654) - `:a002654` - `create_sequence_a002654/1`
    - [A002808 - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.](https://oeis.org/A002808) - `:a002808` - `create_sequence_a002808/1`
@@ -96,12 +101,6 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
-
-
-
-
-
-
 
 
   """
@@ -3607,4 +3606,179 @@ defmodule Chunky.Sequence.OEIS.Core do
   def create_sequence_a055512(_opts) do
     sequence_for_list(@data_a055512)
   end
+  
+  @doc """
+  OEIS Sequence `A001147` - Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).
+
+  From [OEIS A001147](https://oeis.org/A001147):
+
+  > Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).
+  > (Formerly M3002 N1217)
+
+  **Sequence IDs**: `:a001147`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001147) |> Sequence.take!(20)
+      [1,1,3,15,105,945,10395,135135,2027025,34459425,654729075,13749310575,316234143225,7905853580625,213458046676875,6190283353629375,191898783962510625,6332659870762850625,221643095476699771875,8200794532637891559375]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).",
+       references: [{:oeis, :a001147, "https://oeis.org/A001147"}]
+  def create_sequence_a001147(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001147/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001147(idx) do
+      Math.double_factorial(2 * idx - 1)
+  end
+
+  @doc """
+  OEIS Sequence `A001405` - a(n) = binomial(n, floor(n/2)).
+
+  From [OEIS A001405](https://oeis.org/A001405):
+
+  > a(n) = binomial(n, floor(n/2)).
+  > (Formerly M0769 N0294)
+
+  **Sequence IDs**: `:a001405`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001405) |> Sequence.take!(34)
+      [1,1,2,3,6,10,20,35,70,126,252,462,924,1716,3432,6435,12870,24310,48620,92378,184756,352716,705432,1352078,2704156,5200300,10400600,20058300,40116600,77558760,155117520,300540195,601080390,1166803110]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = binomial(n, floor(n/2)).",
+       references: [{:oeis, :a001405, "https://oeis.org/A001405"}]
+  def create_sequence_a001405(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001405/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001405(idx) do
+      Math.binomial(idx, div(idx, 2))
+  end
+
+  @doc """
+  OEIS Sequence `A001519` - a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.
+
+  From [OEIS A001519](https://oeis.org/A001519):
+
+  > a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.
+  > (Formerly M1439 N0569)
+
+  **Sequence IDs**: `:a001519`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001519) |> Sequence.take!(31)
+      [1,1,2,5,13,34,89,233,610,1597,4181,10946,28657,75025,196418,514229,1346269,3524578,9227465,24157817,63245986,165580141,433494437,1134903170,2971215073,7778742049,20365011074,53316291173,139583862445,365435296162,956722026041]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.",
+       references: [{:oeis, :a001519, "https://oeis.org/A001519"}]
+  def create_sequence_a001519(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001519/3)
+  end
+
+
+  @doc offset: 0
+  def seq_a001519(idx, a, b) do
+      case idx do
+         0 -> 1
+         1 -> 1
+         _ -> 3 * b - a 
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A001700` - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.
+
+  From [OEIS A001700](https://oeis.org/A001700):
+
+  > a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.
+  > (Formerly M2848 N1144)
+
+  **Sequence IDs**: `:a001700`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001700) |> Sequence.take!(26)
+      [1,3,10,35,126,462,1716,6435,24310,92378,352716,1352078,5200300,20058300,77558760,300540195,1166803110,4537567650,17672631900,68923264410,269128937220,1052049481860,4116715363800,16123801841550,63205303218876,247959266474052]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.",
+       references: [{:oeis, :a001700, "https://oeis.org/A001700"}]
+  def create_sequence_a001700(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001700/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001700(idx) do
+      Math.binomial(2 * idx + 1, idx + 1)
+  end
+
+  @doc """
+  OEIS Sequence `A001764` - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).
+
+  From [OEIS A001764](https://oeis.org/A001764):
+
+  > a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).
+  > (Formerly M2926 N1174)
+
+  **Sequence IDs**: `:a001764`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001764) |> Sequence.take!(25)
+      [1,1,3,12,55,273,1428,7752,43263,246675,1430715,8414640,50067108,300830572,1822766520,11124755664,68328754959,422030545335,2619631042665,16332922290300,102240109897695,642312451217745,4048514844039120,25594403741131680,162250238001816900]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).",
+       references: [{:oeis, :a001764, "https://oeis.org/A001764"}]
+  def create_sequence_a001764(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001764/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001764(idx) do
+      Math.binomial(3 * idx, idx) |> div(2 * idx + 1)
+  end
+  
 end

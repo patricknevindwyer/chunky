@@ -19,6 +19,9 @@
 
 ## v0.*.*
 
+ - Math
+  - double_factorial/1
+  
  - Sequences 
   - A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.
   - A005935 - Pseudoprimes to base 3.
@@ -119,6 +122,11 @@
   - A020226 - Pseudoprimes to base 98.
   - A020227 - Pseudoprimes to base 99.
   - A020228 - Pseudoprimes to base 100.
+  - A001147 - Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).
+  - A001405 - a(n) = binomial(n, floor(n/2)).
+  - A001519 - a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.
+  - A001700 - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.
+  - A001764 - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).
  
 
 ## v0.11.4

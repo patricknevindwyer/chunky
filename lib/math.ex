@@ -21,6 +21,7 @@ defmodule Chunky.Math do
   Arithmetic functions for pure integer operations.
 
    - `pow/2` - Integer exponentiation
+   - `double_factorial/1` - Double factorial (`n!!`) of `n`
    - `factorial/1` - Factorial (`n!`) of `n`
    - `rising_factorial/2` - Rising factorial of `n^(m)`
    - `falling_factorial/2` - Falling factorial of `(n)m`
@@ -646,6 +647,44 @@ defmodule Chunky.Math do
     CacheAgent.cache_as :factorial, n do
       n * factorial(n - 1)
     end
+  end
+  
+  @doc """
+  Calculate the double factorial of `n`, `n!!`.
+  
+  The double factorial steps down by `2` each iteration, with `0!!` and `1!!` both equal to `1. So
+  the double factorial of `5` is
+  
+  ```
+  5!! == 5 * 3 * 1 == 15
+  ```
+  
+  This function uses a cache for efficiency.
+  
+  ## Examples
+  
+      iex> Math.double_factorial(1)
+      1
+
+      iex> Math.double_factorial(5)
+      15
+
+      iex> Math.double_factorial(10)
+      3840
+
+      iex> Math.double_factorial(18)
+      185794560
+
+      iex> Math.double_factorial(29)
+      6190283353629375
+  
+  """
+  def double_factorial(n) when n < 2, do: 1
+  def double_factorial(n) when n >= 2 do
+     
+     CacheAgent.cache_as :double_factorial, n do
+        n * double_factorial(n - 2) 
+     end 
   end
 
   @doc """
