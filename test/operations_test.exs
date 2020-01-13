@@ -1,4 +1,4 @@
-defmodule Chunky.SequenceDataTest do
+defmodule Chunky.OperationsTest do
   use ExUnit.Case, async: true
   require Chunky.Math.Operations
   import Chunky.Math.Operations, only: [summation: 3, product: 3]

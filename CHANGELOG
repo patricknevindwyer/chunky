@@ -21,6 +21,9 @@
 
 ### Enhancements
 
+ - New module Chunky.Math.Operations
+  - summation/3 macro
+  - product/3 macro
  - Math
   - is_vampire_number?/1
   - is_double_vampire_number?/1
@@ -28,7 +31,36 @@
   - factor_pairs/2
   - is_in_base?/2
   - length_in_base/2
-  - is_pseudo_vampire_number?/1
+  - is_pseudo_vampire_number?/1  
+  - is_pandigital?/1
+  - is_pandigital_in_base?/2
+  - is_left_truncatable_prime?/1
+  - is_right_truncatable_prime?/1
+  - is_left_right_truncatable_prime?/1
+  - is_two_sided_prime?/1
+  - is_palindromic_prime?1
+  - is_emirp_prme?/1
+  - is_circular_prime?/1
+  - is_weakly_prime?/1
+  - rotations/1
+  - reverse_number/1
+  - is_palindromic?/1
+  - is_palindromic_in_base?/2
+  - is_strictly_non_palindromic?/1
+  - is_carmichael_number?/1
+  - is_euler_jacobi_pseudo_prime?/1
+  - is_euler_pseudo_prime?/1
+  - is_poulet_number?/1
+  - is_pseudo_prime?/1
+  - coprimes/1
+  - coprimes/2
+  - is_euler_jacobi_pseudo_prime?/2
+  - is_euler_pseudo_prime?/2
+  - is_pseudo_prime?/2
+  - jacobi_symbol/2
+  - legendre_symbol/2
+  - to_base/2 now supports any base > 1
+  
 
 ## v0.11.3
 

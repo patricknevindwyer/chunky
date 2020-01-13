@@ -2,7 +2,7 @@ defmodule Chunky.Math do
   @moduledoc """
   Integer math, number theory, factorization, prime numbers, and numerical analysis predicates.
 
-
+  
   ## Modular Arithmetic
 
   Pure integer operations for Modular Arithmetic.
@@ -55,19 +55,28 @@ defmodule Chunky.Math do
    - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
    - `digit_count/3` - Count digits in `n` in any base representation
    - `digit_sum/1` - Calculate the sum of the digits of `n`
-   - `is_in_base?/2` - Is `n` a valid number in base `b`?
+   - `is_in_base?/2` - Is the number or list of digits `n` a valid number in base `b`?
+   - `is_pandigital_in_base?/2` - Is `n` a pandigital number in base `b`?
    - `is_plaindrome_in_base?/2` - Does `n` have never decreasing digits in base `b`?
+   - `is_palindromic_in_base?/2` - Is `n` palindromic in base `b`?
    - `length_in_base/2` - How many digits long is `n` in base `b`?
    - `remove_digits!/3` - Remove one or more digits from `n`, returning a reconstituted number
-   - `to_base/2` - Convert a decimal integer to any base from 2 to 10
+   - `reverse_number/1` - Reverse the digits of `n`
+   - `rotations/1` - Enumerate all circular rotations of `n`
+   - `to_base/2` - Convert a decimal integer to any base, returning an integer or list depending on base
 
 
   ## Primes
 
   Analyze, test, and generate prime numbers.
 
+   - `coprimes/1` - Find coprimes of `n` from 2 to `n - 1`
+   - `coprimes/2` - Find coprimes of `n` up to `a`
    - `greatest_prime_factor/1` - Find the largest prime factor of `n`
    - `is_coprime?/2` - Test if two integers are _coprime_ or _relatively prime_
+   - `is_euler_jacobi_pseudo_prime?/2` - Euler-Jacobi pseudo-primality of `n` in base `b`
+   - `is_euler_pseudo_prime?/2` - Euler pseudo-primality of `n` in base `b`
+   - `is_pseudo_prime?/2` - Fermat pseudo-primality of `n` in base `b`
    - `least_prime_factor/1` - Find the smallest prime factor of `n`
    - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
    - `prime_pi/1` - Prime counting function, number of primes less than or equal `n`
@@ -82,27 +91,39 @@ defmodule Chunky.Math do
    - `is_abundant?/1` - Test if an integer is _abundant_
    - `is_achilles_number?/1` - Is `n` an Achilles Number?
    - `is_arithmetic_number?/1` - Test if an integer is an _arithmetic_ number
+   - `is_carmichael_number?/1` - Is `n` a Carmichael number, a number pseudo-prime to all coprime bases
+   - `is_circular_prime?/1` - Is `n` a circular prime?
    - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
    - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_double_vampire_number?/1` - Is `n` a vampire number whose fangs are also vampire numbers?
+   - `is_emirp_prime?/1` - Is `n` a prime that is a different prime when reversed?
+   - `is_euler_jacobi_pseudo_prime?/1` - Is `n` an Euler-jacobi pseudo prime?
+   - `is_euler_pseudo_prime?/1` - Is `n` an Euler pseudo-prime?
    - `is_even?/1` - Is an integer even?
    - `is_highly_abundant?/1` - Test if an integer is a _highly abundant_ number
    - `is_highly_powerful_number?/1` - Test if an integer is a _highly powerful_ number
+   - `is_left_truncatable_prime?/1` - Is `n` a left-truncatable prime?
+   - `is_left_right_truncatable_prime?/1` - Is `n` a left/right truncatable prime?
    - `is_multiple_rhonda?/1` - Test if `n` is a Rhonda number in multiple bases
    - `is_negative?/1` - Is an integer a negative number?
    - `is_odd?/1` - Is an integer odd?
    - `is_odious_number?/1` - Does binary expansion of `n` have odd number of `1`s?
+   - `is_palindromic?/1` - Is `n` palindromic in base 10?
+   - `is_palindromic_prime?/1` - Is `n` a palindromic prime?
+   - `is_pandigital?/1` - Is `n` a pandigital number in base 10?
    - `is_perfect?/1` - Test if an integer is _perfect_
    - `is_perfect_cube?/1` - Is `m` a perfect square?
    - `is_perfect_power?/1` - Is `n` a perfect power?
    - `is_perfect_square?/1` - Is `n` a perfect square?
    - `is_plaindrome?/1` - Does `n` have never decreasing digits in base 10?
    - `is_positive?/1` - Is an integer a positive number?
+   - `is_poulet_number?/1` - Is `n` a Poulet number? 
    - `is_powerful_number?/1` - Test if an integer is a _powerful_ number
    - `is_prime?/1` - Test if an integer is prime
    - `is_prime_fast?/1` - Alternative prime test, faster in specific cases of `n`
    - `is_prime_power?/1` - Check if `n` is a power `m` of a prime, where `m` >= 1.
    - `is_prime_vampire_number?/1` - Is `n` a vampire number with prime fangs?
+   - `is_pseudo_prime?/1` - Is `n` a Fermat pseudo prime in base 10?
    - `is_pseudo_vampire_number?/1` - Is `n` a vampire number with relaxed constraints?
    - `is_rhonda_to_base_4?/1` - Determine if `n` is a Rhonda number to base 4
    - `is_rhonda_to_base_6?/1` - Determine if `n` is a Rhonda number to base 6
@@ -116,11 +137,16 @@ defmodule Chunky.Math do
    - `is_rhonda_to_base_20?/1` - Determine if `n` is a Rhonda number to base 20
    - `is_rhonda_to_base_30?/1` - Determine if `n` is a Rhonda number to base 30
    - `is_rhonda_to_base_60?/1` - Determine if `n` is a Rhonda number to base 60
+   - `is_right_truncatable_prime?/1` - Is `n` a right-truncatable prime?
    - `is_sphenic_number?/1` - Is `n` the product of three distinct primes?
    - `is_squarefree?/1` - Are any factors of `n` perfect squares?
+   - `is_strictly_non_palindromic?/1` - Is `n` non-palindromic in bases 2 through `n - 2`?
+   - `is_two_sided_prime?/1` - Is `n` both a left and right truncatable prime?
    - `is_vampire_number?/1` - Is `n` a vampire number?
+   - `is_weakly_prime?/1` - Is `n` a weakly prime number?
    - `is_zero?/1` - Is an integer `0`?
 
+  
   All of the predicates can be used to analyze an integer with:
 
    - `analyze_number/2` - Apply all 1-arity predicates to an integer, and collect resulting labels
@@ -136,7 +162,9 @@ defmodule Chunky.Math do
    - `hamming_weight/2` - Find the Hamming Weight, the count of digits not `0`, in different base representations of `n`
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
    - `is_rhonda_to_base?/2` - Is `n` a Rhonda number to base `b`?
+   - `jacobi_symbol/2` - Calculate the Jacobi symbol for `(a/n)`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
+   - `legendre_symbol/2` - Calculate the Legendre symbol for `(a/p)`
    - `lucas_number/1` - Find the `n`-th Lucas Number
    - `lucky_numbers/1` - Generate the first `n` Lucky Numbers
    - `mobius_function/1` - Classical Mobius Function
@@ -182,6 +210,7 @@ defmodule Chunky.Math do
    - `jacobsthal_number/1` - Calculate the `n`-th Jacobsthal number
    - `motzkin_number/1` - The number of different ways of drawing non-intersecting chords between `n` points on a circle
    - `ordered_subsets_count/1` - Count the number of partitions of a set of size `n` into any number of ordered lists.
+   - `pancake_cut_max/1` - Count the maximum number of pieces that can be made from `n` cuts of a disk.
    - `plane_partition_count/1` - Number of plane partitions with sum `n`
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
 
@@ -512,7 +541,8 @@ defmodule Chunky.Math do
   Determine if `n` is _pandigital_ in base `b`.
   
   A number `n` is _pandigital_ when it contains all of the digits used in its base
-  _at least_ once. So in base 10 `1234567888890` is pandigital, but `123456789` is not.
+  _at least_ once. So in base 10 `1234567888890` is pandigital, but `123456789` is not. The
+  number `n` is treated as base 10, and converted to the base `b` before being tested.
   
   ## Examples
   
@@ -550,7 +580,11 @@ defmodule Chunky.Math do
   Check if `n` is a valid number in base `b`.
   
   A number `n` that contains only valid digits in base `b` will be considered
-  to be a valid number in that base.
+  to be a valid number in that base. This test assumes that the value being
+  provided is already in base `b`.
+  
+  If the value being tested is a number, this will only check number up to base 10. To
+  check bases above 10, provide a list of digits, like `[10, 17, 1, 29]` (`285359` in base 30).
   
   ## Examples
   
@@ -562,13 +596,30 @@ defmodule Chunky.Math do
       
       iex> Math.is_in_base?(2430432, 6)
       true
+  
+      iex> Math.is_in_base?([1, 17, 4, 10], 17)
+      false
+
+      iex> Math.is_in_base?([1, 17, 4, 10], 18)
+      true
+  
   """
-  def is_in_base?(n, b) do
+  def is_in_base?(n, b) when is_integer(n) and b > 1 and b <= 10 do
       b_digits = 0..b - 1 |> Enum.to_list |> MapSet.new()
       
       (Integer.digits(n)
       |> Enum.filter(fn d -> MapSet.member?(b_digits, d) == false end)
       |> length()) == 0
+  end
+  
+  def is_in_base?(digits, b) when is_list(digits) and b > 1 do
+
+      b_digits = 0..b - 1 |> Enum.to_list |> MapSet.new()
+      
+      (digits
+      |> Enum.filter(fn d -> MapSet.member?(b_digits, d) == false end)
+      |> length()) == 0
+      
   end
   
   @doc """
@@ -2525,8 +2576,11 @@ defmodule Chunky.Math do
   end
   
   @doc """
-  Convert a decimal integer into another base that can be represented by the decimal digits (i.e., any
-  base from 2 to 10).
+  Convert a decimal integer into another base.
+  
+  If the new base can be represented with the decimal digits (i.e.; bases 2 through 10), the
+  returned value will be an integer. If the base is greater than 10, the return value will be
+  a list of digits that are in base `b`.
 
   ## Examples
 
@@ -2538,11 +2592,19 @@ defmodule Chunky.Math do
 
       iex> Math.to_base(987654321, 2)
       111010110111100110100010110001
+  
+      iex> Math.to_base(2048, 60)
+      [34, 8]
   """
   def to_base(n, b) when is_integer(n) and is_integer(b) and b > 1 and b <= 10 do
     n
     |> Integer.digits(b)
     |> Integer.undigits()
+  end
+  
+  def to_base(n, b) when is_integer(n) and is_integer(b) and b > 10 do
+     n
+     |> Integer.digits(b) 
   end
 
   @doc """
@@ -2718,7 +2780,10 @@ defmodule Chunky.Math do
   integers up to `n` that are _relatively prime_ or _coprime_ to `n`. The method used for
   calculating this function relies on a partially closed form of Euler's product formula
   that grows relative to the number of prime factors of `n`.
-
+  
+  If you need the actual coprimes of `n`, and not just the count of coprimes, see `coprimes/1`
+  or `coprimes/2`.
+  
   ## Examples
 
       iex> Math.totient(36)
@@ -3766,6 +3831,12 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Is `n` a _left_ truncatable prime?
+  
+  Truncatable primes are prime number that remain prime when successive digits are removed. For
+  a left truncatable prime, the number will start, and remain, prime as the left digit of the
+  number is recursively dropped, until the number is a single digit prime. For instance, `967`
+  is a left-truncatable prime, because `967`, `67`, and `7` are all prime.
   
   ## Examples
   
@@ -3787,6 +3858,12 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Is `n` a _right_ truncatable prime?
+  
+  Truncatable primes are prime number that remain prime when successive digits are removed. For
+  a right truncatable prime, the number will start, and remain, prime as the right digit of the
+  number is recursively dropped, until the number is a single digit prime. For instance, `23399`
+  is a right-truncatable prime, because `23399`, `2339`, `233`, `23`, and `2` are all prime.
   
   ## Examples
   
@@ -3808,6 +3885,16 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Is `n` a _left/right_ truncatable prime?
+  
+  Truncatable primes are prime number that remain prime when successive digits are removed. For
+  a **left/right** truncatable prime, the number will start, and remain, prime as the left and right digits of the
+  number are recursively dropped at the same time, until the number is a single or double digit prime. For instance, `99729779`
+  is a left/right-truncatable prime, because `99729779`, `972977`, `7297`, and `29` are all prime. For left/right
+  truncation the final number can be a one _or_ two digit prime, depending on if the original number nad an odd or even
+  number of digits.
+  
+  For numbers that are both _left_ truncatable and _right_ trucatable, see `is_two_sided_prime?/1`.
   
   ## Examples
   
@@ -3833,6 +3920,15 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Is `n` a _two sided_ prime, a number that is both a left and right trucatable prime.
+  
+  Truncatable primes are prime number that remain prime when successive digits are removed. For
+  a two sided prime, the number will start, and remain, prime under both left and right truncation. 
+  For instance, `3137` is a two-sided prime, because:
+  
+   - `3137` is prime
+   - `313`, `31`, and `3` are prime (right truncation)
+   - `137`, `37`, and `7` are prime (left truncation)
   
   ## Examples
   
@@ -3875,6 +3971,10 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Is `n` a palindromic prime number?
+  
+  Palindromic prime numbers are both palindromes (the same digits/number when the digits are reversed) and
+  prime numbers. By definition palindromic primes are prime when their digits are reversed.
   
   ## Examples
   
@@ -3894,6 +3994,10 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Is `n` an _emirp_ - a prime number that is a _different_ prime number when reversed?
+  
+  Emirp primes are related to _palindromic_ primes (see `is_palindromic_prime?/1`), except that the
+  reverse of `n` must be a _different_ prime number.
   
   ## Examples
   
@@ -3919,6 +4023,10 @@ defmodule Chunky.Math do
   @doc """
   Is `n` a circular prime?
   
+  A circular prime is a number `n` that remains a prime number through all
+  possible rotations of the digits of `n`. For instance, `1193` is a circular
+  prime because `1193`, `1931`, `9311`, and `3119` are all prime.
+  
   ## Examples
   
       iex> Math.is_circular_prime?(1193)
@@ -3941,6 +4049,10 @@ defmodule Chunky.Math do
   end
 
   @doc """
+  Enumerate all of the rotations of `n`.
+  
+  A rotate of `n` involves a circular rotation of digits - the first digit moved to the end of the
+  number, repeated until all possible rotations are enumerated.
   
   ## Examples
   
@@ -3955,6 +4067,12 @@ defmodule Chunky.Math do
   
       iex> Math.rotations(123456)
       [123456, 234561, 345612, 456123, 561234, 612345]
+  
+      iex> Math.rotations(123123)
+      [123123, 231231, 312312]
+  
+      iex> Math.rotations(1111)
+      [1111]
   """
   def rotations(n) do
       [n] ++ generate_rotations(n, n)
@@ -3975,6 +4093,12 @@ defmodule Chunky.Math do
   end
   
   @doc """
+  Is `n` a _weakly_ prime number?
+  
+  A prime number `n` is called weakly prime if it becomes not prime when any one of its digits 
+  is changed to every single other digit. Testing the number `347` would involve testing all
+  of the numbers `147`, `247`, `447`, `547`, ..., `348`, and `349` to see if they were prime. The
+  number `347` is _not_ weakly prime because `947` _is_ prime.
   
   ## Examples
   
@@ -4029,6 +4153,8 @@ defmodule Chunky.Math do
   @doc """
   Reverse the digits of `n`.
   
+  If the rotated digits of `n` would have leading zeros, they are truncated.
+  
   ## Examples
   
       iex> Math.reverse_number(12345)
@@ -4050,7 +4176,7 @@ defmodule Chunky.Math do
   @doc """
   Check if `n` is a palindromic number in base 10.
   
-  Palindromic numbers, like palindromic words, are the same value when reversed.
+  Palindromic numbers, like palindromic words, are the same value when read forward and reversed.
   
   ## Examples
   
@@ -4070,6 +4196,8 @@ defmodule Chunky.Math do
   @doc """
   Check if `n` is palindromic in base `b`.
   
+  The number `n` is converted from base 10 to base `b` before being checked as a palindrome.
+  
   ## Examples
   
       iex> Math.is_palindromic_in_base?(27, 2)
@@ -4079,7 +4207,16 @@ defmodule Chunky.Math do
       11011
   
       iex> Math.is_palindromic_in_base?(105, 20)
-      true      
+      true
+  
+      iex> Math.to_base(105, 20)
+      [5, 5]
+  
+      iex> Math.is_palindromic_in_base?(222, 3)
+      false
+      
+      iex> Math.to_base(222, 3)
+      22020
       
   """
   def is_palindromic_in_base?(n, b) do
@@ -4156,7 +4293,7 @@ defmodule Chunky.Math do
   @doc """
   Calculate the Jacobi Symbol `(n/k)`.
   
-  Via Wikipedia [Jacobi Symbol]():
+  Via Wikipedia [Jacobi Symbol](https://en.wikipedia.org/wiki/Jacobi_symbol):
   
   > The Jacobi symbol is a generalization of the Legendre symbol. Introduced by Jacobi 
   > in 1837,[1] it is of theoretical interest in modular arithmetic and other branches 
@@ -4342,12 +4479,221 @@ defmodule Chunky.Math do
   end
   def is_euler_jacobi_pseudo_prime?(_, _), do: false
     
-    
+
+
+  @doc """
+  Determine if `n` is a Fermat pseudo-prime to base `a`.
+  
+  The pseudo-primes, or Fermat pseudo-primes, define a relationship between coprimes `n` and `a`, where `n` is a composite
+  number, and `a^(n - 1) % n == 1`.
+  
+  The pseudo-primes over base 2 are often called the Poulet numbers.
+  
+  If `n` is pseudo-prime to all bases `a` that are coprime to `n`, it is a Carmichael number.
+  
+  ## Examples
+  
+      iex> Math.is_pseudo_prime?(33, 10)
+      true
+
+      iex> Math.is_pseudo_prime?(17, 10)
+      false
+
+      iex> Math.is_pseudo_prime?(65, 12)
+      true
+
+      iex> Math.is_pseudo_prime?(27, 12)
+      false
+
+      iex> Math.is_pseudo_prime?(341, 60)
+      true
+      
+      iex> Math.is_pseudo_prime?(291, 60)
+      false
+      
+      
+  """    
   def is_pseudo_prime?(n, a) when a > 1 and n > 1 do
       is_prime?(n) == false && Math.pow(a, n - 1, n) == 1
   end
-  def is_pseudo_prime?(_, _), do: false    
+  def is_pseudo_prime?(_, _), do: false
+  
+  @doc """
+  Determine if `n` is pseudo-prime to base 10.
+  
+  This is a Fermat pseudo-primality test. See `is_pseudo_prime?/2` for more details.
+  
+  ## Examples
+  
+      iex> Math.is_pseudo_prime?(9)
+      true
+
+      iex> Math.is_pseudo_prime?(33)
+      true
+
+      iex> Math.is_pseudo_prime?(47)
+      false
+
+      iex> Math.is_pseudo_prime?(481)
+      true
+
+      iex> Math.is_pseudo_prime?(559)
+      false
+
+      iex> Math.is_pseudo_prime?(8401)
+      true
+  
+  """
+  def is_pseudo_prime?(n) when n > 1, do: is_pseudo_prime?(n, 10)
+  def is_pseudo_prime?(_), do: false
     
+  @doc """
+  Is `n` a Poulet number?
+  
+  Poulet numbers are Fermat pseudo-primes to base 2, see `is_pseudo_prime?/2`.
+  
+  ## Examples
+
+      iex> Math.is_poulet_number?(107)
+      false
+
+      iex> Math.is_poulet_number?(271)
+      false
+  
+      iex> Math.is_poulet_number?(341)
+      true
+  
+      iex> Math.is_poulet_number?(1387)
+      true
+  
+      iex> Math.is_poulet_number?(10261)
+      true
+  
+  """  
+  def is_poulet_number?(n) when n > 1, do: is_pseudo_prime?(n, 2)
+  def is_poulet_number?(_), do: false
+  
+  
+  @doc """
+  Check if `n` is a Carmichael number.
+  
+  A Carmichael number `n` is a composite number that satisfies the congruence:
+  
+   ![Carmichael Number](https://wikimedia.org/api/rest_v1/media/math/render/svg/6a865f5eed65bd5f1a68ddb9ad0f35cfe9aa1208)
+  
+  for all `b` that are coprime to `n`. 
+  
+  ## Examples
+  
+      iex> Math.is_carmichael_number?(517)
+      false
+
+      iex> Math.is_carmichael_number?(561)
+      true
+
+      iex> Math.is_carmichael_number?(1105)
+      true
+
+      iex> Math.is_carmichael_number?(1107)
+      false
+
+      iex> Math.is_carmichael_number?(41041)
+      true
+      
+  """
+  def is_carmichael_number?(n) when n > 1 do
+      coprimes(n) -- [1]
+      |> Enum.all?(fn a -> is_pseudo_prime?(n, a) end)
+  end
+  def is_carmichael_number?(_), do: false
+  
+  @doc """
+  Find all positive coprimes of `n`, from `2` up to `n`.
+  
+  Two numbers `a` and `b` are coprime if, and only if, the only positive integer factor
+  that divides both of them is `1`.
+  
+  If you need comprimes of `n` greater than `n`, see `coprimes/2`. If you only need the
+  count of coprimes of `n`, see `totient/1`.
+  
+  ## Examples
+  
+      iex> Math.coprimes(2)
+      [1]
+
+      iex> Math.coprimes(3)
+      [1, 2]
+
+      iex> Math.coprimes(10)
+      [1, 3, 7, 9]
+
+      iex> Math.coprimes(36)
+      [1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35]
+  
+  
+  """
+  def coprimes(1), do: [1]
+  def coprimes(2), do: [1]
+  def coprimes(n) when n > 2 do
+     
+     # find all prime roots of n
+     p_fs = prime_factors(n) -- [1, n]
+     
+     # enumerate all digits from 2 to n that aren't powers of roots of n
+     [1] ++ (2..n - 1
+     |> Enum.filter(fn m -> is_in_multiples?(m, p_fs) == false end))
+     
+  end
+  
+  @doc """
+  Find all positive coprimes of `n` from `2` up to `d`.
+  
+  Two numbers `a` and `b` are coprime if, and only if, the only positive integer factor
+  that divides both of them is `1`.
+  
+  If you only need the coprimes of `n` less than or equal to `n`, see `coprimes/1`.
+  
+  ## Examples
+  
+      iex> Math.coprimes(2, 10)
+      [1, 3, 5, 7, 9]
+
+      iex> Math.coprimes(3, 20)
+      [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20]
+
+      iex> Math.coprimes(10, 30)
+      [1, 3, 7, 9, 11, 13, 17, 19, 21, 23, 27, 29]
+
+      iex> Math.coprimes(38, 50)
+      [1, 3, 5, 7, 9, 11, 13, 15, 17, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49]
+      
+  
+  """
+  def coprimes(n, d) when n > 1 and d > 1 do
+     
+     p_fs = prime_factors(n) -- [1, n] 
+     
+     # enumerate all digits from 2 to D
+     [1] ++ (2..d
+     |> Enum.filter(
+         fn m -> 
+             # make sure our candidate isn't a mulitple of a prime factor of N
+             # and make sure it isn't a multiple of N itself
+             (is_in_multiples?(m, p_fs) == false) && (rem(m, n) != 0) 
+         end
+     ) )
+  end
+  
+  # is n a multiple of any of the numbers in the list?
+  defp is_in_multiples?(_n, []), do: false
+  defp is_in_multiples?(n, [p | p_fs]) do
+      if rem(n, p) == 0 do
+          true 
+      else
+          is_in_multiples?(n, p_fs)
+      end
+  end
+  
   @doc """
   Determine if a positive integer is prime.
 

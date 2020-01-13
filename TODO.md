@@ -64,58 +64,38 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ## TODO
  
  - New functions in Math
- 
-  - all need inclusion in:
-   - tests
-   - CHANGELOG
-   - TOF for Math
-   
-  - Is pan digital?  (needs tests)
-  - Is pan digital in baseN? (needs tests)
-  - Is base N (has only base N digits) (needs tests)
-  - factor_pairs (multiplicity: true/false) (needs tests)
-  - Is vampire number (needs tests)
-  - Is prime vampire number (needs tests)
-  - is double vampire (needs tests)
-  - is pseudo-vampire number (needs tests)
-  
-  - Is left truncatable prime (needs tests)
-  - Is right truncatable prime (needs tests)
-  - Is left-right-truncatable (needs tests)
-  - Is two-sided-prime (needs tests)
-  
-  - is palindromic prime (needs tests)
-  - is emirp prime (needs tests)
-  - is circular prime (needs tests) (will need repunit/1)
-  - is weakly prime (needs tests)
 
-  - Is palindromic (needs tests)
-  - Is palindromic in base N (needs tests)
-  - is strictly non-palindromic (needs tests)
+ - release 0.11.4
+ 
+ - release 0.11.5
+ 
+ - sequences
+  - fermat pseudo primes https://en.wikipedia.org/wiki/Fermat_pseudoprime
+  - carmichael numbers https://oeis.org/A002997
+  - 5 more core sequences
+     
   
-  - jacobi symbol (needs docs)
-  - legendre symbol (needs docs)
-  
-  - euler pseudo-prime (needs docs)
-  - euler-jacobi pseudo-prime (needs docs)
-  
-  - is_pseudo_prime? (needs implicit base 10, needs tests, needs docs, grab all sequences)
-  
-  
-  - can we use different symbols? like summations?
-  - other pseudo-primes
+ - release 0.12.0
  
   - is it worth splitting off primes into Math.Primes?
    - split off the new functions
    - split off the old prime functions (except factorizations)
+   
+   - Math.Primes
+   - Math.NumberTheory
+   - Math.Combinatorics
+   - Math.Representations
  
  
   > todo
   - Is editable prime (delete digit anywhere) 
   
+  - other pseudo-primes
   
   
-               
+ - update summations in Math
+ - add numberphile references?
+ 
  - sequence manipulations
   - map
   - filter
