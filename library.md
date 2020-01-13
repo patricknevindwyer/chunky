@@ -132,3 +132,26 @@ iex> Chunky.Math.euler_polynomial(2, 15) |> Chunky.Fraction.get_whole()
 ```
 
 See `Chunky.Math` for functions dealing with _number theory_, _combinatorics_, _predicates_, and much more.
+
+# Series Operations
+
+You can use `Chunky.Math.Operations` for macro based shortcuts for some common series operations, like
+summation:
+
+```elixir
+ # Step sum of j^3 + k^2 + 3
+ summation k, 1.10 do
+     summation j, k..10 do
+         j * j * j + k * k + 3
+     end
+ end
+```
+
+and product:
+
+```elixir
+ # continued fractional product 1/2 * 2/3 * ... 100/101
+ product n, 1..100 do
+     Fraction.new(n, n + 1)
+ end
+```

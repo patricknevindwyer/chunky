@@ -2,7 +2,7 @@ defmodule Chunky.Math do
   @moduledoc """
   Integer math, number theory, factorization, prime numbers, and numerical analysis predicates.
 
-  
+
   ## Modular Arithmetic
 
   Pure integer operations for Modular Arithmetic.
@@ -146,7 +146,7 @@ defmodule Chunky.Math do
    - `is_weakly_prime?/1` - Is `n` a weakly prime number?
    - `is_zero?/1` - Is an integer `0`?
 
-  
+
   All of the predicates can be used to analyze an integer with:
 
    - `analyze_number/2` - Apply all 1-arity predicates to an integer, and collect resulting labels
@@ -387,44 +387,42 @@ defmodule Chunky.Math do
 
   @doc """
   Find all pairs of factors of `n`, with or without duplicates.
-  
+
   This is a variant of the `factors/1` function, in that it builds the full pairs
   of factors of `n` in tuple form.
-  
+
   ## Options
-  
+
    - `duplicates` - Boolean. Default `false`. If `true`, include the ordered duplicates of factors (see examples)
-  
+
   ## Examples
-  
+
       iex> Math.factor_pairs(8)
       [{1, 8}, {2, 4}]
       
       iex> Math.factor_pairs(8, duplicates: true)
       [{1, 8}, {2, 4}, {4, 2}, {8, 1}]
-  
+
       iex> Math.factor_pairs(84)
       [1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84]
       [{1, 84}, {2, 42}, {3, 28}, {4, 21}, {6, 14}, {7, 12}]
-  
+
       
   """
   def factor_pairs(n, opts \\ []) do
-      
-      # are we including the pair wise duplicates?
-      dupes = opts |> Keyword.get(:duplicates, false)
-      
-      # find our factors and break everything down, taking only
-      # the parts of the original factors that we need
-      n_fs = factors(n)
-      
-      if dupes do
-          n_fs
-      else
-          n_fs |> Enum.take(n_fs |> length() |> div(2))
-      end
-      |> Enum.map(fn f -> {f, div(n, f)} end)
-      
+    # are we including the pair wise duplicates?
+    dupes = opts |> Keyword.get(:duplicates, false)
+
+    # find our factors and break everything down, taking only
+    # the parts of the original factors that we need
+    n_fs = factors(n)
+
+    if dupes do
+      n_fs
+    else
+      n_fs |> Enum.take(n_fs |> length() |> div(2))
+    end
+    |> Enum.map(fn f -> {f, div(n, f)} end)
   end
 
   @doc """
@@ -539,13 +537,13 @@ defmodule Chunky.Math do
 
   @doc """
   Determine if `n` is _pandigital_ in base `b`.
-  
+
   A number `n` is _pandigital_ when it contains all of the digits used in its base
   _at least_ once. So in base 10 `1234567888890` is pandigital, but `123456789` is not. The
   number `n` is treated as base 10, and converted to the base `b` before being tested.
-  
+
   ## Examples
-  
+
       iex> Math.is_pandigital_in_base?(75, 4)
       true
       
@@ -555,39 +553,39 @@ defmodule Chunky.Math do
       iex> Math.is_pandigital_in_base?(2048, 10)
       false
   """
-  def is_pandigital_in_base?(n, b) do  
-      (Integer.digits(n, b)
-      |> Enum.uniq()
-      |> length()) == b
+  def is_pandigital_in_base?(n, b) do
+    Integer.digits(n, b)
+    |> Enum.uniq()
+    |> length() == b
   end
-  
+
   @doc """
   Check if `n` is _pandigital_ in base 10.
-  
+
   See `is_pandigital_in_base?/2` for more details.
-  
+
   ## Examples
-  
+
       iex> Math.is_pandigital?(123456789)
       false
-  
+
       iex> Math.is_pandigital?(1023456789)
       true
   """
   def is_pandigital?(n), do: is_pandigital_in_base?(n, 10)
-  
+
   @doc """
   Check if `n` is a valid number in base `b`.
-  
+
   A number `n` that contains only valid digits in base `b` will be considered
   to be a valid number in that base. This test assumes that the value being
   provided is already in base `b`.
-  
+
   If the value being tested is a number, this will only check number up to base 10. To
   check bases above 10, provide a list of digits, like `[10, 17, 1, 29]` (`285359` in base 30).
-  
+
   ## Examples
-  
+
       iex> Math.is_in_base?(123456, 5)
       false
       
@@ -596,32 +594,30 @@ defmodule Chunky.Math do
       
       iex> Math.is_in_base?(2430432, 6)
       true
-  
+
       iex> Math.is_in_base?([1, 17, 4, 10], 17)
       false
 
       iex> Math.is_in_base?([1, 17, 4, 10], 18)
       true
-  
+
   """
   def is_in_base?(n, b) when is_integer(n) and b > 1 and b <= 10 do
-      b_digits = 0..b - 1 |> Enum.to_list |> MapSet.new()
-      
-      (Integer.digits(n)
-      |> Enum.filter(fn d -> MapSet.member?(b_digits, d) == false end)
-      |> length()) == 0
-  end
-  
-  def is_in_base?(digits, b) when is_list(digits) and b > 1 do
+    b_digits = 0..(b - 1) |> Enum.to_list() |> MapSet.new()
 
-      b_digits = 0..b - 1 |> Enum.to_list |> MapSet.new()
-      
-      (digits
-      |> Enum.filter(fn d -> MapSet.member?(b_digits, d) == false end)
-      |> length()) == 0
-      
+    Integer.digits(n)
+    |> Enum.filter(fn d -> MapSet.member?(b_digits, d) == false end)
+    |> length() == 0
   end
-  
+
+  def is_in_base?(digits, b) when is_list(digits) and b > 1 do
+    b_digits = 0..(b - 1) |> Enum.to_list() |> MapSet.new()
+
+    digits
+    |> Enum.filter(fn d -> MapSet.member?(b_digits, d) == false end)
+    |> length() == 0
+  end
+
   @doc """
   The _factorial_ of `n`, or `n!`.
 
@@ -2315,82 +2311,78 @@ defmodule Chunky.Math do
 
   """
   def is_rhonda_to_base_60?(n), do: is_rhonda_to_base?(n, 60)
-  
+
   @doc """
   Check if `n` is a _pseudo_ vampire number.
-  
+
   The pseudo-vampire numbers have more relaxed criteria than the standard
   vampire numbers (see `is_vampire_number?/1`). Pseudo-vampires change the restrictions on the number of
   digits in `n` and the factors `a` and `b`, such that:
-  
+
    1. `n` can have an even _or odd_ number of digits
    2. The factors `a` and `b` can be of any length, not strictly of half the length of `n`
-  
+
   ## Examples
-  
+
       iex> Math.is_pseudo_vampire_number?(126)
       true
-  
+
       iex> Math.is_pseudo_vampire_number?(128)
       false
-  
+
       iex> Math.is_pseudo_vampire_number?(19026)
       true
-  
+
       iex> Math.is_pseudo_vampire_number?(1025779)
       true
   """
   def is_pseudo_vampire_number?(n) when n <= 0, do: false
+
   def is_pseudo_vampire_number?(n) do
-      # find our sorted digits of N for later
-      n_digits = Integer.digits(n) |> Enum.sort()
-      
-      # find factors
-      (factor_pairs(n)
-  
-      # filter factors
-            
-      # can't both end in zero
-      |> Enum.filter(
-          fn {a, b} -> 
-              a_z = Integer.digits(a) |> List.last() 
-              b_z = Integer.digits(b) |> List.last()
-              
-              !(a_z == 0 && b_z == 0)
-          end
-      )
-      
-      # do we have all of our digits?
-      |> Enum.filter(
-          fn {a, b} -> 
-              ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
-          end
-      )
-      
-      # if we have anything left over, it's a vampire
-      |> length()) > 0
-      
+    # find our sorted digits of N for later
+    n_digits = Integer.digits(n) |> Enum.sort()
+
+    # find factors
+    factor_pairs(n)
+
+    # filter factors
+
+    # can't both end in zero
+    |> Enum.filter(fn {a, b} ->
+      a_z = Integer.digits(a) |> List.last()
+      b_z = Integer.digits(b) |> List.last()
+
+      !(a_z == 0 && b_z == 0)
+    end)
+
+    # do we have all of our digits?
+    |> Enum.filter(fn {a, b} ->
+      (Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort() == n_digits
+    end)
+
+    # if we have anything left over, it's a vampire
+    |> length() > 0
   end
-  
+
   @doc """
   Check if `n` is a _true vampire number_.
-  
+
   A vampire number is a number `n` that fullfils the following criteria:
-  
+
    1. `n` has an even number of digits
    2. `n` can be factored into two digits `a` and `b`
    3. Both `a` and `b` half exactly half as many digits as `n`
    4. One or the other of `a` or `b` can have trailing zeros, but not both
    5. `a` and `b` contain all of the original digits of `n`, in any order, _including_ duplicated digits in `n`
-  
+
   ## Examples
-  
+
       iex> Math.is_vampire_number?(1260)
       true
       
       iex> Math.is_vampire_number?(6000)
       false
-  
+
       iex> Math.is_vampire_number?(6880)
       true
       
@@ -2398,116 +2390,107 @@ defmodule Chunky.Math do
       true
   """
   def is_vampire_number?(n) when n <= 0, do: false
+
   def is_vampire_number?(n) when is_integer(n) and n > 0 do
-      
-      # even number of digits?
-      if length_in_base(n, 10) |> rem(2) == 1 do
-          false
-      else
-          
-          # find our sorted digits of N for later
-          n_digits = Integer.digits(n) |> Enum.sort()
-          
-          # find factors
-          (factor_pairs(n)
-      
-          # filter factors
-          
-          # same length
-          |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
-          
-          # can't both end in zero
-          |> Enum.filter(
-              fn {a, b} -> 
-                  a_z = Integer.digits(a) |> List.last() 
-                  b_z = Integer.digits(b) |> List.last()
-                  
-                  !(a_z == 0 && b_z == 0)
-              end
-          )
-          
-          # do we have all of our digits?
-          |> Enum.filter(
-              fn {a, b} -> 
-                  ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
-              end
-          )
-          
-          # if we have anything left over, it's a vampire
-          |> length()) > 0
-      end
+    # even number of digits?
+    if length_in_base(n, 10) |> rem(2) == 1 do
+      false
+    else
+      # find our sorted digits of N for later
+      n_digits = Integer.digits(n) |> Enum.sort()
+
+      # find factors
+      factor_pairs(n)
+
+      # filter factors
+
+      # same length
+      |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
+
+      # can't both end in zero
+      |> Enum.filter(fn {a, b} ->
+        a_z = Integer.digits(a) |> List.last()
+        b_z = Integer.digits(b) |> List.last()
+
+        !(a_z == 0 && b_z == 0)
+      end)
+
+      # do we have all of our digits?
+      |> Enum.filter(fn {a, b} ->
+        (Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort() == n_digits
+      end)
+
+      # if we have anything left over, it's a vampire
+      |> length() > 0
+    end
   end
-  
+
   @doc """
   Check if `n` is a _prime vampire number_.
-  
+
   A _prime_ vampire number needs to mee the same criteria as a standard _vampire number_ (see `is_vampire_number?/1`),
   with the additional criteria of:
-  
+
    1. Both of the factors of `n`, `a` and `b`, must be prime
-  
+
   ## Examples
-  
+
       iex> Math.is_prime_vampire_number?(6881)
       false
       
       iex> Math.is_prime_vampire_number?(117067)
       true
-  
+
   """
   def is_prime_vampire_number?(n) when n <= 0, do: false
+
   def is_prime_vampire_number?(n) when is_integer(n) and n > 0 do
-      # even number of digits?
-      if length_in_base(n, 10) |> rem(2) == 1 do
-          false
-      else
-          
-          # find our sorted digits of N for later
-          n_digits = Integer.digits(n) |> Enum.sort()
-          
-          # find factors
-          (factor_pairs(n)
-      
-          # filter factors
-          
-          # same length
-          |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
-          
-          # can't both end in zero
-          |> Enum.filter(
-              fn {a, b} -> 
-                  a_z = Integer.digits(a) |> List.last() 
-                  b_z = Integer.digits(b) |> List.last()
-                  
-                  !(a_z == 0 && b_z == 0)
-              end
-          )
-          
-          # both factors prime?
-          |> Enum.filter(fn {a, b} -> is_prime?(a) && is_prime?(b) end)
-          
-          # do we have all of our digits?
-          |> Enum.filter(
-              fn {a, b} -> 
-                  ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
-              end
-          )
-          
-          # if we have anything left over, it's a vampire
-          |> length()) > 0
-      end
+    # even number of digits?
+    if length_in_base(n, 10) |> rem(2) == 1 do
+      false
+    else
+      # find our sorted digits of N for later
+      n_digits = Integer.digits(n) |> Enum.sort()
+
+      # find factors
+      factor_pairs(n)
+
+      # filter factors
+
+      # same length
+      |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
+
+      # can't both end in zero
+      |> Enum.filter(fn {a, b} ->
+        a_z = Integer.digits(a) |> List.last()
+        b_z = Integer.digits(b) |> List.last()
+
+        !(a_z == 0 && b_z == 0)
+      end)
+
+      # both factors prime?
+      |> Enum.filter(fn {a, b} -> is_prime?(a) && is_prime?(b) end)
+
+      # do we have all of our digits?
+      |> Enum.filter(fn {a, b} ->
+        (Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort() == n_digits
+      end)
+
+      # if we have anything left over, it's a vampire
+      |> length() > 0
+    end
   end
-  
+
   @doc """
   Check of `n` is a **double** _vampire number_.
-  
+
   Double vampire numbers meet all the criteria of a regular vampire number (see `is_vampire_number?/1`)
   with the additional constraint:
-  
+
    1. The two factors of `n`, `a` and `b`, must _also be_ vampire numbers
-  
+
   ## Examples
-  
+
       iex> Math.is_double_vampire_number?(6880)
       false
       
@@ -2515,56 +2498,52 @@ defmodule Chunky.Math do
       true
   """
   def is_double_vampire_number?(n) when n <= 0, do: false
+
   def is_double_vampire_number?(n) when is_integer(n) and n > 0 do
-      # even number of digits?
-      if length_in_base(n, 10) |> rem(2) == 1 do
-          false
-      else
-          
-          # find our sorted digits of N for later
-          n_digits = Integer.digits(n) |> Enum.sort()
-          
-          # find factors
-          (factor_pairs(n)
-      
-          # filter factors
-          
-          # same length
-          |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
-          
-          # can't both end in zero
-          |> Enum.filter(
-              fn {a, b} -> 
-                  a_z = Integer.digits(a) |> List.last() 
-                  b_z = Integer.digits(b) |> List.last()
-                  
-                  !(a_z == 0 && b_z == 0)
-              end
-          )
-          
-          # both factors must _also_ be vampire numbers
-          |> Enum.filter(fn {a, b} -> is_vampire_number?(a) && is_vampire_number?(b) end)
-          
-          # do we have all of our digits?
-          |> Enum.filter(
-              fn {a, b} -> 
-                  ((Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort()) == n_digits
-              end
-          )
-          
-          # if we have anything left over, it's a vampire
-          |> length()) > 0
-      end 
+    # even number of digits?
+    if length_in_base(n, 10) |> rem(2) == 1 do
+      false
+    else
+      # find our sorted digits of N for later
+      n_digits = Integer.digits(n) |> Enum.sort()
+
+      # find factors
+      factor_pairs(n)
+
+      # filter factors
+
+      # same length
+      |> Enum.filter(fn {a, b} -> length_in_base(a, 10) == length_in_base(b, 10) end)
+
+      # can't both end in zero
+      |> Enum.filter(fn {a, b} ->
+        a_z = Integer.digits(a) |> List.last()
+        b_z = Integer.digits(b) |> List.last()
+
+        !(a_z == 0 && b_z == 0)
+      end)
+
+      # both factors must _also_ be vampire numbers
+      |> Enum.filter(fn {a, b} -> is_vampire_number?(a) && is_vampire_number?(b) end)
+
+      # do we have all of our digits?
+      |> Enum.filter(fn {a, b} ->
+        (Integer.digits(a) ++ Integer.digits(b)) |> Enum.sort() == n_digits
+      end)
+
+      # if we have anything left over, it's a vampire
+      |> length() > 0
+    end
   end
-  
+
   @doc """
   Determine the number of digits, or length, of a number `n` in base `b`.
-  
+
   ## Examples
-  
+
       iex> Math.length_in_base(12345, 10)
       5
-  
+
       iex> Math.length_in_base(2048, 2)
       12
       
@@ -2572,12 +2551,12 @@ defmodule Chunky.Math do
       5
   """
   def length_in_base(n, b) do
-     Integer.digits(n, b) |> length() 
+    Integer.digits(n, b) |> length()
   end
-  
+
   @doc """
   Convert a decimal integer into another base.
-  
+
   If the new base can be represented with the decimal digits (i.e.; bases 2 through 10), the
   returned value will be an integer. If the base is greater than 10, the return value will be
   a list of digits that are in base `b`.
@@ -2592,7 +2571,7 @@ defmodule Chunky.Math do
 
       iex> Math.to_base(987654321, 2)
       111010110111100110100010110001
-  
+
       iex> Math.to_base(2048, 60)
       [34, 8]
   """
@@ -2601,10 +2580,10 @@ defmodule Chunky.Math do
     |> Integer.digits(b)
     |> Integer.undigits()
   end
-  
+
   def to_base(n, b) when is_integer(n) and is_integer(b) and b > 10 do
-     n
-     |> Integer.digits(b) 
+    n
+    |> Integer.digits(b)
   end
 
   @doc """
@@ -2780,10 +2759,10 @@ defmodule Chunky.Math do
   integers up to `n` that are _relatively prime_ or _coprime_ to `n`. The method used for
   calculating this function relies on a partially closed form of Euler's product formula
   that grows relative to the number of prime factors of `n`.
-  
+
   If you need the actual coprimes of `n`, and not just the count of coprimes, see `coprimes/1`
   or `coprimes/2`.
-  
+
   ## Examples
 
       iex> Math.totient(36)
@@ -3829,75 +3808,77 @@ defmodule Chunky.Math do
       Fraction.new(1, n) |> Fraction.multiply(sum_part) |> Fraction.get_whole()
     end
   end
-  
+
   @doc """
   Is `n` a _left_ truncatable prime?
-  
+
   Truncatable primes are prime number that remain prime when successive digits are removed. For
   a left truncatable prime, the number will start, and remain, prime as the left digit of the
   number is recursively dropped, until the number is a single digit prime. For instance, `967`
   is a left-truncatable prime, because `967`, `67`, and `7` are all prime.
-  
+
   ## Examples
-  
+
       iex> Math.is_left_truncatable_prime?(967)
       true
-  
+
       iex> Math.is_left_truncatable_prime?(9137)
       true
       
       iex> Math.is_left_truncatable_prime?(9656934675)
       false
-  
+
       iex> Math.is_left_truncatable_prime?(396334245663786197)
       true
   """
   def is_left_truncatable_prime?(n) when n <= 0, do: false
+
   def is_left_truncatable_prime?(n) when n > 0 do
-      is_prime_with_edit?(n, :left)
+    is_prime_with_edit?(n, :left)
   end
-  
+
   @doc """
   Is `n` a _right_ truncatable prime?
-  
+
   Truncatable primes are prime number that remain prime when successive digits are removed. For
   a right truncatable prime, the number will start, and remain, prime as the right digit of the
   number is recursively dropped, until the number is a single digit prime. For instance, `23399`
   is a right-truncatable prime, because `23399`, `2339`, `233`, `23`, and `2` are all prime.
-  
+
   ## Examples
-  
+
       iex> Math.is_right_truncatable_prime?(23399)
       true
-  
+
       iex> Math.is_right_truncatable_prime?(37)
       true
-  
+
       iex> Math.is_right_truncatable_prime?(59393)
       true
-  
+
       iex> Math.is_right_truncatable_prime?(59397)
       false
   """
   def is_right_truncatable_prime?(n) when n <= 0, do: false
+
   def is_right_truncatable_prime?(n) when n > 0 do
-      is_prime_with_edit?(n, :right)
+    is_prime_with_edit?(n, :right)
   end
-  
+
   @doc """
   Is `n` a _left/right_ truncatable prime?
-  
+
   Truncatable primes are prime number that remain prime when successive digits are removed. For
   a **left/right** truncatable prime, the number will start, and remain, prime as the left and right digits of the
   number are recursively dropped at the same time, until the number is a single or double digit prime. For instance, `99729779`
   is a left/right-truncatable prime, because `99729779`, `972977`, `7297`, and `29` are all prime. For left/right
   truncation the final number can be a one _or_ two digit prime, depending on if the original number nad an odd or even
   number of digits.
-  
+
   For numbers that are both _left_ truncatable and _right_ trucatable, see `is_two_sided_prime?/1`.
-  
+
   ## Examples
-  
+
       iex> Math.is_left_right_truncatable_prime?(433)
       true
 
@@ -3906,78 +3887,78 @@ defmodule Chunky.Math do
 
       iex> Math.is_left_right_truncatable_prime?(89)
       true
-  
+
       iex> Math.is_left_right_truncatable_prime?(7)
       true
-  
+
       iex> Math.is_left_right_truncatable_prime?(99729779)
       true
-  
+
   """
   def is_left_right_truncatable_prime?(n) when n <= 0, do: false
+
   def is_left_right_truncatable_prime?(n) when n > 0 do
-      is_prime_with_edit?(n, :both)
+    is_prime_with_edit?(n, :both)
   end
-  
+
   @doc """
   Is `n` a _two sided_ prime, a number that is both a left and right trucatable prime.
-  
+
   Truncatable primes are prime number that remain prime when successive digits are removed. For
   a two sided prime, the number will start, and remain, prime under both left and right truncation. 
   For instance, `3137` is a two-sided prime, because:
-  
+
    - `3137` is prime
    - `313`, `31`, and `3` are prime (right truncation)
    - `137`, `37`, and `7` are prime (left truncation)
-  
+
   ## Examples
-  
+
       iex> Math.is_two_sided_prime?(7)
       true
-  
+
       iex> Math.is_two_sided_prime?(313)
       true
-  
+
       iex> Math.is_two_sided_prime?(3137)
       true
-  
+
       iex> Math.is_two_sided_prime?(739397)
       true
-  
+
   """
   def is_two_sided_prime?(n) when n <= 0, do: false
+
   def is_two_sided_prime?(n) when n > 0 do
-      is_prime_with_edit?(n, :left) && is_prime_with_edit?(n, :right)
+    is_prime_with_edit?(n, :left) && is_prime_with_edit?(n, :right)
   end
-  
+
   defp is_prime_with_edit?(p, mode) do
-     
-     if (mode == :both && length_in_base(p, 10) == 2 && is_prime?(p)) || (length_in_base(p, 10) == 1 and is_prime?(p)) do
-         true
-     else 
-         if is_prime?(p) do
-             
-             case mode do
-                :left -> p |> Integer.digits() |> Enum.drop(1) |> Integer.undigits()
-                :right -> p |> Integer.digits() |> Enum.slice(0..-2) |> Integer.undigits()
-                :both -> p |> Integer.digits() |> Enum.slice(1..-2) |> Integer.undigits()
-             end
-             |> is_prime_with_edit?(mode)
-             
-         else
-             false
-         end
-     end
+    if (mode == :both && length_in_base(p, 10) == 2 && is_prime?(p)) ||
+         (length_in_base(p, 10) == 1 and is_prime?(p)) do
+      true
+    else
+      if is_prime?(p) do
+        case mode do
+          :left -> p |> Integer.digits() |> Enum.drop(1) |> Integer.undigits()
+          :right -> p |> Integer.digits() |> Enum.slice(0..-2) |> Integer.undigits()
+          :both -> p |> Integer.digits() |> Enum.slice(1..-2) |> Integer.undigits()
+        end
+        |> is_prime_with_edit?(mode)
+      else
+        false
+      end
+    end
   end
-  
+
   @doc """
   Is `n` a palindromic prime number?
-  
+
   Palindromic prime numbers are both palindromes (the same digits/number when the digits are reversed) and
   prime numbers. By definition palindromic primes are prime when their digits are reversed.
-  
+
   ## Examples
-  
+
       iex> Math.is_palindromic_prime?(373)
       true
         
@@ -3986,21 +3967,22 @@ defmodule Chunky.Math do
 
       iex> Math.is_palindromic_prime?(55)
       false
-  
+
   """
   def is_palindromic_prime?(n) when n <= 0, do: false
+
   def is_palindromic_prime?(n) when n > 0 do
-      is_prime?(n) && (n == reverse_number(n))
+    is_prime?(n) && n == reverse_number(n)
   end
-  
+
   @doc """
   Is `n` an _emirp_ - a prime number that is a _different_ prime number when reversed?
-  
+
   Emirp primes are related to _palindromic_ primes (see `is_palindromic_prime?/1`), except that the
   reverse of `n` must be a _different_ prime number.
-  
+
   ## Examples
-  
+
       iex> Math.is_emirp_prime?(373)
       false
 
@@ -4012,23 +3994,24 @@ defmodule Chunky.Math do
 
       iex> Math.is_emirp_prime?(947351)
       true
-  
+
   """
   def is_emirp_prime?(n) when n <= 0, do: false
+
   def is_emirp_prime?(n) when n > 0 do
-      r_n = reverse_number(n)
-      is_prime?(n) && is_prime?(r_n) && n != r_n
+    r_n = reverse_number(n)
+    is_prime?(n) && is_prime?(r_n) && n != r_n
   end
-  
+
   @doc """
   Is `n` a circular prime?
-  
+
   A circular prime is a number `n` that remains a prime number through all
   possible rotations of the digits of `n`. For instance, `1193` is a circular
   prime because `1193`, `1931`, `9311`, and `3119` are all prime.
-  
+
   ## Examples
-  
+
       iex> Math.is_circular_prime?(1193)
       true
 
@@ -4040,68 +4023,68 @@ defmodule Chunky.Math do
 
       iex> Math.is_circular_prime?(135)
       false
-  
+
   """
   def is_circular_prime?(n) when n <= 0, do: false
+
   def is_circular_prime?(n) when n > 0 do
-     rotations(n)
-     |> Enum.all?(fn v -> is_prime?(v) end) 
+    rotations(n)
+    |> Enum.all?(fn v -> is_prime?(v) end)
   end
 
   @doc """
   Enumerate all of the rotations of `n`.
-  
+
   A rotate of `n` involves a circular rotation of digits - the first digit moved to the end of the
   number, repeated until all possible rotations are enumerated.
-  
+
   ## Examples
-  
+
       iex> Math.rotations(1234)
       [1234, 2341, 3412, 4123]
-  
+
       iex> Math.rotations(232)
       [232, 322, 223]
-  
+
       iex> Math.rotations(7)
       [7]
-  
+
       iex> Math.rotations(123456)
       [123456, 234561, 345612, 456123, 561234, 612345]
-  
+
       iex> Math.rotations(123123)
       [123123, 231231, 312312]
-  
+
       iex> Math.rotations(1111)
       [1111]
   """
   def rotations(n) do
-      [n] ++ generate_rotations(n, n)
+    [n] ++ generate_rotations(n, n)
   end
-  
+
   defp generate_rotations(c, n) do
-      
-      # find the rotated number
-      rot_dig = Integer.digits(c)
-      rot = (Enum.drop(rot_dig, 1) ++ [List.first(rot_dig)]) |> Integer.undigits()
-      
-      # if we're at our original, just return
-      if rot == n do
-          []
-      else
-         [rot] ++ generate_rotations(rot, n) 
-      end
+    # find the rotated number
+    rot_dig = Integer.digits(c)
+    rot = (Enum.drop(rot_dig, 1) ++ [List.first(rot_dig)]) |> Integer.undigits()
+
+    # if we're at our original, just return
+    if rot == n do
+      []
+    else
+      [rot] ++ generate_rotations(rot, n)
+    end
   end
-  
+
   @doc """
   Is `n` a _weakly_ prime number?
-  
+
   A prime number `n` is called weakly prime if it becomes not prime when any one of its digits 
   is changed to every single other digit. Testing the number `347` would involve testing all
   of the numbers `147`, `247`, `447`, `547`, ..., `348`, and `349` to see if they were prime. The
   number `347` is _not_ weakly prime because `947` _is_ prime.
-  
+
   ## Examples
-  
+
       iex> Math.is_weakly_prime?(294001)
       true
 
@@ -4110,53 +4093,43 @@ defmodule Chunky.Math do
         
       iex> Math.is_weakly_prime?(3085553)
       true
-  
+
   """
   def is_weakly_prime?(n) when n <= 0, do: false
+
   def is_weakly_prime?(n) when n > 0 do
-     
-      if is_prime?(n) do
-          n_digs = Integer.digits(n)
-      
-          # generate the permutations of n
-          0..length_in_base(n, 10) - 1
-      
-          # loop over the places in the number
-          |> Enum.map(
-              fn idx -> 
-                            
-                  # loop over the digits
-                  (0..9
-                  |> Enum.map(
-                      fn sub_digit -> 
-                      
-                          # generate a new number
-                          List.update_at(n_digs, idx, fn _ -> sub_digit end)
-                          |> Integer.undigits()
-                      
-                      end
-                  ))
-              
-                  # remove our original number
-                  -- [n]
-              
-              end
-          )
-      
-          |> List.flatten()
-          |> Enum.all?(fn v -> is_prime?(v) == false end)
-      else
-          false
-      end
+    if is_prime?(n) do
+      n_digs = Integer.digits(n)
+
+      # generate the permutations of n
+      0..(length_in_base(n, 10) - 1)
+
+      # loop over the places in the number
+      |> Enum.map(fn idx ->
+        # loop over the digits
+        # remove our original number
+        (0..9
+         |> Enum.map(fn sub_digit ->
+           # generate a new number
+           List.update_at(n_digs, idx, fn _ -> sub_digit end)
+           |> Integer.undigits()
+         end)) --
+          [n]
+      end)
+      |> List.flatten()
+      |> Enum.all?(fn v -> is_prime?(v) == false end)
+    else
+      false
+    end
   end
-  
+
   @doc """
   Reverse the digits of `n`.
-  
+
   If the rotated digits of `n` would have leading zeros, they are truncated.
-  
+
   ## Examples
-  
+
       iex> Math.reverse_number(12345)
       54321
       
@@ -4167,51 +4140,51 @@ defmodule Chunky.Math do
       11
   """
   def reverse_number(n) do
-     n
-     |> Integer.digits()
-     |> Enum.reverse()
-     |> Integer.undigits() 
+    n
+    |> Integer.digits()
+    |> Enum.reverse()
+    |> Integer.undigits()
   end
-  
+
   @doc """
   Check if `n` is a palindromic number in base 10.
-  
+
   Palindromic numbers, like palindromic words, are the same value when read forward and reversed.
-  
+
   ## Examples
-  
+
       iex> Math.is_palindromic?(1234)
       false
       
       iex> Math.is_palindromic?(123454321)
       true
-  
+
       iex> Math.is_palindromic?(1004006004001)
       true
   """
   def is_palindromic?(n) when is_integer(n) do
-     n == reverse_number(n)
+    n == reverse_number(n)
   end
-  
+
   @doc """
   Check if `n` is palindromic in base `b`.
-  
+
   The number `n` is converted from base 10 to base `b` before being checked as a palindrome.
-  
+
   ## Examples
-  
+
       iex> Math.is_palindromic_in_base?(27, 2)
       true
-  
+
       iex> Math.to_base(27, 2)
       11011
-  
+
       iex> Math.is_palindromic_in_base?(105, 20)
       true
-  
+
       iex> Math.to_base(105, 20)
       [5, 5]
-  
+
       iex> Math.is_palindromic_in_base?(222, 3)
       false
       
@@ -4220,19 +4193,19 @@ defmodule Chunky.Math do
       
   """
   def is_palindromic_in_base?(n, b) do
-     digits = Integer.digits(n, b)
-     
-     digits == Enum.reverse(digits)
+    digits = Integer.digits(n, b)
+
+    digits == Enum.reverse(digits)
   end
-  
+
   @doc """
   Check if `n` is _strictly_ non-palindromic.
-  
+
   These numbers are non-palindromic in any numeric base from 2 to `n - 2`. For larger
   numbers this can be a very expensive check.
-  
+
   ## Examples
-  
+
       iex> Math.is_strictly_non_palindromic?(6)
       true
 
@@ -4244,26 +4217,25 @@ defmodule Chunky.Math do
 
       iex> Math.is_strictly_non_palindromic?(317)
       true
-  
+
   """
   def is_strictly_non_palindromic?(n) when n < 4 and n > -4, do: false
+
   def is_strictly_non_palindromic?(n) when is_integer(n) and (n >= 4 or n <= -4) do
-      
-      (2..abs(n) - 2
-      |> Enum.any?(fn base -> is_palindromic_in_base?(abs(n), base) end)) == false
-      
+    2..(abs(n) - 2)
+    |> Enum.any?(fn base -> is_palindromic_in_base?(abs(n), base) end) == false
   end
-  
+
   @doc """
   Calculate the Legendre Symbol of `(a/p)`, where `p` is prime.
-  
+
   The Legendre symbol is used in number theory when working with prime numbers and
   quadratic constructions. It was originally defined via the formula:
-  
+
    ![Legendre Symbol](https://wikimedia.org/api/rest_v1/media/math/render/svg/7ad53226ea2a06b6fcd0d8f69c3a40ce3edf2407)
-  
+
   ## Examples
-  
+
       iex> Math.legendre_symbol(12, 3)
       0
 
@@ -4275,35 +4247,34 @@ defmodule Chunky.Math do
 
       iex> Math.legendre_symbol(14, 9)
       ** (ArgumentError) p must be prime
-  
+
   """
   def legendre_symbol(a, p) when Integer.is_odd(p) do
-  
-      if is_prime?(p) do
-          case Math.pow(a, div(p - 1, 2), p) do
-             1 -> 1
-             0 -> 0
-             _ -> -1 
-          end
-      else
-          raise ArgumentError, message: "p must be prime" 
+    if is_prime?(p) do
+      case Math.pow(a, div(p - 1, 2), p) do
+        1 -> 1
+        0 -> 0
+        _ -> -1
       end
+    else
+      raise ArgumentError, message: "p must be prime"
+    end
   end
-  
+
   @doc """
   Calculate the Jacobi Symbol `(n/k)`.
-  
+
   Via Wikipedia [Jacobi Symbol](https://en.wikipedia.org/wiki/Jacobi_symbol):
-  
+
   > The Jacobi symbol is a generalization of the Legendre symbol. Introduced by Jacobi 
   > in 1837,[1] it is of theoretical interest in modular arithmetic and other branches 
   > of number theory, but its main use is in computational number theory, especially 
   > primality testing and integer factorization...
-  
+
   The value of `n` can be any integer, while `k` must be a _positive_ and _odd_ integer.
-  
+
   ## Examples
-  
+
       iex> Math.jacobi_symbol(13, 13)
       0
 
@@ -4315,48 +4286,56 @@ defmodule Chunky.Math do
 
       iex> Math.jacobi_symbol(199, 213)
       1
-  
+
   """
   def jacobi_symbol(n, k) when is_integer(n) and Integer.is_odd(k) and k > 0 do
-      {_n, k, t} = jacobi_symbol_outer(n, k, 1)
-      
-      if k == 1 do
-          t
-      else
-          0
-      end
+    {_n, k, t} = jacobi_symbol_outer(n, k, 1)
+
+    if k == 1 do
+      t
+    else
+      0
+    end
   end
-  
+
   defp jacobi_symbol_inner(n, k, t) when Integer.is_odd(n), do: {n, k, t}
+
   defp jacobi_symbol_inner(n, k, t) when Integer.is_even(n) do
-      n = div(n, 2)
-      t = case rem(k, 8) do
-         3 -> t * -1
-         5 -> t * -1
-         _ -> t 
+    n = div(n, 2)
+
+    t =
+      case rem(k, 8) do
+        3 -> t * -1
+        5 -> t * -1
+        _ -> t
       end
-      jacobi_symbol_inner(n, k, t)
+
+    jacobi_symbol_inner(n, k, t)
   end
-  
+
   defp jacobi_symbol_outer(n, k, t) when n == 0, do: {n, k, t}
+
   defp jacobi_symbol_outer(n, k, t) when n != 0 do
-      {k, n, t} = jacobi_symbol_inner(n, k, t)
-      t = if rem(n, 4) == 3 && rem(k, 4) == 3 do
-          t * -1
+    {k, n, t} = jacobi_symbol_inner(n, k, t)
+
+    t =
+      if rem(n, 4) == 3 && rem(k, 4) == 3 do
+        t * -1
       else
-          t
+        t
       end
-      n = rem(n, k)
-      jacobi_symbol_outer(n, k, t)
+
+    n = rem(n, k)
+    jacobi_symbol_outer(n, k, t)
   end
-  
+
   @doc """
   Check if `n` is an Euler pseudo-prime in base 10.
-  
+
   See `is_euler_pseudo_prime?/2` for a definition.
-  
+
   ## Examples
-  
+
       iex> Math.is_euler_pseudo_prime?(9)
       true
     
@@ -4368,24 +4347,26 @@ defmodule Chunky.Math do
 
       iex> Math.is_euler_pseudo_prime?(91)
       true
-  
+
   """
-  def is_euler_pseudo_prime?(n) when n > 1 and Integer.is_odd(n), do: is_euler_pseudo_prime?(n, 10)
+  def is_euler_pseudo_prime?(n) when n > 1 and Integer.is_odd(n),
+    do: is_euler_pseudo_prime?(n, 10)
+
   def is_euler_pseudo_prime?(_), do: false
-  
+
   @doc """
   Check if `n` is an Euler pseudo-prime in base `a`.
-  
+
   Euler pseudo-primes are similar to the more standard definition of Euler-Jacobi pseudo-primes, but only need to
   satisfy the more permissive assertion that if `a` and `n` are coprime:
-  
+
    ![Weak Euler pseudo-prime](https://wikimedia.org/api/rest_v1/media/math/render/svg/1cff79763c8950b703cb3daf38151a80b6905dc0)
-  
+
   See also `is_euler_pseudo_prime?/1` for implicit base 10 check, or `is_euler_jacobi_pseudo_prime?/2` for the more
   commonly accepted pseudo-prime check.
-  
+
   ## Examples
-  
+
       iex> Math.is_euler_pseudo_prime?(185, 5)
       false
 
@@ -4397,25 +4378,27 @@ defmodule Chunky.Math do
 
       iex> Math.is_euler_pseudo_prime?(1105, 16)
       true
-  
+
   """
   def is_euler_pseudo_prime?(n, a) when a > 1 and n > 0 and Integer.is_odd(n) do
-      m_n = n - 1
-      case Math.pow(a, div(n - 1, 2), n) do
-         1 -> true
-         ^m_n -> true
-         _ -> false 
-      end && is_coprime?(n, a) && (is_prime?(n) == false)
+    m_n = n - 1
+
+    case Math.pow(a, div(n - 1, 2), n) do
+      1 -> true
+      ^m_n -> true
+      _ -> false
+    end && is_coprime?(n, a) && is_prime?(n) == false
   end
+
   def is_euler_pseudo_prime?(_, _), do: false
-  
+
   @doc """
   Check if `n` is an Euler-Jacobi pseudo-prime to base 10.
-  
+
   See `is_euler_jacobi_pseudo_prime?/2` for more.
-  
+
   ## Examples
-  
+
       iex> Math.is_euler_jacobi_pseudo_prime?(17)
       false
 
@@ -4428,22 +4411,24 @@ defmodule Chunky.Math do
       iex> Math.is_euler_jacobi_pseudo_prime?(6601)
       true
 
-  
+
   """
-  def is_euler_jacobi_pseudo_prime?(n) when n > 1 and Integer.is_odd(n), do: is_euler_jacobi_pseudo_prime?(n, 10)
+  def is_euler_jacobi_pseudo_prime?(n) when n > 1 and Integer.is_odd(n),
+    do: is_euler_jacobi_pseudo_prime?(n, 10)
+
   def is_euler_jacobi_pseudo_prime?(_), do: false
-  
+
   @doc """
   Check if `n` is an Euler-Jacobi pseudo-prime to base `a`.
-  
+
   These numbers are like Euler pseudo-primes, but with a stricter congruence:
-  
+
    ![Euler Jacobi pseudo-prime](https://wikimedia.org/api/rest_v1/media/math/render/svg/f13cbb4f0c18a0bf6021b8d5d0dcb92f2e9a6281)
-  
+
   where ![Jacobi Symbol](https://wikimedia.org/api/rest_v1/media/math/render/svg/42ee8ba7e649c05c1a3642c7a932095c47e25353) is the Jacobi symbol (see `jacobi_symbol/1`).
-  
+
   ## Examples
-  
+
       iex> Math.is_euler_jacobi_pseudo_prime?(91, 10)
       true
 
@@ -4458,41 +4443,41 @@ defmodule Chunky.Math do
 
       iex> Math.is_euler_jacobi_pseudo_prime?(133, 102)
       true
-  
-  
+
+
   """
   def is_euler_jacobi_pseudo_prime?(n, a) when a > 1 and n > 0 and Integer.is_odd(n) do
-      
-      # calculate the leading congruence
-      m_n = n - 1
-      part_a = case Math.pow(a, div(n - 1, 2), n) do
-          1 -> 1
-          ^m_n -> -1
-          v -> v
-      end
-      
-      # trailing congruene
-      part_b = jacobi_symbol(a, n)
-      
-      # put it all together
-      (part_a == part_b) && is_coprime?(n, a) && (is_prime?(n) == false)
-  end
-  def is_euler_jacobi_pseudo_prime?(_, _), do: false
-    
+    # calculate the leading congruence
+    m_n = n - 1
 
+    part_a =
+      case Math.pow(a, div(n - 1, 2), n) do
+        1 -> 1
+        ^m_n -> -1
+        v -> v
+      end
+
+    # trailing congruene
+    part_b = jacobi_symbol(a, n)
+
+    # put it all together
+    part_a == part_b && is_coprime?(n, a) && is_prime?(n) == false
+  end
+
+  def is_euler_jacobi_pseudo_prime?(_, _), do: false
 
   @doc """
   Determine if `n` is a Fermat pseudo-prime to base `a`.
-  
+
   The pseudo-primes, or Fermat pseudo-primes, define a relationship between coprimes `n` and `a`, where `n` is a composite
   number, and `a^(n - 1) % n == 1`.
-  
+
   The pseudo-primes over base 2 are often called the Poulet numbers.
-  
+
   If `n` is pseudo-prime to all bases `a` that are coprime to `n`, it is a Carmichael number.
-  
+
   ## Examples
-  
+
       iex> Math.is_pseudo_prime?(33, 10)
       true
 
@@ -4512,19 +4497,20 @@ defmodule Chunky.Math do
       false
       
       
-  """    
+  """
   def is_pseudo_prime?(n, a) when a > 1 and n > 1 do
-      is_prime?(n) == false && Math.pow(a, n - 1, n) == 1
+    is_prime?(n) == false && Math.pow(a, n - 1, n) == 1
   end
+
   def is_pseudo_prime?(_, _), do: false
-  
+
   @doc """
   Determine if `n` is pseudo-prime to base 10.
-  
+
   This is a Fermat pseudo-primality test. See `is_pseudo_prime?/2` for more details.
-  
+
   ## Examples
-  
+
       iex> Math.is_pseudo_prime?(9)
       true
 
@@ -4542,16 +4528,16 @@ defmodule Chunky.Math do
 
       iex> Math.is_pseudo_prime?(8401)
       true
-  
+
   """
   def is_pseudo_prime?(n) when n > 1, do: is_pseudo_prime?(n, 10)
   def is_pseudo_prime?(_), do: false
-    
+
   @doc """
   Is `n` a Poulet number?
-  
+
   Poulet numbers are Fermat pseudo-primes to base 2, see `is_pseudo_prime?/2`.
-  
+
   ## Examples
 
       iex> Math.is_poulet_number?(107)
@@ -4559,32 +4545,31 @@ defmodule Chunky.Math do
 
       iex> Math.is_poulet_number?(271)
       false
-  
+
       iex> Math.is_poulet_number?(341)
       true
-  
+
       iex> Math.is_poulet_number?(1387)
       true
-  
+
       iex> Math.is_poulet_number?(10261)
       true
-  
-  """  
+
+  """
   def is_poulet_number?(n) when n > 1, do: is_pseudo_prime?(n, 2)
   def is_poulet_number?(_), do: false
-  
-  
+
   @doc """
   Check if `n` is a Carmichael number.
-  
+
   A Carmichael number `n` is a composite number that satisfies the congruence:
-  
+
    ![Carmichael Number](https://wikimedia.org/api/rest_v1/media/math/render/svg/6a865f5eed65bd5f1a68ddb9ad0f35cfe9aa1208)
-  
+
   for all `b` that are coprime to `n`. 
-  
+
   ## Examples
-  
+
       iex> Math.is_carmichael_number?(517)
       false
 
@@ -4602,22 +4587,23 @@ defmodule Chunky.Math do
       
   """
   def is_carmichael_number?(n) when n > 1 do
-      coprimes(n) -- [1]
-      |> Enum.all?(fn a -> is_pseudo_prime?(n, a) end)
+    (coprimes(n) -- [1])
+    |> Enum.all?(fn a -> is_pseudo_prime?(n, a) end)
   end
+
   def is_carmichael_number?(_), do: false
-  
+
   @doc """
   Find all positive coprimes of `n`, from `2` up to `n`.
-  
+
   Two numbers `a` and `b` are coprime if, and only if, the only positive integer factor
   that divides both of them is `1`.
-  
+
   If you need comprimes of `n` greater than `n`, see `coprimes/2`. If you only need the
   count of coprimes of `n`, see `totient/1`.
-  
+
   ## Examples
-  
+
       iex> Math.coprimes(2)
       [1]
 
@@ -4629,32 +4615,32 @@ defmodule Chunky.Math do
 
       iex> Math.coprimes(36)
       [1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35]
-  
-  
+
+
   """
   def coprimes(1), do: [1]
   def coprimes(2), do: [1]
+
   def coprimes(n) when n > 2 do
-     
-     # find all prime roots of n
-     p_fs = prime_factors(n) -- [1, n]
-     
-     # enumerate all digits from 2 to n that aren't powers of roots of n
-     [1] ++ (2..n - 1
-     |> Enum.filter(fn m -> is_in_multiples?(m, p_fs) == false end))
-     
+    # find all prime roots of n
+    p_fs = prime_factors(n) -- [1, n]
+
+    # enumerate all digits from 2 to n that aren't powers of roots of n
+    [1] ++
+      (2..(n - 1)
+       |> Enum.filter(fn m -> is_in_multiples?(m, p_fs) == false end))
   end
-  
+
   @doc """
   Find all positive coprimes of `n` from `2` up to `d`.
-  
+
   Two numbers `a` and `b` are coprime if, and only if, the only positive integer factor
   that divides both of them is `1`.
-  
+
   If you only need the coprimes of `n` less than or equal to `n`, see `coprimes/1`.
-  
+
   ## Examples
-  
+
       iex> Math.coprimes(2, 10)
       [1, 3, 5, 7, 9]
 
@@ -4667,33 +4653,32 @@ defmodule Chunky.Math do
       iex> Math.coprimes(38, 50)
       [1, 3, 5, 7, 9, 11, 13, 15, 17, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49]
       
-  
+
   """
   def coprimes(n, d) when n > 1 and d > 1 do
-     
-     p_fs = prime_factors(n) -- [1, n] 
-     
-     # enumerate all digits from 2 to D
-     [1] ++ (2..d
-     |> Enum.filter(
-         fn m -> 
-             # make sure our candidate isn't a mulitple of a prime factor of N
-             # and make sure it isn't a multiple of N itself
-             (is_in_multiples?(m, p_fs) == false) && (rem(m, n) != 0) 
-         end
-     ) )
+    p_fs = prime_factors(n) -- [1, n]
+
+    # enumerate all digits from 2 to D
+    [1] ++
+      (2..d
+       |> Enum.filter(fn m ->
+         # make sure our candidate isn't a mulitple of a prime factor of N
+         # and make sure it isn't a multiple of N itself
+         is_in_multiples?(m, p_fs) == false && rem(m, n) != 0
+       end))
   end
-  
+
   # is n a multiple of any of the numbers in the list?
   defp is_in_multiples?(_n, []), do: false
+
   defp is_in_multiples?(n, [p | p_fs]) do
-      if rem(n, p) == 0 do
-          true 
-      else
-          is_in_multiples?(n, p_fs)
-      end
+    if rem(n, p) == 0 do
+      true
+    else
+      is_in_multiples?(n, p_fs)
+    end
   end
-  
+
   @doc """
   Determine if a positive integer is prime.
 
