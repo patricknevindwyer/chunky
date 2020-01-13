@@ -17,6 +17,110 @@
 
 # CHANGELOG
 
+## v0.*.*
+
+ - Sequences 
+  - A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.
+  - A005935 - Pseudoprimes to base 3.
+  - A005936 - Pseudoprimes to base 5.
+  - A005937 - Pseudoprimes to base 6.
+  - A005938 - Pseudoprimes to base 7.
+  - A005939 - Pseudoprimes to base 10.
+  - A020136 - Fermat pseudoprimes to base 4.
+  - A020137 - Pseudoprimes to base 8.
+  - A020138 - Pseudoprimes to base 9.
+  - A020139 - Pseudoprimes to base 11.
+  - A020140 - Pseudoprimes to base 12.
+  - A020141 - Pseudoprimes to base 13.
+  - A020142 - Pseudoprimes to base 14.
+  - A020143 - Pseudoprimes to base 15.
+  - A020144 - Pseudoprimes to base 16.
+  - A020145 - Pseudoprimes to base 17.
+  - A020146 - Pseudoprimes to base 18.
+  - A020147 - Pseudoprimes to base 19.
+  - A020148 - Pseudoprimes to base 20.
+  - A020149 - Pseudoprimes to base 21.
+  - A020150 - Pseudoprimes to base 22.
+  - A020151 - Pseudoprimes to base 23.
+  - A020152 - Pseudoprimes to base 24.
+  - A020153 - Pseudoprimes to base 25.
+  - A020154 - Pseudoprimes to base 26.
+  - A020155 - Pseudoprimes to base 27.
+  - A020156 - Pseudoprimes to base 28.
+  - A020157 - Pseudoprimes to base 29.
+  - A020158 - Pseudoprimes to base 30.
+  - A020159 - Pseudoprimes to base 31.
+  - A020160 - Pseudoprimes to base 32.
+  - A020161 - Pseudoprimes to base 33.
+  - A020162 - Pseudoprimes to base 34.
+  - A020163 - Pseudoprimes to base 35.
+  - A020164 - Pseudoprimes to base 36.
+  - A020165 - Pseudoprimes to base 37.
+  - A020166 - Pseudoprimes to base 38.
+  - A020167 - Pseudoprimes to base 39.
+  - A020168 - Pseudoprimes to base 40.
+  - A020169 - Pseudoprimes to base 41.
+  - A020170 - Pseudoprimes to base 42.
+  - A020171 - Pseudoprimes to base 43.
+  - A020172 - Pseudoprimes to base 44.
+  - A020173 - Pseudoprimes to base 45.
+  - A020174 - Pseudoprimes to base 46.
+  - A020175 - Pseudoprimes to base 47.
+  - A020176 - Pseudoprimes to base 48.
+  - A020177 - Pseudoprimes to base 49.
+  - A020178 - Pseudoprimes to base 50.
+  - A020179 - Pseudoprimes to base 51.
+  - A020180 - Pseudoprimes to base 52.
+  - A020181 - Pseudoprimes to base 53.
+  - A020182 - Pseudoprimes to base 54.
+  - A020183 - Pseudoprimes to base 55.
+  - A020184 - Pseudoprimes to base 56.
+  - A020185 - Pseudoprimes to base 57.
+  - A020186 - Pseudoprimes to base 58.
+  - A020187 - Pseudoprimes to base 59.
+  - A020188 - Pseudoprimes to base 60.
+  - A020189 - Pseudoprimes to base 61.
+  - A020190 - Pseudoprimes to base 62.
+  - A020191 - Pseudoprimes to base 63.
+  - A020192 - Pseudoprimes to base 64.
+  - A020193 - Pseudoprimes to base 65.
+  - A020194 - Pseudoprimes to base 66.
+  - A020195 - Pseudoprimes to base 67.
+  - A020196 - Pseudoprimes to base 68.
+  - A020197 - Pseudoprimes to base 69.
+  - A020198 - Pseudoprimes to base 70.
+  - A020199 - Pseudoprimes to base 71.
+  - A020200 - Pseudoprimes to base 72.
+  - A020201 - Pseudoprimes to base 73.
+  - A020202 - Pseudoprimes to base 74.
+  - A020203 - Pseudoprimes to base 75.
+  - A020204 - Pseudoprimes to base 76.
+  - A020205 - Pseudoprimes to base 77.
+  - A020206 - Pseudoprimes to base 78.
+  - A020207 - Pseudoprimes to base 79.
+  - A020208 - Pseudoprimes to base 80.
+  - A020209 - Pseudoprimes to base 81.
+  - A020210 - Pseudoprimes to base 82.
+  - A020211 - Pseudoprimes to base 83.
+  - A020212 - Pseudoprimes to base 84.
+  - A020213 - Pseudoprimes to base 85.
+  - A020214 - Pseudoprimes to base 86.
+  - A020215 - Pseudoprimes to base 87.
+  - A020216 - Pseudoprimes to base 88.
+  - A020217 - Pseudoprimes to base 89.
+  - A020218 - Pseudoprimes to base 90.
+  - A020219 - Pseudoprimes to base 91.
+  - A020220 - Pseudoprimes to base 92.
+  - A020221 - Pseudoprimes to base 93.
+  - A020222 - Pseudoprimes to base 94.
+  - A020223 - Pseudoprimes to base 95.
+  - A020224 - Pseudoprimes to base 96.
+  - A020225 - Pseudoprimes to base 97.
+  - A020226 - Pseudoprimes to base 98.
+  - A020227 - Pseudoprimes to base 99.
+  - A020228 - Pseudoprimes to base 100.
+ 
+
 ## v0.11.4
 
 ### Enhancements

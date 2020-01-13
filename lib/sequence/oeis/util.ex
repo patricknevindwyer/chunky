@@ -229,7 +229,7 @@ defmodule Chunky.Sequence.OEIS.Util do
 
     # inserting data?
     if include_seq_func do
-      IO.puts(seq_io, "\tsequence_for_function(&#{in_module}.#{seq_function_name}/1)")
+      IO.puts(seq_io, "\tsequence_for_function(&#{in_module}.#{seq_function_name}/2)")
     end
 
     if include_list do
@@ -243,7 +243,7 @@ defmodule Chunky.Sequence.OEIS.Util do
       IO.puts(seq_io, """
 
       @doc offset: #{seq_offset}
-      def seq_#{seq_id_lower}(idx) do
+      def seq_#{seq_id_lower}(_idx, last) do
           
       end
       """)

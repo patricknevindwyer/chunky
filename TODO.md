@@ -63,17 +63,16 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
  
- - New functions in Math
-
- - release 0.11.4
  
  - release 0.11.5
  
  - sequences
-  - fermat pseudo primes https://en.wikipedia.org/wiki/Fermat_pseudoprime
-  - carmichael numbers https://oeis.org/A002997
+ 
   - 5 more core sequences
-     
+
+ - cyclops numbers     
+
+
   
  - release 0.12.0
  
