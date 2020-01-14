@@ -62,6 +62,7 @@ defmodule Chunky.Math do
    - `is_palindromic_in_base?/2` - Is `n` palindromic in base `b`?
    - `length_in_base/2` - How many digits long is `n` in base `b`?
    - `remove_digits!/3` - Remove one or more digits from `n`, returning a reconstituted number
+   - `repunit/1` - Calculate the `n`th Repunit
    - `reverse_number/1` - Reverse the digits of `n`
    - `rotations/1` - Enumerate all circular rotations of `n`
    - `to_base/2` - Convert a decimal integer to any base, returning an integer or list depending on base
@@ -178,6 +179,7 @@ defmodule Chunky.Math do
    - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
    - `sigma/2` - Generalized Sigma function for integers
    - `square_pyramidal_number/1` - Number of elements in an `n x n` stacked square pyramid
+   - `stern_diatomic_series/1` - Find the `n`th number in the diatomic series
    - `tetrahedral_number/1` - Find the `n`-th tetrahedral number
    - `totient/1` - Calculate Euler's totient for `n`
    - `triangle_number/1` - Number of elements in a triangle of `n` rows
@@ -278,8 +280,8 @@ defmodule Chunky.Math do
   alias Chunky.Fraction
   alias Chunky.Math
   require Chunky.CacheAgent
-  # require Chunky.Math.Operations
-  # import Chunky.Math.Operations, only: [summation: 3]
+  require Chunky.Math.Operations
+  import Chunky.Math.Operations, only: [summation: 3]
 
   @rand_max Kernel.trunc(:math.pow(2, 63))
 
@@ -628,6 +630,9 @@ defmodule Chunky.Math do
 
   ## Examples
 
+      iex> Math.factorial(-4)
+      24
+  
       iex> Math.factorial(1)
       1
       
@@ -647,6 +652,12 @@ defmodule Chunky.Math do
     CacheAgent.cache_as :factorial, n do
       n * factorial(n - 1)
     end
+  end
+  
+  def factorial(n) when is_integer(n) and n < 0 do
+      CacheAgent.cache_as :factorial, n do
+         n * factorial(n + 1) 
+      end
   end
   
   @doc """
@@ -5047,6 +5058,39 @@ defmodule Chunky.Math do
       involutions_count(n - 1) + (n - 1) * involutions_count(n - 2)
     end
   end
+  
+  @doc """
+  Find the `n`th term of Stern's diatomic series.
+  
+  This function calculates the [diatomic series](http://mathworld.wolfram.com/SternsDiatomicSeries.html) via
+  a binomial summation.
+  
+  ## Examples
+  
+      iex> Math.stern_diatomic_series(0)
+      0
+
+      iex> Math.stern_diatomic_series(25)
+      7
+
+      iex> Math.stern_diatomic_series(30)
+      4
+
+      iex> Math.stern_diatomic_series(90)
+      12
+
+      iex> Math.stern_diatomic_series(127)
+      7
+  
+  """
+  def stern_diatomic_series(0), do: 0
+  def stern_diatomic_series(1), do: 1
+  def stern_diatomic_series(2), do: 1
+  def stern_diatomic_series(n) when n > 2 do
+      summation k, 0..n - 1 do
+         binomial(k, n - k - 1) |> rem(2)
+      end
+  end
 
   @doc """
   Determine if an integer is _abundant_. 
@@ -5719,6 +5763,33 @@ defmodule Chunky.Math do
     n |> Integer.digits() |> Enum.sum()
   end
 
+  @doc """
+  Calculate the `n`th Repunit, or `R_n`.
+  
+  
+  ## Examples
+  
+      iex> Math.repunit(0)
+      0
+      
+      iex> Math.repunit(1)
+      1
+    
+      iex> Math.repunit(5)
+      11111
+
+      iex> Math.repunit(10)
+      1111111111
+
+      iex> Math.repunit(25)
+      1111111111111111111111111
+  
+  """
+  def repunit(0), do: 0
+  def repunit(n) when n > 0 do
+      Math.pow(10, n) - 1 |> div(9)
+  end
+  
   @doc """
   Count the number of specific digits in `n`.
 

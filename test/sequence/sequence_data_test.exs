@@ -882,6 +882,87 @@ defmodule Chunky.SequenceDataTest do
       finite: false,
       first_index: 0
     },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a001906,
+      opts: [],
+      values: [0, 1, 3, 8, 21, 55, 144, 377, 987, 2584],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a001969,
+      opts: [],
+      values: [0, 3, 5, 6, 9, 10, 12, 15, 17, 18],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a002113,
+      opts: [],
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a002275,
+      opts: [],
+      values: [0, 1, 11, 111, 1111, 11111, 111111, 1111111, 11111111, 111111111],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a002378,
+      opts: [],
+      values: [0, 2, 6, 12, 20, 30, 42, 56, 72, 90],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a002487,
+      opts: [],
+      values: [0, 1, 1, 2, 1, 3, 2, 3, 1, 4],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a002620,
+      opts: [],
+      values: [0, 0, 1, 2, 4, 6, 9, 12, 16, 20],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a003418,
+      opts: [],
+      values: [1, 1, 2, 6, 12, 60, 60, 420, 840, 2520],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a004526,
+      opts: [],
+      values: [0, 0, 1, 1, 2, 2, 3, 3, 4, 4],
+      finite: false,
+      first_index: 0
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Core,
+      sequence: :a005408,
+      opts: [],
+      values: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+      finite: false,
+      first_index: 0
+    },
+    
 
     # Sequence.OEIS.Sigma
     %{

@@ -85,14 +85,24 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
    - [A001700 - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.](https://oeis.org/A001700) - `:a001700` - `create_sequence_a001700/1`
    - [A001764 - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).](https://oeis.org/A001764) - `:a001764` - `create_sequence_a001764/1`
+   - [A001906 - F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).](https://oeis.org/A001906) - `:a001906` - `create_sequence_a001906/1`
+   - [A001969 - Evil numbers: numbers with an even number of 1's in their binary expansion.](https://oeis.org/A001969) - `:a001969` - `create_sequence_a001969/1`
    - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
+   - [A002113 - Palindromes in base 10.](https://oeis.org/A002113) - `:a002113` - `create_sequence_a002113/1`
+   - [A002275 - Repunits: (10^n - 1)/9. Often denoted by R_n.](https://oeis.org/A002275) - `:a002275` - `create_sequence_a002275/1`
+   - [A002378 - Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).](https://oeis.org/A002378) - `:a002378` - `create_sequence_a002378/1`
+   - [A002487 - Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).](https://oeis.org/A002487) - `:a002487` - `create_sequence_a002487/1`
+   - [A002620 - Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).](https://oeis.org/A002620) - `:a002620` - `create_sequence_a002620/1`
    - [A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters](https://oeis.org/A002654) - `:a002654` - `create_sequence_a002654/1`
    - [A002808 - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.](https://oeis.org/A002808) - `:a002808` - `create_sequence_a002808/1`
    - [A003094 - Number of unlabeled connected planar simple graphs with n nodes](https://oeis.org/A003094) - `:a003094` - `create_sequence_a003094/1`
+   - [A003418 - Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.](https://oeis.org/A003418) - `:a003418` - `create_sequence_a003418/1`
    - [A003484 - Radon function, also called Hurwitz-Radon numbers](https://oeis.org/A003484) - `:a003484` - `create_sequence_a003484/1`
+   - [A004526 - Nonnegative integers repeated, floor(n/2).](https://oeis.org/A004526) - `:a004526` - `create_sequence_a004526/1`
    - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
    - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
    - [A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1](https://oeis.org/A005117) - `:a005117` - `create_sequence_a005117/1`
+   - [A005408 - The odd numbers: a(n) = 2*n + 1.](https://oeis.org/A005408) - `:a005408` - `create_sequence_a005408/1`
    - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
    - [A005843 - The nonnegative even numbers: a(n) = 2n.](https://oeis.org/A005843) - `:a005843` - `create_sequence_a005843/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
@@ -103,6 +113,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
 
+  
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -3815,4 +3826,360 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a006882(idx) do
       Math.double_factorial(idx)
   end  
+  
+  @doc """
+  OEIS Sequence `A001906` - F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).
+
+  From [OEIS A001906](https://oeis.org/A001906):
+
+  > F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).
+  > (Formerly M2741 N1101)
+
+  **Sequence IDs**: `:a001906`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001906) |> Sequence.take!(31)
+      [0,1,3,8,21,55,144,377,987,2584,6765,17711,46368,121393,317811,832040,2178309,5702887,14930352,39088169,102334155,267914296,701408733,1836311903,4807526976,12586269025,32951280099,86267571272,225851433717,591286729879,1548008755920]
+
+
+  """
+  @doc offset: 0,
+       sequence: "F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).",
+       references: [{:oeis, :a001906, "https://oeis.org/A001906"}]
+  def create_sequence_a001906(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001906/3)
+  end
+
+
+  @doc offset: 0
+  def seq_a001906(idx, a, b) do
+      case idx do
+         0 -> 0
+         1 -> 1
+         _ -> 3 * b - a 
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A001969` - Evil numbers: numbers with an even number of 1's in their binary expansion.
+
+  From [OEIS A001969](https://oeis.org/A001969):
+
+  > Evil numbers: numbers with an even number of 1's in their binary expansion.
+  > (Formerly M2395 N0952)
+
+  **Sequence IDs**: `:a001969`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001969) |> Sequence.take!(65)
+      [0,3,5,6,9,10,12,15,17,18,20,23,24,27,29,30,33,34,36,39,40,43,45,46,48,51,53,54,57,58,60,63,65,66,68,71,72,75,77,78,80,83,85,86,89,90,92,95,96,99,101,102,105,106,108,111,113,114,116,119,120,123,125,126,129]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Evil numbers: numbers with an even number of 1's in their binary expansion.",
+       references: [{:oeis, :a001969, "https://oeis.org/A001969"}]
+  def create_sequence_a001969(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001969/2)
+  end
+
+
+  @doc offset: 1, fill_value: -1
+  def seq_a001969(_idx, last) do
+      Math.next_number(
+          fn v -> 
+              Math.digit_count(v, [1], base: 2) |> rem(2) == 0
+          end, 
+          last
+      )
+  end
+
+  @doc """
+  OEIS Sequence `A002113` - Palindromes in base 10.
+
+  From [OEIS A002113](https://oeis.org/A002113):
+
+  > Palindromes in base 10.
+  > (Formerly M0484 N0178)
+
+  **Sequence IDs**: `:a002113`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002113) |> Sequence.take!(61)
+      [0,1,2,3,4,5,6,7,8,9,11,22,33,44,55,66,77,88,99,101,111,121,131,141,151,161,171,181,191,202,212,222,232,242,252,262,272,282,292,303,313,323,333,343,353,363,373,383,393,404,414,424,434,444,454,464,474,484,494,505,515]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Palindromes in base 10.",
+       references: [{:oeis, :a002113, "https://oeis.org/A002113"}]
+  def create_sequence_a002113(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002113/2)
+  end
+
+
+  @doc offset: 1, fill_value: -1
+  def seq_a002113(_idx, last) do
+      Math.next_number(fn v -> Math.is_palindromic?(v) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A002275` - Repunits: (10^n - 1)/9. Often denoted by R_n.
+
+  From [OEIS A002275](https://oeis.org/A002275):
+
+  > Repunits: (10^n - 1)/9. Often denoted by R_n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a002275`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002275) |> Sequence.take!(21)
+      [0,1,11,111,1111,11111,111111,1111111,11111111,111111111,1111111111,11111111111,111111111111,1111111111111,11111111111111,111111111111111,1111111111111111,11111111111111111,111111111111111111,1111111111111111111,11111111111111111111]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Repunits: (10^n - 1)/9. Often denoted by R_n.",
+       references: [{:oeis, :a002275, "https://oeis.org/A002275"}]
+  def create_sequence_a002275(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002275/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a002275(idx) do
+      Math.repunit(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A002378` - Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).
+
+  From [OEIS A002378](https://oeis.org/A002378):
+
+  > Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).
+  > (Formerly M1581 N0616)
+
+  **Sequence IDs**: `:a002378`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002378) |> Sequence.take!(51)
+      [0,2,6,12,20,30,42,56,72,90,110,132,156,182,210,240,272,306,342,380,420,462,506,552,600,650,702,756,812,870,930,992,1056,1122,1190,1260,1332,1406,1482,1560,1640,1722,1806,1892,1980,2070,2162,2256,2352,2450,2550]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).",
+       references: [{:oeis, :a002378, "https://oeis.org/A002378"}]
+  def create_sequence_a002378(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002378/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a002378(idx) do
+      idx * (idx + 1)
+  end
+
+  @doc """
+  OEIS Sequence `A002487` - Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).
+
+  From [OEIS A002487](https://oeis.org/A002487):
+
+  > Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).
+  > (Formerly M0141 N0056)
+
+  **Sequence IDs**: `:a002487`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002487) |> Sequence.take!(92)
+      [0,1,1,2,1,3,2,3,1,4,3,5,2,5,3,4,1,5,4,7,3,8,5,7,2,7,5,8,3,7,4,5,1,6,5,9,4,11,7,10,3,11,8,13,5,12,7,9,2,9,7,12,5,13,8,11,3,10,7,11,4,9,5,6,1,7,6,11,5,14,9,13,4,15,11,18,7,17,10,13,3,14,11,19,8,21,13,18,5,17,12,19]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).",
+       references: [{:oeis, :a002487, "https://oeis.org/A002487"}]
+  def create_sequence_a002487(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002487/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a002487(idx) do
+      Math.stern_diatomic_series(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A002620` - Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).
+
+  From [OEIS A002620](https://oeis.org/A002620):
+
+  > Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).
+  > (Formerly M0998 N0374)
+
+  **Sequence IDs**: `:a002620`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002620) |> Sequence.take!(58) 
+      [0,0,1,2,4,6,9,12,16,20,25,30,36,42,49,56,64,72,81,90,100,110,121,132,144,156,169,182,196,210,225,240,256,272,289,306,324,342,361,380,400,420,441,462,484,506,529,552,576,600,625,650,676,702,729,756,784,812]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).",
+       references: [{:oeis, :a002620, "https://oeis.org/A002620"}]
+  def create_sequence_a002620(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002620/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a002620(idx) do
+      b = div(idx, 2)
+      r = rem(idx, 2)
+      b * (b + r)
+  end
+
+  @doc """
+  OEIS Sequence `A003418` - Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.
+
+  From [OEIS A003418](https://oeis.org/A003418):
+
+  > Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.
+  > (Formerly M1590)
+
+  **Sequence IDs**: `:a003418`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a003418) |> Sequence.take!(29)
+      [1,1,2,6,12,60,60,420,840,2520,2520,27720,27720,360360,360360,360360,720720,12252240,12252240,232792560,232792560,232792560,232792560,5354228880,5354228880,26771144400,26771144400,80313433200,80313433200]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.",
+       references: [{:oeis, :a003418, "https://oeis.org/A003418"}]
+  def create_sequence_a003418(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a003418/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a003418(idx) do
+      case idx do
+         0 -> 1
+         1 -> 1
+         _ -> Math.lcm(1..idx |> Enum.to_list()) 
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A004526` - Nonnegative integers repeated, floor(n/2).
+
+  From [OEIS A004526](https://oeis.org/A004526):
+
+  > Nonnegative integers repeated, floor(n/2).
+  > (Formerly )
+
+  **Sequence IDs**: `:a004526`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a004526) |> Sequence.take!(74)
+      [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18,19,19,20,20,21,21,22,22,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,35,35,36,36]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Nonnegative integers repeated, floor(n/2).",
+       references: [{:oeis, :a004526, "https://oeis.org/A004526"}]
+  def create_sequence_a004526(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a004526/1)
+  end 
+
+
+  @doc offset: 0
+  def seq_a004526(idx) do
+      div(idx, 2)
+  end
+
+  @doc """
+  OEIS Sequence `A005408` - The odd numbers: a(n) = 2*n + 1.
+
+  From [OEIS A005408](https://oeis.org/A005408):
+
+  > The odd numbers: a(n) = 2*n + 1.
+  > (Formerly M2400)
+
+  **Sequence IDs**: `:a005408`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a005408) |> Sequence.take!(66)
+      [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67,69,71,73,75,77,79,81,83,85,87,89,91,93,95,97,99,101,103,105,107,109,111,113,115,117,119,121,123,125,127,129,131]
+
+
+  """
+  @doc offset: 0,
+       sequence: "The odd numbers: a(n) = 2*n + 1.",
+       references: [{:oeis, :a005408, "https://oeis.org/A005408"}]
+  def create_sequence_a005408(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005408/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a005408(idx) do
+      idx * 2 + 1
+  end
+  
 end
