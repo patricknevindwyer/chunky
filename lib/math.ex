@@ -158,7 +158,9 @@ defmodule Chunky.Math do
   Functions related to [Number Theory](https://en.wikipedia.org/wiki/Number_theory) operations over the integers.
 
    - `aliquot_sum/1` - Find the Aliquot Sum of `n`
+   - `bernoulli_number/1` - Find the `n`-th Bernoulli number
    - `bigomega/1` - Big Omega function - count of distinct primes, with multiplicity
+   - `chebyshev_triangle_coefficient/2` - Calculate coefficient of Chebyshev's polynomial of the second kind
    - `divisors_of_form_mx_plus_b/3` - Divisors of `n` that conform to values of `mx + b`
    - `get_rhonda_to/2` - Find the bases for which `n` is a Rhonda number
    - `hamming_weight/2` - Find the Hamming Weight, the count of digits not `0`, in different base representations of `n`
@@ -184,7 +186,7 @@ defmodule Chunky.Math do
    - `totient/1` - Calculate Euler's totient for `n`
    - `triangle_number/1` - Number of elements in a triangle of `n` rows
    - `triangle_row_for_element/1` - Row in triangle for `n`-th element
-   - `triangle_position_for_element/1` - Position in triangel for `n`-th element
+   - `triangle_position_for_element/1` - Position in triangle for `n`-th element
 
 
   ## Polynomials
@@ -212,9 +214,12 @@ defmodule Chunky.Math do
    - `involutions_count/1` - Number of self-inverse permutations of `n` elements
    - `jacobsthal_number/1` - Calculate the `n`-th Jacobsthal number
    - `motzkin_number/1` - The number of different ways of drawing non-intersecting chords between `n` points on a circle
+   - `n_choose_k/2` - Calculate the number of `k` element sets that can be obtained from an `n` element set
    - `ordered_subsets_count/1` - Count the number of partitions of a set of size `n` into any number of ordered lists.
    - `pancake_cut_max/1` - Count the maximum number of pieces that can be made from `n` cuts of a disk.
    - `plane_partition_count/1` - Number of plane partitions with sum `n`
+   - `schroder_number/1` - Find the `n`th Schröder number.
+   - `stirling_partition_number/2` - Number of non-empty sets of size `k` that can be made from a set of size `n`
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
 
 
@@ -1365,6 +1370,75 @@ defmodule Chunky.Math do
   end
 
   @doc """
+  Find the Stirling partition number (or Stirling number of the second kind) `{n, k}`.
+  
+  In combinatorics, the Stirling partition number describes the number of ways to partition a set of `n` elements
+  into `k` non-empty subsets.
+  
+  The explicit formula for `{n, k}` is:
+  
+   ![Stirling Partition Number](https://wikimedia.org/api/rest_v1/media/math/render/svg/21344eaf46bde946b0ec224c2cb5fff938d91f92)
+  
+  ## Examples
+  
+      iex> Math.stirling_partition_number(0, 0)
+      1
+
+      iex> Math.stirling_partition_number(3, 0)
+      0
+
+      iex> Math.stirling_partition_number(5, 2)
+      15
+
+      iex> Math.stirling_partition_number(7, 4)
+      350
+
+      iex> Math.stirling_partition_number(10, 6)
+      22827
+  
+      iex> Math.stirling_partition_number(10, 13)
+      0
+  
+  """
+  def stirling_partition_number(0, 0), do: 1
+  def stirling_partition_number(_, 0), do: 0
+  def stirling_partition_number(0, _), do: 0
+  def stirling_partition_number(n, k) when k > n, do: 0
+  def stirling_partition_number(n, k) when n > 0 and k > 0 and n >= k do
+      
+      part_a = summation j, 0..k do
+         Math.pow(-1, k - j) * binomial(k, j) * Math.pow(j, n)
+      end
+      
+      div(part_a, Math.factorial(k))
+  end
+
+  @doc """
+  Determine the number of subsets of `n` of `k` elements. Also written `nCr`.
+  
+  Also describes Pascals triangle by (row, offset), as well as the binomial expansion `(n/k)`.
+  
+  ## Examples
+  
+      iex> Math.n_choose_k(5, 3)
+      10
+
+      iex> Math.n_choose_k(10, 4)
+      210
+
+      iex> Math.n_choose_k(25, 2)
+      300
+
+      iex> Math.n_choose_k(50, 14)
+      937845656300
+  
+  
+  """
+  def n_choose_k(n, k) when n >= k do
+     binomial(n, k) 
+  end
+
+  @doc """
   Calculate the Bell Number of `n`, or the number of possible partitions of a set of size `n`.
 
   This function implementation relies on caching for efficiency.
@@ -1678,6 +1752,83 @@ defmodule Chunky.Math do
     end)
     |> Fraction.sum()
   end
+  
+  @doc """
+  Calculate the `n`-th Bernoulli number, and return it as a Fraction.
+  
+  Bernoulli numbers are used throughout number theory for analysis, series construction,
+  and topology. While the odd Bernoulli numbers greater than `B_1` are technically `0`,
+  this function returns a zero value fraction (the reduced value `0/1`).
+  
+  ## Examples
+  
+      iex> Math.bernoulli_number(1)
+      %Fraction{num: 1, den: 2}
+
+      iex> Math.bernoulli_number(4)
+      %Fraction{num: -1, den: 30}
+
+      iex> Math.bernoulli_number(7)
+      %Fraction{num: 0, den: 1}
+
+      iex> Math.bernoulli_number(8)
+      %Fraction{num: -1, den: 30}
+
+      iex> Math.bernoulli_number(20)
+      %Fraction{num: -174611, den: 330}
+  
+  """
+  def bernoulli_number(0), do: Fraction.new(1, 1)
+  def bernoulli_number(1), do: Fraction.new(1, 2)
+  def bernoulli_number(n) when n > 0 and Integer.is_odd(n), do: Fraction.new(0, 1)
+  def bernoulli_number(n) when n > 0 and Integer.is_even(n) do
+     
+      f = Fraction.new(n, Math.pow(4, n) - Math.pow(2, n))
+     summation k, 0..n - 1 do
+        part_a = binomial(n - 1, k) * euler_number(k) 
+        f |> Fraction.multiply(part_a)
+     end
+     |> Fraction.simplify()
+  end
+  
+  @doc """
+  Calculate Chebyshev's triangle of coefficients at `S(n, k)`.
+  
+  The coefficient triangle is used for diophantine polynomial analysis, [spherical harmonics](http://mathworld.wolfram.com/ChebyshevPolynomialoftheSecondKind.html),
+  series analysis, and other number theoretic applications.
+  
+  While a recurrence relationship exists, this function uses a binomial expansion to
+  find values.
+  
+  ## Examples
+      
+      iex> Math.chebyshev_triangle_coefficient(0, 0)
+      1
+
+      iex> Math.chebyshev_triangle_coefficient(4, 2)
+      -3
+
+      iex> Math.chebyshev_triangle_coefficient(9, 4)
+      0
+
+      iex> Math.chebyshev_triangle_coefficient(11, 7)
+      36
+  
+  """
+  def chebyshev_triangle_coefficient(0, 0), do: 1
+  def chebyshev_triangle_coefficient(_n, -1), do: 0
+  def chebyshev_triangle_coefficient(-1, _k), do: 0
+  def chebyshev_triangle_coefficient(n, k) when n < k or Integer.is_odd(n + k), do: 0
+  def chebyshev_triangle_coefficient(n, k) do
+      
+      # Using closed form T(n,k) via binomial expansion
+      # T(n,k) := 0 if n < k or n+k odd
+      # else ((-1)^((n+k)/2+k))*binomial((n+k)/2, k); 
+  
+      # ((-1)^((n+k)/2+k))*binomial((n+k)/2, k); 
+      Math.pow(-1, div(n + k, 2) + k) * binomial(div(n + k, 2), k)
+  end
+  
 
   @doc """
   Check if `n` is a _sphenic number_, the product of three distinct primes.
@@ -1923,6 +2074,35 @@ defmodule Chunky.Math do
     8 * div(p_adic_valuation(2, n), 4) + Math.pow(2, rem(p_adic_valuation(2, n), 4))
   end
 
+  @doc """
+  Find the `n`th Schröder number.
+  
+  The Schroder numbers describe the number of lattice paths across a grid from a south east corner
+  to a north east corner, using only north, east, or north-east steps.
+  
+  ## Examples
+  
+      iex> Math.schroder_number(0)
+      1
+
+      iex> Math.schroder_number(2)
+      6
+
+      iex> Math.schroder_number(6)
+      1806
+
+      iex> Math.schroder_number(10)
+      1037718
+
+      iex> Math.schroder_number(18)
+      600318853926
+  
+  """
+  def schroder_number(0), do: 1
+  def schroder_number(n) do
+      2 * hipparchus_number(n)
+  end
+  
   @doc """
   Find the `n`-th Hipparchus number.
 

@@ -66,10 +66,24 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
  - release 0.11.5
  
+  - bernoulli_number
+   - inline doc
+   - TOF
+   - test
+   - CHANGELONG
+  - chebyshev_triangle_coefficient
+   - inline doc
+   - TOF
+   - test
+   - CHANGELONG
+  
  - cyclops numbers     
 
  - @doc nil all the sequence functions
-
+ - document all math triangle functions with a grid so we can tell which ones use zero indexing on row/column, or are grid shifted, etc
+  - chebyshev (A049310)
+  - stirling numbers (A008277)
+  - pascals triangle (A007318)
   
  - release 0.12.0
  

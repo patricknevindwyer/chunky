@@ -23,6 +23,11 @@
   - double_factorial/1
   - repunit/1
   - stern_diatomic_series/1
+  - n_choose_k/2
+  - stirling_partition_number/2
+  - schroder_number/1
+  - chebyshev_triangle_coefficient/2
+  - bernoulli_number/1
   
  - Sequences 
   - A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.
@@ -140,7 +145,13 @@
   - A003418 - Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.
   - A004526 - Nonnegative integers repeated, floor(n/2).
   - A005408 - The odd numbers: a(n) = 2*n + 1.
-
+  - A006318 - Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).
+  - A007318 - Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.
+  - A008277 - Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.
+  - A018252 - The nonprime numbers: 1 together with the composite numbers, A002808.
+  - A027642 - Denominator of Bernoulli number B_n.
+  - A049310 - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).
+  - A070939 - Length of binary representation of n.
 
 
 ## v0.11.4

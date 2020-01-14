@@ -105,14 +105,20 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A005408 - The odd numbers: a(n) = 2*n + 1.](https://oeis.org/A005408) - `:a005408` - `create_sequence_a005408/1`
    - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
    - [A005843 - The nonnegative even numbers: a(n) = 2n.](https://oeis.org/A005843) - `:a005843` - `create_sequence_a005843/1`
+   - [A006318 - Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).](https://oeis.org/A006318) - `:a006318` - `create_sequence_a006318/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
    - [A006882 - Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.](https://oeis.org/A006882) - `:a006882` - `create_sequence_a006882/1`
    - [A006966 - Number of lattices on n unlabeled nodes](https://oeis.org/A006966) - `:a006966` - `create_sequence_a006966/1`
+   - [A007318 - Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.](https://oeis.org/A007318) - `:a007318` - `create_sequence_a007318/1`
+   - [A008277 - Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.](https://oeis.org/A008277) - `:a008277` - `create_sequence_a008277/1`
    - [A008292 - Triangle of Eulerian numbers T(n,k)](https://oeis.org/A008292) - `:a008292` - `create_sequence_a008292/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
+   - [A018252 - The nonprime numbers: 1 together with the composite numbers, A002808.](https://oeis.org/A018252) - `:a018252` - `create_sequence_a018252/1`
    - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
-   - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`
-
+   - [A027642 - Denominator of Bernoulli number B_n.](https://oeis.org/A027642) - `:a027642` - `create_sequence_a027642/1`
+   - [A049310 - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).](https://oeis.org/A049310) - `:a049310` - `create_sequence_a049310/1`
+   - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`  
+   - [A070939 - Length of binary representation of n.](https://oeis.org/A070939) - `:a070939` - `create_sequence_a070939/1`
   
 
   """
@@ -4180,6 +4186,252 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a005408(idx) do
       idx * 2 + 1
+  end
+  
+  @doc """
+  OEIS Sequence `A006318` - Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).
+
+  From [OEIS A006318](https://oeis.org/A006318):
+
+  > Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).
+  > (Formerly M1659)
+
+  **Sequence IDs**: `:a006318`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a006318) |> Sequence.take!(25)
+      [1,2,6,22,90,394,1806,8558,41586,206098,1037718,5293446,27297738,142078746,745387038,3937603038,20927156706,111818026018,600318853926,3236724317174,17518619320890,95149655201962,518431875418926,2832923350929742,15521467648875090]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).",
+       references: [{:oeis, :a006318, "https://oeis.org/A006318"}]
+  def create_sequence_a006318(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006318/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a006318(idx) do
+      Math.schroder_number(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A007318` - Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.
+
+  From [OEIS A007318](https://oeis.org/A007318):
+
+  > Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.
+  > (Formerly M0082)
+
+  **Sequence IDs**: `:a007318`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a007318) |> Sequence.take!(78)
+      [1,1,1,1,2,1,1,3,3,1,1,4,6,4,1,1,5,10,10,5,1,1,6,15,20,15,6,1,1,7,21,35,35,21,7,1,1,8,28,56,70,56,28,8,1,1,9,36,84,126,126,84,36,9,1,1,10,45,120,210,252,210,120,45,10,1,1,11,55,165,330,462,462,330,165,55,11,1]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.",
+       references: [{:oeis, :a007318, "https://oeis.org/A007318"}]
+  def create_sequence_a007318(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a007318/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a007318(idx) do
+      {row, off} = Math.triangle_position_for_element(idx)
+      Math.n_choose_k(row - 1, off)
+  end
+
+  @doc """
+  OEIS Sequence `A008277` - Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.
+
+  From [OEIS A008277](https://oeis.org/A008277):
+
+  > Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a008277`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a008277) |> Sequence.take!(66)
+      [1,1,1,1,3,1,1,7,6,1,1,15,25,10,1,1,31,90,65,15,1,1,63,301,350,140,21,1,1,127,966,1701,1050,266,28,1,1,255,3025,7770,6951,2646,462,36,1,1,511,9330,34105,42525,22827,5880,750,45,1,1,1023,28501,145750,246730,179487,63987,11880,1155,55,1]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.",
+       references: [{:oeis, :a008277, "https://oeis.org/A008277"}]
+  def create_sequence_a008277(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008277/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a008277(idx) do
+      {row, off} = Math.triangle_position_for_element(idx)
+      Math.stirling_partition_number(row, off + 1)
+  end
+
+  @doc """
+  OEIS Sequence `A018252` - The nonprime numbers: 1 together with the composite numbers, A002808.
+
+  From [OEIS A018252](https://oeis.org/A018252):
+
+  > The nonprime numbers: 1 together with the composite numbers, A002808.
+  > (Formerly )
+
+  **Sequence IDs**: `:a018252`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a018252) |> Sequence.take!(65)
+      [1,4,6,8,9,10,12,14,15,16,18,20,21,22,24,25,26,27,28,30,32,33,34,35,36,38,39,40,42,44,45,46,48,49,50,51,52,54,55,56,57,58,60,62,63,64,65,66,68,69,70,72,74,75,76,77,78,80,81,82,84,85,86,87,88]
+
+
+  """
+  @doc offset: 1,
+       sequence: "The nonprime numbers: 1 together with the composite numbers, A002808.",
+       references: [{:oeis, :a018252, "https://oeis.org/A018252"}]
+  def create_sequence_a018252(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a018252/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a018252(idx, last) do
+      case idx do
+         1 -> 1
+         _ -> Math.next_number(fn v -> Math.is_prime?(v) == false end, last) 
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A027642` - Denominator of Bernoulli number B_n.
+
+  From [OEIS A027642](https://oeis.org/A027642):
+
+  > Denominator of Bernoulli number B_n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a027642`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a027642) |> Sequence.take!(62)
+      [1,2,6,1,30,1,42,1,30,1,66,1,2730,1,6,1,510,1,798,1,330,1,138,1,2730,1,6,1,870,1,14322,1,510,1,6,1,1919190,1,6,1,13530,1,1806,1,690,1,282,1,46410,1,66,1,1590,1,798,1,870,1,354,1,56786730,1]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Denominator of Bernoulli number B_n.",
+       references: [{:oeis, :a027642, "https://oeis.org/A027642"}]
+  def create_sequence_a027642(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a027642/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a027642(idx) do
+      {_, den} = Math.bernoulli_number(idx) |> Fraction.components()
+      den
+  end
+
+  @doc """
+  OEIS Sequence `A049310` - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).
+
+  From [OEIS A049310](https://oeis.org/A049310):
+
+  > Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).
+  > (Formerly )
+
+  **Sequence IDs**: `:a049310`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a049310) |> Sequence.take!(86)
+      [1,0,1,-1,0,1,0,-2,0,1,1,0,-3,0,1,0,3,0,-4,0,1,-1,0,6,0,-5,0,1,0,-4,0,10,0,-6,0,1,1,0,-10,0,15,0,-7,0,1,0,5,0,-20,0,21,0,-8,0,1,-1,0,15,0,-35,0,28,0,-9,0,1,0,-6,0,35,0,-56,0,36,0,-10,0,1,1,0,-21,0,70,0,-84,0]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).",
+       references: [{:oeis, :a049310, "https://oeis.org/A049310"}]
+  def create_sequence_a049310(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a049310/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a049310(idx) do
+      {row, off} = Math.triangle_position_for_element(idx)
+      Math.chebyshev_triangle_coefficient(row - 1, off)
+    
+  end
+
+  @doc """
+  OEIS Sequence `A070939` - Length of binary representation of n.
+
+  From [OEIS A070939](https://oeis.org/A070939):
+
+  > Length of binary representation of n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a070939`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a070939) |> Sequence.take!(105)
+      [1,1,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Length of binary representation of n.",
+       references: [{:oeis, :a070939, "https://oeis.org/A070939"}]
+  def create_sequence_a070939(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a070939/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a070939(idx) do
+      Math.length_in_base(idx, 2)
   end
   
 end
