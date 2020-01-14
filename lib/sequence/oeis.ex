@@ -552,7 +552,7 @@ defmodule Chunky.Sequence.OEIS do
     # build the list of atoms of uncovered/missing sequences
     missing_seqs =
       sequence_list
-      |> Sequence.take!(100)
+      |> Sequence.take!(1000)
       |> Enum.filter(fn sequence -> !Enum.member?(all_sequences, sequence) end)
 
     %{

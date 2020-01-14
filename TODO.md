@@ -65,18 +65,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
  
  - release 0.11.5
- 
-  - bernoulli_number
-   - inline doc
-   - TOF
-   - test
-   - CHANGELONG
-  - chebyshev_triangle_coefficient
-   - inline doc
-   - TOF
-   - test
-   - CHANGELONG
-  
+   
  - cyclops numbers     
 
  - @doc nil all the sequence functions
@@ -84,6 +73,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - chebyshev (A049310)
   - stirling numbers (A008277)
   - pascals triangle (A007318)
+  
+  
+ - move util scripts that use JASON and HTTPoison into a scripts directory as .exs files
+ - move jason and HTTPoison to dev only
+ - benchee setup for prime factors and factors and binomial and factorial
   
  - release 0.12.0
  
