@@ -22,7 +22,6 @@
  - Math
   - double_factorial/1
   - repunit/1
-  - factorial now handles negative numbers
   - stern_diatomic_series/1
   
  - Sequences 

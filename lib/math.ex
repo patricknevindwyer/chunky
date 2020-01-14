@@ -630,7 +630,7 @@ defmodule Chunky.Math do
 
   ## Examples
 
-      iex> Math.factorial(-4)
+      iex> Math.factorial(4)
       24
   
       iex> Math.factorial(1)
@@ -652,12 +652,6 @@ defmodule Chunky.Math do
     CacheAgent.cache_as :factorial, n do
       n * factorial(n - 1)
     end
-  end
-  
-  def factorial(n) when is_integer(n) and n < 0 do
-      CacheAgent.cache_as :factorial, n do
-         n * factorial(n + 1) 
-      end
   end
   
   @doc """
@@ -1363,6 +1357,8 @@ defmodule Chunky.Math do
       iex> Math.binomial(100, 50)
       100891344545564193334812497256
   """
+  def binomial(n, k) when n < 0 or k < 0, do: 0
+  def binomial(n, k) when n < k, do: 0
   def binomial(n, k) do
     # n! / (k! * (n - k)!)
     div(factorial(n), factorial(k) * factorial(n - k))

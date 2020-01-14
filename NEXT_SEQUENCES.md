@@ -1,7 +1,7 @@
 ## Generators
 
 ```elixir 
-OEIS.Util.generate_function_sequences(~w(), in_module: Chunky.Sequence.OEIS.Repr)
+OEIS.Util.generate_function_sequences(~w(A006318 A007318 A008277 A018252 A027642 A049310 A070939), in_module: Chunky.Sequence.OEIS.Core)
 OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 ```
 
@@ -12,6 +12,7 @@ OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 ## Core
 
 
+A006318 A007318 A008277 A018252 A027642 A049310 A070939
 
 
 ## Powers
@@ -30,4 +31,7 @@ OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 pandigitals
 
 ## Constant
+
+
+## Primes
 
