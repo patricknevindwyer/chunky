@@ -37,6 +37,14 @@ defmodule Chunky.OperationsTest do
                   Fraction.new(num, 4)
                 end)
     end
+    
+    test "int - product over result of function" do
+       
+       assert 1_728 == (product k, Chunky.Math.factors(12) do
+          k 
+       end)
+    end
+    
   end
 
   describe "summation" do
