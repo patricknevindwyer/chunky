@@ -20,15 +20,16 @@ defmodule Chunky.Math do
 
   Arithmetic functions for pure integer operations.
 
-   - `pow/2` - Integer exponentiation
    - `double_factorial/1` - Double factorial (`n!!`) of `n`
    - `factorial/1` - Factorial (`n!`) of `n`
-   - `rising_factorial/2` - Rising factorial of `n^(m)`
    - `falling_factorial/2` - Falling factorial of `(n)m`
-   - `lcm/2` - Least common multiple of `n` and `m`
-   - `lcm/1` - Least common multiple of a list of integers
    - `integer_nth_root?/3` - Determine if an integer has a specific `n-th` root
    - `integer_nth_root/3` - Find the `n`-th integer root, if it exists
+   - `lcm/2` - Least common multiple of `n` and `m`
+   - `lcm/1` - Least common multiple of a list of integers
+   - `nth_root_int/2` - Nearest `m`-th root of `n` such that `root^m <= n`
+   - `pow/2` - Integer exponentiation
+   - `rising_factorial/2` - Rising factorial of `n^(m)`
 
 
   ## Float Arithmetic
@@ -46,6 +47,7 @@ defmodule Chunky.Math do
    - `factors/1` - All divisors for an integer
    - `is_power_of?/2` - Is `n` a power of `m`?
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
+   -  `ordered_factorization_count/1` - Count the number of _ordered_ factorizations of `n`
    - `prime_factors/1` - Factorize an integer into prime factors
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `tau/1` - Tau function, number of divisors of `n`
@@ -127,6 +129,8 @@ defmodule Chunky.Math do
    - `is_prime_vampire_number?/1` - Is `n` a vampire number with prime fangs?
    - `is_pseudo_prime?/1` - Is `n` a Fermat pseudo prime in base 10?
    - `is_pseudo_vampire_number?/1` - Is `n` a vampire number with relaxed constraints?
+   - `is_repdigit?/1` - Is `n` a repdigit number in a base > 1?
+   - `is_repunit?/1` - Is `n` a Repunit?
    - `is_rhonda_to_base_4?/1` - Determine if `n` is a Rhonda number to base 4
    - `is_rhonda_to_base_6?/1` - Determine if `n` is a Rhonda number to base 6
    - `is_rhonda_to_base_8?/1` - Determine if `n` is a Rhonda number to base 8
@@ -202,6 +206,7 @@ defmodule Chunky.Math do
   Functions dealing with [Combinatorics](https://en.wikipedia.org/wiki/Combinatorics), permutation calculations, and related topics.
 
    - `bell_number/1` - Compute the number of partitions of a set of size `n`
+   - `binary_partitions_count/1` - Find the number of ways to partition `2 * n` into powers of `2`
    - `catalan_number/1` - Find the Catalan number for `n`, counts of highly recursive objects and sets
    - `derangement_count/1` - Number of derangements of set size `n`, or _subfactorial n_
    - `endomorphism_count/1` - Number of endomorphisms of a set of size `n`
@@ -220,6 +225,9 @@ defmodule Chunky.Math do
    - `plane_partition_count/1` - Number of plane partitions with sum `n`
    - `schroder_number/1` - Find the `n`th Schröder number.
    - `stirling_partition_number/2` - Number of non-empty sets of size `k` that can be made from a set of size `n`
+   - `total_partitions/1` - Count the number of total, or series reduced tree, partitions of `n` elements
+   - `two_color_bracelet_with_period_count/2` - The number of bracelet permutations for `n` beads, with period `n`
+   - `two_color_bracelet_count/2` - The number of bracelet permutations for `n` beads of two colors
    - `wedderburn_etherington_number/1` - Calculate the size of certain binary tree sets
 
 
@@ -434,6 +442,44 @@ defmodule Chunky.Math do
   end
 
   @doc """
+  Count the number of _ordered_ factorizations of `n`.
+  
+  Also called the Hille function, or Kalmár's problem, this counts all possible factorizations (not all necessarily prime)
+  of `n`, regardless of order. So `10` has 3 factorizations, `2x5`, `5x2`, and `10`.
+  
+  OEIS References:
+  
+   - [A074206 - Kalmár's problem: number of ordered factorizations of n](https://oeis.org/A074206)
+  
+  ## Examples
+  
+      iex> Math.ordered_factorization_count(1)
+      1
+
+      iex> Math.ordered_factorization_count(8)
+      4
+
+      iex> Math.ordered_factorization_count(25)
+      2
+
+      iex> Math.ordered_factorization_count(104)
+      20
+
+      iex> Math.ordered_factorization_count(3648)
+      2496
+  
+  """
+  def ordered_factorization_count(0), do: 0
+  def ordered_factorization_count(1), do: 1
+  def ordered_factorization_count(n) when is_integer(n) and n > 1 do
+      CacheAgent.cache_as :ordered_factorization_count, n do
+         summation k, factors(n) -- [n] do
+             ordered_factorization_count(k)
+         end 
+      end
+  end
+  
+  @doc """
   Count the number of possible factorizations of `n`.
 
   This counts a number as a factor of itself, as well as multi-set factorizations. So `8`
@@ -501,6 +547,78 @@ defmodule Chunky.Math do
   """
   def is_coprime?(a, b) when is_integer(a) and is_integer(b) and a > 0 and b > 0 do
     Integer.gcd(a, b) == 1
+  end
+
+  @doc """
+  Check if `n` is a Repunit.
+  
+  Repunits are numbers consisting of all `1`s in base 10. Hence, **R1** == `1`, **R2** == `11`, etc.
+  
+  ## Examples
+  
+      iex> Math.is_repunit?(0)
+      false
+
+      iex> Math.is_repunit?(11)
+      true
+  
+      iex> Math.is_repunit?(11011)
+      false
+
+      iex> Math.is_repunit?(1111111)
+      true
+
+      iex> Math.is_repunit?(2071723 * 5363222357)
+      true
+  
+  """
+  def is_repunit?(n) when n <= 1, do: false
+  def is_repunit?(n) when n > 0 do
+      digs = n
+      |> Integer.digits()
+      |> Enum.uniq()
+      
+      digs == [1]
+  end
+  
+  @doc """
+  Check if `n` is a Repdigit number.
+  
+  Repdigits numbers are a generalization of a Repunit - a number consisting of a single repeating
+  digit. Repdigit numbers can occur in any numeric base > 1. When evaluating numbers in bases
+  greater than base 10, lists of digits should be used (see `to_base/2`).
+  
+  ## Examples
+  
+      iex> Math.is_repdigit?(123)
+      false
+      
+      iex> Math.is_repdigit?(22222)
+      true
+
+      iex> Math.is_repdigit?(88888888888)
+      true
+
+      iex> Math.to_base(9884745, 60) |> Math.is_repdigit?()
+      true
+      
+      iex> Math.to_base(9884745, 60)
+      [45, 45, 45, 45]
+  
+  """
+  def is_repdigit?(n) when is_integer(n) do
+      (
+          n
+          |> Integer.digits()
+          |> Enum.uniq()
+          |> length()
+      ) == 1
+  end
+  
+  def is_repdigit?(n) when is_list(n) do
+      (n
+      |> Enum.uniq()
+      |> length()) == 1
   end
 
   @doc """
@@ -2979,6 +3097,53 @@ defmodule Chunky.Math do
   end
 
   @doc """
+  Count the number of ways `n` can be partitioned into the sum of two squares.
+  
+  For the purposes of this function, the partition count for `0` and `1` is `1`. For
+  all cases, `1` counts as a square number.
+  
+  As examples:
+  
+   - `5` has one partition, `1^2 + 2^2`
+   - `25` has two partitions, `3^2 + 4^2` and `0^2 + 5^2`
+  
+  OEIS References
+  
+   - [A000161 - Number of partitions of n into 2 squares](https://oeis.org/A000161)
+  
+  
+  ## Examples
+  
+      iex> Math.partitions_into_two_squares(20)
+      1
+
+      iex> Math.partitions_into_two_squares(300)
+      0
+
+      iex> Math.partitions_into_two_squares(986)
+      2
+
+      iex> Math.partitions_into_two_squares(9945)
+      4
+  
+  """
+  def partitions_into_two_squares(n) when n >= 0 and n < 3, do: 1
+  def partitions_into_two_squares(n) when n >= 3 do
+      # sum(k=sqrtint((n-1)\2)+1, sqrtint(n), issquare(n-k^2))
+      summation k, Math.nth_root_int(div(n - 1, 2), 2) + 1 .. Math.nth_root_int(n, 2) do
+          case n - Math.pow(k, 2) do
+             1 -> 1
+             v -> 
+                 if Math.is_perfect_square?(v) do
+                     1
+                 else
+                     0
+                 end
+          end
+      end    
+  end
+  
+  @doc """
   Euler's totient function for `n`.
 
   Also called _phi_ or written as `Φ(n)`, the Eulerian totient function counts the positive
@@ -3078,6 +3243,166 @@ defmodule Chunky.Math do
     Math.pow(n, k)
     |> Fraction.multiply(c_f)
     |> Fraction.get_whole()
+  end
+    
+  @doc """
+  Find the number of ways to partition `2 * n` into powers of `2`.
+  
+  As this function is highly recursive, and uses a recurrence relationship, it uses a cache for efficiency.
+  
+  OEIS References:
+  
+   - [A000123 - Number of binary partitions: number of partitions of 2n into powers of 2](https://oeis.org/A000123)
+  
+  ## Examples
+  
+      iex> Math.binary_partitions_count(1)
+      2
+
+      iex> Math.binary_partitions_count(5)
+      14
+
+      iex> Math.binary_partitions_count(12)
+      94
+
+      iex> Math.binary_partitions_count(37)
+      3074
+  
+  """
+  def binary_partitions_count(0), do: 1
+  def binary_partitions_count(n) when n >= 0 do
+      # a(n) = a(n-1) + a(floor(n/2))
+      CacheAgent.cache_as :binary_partition_count, n do
+         binary_partitions_count(n - 1) + binary_partitions_count(div(n, 2))
+      end
+  end
+  
+  @doc """
+  Count the number of bracelet permutations for `n` beads, with primitive period of `n`, with two colors.
+  
+  OEIS References:
+  
+   - [A000048 - Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed](https://oeis.org/A000048)
+  
+  ## Options
+  
+   - `allow_turning_over` - Boolean. Default `false`. Currently only supports `false`.
+  
+  ## Examples
+  
+      iex> Math.two_color_bracelet_with_period_count(1)
+      1
+
+      iex> Math.two_color_bracelet_with_period_count(5)
+      3
+
+      iex> Math.two_color_bracelet_with_period_count(12)
+      170
+
+      iex> Math.two_color_bracelet_with_period_count(38)
+      3616814565
+  
+  """
+  def two_color_bracelet_with_period_count(n, opts \\ []) when n >= 0 do
+      allow_turns = opts |> Keyword.get(:allow_turning_over, false)
+
+      if allow_turns do
+          0
+      else
+          
+          if n == 0 do
+              1
+          else
+              # a(n) = (1/(2*n)) * Sum_{odd d divides n} mu(d)*2^(n/d)
+              facs = factors(n) |> Enum.filter(&is_odd?/1)
+              part_a = summation k, facs do
+                 mobius_function(k) * Math.pow(2, div(n, k)) 
+              end
+          
+              Fraction.new(1, 2 * n) |> Fraction.multiply(part_a) |> Fraction.get_whole()
+          end
+      end
+  end
+  
+  @doc """
+  Count the number of bracelet permutations for `n` beads of two colors.
+  
+  By default the "turning over" of beads is allowed. See options below for configuraitons.
+  
+  OEIS References: 
+   
+   - [A000029 - Number of bracelets with n beads of two colors with turning over](https://oeis.org/A000029)
+   - [A000031 - Number of bracelets with n beads of two colors without turning over](https://oeis.org/A000031)
+  
+  ## Options
+  
+   - `allow_turning_over` - Boolean. Default `true`. Allow or disallow "turning over" of beads on bracelet
+  
+  ## Examples
+  
+      iex> Math.two_color_bracelet_count(5)
+      8
+  
+      iex> Math.two_color_bracelet_count(12)
+      224
+  
+      iex> Math.two_color_bracelet_count(37)
+      1857545300
+  
+      iex> Math.two_color_bracelet_count(5, allow_turning_over: false)
+      8
+
+      iex> Math.two_color_bracelet_count(12, allow_turning_over: false)
+      352
+
+      iex> Math.two_color_bracelet_count(37, allow_turning_over: false)
+      3714566312
+  
+  """
+  def two_color_bracelet_count(n, opts \\ []) when n >= 0 do
+      allow_turns = opts |> Keyword.get(:allow_turning_over, true)
+      
+      if allow_turns do
+          
+          cond do
+              
+              n >= 0 && n < 3 -> 
+                  n + 1
+                  
+              true ->
+                  # a(n) = Sum_{d divides n} phi(d)*2^(n/d)/(2*n) + 
+                  #     2^((n - 1)/2) if n odd 
+                  #     2^(n/2 - 1) + 2^(n/2 - 2) if n even.
+          
+                  part_a = (summation k, factors(n) do
+                     totient(k) * Math.pow(2, div(n, k)) 
+                  end) |> div(2 * n) 
+          
+                  part_a + if is_even?(n) do
+                      Math.pow(2, div(n, 2) - 1) + Math.pow(2, div(n, 2) - 2)
+                  else
+                      Math.pow(2, div(n - 1, 2))
+                  end
+          end
+          
+      else
+          
+          cond do
+             n == 0 -> 
+                 1
+                 
+             true ->
+                 # a(n) = (1/n)*Sum_{ d divides n } phi(d)*2^(n/d)
+                 part_a = summation k, factors(n) do
+                     totient(k) * Math.pow(2, div(n, k))
+                 end
+          
+                 Fraction.new(1, n) |> Fraction.multiply(part_a) |> Fraction.get_whole()
+                  
+          end
+
+      end
+      
   end
 
   @doc """
@@ -3975,6 +4300,47 @@ defmodule Chunky.Math do
       # build the fractional component and complete
       Fraction.new(1, n + 1) |> Fraction.multiply(sum_term) |> Fraction.get_whole()
     end
+  end
+  
+  @doc """
+  Count the number of total, or series reduced tree, partitions of `n` elements.
+  
+  Also known as Schröder's Fourth problem. In combinatorics, this is the number of
+  singleton reduced trees with `n` labels, where the leaves are non-empty sets.
+  
+  OEIS References:
+  
+   - [A000311 - series-reduced rooted trees with n labeled leaves; also number of total partitions of n](https://oeis.org/A000311)
+  
+  ## Examples
+  
+      iex> Math.total_partitions(0)
+      0
+
+      iex> Math.total_partitions(3)
+      4
+
+      iex> Math.total_partitions(8)
+      660032
+
+      iex> Math.total_partitions(20)
+      887094711304119347388416
+  
+  """
+  def total_partitions(0), do: 0
+  def total_partitions(1), do: 1
+  def total_partitions(n) when n > 1 do
+      # a(1)=1; for n>1, a(n) = -(n-1) * a(n-1) + Sum_{k=1..n-1} binomial(n, k) * a(k) * a(n-k)
+      CacheAgent.cache_as :total_partitions, n do
+          
+         part_a = - 1 * (n - 1) * total_partitions(n - 1)  
+         
+         part_b = summation k, 1..n - 1 do
+            binomial(n, k) * total_partitions(k) * total_partitions(n - k) 
+         end
+         
+         part_a + part_b
+      end
   end
 
   @doc """
@@ -5341,6 +5707,12 @@ defmodule Chunky.Math do
 
   ## Examples
 
+      iex> Math.is_perfect_square?(0)
+      true
+
+      iex> Math.is_perfect_square?(1)
+      true
+
       iex> Math.is_perfect_square?(3)
       false
 
@@ -5350,6 +5722,8 @@ defmodule Chunky.Math do
       iex> Math.is_perfect_square?(123456)
       false
   """
+  def is_perfect_square?(0), do: true
+  def is_perfect_square?(1), do: true
   def is_perfect_square?(n) when is_integer(n) and n <= 3, do: false
 
   def is_perfect_square?(n) when is_integer(n) and n > 3 do
@@ -5756,7 +6130,7 @@ defmodule Chunky.Math do
       [:negative, :odd]
 
       iex> Math.analyze_number(0)
-      [:even, :palindromic, :plaindrome, :zero]
+      [:even, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
       iex> Math.analyze_number(105840, skip_smooth: true)
       [:abundant, :arithmetic_number, :even, :odious_number, :positive]
@@ -6241,6 +6615,71 @@ defmodule Chunky.Math do
   def lcm(0, _b), do: 0
   def lcm(a, b) when is_integer(a) and is_integer(b), do: div(abs(a * b), Integer.gcd(a, b))
 
+  @doc """
+  Find the nearest integer `n`th root of `x`, such that `root^n <= x`.
+  
+  This is an iterative root method that bypasses any floating point operations, so is suitable
+  for finding large integer roots. For numbers less than `2^64-1` the `nth_root` method may be
+  faster.
+  
+  ## Examples
+  
+      iex> a = 1234567890987654321
+      iex> Math.nth_root_int(a * a * a * a * a, 5)
+      1234567890987654321
+  
+      iex> Math.nth_root_int(100_000, 4)
+      17
+  
+      iex> Math.nth_root_int(8, 3)
+      2
+  """
+  def nth_root_int(x, n) when n > 1 and x > 0 do
+      
+      # iterative binary search across the answer space
+      refine_nth_root_int(x, n, 1, x)
+      
+  end
+  
+  # run a binary search to find our optimal candidate value
+  defp refine_nth_root_int(x, n, c_low, c_hi) do
+     
+      # are low and hi right next to one another?
+      if c_low == (c_hi - 1) do
+          c_low
+      else
+
+          # pick a mid point
+          c_mid = div(c_hi - c_low, 2) + c_low
+          
+          # eval our options
+          val_low = Math.pow(c_low, n)
+          val_mid = Math.pow(c_mid, n)
+          val_hi = Math.pow(c_hi, n)
+          
+          # determine if one of our values is exact, or
+          # if we need to refine
+          cond do
+              
+              # any exact?
+              val_low == x -> c_low
+              val_mid == x -> c_mid
+              val_hi == x -> c_hi
+              
+              # bounding
+              val_low < x && val_mid > x -> refine_nth_root_int(x, n, c_low, c_mid)
+              val_mid < x && val_hi > x -> refine_nth_root_int(x, n, c_mid, c_hi)
+                 
+              # how?
+              true -> 0
+              
+          end
+          
+      end
+      
+      
+  end
+  
   @doc """
   Generalized floating point nth root, from:
 

@@ -28,6 +28,14 @@
   - schroder_number/1
   - chebyshev_triangle_coefficient/2
   - bernoulli_number/1
+  - two_color_bracelet_with_period_count/2
+  - two_color_bracelet_count/2
+  - binary_partitions_count/1
+  - nth_root_int/2
+  - total_partitions/1
+  - ordered_factorization_count/1
+  - is_repunit?/1
+  - is_repdigit?/1
   
  - Sequences 
   - A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.
@@ -152,6 +160,16 @@
   - A027642 - Denominator of Bernoulli number B_n.
   - A049310 - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).
   - A070939 - Length of binary representation of n.
+  - A000029 - Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).
+  - A000031 - Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.
+  - A000048 - Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.
+  - A000123 - Number of binary partitions: number of partitions of 2n into powers of 2.
+  - A000161 - Number of partitions of n into 2 squares.
+  - A000311 - Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.
+  - A001478 - The negative integers.
+  - A002531 - a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.
+  - A074206 - Kalmár's [Kalmar's] problem: number of ordered factorizations of n.
+
 
 
 ## v0.11.4
