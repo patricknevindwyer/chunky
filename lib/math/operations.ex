@@ -40,6 +40,15 @@ defmodule Chunky.Math.Operations do
       Fraction.new(1, den)
   end
   ```
+  
+  Any enumerable can be passed to summation:
+  
+  ```elixir
+  # sum the divisors of 100
+  summation k, Math.factors(100) do
+      k
+  end
+  ```
 
   """
   defmacro summation(key, range, do: expression) do
@@ -93,6 +102,16 @@ defmodule Chunky.Math.Operations do
       Fraction.new(k, k + 1)
   end
   ```
+  
+  Any enumerable can be passed to product:
+  
+  ```elixir
+  # multiply the divisors of 100
+  product k, Math.factors(100) do
+      k
+  end
+  ```
+  
   """
   defmacro product(key, range, do: expression) do
     quote do
