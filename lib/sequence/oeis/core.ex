@@ -487,20 +487,20 @@ defmodule Chunky.Sequence.OEIS.Core do
   @data_a005470 [1, 1, 2, 4, 11, 33, 142, 822, 6966, 79853, 1_140_916, 18_681_008, 333_312_451]
 
   @data_a005588 [
-      2, 
-      7,
-      52,
-      2133,
-      2590407,
-      3374951541062,
-      5695183504479116640376509,
-      16217557574922386301420514191523784895639577710480,
-      131504586847961235687181874578063117114329409897550318273792033024340388219235081096658023517076950,
-      8646728181026489602610406537158318670928372786737024641130379069394221138489756289944296330853107913728061052785430910141356382611113325681250718311629163466222152852597067554256522520919973090955,
-      37382954118278832773895244218236686338908646550437400502358118064530753024550062640906067170928616739335301863382037085201145976272239453658981262846128190508219395966448887917209180943430756816309073652028140629406702623549485336391197570040678753084310648032159266735992810331022649795860853141942633381251585125549096861959475068250868587426672999533600613169522601703660739146957369890325,
-      698742629304670171755159456606645882464563215715832539360594587622161928133397802571216754607349602657704905034938428686495862728728254448794930230920430305987983203057065722937242690974977982553211093834896106441403664858556891811760492816199857665396567542914925037623435144863693826624157959093792706703191150574055525090366026295073053913789975182184642596837652773018150165286207352763970112375339742855287127212754217518055271848559693438156973004663641709290423075908178824635609324004676554852274031020382924227285656035129116758079903634962892737701916718226251357310348953054664432974657105736715130329702369236857236758170792271173496368683585989886287967312409380417261405819521508793711883365962752176591995956516583053407132299622198512949230653631254048264190805856710
+    2,
+    7,
+    52,
+    2133,
+    2_590_407,
+    3_374_951_541_062,
+    5_695_183_504_479_116_640_376_509,
+    16_217_557_574_922_386_301_420_514_191_523_784_895_639_577_710_480,
+    131_504_586_847_961_235_687_181_874_578_063_117_114_329_409_897_550_318_273_792_033_024_340_388_219_235_081_096_658_023_517_076_950,
+    8_646_728_181_026_489_602_610_406_537_158_318_670_928_372_786_737_024_641_130_379_069_394_221_138_489_756_289_944_296_330_853_107_913_728_061_052_785_430_910_141_356_382_611_113_325_681_250_718_311_629_163_466_222_152_852_597_067_554_256_522_520_919_973_090_955,
+    37_382_954_118_278_832_773_895_244_218_236_686_338_908_646_550_437_400_502_358_118_064_530_753_024_550_062_640_906_067_170_928_616_739_335_301_863_382_037_085_201_145_976_272_239_453_658_981_262_846_128_190_508_219_395_966_448_887_917_209_180_943_430_756_816_309_073_652_028_140_629_406_702_623_549_485_336_391_197_570_040_678_753_084_310_648_032_159_266_735_992_810_331_022_649_795_860_853_141_942_633_381_251_585_125_549_096_861_959_475_068_250_868_587_426_672_999_533_600_613_169_522_601_703_660_739_146_957_369_890_325,
+    698_742_629_304_670_171_755_159_456_606_645_882_464_563_215_715_832_539_360_594_587_622_161_928_133_397_802_571_216_754_607_349_602_657_704_905_034_938_428_686_495_862_728_728_254_448_794_930_230_920_430_305_987_983_203_057_065_722_937_242_690_974_977_982_553_211_093_834_896_106_441_403_664_858_556_891_811_760_492_816_199_857_665_396_567_542_914_925_037_623_435_144_863_693_826_624_157_959_093_792_706_703_191_150_574_055_525_090_366_026_295_073_053_913_789_975_182_184_642_596_837_652_773_018_150_165_286_207_352_763_970_112_375_339_742_855_287_127_212_754_217_518_055_271_848_559_693_438_156_973_004_663_641_709_290_423_075_908_178_824_635_609_324_004_676_554_852_274_031_020_382_924_227_285_656_035_129_116_758_079_903_634_962_892_737_701_916_718_226_251_357_310_348_953_054_664_432_974_657_105_736_715_130_329_702_369_236_857_236_758_170_792_271_173_496_368_683_585_989_886_287_967_312_409_380_417_261_405_819_521_508_793_711_883_365_962_752_176_591_995_956_516_583_053_407_132_299_622_198_512_949_230_653_631_254_048_264_190_805_856_710
   ]
-  
+
   # raw data for A006966 - Number of lattices on n unlabeled nodes.
   @data_a006966 [
     1,
@@ -3661,7 +3661,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def create_sequence_a055512(_opts) do
     sequence_for_list(@data_a055512)
   end
-  
+
   @doc """
   OEIS Sequence `A001147` - Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).
 
@@ -3687,13 +3687,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).",
        references: [{:oeis, :a001147, "https://oeis.org/A001147"}]
   def create_sequence_a001147(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001147/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001147/1)
   end
-
 
   @doc offset: 0
   def seq_a001147(idx) do
-      Math.double_factorial(2 * idx - 1)
+    Math.double_factorial(2 * idx - 1)
   end
 
   @doc """
@@ -3721,13 +3720,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "a(n) = binomial(n, floor(n/2)).",
        references: [{:oeis, :a001405, "https://oeis.org/A001405"}]
   def create_sequence_a001405(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001405/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001405/1)
   end
-
 
   @doc offset: 0
   def seq_a001405(idx) do
-      Math.binomial(idx, div(idx, 2))
+    Math.binomial(idx, div(idx, 2))
   end
 
   @doc """
@@ -3755,17 +3753,16 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.",
        references: [{:oeis, :a001519, "https://oeis.org/A001519"}]
   def create_sequence_a001519(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001519/3)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001519/3)
   end
-
 
   @doc offset: 0
   def seq_a001519(idx, a, b) do
-      case idx do
-         0 -> 1
-         1 -> 1
-         _ -> 3 * b - a 
-      end
+    case idx do
+      0 -> 1
+      1 -> 1
+      _ -> 3 * b - a
+    end
   end
 
   @doc """
@@ -3790,16 +3787,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.",
+       sequence:
+         "a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.",
        references: [{:oeis, :a001700, "https://oeis.org/A001700"}]
   def create_sequence_a001700(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001700/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001700/1)
   end
-
 
   @doc offset: 0
   def seq_a001700(idx) do
-      Math.binomial(2 * idx + 1, idx + 1)
+    Math.binomial(2 * idx + 1, idx + 1)
   end
 
   @doc """
@@ -3824,16 +3821,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).",
+       sequence:
+         "a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).",
        references: [{:oeis, :a001764, "https://oeis.org/A001764"}]
   def create_sequence_a001764(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001764/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001764/1)
   end
-
 
   @doc offset: 0
   def seq_a001764(idx) do
-      Math.binomial(3 * idx, idx) |> div(2 * idx + 1)
+    Math.binomial(3 * idx, idx) |> div(2 * idx + 1)
   end
 
   @doc """
@@ -3861,15 +3858,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.",
        references: [{:oeis, :a006882, "https://oeis.org/A006882"}]
   def create_sequence_a006882(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006882/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006882/1)
   end
-
 
   @doc offset: 0
   def seq_a006882(idx) do
-      Math.double_factorial(idx)
-  end  
-  
+    Math.double_factorial(idx)
+  end
+
   @doc """
   OEIS Sequence `A001906` - F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).
 
@@ -3895,17 +3891,16 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).",
        references: [{:oeis, :a001906, "https://oeis.org/A001906"}]
   def create_sequence_a001906(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001906/3)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001906/3)
   end
-
 
   @doc offset: 0
   def seq_a001906(idx, a, b) do
-      case idx do
-         0 -> 0
-         1 -> 1
-         _ -> 3 * b - a 
-      end
+    case idx do
+      0 -> 0
+      1 -> 1
+      _ -> 3 * b - a
+    end
   end
 
   @doc """
@@ -3933,18 +3928,17 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Evil numbers: numbers with an even number of 1's in their binary expansion.",
        references: [{:oeis, :a001969, "https://oeis.org/A001969"}]
   def create_sequence_a001969(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001969/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001969/2)
   end
-
 
   @doc offset: 1, fill_value: -1
   def seq_a001969(_idx, last) do
-      Math.next_number(
-          fn v -> 
-              Math.digit_count(v, [1], base: 2) |> rem(2) == 0
-          end, 
-          last
-      )
+    Math.next_number(
+      fn v ->
+        Math.digit_count(v, [1], base: 2) |> rem(2) == 0
+      end,
+      last
+    )
   end
 
   @doc """
@@ -3972,13 +3966,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Palindromes in base 10.",
        references: [{:oeis, :a002113, "https://oeis.org/A002113"}]
   def create_sequence_a002113(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002113/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002113/2)
   end
-
 
   @doc offset: 1, fill_value: -1
   def seq_a002113(_idx, last) do
-      Math.next_number(fn v -> Math.is_palindromic?(v) end, last)
+    Math.next_number(fn v -> Math.is_palindromic?(v) end, last)
   end
 
   @doc """
@@ -4006,13 +3999,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Repunits: (10^n - 1)/9. Often denoted by R_n.",
        references: [{:oeis, :a002275, "https://oeis.org/A002275"}]
   def create_sequence_a002275(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002275/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002275/1)
   end
-
 
   @doc offset: 0
   def seq_a002275(idx) do
-      Math.repunit(idx)
+    Math.repunit(idx)
   end
 
   @doc """
@@ -4040,13 +4032,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).",
        references: [{:oeis, :a002378, "https://oeis.org/A002378"}]
   def create_sequence_a002378(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002378/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002378/1)
   end
-
 
   @doc offset: 0
   def seq_a002378(idx) do
-      idx * (idx + 1)
+    idx * (idx + 1)
   end
 
   @doc """
@@ -4071,16 +4062,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).",
+       sequence:
+         "Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).",
        references: [{:oeis, :a002487, "https://oeis.org/A002487"}]
   def create_sequence_a002487(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002487/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002487/1)
   end
-
 
   @doc offset: 0
   def seq_a002487(idx) do
-      Math.stern_diatomic_series(idx)
+    Math.stern_diatomic_series(idx)
   end
 
   @doc """
@@ -4108,15 +4099,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).",
        references: [{:oeis, :a002620, "https://oeis.org/A002620"}]
   def create_sequence_a002620(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002620/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002620/1)
   end
-
 
   @doc offset: 0
   def seq_a002620(idx) do
-      b = div(idx, 2)
-      r = rem(idx, 2)
-      b * (b + r)
+    b = div(idx, 2)
+    r = rem(idx, 2)
+    b * (b + r)
   end
 
   @doc """
@@ -4144,17 +4134,16 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.",
        references: [{:oeis, :a003418, "https://oeis.org/A003418"}]
   def create_sequence_a003418(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a003418/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a003418/1)
   end
-
 
   @doc offset: 0
   def seq_a003418(idx) do
-      case idx do
-         0 -> 1
-         1 -> 1
-         _ -> Math.lcm(1..idx |> Enum.to_list()) 
-      end
+    case idx do
+      0 -> 1
+      1 -> 1
+      _ -> Math.lcm(1..idx |> Enum.to_list())
+    end
   end
 
   @doc """
@@ -4182,13 +4171,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Nonnegative integers repeated, floor(n/2).",
        references: [{:oeis, :a004526, "https://oeis.org/A004526"}]
   def create_sequence_a004526(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a004526/1)
-  end 
-
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a004526/1)
+  end
 
   @doc offset: 0
   def seq_a004526(idx) do
-      div(idx, 2)
+    div(idx, 2)
   end
 
   @doc """
@@ -4216,15 +4204,14 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "The odd numbers: a(n) = 2*n + 1.",
        references: [{:oeis, :a005408, "https://oeis.org/A005408"}]
   def create_sequence_a005408(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005408/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005408/1)
   end
-
 
   @doc offset: 0
   def seq_a005408(idx) do
-      idx * 2 + 1
+    idx * 2 + 1
   end
-  
+
   @doc """
   OEIS Sequence `A006318` - Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).
 
@@ -4250,13 +4237,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).",
        references: [{:oeis, :a006318, "https://oeis.org/A006318"}]
   def create_sequence_a006318(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006318/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006318/1)
   end
-
 
   @doc offset: 0
   def seq_a006318(idx) do
-      Math.schroder_number(idx)
+    Math.schroder_number(idx)
   end
 
   @doc """
@@ -4281,17 +4267,17 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.",
+       sequence:
+         "Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.",
        references: [{:oeis, :a007318, "https://oeis.org/A007318"}]
   def create_sequence_a007318(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a007318/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a007318/1)
   end
-
 
   @doc offset: 0
   def seq_a007318(idx) do
-      {row, off} = Math.triangle_position_for_element(idx)
-      Math.n_choose_k(row - 1, off)
+    {row, off} = Math.triangle_position_for_element(idx)
+    Math.n_choose_k(row - 1, off)
   end
 
   @doc """
@@ -4319,14 +4305,13 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.",
        references: [{:oeis, :a008277, "https://oeis.org/A008277"}]
   def create_sequence_a008277(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008277/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008277/1)
   end
-
 
   @doc offset: 0
   def seq_a008277(idx) do
-      {row, off} = Math.triangle_position_for_element(idx)
-      Math.stirling_partition_number(row, off + 1)
+    {row, off} = Math.triangle_position_for_element(idx)
+    Math.stirling_partition_number(row, off + 1)
   end
 
   @doc """
@@ -4354,16 +4339,15 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "The nonprime numbers: 1 together with the composite numbers, A002808.",
        references: [{:oeis, :a018252, "https://oeis.org/A018252"}]
   def create_sequence_a018252(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a018252/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a018252/2)
   end
-
 
   @doc offset: 1
   def seq_a018252(idx, last) do
-      case idx do
-         1 -> 1
-         _ -> Math.next_number(fn v -> Math.is_prime?(v) == false end, last) 
-      end
+    case idx do
+      1 -> 1
+      _ -> Math.next_number(fn v -> Math.is_prime?(v) == false end, last)
+    end
   end
 
   @doc """
@@ -4391,14 +4375,13 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Denominator of Bernoulli number B_n.",
        references: [{:oeis, :a027642, "https://oeis.org/A027642"}]
   def create_sequence_a027642(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a027642/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a027642/1)
   end
-
 
   @doc offset: 0
   def seq_a027642(idx) do
-      {_, den} = Math.bernoulli_number(idx) |> Fraction.components()
-      den
+    {_, den} = Math.bernoulli_number(idx) |> Fraction.components()
+    den
   end
 
   @doc """
@@ -4423,18 +4406,17 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).",
+       sequence:
+         "Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).",
        references: [{:oeis, :a049310, "https://oeis.org/A049310"}]
   def create_sequence_a049310(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a049310/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a049310/1)
   end
-
 
   @doc offset: 0
   def seq_a049310(idx) do
-      {row, off} = Math.triangle_position_for_element(idx)
-      Math.chebyshev_triangle_coefficient(row - 1, off)
-    
+    {row, off} = Math.triangle_position_for_element(idx)
+    Math.chebyshev_triangle_coefficient(row - 1, off)
   end
 
   @doc """
@@ -4462,13 +4444,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Length of binary representation of n.",
        references: [{:oeis, :a070939, "https://oeis.org/A070939"}]
   def create_sequence_a070939(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a070939/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a070939/1)
   end
-
 
   @doc offset: 0
   def seq_a070939(idx) do
-      Math.length_in_base(idx, 2)
+    Math.length_in_base(idx, 2)
   end
 
   @doc """
@@ -4493,16 +4474,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).",
+       sequence:
+         "Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).",
        references: [{:oeis, :a000029, "https://oeis.org/A000029"}]
   def create_sequence_a000029(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000029/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000029/1)
   end
-
 
   @doc offset: 0
   def seq_a000029(idx) do
-      Math.two_color_bracelet_count(idx)
+    Math.two_color_bracelet_count(idx)
   end
 
   @doc """
@@ -4527,12 +4508,12 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.",
+       sequence:
+         "Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.",
        references: [{:oeis, :a000031, "https://oeis.org/A000031"}]
   def create_sequence_a000031(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000031/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000031/1)
   end
-
 
   @doc offset: 0
   def seq_a000031(idx) do
@@ -4561,12 +4542,12 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.",
+       sequence:
+         "Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.",
        references: [{:oeis, :a000048, "https://oeis.org/A000048"}]
   def create_sequence_a000048(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000048/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000048/1)
   end
-
 
   @doc offset: 0
   def seq_a000048(idx) do
@@ -4598,13 +4579,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Number of binary partitions: number of partitions of 2n into powers of 2.",
        references: [{:oeis, :a000123, "https://oeis.org/A000123"}]
   def create_sequence_a000123(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000123/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000123/1)
   end
-
 
   @doc offset: 0
   def seq_a000123(idx) do
-      Math.binary_partitions_count(idx)
+    Math.binary_partitions_count(idx)
   end
 
   @doc """
@@ -4632,13 +4612,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Number of partitions of n into 2 squares.",
        references: [{:oeis, :a000161, "https://oeis.org/A000161"}]
   def create_sequence_a000161(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000161/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000161/1)
   end
-
 
   @doc offset: 0
   def seq_a000161(idx) do
-      Math.partitions_into_two_squares(idx)
+    Math.partitions_into_two_squares(idx)
   end
 
   @doc """
@@ -4663,16 +4642,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.",
+       sequence:
+         "Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.",
        references: [{:oeis, :a000311, "https://oeis.org/A000311"}]
   def create_sequence_a000311(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000311/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000311/1)
   end
-
 
   @doc offset: 0
   def seq_a000311(idx) do
-      Math.total_partitions(idx)
+    Math.total_partitions(idx)
   end
 
   @doc """
@@ -4700,13 +4679,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "The negative integers.",
        references: [{:oeis, :a001478, "https://oeis.org/A001478"}]
   def create_sequence_a001478(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001478/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001478/1)
   end
-
 
   @doc offset: 1
   def seq_a001478(idx) do
-      -1 * idx
+    -1 * idx
   end
 
   @doc """
@@ -4734,18 +4712,17 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.",
        references: [{:oeis, :a002531, "https://oeis.org/A002531"}]
   def create_sequence_a002531(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002531/3)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002531/3)
   end
-
 
   @doc offset: 0
   def seq_a002531(idx, l_2, l_1) do
-      cond do
-         idx == 0 -> 1
-         idx == 1 -> 1
-         Math.is_even?(idx) -> l_2 + l_1
-         true -> 2 * l_1 + l_2 
-      end
+    cond do
+      idx == 0 -> 1
+      idx == 1 -> 1
+      Math.is_even?(idx) -> l_2 + l_1
+      true -> 2 * l_1 + l_2
+    end
   end
 
   @doc """
@@ -4773,13 +4750,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Kalmár's [Kalmar's] problem: number of ordered factorizations of n.",
        references: [{:oeis, :a074206, "https://oeis.org/A074206"}]
   def create_sequence_a074206(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a074206/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a074206/1)
   end
-
 
   @doc offset: 0
   def seq_a074206(idx) do
-      Math.ordered_factorization_count(idx)
+    Math.ordered_factorization_count(idx)
   end
 
   @doc """
@@ -4804,20 +4780,20 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.",
+       sequence:
+         "Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.",
        references: [{:oeis, :a001057, "https://oeis.org/A001057"}]
   def create_sequence_a001057(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001057/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001057/1)
   end
-
 
   @doc offset: 0
   def seq_a001057(idx) do
-      cond do
-         idx == 0 -> 0
-         Math.is_odd?(idx) -> div(idx, 2) + 1
-         true -> div(idx, 2) * -1
-      end
+    cond do
+      idx == 0 -> 0
+      Math.is_odd?(idx) -> div(idx, 2) + 1
+      true -> div(idx, 2) * -1
+    end
   end
 
   @doc """
@@ -4845,18 +4821,16 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Numerators of continued fraction convergents to sqrt(2).",
        references: [{:oeis, :a001333, "https://oeis.org/A001333"}]
   def create_sequence_a001333(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001333/3)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001333/3)
   end
-
 
   @doc offset: 0
   def seq_a001333(idx, n_2, n_1) do
-      case idx do
-         0 -> 1
-         1 -> 1 
-         _ -> 2 * n_1 + n_2
-      end
-
+    case idx do
+      0 -> 1
+      1 -> 1
+      _ -> 2 * n_1 + n_2
+    end
   end
 
   @doc """
@@ -4884,18 +4858,17 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Numbers that are the sum of 2 squares.",
        references: [{:oeis, :a001481, "https://oeis.org/A001481"}]
   def create_sequence_a001481(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001481/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001481/2)
   end
-
 
   @doc offset: 1, fill_value: -1
   def seq_a001481(_idx, last) do
-      Math.next_number(
-          fn v -> 
-              Math.partitions_into_two_squares(v) > 0
-          end, 
-          last
-      )
+    Math.next_number(
+      fn v ->
+        Math.partitions_into_two_squares(v) > 0
+      end,
+      last
+    )
   end
 
   @doc """
@@ -4920,21 +4893,20 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.",
+       sequence:
+         "Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.",
        references: [{:oeis, :a001699, "https://oeis.org/A001699"}]
   def create_sequence_a001699(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001699/3)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001699/3)
   end
-
 
   @doc offset: 0
   def seq_a001699(idx, n_2, n_1) do
-    
-      case idx do
-         0 -> 1
-         1 -> 1
-         _ -> (div(n_1, n_2) + n_1 + n_2) * n_1
-      end
+    case idx do
+      0 -> 1
+      1 -> 1
+      _ -> (div(n_1, n_2) + n_1 + n_2) * n_1
+    end
   end
 
   @doc """
@@ -4962,13 +4934,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Number of perfect partitions of n.",
        references: [{:oeis, :a002033, "https://oeis.org/A002033"}]
   def create_sequence_a002033(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002033/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002033/1)
   end
-
 
   @doc offset: 0
   def seq_a002033(idx) do
-      Math.perfect_partition_count(idx)
+    Math.perfect_partition_count(idx)
   end
 
   @doc """
@@ -4993,42 +4964,42 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.",
+       sequence:
+         "Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.",
        references: [{:oeis, :a002110, "https://oeis.org/A002110"}]
   def create_sequence_a002110(_opts) do
-      %{
-          next_fn: &seq_a002110/3,
-          data: %{
-              last_prime: 0
-          }
+    %{
+      next_fn: &seq_a002110/3,
+      data: %{
+        last_prime: 0
       }
+    }
   end
-
 
   @doc offset: 0
   def seq_a002110(:init, data, _value) do
-      %{
-          data: data,
-          value: 1
-      }
+    %{
+      data: data,
+      value: 1
+    }
   end
-  
+
   def seq_a002110(:next, %{last_prime: last} = data, value) do
-      
-      # find our next prime
-      n_prime = if last == 0 do
-          1
+    # find our next prime
+    n_prime =
+      if last == 0 do
+        1
       else
-          Math.next_number(&Math.is_prime?/1, last)
+        Math.next_number(&Math.is_prime?/1, last)
       end
-      
-      {
-          :continue,
-          %{
-              data: data |> Map.put(:last_prime, n_prime),
-              value: value * n_prime
-          }
+
+    {
+      :continue,
+      %{
+        data: data |> Map.put(:last_prime, n_prime),
+        value: value * n_prime
       }
+    }
   end
 
   @doc """
@@ -5056,19 +5027,18 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.",
        references: [{:oeis, :a002530, "https://oeis.org/A002530"}]
   def create_sequence_a002530(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002530/5)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002530/5)
   end
-
 
   @doc offset: 0
   def seq_a002530(idx, n_4, _n_3, n_2, _n_1) do
-      case idx do
-         0 -> 0
-         1 -> 1
-         2 -> 1
-         3 -> 3
-         _ -> 4 * n_2 - n_4 
-      end
+    case idx do
+      0 -> 0
+      1 -> 1
+      2 -> 1
+      3 -> 3
+      _ -> 4 * n_2 - n_4
+    end
   end
 
   @doc """
@@ -5080,7 +5050,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   > (Formerly M1813)
 
   See also [Counting Free Binary Trees Admitting a Given Height](http://cobweb.cs.uga.edu/~rwr/publications/binary.pdf) by Harary, et al
-  
+
   **Sequence IDs**: `:a005588`
 
   **Finite**: True
@@ -5098,7 +5068,7 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Number of free binary trees admitting height n.",
        references: [{:oeis, :a005588, "https://oeis.org/A005588"}]
   def create_sequence_a005588(_opts) do
-          sequence_for_list(@data_a005588)
+    sequence_for_list(@data_a005588)
   end
 
   @doc """
@@ -5123,19 +5093,19 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.",
+       sequence:
+         "Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.",
        references: [{:oeis, :a005811, "https://oeis.org/A005811"}]
   def create_sequence_a005811(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005811/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005811/1)
   end
-
 
   @doc offset: 0
   def seq_a005811(idx) do
-      case idx do
-         0 -> 0
-         v -> Math.digit_runs_count(v, base: 2) 
-      end
+    case idx do
+      0 -> 0
+      v -> Math.digit_runs_count(v, base: 2)
+    end
   end
 
   @doc """
@@ -5163,13 +5133,12 @@ defmodule Chunky.Sequence.OEIS.Core do
        sequence: "Number of planted 3-trees of height < n.",
        references: [{:oeis, :a006894, "https://oeis.org/A006894"}]
   def create_sequence_a006894(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006894/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006894/1)
   end
-
 
   @doc offset: 1
   def seq_a006894(idx) do
-      Math.planted_3_trees_count(idx)
+    Math.planted_3_trees_count(idx)
   end
 
   @doc """
@@ -5194,17 +5163,16 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   """
   @doc offset: 0,
-       sequence: "Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.",
+       sequence:
+         "Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.",
        references: [{:oeis, :a008279, "https://oeis.org/A008279"}]
   def create_sequence_a008279(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008279/1)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008279/1)
   end
-
 
   @doc offset: 0
   def seq_a008279(idx) do
-      {r, c} = Math.triangle_position_for_element(idx)
-      Math.factorial(r - 1) |> div(Math.factorial(r - 1 - c))
+    {r, c} = Math.triangle_position_for_element(idx)
+    Math.factorial(r - 1) |> div(Math.factorial(r - 1 - c))
   end
-  
 end

@@ -138,13 +138,12 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.",
        references: [{:oeis, :a001567, "https://oeis.org/A001567"}]
   def create_sequence_a001567(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a001567/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a001567/2)
   end
-
 
   @doc offset: 1
   def seq_a001567(_idx, last) do
-      Math.next_number(fn v -> Math.is_pseudo_prime?(v, 2) end, last)
+    Math.next_number(fn v -> Math.is_pseudo_prime?(v, 2) end, last)
   end
 
   @doc """
@@ -172,13 +171,12 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 3.",
        references: [{:oeis, :a005935, "https://oeis.org/A005935"}]
   def create_sequence_a005935(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005935/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005935/2)
   end
-
 
   @doc offset: 1
   def seq_a005935(_idx, last) do
-      Math.next_number(fn v -> Math.is_pseudo_prime?(v, 3) end, last)
+    Math.next_number(fn v -> Math.is_pseudo_prime?(v, 3) end, last)
   end
 
   @doc """
@@ -206,13 +204,12 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 5.",
        references: [{:oeis, :a005936, "https://oeis.org/A005936"}]
   def create_sequence_a005936(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005936/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005936/2)
   end
-
 
   @doc offset: 1
   def seq_a005936(_idx, last) do
-      Math.next_number(fn v -> Math.is_pseudo_prime?(v, 5) end, last)
+    Math.next_number(fn v -> Math.is_pseudo_prime?(v, 5) end, last)
   end
 
   @doc """
@@ -240,13 +237,12 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 6.",
        references: [{:oeis, :a005937, "https://oeis.org/A005937"}]
   def create_sequence_a005937(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005937/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005937/2)
   end
-
 
   @doc offset: 1
   def seq_a005937(_idx, last) do
-      Math.next_number(fn v -> Math.is_pseudo_prime?(v, 6) end, last)    
+    Math.next_number(fn v -> Math.is_pseudo_prime?(v, 6) end, last)
   end
 
   @doc """
@@ -274,9 +270,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 7.",
        references: [{:oeis, :a005938, "https://oeis.org/A005938"}]
   def create_sequence_a005938(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005938/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005938/2)
   end
-
 
   @doc offset: 1
   def seq_a005938(_idx, last) do
@@ -308,9 +303,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 10.",
        references: [{:oeis, :a005939, "https://oeis.org/A005939"}]
   def create_sequence_a005939(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005939/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005939/2)
   end
-
 
   @doc offset: 1
   def seq_a005939(_idx, last) do
@@ -342,9 +336,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Fermat pseudoprimes to base 4.",
        references: [{:oeis, :a020136, "https://oeis.org/A020136"}]
   def create_sequence_a020136(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020136/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020136/2)
   end
-
 
   @doc offset: 1
   def seq_a020136(_idx, last) do
@@ -376,9 +369,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 8.",
        references: [{:oeis, :a020137, "https://oeis.org/A020137"}]
   def create_sequence_a020137(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020137/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020137/2)
   end
-
 
   @doc offset: 1
   def seq_a020137(_idx, last) do
@@ -410,12 +402,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 9.",
        references: [{:oeis, :a020138, "https://oeis.org/A020138"}]
   def create_sequence_a020138(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020138/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020138/2)
   end
 
-
   @doc offset: 1
-  def seq_a020138(_idx, last) do 
+  def seq_a020138(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 9) end, last)
   end
 
@@ -444,9 +435,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 11.",
        references: [{:oeis, :a020139, "https://oeis.org/A020139"}]
   def create_sequence_a020139(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020139/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020139/2)
   end
-
 
   @doc offset: 1
   def seq_a020139(_idx, last) do
@@ -478,12 +468,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 12.",
        references: [{:oeis, :a020140, "https://oeis.org/A020140"}]
   def create_sequence_a020140(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020140/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020140/2)
   end
 
-
   @doc offset: 1
-  def seq_a020140(_idx, last) do 
+  def seq_a020140(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 12) end, last)
   end
 
@@ -512,9 +501,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 13.",
        references: [{:oeis, :a020141, "https://oeis.org/A020141"}]
   def create_sequence_a020141(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020141/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020141/2)
   end
-
 
   @doc offset: 1
   def seq_a020141(_idx, last) do
@@ -546,9 +534,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 14.",
        references: [{:oeis, :a020142, "https://oeis.org/A020142"}]
   def create_sequence_a020142(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020142/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020142/2)
   end
-
 
   @doc offset: 1
   def seq_a020142(_idx, last) do
@@ -580,9 +567,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 15.",
        references: [{:oeis, :a020143, "https://oeis.org/A020143"}]
   def create_sequence_a020143(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020143/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020143/2)
   end
-
 
   @doc offset: 1
   def seq_a020143(_idx, last) do
@@ -614,9 +600,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 16.",
        references: [{:oeis, :a020144, "https://oeis.org/A020144"}]
   def create_sequence_a020144(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020144/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020144/2)
   end
-
 
   @doc offset: 1
   def seq_a020144(_idx, last) do
@@ -648,9 +633,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 17.",
        references: [{:oeis, :a020145, "https://oeis.org/A020145"}]
   def create_sequence_a020145(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020145/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020145/2)
   end
-
 
   @doc offset: 1
   def seq_a020145(_idx, last) do
@@ -682,9 +666,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 18.",
        references: [{:oeis, :a020146, "https://oeis.org/A020146"}]
   def create_sequence_a020146(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020146/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020146/2)
   end
-
 
   @doc offset: 1
   def seq_a020146(_idx, last) do
@@ -716,9 +699,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 19.",
        references: [{:oeis, :a020147, "https://oeis.org/A020147"}]
   def create_sequence_a020147(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020147/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020147/2)
   end
-
 
   @doc offset: 1
   def seq_a020147(_idx, last) do
@@ -750,9 +732,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 20.",
        references: [{:oeis, :a020148, "https://oeis.org/A020148"}]
   def create_sequence_a020148(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020148/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020148/2)
   end
-
 
   @doc offset: 1
   def seq_a020148(_idx, last) do
@@ -784,9 +765,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 21.",
        references: [{:oeis, :a020149, "https://oeis.org/A020149"}]
   def create_sequence_a020149(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020149/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020149/2)
   end
-
 
   @doc offset: 1
   def seq_a020149(_idx, last) do
@@ -818,9 +798,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 22.",
        references: [{:oeis, :a020150, "https://oeis.org/A020150"}]
   def create_sequence_a020150(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020150/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020150/2)
   end
-
 
   @doc offset: 1
   def seq_a020150(_idx, last) do
@@ -852,9 +831,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 23.",
        references: [{:oeis, :a020151, "https://oeis.org/A020151"}]
   def create_sequence_a020151(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020151/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020151/2)
   end
-
 
   @doc offset: 1
   def seq_a020151(_idx, last) do
@@ -886,9 +864,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 24.",
        references: [{:oeis, :a020152, "https://oeis.org/A020152"}]
   def create_sequence_a020152(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020152/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020152/2)
   end
-
 
   @doc offset: 1
   def seq_a020152(_idx, last) do
@@ -920,9 +897,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 25.",
        references: [{:oeis, :a020153, "https://oeis.org/A020153"}]
   def create_sequence_a020153(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020153/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020153/2)
   end
-
 
   @doc offset: 1
   def seq_a020153(_idx, last) do
@@ -954,9 +930,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 26.",
        references: [{:oeis, :a020154, "https://oeis.org/A020154"}]
   def create_sequence_a020154(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020154/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020154/2)
   end
-
 
   @doc offset: 1
   def seq_a020154(_idx, last) do
@@ -988,12 +963,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 27.",
        references: [{:oeis, :a020155, "https://oeis.org/A020155"}]
   def create_sequence_a020155(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020155/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020155/2)
   end
 
-
   @doc offset: 1
-  def seq_a020155(_idx, last) do 
+  def seq_a020155(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 27) end, last)
   end
 
@@ -1022,12 +996,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 28.",
        references: [{:oeis, :a020156, "https://oeis.org/A020156"}]
   def create_sequence_a020156(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020156/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020156/2)
   end
 
-
   @doc offset: 1
-  def seq_a020156(_idx, last) do 
+  def seq_a020156(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 28) end, last)
   end
 
@@ -1056,9 +1029,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 29.",
        references: [{:oeis, :a020157, "https://oeis.org/A020157"}]
   def create_sequence_a020157(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020157/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020157/2)
   end
-
 
   @doc offset: 1
   def seq_a020157(_idx, last) do
@@ -1090,9 +1062,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 30.",
        references: [{:oeis, :a020158, "https://oeis.org/A020158"}]
   def create_sequence_a020158(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020158/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020158/2)
   end
-
 
   @doc offset: 1
   def seq_a020158(_idx, last) do
@@ -1124,9 +1095,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 31.",
        references: [{:oeis, :a020159, "https://oeis.org/A020159"}]
   def create_sequence_a020159(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020159/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020159/2)
   end
-
 
   @doc offset: 1
   def seq_a020159(_idx, last) do
@@ -1158,9 +1128,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 32.",
        references: [{:oeis, :a020160, "https://oeis.org/A020160"}]
   def create_sequence_a020160(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020160/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020160/2)
   end
-
 
   @doc offset: 1
   def seq_a020160(_idx, last) do
@@ -1192,9 +1161,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 33.",
        references: [{:oeis, :a020161, "https://oeis.org/A020161"}]
   def create_sequence_a020161(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020161/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020161/2)
   end
-
 
   @doc offset: 1
   def seq_a020161(_idx, last) do
@@ -1226,9 +1194,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 34.",
        references: [{:oeis, :a020162, "https://oeis.org/A020162"}]
   def create_sequence_a020162(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020162/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020162/2)
   end
-
 
   @doc offset: 1
   def seq_a020162(_idx, last) do
@@ -1260,12 +1227,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 35.",
        references: [{:oeis, :a020163, "https://oeis.org/A020163"}]
   def create_sequence_a020163(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020163/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020163/2)
   end
 
-
   @doc offset: 1
-  def seq_a020163(_idx, last) do 
+  def seq_a020163(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 35) end, last)
   end
 
@@ -1294,9 +1260,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 36.",
        references: [{:oeis, :a020164, "https://oeis.org/A020164"}]
   def create_sequence_a020164(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020164/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020164/2)
   end
-
 
   @doc offset: 1
   def seq_a020164(_idx, last) do
@@ -1328,9 +1293,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 37.",
        references: [{:oeis, :a020165, "https://oeis.org/A020165"}]
   def create_sequence_a020165(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020165/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020165/2)
   end
-
 
   @doc offset: 1
   def seq_a020165(_idx, last) do
@@ -1362,9 +1326,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 38.",
        references: [{:oeis, :a020166, "https://oeis.org/A020166"}]
   def create_sequence_a020166(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020166/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020166/2)
   end
-
 
   @doc offset: 1
   def seq_a020166(_idx, last) do
@@ -1396,9 +1359,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 39.",
        references: [{:oeis, :a020167, "https://oeis.org/A020167"}]
   def create_sequence_a020167(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020167/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020167/2)
   end
-
 
   @doc offset: 1
   def seq_a020167(_idx, last) do
@@ -1430,12 +1392,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 40.",
        references: [{:oeis, :a020168, "https://oeis.org/A020168"}]
   def create_sequence_a020168(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020168/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020168/2)
   end
 
-
   @doc offset: 1
-  def seq_a020168(_idx, last) do 
+  def seq_a020168(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 40) end, last)
   end
 
@@ -1464,9 +1425,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 41.",
        references: [{:oeis, :a020169, "https://oeis.org/A020169"}]
   def create_sequence_a020169(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020169/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020169/2)
   end
-
 
   @doc offset: 1
   def seq_a020169(_idx, last) do
@@ -1498,9 +1458,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 42.",
        references: [{:oeis, :a020170, "https://oeis.org/A020170"}]
   def create_sequence_a020170(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020170/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020170/2)
   end
-
 
   @doc offset: 1
   def seq_a020170(_idx, last) do
@@ -1532,9 +1491,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 43.",
        references: [{:oeis, :a020171, "https://oeis.org/A020171"}]
   def create_sequence_a020171(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020171/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020171/2)
   end
-
 
   @doc offset: 1
   def seq_a020171(_idx, last) do
@@ -1566,9 +1524,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 44.",
        references: [{:oeis, :a020172, "https://oeis.org/A020172"}]
   def create_sequence_a020172(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020172/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020172/2)
   end
-
 
   @doc offset: 1
   def seq_a020172(_idx, last) do
@@ -1600,9 +1557,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 45.",
        references: [{:oeis, :a020173, "https://oeis.org/A020173"}]
   def create_sequence_a020173(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020173/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020173/2)
   end
-
 
   @doc offset: 1
   def seq_a020173(_idx, last) do
@@ -1634,9 +1590,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 46.",
        references: [{:oeis, :a020174, "https://oeis.org/A020174"}]
   def create_sequence_a020174(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020174/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020174/2)
   end
-
 
   @doc offset: 1
   def seq_a020174(_idx, last) do
@@ -1668,9 +1623,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 47.",
        references: [{:oeis, :a020175, "https://oeis.org/A020175"}]
   def create_sequence_a020175(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020175/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020175/2)
   end
-
 
   @doc offset: 1
   def seq_a020175(_idx, last) do
@@ -1702,9 +1656,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 48.",
        references: [{:oeis, :a020176, "https://oeis.org/A020176"}]
   def create_sequence_a020176(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020176/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020176/2)
   end
-
 
   @doc offset: 1
   def seq_a020176(_idx, last) do
@@ -1736,13 +1689,12 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 49.",
        references: [{:oeis, :a020177, "https://oeis.org/A020177"}]
   def create_sequence_a020177(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020177/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020177/2)
   end
-
 
   @doc offset: 1
   def seq_a020177(_idx, last) do
-     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 49) end, last)
+    Math.next_number(fn v -> Math.is_pseudo_prime?(v, 49) end, last)
   end
 
   @doc """
@@ -1770,9 +1722,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 50.",
        references: [{:oeis, :a020178, "https://oeis.org/A020178"}]
   def create_sequence_a020178(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020178/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020178/2)
   end
-
 
   @doc offset: 1
   def seq_a020178(_idx, last) do
@@ -1804,9 +1755,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 51.",
        references: [{:oeis, :a020179, "https://oeis.org/A020179"}]
   def create_sequence_a020179(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020179/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020179/2)
   end
-
 
   @doc offset: 1
   def seq_a020179(_idx, last) do
@@ -1838,9 +1788,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 52.",
        references: [{:oeis, :a020180, "https://oeis.org/A020180"}]
   def create_sequence_a020180(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020180/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020180/2)
   end
-
 
   @doc offset: 1
   def seq_a020180(_idx, last) do
@@ -1872,9 +1821,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 53.",
        references: [{:oeis, :a020181, "https://oeis.org/A020181"}]
   def create_sequence_a020181(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020181/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020181/2)
   end
-
 
   @doc offset: 1
   def seq_a020181(_idx, last) do
@@ -1906,9 +1854,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 54.",
        references: [{:oeis, :a020182, "https://oeis.org/A020182"}]
   def create_sequence_a020182(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020182/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020182/2)
   end
-
 
   @doc offset: 1
   def seq_a020182(_idx, last) do
@@ -1940,12 +1887,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 55.",
        references: [{:oeis, :a020183, "https://oeis.org/A020183"}]
   def create_sequence_a020183(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020183/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020183/2)
   end
 
-
   @doc offset: 1
-  def seq_a020183(_idx, last) do 
+  def seq_a020183(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 55) end, last)
   end
 
@@ -1974,9 +1920,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 56.",
        references: [{:oeis, :a020184, "https://oeis.org/A020184"}]
   def create_sequence_a020184(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020184/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020184/2)
   end
-
 
   @doc offset: 1
   def seq_a020184(_idx, last) do
@@ -2008,9 +1953,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 57.",
        references: [{:oeis, :a020185, "https://oeis.org/A020185"}]
   def create_sequence_a020185(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020185/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020185/2)
   end
-
 
   @doc offset: 1
   def seq_a020185(_idx, last) do
@@ -2042,9 +1986,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 58.",
        references: [{:oeis, :a020186, "https://oeis.org/A020186"}]
   def create_sequence_a020186(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020186/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020186/2)
   end
-
 
   @doc offset: 1
   def seq_a020186(_idx, last) do
@@ -2076,9 +2019,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 59.",
        references: [{:oeis, :a020187, "https://oeis.org/A020187"}]
   def create_sequence_a020187(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020187/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020187/2)
   end
-
 
   @doc offset: 1
   def seq_a020187(_idx, last) do
@@ -2110,9 +2052,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 60.",
        references: [{:oeis, :a020188, "https://oeis.org/A020188"}]
   def create_sequence_a020188(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020188/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020188/2)
   end
-
 
   @doc offset: 1
   def seq_a020188(_idx, last) do
@@ -2144,9 +2085,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 61.",
        references: [{:oeis, :a020189, "https://oeis.org/A020189"}]
   def create_sequence_a020189(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020189/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020189/2)
   end
-
 
   @doc offset: 1
   def seq_a020189(_idx, last) do
@@ -2178,9 +2118,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 62.",
        references: [{:oeis, :a020190, "https://oeis.org/A020190"}]
   def create_sequence_a020190(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020190/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020190/2)
   end
-
 
   @doc offset: 1
   def seq_a020190(_idx, last) do
@@ -2212,9 +2151,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 63.",
        references: [{:oeis, :a020191, "https://oeis.org/A020191"}]
   def create_sequence_a020191(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020191/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020191/2)
   end
-
 
   @doc offset: 1
   def seq_a020191(_idx, last) do
@@ -2246,9 +2184,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 64.",
        references: [{:oeis, :a020192, "https://oeis.org/A020192"}]
   def create_sequence_a020192(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020192/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020192/2)
   end
-
 
   @doc offset: 1
   def seq_a020192(_idx, last) do
@@ -2280,12 +2217,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 65.",
        references: [{:oeis, :a020193, "https://oeis.org/A020193"}]
   def create_sequence_a020193(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020193/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020193/2)
   end
 
-
   @doc offset: 1
-  def seq_a020193(_idx, last) do 
+  def seq_a020193(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 65) end, last)
   end
 
@@ -2314,9 +2250,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 66.",
        references: [{:oeis, :a020194, "https://oeis.org/A020194"}]
   def create_sequence_a020194(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020194/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020194/2)
   end
-
 
   @doc offset: 1
   def seq_a020194(_idx, last) do
@@ -2348,9 +2283,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 67.",
        references: [{:oeis, :a020195, "https://oeis.org/A020195"}]
   def create_sequence_a020195(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020195/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020195/2)
   end
-
 
   @doc offset: 1
   def seq_a020195(_idx, last) do
@@ -2382,9 +2316,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 68.",
        references: [{:oeis, :a020196, "https://oeis.org/A020196"}]
   def create_sequence_a020196(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020196/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020196/2)
   end
-
 
   @doc offset: 1
   def seq_a020196(_idx, last) do
@@ -2416,9 +2349,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 69.",
        references: [{:oeis, :a020197, "https://oeis.org/A020197"}]
   def create_sequence_a020197(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020197/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020197/2)
   end
-
 
   @doc offset: 1
   def seq_a020197(_idx, last) do
@@ -2450,9 +2382,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 70.",
        references: [{:oeis, :a020198, "https://oeis.org/A020198"}]
   def create_sequence_a020198(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020198/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020198/2)
   end
-
 
   @doc offset: 1
   def seq_a020198(_idx, last) do
@@ -2484,9 +2415,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 71.",
        references: [{:oeis, :a020199, "https://oeis.org/A020199"}]
   def create_sequence_a020199(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020199/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020199/2)
   end
-
 
   @doc offset: 1
   def seq_a020199(_idx, last) do
@@ -2518,9 +2448,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 72.",
        references: [{:oeis, :a020200, "https://oeis.org/A020200"}]
   def create_sequence_a020200(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020200/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020200/2)
   end
-
 
   @doc offset: 1
   def seq_a020200(_idx, last) do
@@ -2552,9 +2481,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 73.",
        references: [{:oeis, :a020201, "https://oeis.org/A020201"}]
   def create_sequence_a020201(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020201/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020201/2)
   end
-
 
   @doc offset: 1
   def seq_a020201(_idx, last) do
@@ -2586,9 +2514,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 74.",
        references: [{:oeis, :a020202, "https://oeis.org/A020202"}]
   def create_sequence_a020202(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020202/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020202/2)
   end
-
 
   @doc offset: 1
   def seq_a020202(_idx, last) do
@@ -2620,12 +2547,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 75.",
        references: [{:oeis, :a020203, "https://oeis.org/A020203"}]
   def create_sequence_a020203(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020203/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020203/2)
   end
 
-
   @doc offset: 1
-  def seq_a020203(_idx, last) do 
+  def seq_a020203(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 75) end, last)
   end
 
@@ -2654,9 +2580,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 76.",
        references: [{:oeis, :a020204, "https://oeis.org/A020204"}]
   def create_sequence_a020204(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020204/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020204/2)
   end
-
 
   @doc offset: 1
   def seq_a020204(_idx, last) do
@@ -2688,9 +2613,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 77.",
        references: [{:oeis, :a020205, "https://oeis.org/A020205"}]
   def create_sequence_a020205(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020205/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020205/2)
   end
-
 
   @doc offset: 1
   def seq_a020205(_idx, last) do
@@ -2722,9 +2646,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 78.",
        references: [{:oeis, :a020206, "https://oeis.org/A020206"}]
   def create_sequence_a020206(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020206/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020206/2)
   end
-
 
   @doc offset: 1
   def seq_a020206(_idx, last) do
@@ -2756,12 +2679,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 79.",
        references: [{:oeis, :a020207, "https://oeis.org/A020207"}]
   def create_sequence_a020207(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020207/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020207/2)
   end
 
-
   @doc offset: 1
-  def seq_a020207(_idx, last) do 
+  def seq_a020207(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 79) end, last)
   end
 
@@ -2790,9 +2712,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 80.",
        references: [{:oeis, :a020208, "https://oeis.org/A020208"}]
   def create_sequence_a020208(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020208/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020208/2)
   end
-
 
   @doc offset: 1
   def seq_a020208(_idx, last) do
@@ -2824,9 +2745,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 81.",
        references: [{:oeis, :a020209, "https://oeis.org/A020209"}]
   def create_sequence_a020209(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020209/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020209/2)
   end
-
 
   @doc offset: 1
   def seq_a020209(_idx, last) do
@@ -2858,9 +2778,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 82.",
        references: [{:oeis, :a020210, "https://oeis.org/A020210"}]
   def create_sequence_a020210(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020210/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020210/2)
   end
-
 
   @doc offset: 1
   def seq_a020210(_idx, last) do
@@ -2892,9 +2811,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 83.",
        references: [{:oeis, :a020211, "https://oeis.org/A020211"}]
   def create_sequence_a020211(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020211/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020211/2)
   end
-
 
   @doc offset: 1
   def seq_a020211(_idx, last) do
@@ -2926,9 +2844,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 84.",
        references: [{:oeis, :a020212, "https://oeis.org/A020212"}]
   def create_sequence_a020212(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020212/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020212/2)
   end
-
 
   @doc offset: 1
   def seq_a020212(_idx, last) do
@@ -2960,9 +2877,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 85.",
        references: [{:oeis, :a020213, "https://oeis.org/A020213"}]
   def create_sequence_a020213(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020213/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020213/2)
   end
-
 
   @doc offset: 1
   def seq_a020213(_idx, last) do
@@ -2994,9 +2910,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 86.",
        references: [{:oeis, :a020214, "https://oeis.org/A020214"}]
   def create_sequence_a020214(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020214/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020214/2)
   end
-
 
   @doc offset: 1
   def seq_a020214(_idx, last) do
@@ -3028,9 +2943,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 87.",
        references: [{:oeis, :a020215, "https://oeis.org/A020215"}]
   def create_sequence_a020215(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020215/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020215/2)
   end
-
 
   @doc offset: 1
   def seq_a020215(_idx, last) do
@@ -3062,9 +2976,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 88.",
        references: [{:oeis, :a020216, "https://oeis.org/A020216"}]
   def create_sequence_a020216(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020216/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020216/2)
   end
-
 
   @doc offset: 1
   def seq_a020216(_idx, last) do
@@ -3096,9 +3009,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 89.",
        references: [{:oeis, :a020217, "https://oeis.org/A020217"}]
   def create_sequence_a020217(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020217/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020217/2)
   end
-
 
   @doc offset: 1
   def seq_a020217(_idx, last) do
@@ -3130,9 +3042,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 90.",
        references: [{:oeis, :a020218, "https://oeis.org/A020218"}]
   def create_sequence_a020218(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020218/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020218/2)
   end
-
 
   @doc offset: 1
   def seq_a020218(_idx, last) do
@@ -3164,9 +3075,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 91.",
        references: [{:oeis, :a020219, "https://oeis.org/A020219"}]
   def create_sequence_a020219(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020219/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020219/2)
   end
-
 
   @doc offset: 1
   def seq_a020219(_idx, last) do
@@ -3198,9 +3108,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 92.",
        references: [{:oeis, :a020220, "https://oeis.org/A020220"}]
   def create_sequence_a020220(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020220/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020220/2)
   end
-
 
   @doc offset: 1
   def seq_a020220(_idx, last) do
@@ -3232,9 +3141,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 93.",
        references: [{:oeis, :a020221, "https://oeis.org/A020221"}]
   def create_sequence_a020221(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020221/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020221/2)
   end
-
 
   @doc offset: 1
   def seq_a020221(_idx, last) do
@@ -3266,9 +3174,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 94.",
        references: [{:oeis, :a020222, "https://oeis.org/A020222"}]
   def create_sequence_a020222(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020222/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020222/2)
   end
-
 
   @doc offset: 1
   def seq_a020222(_idx, last) do
@@ -3300,12 +3207,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 95.",
        references: [{:oeis, :a020223, "https://oeis.org/A020223"}]
   def create_sequence_a020223(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020223/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020223/2)
   end
 
-
   @doc offset: 1
-  def seq_a020223(_idx, last) do 
+  def seq_a020223(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 95) end, last)
   end
 
@@ -3334,12 +3240,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 96.",
        references: [{:oeis, :a020224, "https://oeis.org/A020224"}]
   def create_sequence_a020224(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020224/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020224/2)
   end
 
-
   @doc offset: 1
-  def seq_a020224(_idx, last) do 
+  def seq_a020224(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 96) end, last)
   end
 
@@ -3368,13 +3273,12 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 97.",
        references: [{:oeis, :a020225, "https://oeis.org/A020225"}]
   def create_sequence_a020225(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020225/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020225/2)
   end
-
 
   @doc offset: 1
   def seq_a020225(_idx, last) do
-     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 97) end, last)
+    Math.next_number(fn v -> Math.is_pseudo_prime?(v, 97) end, last)
   end
 
   @doc """
@@ -3402,9 +3306,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 98.",
        references: [{:oeis, :a020226, "https://oeis.org/A020226"}]
   def create_sequence_a020226(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020226/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020226/2)
   end
-
 
   @doc offset: 1
   def seq_a020226(_idx, last) do
@@ -3436,12 +3339,11 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 99.",
        references: [{:oeis, :a020227, "https://oeis.org/A020227"}]
   def create_sequence_a020227(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020227/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020227/2)
   end
 
-
   @doc offset: 1
-  def seq_a020227(_idx, last) do 
+  def seq_a020227(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 99) end, last)
   end
 
@@ -3470,9 +3372,8 @@ defmodule Chunky.Sequence.OEIS.Primes do
        sequence: "Pseudoprimes to base 100.",
        references: [{:oeis, :a020228, "https://oeis.org/A020228"}]
   def create_sequence_a020228(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020228/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020228/2)
   end
-
 
   @doc offset: 1
   def seq_a020228(_idx, last) do

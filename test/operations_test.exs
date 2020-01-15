@@ -37,14 +37,13 @@ defmodule Chunky.OperationsTest do
                   Fraction.new(num, 4)
                 end)
     end
-    
+
     test "int - product over result of function" do
-       
-       assert 1_728 == (product k, Chunky.Math.factors(12) do
-          k 
-       end)
+      assert 1_728 ==
+               (product k, Chunky.Math.factors(12) do
+                  k
+                end)
     end
-    
   end
 
   describe "summation" do
@@ -108,18 +107,18 @@ defmodule Chunky.OperationsTest do
                   end
                 end)
     end
-    
+
     test "int - sum over list" do
-       assert (summation k, [1, 3, 5, 7, 9] do
-          k 
-       end) == 25
+      assert (summation k, [1, 3, 5, 7, 9] do
+                k
+              end) == 25
     end
-    
+
     test "int - sum over result of function" do
-       
-       assert 28 == (summation k, Chunky.Math.factors(12) do
-          k 
-       end)
+      assert 28 ==
+               (summation k, Chunky.Math.factors(12) do
+                  k
+                end)
     end
   end
 end
