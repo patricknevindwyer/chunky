@@ -12,7 +12,6 @@ OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 ## Core
 
 
-A001057 A001333 A001481 A001699 A002033 A002110 A002530
 
 
 

@@ -119,13 +119,17 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1](https://oeis.org/A005117) - `:a005117` - `create_sequence_a005117/1`
    - [A005408 - The odd numbers: a(n) = 2*n + 1.](https://oeis.org/A005408) - `:a005408` - `create_sequence_a005408/1`
    - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
+   - [A005588 - Number of free binary trees admitting height n.](https://oeis.org/A005588) - `:a005588` - `create_sequence_a005588/1`
+   - [A005811 - Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.](https://oeis.org/A005811) - `:a005811` - `create_sequence_a005811/1`
    - [A005843 - The nonnegative even numbers: a(n) = 2n.](https://oeis.org/A005843) - `:a005843` - `create_sequence_a005843/1`
    - [A006318 - Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).](https://oeis.org/A006318) - `:a006318` - `create_sequence_a006318/1`
    - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
    - [A006882 - Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.](https://oeis.org/A006882) - `:a006882` - `create_sequence_a006882/1`
+   - [A006894 - Number of planted 3-trees of height < n.](https://oeis.org/A006894) - `:a006894` - `create_sequence_a006894/1`
    - [A006966 - Number of lattices on n unlabeled nodes](https://oeis.org/A006966) - `:a006966` - `create_sequence_a006966/1`
    - [A007318 - Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.](https://oeis.org/A007318) - `:a007318` - `create_sequence_a007318/1`
    - [A008277 - Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.](https://oeis.org/A008277) - `:a008277` - `create_sequence_a008277/1`
+   - [A008279 - Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.](https://oeis.org/A008279) - `:a008279` - `create_sequence_a008279/1`
    - [A008292 - Triangle of Eulerian numbers T(n,k)](https://oeis.org/A008292) - `:a008292` - `create_sequence_a008292/1`
    - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
    - [A018252 - The nonprime numbers: 1 together with the composite numbers, A002808.](https://oeis.org/A018252) - `:a018252` - `create_sequence_a018252/1`
@@ -482,6 +486,21 @@ defmodule Chunky.Sequence.OEIS.Core do
   # raw data for A005470 - Number of unlabeled planar simple graphs with n nodes.
   @data_a005470 [1, 1, 2, 4, 11, 33, 142, 822, 6966, 79853, 1_140_916, 18_681_008, 333_312_451]
 
+  @data_a005588 [
+      2, 
+      7,
+      52,
+      2133,
+      2590407,
+      3374951541062,
+      5695183504479116640376509,
+      16217557574922386301420514191523784895639577710480,
+      131504586847961235687181874578063117114329409897550318273792033024340388219235081096658023517076950,
+      8646728181026489602610406537158318670928372786737024641130379069394221138489756289944296330853107913728061052785430910141356382611113325681250718311629163466222152852597067554256522520919973090955,
+      37382954118278832773895244218236686338908646550437400502358118064530753024550062640906067170928616739335301863382037085201145976272239453658981262846128190508219395966448887917209180943430756816309073652028140629406702623549485336391197570040678753084310648032159266735992810331022649795860853141942633381251585125549096861959475068250868587426672999533600613169522601703660739146957369890325,
+      698742629304670171755159456606645882464563215715832539360594587622161928133397802571216754607349602657704905034938428686495862728728254448794930230920430305987983203057065722937242690974977982553211093834896106441403664858556891811760492816199857665396567542914925037623435144863693826624157959093792706703191150574055525090366026295073053913789975182184642596837652773018150165286207352763970112375339742855287127212754217518055271848559693438156973004663641709290423075908178824635609324004676554852274031020382924227285656035129116758079903634962892737701916718226251357310348953054664432974657105736715130329702369236857236758170792271173496368683585989886287967312409380417261405819521508793711883365962752176591995956516583053407132299622198512949230653631254048264190805856710
+  ]
+  
   # raw data for A006966 - Number of lattices on n unlabeled nodes.
   @data_a006966 [
     1,
@@ -5050,6 +5069,142 @@ defmodule Chunky.Sequence.OEIS.Core do
          3 -> 3
          _ -> 4 * n_2 - n_4 
       end
+  end
+
+  @doc """
+  OEIS Sequence `A005588` - Number of free binary trees admitting height n.
+
+  From [OEIS A005588](https://oeis.org/A005588):
+
+  > Number of free binary trees admitting height n.
+  > (Formerly M1813)
+
+  See also [Counting Free Binary Trees Admitting a Given Height](http://cobweb.cs.uga.edu/~rwr/publications/binary.pdf) by Harary, et al
+  
+  **Sequence IDs**: `:a005588`
+
+  **Finite**: True
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a005588) |> Sequence.take!(9)
+      [2,7,52,2133,2590407,3374951541062,5695183504479116640376509,16217557574922386301420514191523784895639577710480,131504586847961235687181874578063117114329409897550318273792033024340388219235081096658023517076950]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of free binary trees admitting height n.",
+       references: [{:oeis, :a005588, "https://oeis.org/A005588"}]
+  def create_sequence_a005588(_opts) do
+          sequence_for_list(@data_a005588)
+  end
+
+  @doc """
+  OEIS Sequence `A005811` - Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.
+
+  From [OEIS A005811](https://oeis.org/A005811):
+
+  > Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.
+  > (Formerly M0110)
+
+  **Sequence IDs**: `:a005811`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a005811) |> Sequence.take!(94)
+      [0,1,2,1,2,3,2,1,2,3,4,3,2,3,2,1,2,3,4,3,4,5,4,3,2,3,4,3,2,3,2,1,2,3,4,3,4,5,4,3,4,5,6,5,4,5,4,3,2,3,4,3,4,5,4,3,2,3,4,3,2,3,2,1,2,3,4,3,4,5,4,3,4,5,6,5,4,5,4,3,4,5,6,5,6,7,6,5,4,5,6,5,4,5]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.",
+       references: [{:oeis, :a005811, "https://oeis.org/A005811"}]
+  def create_sequence_a005811(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005811/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a005811(idx) do
+      case idx do
+         0 -> 0
+         v -> Math.digit_runs_count(v, base: 2) 
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A006894` - Number of planted 3-trees of height < n.
+
+  From [OEIS A006894](https://oeis.org/A006894):
+
+  > Number of planted 3-trees of height < n.
+  > (Formerly M1254)
+
+  **Sequence IDs**: `:a006894`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a006894) |> Sequence.take!(11)
+      [1,2,4,11,67,2279,2598061,3374961778892,5695183504492614029263279,16217557574922386301420536972254869595782763547561,131504586847961235687181874578063117114329409897615188504091716162522225834932122128288032336298142]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Number of planted 3-trees of height < n.",
+       references: [{:oeis, :a006894, "https://oeis.org/A006894"}]
+  def create_sequence_a006894(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006894/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a006894(idx) do
+      Math.planted_3_trees_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A008279` - Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.
+
+  From [OEIS A008279](https://oeis.org/A008279):
+
+  > Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.
+  > (Formerly )
+
+  **Sequence IDs**: `:a008279`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a008279) |> Sequence.take!(55)
+      [1,1,1,1,2,2,1,3,6,6,1,4,12,24,24,1,5,20,60,120,120,1,6,30,120,360,720,720,1,7,42,210,840,2520,5040,5040,1,8,56,336,1680,6720,20160,40320,40320,1,9,72,504,3024,15120,60480,181440,362880,362880]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.",
+       references: [{:oeis, :a008279, "https://oeis.org/A008279"}]
+  def create_sequence_a008279(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008279/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a008279(idx) do
+      {r, c} = Math.triangle_position_for_element(idx)
+      Math.factorial(r - 1) |> div(Math.factorial(r - 1 - c))
   end
   
 end

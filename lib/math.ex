@@ -59,6 +59,8 @@ defmodule Chunky.Math do
    - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
    - `is_cyclops_number_in_base?/2` - Is `n` a cyclops number in base `b`?
    - `digit_count/3` - Count digits in `n` in any base representation
+   - `digit_runs/2` - Break `n` apart into runs of similar digits
+   - `digit_runs_count/2` - Count the number of digit runs in `n`
    - `digit_sum/1` - Calculate the sum of the digits of `n`
    - `is_in_base?/2` - Is the number or list of digits `n` a valid number in base `b`?
    - `is_pandigital_in_base?/2` - Is `n` a pandigital number in base `b`?
@@ -242,6 +244,7 @@ defmodule Chunky.Math do
    - `cayley_number/1` - Number of trees for `n` labeled vertices
    - `labeled_rooted_forests_count/1` - Number of labeled, rooted forests with `n` nodes
    - `labeled_rooted_trees_count/1` - Number of labeled, rooted trees with `n` nodes
+   - `planted_3_trees_count/1` - The number of planted 3 trees of height less than `n`
    - `rooted_tree_count/1` - The number of unlabeled, or planted, trees with `n` nodes
 
 
@@ -748,6 +751,106 @@ defmodule Chunky.Math do
     |> length() == 0
   end
 
+  @doc """
+  Break apart `n` into runs of digits.
+  
+  Optionally specify the base (default 10) in which to expand the number `n`. A run
+  of digits is any grouping of identical digits. The groups of digits are returned
+  as lists, so the final result is a list of lists.
+  
+  ## Options
+  
+   - `base` - Integer. Default `10`.
+  
+  ## Examples
+  
+      iex> Math.digit_runs(1233455)
+      [[1], [2], [3, 3], [4], [5, 5]]
+
+      iex> Math.digit_runs(847, base: 2)
+      [ [1, 1], [0], [1], [0, 0], [1, 1, 1, 1]]
+
+      iex> Math.digit_runs(1442792515, base: 16)
+      [ [5, 5], [15, 15], [4, 4, 4], [3]]
+
+      iex> Math.digit_runs(614482, base: 30)
+      [ [22, 22, 22, 22] ]
+  
+      iex> Math.digit_runs(-100200)
+      [ [1], [0, 0], [2], [0, 0]]
+      
+  """
+  def digit_runs(n, opts \\ []) do
+      b = opts |> Keyword.get(:base, 10)
+      
+      Integer.digits(abs(n), b)
+      |> Enum.chunk_by(fn v -> v end)
+      
+  end
+  
+  @doc """
+  Count the number of digit runs in `n`.
+  
+  Optionally specify the base (default 10) in which to expand `n`. See `digit_runs/2` for more
+  details on how digit runs are constructed.
+  
+  OEIS References:
+  
+   - [A005811 - Number of runs in binary expansion of n](https://oeis.org/A005811)
+  
+  ## Examples
+  
+      iex> Math.digit_runs_count(1233455)
+      5
+      
+      iex> Math.digit_runs_count(54321, base: 2)
+      9
+      
+      iex> Math.digit_runs_count(1234567890987654321, base: 8)
+      18
+  """
+  def digit_runs_count(n, opts \\ []) do
+      digit_runs(n, opts) |> length()
+  end
+  
+  @doc """
+  Count the number of planted 3-trees of height < `n`.
+  
+  Used in combinatoric calculations of tree rootings admitting trees of certain heights. The number of
+  planted 3 trees grows _very_ quickly - `planted_3_trees_count(20)` is a 50,084 digit number.
+  
+  OEIS Reference:
+  
+   - [A006894 - Number of planted 3-trees of height < n](https://oeis.org/A006894)
+  
+  This function is recursive, and uses a cache for efficiency.
+  
+  
+  ## Examples
+  
+      iex> Math.planted_3_trees_count(1)
+      1
+
+      iex> Math.planted_3_trees_count(3)
+      4
+
+      iex> Math.planted_3_trees_count(6)
+      2279
+
+      iex> Math.planted_3_trees_count(9)
+      5695183504492614029263279
+  
+  """
+  def planted_3_trees_count(1), do: 1
+  def planted_3_trees_count(n) when n > 0 do
+      # a(n)=a(n-1)*(a(n-1) + 1)/2 + 1
+      CacheAgent.cache_as :plated_3_trees_count, n do
+         n_1 = planted_3_trees_count(n - 1) 
+         
+         (n_1 * (n_1 + 1) |> div(2)) + 1
+      end
+  end
+  
   @doc """
   The _factorial_ of `n`, or `n!`.
 

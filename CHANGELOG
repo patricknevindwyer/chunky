@@ -17,7 +17,29 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.11.5
+
+```
+OEIS Coverage
+        703 total sequences
+By Module
+        Elixir.Chunky.Sequence.OEIS - 1 sequences
+        Elixir.Chunky.Sequence.OEIS.Combinatorics - 7 sequences
+        Elixir.Chunky.Sequence.OEIS.Constants - 31 sequences
+        Elixir.Chunky.Sequence.OEIS.Core - 136 sequences
+        Elixir.Chunky.Sequence.OEIS.Factors - 119 sequences
+        Elixir.Chunky.Sequence.OEIS.Multiples - 60 sequences
+        Elixir.Chunky.Sequence.OEIS.Powers - 47 sequences
+        Elixir.Chunky.Sequence.OEIS.Primes - 100 sequences
+        Elixir.Chunky.Sequence.OEIS.Repr - 182 sequences
+        Elixir.Chunky.Sequence.OEIS.Sigma - 20 sequences
+Sequence Groups
+        OEIS Core Sequences - 135 / 177 (76.27%)
+        OEIS Core::Easy Sequences - 121 / 146 (82.88%)
+        OEIS Core::Hard Sequences - 12 / 12 (100.0%)
+        OEIS Core::Multiplicative Sequences - 22 / 22 (100.0%)
+        OEIS Core::Eigen Sequences - 5 / 5 (100.0%)
+```
 
  - Math
   - double_factorial/1
@@ -39,6 +61,9 @@
   - is_cyclops_number_in_base?/2
   - is_cyclops_number?/1
   - perfect_partition_count/1
+  - digit_runs/2
+  - digit_runs_count/2
+  - planted_3_trees_count/1
 
   
  - Sequences 
@@ -180,7 +205,10 @@
   - A002033 - Number of perfect partitions of n.
   - A002110 - Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.
   - A002530 - a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.
-
+  - A005588 - Number of free binary trees admitting height n.
+  - A005811 - Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.
+  - A006894 - Number of planted 3-trees of height < n.
+  - A008279 - Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.
 
 
 
