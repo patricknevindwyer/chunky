@@ -27,7 +27,8 @@ defmodule Chunky.Math do
    - `integer_nth_root/3` - Find the `n`-th integer root, if it exists
    - `lcm/2` - Least common multiple of `n` and `m`
    - `lcm/1` - Least common multiple of a list of integers
-   - `nth_root_int/2` - Nearest `m`-th root of `n` such that `root^m <= n`
+   - `nth_integer_root/2` - Nearest `m`-th root of `n` such that `root^m <= n`, returning a tuple
+   - `nth_integer_root!/2` - Nearest `m`-th root of `n` such that `root^m <= n`, returning an integer
    - `pow/2` - Integer exponentiation
    - `rising_factorial/2` - Rising factorial of `n^(m)`
 
@@ -888,7 +889,7 @@ defmodule Chunky.Math do
   @doc """
   Calculate the double factorial of `n`, `n!!`.
 
-  The double factorial steps down by `2` each iteration, with `0!!` and `1!!` both equal to `1. So
+  The double factorial steps down by `2` each iteration, with `0!!` and `1!!` both equal to `1`. So
   the double factorial of `5` is
 
   ```
@@ -3242,7 +3243,7 @@ defmodule Chunky.Math do
 
   def partitions_into_two_squares(n) when n >= 3 do
     # sum(k=sqrtint((n-1)\2)+1, sqrtint(n), issquare(n-k^2))
-    summation k, (Math.nth_root_int(div(n - 1, 2), 2) + 1)..Math.nth_root_int(n, 2) do
+    summation k, (Math.nth_integer_root!(div(n - 1, 2), 2) + 1)..Math.nth_integer_root!(n, 2) do
       case n - Math.pow(k, 2) do
         1 ->
           1
@@ -6858,29 +6859,63 @@ defmodule Chunky.Math do
   This is an iterative root method that bypasses any floating point operations, so is suitable
   for finding large integer roots. For numbers less than `2^64-1` the `nth_root` method may be
   faster.
+  
+  The return value of `nth_integer_root` is a tuple of either `{:exact, value}` or `{:nearest, value}`
+  depending on the root. To get an immediate value, see `nth_integer_root!/2`.
 
   ## Examples
 
       iex> a = 1234567890987654321
-      iex> Math.nth_root_int(a * a * a * a * a, 5)
-      1234567890987654321
+      iex> Math.nth_integer_root(a * a * a * a * a, 5)
+      {:exact, 1234567890987654321}
 
-      iex> Math.nth_root_int(100_000, 4)
-      17
+      iex> Math.nth_integer_root(100_000, 4)
+      {:nearest, 17}
 
-      iex> Math.nth_root_int(8, 3)
-      2
+      iex> Math.nth_integer_root(8, 3)
+      {:exact, 2}
   """
-  def nth_root_int(x, n) when n > 1 and x > 0 do
+  def nth_integer_root(x, n) when n > 1 and x > 0 do
     # iterative binary search across the answer space
     refine_nth_root_int(x, n, 1, x)
+  end
+  
+  @doc """
+  Find the nearest integer `n`th root of `x`, such that `root^n <= x`.
+
+  This is an iterative root method that bypasses any floating point operations, so is suitable
+  for finding large integer roots. For numbers less than `2^64-1` the `nth_root` method may be
+  faster.
+  
+  The return value of `nth_integer_root` is an integer that is the exact, or nearest, `n`th root
+  of `x`. If you need to _know_ if the root is exact or nearest, see `nth_integer_root/2`.
+
+  ## Examples
+
+      iex> a = 1234567890987654321
+      iex> Math.nth_integer_root!(a * a * a * a * a, 5)
+      1234567890987654321
+
+      iex> Math.nth_integer_root!(100_000, 4)
+      17
+
+      iex> Math.nth_integer_root!(8, 3)
+      2
+  """
+  def nth_integer_root!(x, n) when n > 1 and x > 0 do
+     {_, v} = nth_integer_root(x, n)
+     v 
   end
 
   # run a binary search to find our optimal candidate value
   defp refine_nth_root_int(x, n, c_low, c_hi) do
     # are low and hi right next to one another?
     if c_low == c_hi - 1 do
-      c_low
+        if Math.pow(c_low, n) == x do
+            {:exact, c_low}
+        else
+            {:nearest, c_low}
+        end
     else
       # pick a mid point
       c_mid = div(c_hi - c_low, 2) + c_low
@@ -6894,14 +6929,14 @@ defmodule Chunky.Math do
       # if we need to refine
       cond do
         # any exact?
-        val_low == x -> c_low
-        val_mid == x -> c_mid
-        val_hi == x -> c_hi
+        val_low == x -> {:exact, c_low}
+        val_mid == x -> {:exact, c_mid}
+        val_hi == x -> {:exact, c_hi}
         # bounding
         val_low < x && val_mid > x -> refine_nth_root_int(x, n, c_low, c_mid)
         val_mid < x && val_hi > x -> refine_nth_root_int(x, n, c_mid, c_hi)
         # how?
-        true -> 0
+        true -> {:error, nil}
       end
     end
   end

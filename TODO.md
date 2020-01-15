@@ -69,10 +69,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ## TODO
  
- 
- - release 0.11.5
- 
-  
+   
  - release 0.12.0 - documentation and refactoring
 
   - change nth_root_int to:

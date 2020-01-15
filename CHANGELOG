@@ -17,6 +17,13 @@
 
 # CHANGELOG
 
+## v0.*.*
+
+ - Chunky.Math
+  - refactored nth_root_int/2 into:
+   - nth_integer_root/2 -> {:exact, __} or {:nearest, __}
+   - nth_integer_root!/2 -> val
+
 ## v0.11.5
 
 ```
