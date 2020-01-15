@@ -13,12 +13,15 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000010 - Euler's totient function](https://oeis.org/A000010) - `:a000010` - `create_sequence_a000010/1`
    - [A000012 - The simplest sequence of positive numbers: the all 1's sequence](https://oeis.org/A000012) - `:a000012` - `create_sequence_a000012/1`
    - [A000027 - The positive integers](https://oeis.org/A000027) - `:a000027` - `create_sequence_a000027/1`
+   - [A000029 - Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).](https://oeis.org/A000029) - `:a000029` - `create_sequence_a000029/1`
+   - [A000031 - Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.](https://oeis.org/A000031) - `:a000031` - `create_sequence_a000031/1`
    - [A000032 - Lucas numbers beginning at 2](https://oeis.org/A000032) - `:a000032` - `create_sequence_a000032/1`
    - [A000035 - Period 2: repeat [0, 1]; a(n) = n mod 2](https://oeis.org/A000035) - `:a000035` - `create_sequence_a000035/1`
    - [A000040 - The prime numbers.](https://oeis.org/A000040) - `:a000040` - `create_sequence_a000040/1`
    - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
    - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
    - [A000045 - Fibonacci Numbers](https://oeis.org/A000045) - `:a000045` or `:fibonacci` - `create_sequence_a000045/1`
+   - [A000048 - Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.](https://oeis.org/A000048) - `:a000048` - `create_sequence_a000048/1`
    - [A000069 - Odious numbers: numbers with an odd number of 1's in their binary expansion](https://oeis.org/A000069) - `:a000069` - `create_sequence_a000069/1`
    - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
    - [A000081 - Number of unlabeled rooted trees with n nodes](https://oeis.org/A000081) - `:a000081` - `create_sequence_a000081/1`
@@ -30,9 +33,11 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000111 - Euler or up/down numbers](https://oeis.org/A000111) - `:a000111` - `create_sequence_a000111/1`
    - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
    - [A000120 - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n)](https://oeis.org/A000120) - `:a000120` - `create_sequence_a000120/1`
+   - [A000123 - Number of binary partitions: number of partitions of 2n into powers of 2.](https://oeis.org/A000123) - `:a000123` - `create_sequence_a000123/1`
    - [A000124 - Central polygonal numbers (the Lazy Caterer's sequence)](https://oeis.org/A000124) - `:a000124` - `create_sequence_a000124/1`
    - [A000129 - Pell numbers: a(n) = 2*a(n-1) + a(n-2)](https://oeis.org/A000129) - `:a000129` - `create_sequence_a000129/1`
    - [A000142 - Factorial numbers: n! = 1*2*3*4*...*n ](https://oeis.org/A000142) - `:a000142` - `create_sequence_a000142/1`
+   - [A000161 - Number of partitions of n into 2 squares.](https://oeis.org/A000161) - `:a000161` - `create_sequence_a000161/1`
    - [A000166 - Subfactorial or rencontres numbers, or derangements of `n`](https://oeis.org/A000166) - `:a000166` - `create_sequence_a000166/1`
    - [A000169 - Number of labeled rooted trees with n nodes: n^(n-1)](https://oeis.org/A000169) - `:a000169` - `create_sequence_a000169/1`
    - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
@@ -46,6 +51,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
    - [A000292 - Tetrahedral (or triangular pyramidal) numbers](https://oeis.org/A000292) - `:a000292` - `create_sequence_a000292/1`
    - [A000302 - Powers of 4: a(n) = 4^n](https://oeis.org/A000302) - `:a000302` - `create_sequence_a000302/1`
+   - [A000311 - Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.](https://oeis.org/A000311) - `:a000311` - `create_sequence_a000311/1`
    - [A000312 - a(n) = n^n; number of labeled mappings from n points to themselves](https://oeis.org/A000312) - `:a000312` - `create_sequence_a000312/1`
    - [A000326 - Pentagonal numbers: a(n) = n*(3*n-1)/2.](https://oeis.org/A000326) - `:a000326` - `create_sequence_a000326/1`
    - [A000330 - Square pyramidal numbers](https://oeis.org/A000330) - `:a000330` - `create_sequence_a000330/1`
@@ -79,6 +85,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
    - [A001405 - a(n) = binomial(n, floor(n/2)).](https://oeis.org/A001405) - `:a001405` - `create_sequence_a001405/1`
    - [A001477 - The nonnegative integers.](https://oeis.org/A001477) - `:a001477` - `create_sequence_a001477/1`
+   - [A001478 - The negative integers.](https://oeis.org/A001478) - `:a001478` - `create_sequence_a001478/1`
    - [A001489 - a(n) = -n.](https://oeis.org/A001489) - `:a001489` - `create_sequence_a001489/1`
    - [A001511 - The ruler function: 2^a(n) divides 2n](https://oeis.org/A001511) - `:a001511` - `create_sequence_a001511/1`
    - [A001519 - a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.](https://oeis.org/A001519) - `:a001519` - `create_sequence_a001519/1`
@@ -92,6 +99,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A002275 - Repunits: (10^n - 1)/9. Often denoted by R_n.](https://oeis.org/A002275) - `:a002275` - `create_sequence_a002275/1`
    - [A002378 - Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).](https://oeis.org/A002378) - `:a002378` - `create_sequence_a002378/1`
    - [A002487 - Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).](https://oeis.org/A002487) - `:a002487` - `create_sequence_a002487/1`
+   - [A002531 - a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.](https://oeis.org/A002531) - `:a002531` - `create_sequence_a002531/1`
    - [A002620 - Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).](https://oeis.org/A002620) - `:a002620` - `create_sequence_a002620/1`
    - [A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters](https://oeis.org/A002654) - `:a002654` - `create_sequence_a002654/1`
    - [A002808 - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.](https://oeis.org/A002808) - `:a002808` - `create_sequence_a002808/1`
@@ -119,7 +127,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A049310 - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).](https://oeis.org/A049310) - `:a049310` - `create_sequence_a049310/1`
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`  
    - [A070939 - Length of binary representation of n.](https://oeis.org/A070939) - `:a070939` - `create_sequence_a070939/1`
-  
+   - [A074206 - Kalmár's [Kalmar's] problem: number of ordered factorizations of n.](https://oeis.org/A074206) - `:a074206` - `create_sequence_a074206/1`
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -4432,6 +4440,317 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a070939(idx) do
       Math.length_in_base(idx, 2)
+  end
+
+  @doc """
+  OEIS Sequence `A000029` - Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).
+
+  From [OEIS A000029](https://oeis.org/A000029):
+
+  > Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).
+  > (Formerly M0563 N0202)
+
+  **Sequence IDs**: `:a000029`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000029) |> Sequence.take!(36)
+      [1,2,3,4,6,8,13,18,30,46,78,126,224,380,687,1224,2250,4112,7685,14310,27012,50964,96909,184410,352698,675188,1296858,2493726,4806078,9272780,17920860,34669602,67159050,130216124,252745368,490984488]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).",
+       references: [{:oeis, :a000029, "https://oeis.org/A000029"}]
+  def create_sequence_a000029(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000029/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000029(idx) do
+      Math.two_color_bracelet_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000031` - Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.
+
+  From [OEIS A000031](https://oeis.org/A000031):
+
+  > Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.
+  > (Formerly M0564 N0203)
+
+  **Sequence IDs**: `:a000031`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000031) |> Sequence.take!(36)
+      [1,2,3,4,6,8,14,20,36,60,108,188,352,632,1182,2192,4116,7712,14602,27596,52488,99880,190746,364724,699252,1342184,2581428,4971068,9587580,18512792,35792568,69273668,134219796,260301176,505294128,981706832]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.",
+       references: [{:oeis, :a000031, "https://oeis.org/A000031"}]
+  def create_sequence_a000031(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000031/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000031(idx) do
+    Math.two_color_bracelet_count(idx, allow_turning_over: false)
+  end
+
+  @doc """
+  OEIS Sequence `A000048` - Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.
+
+  From [OEIS A000048](https://oeis.org/A000048):
+
+  > Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.
+  > (Formerly M0711 N0262)
+
+  **Sequence IDs**: `:a000048`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000048) |> Sequence.take!(38)
+      [1,1,1,1,2,3,5,9,16,28,51,93,170,315,585,1091,2048,3855,7280,13797,26214,49929,95325,182361,349520,671088,1290555,2485504,4793490,9256395,17895679,34636833,67108864,130150493,252645135,490853403,954437120,1857283155]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.",
+       references: [{:oeis, :a000048, "https://oeis.org/A000048"}]
+  def create_sequence_a000048(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000048/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000048(idx) do
+    Math.two_color_bracelet_with_period_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000123` - Number of binary partitions: number of partitions of 2n into powers of 2.
+
+  From [OEIS A000123](https://oeis.org/A000123):
+
+  > Number of binary partitions: number of partitions of 2n into powers of 2.
+  > (Formerly M1011 N0378)
+
+  **Sequence IDs**: `:a000123`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000123) |> Sequence.take!(51)
+      [1,2,4,6,10,14,20,26,36,46,60,74,94,114,140,166,202,238,284,330,390,450,524,598,692,786,900,1014,1154,1294,1460,1626,1828,2030,2268,2506,2790,3074,3404,3734,4124,4514,4964,5414,5938,6462,7060,7658,8350,9042,9828]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of binary partitions: number of partitions of 2n into powers of 2.",
+       references: [{:oeis, :a000123, "https://oeis.org/A000123"}]
+  def create_sequence_a000123(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000123/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000123(idx) do
+      Math.binary_partitions_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000161` - Number of partitions of n into 2 squares.
+
+  From [OEIS A000161](https://oeis.org/A000161):
+
+  > Number of partitions of n into 2 squares.
+  > (Formerly )
+
+  **Sequence IDs**: `:a000161`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000161) |> Sequence.take!(108)
+      [1,1,1,0,1,1,0,0,1,1,1,0,0,1,0,0,1,1,1,0,1,0,0,0,0,2,1,0,0,1,0,0,1,0,1,0,1,1,0,0,1,1,0,0,0,1,0,0,0,1,2,0,1,1,0,0,0,0,1,0,0,1,0,0,1,2,0,0,1,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,2,0,0,0,1,1,0,0,0,0,0,0,1,1,0,2,1,0,0,1,0,1,0]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of partitions of n into 2 squares.",
+       references: [{:oeis, :a000161, "https://oeis.org/A000161"}]
+  def create_sequence_a000161(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000161/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000161(idx) do
+      Math.partitions_into_two_squares(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A000311` - Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.
+
+  From [OEIS A000311](https://oeis.org/A000311): 
+
+  > Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.
+  > (Formerly M3613 N1465)
+
+  **Sequence IDs**: `:a000311`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a000311) |> Sequence.take!(20)
+      [0,1,1,4,26,236,2752,39208,660032,12818912,282137824,6939897856,188666182784,5617349020544,181790703209728,6353726042486272,238513970965257728,9571020586419012608,408837905660444010496,18522305410364986906624]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.",
+       references: [{:oeis, :a000311, "https://oeis.org/A000311"}]
+  def create_sequence_a000311(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000311/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a000311(idx) do
+      Math.total_partitions(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A001478` - The negative integers.
+
+  From [OEIS A001478](https://oeis.org/A001478):
+
+  > The negative integers.
+  > (Formerly )
+
+  **Sequence IDs**: `:a001478`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001478) |> Sequence.take!(65)
+      [-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-39,-40,-41,-42,-43,-44,-45,-46,-47,-48,-49,-50,-51,-52,-53,-54,-55,-56,-57,-58,-59,-60,-61,-62,-63,-64,-65]
+
+
+  """
+  @doc offset: 1,
+       sequence: "The negative integers.",
+       references: [{:oeis, :a001478, "https://oeis.org/A001478"}]
+  def create_sequence_a001478(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001478/1)
+  end
+
+
+  @doc offset: 1
+  def seq_a001478(idx) do
+      -1 * idx
+  end
+
+  @doc """
+  OEIS Sequence `A002531` - a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.
+
+  From [OEIS A002531](https://oeis.org/A002531):
+
+  > a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.
+  > (Formerly M1340 N0513)
+
+  **Sequence IDs**: `:a002531`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002531) |> Sequence.take!(34)
+      [1,1,2,5,7,19,26,71,97,265,362,989,1351,3691,5042,13775,18817,51409,70226,191861,262087,716035,978122,2672279,3650401,9973081,13623482,37220045,50843527,138907099,189750626,518408351,708158977,1934726305]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.",
+       references: [{:oeis, :a002531, "https://oeis.org/A002531"}]
+  def create_sequence_a002531(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002531/3)
+  end
+
+
+  @doc offset: 0
+  def seq_a002531(idx, l_2, l_1) do
+      cond do
+         idx == 0 -> 1
+         idx == 1 -> 1
+         Math.is_even?(idx) -> l_2 + l_1
+         true -> 2 * l_1 + l_2 
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A074206` - Kalmár's [Kalmar's] problem: number of ordered factorizations of n.
+
+  From [OEIS A074206](https://oeis.org/A074206):
+
+  > Kalmár's [Kalmar's] problem: number of ordered factorizations of n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a074206`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a074206) |> Sequence.take!(97)
+      [0,1,1,1,2,1,3,1,4,2,3,1,8,1,3,3,8,1,8,1,8,3,3,1,20,2,3,4,8,1,13,1,16,3,3,3,26,1,3,3,20,1,13,1,8,8,3,1,48,2,8,3,8,1,20,3,20,3,3,1,44,1,3,8,32,3,13,1,8,3,13,1,76,1,3,8,8,3,13,1,48,8,3,1,44,3,3,3,20,1,44,3,8,3,3,3,112]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Kalmár's [Kalmar's] problem: number of ordered factorizations of n.",
+       references: [{:oeis, :a074206, "https://oeis.org/A074206"}]
+  def create_sequence_a074206(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a074206/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a074206(idx) do
+      Math.ordered_factorization_count(idx)
   end
   
 end

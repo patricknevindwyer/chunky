@@ -1,7 +1,7 @@
 ## Generators
 
 ```elixir 
-OEIS.Util.generate_function_sequences(~w(A006318 A007318 A008277 A018252 A027642 A049310 A070939), in_module: Chunky.Sequence.OEIS.Core)
+OEIS.Util.generate_function_sequences(~w(A000029 A000031 A000048 A000123 A000161 A000311 A001478 A002531 A074206), in_module: Chunky.Sequence.OEIS.Core)
 OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 ```
 
@@ -12,7 +12,7 @@ OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
 ## Core
 
 
-A006318 A007318 A008277 A018252 A027642 A049310 A070939
+A000029 A000031 A000048 A000123 A000161 A000311 A001478 A002531 A074206
 
 
 ## Powers
