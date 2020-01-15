@@ -60,35 +60,22 @@ OEIS.Util.crawl_keywords(["core", "hard"])
 ```
 OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> "#{seq_id |> String.downcase()}" |> String.to_atom() end) |> Enum.sort() |> IO.inspect(limit: :infinity)
 ```
+
+ - todos for functions
+  - TOF
+  - test
+  - inline
+  - CHANGELOG
  
 ## TODO
  
  
  - release 0.11.5
  
- - add an is_repunit function (autoconvert to base 2)
- 
  - more core sequences (let's get up to 75% coverage)
   - 9 more to go
-
- - Math.pow goes infinite on negative powers
-    
- - cyclops numbers     
-
- - @doc nil all the sequence functions
- 
- - document all math triangle functions with a grid so we can tell which ones use zero indexing on row/column, or are grid shifted, etc
-  - chebyshev (A049310)
-  - stirling numbers (A008277)
-  - pascals triangle (A007318)
-  - ?
   
-  
- - move util scripts that use JASON and HTTPoison into a scripts directory as .exs files
- - move jason and HTTPoison to dev only
- - benchee setup for prime factors and factors and binomial and factorial
-  
- - release 0.12.0
+ - release 0.12.0 - documentation and refactoring
  
   - is it worth splitting off primes into Math.Primes?
    - split off the new functions
@@ -103,6 +90,18 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  - check all the added OEIS sequences, and add refs to any discrete functions they use
   - add refs to sequence library instead of OEIS
   - how do we shorten or change those links?
+ 
+ - @doc nil all the sequence functions
+ 
+ - document all math triangle functions with a grid so we can tell which ones use zero indexing on row/column, or are grid shifted, etc
+  - chebyshev (A049310)
+  - stirling numbers (A008277)
+  - pascals triangle (A007318)
+  - ?
+ 
+ - move util scripts that use JASON and HTTPoison into a scripts directory as .exs files
+ - move jason and HTTPoison to dev only
+ - benchee setup for prime factors and factors and binomial and factorial
  
  
   > todo

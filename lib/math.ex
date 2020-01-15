@@ -56,6 +56,7 @@ defmodule Chunky.Math do
   ## Digit Checks and Manipulations
 
    - `contains_digit?/2` - Check if `n` contains the digit in its current base representation
+   - `is_cyclops_number_in_base?/2` - Is `n` a cyclops number in base `b`?
    - `digit_count/3` - Count digits in `n` in any base representation
    - `digit_sum/1` - Calculate the sum of the digits of `n`
    - `is_in_base?/2` - Is the number or list of digits `n` a valid number in base `b`?
@@ -98,6 +99,7 @@ defmodule Chunky.Math do
    - `is_carmichael_number?/1` - Is `n` a Carmichael number, a number pseudo-prime to all coprime bases
    - `is_circular_prime?/1` - Is `n` a circular prime?
    - `is_cubefree?/1` - Are any factors of `n` perfect cubes?
+   - `is_cyclops_number?/1` - Check if `n` is a Cyclops number in base 10
    - `is_deficient?/1` - Test if an integer is _deficient_
    - `is_double_vampire_number?/1` - Is `n` a vampire number whose fangs are also vampire numbers?
    - `is_emirp_prime?/1` - Is `n` a prime that is a different prime when reversed?
@@ -5819,6 +5821,79 @@ defmodule Chunky.Math do
   end
 
   @doc """
+  Check if `n` is a Cyclops number in base 10.
+  
+  See `is_cyclops_number_in_base?/2` for details.
+  
+  ## Examples
+  
+      iex> Math.is_cyclops_number?(0)
+      true
+
+      iex> Math.is_cyclops_number?(50)
+      false
+
+      iex> Math.is_cyclops_number?(104)
+      true
+
+      iex> Math.is_cyclops_number?(1005)
+      false
+  
+      iex> Math.is_cyclops_number?(19010)
+      false
+
+      iex> Math.is_cyclops_number?(1230456)
+      true
+  
+  """
+  def is_cyclops_number?(n), do: is_cyclops_number_in_base?(n, 10)
+  
+  @doc """
+  Is `n` a cyclops number in base `b`?
+  
+  A cyclops number in a given base has exactly one `0` in its representation, in the exact middle
+  of the number, with an equal number of digits on each side. This implies that there must
+  be an odd number of digits.
+  
+  The provided number `n` is converted from base 10 to base `b` before being evaluated.
+  
+  ## Examples
+  
+      iex> Math.is_cyclops_number_in_base?(119, 2)
+      true
+
+      iex> Math.is_cyclops_number_in_base?(2146, 5)
+      true
+
+      iex> Math.is_cyclops_number_in_base?(451, 8)
+      true
+
+      iex> Math.is_cyclops_number_in_base?(68413345263, 16)
+      true
+
+      iex> Math.is_cyclops_number_in_base?(956966581810, 60)
+      true
+  
+  """
+  def is_cyclops_number_in_base?(n, b) do
+      
+      digs = n
+      |> Integer.digits(b)
+      
+      # odd number of digits
+      c_1 = length(digs) |> is_odd?()
+      
+      # only one zero
+      c_2 = (digit_count(n, [0], base: b) == 1)
+      
+      # zero in the middle
+      c_3 = (Enum.at(digs, length(digs) |> div(2)) == 0)
+      
+      c_1 && c_2 && c_3
+      
+  end
+  
+  @doc """
   Check if `n` is a _perfect power_.
 
   Perfect powers are `n` where positive integers `m` and `k` exist, such 
@@ -6130,7 +6205,7 @@ defmodule Chunky.Math do
       [:negative, :odd]
 
       iex> Math.analyze_number(0)
-      [:even, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
+      [:cyclops_number, :even, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
       iex> Math.analyze_number(105840, skip_smooth: true)
       [:abundant, :arithmetic_number, :even, :odious_number, :positive]
@@ -6500,7 +6575,10 @@ defmodule Chunky.Math do
   Integer exponentiation, `x^y`.
 
   This function uses pure integer methods to bypass issues with floating point precision
-  trucation in large values using the built-in `:math` exponentiation functions.
+  trucation in large values using the built-in `:math` exponentiation functions. For negative
+  exponents a Fraction will be returned.
+  
+  For pure integer roots, see `nth_root_int/2`.
 
   ## Example
       
@@ -6509,7 +6587,14 @@ defmodule Chunky.Math do
 
       iex> Math.pow(17, 14)
       168377826559400929
+  
+      iex> Math.pow(4, -3)
+      %Fraction{num: 1, den: 64}
   """
+  def pow(x, y) when is_integer(x) and y < 0 do
+      Fraction.new(1, Math.pow(x, abs(y)))
+  end
+  
   def pow(_x, 0), do: 1
   def pow(x, 1), do: x
 

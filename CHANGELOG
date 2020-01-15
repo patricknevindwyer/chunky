@@ -36,6 +36,9 @@
   - ordered_factorization_count/1
   - is_repunit?/1
   - is_repdigit?/1
+  - is_cyclops_number_in_base?/2
+  - is_cyclops_number?/1
+
   
  - Sequences 
   - A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.
