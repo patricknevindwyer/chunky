@@ -75,6 +75,7 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001006 - Motzkin numbers: number of ways of drawing any number of nonintersecting chords joining n points on a circle](https://oeis.org/A001006) - `:a001006` - `create_sequence_a001006/1`
    - [A001045 - Jacobsthal sequence (or Jacobsthal numbers)](https://oeis.org/A001045) - `:a001045` - `create_sequence_a001045/1`
    - [A001055 - The multiplicative partition function: number of ways of factoring n with all factors greater than 1](https://oeis.org/A001055) - `:a001055` - `create_sequence_a001055/1`
+   - [A001057 - Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.](https://oeis.org/A001057) - `:a001057` - `create_sequence_a001057/1`
    - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
    - [A001147 - Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).](https://oeis.org/A001147) - `:a001147` - `create_sequence_a001147/1`
    - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
@@ -82,23 +83,29 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
    - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
    - [A001227 - Number of odd divisors of n.](https://oeis.org/A001227) - `:a001227` - `create_sequence_a001227/1`
+   - [A001333 - Numerators of continued fraction convergents to sqrt(2).](https://oeis.org/A001333) - `:a001333` - `create_sequence_a001333/1`
    - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
    - [A001405 - a(n) = binomial(n, floor(n/2)).](https://oeis.org/A001405) - `:a001405` - `create_sequence_a001405/1`
    - [A001477 - The nonnegative integers.](https://oeis.org/A001477) - `:a001477` - `create_sequence_a001477/1`
    - [A001478 - The negative integers.](https://oeis.org/A001478) - `:a001478` - `create_sequence_a001478/1`
+   - [A001481 - Numbers that are the sum of 2 squares.](https://oeis.org/A001481) - `:a001481` - `create_sequence_a001481/1`
    - [A001489 - a(n) = -n.](https://oeis.org/A001489) - `:a001489` - `create_sequence_a001489/1`
    - [A001511 - The ruler function: 2^a(n) divides 2n](https://oeis.org/A001511) - `:a001511` - `create_sequence_a001511/1`
    - [A001519 - a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.](https://oeis.org/A001519) - `:a001519` - `create_sequence_a001519/1`
    - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
+   - [A001699 - Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.](https://oeis.org/A001699) - `:a001699` - `create_sequence_a001699/1`
    - [A001700 - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.](https://oeis.org/A001700) - `:a001700` - `create_sequence_a001700/1`
    - [A001764 - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).](https://oeis.org/A001764) - `:a001764` - `create_sequence_a001764/1`
    - [A001906 - F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).](https://oeis.org/A001906) - `:a001906` - `create_sequence_a001906/1`
    - [A001969 - Evil numbers: numbers with an even number of 1's in their binary expansion.](https://oeis.org/A001969) - `:a001969` - `create_sequence_a001969/1`
+   - [A002033 - Number of perfect partitions of n.](https://oeis.org/A002033) - `:a002033` - `create_sequence_a002033/1`
    - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
+   - [A002110 - Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.](https://oeis.org/A002110) - `:a002110` - `create_sequence_a002110/1`
    - [A002113 - Palindromes in base 10.](https://oeis.org/A002113) - `:a002113` - `create_sequence_a002113/1`
    - [A002275 - Repunits: (10^n - 1)/9. Often denoted by R_n.](https://oeis.org/A002275) - `:a002275` - `create_sequence_a002275/1`
    - [A002378 - Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).](https://oeis.org/A002378) - `:a002378` - `create_sequence_a002378/1`
    - [A002487 - Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).](https://oeis.org/A002487) - `:a002487` - `create_sequence_a002487/1`
+   - [A002530 - a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.](https://oeis.org/A002530) - `:a002530` - `create_sequence_a002530/1`
    - [A002531 - a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.](https://oeis.org/A002531) - `:a002531` - `create_sequence_a002531/1`
    - [A002620 - Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).](https://oeis.org/A002620) - `:a002620` - `create_sequence_a002620/1`
    - [A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters](https://oeis.org/A002654) - `:a002654` - `create_sequence_a002654/1`
@@ -128,6 +135,9 @@ defmodule Chunky.Sequence.OEIS.Core do
    - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`  
    - [A070939 - Length of binary representation of n.](https://oeis.org/A070939) - `:a070939` - `create_sequence_a070939/1`
    - [A074206 - Kalmár's [Kalmar's] problem: number of ordered factorizations of n.](https://oeis.org/A074206) - `:a074206` - `create_sequence_a074206/1`
+
+
+
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -4751,6 +4761,295 @@ defmodule Chunky.Sequence.OEIS.Core do
   @doc offset: 0
   def seq_a074206(idx) do
       Math.ordered_factorization_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A001057` - Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.
+
+  From [OEIS A001057](https://oeis.org/A001057):
+
+  > Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.
+  > (Formerly )
+
+  **Sequence IDs**: `:a001057`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001057) |> Sequence.take!(63)
+      [0,1,-1,2,-2,3,-3,4,-4,5,-5,6,-6,7,-7,8,-8,9,-9,10,-10,11,-11,12,-12,13,-13,14,-14,15,-15,16,-16,17,-17,18,-18,19,-19,20,-20,21,-21,22,-22,23,-23,24,-24,25,-25,26,-26,27,-27,28,-28,29,-29,30,-30,31,-31]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.",
+       references: [{:oeis, :a001057, "https://oeis.org/A001057"}]
+  def create_sequence_a001057(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001057/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a001057(idx) do
+      cond do
+         idx == 0 -> 0
+         Math.is_odd?(idx) -> div(idx, 2) + 1
+         true -> div(idx, 2) * -1
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A001333` - Numerators of continued fraction convergents to sqrt(2).
+
+  From [OEIS A001333](https://oeis.org/A001333):
+
+  > Numerators of continued fraction convergents to sqrt(2).
+  > (Formerly M2665 N1064)
+
+  **Sequence IDs**: `:a001333`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001333) |> Sequence.take!(32)
+      [1,1,3,7,17,41,99,239,577,1393,3363,8119,19601,47321,114243,275807,665857,1607521,3880899,9369319,22619537,54608393,131836323,318281039,768398401,1855077841,4478554083,10812186007,26102926097,63018038201,152139002499,367296043199]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Numerators of continued fraction convergents to sqrt(2).",
+       references: [{:oeis, :a001333, "https://oeis.org/A001333"}]
+  def create_sequence_a001333(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001333/3)
+  end
+
+
+  @doc offset: 0
+  def seq_a001333(idx, n_2, n_1) do
+      case idx do
+         0 -> 1
+         1 -> 1 
+         _ -> 2 * n_1 + n_2
+      end
+
+  end
+
+  @doc """
+  OEIS Sequence `A001481` - Numbers that are the sum of 2 squares.
+
+  From [OEIS A001481](https://oeis.org/A001481):
+
+  > Numbers that are the sum of 2 squares.
+  > (Formerly M0968 N0361)
+
+  **Sequence IDs**: `:a001481`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001481) |> Sequence.take!(66)
+      [0,1,2,4,5,8,9,10,13,16,17,18,20,25,26,29,32,34,36,37,40,41,45,49,50,52,53,58,61,64,65,68,72,73,74,80,81,82,85,89,90,97,98,100,101,104,106,109,113,116,117,121,122,125,128,130,136,137,144,145,146,148,149,153,157,160]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Numbers that are the sum of 2 squares.",
+       references: [{:oeis, :a001481, "https://oeis.org/A001481"}]
+  def create_sequence_a001481(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001481/2)
+  end
+
+
+  @doc offset: 1, fill_value: -1
+  def seq_a001481(_idx, last) do
+      Math.next_number(
+          fn v -> 
+              Math.partitions_into_two_squares(v) > 0
+          end, 
+          last
+      )
+  end
+
+  @doc """
+  OEIS Sequence `A001699` - Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.
+
+  From [OEIS A001699](https://oeis.org/A001699):
+
+  > Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.
+  > (Formerly M3087 N1251) 
+
+  **Sequence IDs**: `:a001699`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a001699) |> Sequence.take!(10)
+      [1,1,3,21,651,457653,210065930571,44127887745696109598901,1947270476915296449559659317606103024276803403,3791862310265926082868235028027893277370233150300118107846437701158064808916492244872560821]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.",
+       references: [{:oeis, :a001699, "https://oeis.org/A001699"}]
+  def create_sequence_a001699(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001699/3)
+  end
+
+
+  @doc offset: 0
+  def seq_a001699(idx, n_2, n_1) do
+    
+      case idx do
+         0 -> 1
+         1 -> 1
+         _ -> (div(n_1, n_2) + n_1 + n_2) * n_1
+      end
+  end
+
+  @doc """
+  OEIS Sequence `A002033` - Number of perfect partitions of n.
+
+  From [OEIS A002033](https://oeis.org/A002033):
+
+  > Number of perfect partitions of n.
+  > (Formerly M0131 N0053)
+
+  **Sequence IDs**: `:a002033`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002033) |> Sequence.take!(96)
+      [1,1,1,2,1,3,1,4,2,3,1,8,1,3,3,8,1,8,1,8,3,3,1,20,2,3,4,8,1,13,1,16,3,3,3,26,1,3,3,20,1,13,1,8,8,3,1,48,2,8,3,8,1,20,3,20,3,3,1,44,1,3,8,32,3,13,1,8,3,13,1,76,1,3,8,8,3,13,1,48,8,3,1,44,3,3,3,20,1,44,3,8,3,3,3,112]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Number of perfect partitions of n.",
+       references: [{:oeis, :a002033, "https://oeis.org/A002033"}]
+  def create_sequence_a002033(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002033/1)
+  end
+
+
+  @doc offset: 0
+  def seq_a002033(idx) do
+      Math.perfect_partition_count(idx)
+  end
+
+  @doc """
+  OEIS Sequence `A002110` - Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.
+
+  From [OEIS A002110](https://oeis.org/A002110):
+
+  > Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.
+  > (Formerly M1691 N0668)
+
+  **Sequence IDs**: `:a002110`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002110) |> Sequence.take!(20)
+      [1,2,6,30,210,2310,30030,510510,9699690,223092870,6469693230,200560490130,7420738134810,304250263527210,13082761331670030,614889782588491410,32589158477190044730,1922760350154212639070,117288381359406970983270,7858321551080267055879090]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.",
+       references: [{:oeis, :a002110, "https://oeis.org/A002110"}]
+  def create_sequence_a002110(_opts) do
+      %{
+          next_fn: &seq_a002110/3,
+          data: %{
+              last_prime: 0
+          }
+      }
+  end
+
+
+  @doc offset: 0
+  def seq_a002110(:init, data, _value) do
+      %{
+          data: data,
+          value: 1
+      }
+  end
+  
+  def seq_a002110(:next, %{last_prime: last} = data, value) do
+      
+      # find our next prime
+      n_prime = if last == 0 do
+          1
+      else
+          Math.next_number(&Math.is_prime?/1, last)
+      end
+      
+      {
+          :continue,
+          %{
+              data: data |> Map.put(:last_prime, n_prime),
+              value: value * n_prime
+          }
+      }
+  end
+
+  @doc """
+  OEIS Sequence `A002530` - a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.
+
+  From [OEIS A002530](https://oeis.org/A002530):
+
+  > a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.
+  > (Formerly M2363 N0934)
+
+  **Sequence IDs**: `:a002530`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Core, :a002530) |> Sequence.take!(36)
+      [0,1,1,3,4,11,15,41,56,153,209,571,780,2131,2911,7953,10864,29681,40545,110771,151316,413403,564719,1542841,2107560,5757961,7865521,21489003,29354524,80198051,109552575,299303201,408855776,1117014753,1525870529,4168755811]
+
+
+  """
+  @doc offset: 0,
+       sequence: "a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.",
+       references: [{:oeis, :a002530, "https://oeis.org/A002530"}]
+  def create_sequence_a002530(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002530/5)
+  end
+
+
+  @doc offset: 0
+  def seq_a002530(idx, n_4, _n_3, n_2, _n_1) do
+      case idx do
+         0 -> 0
+         1 -> 1
+         2 -> 1
+         3 -> 3
+         _ -> 4 * n_2 - n_4 
+      end
   end
   
 end

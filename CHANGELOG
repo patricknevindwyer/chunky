@@ -38,6 +38,7 @@
   - is_repdigit?/1
   - is_cyclops_number_in_base?/2
   - is_cyclops_number?/1
+  - perfect_partition_count/1
 
   
  - Sequences 
@@ -172,6 +173,14 @@
   - A001478 - The negative integers.
   - A002531 - a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.
   - A074206 - Kalmár's [Kalmar's] problem: number of ordered factorizations of n.
+  - A001057 - Canonical enumeration of integers: interleaved positive and negative integers with zero prepended
+  - A001333 - Numerators of continued fraction convergents to sqrt(2).
+  - A001481 - Numbers that are the sum of 2 squares.
+  - A001699 - Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.
+  - A002033 - Number of perfect partitions of n.
+  - A002110 - Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.
+  - A002530 - a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.
+
 
 
 

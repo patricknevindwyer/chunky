@@ -47,7 +47,8 @@ defmodule Chunky.Math do
    - `factors/1` - All divisors for an integer
    - `is_power_of?/2` - Is `n` a power of `m`?
    - `is_root_of?/2` - Check if `m` is a k-th root of `n`
-   -  `ordered_factorization_count/1` - Count the number of _ordered_ factorizations of `n`
+   - `ordered_factorization_count/1` - Count the number of _ordered_ factorizations of `n`
+   - `partitions_into_two_squares/1` - Count the number of partitions of `n` into the sum of two squares
    - `prime_factors/1` - Factorize an integer into prime factors
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `tau/1` - Tau function, number of divisors of `n`
@@ -183,6 +184,7 @@ defmodule Chunky.Math do
    - `p_adic_valuation/2` - The _p-adic_ valuation function (for prime `p` and integer `n`)
    - `pell_number/1` - Find the `n`-th denominator in the infinite sequence of fractional approximations of `sqrt(2)`
    - `pentagonal_number/1` - Find the `n`-th pentagonal number
+   - `perfect_partition_count/1` - Count of perfect partitions of `n`
    - `product_of_prime_factor_exponents/1` - Decompose `n` to prime factors of the form `x^y`, find product of all `y`
    - `radical/1` - Square-free kernel, or `rad(n)` - product of distict prime factors
    - `sigma/2` - Generalized Sigma function for integers
@@ -4343,6 +4345,45 @@ defmodule Chunky.Math do
          
          part_a + part_b
       end
+  end
+  
+  @doc """
+  Count the number of _perfect_ partitions of `n`.
+  
+  A perfect partition of `n` is a partition of `n` such that any number from 1 to `n` can
+  be _uniquely_ generated using the values of the partition. Take, for example, the perfect
+  partition of `4`; `{1, 1, 1, 1}`. In this case the base required value (`n` copies of `1`)
+  is the only perfect partition. The partition `{2, 1, 1}` isn't part of the perfect partition
+  because the value `2` could be constructed in two different ways with those values (`{2, _, _}` and `{_, 1, 1}`).
+  
+  When assessing a perfect partition, an intermediate value that can be constructed with the _same_ 
+  partition values multiple times is still a perfect partition. For instance, `5` has as one of its
+  valid perfect partitions `{2, 2, 1}`. The value `3` can be constructed twice, as `{2, _, 1}` and
+  `{2, 1, _}`, but as both constructions use identical values (`2 + 1`), this is still a perfect
+  partition.
+  
+  OEIS References:
+  
+   - [A002033 - Number of perfect partitions of n](https://oeis.org/A002033)
+  
+  ## Examples
+  
+      iex> Math.perfect_partition_count(3)
+      2
+
+      iex> Math.perfect_partition_count(23)
+      20
+
+      iex> Math.perfect_partition_count(351)
+      112
+  
+      iex> Math.perfect_partition_count(2345)
+      75
+  
+  """
+  def perfect_partition_count(n) when is_integer(n) and n >= 0 do
+      # we use the congruence with H(n + 1) - number of ordered factorizations
+      ordered_factorization_count(n + 1)
   end
 
   @doc """
