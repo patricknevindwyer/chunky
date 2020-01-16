@@ -131,6 +131,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   """
   import Chunky.Sequence, only: [sequence_for_function: 1, sequence_for_list: 1]
   alias Chunky.Math
+  alias Chunky.Math.Predicates
 
   require Integer
 
@@ -888,7 +889,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
         if candidate == 1 do
           false
         else
-          !Math.is_perfect_square?(candidate)
+          !Predicates.is_perfect_square?(candidate)
         end
       end,
       last
@@ -999,7 +1000,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a001597(_idx, last) do
-    Math.next_number(&Math.is_perfect_power?/1, last)
+    Math.next_number(&Predicates.is_perfect_power?/1, last)
   end
 
   @doc """
@@ -1031,7 +1032,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a001694(_idx, last) do
-    Math.next_number(&Math.is_powerful_number?/1, last)
+    Math.next_number(&Predicates.is_powerful_number?/1, last)
   end
 
   @doc """
@@ -1118,7 +1119,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a002473(_idx, last) do
-    Math.next_number(&Math.is_7_smooth?/1, last)
+    Math.next_number(&Predicates.is_7_smooth?/1, last)
   end
 
   @doc """
@@ -1149,7 +1150,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a003586(_idx, last) do
-    Math.next_number(&Math.is_3_smooth?/1, last)
+    Math.next_number(&Predicates.is_3_smooth?/1, last)
   end
 
   @doc """
@@ -1182,7 +1183,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a004709(_idx, last) do
-    Math.next_number(&Math.is_cubefree?/1, last)
+    Math.next_number(&Predicates.is_cubefree?/1, last)
   end
 
   @doc """
@@ -1387,7 +1388,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a007304(_idx, last) do
-    Math.next_number(&Math.is_sphenic_number?/1, last)
+    Math.next_number(&Predicates.is_sphenic_number?/1, last)
   end
 
   @doc """
@@ -1425,7 +1426,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
         if candidate == 1 do
           false
         else
-          !Math.is_perfect_cube?(candidate)
+          !Predicates.is_perfect_cube?(candidate)
         end
       end,
       last
@@ -1565,7 +1566,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a008966(idx) do
-    if Math.is_squarefree?(idx) do
+    if Predicates.is_squarefree?(idx) do
       1
     else
       0
@@ -1604,7 +1605,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   def seq_a013929(_idx, last) do
     Math.next_number(
       fn candidate ->
-        !Math.is_squarefree?(candidate)
+        !Predicates.is_squarefree?(candidate)
       end,
       last
     )
@@ -2434,7 +2435,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   def seq_a039956(_idx, last) do
     Math.next_number(
       fn c ->
-        Math.is_squarefree?(c) && Integer.is_even(c)
+        Predicates.is_squarefree?(c) && Integer.is_even(c)
       end,
       last
     )
@@ -2473,7 +2474,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   def seq_a046099(_idx, last) do
     Math.next_number(
       fn candidate ->
-        !Math.is_cubefree?(candidate)
+        !Predicates.is_cubefree?(candidate)
       end,
       last
     )
@@ -2846,7 +2847,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a051037(_idx, last) do
-    Math.next_number(&Math.is_5_smooth?/1, last)
+    Math.next_number(&Predicates.is_5_smooth?/1, last)
   end
 
   @doc """
@@ -2877,7 +2878,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a051038(_idx, last) do
-    Math.next_number(&Math.is_11_smooth?/1, last)
+    Math.next_number(&Predicates.is_11_smooth?/1, last)
   end
 
   @doc """
@@ -2947,7 +2948,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   end
 
   def seq_a052486(_idx, last) do
-    Math.next_number(&Math.is_achilles_number?/1, last)
+    Math.next_number(&Predicates.is_achilles_number?/1, last)
   end
 
   @doc """
@@ -2982,7 +2983,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   def seq_a056911(_idx, last) do
     Math.next_number(
       fn c ->
-        Math.is_squarefree?(c) && Integer.is_odd(c)
+        Predicates.is_squarefree?(c) && Integer.is_odd(c)
       end,
       last
     )
@@ -3250,7 +3251,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   def seq_a067259(_idx, last) do
     Math.next_number(
       fn candidate ->
-        Math.is_cubefree?(candidate) && !Math.is_squarefree?(candidate)
+        Predicates.is_cubefree?(candidate) && !Predicates.is_squarefree?(candidate)
       end,
       last
     )
@@ -3859,7 +3860,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a080197(_idx, last) do
-    Math.next_number(&Math.is_13_smooth?/1, last)
+    Math.next_number(&Predicates.is_13_smooth?/1, last)
   end
 
   @doc """
@@ -3890,7 +3891,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a080681(_idx, last) do
-    Math.next_number(&Math.is_17_smooth?/1, last)
+    Math.next_number(&Predicates.is_17_smooth?/1, last)
   end
 
   @doc """
@@ -3921,7 +3922,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a080682(_idx, last) do
-    Math.next_number(&Math.is_19_smooth?/1, last)
+    Math.next_number(&Predicates.is_19_smooth?/1, last)
   end
 
   @doc """
@@ -3952,7 +3953,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   @doc offset: 1
   def seq_a080683(_idx, last) do
-    Math.next_number(&Math.is_23_smooth?/1, last)
+    Math.next_number(&Predicates.is_23_smooth?/1, last)
   end
 
   @doc """
@@ -4101,7 +4102,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
         Math.prime_factor_exponents(candidate)
 
         # filter to those that _are not_ square free
-        |> Enum.filter(fn {_base, exp} -> !Math.is_squarefree?(exp) end)
+        |> Enum.filter(fn {_base, exp} -> !Predicates.is_squarefree?(exp) end)
 
         # if we have anything left, this number is not exponentially square free
         |> length() > 0
@@ -4746,7 +4747,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
         Math.prime_factor_exponents(candidate)
 
         # filter to those that _are not_ square free
-        |> Enum.filter(fn {_base, exp} -> !Math.is_squarefree?(exp) end)
+        |> Enum.filter(fn {_base, exp} -> !Predicates.is_squarefree?(exp) end)
 
         # if we have anything left, this number is not exponentially square free
         |> length() == 0

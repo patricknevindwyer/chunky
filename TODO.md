@@ -66,34 +66,49 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - test
   - inline
   - CHANGELOG
+
+ - module refactoring todos
+  - create module
+  - create test file
+  - move funcs
+  - move tests
+  - TOF doc in new module
+  - intro in new module
+  - link from Math
+  - link from library.md
+ 
  
 ## TODO
  
    
- - release 0.12.0 - documentation and refactoring
-
-  - change nth_root_int to:
-   - nth_integer_root/2 -> {:exact, __} or {:nearest, __}
-   - nth_integer_root!/2 -> val
+### release 0.12.0 - documentation and refactoring
    
-  - is it worth splitting off primes into Math.Primes?
-   - split off the new functions
-   - split off the old prime functions (except factorizations)
    
-   - Math.Factorization
-   - Math.NumberTheory
-   - Math.Combinatorics
-   - Math.Representations
-   - Math.Predicates
-   - Math (high level common ops)
-   
-   - better docs in each module
-    - where possible, break down by commonality, or just have high level details
-    - rely on inline docs
-   - cross refs to similar/other functions
+ - add predicates
+  - singly-even http://mathworld.wolfram.com/EvenNumber.html
+  - doubly-even
+  - frugal numbers
+  - extravagent numbers
+  - equidigital
+  - smith numbers
+  - polite numbers
+  - impolite numbers
+  - hypotenuse numbers
+  - non-hypotenuse numbers
+  - practical numbers
+  - primary pseudo-perfect
+  - giuga numbers
+  - semi-primes
+  - wolstenholm
+  - check Classes of Natural Numbers
+    
+ - functions    
+  - egyptian fraction
+  - generalized harmonic number
  
-  - better docs for sequence libraries
-   - group by commonality, link to just internal ref
+ 
+ - better docs for sequence libraries
+  - group by commonality, link to just internal ref
 
  
  - check all the added OEIS sequences, and add refs to any discrete functions they use
@@ -108,7 +123,8 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - pascals triangle (A007318)
   - ?
  
- - release 0.*.*
+### release 0.*.*
+ 
  
  - move util scripts that use JASON and HTTPoison into a scripts directory as .exs files
  - move jason and HTTPoison to dev only
@@ -118,6 +134,20 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - null cache/max cache
   - clear cache
   - LRU/time option for expiration
+  
+ - future refactors
+  - better docs in each module
+   - where possible, break down by commonality, or just have high level details
+   - rely on inline docs
+   - cross refs to similar/other functions
+  - Math.Factorization
+  - Math.NumberTheory
+   - add aliases for psi/phi/tau/etc
+  - Math.Triangles?
+  - Math.Combinatorics
+  - Math.Representations
+  - Math (high level common ops)
+   
  
   > todo
   - Is editable prime (delete digit anywhere) 

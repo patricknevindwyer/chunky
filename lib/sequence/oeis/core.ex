@@ -147,6 +147,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
   alias Chunky.Fraction
   alias Chunky.Math
+  alias Chunky.Math.Predicates
 
   require Integer
 
@@ -975,7 +976,7 @@ defmodule Chunky.Sequence.OEIS.Core do
         3
 
       _ ->
-        Math.next_number(&Math.is_prime_fast?/1, last, 2)
+        Math.next_number(&Predicates.is_prime_fast?/1, last, 2)
     end
   end
 
@@ -1116,7 +1117,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1
   def seq_a000069(_idx, last) do
-    Math.next_number(&Math.is_odious_number?/1, last)
+    Math.next_number(&Predicates.is_odious_number?/1, last)
   end
 
   @doc """
@@ -2389,7 +2390,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1
   def seq_a000961(_idx, last) do
-    Math.next_number(&Math.is_prime_power?/1, last)
+    Math.next_number(&Predicates.is_prime_power?/1, last)
   end
 
   @doc """
@@ -2983,7 +2984,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1
   def seq_a005100(_idx, last) do
-    Math.next_deficient(last)
+      Math.next_number(&Predicates.is_deficient?/1, last)
   end
 
   @doc """
@@ -3015,7 +3016,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1, fill_value: 1
   def seq_a005101(_idx, last) do
-    Math.next_abundant(last)
+      Math.next_number(&Predicates.is_abundant?/1, last)
   end
 
   @doc """
@@ -3047,7 +3048,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1
   def seq_a005117(_idx, last) do
-    Math.next_number(&Math.is_squarefree?/1, last)
+    Math.next_number(&Predicates.is_squarefree?/1, last)
   end
 
   @doc """
@@ -3547,7 +3548,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1, fill_value: 3
   def seq_a002808(_idx, last) do
-    Math.next_number(fn v -> Math.is_prime?(v) == false end, last)
+    Math.next_number(fn v -> Predicates.is_prime?(v) == false end, last)
   end
 
   @doc """
@@ -3971,7 +3972,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1, fill_value: -1
   def seq_a002113(_idx, last) do
-    Math.next_number(fn v -> Math.is_palindromic?(v) end, last)
+    Math.next_number(fn v -> Predicates.is_palindromic?(v) end, last)
   end
 
   @doc """
@@ -4346,7 +4347,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a018252(idx, last) do
     case idx do
       1 -> 1
-      _ -> Math.next_number(fn v -> Math.is_prime?(v) == false end, last)
+      _ -> Math.next_number(fn v -> Predicates.is_prime?(v) == false end, last)
     end
   end
 
@@ -4720,7 +4721,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     cond do
       idx == 0 -> 1
       idx == 1 -> 1
-      Math.is_even?(idx) -> l_2 + l_1
+      Predicates.is_even?(idx) -> l_2 + l_1
       true -> 2 * l_1 + l_2
     end
   end
@@ -4791,7 +4792,7 @@ defmodule Chunky.Sequence.OEIS.Core do
   def seq_a001057(idx) do
     cond do
       idx == 0 -> 0
-      Math.is_odd?(idx) -> div(idx, 2) + 1
+      Predicates.is_odd?(idx) -> div(idx, 2) + 1
       true -> div(idx, 2) * -1
     end
   end
@@ -4990,7 +4991,7 @@ defmodule Chunky.Sequence.OEIS.Core do
       if last == 0 do
         1
       else
-        Math.next_number(&Math.is_prime?/1, last)
+        Math.next_number(&Predicates.is_prime?/1, last)
       end
 
     {

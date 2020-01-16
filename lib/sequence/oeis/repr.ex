@@ -194,6 +194,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
   import Chunky.Sequence, only: [sequence_for_function: 1]
 
   alias Chunky.Math
+  alias Chunky.Math.Predicates
 
   @doc """
   OEIS Sequence `A004176` - Omit 1's from n.
@@ -2017,7 +2018,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 10000
   def seq_a100968(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_4?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_4?/1, last)
   end
 
   @doc """
@@ -2050,7 +2051,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 800
   def seq_a100969(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_6?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_6?/1, last)
   end
 
   @doc """
@@ -2083,7 +2084,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 1800
   def seq_a100970(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_8?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_8?/1, last)
   end
 
   @doc """
@@ -2116,7 +2117,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 15500
   def seq_a100973(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_9?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_9?/1, last)
   end
 
   @doc """
@@ -2149,7 +2150,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 1500
   def seq_a099542(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_10?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_10?/1, last)
   end
 
   @doc """
@@ -2182,7 +2183,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 500
   def seq_a100971(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_12?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_12?/1, last)
   end
 
   @doc """
@@ -2215,7 +2216,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 11400
   def seq_a100972(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_14?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_14?/1, last)
   end
 
   @doc """
@@ -2248,7 +2249,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 2300
   def seq_a100974(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_15?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_15?/1, last)
   end
 
   @doc """
@@ -2281,7 +2282,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 900
   def seq_a100975(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_16?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_16?/1, last)
   end
 
   @doc """
@@ -2314,7 +2315,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 1800
   def seq_a255732(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_20?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_20?/1, last)
   end
 
   @doc """
@@ -2347,7 +2348,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 3000
   def seq_a255736(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_30?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_30?/1, last)
   end
 
   @doc """
@@ -2380,7 +2381,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 3300
   def seq_a255731(_idx, last) do
-    Math.next_number(&Math.is_rhonda_to_base_60?/1, last)
+    Math.next_number(&Predicates.is_rhonda_to_base_60?/1, last)
   end
 
   @doc """
@@ -2413,7 +2414,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   @doc offset: 1, fill_value: 900
   def seq_a100988(_idx, last) do
-    Math.next_number(&Math.is_multiple_rhonda?/1, last)
+    Math.next_number(&Predicates.is_multiple_rhonda?/1, last)
   end
 
   @doc """

@@ -31,6 +31,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
   alias Chunky.Math
+  alias Chunky.Math.Predicates
 
   @doc """
   OEIS Sequence `A001158` - Sum of cubes of divisors of N, simga-3(n), `𝝈3(n)`.
@@ -227,7 +228,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
   end
 
   defp next_seq_a003601(last) do
-    if Math.is_arithmetic_number?(last + 1) do
+    if Predicates.is_arithmetic_number?(last + 1) do
       last + 1
     else
       next_seq_a003601(last + 1)

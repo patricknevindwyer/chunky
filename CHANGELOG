@@ -23,6 +23,9 @@
   - refactored nth_root_int/2 into:
    - nth_integer_root/2 -> {:exact, __} or {:nearest, __}
    - nth_integer_root!/2 -> val
+ - new module Chunky.Math.Predicates
+ - refactored all functions of form `is_*?/1` from Chunky.Math to Chunky.Math.Predicates
+ 
 
 ## v0.11.5
 

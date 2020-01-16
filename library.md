@@ -85,7 +85,13 @@ in:
 # Math
 
 Chunky provides a large selection of pure integer (and a few fraction and float) mathematical functions, constructs, 
-and predicates. Things like, finding the factors (or just the prime factors) of an integer, small or large:
+and predicates. The math modules are:
+
+ - `Chunky.Math` - Integer math operations, combinatorics, number theory, number generation
+ - `Chunky.Math.Predicates` - Numeric analysis and inspection
+
+
+Using Chunky.Math, you can do things like, finding the factors (or just the prime factors) of an integer, small or large:
 
 ```elixir
 iex> Chunky.Math.factors(124)
@@ -104,17 +110,17 @@ iex> Chunky.Math.prime_factors(1234567890987654321)
 Or testing properties of numbers with predicates:
 
 ```elixir
-iex> Chunky.Math.is_abundant?(945)
+iex> Chunky.Math.Predicates.is_abundant?(945)
 true
 
-iex> Chunky.Math.is_highly_abundant?(945)
+iex> Chunky.Math.Predicates.is_highly_abundant?(945)
 false
 ```
 
 or testing all the predicates at once, to determine the properties of a number:
 
 ```elixir
-iex> Chunky.Math.analyze_number(12345678)
+iex> Chunky.Math.Predicates.analyze_number(12345678)
 [:abundant, :arithmetic_number, :cubefree, :even, :positive]
 
 iex> Chunky.Math.analyze_number(1299209)
@@ -131,7 +137,7 @@ iex> Chunky.Math.euler_polynomial(2, 15) |> Chunky.Fraction.get_whole()
 210
 ```
 
-See `Chunky.Math` for functions dealing with _number theory_, _combinatorics_, _predicates_, and much more.
+See the Math modules for functions dealing with _number theory_, _combinatorics_, _predicates_, and much more.
 
 # Series Operations
 
