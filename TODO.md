@@ -93,8 +93,8 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x happy number
   - x unhappy number
   - x evil number
-  - polite numbers
-  - impolite numbers
+  - x polite numbers
+  - x impolite numbers
   - smith numbers
   - hypotenuse numbers
   - non-hypotenuse numbers

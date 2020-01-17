@@ -62,6 +62,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A121040 - Multiples of 20 containing a 20 in their decimal representation.](https://oeis.org/A121040) - `:a121040` - `create_sequence_a121040/1`
    - [A135628 - Multiples of 28.](https://oeis.org/A135628) - `:a135628` - `create_sequence_a135628/1`
    - [A135631 - Multiples of 31.](https://oeis.org/A135631) - `:a135631` - `create_sequence_a135631/1`
+   - [A138591 - Sums of two or more consecutive nonnegative integers.](https://oeis.org/A138591) - `:a138591` - `create_sequence_a138591/1`
    - [A152691 - Multiples of 64.](https://oeis.org/A152691) - `:a152691` - `create_sequence_a152691/1`
    - [A174312 - 32*n.](https://oeis.org/A174312) - `:a174312` - `create_sequence_a174312/1`
    - [A195819 - Multiples of 29.](https://oeis.org/A195819) - `:a195819` - `create_sequence_a195819/1`
@@ -2160,5 +2161,42 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   @doc offset: 1
   def seq_a031177(_idx, last) do
       Math.next_number(&Predicates.is_unhappy_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A138591` - Sums of two or more consecutive nonnegative integers.
+
+  From [OEIS A138591](https://oeis.org/A138591):
+
+  > Sums of two or more consecutive nonnegative integers.
+  > (Formerly ) 
+
+  **Sequence IDs**: `:a138591`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a138591) |> Sequence.take!(71)
+      [1,3,5,6,7,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,65,66,67,68,69,70,71,72,73,74,75,76,77]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Sums of two or more consecutive nonnegative integers.",
+       references: [{:oeis, :a138591, "https://oeis.org/A138591"}]
+  def create_sequence_a138591(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a138591/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a138591(idx, last) do
+      case idx do
+          1 -> 1
+          _ -> Math.next_number(&Predicates.is_polite_number?/1, last)
+      end
   end
 end

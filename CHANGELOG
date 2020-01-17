@@ -37,6 +37,8 @@
   - is_happy_number?/1
   - is_unhappy_number?/1
   - is_evil_number?/1
+  - is_polite_number?/1
+  - is_impolite_number?/1
   
 
 ### Sequences
@@ -47,6 +49,8 @@
  - A046758 - Equidigital numbers
  - A007770 - Happy numbers
  - A031177 - Unhappy numbers
+ - A057716 - The non-powers of 2
+ - A138591 - Sums of two or more consecutive nonnegative integers
 
  
  

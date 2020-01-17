@@ -51,6 +51,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
    - [A009992 - Powers of 48: a(n) = 48^n.](https://oeis.org/A009992) - `:a009992` - `create_sequence_a009992/1`
    - [A011557 - Powers of 10: a(n) = 10^n.](https://oeis.org/A011557) - `:a011557` - `create_sequence_a011557/1`
    - [A087752 - Powers of 49.](https://oeis.org/A087752) - `:a087752` - `create_sequence_a087752/1`
+   - [A057716 - The non-powers of 2.](https://oeis.org/A057716) - `:a057716` - `create_sequence_a057716/1`
    - [A159991 - Powers of 60.](https://oeis.org/A159991) - `:a159991` - `create_sequence_a159991/1`
 
 
@@ -61,6 +62,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
   import Chunky.Sequence, only: [sequence_for_function: 1]
 
   alias Chunky.Math
+  alias Chunky.Math.Predicates
 
   @doc """
   OEIS Sequence `A000051` - a(n) = 2^n + 1.
@@ -1611,5 +1613,41 @@ defmodule Chunky.Sequence.OEIS.Powers do
   @doc offset: 0
   def seq_a159991(idx) do
     Math.pow(60, idx)
+  end
+  
+  @doc """
+  OEIS Sequence `A057716` - The non-powers of 2.
+
+  From [OEIS A057716](https://oeis.org/A057716):
+
+  > The non-powers of 2.
+
+  **Sequence IDs**: `:a057716`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Powers, :a057716) |> Sequence.take!(68)
+      [0,3,5,6,7,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,65,66,67,68,69,70,71,72,73,74]
+
+
+  """
+  @doc offset: 0,
+       sequence: "The non-powers of 2.",
+       references: [{:oeis, :a057716, "https://oeis.org/A057716"}]
+  def create_sequence_a057716(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a057716/2)
+  end
+
+
+  @doc offset: 0
+  def seq_a057716(idx, last) do
+      case idx do 
+          0 -> 0
+          _ -> Math.next_number(&Predicates.is_polite_number?/1, last)
+      end
   end
 end

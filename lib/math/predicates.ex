@@ -41,6 +41,18 @@ defmodule Chunky.Math.Predicates do
     - `is_wasteful_number?/1` - Does writing the prime factors of `n` take more digits that writing `n`?
    
    
+   ## Sums and Sequences
+   
+   Some number properties are based on summations or sequences of numbers.
+   
+   The polite and impolite numbers are based on writing a number `n` as the sum of two or more consecutive positive
+   integers. The number `5` is a polite number, as it can be written as `2+3`. The number `8` is _impolite_, there are
+   no consecutive positive integers that add up to `8`.
+   
+    - `is_impolite_number?/1` - The number `n` cannot be written as the sum of two or more consecutive positive integers
+    - `is_polite_number?/1` - The number `n` _can_ be written as the sum of two or more consecutive positive integers
+   
+   
    ## Number Theory
    
    The general mathematical properties of numbers fall into the Number Theory cateogry.
@@ -261,6 +273,7 @@ defmodule Chunky.Math.Predicates do
                is_pandigital_in_base?: 2,
                is_palindromic_in_base?: 2,
                is_plaindrome_in_base?: 2,
+               is_power_of?: 2,
                is_pseudo_prime?: 2, 
                length_in_base: 2,
                prime_factors: 1,
@@ -399,10 +412,10 @@ defmodule Chunky.Math.Predicates do
    ## Examples
 
        iex> Predicates.analyze_number(2048)
-       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
+       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :doubly_even_number, :economical_number, :even, :impolite_number, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
 
        iex> Predicates.analyze_number(2048, skip_smooth: true)
-       [:deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
+       [:deficient, :doubly_even_number, :economical_number, :even, :impolite_number, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
 
        iex> Predicates.analyze_number(-37)
        [:negative, :odd, :odious_number]
@@ -411,16 +424,16 @@ defmodule Chunky.Math.Predicates do
        [:cyclops_number, :doubly_even_number, :even, :evil_number, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :odious_number, :positive, :unhappy_number, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :odious_number, :polite_number, :positive, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :odious_number, :positive, :unhappy_number, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :odious_number, :polite_number, :positive, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(1000, skip_smooth: true)
-       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
+       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :multiple_rhonda, :perfect_cube, :perfect_power, :polite_number, :positive, :powerful_number, :rhonda_to_base_16]
     
        iex> Predicates.analyze_number(1435)
-       [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :odd, :odious_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
+       [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :odd, :odious_number, :polite_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
    """
    def analyze_number(n, opts \\ []) when is_integer(n) do
      # how long are we waiting for each predicate
@@ -1433,6 +1446,42 @@ defmodule Chunky.Math.Predicates do
    end
    
    @doc """
+   Is `n` an impolite number? Impolite numbers cannot be written as the sum of two consecutive integers.
+   
+   OEIS References:
+   
+    - [A000079 - Powers of 2](https://oeis.org/A000079)
+   
+   See also:
+   
+    - `is_polite_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_impolite_number?(2)
+       true
+
+       iex> Predicates.is_impolite_number?(5)
+       false
+
+       iex> Predicates.is_impolite_number?(8)
+       true
+
+       iex> Predicates.is_impolite_number?(32)
+       true
+
+       iex> Predicates.is_impolite_number?(512)
+       true
+   
+   """
+   def is_impolite_number?(n) when n > 0 do
+      is_power_of?(n, 2) 
+   end
+   
+   def is_impolite_number?(_), do: false
+   
+   @doc """
    Is `n` a _left/right_ truncatable prime?
 
    Truncatable primes are prime number that remain prime when successive digits are removed. For
@@ -1862,6 +1911,45 @@ defmodule Chunky.Math.Predicates do
    """
    def is_plaindrome?(n), do: is_plaindrome_in_base?(n, 10)
 
+   @doc """
+   Is `n` a polite number? Polite numbers can be expressed as the sum of two consecutive digits.
+   
+   OEIS References:
+   
+    - [A138591 - Sums of two or more consecutive nonnegative integers](https://oeis.org/A138591)
+   
+   See also:
+   
+    - `is_impolite_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_polite_number?(0)
+       false
+
+       iex> Predicates.is_polite_number?(3)
+       true
+
+       iex> Predicates.is_polite_number?(4)
+       false
+
+       iex> Predicates.is_polite_number?(17)
+       true
+
+       iex> Predicates.is_polite_number?(333)
+       true
+
+       iex> Predicates.is_polite_number?(4098)
+       true
+   
+   """
+   def is_polite_number?(n) when n > 0 do
+       is_power_of?(n, 2) == false
+   end
+   
+   def is_polite_number?(_), do: false
+   
    @doc """
    Determine if a number is a positive integer.
 
