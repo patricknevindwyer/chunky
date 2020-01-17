@@ -32,16 +32,29 @@ defmodule Chunky.Math.Predicates do
     - `is_highly_powerful_number?/1` - Is the product of the exponents of the prime factorization of `n` greater than the same property for any number less than `n`?
     - `is_powerful_number?/1` - Do the squares of all prime factors of `n` also evenly divide `n`?
       
+   Economical, equidigital, and wasteful numbers all look at how the prime factorization of a number can be written,
+   and how many digits that requires relative to the number of digits in the original number. The prime factorization of `16`, for
+   example, can be written with just `2` and `4`, while the prime factors of `24` (`2^3 * 3^1`) requires only the digits `233`.
+   
+    - `is_economical_number?/1` - Does writing the prime factors of `n` take fewer digits than writing `n`?
+    - `is_equidigital_number?/1` - Does writing the prime factors of `n` take exactly as many digits as writing `n`?
+    - `is_wasteful_number?/1` - Does writing the prime factors of `n` take more digits that writing `n`?
+   
    
    ## Number Theory
    
-   The basic properties of numbers fall into the Number Theory cateogry.
+   The general mathematical properties of numbers fall into the Number Theory cateogry.
    
     - `is_even?/1` - Is an integer even?
     - `is_negative?/1` - Is an integer a negative number?
     - `is_odd?/1` - Is an integer odd?
     - `is_positive?/1` - Is an integer a positive number?
     - `is_zero?/1` - Is an integer `0`?   
+   
+   The single and doubly even numbers put further constraints on the even numbers.
+   
+    - `is_doubly_even_number?/1` - Is `n` divisible by 4?
+    - `is_singly_even_number?/1` - Is `n` divisible by 2, but not by 4?
    
    
    ## Patterns
@@ -238,6 +251,7 @@ defmodule Chunky.Math.Predicates do
                length_in_base: 2,
                prime_factors: 1,
                product_of_prime_factor_exponents: 1,
+               reduced_prime_factors: 1,
                reverse_number: 1,
                rotations: 1, 
                sigma: 1, 
@@ -371,28 +385,28 @@ defmodule Chunky.Math.Predicates do
    ## Examples
 
        iex> Predicates.analyze_number(2048)
-       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
+       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
 
        iex> Predicates.analyze_number(2048, skip_smooth: true)
-       [:deficient, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
+       [:deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
 
        iex> Predicates.analyze_number(-37)
        [:negative, :odd]
 
        iex> Predicates.analyze_number(0)
-       [:cyclops_number, :even, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
+       [:cyclops_number, :doubly_even_number, :even, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true)
-       [:abundant, :arithmetic_number, :even, :odious_number, :positive]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :odious_number, :positive, :wasteful_number]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
-       [:abundant, :arithmetic_number, :even, :highly_abundant, :odious_number, :positive]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :odious_number, :positive, :wasteful_number]
 
        iex> Predicates.analyze_number(1000, skip_smooth: true)
-       [:abundant, :even, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
+       [:abundant, :doubly_even_number, :equidigital_number, :even, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
     
        iex> Predicates.analyze_number(1435)
-       [:arithmetic_number, :cubefree, :deficient, :odd, :odious_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :vampire_number]
+       [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :odd, :odious_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :vampire_number]
    """
    def analyze_number(n, opts \\ []) when is_integer(n) do
      # how long are we waiting for each predicate
@@ -984,6 +998,87 @@ defmodule Chunky.Math.Predicates do
    end
    
    @doc """
+   Is `n` divisible by 4?
+   
+   Doubly even numbers are an extension of the even numbers.
+   
+   OEIS References:
+   
+    - [A008586 - Multiples of 4](http://oeis.org/A008586)
+   
+   See also:
+   
+    - `is_even?/1`
+    - `is_singly_even_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_doubly_even_number?(4)
+       true
+
+       iex> Predicates.is_doubly_even_number?(14)
+       false
+
+       iex> Predicates.is_doubly_even_number?(892)
+       true
+
+       iex> Predicates.is_doubly_even_number?(3956)
+       true
+   
+   """
+   def is_doubly_even_number?(n) when Integer.is_odd(n), do: false
+   def is_doubly_even_number?(n) when Integer.is_even(n) do
+      rem(n, 4) == 0 
+   end
+   
+   @doc """
+   Does the prime factorization of `n` have fewer digits (counting primes and powers) than `n`?
+   
+   The economical numbers are sometimes called the _frugal_ numbers. When counting digits of
+   the prime factorization the prime and it's exponent are combined together, so `125` is a frugal
+   number, because its prime factorization is `5^3` or `53` written out.
+   
+   OEIS References:
+   
+    - [A046759 - The economical numbers](http://oeis.org/A046759)
+   
+   See also:
+   
+    - `is_wasteful_number?/1`
+    - `is_equidigital_number?/1`
+   
+   ## Examples
+   
+       iex> Predicates.is_economical_number?(125)
+       true
+
+       iex> Predicates.is_economical_number?(1875)
+       true
+
+       iex> Predicates.is_economical_number?(1880)
+       false
+
+       iex> Predicates.is_economical_number?(1946430)
+       true
+   
+   """
+   def is_economical_number?(n) when n > 124 do
+       (reduced_prime_factors(n)
+       |> Enum.map(
+           fn {base, power} -> 
+               case power do
+                   1 -> Integer.digits(base)
+                   _ -> Integer.digits(base) ++ Integer.digits(power) 
+               end
+           end
+       )
+       |> List.flatten()
+       |> length()) < length_in_base(n, 10)
+   end
+   def is_economical_number?(_), do: false
+   
+   @doc """
    Is `n` an _emirp_ - a prime number that is a _different_ prime number when reversed?
 
    Emirp primes are related to _palindromic_ primes, except that the
@@ -1016,6 +1111,51 @@ defmodule Chunky.Math.Predicates do
      r_n = reverse_number(n)
      is_prime?(n) && is_prime?(r_n) && n != r_n
    end
+   
+   @doc """
+   Does the prime factorization of `n` use exactly as many digits (counting primes and powers) as `n`?
+   
+   When counting digits of the prime factorization the prime and it's exponent are combined together, 
+   so `16` is an equidigital number, because its prime factorization is `2^4` or `24` written out.
+   
+   OEIS References:
+   
+    - [A046758 - Equidigital numbers](http://oeis.org/A046758)
+   
+   See also:
+   
+    - `is_economical_number?/1`
+    - `is_wasteful_number?/1`
+   
+   ## Examples
+   
+       iex> Predicates.is_equidigital_number?(2)
+       true
+
+       iex> Predicates.is_equidigital_number?(49)
+       true
+
+       iex> Predicates.is_equidigital_number?(433)
+       true
+
+       iex> Predicates.is_equidigital_number?(33701)
+       true
+   
+   """
+   def is_equidigital_number?(n) when n > 0 do
+       (reduced_prime_factors(n)
+       |> Enum.map(
+           fn {base, power} -> 
+               case power do
+                   1 -> Integer.digits(base)
+                   _ -> Integer.digits(base) ++ Integer.digits(power) 
+               end
+           end
+       )
+       |> List.flatten()
+       |> length()) == length_in_base(n, 10)
+   end
+   def is_equidigital_number?(_), do: false
    
    @doc """
    Check if `n` is an Euler-Jacobi pseudo-prime to base 10.
@@ -2359,6 +2499,41 @@ defmodule Chunky.Math.Predicates do
    end
    
    @doc """
+   Is `n` a divisible by 2, but not by 4?
+   
+   Singly divisible numbers are of the form `4*n + 2`.
+  
+   OEIS References:
+   
+    - [A016825 - Positive integers congruent to 2 mod 4](http://oeis.org/A016825)
+   
+   
+   See also:
+   
+    - `is_even?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_singly_even_number?(2)
+       true
+
+       iex> Predicates.is_singly_even_number?(8)
+       false
+    
+       iex> Predicates.is_singly_even_number?(1930)
+       true
+
+       iex> Predicates.is_singly_even_number?(79874)
+       true
+   
+   """
+   def is_singly_even_number?(n) when Integer.is_odd(n), do: false
+   def is_singly_even_number?(n) when Integer.is_even(n) do
+       rem(n, 2) == 0 && rem(n, 4) != 0
+   end
+   
+   @doc """
    Check if `n` is a _sphenic number_, the product of three distinct primes.
    
    See also:
@@ -2560,6 +2735,52 @@ defmodule Chunky.Math.Predicates do
      end
    end
    
+   @doc """
+   Does the prime factorization of `n` have mored digits (counting primes and powers) than `n`?
+   
+   The wasteful numbers are sometimes called the _extravagant_ numbers. When counting digits of
+   the prime factorization the prime and it's exponent are combined together, so `4` is an extravagant
+   number, because its prime factorization is `2^2` or `22` written out.
+   
+   OEIS References:
+   
+    - [A046760 - Wasteful numbers](http://oeis.org/A046760)
+   
+   See also:
+   
+    - `is_economical_number?/1`
+    - `is_equidigital_number?/1`
+   
+   ## Examples
+   
+       iex> Predicates.is_wasteful_number?(4)
+       true
+
+       iex> Predicates.is_wasteful_number?(24)
+       true
+
+       iex> Predicates.is_wasteful_number?(110)
+       true
+
+       iex> Predicates.is_wasteful_number?(14330)
+       true
+   
+   """
+   def is_wasteful_number?(n) when n > 3 do
+       (reduced_prime_factors(n)
+       |> Enum.map(
+           fn {base, power} -> 
+               case power do
+                   1 -> Integer.digits(base)
+                   _ -> Integer.digits(base) ++ Integer.digits(power) 
+               end
+           end
+       )
+       |> List.flatten()
+       |> length()) > length_in_base(n, 10)
+   end
+   def is_wasteful_number?(_), do: false
+      
    @doc """
    Is `n` a _weakly_ prime number?
 

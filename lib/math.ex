@@ -54,6 +54,7 @@ defmodule Chunky.Math do
    - `ordered_factorization_count/1` - Count the number of _ordered_ factorizations of `n`
    - `partitions_into_two_squares/1` - Count the number of partitions of `n` into the sum of two squares
    - `prime_factors/1` - Factorize an integer into prime factors
+   - `reduced_prime_factors/1` - Find the prime factors and their powers for `n`
    - `sigma/1` - Sigma-1 function (sum of divisors)
    - `tau/1` - Tau function, number of divisors of `n`
 
@@ -231,6 +232,37 @@ defmodule Chunky.Math do
   
   import Chunky.Math.Operations, only: [summation: 3]
 
+  @doc """
+  Find the prime factors of `n` as the factors to a power.
+  
+  While the `prime_factors/1` function will return the full prime factorization
+  of `n` as a list of all factors (such as `[1, 2, 2, 3]` for factors of `12`), this
+  function returns a list of tuples, with each tuple containing the prime factor, and
+  the power of the prime factor, such as `[{1, 1}, {2, 2}, {3, 1}]` for the prime
+  factors of `12`.
+  
+  ## Examples
+  
+      iex> Math.reduced_prime_factors(1)
+      [{1, 1}]
+
+      iex> Math.reduced_prime_factors(16)
+      [{2, 4}]
+
+      iex> Math.reduced_prime_factors(34560)
+      [{2, 8}, {3, 3}, {5, 1}]
+
+      iex> Math.reduced_prime_factors(30223017)
+      [{3, 3}, {11, 3}, {29, 2}]
+  
+  """
+  def reduced_prime_factors(1), do: [{1, 1}]
+  def reduced_prime_factors(n) when is_integer(n) and n > 1 do
+      prime_factors(n) -- [1]
+      |> Enum.chunk_by(fn v -> v end)
+      |> Enum.map(fn run -> {run |> List.first(), length(run)} end)
+  end
+  
   @doc """
   Decompose an integer to prime factors.
 

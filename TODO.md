@@ -85,14 +85,17 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
    
    
  - add predicates
-  - singly-even http://mathworld.wolfram.com/EvenNumber.html
-  - doubly-even
-  - frugal numbers
-  - extravagent numbers
-  - equidigital
-  - smith numbers
+  - x singly-even http://mathworld.wolfram.com/EvenNumber.html
+  - x doubly-even
+  - x frugal numbers /   - economical number?
+  - x extravagent numbers
+  - x equidigital
+  - happy number
+  - unhappy number
+  - evil number
   - polite numbers
   - impolite numbers
+  - smith numbers
   - hypotenuse numbers
   - non-hypotenuse numbers
   - practical numbers
@@ -101,6 +104,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - semi-primes
   - wolstenholm
   - check Classes of Natural Numbers
+
     
  - functions    
   - egyptian fraction

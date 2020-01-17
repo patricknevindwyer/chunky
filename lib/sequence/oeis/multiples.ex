@@ -28,6 +28,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A008605 - Multiples of 23.](https://oeis.org/A008605) - `:a008605` - `create_sequence_a008605/1`
    - [A008606 - Multiples of 24.](https://oeis.org/A008606) - `:a008606` - `create_sequence_a008606/1`
    - [A008607 - Multiples of 25.](https://oeis.org/A008607) - `:a008607` - `create_sequence_a008607/1`
+   - [A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.](https://oeis.org/A016825) - `:a016825` - `create_sequence_a016825/1`
    - [A169823 - Multiples of 60.](https://oeis.org/A169823) - `:a169823` - `create_sequence_a169823/1`
    - [A169825 - Multiples of 420.](https://oeis.org/A169825) - `:a169825` - `create_sequence_a169825/1`
    - [A169827 - Multiples of 840.](https://oeis.org/A169827) - `:a169827` - `create_sequence_a169827/1`
@@ -74,6 +75,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   import Chunky.Sequence, only: [sequence_for_function: 1]
 
   alias Chunky.Math
+  alias Chunky.Math.Predicates
 
   @doc """
   OEIS Sequence `A008585` - a(n) = 3*n.
@@ -2053,5 +2055,39 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   @doc offset: 0
   def seq_a152691(idx) do
     idx * 64
+  end
+  
+  @doc """
+  OEIS Sequence `A016825` - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.
+
+  From [OEIS A016825](https://oeis.org/A016825):
+
+  > Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.
+  > (Formerly )
+
+  **Sequence IDs**: `:a016825`
+
+  **Finite**: False
+
+  **Offset**: 0
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a016825) |> Sequence.take!(59)
+      [2,6,10,14,18,22,26,30,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,94,98,102,106,110,114,118,122,126,130,134,138,142,146,150,154,158,162,166,170,174,178,182,186,190,194,198,202,206,210,214,218,222,226,230,234]
+
+
+  """
+  @doc offset: 0,
+       sequence: "Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.",
+       references: [{:oeis, :a016825, "https://oeis.org/A016825"}]
+  def create_sequence_a016825(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a016825/2)
+  end
+
+
+  @doc offset: 0
+  def seq_a016825(_idx, last) do
+      Math.next_number(&Predicates.is_singly_even_number?/1, last + 1)
   end
 end

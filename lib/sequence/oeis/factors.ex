@@ -60,6 +60,9 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A046386 - Products of four distinct primes](https://oeis.org/A046386) - `:a046386` - `create_sequence_a046386/1`
    - [A046387 - Products of 5 distinct primes](https://oeis.org/A046387) - `:a046387` - `create_sequence_a046387/1`
    - [A046660 - Excess of n = Ω(n) - ω(n)](https://oeis.org/A046660) - `:a046660` - `create_sequence_a046660/1`
+   - [A046758 - Equidigital numbers.](https://oeis.org/A046758) - `:a046758` - `create_sequence_a046758/1`
+   - [A046759 - Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).](https://oeis.org/A046759) - `:a046759` - `create_sequence_a046759/1`
+   - [A046760 - Wasteful numbers.](https://oeis.org/A046760) - `:a046760` - `create_sequence_a046760/1`
    - [A048272 - Number of odd divisors of n minus number of even divisors of n](https://oeis.org/A048272) - `:a048272` - `create_sequence_a048272/1`
    - [A051037 - 5-smooth Numbers](https://oeis.org/A051037) - `:a051037` - `create_sequence_a03586/1`
    - [A051038 - 11-smooth Numbers](https://oeis.org/A051038) - `:a051038` - `create_sequence_a03586/1`
@@ -123,6 +126,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - [A209061 - Exponentially squarefree numbers](https://oeis.org/A209061) - `:a209061` - `create_sequence_a209061/1`
    - [A211337 - Numbers n for which the number of divisors, tau(n), is congruent to 1 modulo 3](https://oeis.org/A211337) - `:a211337` - `create_sequence_a211337/1`
    - [A211338 - Numbers n for which the number of divisors, tau(n), is congruent to 2 modulo 3](https://oeis.org/A211338) - `:a211338` - `create_sequence_a211338/1`
+
 
 
 
@@ -4818,5 +4822,107 @@ defmodule Chunky.Sequence.OEIS.Factors do
   @doc offset: 1
   def seq_a211338(_idx, last) do
     Math.next_number(fn candidate -> rem(Math.tau(candidate), 3) == 2 end, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A046759` - Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).
+
+  From [OEIS A046759](https://oeis.org/A046759):
+
+  > Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).
+  > (Formerly )
+
+  **Sequence IDs**: `:a046759`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a046759) |> Sequence.take!(41)
+      [125,128,243,256,343,512,625,729,1024,1029,1215,1250,1280,1331,1369,1458,1536,1681,1701,1715,1792,1849,1875,2048,2187,2197,2209,2401,2560,2809,3125,3481,3584,3645,3721,4096,4374,4375,4489,4802,4913]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).",
+       references: [{:oeis, :a046759, "https://oeis.org/A046759"}]
+  def create_sequence_a046759(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046759/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a046759(_idx, last) do
+      Math.next_number(&Predicates.is_economical_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A046760` - Wasteful numbers.
+
+  From [OEIS A046760](https://oeis.org/A046760):
+
+  > Wasteful numbers.
+  > (Formerly )
+
+  **Sequence IDs**: `:a046760`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a046760) |> Sequence.take!(67)
+      [4,6,8,9,12,18,20,22,24,26,28,30,33,34,36,38,39,40,42,44,45,46,48,50,51,52,54,55,56,57,58,60,62,63,65,66,68,69,70,72,74,75,76,77,78,80,82,84,85,86,87,88,90,91,92,93,94,95,96,98,99,100,102,104,108,110,114]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Wasteful numbers.",
+       references: [{:oeis, :a046760, "https://oeis.org/A046760"}]
+  def create_sequence_a046760(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046760/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a046760(_idx, last) do
+      Math.next_number(&Predicates.is_wasteful_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A046758` - Equidigital numbers.
+
+  From [OEIS A046758](https://oeis.org/A046758):
+
+  > Equidigital numbers.
+  > (Formerly )
+
+  **Sequence IDs**: `:a046758`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Factors, :a046758) |> Sequence.take!(61)
+      [1,2,3,5,7,10,11,13,14,15,16,17,19,21,23,25,27,29,31,32,35,37,41,43,47,49,53,59,61,64,67,71,73,79,81,83,89,97,101,103,105,106,107,109,111,112,113,115,118,119,121,122,123,127,129,131,133,134,135,137,139]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Equidigital numbers.",
+       references: [{:oeis, :a046758, "https://oeis.org/A046758"}]
+  def create_sequence_a046758(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046758/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a046758(_idx, last) do
+      Math.next_number(&Predicates.is_equidigital_number?/1, last)
   end
 end

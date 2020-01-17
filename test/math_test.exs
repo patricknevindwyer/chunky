@@ -5,6 +5,37 @@ defmodule Chunky.MathTest do
   alias Chunky.Math
   doctest Chunky.Math
 
+  describe "reduced_prime_factors/1" do
+      test "value tests" do
+         [
+             # 1
+             {1, [{1, 1}]},
+             
+             # single low digit
+             {2, [{2, 1}]},
+             
+             # two digit prime
+             {17, [{17, 1}]},
+             
+             # power of 2
+             {64, [{2, 6}]},
+             
+             # larger composite
+             {12209276310, [{2, 1}, {3, 1}, {5, 1}, {7, 1}, {11, 5}, {19, 2}]},
+             
+             # skipped primes
+             {7569, [{3, 2}, {29, 2}]},
+             
+             # large power of 2
+             {9223372036854775808, [{2, 63}]},
+                          
+         ] 
+         |> Enum.each(fn {n, red} -> 
+             assert Math.reduced_prime_factors(n) == red
+         end)
+      end
+  end
+  
   describe "is_euler_pseudo_prime?/2" do
     test "value tests - true" do
       ns = [
