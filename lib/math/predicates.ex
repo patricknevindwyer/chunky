@@ -57,6 +57,17 @@ defmodule Chunky.Math.Predicates do
     - `is_singly_even_number?/1` - Is `n` divisible by 2, but not by 4?
    
    
+   ## Convergences
+   
+   Some numeric analysis is based on the eventual convergence of a function or iteration.
+   
+   By repeatedly taking the digits of a number, squaring them, and summing the result, all
+   numbers will eventually converge to one of the numbers `0, 1, 4, 16, 20, 37, 42, 58, 89, or 145`. 
+   
+    - `is_happy_number?/1` - Happy numbers coverge to `1`
+    - `is_unhappy_number?/1` - Unhappy numbers converge to a value other than `1`
+   
+   
    ## Patterns
    
    Patterns of digits in numbers are a common topic in recreational math. These predicates deal with the sequencing, arrangement,
@@ -385,10 +396,10 @@ defmodule Chunky.Math.Predicates do
    ## Examples
 
        iex> Predicates.analyze_number(2048)
-       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
+       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
 
        iex> Predicates.analyze_number(2048, skip_smooth: true)
-       [:deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power]
+       [:deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
 
        iex> Predicates.analyze_number(-37)
        [:negative, :odd]
@@ -397,16 +408,16 @@ defmodule Chunky.Math.Predicates do
        [:cyclops_number, :doubly_even_number, :even, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :odious_number, :positive, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :odious_number, :positive, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :odious_number, :positive, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :odious_number, :positive, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(1000, skip_smooth: true)
-       [:abundant, :doubly_even_number, :equidigital_number, :even, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
+       [:abundant, :doubly_even_number, :equidigital_number, :even, :happy_number, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
     
        iex> Predicates.analyze_number(1435)
-       [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :odd, :odious_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :vampire_number]
+       [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :odd, :odious_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
    """
    def analyze_number(n, opts \\ []) when is_integer(n) do
      # how long are we waiting for each predicate
@@ -1236,6 +1247,63 @@ defmodule Chunky.Math.Predicates do
    """
    def is_even?(n) when Integer.is_even(n), do: true
    def is_even?(n) when is_integer(n), do: false
+   
+   @doc """
+   Does the repeated sum of squares of the digits of `n` converge to `1`?
+   
+   By repeatedly taking the digits of a number, squaring them, and summing the result, all
+   numbers will eventually converge to one of the numbers `0, 1, 4, 16, 20, 37, 42, 58, 89, or 145`. Happy
+   numbers coverge to `1`.
+   
+   OEIS References:
+   
+    - [A007770 - Happy numbers](http://oeis.org/A007770)
+   
+   See also:
+   
+    - `is_unhappy_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_happy_number?(0)
+       false
+
+       iex> Predicates.is_happy_number?(1)
+       true
+
+       iex> Predicates.is_happy_number?(193)
+       true
+   
+       iex> Predicates.is_happy_number?(3323)
+       true
+   
+       iex> Predicates.is_happy_number?(999989)
+       true
+   
+   """
+   def is_happy_number?(n) when n >= 0 do
+       
+       h = Integer.digits(n)
+       |> Enum.map(fn d -> d * d end)
+       |> Enum.sum()
+       
+       case h do
+          0 -> false
+          1 -> true
+          4 -> false
+          16 -> false
+          20 -> false
+          37 -> false
+          42 -> false
+          58 -> false
+          89 -> false
+          145 -> false
+          _ -> is_happy_number?(h)
+       end
+       
+   end
+   def is_happy_number?(_), do: false
    
    @doc """
    Check if a number `n` is _highly abundant_.
@@ -2666,6 +2734,46 @@ defmodule Chunky.Math.Predicates do
    def is_two_sided_prime?(n) when n > 0 do
      is_prime_with_edit?(n, :left) && is_prime_with_edit?(n, :right)
    end
+   
+   @doc """
+   Does the repeated sum of squares of the digits of `n` converge to a value other than `1`?
+   
+   By repeatedly taking the digits of a number, squaring them, and summing the result, all
+   numbers will eventually converge to one of the numbers `0, 1, 4, 16, 20, 37, 42, 58, 89, or 145`. Unhappy
+   numbers coverge to a value other than `1`.
+   
+   OEIS References:
+   
+    - [A031177 - Unappy numbers](http://oeis.org/A031177)
+   
+   See also:
+   
+    - `is_happy_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_unhappy_number?(2)
+       true
+
+       iex> Predicates.is_unhappy_number?(25)
+       true
+
+       iex> Predicates.is_unhappy_number?(475)
+       true
+   
+       iex> Predicates.is_unhappy_number?(953)
+       true
+   
+       iex> Predicates.is_unhappy_number?(11728)
+       true
+   
+   """
+   def is_unhappy_number?(n) when n > 1 do
+       is_happy_number?(n) == false
+   end
+   def is_unhappy_number?(_), do: false
+   
    
    @doc """
    Check if `n` is a _true vampire number_.

@@ -104,6 +104,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - semi-primes
   - wolstenholm
   - check Classes of Natural Numbers
+  - Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
 
     
  - functions    

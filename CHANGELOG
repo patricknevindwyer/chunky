@@ -34,6 +34,8 @@
   - is_economical_number?/1
   - is_wasteful_number?/1
   - is_equidigital_number?/1
+  - is_happy_number?/1
+  - is_unhappy_number?/1
   
 
 ### Sequences
@@ -42,6 +44,8 @@
  - A046759 - Economical numbers
  - A046760 - Wasteful numbers
  - A046758 - Equidigital numbers
+ - A007770 - Happy numbers
+ - A031177 - Unhappy numbers
 
  
  

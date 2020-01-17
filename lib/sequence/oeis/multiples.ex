@@ -5,6 +5,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   ## Available Sequences
 
+   - [A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.](https://oeis.org/A007770) - `:a007770` - `create_sequence_a007770/1`
    - [A008585 - a(n) = 3*n.](https://oeis.org/A008585) - `:a008585` - `create_sequence_a008585/1`
    - [A008586 - Multiples of 4.](https://oeis.org/A008586) - `:a008586` - `create_sequence_a008586/1`
    - [A008587 - Multiples of 5.](https://oeis.org/A008587) - `:a008587` - `create_sequence_a008587/1`
@@ -28,6 +29,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A008605 - Multiples of 23.](https://oeis.org/A008605) - `:a008605` - `create_sequence_a008605/1`
    - [A008606 - Multiples of 24.](https://oeis.org/A008606) - `:a008606` - `create_sequence_a008606/1`
    - [A008607 - Multiples of 25.](https://oeis.org/A008607) - `:a008607` - `create_sequence_a008607/1`
+   - [A031177 - Unhappy numbers: numbers having period-8 2-digitized sequences.](https://oeis.org/A031177) - `:a031177` - `create_sequence_a031177/1`
    - [A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.](https://oeis.org/A016825) - `:a016825` - `create_sequence_a016825/1`
    - [A169823 - Multiples of 60.](https://oeis.org/A169823) - `:a169823` - `create_sequence_a169823/1`
    - [A169825 - Multiples of 420.](https://oeis.org/A169825) - `:a169825` - `create_sequence_a169825/1`
@@ -66,6 +68,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A249674 - a(n) = 30*n.](https://oeis.org/A249674) - `:a249674` - `create_sequence_a249674/1`
    - [A252994 - Multiples of 26.](https://oeis.org/A252994) - `:a252994` - `create_sequence_a252994/1`
    - [A305548 - a(n) = 27*n.](https://oeis.org/A305548) - `:a305548` - `create_sequence_a305548/1`
+
 
 
 
@@ -2089,5 +2092,73 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   @doc offset: 0
   def seq_a016825(_idx, last) do
       Math.next_number(&Predicates.is_singly_even_number?/1, last + 1)
+  end
+  
+  @doc """
+  OEIS Sequence `A007770` - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.
+
+  From [OEIS A007770](https://oeis.org/A007770):
+
+  > Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.
+  > (Formerly )
+
+  **Sequence IDs**: `:a007770`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a007770) |> Sequence.take!(54)
+      [1,7,10,13,19,23,28,31,32,44,49,68,70,79,82,86,91,94,97,100,103,109,129,130,133,139,167,176,188,190,192,193,203,208,219,226,230,236,239,262,263,280,291,293,301,302,310,313,319,320,326,329,331,338]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.",
+       references: [{:oeis, :a007770, "https://oeis.org/A007770"}]
+  def create_sequence_a007770(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a007770/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a007770(_idx, last) do
+      Math.next_number(&Predicates.is_happy_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A031177` - Unhappy numbers: numbers having period-8 2-digitized sequences.
+
+  From [OEIS A031177](https://oeis.org/A031177):
+
+  > Unhappy numbers: numbers having period-8 2-digitized sequences.
+  > (Formerly )
+
+  **Sequence IDs**: `:a031177`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a031177) |> Sequence.take!(68)
+      [2,3,4,5,6,8,9,11,12,14,15,16,17,18,20,21,22,24,25,26,27,29,30,33,34,35,36,37,38,39,40,41,42,43,45,46,47,48,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,69,71,72,73,74,75,76,77,78,80,81,83]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Unhappy numbers: numbers having period-8 2-digitized sequences.",
+       references: [{:oeis, :a031177, "https://oeis.org/A031177"}]
+  def create_sequence_a031177(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a031177/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a031177(_idx, last) do
+      Math.next_number(&Predicates.is_unhappy_number?/1, last)
   end
 end
