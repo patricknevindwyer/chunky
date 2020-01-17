@@ -90,9 +90,9 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x frugal numbers /   - economical number?
   - x extravagent numbers
   - x equidigital
-  - happy number
-  - unhappy number
-  - evil number
+  - x happy number
+  - x unhappy number
+  - x evil number
   - polite numbers
   - impolite numbers
   - smith numbers
@@ -105,6 +105,13 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - wolstenholm
   - check Classes of Natural Numbers
   - Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
+  - narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html
+  - muenchhausen number - http://mathworld.wolfram.com/MuenchhausenNumber.html
+  - harshad number - http://mathworld.wolfram.com/HarshadNumber.html
+  - apocalypse numbers - http://mathworld.wolfram.com/ApocalypseNumber.html
+  - apocalyptic numbers - http://mathworld.wolfram.com/ApocalypticNumber.html
+  - belphegor numbers - http://mathworld.wolfram.com/BelphegorNumber.html
+  
 
     
  - functions    

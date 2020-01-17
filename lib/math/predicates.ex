@@ -88,7 +88,9 @@ defmodule Chunky.Math.Predicates do
 
    Patterns specific to base-2:
    
-    - `is_odious_number?/1` - Does binary expansion of `n` have odd number of `1`s?
+    - `is_evil_number?/1` - Does the binary expansion of `n` have an _even_ number of `1`s?
+    - `is_odious_number?/1` - Does the binary expansion of `n` have _odd_ number of `1`s?
+   
    
    Miscellaneous patterns:
       
@@ -245,7 +247,8 @@ defmodule Chunky.Math.Predicates do
    import Chunky.Math, 
        only: 
            [
-               coprimes: 1, 
+               coprimes: 1,
+               digit_count: 3, 
                factor_pairs: 1,
                factors: 1, 
                get_rhonda_to: 1,
@@ -402,10 +405,10 @@ defmodule Chunky.Math.Predicates do
        [:deficient, :doubly_even_number, :economical_number, :even, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
 
        iex> Predicates.analyze_number(-37)
-       [:negative, :odd]
+       [:negative, :odd, :odious_number]
 
        iex> Predicates.analyze_number(0)
-       [:cyclops_number, :doubly_even_number, :even, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
+       [:cyclops_number, :doubly_even_number, :even, :evil_number, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true)
        [:abundant, :arithmetic_number, :doubly_even_number, :even, :odious_number, :positive, :unhappy_number, :wasteful_number]
@@ -414,7 +417,7 @@ defmodule Chunky.Math.Predicates do
        [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :odious_number, :positive, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(1000, skip_smooth: true)
-       [:abundant, :doubly_even_number, :equidigital_number, :even, :happy_number, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
+       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :multiple_rhonda, :perfect_cube, :perfect_power, :positive, :powerful_number, :rhonda_to_base_16]
     
        iex> Predicates.analyze_number(1435)
        [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :odd, :odious_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
@@ -1249,6 +1252,40 @@ defmodule Chunky.Math.Predicates do
    def is_even?(n) when is_integer(n), do: false
    
    @doc """
+   Does `n` have an even number of `1`s in base 2?
+   
+   Evil numbers, and their counterpart the _odious_ numbers, count the quantity of set bits (`1`s) in
+   the base 2 expansion of a number.
+   
+   OEIS References:
+   
+    - [A001969 - Evil Numbers](http://oeis.org/A001969)
+   
+   See also:
+   
+    - `is_odious_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_evil_number?(3)
+       true
+
+       iex> Predicates.is_evil_number?(23)
+       true
+
+       iex> Predicates.is_evil_number?(25)
+       false
+
+       iex> Predicates.is_evil_number?(19940)
+       true
+   
+   """
+   def is_evil_number?(n) when is_integer(n) do
+       digit_count(n, [1], base: 2) |> rem(2) == 0    
+   end
+   
+   @doc """
    Does the repeated sum of squares of the digits of `n` converge to `1`?
    
    By repeatedly taking the digits of a number, squaring them, and summing the result, all
@@ -1538,6 +1575,15 @@ defmodule Chunky.Math.Predicates do
 
    See definition on [MathWorld](http://mathworld.wolfram.com/OdiousNumber.html) or [Wikipedia](https://en.wikipedia.org/wiki/Odious_number).
    
+   OEIS References:
+   
+    - [A000069 - Odious Numbers](http://oeis.org/A000069)
+   
+   See also:
+    
+    - `is_evil_number?/1`
+   
+   
    ## Examples
 
        iex> Predicates.is_odious_number?(2)
@@ -1556,16 +1602,8 @@ defmodule Chunky.Math.Predicates do
        true
 
    """
-   def is_odious_number?(n) when is_integer(n) and n <= 0, do: false
-
-   def is_odious_number?(i) when is_integer(i) and i > 0 do
-     ones =
-       i
-       |> Integer.digits(2)
-       |> Enum.filter(fn d -> d == 1 end)
-       |> Enum.sum()
-
-     rem(ones, 2) == 1
+   def is_odious_number?(n) when is_integer(n) do
+       digit_count(n, [1], base: 2) |> rem(2) == 1    
    end
    
    @doc """

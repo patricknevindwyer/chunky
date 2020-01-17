@@ -36,6 +36,7 @@
   - is_equidigital_number?/1
   - is_happy_number?/1
   - is_unhappy_number?/1
+  - is_evil_number?/1
   
 
 ### Sequences
