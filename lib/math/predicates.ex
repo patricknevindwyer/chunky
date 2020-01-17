@@ -1917,6 +1917,7 @@ defmodule Chunky.Math.Predicates do
    OEIS References:
    
     - [A138591 - Sums of two or more consecutive nonnegative integers](https://oeis.org/A138591)
+    - [A057716 - The non-powers of 2](https://oeis.org/A057716)
    
    See also:
    
