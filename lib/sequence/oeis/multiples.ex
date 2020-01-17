@@ -5,6 +5,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   ## Available Sequences
 
+   - [A006753 - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).](https://oeis.org/A006753) - `:a006753` - `create_sequence_a006753/1`
    - [A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.](https://oeis.org/A007770) - `:a007770` - `create_sequence_a007770/1`
    - [A008585 - a(n) = 3*n.](https://oeis.org/A008585) - `:a008585` - `create_sequence_a008585/1`
    - [A008586 - Multiples of 4.](https://oeis.org/A008586) - `:a008586` - `create_sequence_a008586/1`
@@ -29,6 +30,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A008605 - Multiples of 23.](https://oeis.org/A008605) - `:a008605` - `create_sequence_a008605/1`
    - [A008606 - Multiples of 24.](https://oeis.org/A008606) - `:a008606` - `create_sequence_a008606/1`
    - [A008607 - Multiples of 25.](https://oeis.org/A008607) - `:a008607` - `create_sequence_a008607/1`
+   - [A019506 - Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.](https://oeis.org/A019506) - `:a019506` - `create_sequence_a019506/1`
    - [A031177 - Unhappy numbers: numbers having period-8 2-digitized sequences.](https://oeis.org/A031177) - `:a031177` - `create_sequence_a031177/1`
    - [A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.](https://oeis.org/A016825) - `:a016825` - `create_sequence_a016825/1`
    - [A169823 - Multiples of 60.](https://oeis.org/A169823) - `:a169823` - `create_sequence_a169823/1`
@@ -2198,5 +2200,73 @@ defmodule Chunky.Sequence.OEIS.Multiples do
           1 -> 1
           _ -> Math.next_number(&Predicates.is_polite_number?/1, last)
       end
+  end
+  
+  @doc """
+  OEIS Sequence `A006753` - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).
+
+  From [OEIS A006753](https://oeis.org/A006753):
+
+  > Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).
+  > (Formerly M3582)
+
+  **Sequence IDs**: `:a006753`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a006753) |> Sequence.take!(52)
+      [4,22,27,58,85,94,121,166,202,265,274,319,346,355,378,382,391,438,454,483,517,526,535,562,576,588,627,634,636,645,648,654,663,666,690,706,728,729,762,778,825,852,861,895,913,915,922,958,985,1086,1111,1165]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).",
+       references: [{:oeis, :a006753, "https://oeis.org/A006753"}]
+  def create_sequence_a006753(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006753/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a006753(_idx, last) do
+      Math.next_number(&Predicates.is_smith_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A019506` - Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.
+
+  From [OEIS A019506](https://oeis.org/A019506):
+
+  > Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.
+  > (Formerly )
+
+  **Sequence IDs**: `:a019506`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a019506) |> Sequence.take!(50)
+      [22,58,84,85,94,136,160,166,202,234,250,265,274,308,319,336,346,355,361,364,382,391,424,438,454,456,476,483,516,517,526,535,562,627,634,644,645,650,654,660,663,690,702,706,732,735,762,778,855,860]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.",
+       references: [{:oeis, :a019506, "https://oeis.org/A019506"}]
+  def create_sequence_a019506(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a019506/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a019506(_idx, last) do
+      Math.next_number(&Predicates.is_hoax_number?/1, last)
   end
 end

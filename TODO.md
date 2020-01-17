@@ -77,6 +77,13 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - link from Math
   - link from library.md
  
+ - todo for new predicate
+  - predicate function
+  - predicate TOF
+  - predicate doc (inline, OEIS ref, see also, examples)
+  - OEIS sequence
+  - sequence test
+  - CHANGELOG (sequence and func)
  
 ## TODO
  
@@ -95,7 +102,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x evil number
   - x polite numbers
   - x impolite numbers
-  - smith numbers
+  - x smith numbers
   - hypotenuse numbers
   - non-hypotenuse numbers
   - practical numbers
@@ -111,6 +118,8 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - apocalypse numbers - http://mathworld.wolfram.com/ApocalypseNumber.html
   - apocalyptic numbers - http://mathworld.wolfram.com/ApocalypticNumber.html
   - belphegor numbers - http://mathworld.wolfram.com/BelphegorNumber.html
+  - monica set - http://mathworld.wolfram.com/MonicaSet.html
+  - suzanne set - http://mathworld.wolfram.com/SuzanneSet.html
   
 
     

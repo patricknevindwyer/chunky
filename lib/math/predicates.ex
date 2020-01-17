@@ -52,6 +52,12 @@ defmodule Chunky.Math.Predicates do
     - `is_impolite_number?/1` - The number `n` cannot be written as the sum of two or more consecutive positive integers
     - `is_polite_number?/1` - The number `n` _can_ be written as the sum of two or more consecutive positive integers
    
+   The Smith and Hoax numbers involve the digit sum of a number compared to the digit sum of the prime factors of the
+   number.
+   
+    - `is_hoax_number?/1` - Hoax numbers have equal digits sums in `n` and the summed _unique_ prime factors of `n`.
+    - `is_smith_number?/1` - Smith numbers have equal digit sums in `n` and the summed prime factors of `n`.
+   
    
    ## Number Theory
    
@@ -261,6 +267,7 @@ defmodule Chunky.Math.Predicates do
            [
                coprimes: 1,
                digit_count: 3, 
+               digit_sum: 1,
                factor_pairs: 1,
                factors: 1, 
                get_rhonda_to: 1,
@@ -1444,6 +1451,60 @@ defmodule Chunky.Math.Predicates do
      |> Enum.filter(fn m -> product_of_prime_factor_exponents(m) >= ppfe_n end)
      |> length() == 0
    end
+   
+   @doc """
+   Is `n` a hoax number? Hoax numbers have a digit sum of `n` equal to the digit 
+   sum of the unique prime factors of `n`.
+   
+   For instance `22` has a digit sum of `4`, and the unique prime factors `2^1 * 11^1`,
+   with digit sum of `2 + 1 + 1` or `4`.
+   
+   OEIS References:
+   
+    - [A019506 - Hoax Numbers](http://oeis.org/A019506)
+   
+   See also:
+   
+    - `is_smith_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_hoax_number?(20)
+       false
+
+       iex> Predicates.is_hoax_number?(22)
+       true
+
+       iex> Predicates.is_hoax_number?(160)
+       true
+
+       iex> Predicates.is_hoax_number?(170)
+       false
+   
+       iex> Predicates.is_hoax_number?(11209)
+       true
+   
+       iex> Predicates.is_hoax_number?(11220)
+       false
+   
+   
+   """
+   def is_hoax_number?(n) when n > 0 do
+       if is_prime?(n) do
+           false
+       else
+           (prime_factors(n) -- [1]
+      
+           # digit sums of parts
+           |> Enum.uniq()
+           |> Enum.map(fn d -> digit_sum(d) end)
+           |> Enum.sum()) == digit_sum(n)
+       end
+       
+   end
+   
+   def is_hoax_number?(_), do: false
    
    @doc """
    Is `n` an impolite number? Impolite numbers cannot be written as the sum of two consecutive integers.
@@ -2727,6 +2788,62 @@ defmodule Chunky.Math.Predicates do
    def is_singly_even_number?(n) when Integer.is_even(n) do
        rem(n, 2) == 0 && rem(n, 4) != 0
    end
+   
+   @doc """
+   Is `n` a Smith Number? Smith numbers have equal digit sums in `n` and the summed factors of `n`.
+  
+   The canonical example of a Smith number is `4937775`. The digits sum is `42` (`4 + 9 + 3 + 7 + 7 + 7 + 5`),
+   as is the sum of the prime factorization `3^1 + 5^2 + 65837^1` (`3 + (5 * 2) + (6 + 5 + 8 + 3 + 7)`).
+  
+   OEIS References:
+  
+    - [A006753 - Smith (or joke) numbers](https://oeis.org/A006753)
+  
+   See also:
+   
+    - `is_hoax_number?/1`
+   
+   
+   ## Examples
+  
+       iex> Predicates.is_smith_number?(4)
+       true
+   
+       iex> Predicates.is_smith_number?(5)
+       false
+
+       iex> Predicates.is_smith_number?(8)
+       false
+
+       iex> Predicates.is_smith_number?(382)
+       true
+
+       iex> Predicates.is_smith_number?(436)
+       false
+
+       iex> Predicates.is_smith_number?(8545)
+       true
+
+       iex> Predicates.is_smith_number?(13444)
+       false
+
+       iex> Predicates.is_smith_number?(4937775)
+       true
+  
+   """
+   def is_smith_number?(n) when n > 0 do
+      
+       if is_prime?(n) do
+           false
+       else
+           (prime_factors(n) -- [1]
+      
+           # digit sums of parts
+           |> Enum.map(fn d -> digit_sum(d) end)
+           |> Enum.sum()) == digit_sum(n)
+       end
+   end
+   def is_smith_number?(_), do: false
    
    @doc """
    Check if `n` is a _sphenic number_, the product of three distinct primes.

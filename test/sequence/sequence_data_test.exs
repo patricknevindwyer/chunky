@@ -4657,6 +4657,22 @@ defmodule Chunky.SequenceDataTest do
       finite: false,
       first_index: 1
     },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Multiples,
+      sequence: :a006753,
+      opts: [],
+      values: [4, 22, 27, 58, 85, 94, 121, 166, 202, 265],
+      finite: false,
+      first_index: 1
+    },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Multiples,
+      sequence: :a019506,
+      opts: [],
+      values: [22, 58, 84, 85, 94, 136, 160, 166, 202, 234],
+      finite: false,
+      first_index: 1
+    },
 
     # OEIS.Repr
     %{

@@ -39,6 +39,8 @@
   - is_evil_number?/1
   - is_polite_number?/1
   - is_impolite_number?/1
+  - is_smith_number?/1
+  - is_hoax_number?/1
   
 
 ### Sequences
@@ -51,9 +53,9 @@
  - A031177 - Unhappy numbers
  - A057716 - The non-powers of 2
  - A138591 - Sums of two or more consecutive nonnegative integers
+ - A006753 - Smith (or joke) numbers
+ - A019506 - Hoax numbers
 
- 
- 
 
 ## v0.11.5
 
