@@ -51,6 +51,8 @@
   - is_weird_number?/11
   - is_primitive_pseudoperfect_number?/1
   - is_primitive_weird_number?/1
+  - is_semiprime_number?/1
+  - is_squarefree_semiprime?/1
 
 ### Sequences
 

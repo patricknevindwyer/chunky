@@ -111,12 +111,10 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x weird
   - x primitive pseudoperfect
   - x primitive weird (http://oeis.org/A002975)
-  
-  - rebuild "see also" of perfect variants
-  
+  - x rebuild "see also" of perfect variants
   - [-] giuga numbers
   - ulam numbers
-  - semi-primes
+  - x semi-primes
   - wolstenholm
   - check Classes of Natural Numbers
   - check Divisibility-based sets of integers (ref section of https://en.wikipedia.org/wiki/Practical_number)
@@ -135,7 +133,6 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  - functions    
   - egyptian fraction
   - generalized harmonic number
- 
  
  - better docs for sequence libraries
   - group by commonality, link to just internal ref

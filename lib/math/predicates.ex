@@ -220,6 +220,10 @@ defmodule Chunky.Math.Predicates do
    Generalizations of the Euler, Euler-Jacobi, and Fermat pseudo-prime functions across _any_ base (not just base 10)
    are available in `Chunky.Math`.
 
+   Semiprime numbers are composite numbers that, similar to the pseudoprimes, fullfil certain criteria.
+   
+    - `is_semiprime_number?/1` - Is `n` a composite with exactly two prime factors?
+    - `is_squarefree_semiprime?/1` - Is `n` a composite with exactly two _distinct_ prime factors?
 
    ## Rhonda Numbers
    
@@ -292,6 +296,7 @@ defmodule Chunky.Math.Predicates do
    import Chunky.Math, 
        only: 
            [
+               bigomega: 1,
                coprimes: 1,
                digit_count: 3, 
                digit_sum: 1,
@@ -3183,6 +3188,41 @@ defmodule Chunky.Math.Predicates do
    end
    
    @doc """
+   Is `n` a composite number with exactly two prime factors?
+   
+   OEIS References:
+   
+    - [A001358 - Semiprimes](http://oeis.org/A001358)
+   
+   See also:
+   
+    - `is_squarefree_semiprime?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_semiprime_number?(4)
+       true
+
+       iex> Predicates.is_semiprime_number?(11)
+       false
+
+       iex> Predicates.is_semiprime_number?(21)
+       true
+
+       iex> Predicates.is_semiprime_number?(128)
+       false
+
+       iex> Predicates.is_semiprime_number?(40773)
+       true
+   
+   """
+   def is_semiprime_number?(n) when n > 0 do
+       bigomega(n) == 2    
+   end
+   def is_semiprime_number?(_), do: false
+   
+   @doc """
    Is `n` a divisible by 2, but not by 4?
    
    Singly divisible numbers are of the form `4*n + 2`.
@@ -3368,6 +3408,46 @@ defmodule Chunky.Math.Predicates do
      |> Enum.filter(fn c_f -> is_perfect_square?(c_f) end)
      |> length() == 0
    end
+   
+   @doc """
+   Is `n` a semiprime and also square free - a composite of two distinct primes?
+   
+   This function is an optimization of combining `is_semiprime_number?/1` and `is_squarefree?/1`.
+   
+   OEIS References:
+   
+    - [A006881 - Squarefree semiprimes](http://oeis.org/A006881)
+   
+   See also:
+   
+    - `is_semiprime_number?/1`
+    - `is_squarefree?/1`
+   
+   
+   ## Examples
+       
+       iex> Predicates.is_squarefree_semiprime?(4)
+       false
+
+       iex> Predicates.is_squarefree_semiprime?(21)
+       true
+
+       iex> Predicates.is_squarefree_semiprime?(58)
+       true
+
+       iex> Predicates.is_squarefree_semiprime?(187)
+       true
+
+       iex> Predicates.is_squarefree_semiprime?(4414)
+       true
+   
+   """
+   def is_squarefree_semiprime?(n) when n > 0 do
+       facs = prime_factors(n) -- [1]
+       length(facs) == 2 && length(Enum.uniq(facs)) == 2    
+   end
+   def is_squarefree_semiprime?(_), do: false
+   
    
    @doc """
    Is `n` a _two sided_ prime, a number that is both a left and right trucatable prime.
