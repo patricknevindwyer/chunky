@@ -26,6 +26,7 @@
    - nth_integer_root/2 -> {:exact, __} or {:nearest, __}
    - nth_integer_root!/2 -> val
   - reduced_prime_factors/1
+  - has_subset_sum?/2
  - new module Chunky.Math.Predicates
  - refactored all functions of form `is_*?/1` from Chunky.Math to Chunky.Math.Predicates
  - Math.Predicates

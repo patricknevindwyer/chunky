@@ -11,6 +11,10 @@ defmodule Chunky.Math.Predicates do
    of the predicate functions assume that the number being evaluated is in Base 10 - these function will often have
    counterparts in `Chunky.Math` that work on numbers in _any_ base.
    
+   All of the predicates can be used to analyze an integer with:
+
+    - `analyze_number/2` - Apply all of the predicates to an integer, and collect resulting labels
+   
    
    ## Factors and Divisors
    

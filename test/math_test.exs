@@ -142,6 +142,19 @@ defmodule Chunky.MathTest do
           )
           
       end
+      
+      test "[evens]" do
+          vs = [-11, -4, -3, -2, -1, 0, 1, 2, 3, 4, 11]
+          hs = [false, true, false, true, false, true, false, true, false, true, false]
+          ls = [-6, -4, -2, 0, 2, 4, 6]
+          
+          Enum.zip(vs, hs)
+          |> Enum.each(
+              fn {val, res} -> 
+                  assert Math.has_subset_sum?(ls, val) == res
+              end
+          )          
+      end
   end
   
   describe "reduced_prime_factors/1" do

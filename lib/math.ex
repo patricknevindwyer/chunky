@@ -41,7 +41,12 @@ defmodule Chunky.Math do
    - `nth_root/3` - Floating point `n-th` root of an integer
    - `floats_equal?/3` - Determine if two floats are equal, within an error bound
 
-
+  
+  ## Sets and Lists
+  
+   - `has_subset_sum?/2` - Does any subset of integers in a list sum to `n`?
+  
+  
   ## Factorization and Divisors
 
   Work with divisors and prime factors.
@@ -94,10 +99,6 @@ defmodule Chunky.Math do
    - `prime_factor_exponents/1` - Find the exponents of all prime factors of `n`
    - `prime_pi/1` - Prime counting function, number of primes less than or equal `n`
 
-
-  All of the predicates can be used to analyze an integer with:
-
-   - `analyze_number/2` - Apply all 1-arity predicates to an integer, and collect resulting labels
 
   ## Number Theory
 
@@ -213,6 +214,7 @@ defmodule Chunky.Math do
   Functions related to cryptographc analysis, factorization in cryptography, and numeric constructions.
 
    - `is_b_smooth?/2` - Is `n` prime factor smooth up to `b` - all prime factors <= `b`  
+
 
   ## Number Generation
 
@@ -469,21 +471,85 @@ defmodule Chunky.Math do
     end
   end
   
+  @doc """
+  Does a list of numbers contain any subset that sums to `n`?
+  
+  The [subset sum](https://en.wikipedia.org/wiki/Subset_sum_problem) solution is an NP-Complete problem. For this
+  implementation a series of heuristics is used to quickly eliminate edge cases, and then an exponential time exact
+  combinatoric algorithm is used to search for solutions. This algoritm is a _fast pass_ recursion - as soon as a
+  valid solution is found, the algorithm terminates. The best case running time is `O(1)`, while the worst case (a full
+  search of all solutions, with no valid sum) is exponential to the size of the list of numbers, or approximates `O(2^N*N)`.
+  
+  
+  ## Examples
+  
+      iex> Math.has_subset_sum?([1, 2, 3, 5, 11], 9)
+      true
+
+      iex> Math.has_subset_sum?([1, 2, 3, 5, 11], 11)
+      true
+
+      iex> Math.has_subset_sum?([1, 2, 3, 5, 11], 23)
+      false
+  
+      iex> Math.has_subset_sum?([-3, 2, 4, 11], -1)
+      true
+
+      iex> Math.has_subset_sum?([-3, 2, 4, 11], 14)
+      true
+
+      iex> Math.has_subset_sum?([-3, 2, 4, 11], 10)
+      true
+  
+  
+  """
   def has_subset_sum?(nums, n) when is_list(nums) and is_integer(n) do
+            
+      # Our heuristics
+      #  - is N an explict member of the set?
+      #  - are nums all positive and n negative
+      #  - are nums all positive and n > sum(nums)
+      #  - are nums all even and n is negative?
+      #  - are nums all negative and n positive
+      #  - are nums all negative and n < sum(nums)
+      #  - is N < sum(negatives)
+      #  - is N > sum(positives)
+      all_pos = nums |> Enum.all?(&Predicates.is_positive?/1)
+      all_neg = nums |> Enum.all?(&Predicates.is_negative?/1)
+      all_evs = nums |> Enum.all?(&Predicates.is_even?/1)
+      pos_sum = nums |> Enum.filter(&Predicates.is_positive?/1) |> Enum.sum()
+      neg_sum = nums |> Enum.filter(&Predicates.is_negative?/1) |> Enum.sum()
       
-      if Enum.member?(nums, n) do
-          true
-      else
-      
-          # drop into a pass fast check of all combinations
-          1..length(nums)
-          |> Enum.any?(fn subset_size -> 
-              case subset_check(nums, subset_size, n) do
-                  true -> true
-                  _ -> false
-              end 
-          end)
+      cond do
+          
+         Enum.member?(nums, n) -> true 
+         
+         all_pos && Predicates.is_negative?(n) -> false
+         
+         all_pos && Enum.sum(nums) < n -> false
+         
+         all_evs && Predicates.is_odd?(n) -> false
+         
+         all_neg && Predicates.is_positive?(n) -> false
+         
+         all_neg && Enum.sum(nums) > n -> false
+         
+         n > pos_sum -> false
+         
+         n < neg_sum -> false
+         
+         true ->
+             # drop into a pass fast check of all combinations
+             1..length(nums)
+             |> Enum.any?(fn subset_size ->
+                 case subset_check(nums, subset_size, n) do
+                     true -> true
+                     _ -> false
+                 end 
+             end)
+             
       end
+      
   end
   
   defp subset_check(_, 0, _), do: [[]]
