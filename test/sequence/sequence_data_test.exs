@@ -4722,6 +4722,15 @@ defmodule Chunky.SequenceDataTest do
       first_index: 1,
       take_values: 3
     },
+    %{
+      module: Elixir.Chunky.Sequence.OEIS.Multiples,
+      sequence: :a006037,
+      opts: [],
+      values: [70, 836, 4030],
+      finite: false,
+      first_index: 1,
+      take_values: 3
+    },
 
     # OEIS.Repr
     %{

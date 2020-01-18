@@ -8,6 +8,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A004144 - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).](https://oeis.org/A004144) - `:a004144` - `create_sequence_a004144/1`
    - [A005153 - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.](https://oeis.org/A005153) - `:a005153` - `create_sequence_a005153/1`
    - [A005835 - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.](https://oeis.org/A005835) - `:a005835` - `create_sequence_a005835/1`
+   - [A006037 - Weird numbers: abundant (A005101) but not pseudoperfect (A005835).](https://oeis.org/A006037) - `:a006037` - `create_sequence_a006037/1`
    - [A006753 - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).](https://oeis.org/A006753) - `:a006753` - `create_sequence_a006753/1`
    - [A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.](https://oeis.org/A007770) - `:a007770` - `create_sequence_a007770/1`
    - [A008585 - a(n) = 3*n.](https://oeis.org/A008585) - `:a008585` - `create_sequence_a008585/1`
@@ -2474,4 +2475,38 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   def seq_a194472(_idx, last) do
       Math.next_number(&Predicates.is_erdos_nicolas_number?/1, last)
   end      
+  
+  @doc """
+  OEIS Sequence `A006037` - Weird numbers: abundant (A005101) but not pseudoperfect (A005835).
+
+  From [OEIS A006037](https://oeis.org/A006037):
+
+  > Weird numbers: abundant (A005101) but not pseudoperfect (A005835).
+  > (Formerly M5339)
+
+  **Sequence IDs**: `:a006037`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a006037) |> Sequence.take!(5)
+      [70,836,4030,5830,7192]
+
+
+  """ 
+  @doc offset: 1,
+       sequence: "Weird numbers: abundant (A005101) but not pseudoperfect (A005835).",
+       references: [{:oeis, :a006037, "https://oeis.org/A006037"}]
+  def create_sequence_a006037(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006037/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a006037(_idx, last) do
+      Math.next_number(&Predicates.is_weird_number?/1, last)
+  end
 end

@@ -48,6 +48,7 @@
   - is_primary_pseudoperfect_number?/1
   - is_pseudoperfect_number?/1
   - is_erdos_nicolas_number?/1
+  - is_weird_number?/11
 
 ### Sequences
 
@@ -67,6 +68,7 @@
  - A054377 - Primary pseudoperfect numbers
  - A005835 - Pseudoperfect (or semiperfect) numbers
  - A194472 - Erdős-Nicolas numbers
+ - A006037 - Weird numbers
 
 
 

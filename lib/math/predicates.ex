@@ -34,6 +34,7 @@ defmodule Chunky.Math.Predicates do
     - `is_erdos_nicolas_number?/1` - An abundant number `n` where the first `k` factors sum to `n`.
     - `is_primary_pseudoperfect_number?/1` - A number is primary pseudoperfect if the sum of 1 over `n` and 1 over the prime factors of `n` equals `1`.
     - `is_pseudoperfect_number?/1` - Does any subset of the factors of `n` sum to `n`?
+    - `is_weird_number?/1` - Is `n` abundant but not pseudoperfect?
    
    Powerful numbers look at the exponents of prime factors of a number `n`. For instance, `8` has the prime factorization
    `2 * 2 * 2`, or `2^3`. The number `72` has the prime factorization `2^3 * 3^2`.
@@ -1231,6 +1232,7 @@ defmodule Chunky.Math.Predicates do
    
     - `is_primary_pseudoperfect_number?/1`
     - `is_pseudoperfect_number?/1`
+    - `is_weird_number?/1`
    
    ## Examples
    
@@ -2361,6 +2363,7 @@ defmodule Chunky.Math.Predicates do
    
     - `is_erdos_nicolas_number?/1`
     - `is_pseudoperfect_number?/1`
+    - `is_weird_number?/1`
    
    
    ## Examples
@@ -2608,6 +2611,7 @@ defmodule Chunky.Math.Predicates do
    
     - `is_erdos_nicolas_number?/1`
     - `is_primary_pseudoperfect_number?/1`
+    - `is_weird_number?/1`
    
    
    ## Examples
@@ -3517,6 +3521,46 @@ defmodule Chunky.Math.Predicates do
        false
      end
    end
+   
+   @doc """
+   Weird numbers are _abundant_ but not _pseudoperfect_ numbers.
+   
+   A weird number `n` has a sum of factors that is greater than `n` (see `is_abundant?/1`), but no subset of
+   factors that sum to exactly `n` (see `is_pseudoperfect_number?/1`).
+   
+   OEIS References:
+   
+    - [A006037 - Weird Numbers](http://oeis.org/A006037)
+   
+   See also:
+   
+    - `is_erdos_nicolas_number?/1`
+    - `is_primary_pseudoperfect_number?/1`
+    - `is_pseudoperfect_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_weird_number?(24)
+       false
+
+       iex> Predicates.is_weird_number?(70)
+       true
+
+       iex> Predicates.is_weird_number?(820)
+       false
+
+       iex> Predicates.is_weird_number?(836)
+       true
+
+       iex> Predicates.is_weird_number?(10792)
+       true
+   
+   """
+   def is_weird_number?(n) when Integer.is_even(n) do
+       is_abundant?(n) && (is_pseudoperfect_number?(n) == false)
+   end
+   def is_weird_number?(_), do: false
    
    @doc """
    Predicate for testing for `0`
