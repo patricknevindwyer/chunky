@@ -7,6 +7,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
    - [A004144 - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).](https://oeis.org/A004144) - `:a004144` - `create_sequence_a004144/1`
    - [A005153 - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.](https://oeis.org/A005153) - `:a005153` - `create_sequence_a005153/1`
+   - [A005835 - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.](https://oeis.org/A005835) - `:a005835` - `create_sequence_a005835/1`
    - [A006753 - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).](https://oeis.org/A006753) - `:a006753` - `create_sequence_a006753/1`
    - [A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.](https://oeis.org/A007770) - `:a007770` - `create_sequence_a007770/1`
    - [A008585 - a(n) = 3*n.](https://oeis.org/A008585) - `:a008585` - `create_sequence_a008585/1`
@@ -2409,6 +2410,41 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        references: [{:oeis, :a054377, "https://oeis.org/A054377"}]
   def create_sequence_a054377(_opts) do
           sequence_for_list(@data_a054377)
-  end  
+  end 
   
+  @doc """
+  OEIS Sequence `A005835` - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.
+
+  From [OEIS A005835](https://oeis.org/A005835):
+
+  > Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.
+  > (Formerly M4094)
+
+  **Sequence IDs**: `:a005835`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a005835) |> Sequence.take!(62)
+      [6,12,18,20,24,28,30,36,40,42,48,54,56,60,66,72,78,80,84,88,90,96,100,102,104,108,112,114,120,126,132,138,140,144,150,156,160,162,168,174,176,180,186,192,196,198,200,204,208,210,216,220,222,224,228,234,240,246,252,258,260,264]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.",
+       references: [{:oeis, :a005835, "https://oeis.org/A005835"}]
+  def create_sequence_a005835(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005835/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a005835(_idx, last) do
+      Math.next_number(&Predicates.is_pseudoperfect_number?/1, last)
+  end 
+
+      
 end

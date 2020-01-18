@@ -32,6 +32,7 @@ defmodule Chunky.Math.Predicates do
    Variations on _perfect_ numbers take different approaches to summing the divisors of `n`.
    
     - `is_primary_pseudoperfect_number?/1` - A number is primary pseudoperfect if the sum of 1 over `n` and 1 over the prime factors of `n` equals `1`.
+    - `is_pseudoperfect_number?/1` - Does any subset of the factors of `n` sum to `n`?
    
    Powerful numbers look at the exponents of prime factors of a number `n`. For instance, `8` has the prime factorization
    `2 * 2 * 2`, or `2^3`. The number `72` has the prime factorization `2^3 * 3^2`.
@@ -293,6 +294,7 @@ defmodule Chunky.Math.Predicates do
                factor_pairs: 1,
                factors: 1, 
                get_rhonda_to: 1,
+               has_subset_sum?: 2,
                is_b_smooth?: 2, 
                is_cyclops_number_in_base?: 2,
                is_euler_jacobi_pseudo_prime?: 2,
@@ -456,10 +458,10 @@ defmodule Chunky.Math.Predicates do
        [:abundant, :arithmetic_number, :doubly_even_number, :even, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :unhappy_number, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :pseudoperfect_number, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(1000, skip_smooth: true)
-       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :hypotenuse_number, :multiple_rhonda, :perfect_cube, :perfect_power, :polite_number, :positive, :powerful_number, :practical_number, :rhonda_to_base_16]
+       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :hypotenuse_number, :multiple_rhonda, :perfect_cube, :perfect_power, :polite_number, :positive, :powerful_number, :practical_number, :pseudoperfect_number, :rhonda_to_base_16]
     
        iex> Predicates.analyze_number(1435)
        [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :hypotenuse_number, :odd, :odious_number, :polite_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
@@ -2303,6 +2305,10 @@ defmodule Chunky.Math.Predicates do
    
     - [A054377 - Primary pseudoperfect numbers](https://oeis.org/A054377)
    
+   See also:
+   
+    - `is_pseudoperfect_number?/1`
+   
    
    ## Examples
    
@@ -2532,6 +2538,47 @@ defmodule Chunky.Math.Predicates do
        |> length() > 0
      end
    end
+   
+   @doc """
+   Can `n` be written as a sum of some or all of its divisors?
+   
+   The pseudoperfect numbers are a super-set of the perfect numbers (where the sum of factors is equal to `n`), such
+   that the sum of any combination of the factors of `n` equal `n`. Finding pseudoperfect numbers
+   is equivalent to solving the Subset Sum, an NP-Complete problem. For numbers with a lot of factors, this
+   algorithm will run in the worst case of exponential time.
+   
+   OEIS References:
+   
+    - [A005835 - Pseudoperfect](https://oeis.org/A005835)
+   
+   See also:
+   
+    - `is_primary_pseudoperfect_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_pseudoperfect_number?(4)
+       false
+
+       iex> Predicates.is_pseudoperfect_number?(6)
+       true
+
+       iex> Predicates.is_pseudoperfect_number?(12)
+       true
+
+       iex> Predicates.is_pseudoperfect_number?(150)
+       true
+
+       iex> Predicates.is_pseudoperfect_number?(1944)
+       true
+   
+   """
+   def is_pseudoperfect_number?(n) when n > 0 do
+       factors(n) -- [n]
+       |> has_subset_sum?(n)
+   end
+   def is_pseudoperfect_number?(_), do: false
    
    @doc """
    Determine if `n` is pseudo-prime to base 10.
