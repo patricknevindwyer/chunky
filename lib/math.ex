@@ -468,6 +468,67 @@ defmodule Chunky.Math do
       end
     end
   end
+  
+  def has_subset_sum?(nums, n) when is_list(nums) and is_integer(n) do
+      
+      if Enum.member?(nums, n) do
+          true
+      else
+      
+          # drop into a pass fast check of all combinations
+          1..length(nums)
+          |> Enum.any?(fn subset_size -> 
+              case subset_check(nums, subset_size, n) do
+                  true -> true
+                  _ -> false
+              end 
+          end)
+      end
+  end
+  
+  defp subset_check(_, 0, _), do: [[]]
+  defp subset_check([], k, _) when is_integer(k), do: []
+  defp subset_check([head | tail], k, value) when is_integer(k) and is_integer(value) do
+      
+      # our tail call could have a boolean or a list
+      tail_comb = subset_check(tail, k - 1, value)
+      # IO.inspect(tail_comb)
+            
+      cond do
+                    
+          # if it's a boolean, pass it back
+          is_boolean(tail_comb) -> tail_comb
+          
+          # not a bool, keep tryin
+          true -> 
+              
+              # check these inner values
+              inner_comb = Enum.map(
+                tail_comb,
+                fn r_comb ->
+                  [head | r_comb]
+                end
+              )
+              
+              # now we check to see if any of the inner values calculated so far
+              # match our test value - if so, return boolean, otherwise return
+              # our tail sets
+              if Enum.any?(inner_comb, fn vals -> Enum.sum(vals) == value end) do
+                  true
+              else
+                  
+                  # before we return our tail set, check if the _tail_ had a boolean
+                  # answer
+                  subs = subset_check(tail, k, value)
+                  cond do
+                      is_boolean(subs) -> subs
+                      true -> inner_comb ++ subs
+                  end                  
+              end
+          
+      end
+  end
+  
 
   @doc """
   Count the number of possible factorizations of `n`.
