@@ -47,7 +47,7 @@
   - is_practical_number?/1
   - is_primary_pseudoperfect_number?/1
   - is_pseudoperfect_number?/1
-  
+  - is_erdos_nicolas_number?/1
 
 ### Sequences
 
@@ -66,6 +66,7 @@
  - A005153 - Practical numbers
  - A054377 - Primary pseudoperfect numbers
  - A005835 - Pseudoperfect (or semiperfect) numbers
+ - A194472 - Erdős-Nicolas numbers
 
 
 

@@ -31,6 +31,7 @@ defmodule Chunky.Math.Predicates do
 
    Variations on _perfect_ numbers take different approaches to summing the divisors of `n`.
    
+    - `is_erdos_nicolas_number?/1` - An abundant number `n` where the first `k` factors sum to `n`.
     - `is_primary_pseudoperfect_number?/1` - A number is primary pseudoperfect if the sum of 1 over `n` and 1 over the prime factors of `n` equals `1`.
     - `is_pseudoperfect_number?/1` - Does any subset of the factors of `n` sum to `n`?
    
@@ -1216,6 +1217,57 @@ defmodule Chunky.Math.Predicates do
    def is_equidigital_number?(_), do: false
    
    @doc """
+   Is `n` an abundant number whose first `k` factors sum to `n`?
+   
+   The Erdős-Nicolas numbers are a variation on abundant and perfect numbers. The first `k` factors
+   of `n` must sum to `n`; for instance `2016` is an Erdős-Nicolas number, as the first 31 factors (of 35
+   factors) sums to `2016`.
+   
+   OEIS References
+   
+    - [A194472 - Erdős-Nicolas numbers](https://oeis.org/A194472)
+   
+   See also:
+   
+    - `is_primary_pseudoperfect_number?/1`
+    - `is_pseudoperfect_number?/1`
+   
+   ## Examples
+   
+       iex> Predicates.is_erdos_nicolas_number?(6)
+       false
+
+       iex> Predicates.is_erdos_nicolas_number?(24)
+       true
+
+       iex> Predicates.is_erdos_nicolas_number?(2016)
+       true
+
+       iex> Predicates.is_erdos_nicolas_number?(4096)
+       false
+
+       iex> Predicates.is_erdos_nicolas_number?(8190)
+       true
+   
+   """
+   def is_erdos_nicolas_number?(n) when n > 0 do
+       is_abundant?(n) && has_prefix_sum?(factors(n) -- [n], 0, n)
+   end
+   def is_erdos_nicolas_number?(_), do: false
+   
+   defp has_prefix_sum?([], sum, val) do
+       sum == val
+   end
+   
+   defp has_prefix_sum?([pre | nums], sum, val) do
+       if sum == val do
+           true
+       else
+           has_prefix_sum?(nums, sum + pre, val)
+       end
+   end
+   
+   @doc """
    Check if `n` is an Euler-Jacobi pseudo-prime to base 10.
 
    **Generalized function**: `Chunky.Math.is_euler_jacobi_pseudo_prime?/2`
@@ -2307,6 +2359,7 @@ defmodule Chunky.Math.Predicates do
    
    See also:
    
+    - `is_erdos_nicolas_number?/1`
     - `is_pseudoperfect_number?/1`
    
    
@@ -2553,6 +2606,7 @@ defmodule Chunky.Math.Predicates do
    
    See also:
    
+    - `is_erdos_nicolas_number?/1`
     - `is_primary_pseudoperfect_number?/1`
    
    

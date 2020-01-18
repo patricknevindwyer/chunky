@@ -72,15 +72,11 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A138591 - Sums of two or more consecutive nonnegative integers.](https://oeis.org/A138591) - `:a138591` - `create_sequence_a138591/1`
    - [A152691 - Multiples of 64.](https://oeis.org/A152691) - `:a152691` - `create_sequence_a152691/1`
    - [A174312 - 32*n.](https://oeis.org/A174312) - `:a174312` - `create_sequence_a174312/1`
+   - [A194472 - Erdős-Nicolas numbers.](https://oeis.org/A194472) - `:a194472` - `create_sequence_a194472/1`
    - [A195819 - Multiples of 29.](https://oeis.org/A195819) - `:a195819` - `create_sequence_a195819/1`
    - [A249674 - a(n) = 30*n.](https://oeis.org/A249674) - `:a249674` - `create_sequence_a249674/1`
    - [A252994 - Multiples of 26.](https://oeis.org/A252994) - `:a252994` - `create_sequence_a252994/1`
    - [A305548 - a(n) = 27*n.](https://oeis.org/A305548) - `:a305548` - `create_sequence_a305548/1`
-
-
-
-
-
 
 
   """
@@ -93,7 +89,6 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   # raw data for A054377 - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.
   @data_a054377 [2,6,42,1806,47058,2214502422,52495396602,8490421583559688410706771261086]
-
 
   @doc """
   OEIS Sequence `A008585` - a(n) = 3*n.
@@ -2446,5 +2441,37 @@ defmodule Chunky.Sequence.OEIS.Multiples do
       Math.next_number(&Predicates.is_pseudoperfect_number?/1, last)
   end 
 
-      
+  @doc """
+  OEIS Sequence `A194472` - Erdős-Nicolas numbers.
+
+  From [OEIS A194472](https://oeis.org/A194472):
+
+  > Erdős-Nicolas numbers.
+  > (Formerly )
+
+  **Sequence IDs**: `:a194472`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a194472) |> Sequence.take!(5)
+      [24,2016,8190,42336,45864]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Erdős-Nicolas numbers.",
+       references: [{:oeis, :a194472, "https://oeis.org/A194472"}]
+  def create_sequence_a194472(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a194472/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a194472(_idx, last) do
+      Math.next_number(&Predicates.is_erdos_nicolas_number?/1, last)
+  end      
 end
