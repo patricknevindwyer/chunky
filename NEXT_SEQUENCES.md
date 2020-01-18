@@ -2,7 +2,7 @@
 
 ```elixir 
 OEIS.Util.generate_function_sequences(~w(A005153), in_module: Chunky.Sequence.OEIS.Multiples)
-OEIS.Util.generate_list_sequences(, in_module: Chunky.Sequence.OEIS.Factors)
+OEIS.Util.generate_list_sequences(~w(), in_module: Chunky.Sequence.OEIS.Multiples)
 ```
 
 ## Combinatorics

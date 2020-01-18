@@ -25,6 +25,10 @@ defmodule Chunky.Math.Predicates do
     - `is_highly_abundant?/1` - Is the sum of divisors of `n` greater than the sum of divisors of any number _less_ than `n`?
     - `is_perfect?/1` - Is the sum of divisors of `n` equal to `n`?
 
+   Variations on _perfect_ numbers take different approaches to summing the divisors of `n`.
+   
+    - `is_primary_pseudoperfect_number?/1` - A number is primary pseudoperfect if the sum of 1 over `n` and 1 over the prime factors of `n` equals `1`.
+   
    Powerful numbers look at the exponents of prime factors of a number `n`. For instance, `8` has the prime factorization
    `2 * 2 * 2`, or `2^3`. The number `72` has the prime factorization `2^3 * 3^2`.
    
@@ -67,7 +71,7 @@ defmodule Chunky.Math.Predicates do
    
     - `is_nonhypotenuse_number?/1` - Can the square of `n` not be written as the sum of two other squares?
     - `is_hypotenuse_number?/1` - Can the square of `n` be written as the sum of two other squares?
-   
+      
    
    ## Number Theory
    
@@ -269,7 +273,11 @@ defmodule Chunky.Math.Predicates do
    """
     
    require Integer
+   require Chunky.Math.Operations
+  
+   import Chunky.Math.Operations, only: [summation: 3]
    
+   alias Chunky.Fraction
    alias Chunky.Math
    
    import Chunky.Math, 
@@ -2274,6 +2282,54 @@ defmodule Chunky.Math.Predicates do
       end
    end
    def is_practical_number?(_), do: false
+   
+   @doc """
+   Is `n` a primary pseudoperfect number? A number is primary pseudoperfect if the sum of 1 over `n` and 1 over the
+   prime factors of `n` equals `1`.
+   
+   This summation over reciprocals of prime factors is also called the Egyptian fraction:
+   
+    ![Egyptian fraction](https://wikimedia.org/api/rest_v1/media/math/render/svg/5771d36b75526fc2b111629deba3776de7913b8a)
+   
+   This function uses the alternate fractional summation of:
+   
+    ![Pseudoperfect Summation](https://wikimedia.org/api/rest_v1/media/math/render/svg/fd4e0622e97b7cfca74c6d1186848be5b04c86d4)
+   
+   OEIS References:
+   
+    - [A054377 - Primary pseudoperfect numbers](https://oeis.org/A054377)
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_primary_pseudoperfect_number?(2)
+       true
+
+       iex> Predicates.is_primary_pseudoperfect_number?(4)
+       false
+
+       iex> Predicates.is_primary_pseudoperfect_number?(6)
+       true
+
+       iex> Predicates.is_primary_pseudoperfect_number?(210)
+       false
+
+       iex> Predicates.is_primary_pseudoperfect_number?(1806)
+       true
+   
+   """
+   def is_primary_pseudoperfect_number?(n) when n > 1 do
+   
+       ef = (summation p, prime_factors(n) -- [1] do
+           Fraction.new(n, p)
+       end)
+       |> Fraction.add(1)
+       
+       Fraction.is_whole?(ef) && (Fraction.get_whole(ef) == n)
+          
+   end
+   
+   def is_primary_pseudoperfect_number?(_), do: false
    
    @doc """
    Determine if a positive integer is prime.

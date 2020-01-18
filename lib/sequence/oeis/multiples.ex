@@ -33,9 +33,10 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A008606 - Multiples of 24.](https://oeis.org/A008606) - `:a008606` - `create_sequence_a008606/1`
    - [A008607 - Multiples of 25.](https://oeis.org/A008607) - `:a008607` - `create_sequence_a008607/1`
    - [A009003 - Hypotenuse numbers (squares are sums of 2 nonzero squares).](https://oeis.org/A009003) - `:a009003` - `create_sequence_a009003/1`
+   - [A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.](https://oeis.org/A016825) - `:a016825` - `create_sequence_a016825/1`
    - [A019506 - Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.](https://oeis.org/A019506) - `:a019506` - `create_sequence_a019506/1`
    - [A031177 - Unhappy numbers: numbers having period-8 2-digitized sequences.](https://oeis.org/A031177) - `:a031177` - `create_sequence_a031177/1`
-   - [A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.](https://oeis.org/A016825) - `:a016825` - `create_sequence_a016825/1`
+   - [A054377 - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.](https://oeis.org/A054377) - `:a054377` - `create_sequence_a054377/1`
    - [A169823 - Multiples of 60.](https://oeis.org/A169823) - `:a169823` - `create_sequence_a169823/1`
    - [A169825 - Multiples of 420.](https://oeis.org/A169825) - `:a169825` - `create_sequence_a169825/1`
    - [A169827 - Multiples of 840.](https://oeis.org/A169827) - `:a169827` - `create_sequence_a169827/1`
@@ -83,10 +84,15 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
 
-  import Chunky.Sequence, only: [sequence_for_function: 1]
+  import Chunky.Sequence, only: [sequence_for_function: 1, sequence_for_list: 1]
 
   alias Chunky.Math
   alias Chunky.Math.Predicates
+
+
+  # raw data for A054377 - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.
+  @data_a054377 [2,6,42,1806,47058,2214502422,52495396602,8490421583559688410706771261086]
+
 
   @doc """
   OEIS Sequence `A008585` - a(n) = 3*n.
@@ -2376,4 +2382,33 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   def seq_a005153(_idx, last) do
       Math.next_number(&Predicates.is_practical_number?/1, last)
   end
+
+  @doc """
+  OEIS Sequence `A054377` - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.
+
+  From [OEIS A054377](https://oeis.org/A054377):
+
+  > Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.
+  > (Formerly )
+
+  **Sequence IDs**: `:a054377`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a054377) |> Sequence.take!(8)
+      [2,6,42,1806,47058,2214502422,52495396602,8490421583559688410706771261086]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.",
+       references: [{:oeis, :a054377, "https://oeis.org/A054377"}]
+  def create_sequence_a054377(_opts) do
+          sequence_for_list(@data_a054377)
+  end  
+  
 end

@@ -106,7 +106,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x hypotenuse numbers
   - x non-hypotenuse numbers
   - x practical numbers
-  - primary pseudo-perfect
+  - x primary pseudo-perfect
   - semiperfect
   - giuga numbers
   - ulam numbers
