@@ -41,6 +41,9 @@
   - is_impolite_number?/1
   - is_smith_number?/1
   - is_hoax_number?/1
+  - is_nonhypotenuse_number?/1
+  - is_hypotenuse_number?/1
+  - is_practical_number?/1
   
 
 ### Sequences
@@ -55,6 +58,10 @@
  - A138591 - Sums of two or more consecutive nonnegative integers
  - A006753 - Smith (or joke) numbers
  - A019506 - Hoax numbers
+ - A004144 - Nonhypotenuse numbers
+ - A009003 - Hypotenuse numbers
+ - A005153 - Practical numbers
+
 
 
 ## v0.11.5

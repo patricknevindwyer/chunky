@@ -103,14 +103,17 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x polite numbers
   - x impolite numbers
   - x smith numbers
-  - hypotenuse numbers
-  - non-hypotenuse numbers
-  - practical numbers
+  - x hypotenuse numbers
+  - x non-hypotenuse numbers
+  - x practical numbers
   - primary pseudo-perfect
+  - semiperfect
   - giuga numbers
+  - ulam numbers
   - semi-primes
   - wolstenholm
   - check Classes of Natural Numbers
+  - check Divisibility-based sets of integers (ref section of https://en.wikipedia.org/wiki/Practical_number)
   - Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
   - narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html
   - muenchhausen number - http://mathworld.wolfram.com/MuenchhausenNumber.html

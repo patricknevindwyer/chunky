@@ -52,11 +52,21 @@ defmodule Chunky.Math.Predicates do
     - `is_impolite_number?/1` - The number `n` cannot be written as the sum of two or more consecutive positive integers
     - `is_polite_number?/1` - The number `n` _can_ be written as the sum of two or more consecutive positive integers
    
+   The _practical_ numbers extend the idea of polite numbers, such that a polite number is a positive integer `n` where
+   all positive integers _less_ than `n` can be written as sums of the distinct divisors of `n`.
+   
+    - `is_practical_number?/1` - All `m` less than `n` can be written as sums of distinct divisors of `n`.
+   
    The Smith and Hoax numbers involve the digit sum of a number compared to the digit sum of the prime factors of the
    number.
    
     - `is_hoax_number?/1` - Hoax numbers have equal digits sums in `n` and the summed _unique_ prime factors of `n`.
     - `is_smith_number?/1` - Smith numbers have equal digit sums in `n` and the summed prime factors of `n`.
+   
+   The hypotenuse and nonhypotenuse numbers determine which numbers can be the hypotenuse of integer right triangles.
+   
+    - `is_nonhypotenuse_number?/1` - Can the square of `n` not be written as the sum of two other squares?
+    - `is_hypotenuse_number?/1` - Can the square of `n` be written as the sum of two other squares?
    
    
    ## Number Theory
@@ -419,10 +429,10 @@ defmodule Chunky.Math.Predicates do
    ## Examples
 
        iex> Predicates.analyze_number(2048)
-       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :doubly_even_number, :economical_number, :even, :impolite_number, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
+       [:"11_smooth", :"13_smooth", :"17_smooth", :"19_smooth", :"23_smooth",:"3_smooth", :"5_smooth", :"7_smooth", :deficient, :doubly_even_number, :economical_number, :even, :impolite_number, :nonhypotenuse_number, :odious_number, :perfect_power, :positive, :powerful_number, :practical_number, :prime_power, :unhappy_number]
 
        iex> Predicates.analyze_number(2048, skip_smooth: true)
-       [:deficient, :doubly_even_number, :economical_number, :even, :impolite_number, :odious_number,:perfect_power, :positive, :powerful_number, :prime_power, :unhappy_number]
+       [:deficient, :doubly_even_number, :economical_number, :even, :impolite_number, :nonhypotenuse_number, :odious_number, :perfect_power, :positive, :powerful_number, :practical_number, :prime_power, :unhappy_number]
 
        iex> Predicates.analyze_number(-37)
        [:negative, :odd, :odious_number]
@@ -431,16 +441,16 @@ defmodule Chunky.Math.Predicates do
        [:cyclops_number, :doubly_even_number, :even, :evil_number, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :odious_number, :polite_number, :positive, :unhappy_number, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :odious_number, :polite_number, :positive, :unhappy_number, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(1000, skip_smooth: true)
-       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :multiple_rhonda, :perfect_cube, :perfect_power, :polite_number, :positive, :powerful_number, :rhonda_to_base_16]
+       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :hypotenuse_number, :multiple_rhonda, :perfect_cube, :perfect_power, :polite_number, :positive, :powerful_number, :practical_number, :rhonda_to_base_16]
     
        iex> Predicates.analyze_number(1435)
-       [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :odd, :odious_number, :polite_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
+       [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :hypotenuse_number, :odd, :odious_number, :polite_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
    """
    def analyze_number(n, opts \\ []) when is_integer(n) do
      # how long are we waiting for each predicate
@@ -1507,6 +1517,48 @@ defmodule Chunky.Math.Predicates do
    def is_hoax_number?(_), do: false
    
    @doc """
+   Is `n` a hypotenuse number? A hypotenuse number is a numer whose square can be written as the sum of two other squares.
+   
+   A hypotenuse number is fairly literal - it can be the hypotenuse of an integer right triangle, i.e. it fullfils `c` in
+   the equation `a^2 + b^c = c^2`.
+   
+   OEIS References:
+   
+    - [A009003 - Nonhypotenuse numbers](https://oeis.org/A009003)
+   
+   See also:
+   
+    - `is_nonhypotenuse_number?/1`
+   
+   ## Examples
+   
+       iex> Predicates.is_hypotenuse_number?(5)
+       true
+
+       iex> Predicates.is_hypotenuse_number?(8)
+       false
+
+       iex> Predicates.is_hypotenuse_number?(25)
+       true
+
+       iex> Predicates.is_hypotenuse_number?(121)
+       false
+
+       iex> Predicates.is_hypotenuse_number?(592)
+       true
+   
+   """
+   def is_hypotenuse_number?(n) when n > 0 do
+       # cannot have any prime factors of the form 4k + 1
+       (
+           prime_factors(n) -- [1]
+           |> Enum.any?(fn f -> rem(f, 4) == 1 end)
+       )
+   end
+   
+   def is_hypotenuse_number?(_), do: false
+   
+   @doc """
    Is `n` an impolite number? Impolite numbers cannot be written as the sum of two consecutive integers.
    
    OEIS References:
@@ -1662,6 +1714,48 @@ defmodule Chunky.Math.Predicates do
    """
    def is_negative?(n) when is_integer(n) and n < 0, do: true
    def is_negative?(n) when is_integer(n), do: false
+   
+   @doc """
+   Is `n` a non-hypotenuse number? A non hypotenuse number is a numer whose square cannot be written as the sum of two other squares.
+   
+   A non-hypotenuse number is fairly literal - it cannot be the hypotenuse of an integer right triangle, i.e. it cannot fullfil `c` in
+   the equation `a^2 + b^c = c^2`.
+   
+   OEIS References:
+   
+    - [A004144 - Nonhypotenuse numbers](https://oeis.org/A004144)
+   
+   See also:
+   
+    - `is_hypotenuse_number?/1`
+   
+   ## Examples
+   
+       iex> Predicates.is_nonhypotenuse_number?(1)
+       true
+
+       iex> Predicates.is_nonhypotenuse_number?(5)
+       false
+
+       iex> Predicates.is_nonhypotenuse_number?(22)
+       true
+
+       iex> Predicates.is_nonhypotenuse_number?(25)
+       false
+
+       iex> Predicates.is_nonhypotenuse_number?(332)
+       true
+   
+   """
+   def is_nonhypotenuse_number?(n) when n > 0 do
+       # cannot have any prime factors of the form 4k + 1
+       (
+           prime_factors(n) -- [1]
+           |> Enum.any?(fn f -> rem(f, 4) == 1 end)
+       ) == false
+   end
+   
+   def is_nonhypotenuse_number?(_), do: false
    
    @doc """
    Predicate version of `is_odd?/1` Integer guard.
@@ -2103,6 +2197,83 @@ defmodule Chunky.Math.Predicates do
      end)
      |> length() == 0
    end
+   
+   @doc """
+   Is `n` a practical number? A practical number is a positive integer `n` where all positive 
+   integers less than `n` can be written as a sum of the distinct divisors of `n`.
+   
+   For instance, `8` is a practical number. Given the divisors `1, 2, 4`, the non-divisors
+   smaller than `8` can be writen as `3 = 1 + 2, 5 = 2 + 3, 6 = 3 + 2 + 1, 7 = 4 + 2 + 1`.
+   
+   Also called the _panarithmic_ numbers.
+   
+   OEIS References:
+   
+    - [A005153 - Practical numbers](https://oeis.org/A005153)
+   
+   ## Examples
+   
+       iex> Predicates.is_practical_number?(1)
+       true
+
+       iex> Predicates.is_practical_number?(11)
+       false
+
+       iex> Predicates.is_practical_number?(120)
+       true
+
+       iex> Predicates.is_practical_number?(124)
+       false
+   
+       iex> Predicates.is_practical_number?(5152)
+       true
+   
+
+   """
+   def is_practical_number?(n) when n > 0 do
+      
+      [{pf_a, _} | _] = rpfs = reduced_prime_factors(n) 
+      
+      # first factor must be 2
+      case {pf_a, length(rpfs)} do
+          
+          # one is, by definition, a practical number
+          {1, _} -> true
+          
+          # it's a power of 2
+          {2, 1} -> true
+          
+          # otherwise 2 must be the first factor of a longer factorization
+          {2, _} -> 
+              
+              # drop our first factor, and test each remaining factor in our
+              # inequality of factor_i <= sigma(factor_1^pow_1 * ... factor_(i - 1)^pow_(i - 1)) + 1
+          
+              # build up the sets we need to compare
+              0..length(rpfs) - 2
+              |> Enum.map(
+                  fn idx -> 
+                  
+                      # what's our factor
+                      {f, _} = Enum.at(rpfs, idx + 1)
+                  
+                      # whats our inner sigma value
+                      ins = rpfs
+                      |> Enum.take(idx + 1)
+                      |> Enum.map(fn {base, power} -> Math.pow(base, power) end)
+                      |> Enum.reduce(1, fn x, acc -> x * acc end)
+                  
+                      {f, ins}
+                  end
+              )
+              |> Enum.all?(fn {fac, prod} -> fac <= (sigma(prod) + 1) end)
+
+          
+          # any other first factor, and the number is not practical
+          _ -> false
+      end
+   end
+   def is_practical_number?(_), do: false
    
    @doc """
    Determine if a positive integer is prime.

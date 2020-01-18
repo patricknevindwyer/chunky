@@ -5,6 +5,8 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   ## Available Sequences
 
+   - [A004144 - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).](https://oeis.org/A004144) - `:a004144` - `create_sequence_a004144/1`
+   - [A005153 - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.](https://oeis.org/A005153) - `:a005153` - `create_sequence_a005153/1`
    - [A006753 - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).](https://oeis.org/A006753) - `:a006753` - `create_sequence_a006753/1`
    - [A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.](https://oeis.org/A007770) - `:a007770` - `create_sequence_a007770/1`
    - [A008585 - a(n) = 3*n.](https://oeis.org/A008585) - `:a008585` - `create_sequence_a008585/1`
@@ -30,6 +32,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A008605 - Multiples of 23.](https://oeis.org/A008605) - `:a008605` - `create_sequence_a008605/1`
    - [A008606 - Multiples of 24.](https://oeis.org/A008606) - `:a008606` - `create_sequence_a008606/1`
    - [A008607 - Multiples of 25.](https://oeis.org/A008607) - `:a008607` - `create_sequence_a008607/1`
+   - [A009003 - Hypotenuse numbers (squares are sums of 2 nonzero squares).](https://oeis.org/A009003) - `:a009003` - `create_sequence_a009003/1`
    - [A019506 - Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.](https://oeis.org/A019506) - `:a019506` - `create_sequence_a019506/1`
    - [A031177 - Unhappy numbers: numbers having period-8 2-digitized sequences.](https://oeis.org/A031177) - `:a031177` - `create_sequence_a031177/1`
    - [A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.](https://oeis.org/A016825) - `:a016825` - `create_sequence_a016825/1`
@@ -71,6 +74,8 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - [A249674 - a(n) = 30*n.](https://oeis.org/A249674) - `:a249674` - `create_sequence_a249674/1`
    - [A252994 - Multiples of 26.](https://oeis.org/A252994) - `:a252994` - `create_sequence_a252994/1`
    - [A305548 - a(n) = 27*n.](https://oeis.org/A305548) - `:a305548` - `create_sequence_a305548/1`
+
+
 
 
 
@@ -2268,5 +2273,107 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   @doc offset: 1
   def seq_a019506(_idx, last) do
       Math.next_number(&Predicates.is_hoax_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A004144` - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).
+
+  From [OEIS A004144](https://oeis.org/A004144):
+
+  > Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).
+  > (Formerly M0542)
+
+  **Sequence IDs**: `:a004144`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a004144) |> Sequence.take!(68)
+      [1,2,3,4,6,7,8,9,11,12,14,16,18,19,21,22,23,24,27,28,31,32,33,36,38,42,43,44,46,47,48,49,54,56,57,59,62,63,64,66,67,69,71,72,76,77,79,81,83,84,86,88,92,93,94,96,98,99,103,107,108,112,114,118,121,124,126,127]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).",
+       references: [{:oeis, :a004144, "https://oeis.org/A004144"}]
+  def create_sequence_a004144(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a004144/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a004144(_idx, last) do
+      Math.next_number(&Predicates.is_nonhypotenuse_number?/1, last)
+  end
+
+  @doc """
+  OEIS Sequence `A009003` - Hypotenuse numbers (squares are sums of 2 nonzero squares).
+
+  From [OEIS A009003](https://oeis.org/A009003):
+
+  > Hypotenuse numbers (squares are sums of 2 nonzero squares).
+  > (Formerly )
+
+  **Sequence IDs**: `:a009003`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a009003) |> Sequence.take!(64)
+      [5,10,13,15,17,20,25,26,29,30,34,35,37,39,40,41,45,50,51,52,53,55,58,60,61,65,68,70,73,74,75,78,80,82,85,87,89,90,91,95,97,100,101,102,104,105,106,109,110,111,113,115,116,117,119,120,122,123,125,130,135,136,137,140]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Hypotenuse numbers (squares are sums of 2 nonzero squares).",
+       references: [{:oeis, :a009003, "https://oeis.org/A009003"}]
+  def create_sequence_a009003(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a009003/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a009003(_idx, last) do
+      Math.next_number(&Predicates.is_hypotenuse_number?/1, last)    
+  end
+  
+  @doc """
+  OEIS Sequence `A005153` - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.
+
+  From [OEIS A005153](https://oeis.org/A005153):
+
+  > Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.
+  > (Formerly M0991)
+
+  **Sequence IDs**: `:a005153` 
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a005153) |> Sequence.take!(60)
+      [1,2,4,6,8,12,16,18,20,24,28,30,32,36,40,42,48,54,56,60,64,66,72,78,80,84,88,90,96,100,104,108,112,120,126,128,132,140,144,150,156,160,162,168,176,180,192,196,198,200,204,208,210,216,220,224,228,234,240,252]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.",
+       references: [{:oeis, :a005153, "https://oeis.org/A005153"}]
+  def create_sequence_a005153(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005153/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a005153(_idx, last) do
+      Math.next_number(&Predicates.is_practical_number?/1, last)
   end
 end
