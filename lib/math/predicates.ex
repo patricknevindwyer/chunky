@@ -1233,8 +1233,11 @@ defmodule Chunky.Math.Predicates do
    See also:
    
     - `is_primary_pseudoperfect_number?/1`
+    - `is_primitive_pseudoperfect_number?/1`
+    - `is_primitive_weird_number?/1`
     - `is_pseudoperfect_number?/1`
     - `is_weird_number?/1`
+
    
    ## Examples
    
@@ -2364,6 +2367,8 @@ defmodule Chunky.Math.Predicates do
    See also:
    
     - `is_erdos_nicolas_number?/1`
+    - `is_primitive_pseudoperfect_number?/1`
+    - `is_primitive_weird_number?/1`
     - `is_pseudoperfect_number?/1`
     - `is_weird_number?/1`
    
@@ -2606,6 +2611,11 @@ defmodule Chunky.Math.Predicates do
    
    See also:
    
+    - `is_erdos_nicolas_number?/1`
+    - `is_primary_pseudoperfect_number?/1`
+    - `is_primitive_weird_number?/1`
+    - `is_pseudoperfect_number?/1`
+    - `is_weird_number?/1`
    
    ## Examples
    
@@ -2643,6 +2653,12 @@ defmodule Chunky.Math.Predicates do
     - [A002975 - Primitive weird numbers](http://oeis.org/A002975)
    
    See also:
+   
+    - `is_erdos_nicolas_number?/1`
+    - `is_primary_pseudoperfect_number?/1`
+    - `is_primitive_pseudoperfect_number?/1`
+    - `is_pseudoperfect_number?/1`
+    - `is_weird_number?/1`
    
    
    ## Examples
@@ -2685,6 +2701,8 @@ defmodule Chunky.Math.Predicates do
    
     - `is_erdos_nicolas_number?/1`
     - `is_primary_pseudoperfect_number?/1`
+    - `is_primitive_pseudoperfect_number?/1`
+    - `is_primitive_weird_number?/1`
     - `is_weird_number?/1`
    
    
@@ -3610,6 +3628,8 @@ defmodule Chunky.Math.Predicates do
    
     - `is_erdos_nicolas_number?/1`
     - `is_primary_pseudoperfect_number?/1`
+    - `is_primitive_pseudoperfect_number?/1`
+    - `is_primitive_weird_number?/1`
     - `is_pseudoperfect_number?/1`
    
    
