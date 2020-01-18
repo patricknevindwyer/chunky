@@ -35,6 +35,8 @@ defmodule Chunky.Math.Predicates do
     - `is_primary_pseudoperfect_number?/1` - A number is primary pseudoperfect if the sum of 1 over `n` and 1 over the prime factors of `n` equals `1`.
     - `is_pseudoperfect_number?/1` - Does any subset of the factors of `n` sum to `n`?
     - `is_weird_number?/1` - Is `n` abundant but not pseudoperfect?
+    - `is_primitive_pseudoperfect_number?/1` - Is `n` pseudoperfect, but all the proper divisors of `n` _not_ pseudoperfect?
+    - `is_primitive_weird_number?/1` - Is `n` a weird number, but all the proper divisors of `n` are _not_ weird?
    
    Powerful numbers look at the exponents of prime factors of a number `n`. For instance, `8` has the prime factorization
    `2 * 2 * 2`, or `2^3`. The number `72` has the prime factorization `2^3 * 3^2`.
@@ -2594,6 +2596,78 @@ defmodule Chunky.Math.Predicates do
        |> length() > 0
      end
    end
+   
+   @doc """
+   Is `n` pseudoperfect, but all the proper divisors of `n` _not_ pseudoperfect?
+   
+   OEIS References:
+   
+    - [A006036 - Primitive pseudoperfect numbers](http://oeis.org/A006036)
+   
+   See also:
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_primitive_pseudoperfect_number?(6)
+       true
+
+       iex> Predicates.is_primitive_pseudoperfect_number?(8)
+       false
+
+       iex> Predicates.is_primitive_pseudoperfect_number?(28)
+       true
+
+       iex> Predicates.is_primitive_pseudoperfect_number?(270)
+       false
+
+       iex> Predicates.is_primitive_pseudoperfect_number?(272)
+       true
+   
+   """
+   def is_primitive_pseudoperfect_number?(n) when n > 0 do
+       
+       (
+           factors(n) -- [n]
+           |> Enum.all?(fn d -> is_pseudoperfect_number?(d) == false end)
+       )
+       && is_pseudoperfect_number?(n)
+   end
+   def is_primitive_pseudoperfect_number?(_), do: false
+   
+   @doc """
+   Is `n` a weird number, but all proper divisors of `n` are _not_ weird numbers?
+   
+   OEIS References:
+   
+    - [A002975 - Primitive weird numbers](http://oeis.org/A002975)
+   
+   See also:
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_primitive_weird_number?(70)
+       true
+
+       iex> Predicates.is_primitive_weird_number?(800)
+       false
+
+       iex> Predicates.is_primitive_weird_number?(836)
+       true
+
+       iex> Predicates.is_primitive_weird_number?(4030)
+       true
+
+   """
+   def is_primitive_weird_number?(n) when n > 0 do
+       (
+           factors(n) -- [n]
+           |> Enum.all?(fn d -> is_weird_number?(d) == false end)
+       )
+       && is_weird_number?(n)
+   end
+   def is_primitive_weird_number?(_), do: false
    
    @doc """
    Can `n` be written as a sum of some or all of its divisors?

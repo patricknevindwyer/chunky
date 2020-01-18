@@ -109,9 +109,12 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x primary pseudo-perfect
   - x semiperfect
   - x weird
-  - primitive pseudoperfect
-  - primitive weird (http://oeis.org/A002975)
-  - giuga numbers
+  - x primitive pseudoperfect
+  - x primitive weird (http://oeis.org/A002975)
+  
+  - rebuild "see also" of perfect variants
+  
+  - [-] giuga numbers
   - ulam numbers
   - semi-primes
   - wolstenholm

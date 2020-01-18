@@ -49,6 +49,8 @@
   - is_pseudoperfect_number?/1
   - is_erdos_nicolas_number?/1
   - is_weird_number?/11
+  - is_primitive_pseudoperfect_number?/1
+  - is_primitive_weird_number?/1
 
 ### Sequences
 
@@ -69,6 +71,9 @@
  - A005835 - Pseudoperfect (or semiperfect) numbers
  - A194472 - Erdős-Nicolas numbers
  - A006037 - Weird numbers
+ - A006036 - Primitive pseudoperfect numbers
+ - A002975 - Primitive weird numbers
+ 
 
 
 

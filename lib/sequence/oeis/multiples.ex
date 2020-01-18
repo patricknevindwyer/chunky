@@ -4,10 +4,12 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   and additions.
 
   ## Available Sequences
-
+   
+   - [A002975 - Primitive weird numbers: weird numbers with no proper weird divisors.](https://oeis.org/A002975) - `:a002975` - `create_sequence_a002975/1`
    - [A004144 - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).](https://oeis.org/A004144) - `:a004144` - `create_sequence_a004144/1`
    - [A005153 - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.](https://oeis.org/A005153) - `:a005153` - `create_sequence_a005153/1`
    - [A005835 - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.](https://oeis.org/A005835) - `:a005835` - `create_sequence_a005835/1`
+   - [A006036 - Primitive pseudoperfect numbers.](https://oeis.org/A006036) - `:a006036` - `create_sequence_a006036/1`
    - [A006037 - Weird numbers: abundant (A005101) but not pseudoperfect (A005835).](https://oeis.org/A006037) - `:a006037` - `create_sequence_a006037/1`
    - [A006753 - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).](https://oeis.org/A006753) - `:a006753` - `create_sequence_a006753/1`
    - [A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.](https://oeis.org/A007770) - `:a007770` - `create_sequence_a007770/1`
@@ -2508,5 +2510,73 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   @doc offset: 1
   def seq_a006037(_idx, last) do
       Math.next_number(&Predicates.is_weird_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A006036` - Primitive pseudoperfect numbers.
+
+  From [OEIS A006036](https://oeis.org/A006036):
+
+  > Primitive pseudoperfect numbers.
+  > (Formerly M4133)
+
+  **Sequence IDs**: `:a006036`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a006036) |> Sequence.take!(69)
+      [6,20,28,88,104,272,304,350,368,464,490,496,550,572,650,748,770,910,945,1184,1190,1312,1330,1376,1430,1504,1575,1610,1696,1870,1888,1952,2002,2030,2090,2170,2205,2210,2470,2530,2584,2590,2870,2990,3010,3128,3190,3230,3290,3410,3465,3496,3710,3770,3944,4070,4095,4130,4216,4270,4288,4408,4510,4544,4672,4690,4712,4730,4970]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Primitive pseudoperfect numbers.",
+       references: [{:oeis, :a006036, "https://oeis.org/A006036"}]
+  def create_sequence_a006036(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006036/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a006036(_idx, last) do
+      Math.next_number(&Predicates.is_primitive_pseudoperfect_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A002975` - Primitive weird numbers: weird numbers with no proper weird divisors.
+
+  From [OEIS A002975](https://oeis.org/A002975):
+
+  > Primitive weird numbers: weird numbers with no proper weird divisors.
+  > (Formerly M5340)
+
+  **Sequence IDs**: `:a002975`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Multiples, :a002975) |> Sequence.take!(3)
+      [70,836,4030]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Primitive weird numbers: weird numbers with no proper weird divisors.",
+       references: [{:oeis, :a002975, "https://oeis.org/A002975"}]
+  def create_sequence_a002975(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a002975/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a002975(_idx, last) do
+      Math.next_number(&Predicates.is_primitive_weird_number?/1, last)
   end
 end
