@@ -5,6 +5,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   ## Available Sequences
 
+
    - [A000788 - Total number of 1's in binary expansions of 0, ..., n.](https://oeis.org/A000788) - `:a000788` - `create_sequence_a000788/1`
    - [A004176 - Omit 1's from n.](https://oeis.org/A004176) - `:a004176` - `create_sequence_a004176/1`
    - [A004177 - Omit 2's from n.](https://oeis.org/A004177) - `:a004177` - `create_sequence_a004177/1`
@@ -25,8 +26,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A004726 - Delete all 7's from the sequence of nonnegative integers.](https://oeis.org/A004726) - `:a004726` - `create_sequence_a004726/1`
    - [A004727 - Delete all 8's from the sequence of nonnegative integers.](https://oeis.org/A004727) - `:a004727` - `create_sequence_a004727/1`
    - [A004728 - Delete all 9's from the sequence of nonnegative integers.](https://oeis.org/A004728) - `:a004728` - `create_sequence_a004728/1`
+   - [A005188 - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.](https://oeis.org/A005188) - `:a005188` - `create_sequence_a005188/1`
    - [A005823 - Numbers whose ternary expansion contains no 1's.](https://oeis.org/A005823) - `:a005823` - `create_sequence_a005823/1`
    - [A005836 - Numbers n whose base 3 representation contains no 2.](https://oeis.org/A005836) - `:a005836` - `create_sequence_a005836/1`
+   - [A006886 - Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.](https://oeis.org/A006886) - `:a006886` - `create_sequence_a006886/1`
    - [A007088 - The binary numbers (or binary words, or binary vectors): numbers written in base 2.](https://oeis.org/A007088) - `:a007088` - `create_sequence_a007088/1`
    - [A007089 - Numbers in base 3.](https://oeis.org/A007089) - `:a007089` - `create_sequence_a007089/1`
    - [A007090 - Numbers in base 4.](https://oeis.org/A007090) - `:a007090` - `create_sequence_a007090/1`
@@ -37,6 +40,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A007095 - Numbers in base 9.](https://oeis.org/A007095) - `:a007095` - `create_sequence_a007095/1`
    - [A007953 - Digital sum (i.e., sum of digits) of n; also called digsum(n).](https://oeis.org/A007953) - `:a007953` - `create_sequence_a007953/1`
    - [A007954 - Product of decimal digits of n.](https://oeis.org/A007954) - `:a007954` - `create_sequence_a007954/1`
+   - [A010344 - Base-4 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010344) - `:a010344` - `create_sequence_a010344/1`
+   - [A010346 - Base-5 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010346) - `:a010346` - `create_sequence_a010346/1`
+   - [A010348 - Base-6 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010348) - `:a010348` - `create_sequence_a010348/1`
+   - [A010350 - Base-7 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010350) - `:a010350` - `create_sequence_a010350/1`
+   - [A010353 - Base-9 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010353) - `:a010353` - `create_sequence_a010353/1`
+   - [A010354 - Base-8 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010354) - `:a010354` - `create_sequence_a010354/1`
    - [A011531 - Numbers that contain a digit 1 in their decimal representation.](https://oeis.org/A011531) - `:a011531` - `create_sequence_a011531/1`
    - [A011532 - Numbers that contain a 2.](https://oeis.org/A011532) - `:a011532` - `create_sequence_a011532/1`
    - [A011533 - Numbers that contain a 3.](https://oeis.org/A011533) - `:a011533` - `create_sequence_a011533/1`
@@ -48,6 +57,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A011539 - "9ish numbers": decimal representation contains at least one nine.](https://oeis.org/A011539) - `:a011539` - `create_sequence_a011539/1`
    - [A011540 - Numbers that contain a digit 0.](https://oeis.org/A011540) - `:a011540` - `create_sequence_a011540/1`   
    - [A014263 - Numbers that contain even digits only.](https://oeis.org/A014263) - `:a014263` - `create_sequence_a014263/1`
+   - [A014576 - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).](https://oeis.org/A014576) - `:a014576` - `create_sequence_a014576/1`
    - [A023692 - Numbers with a single 1 in their ternary expansion.](https://oeis.org/A023692) - `:a023692` - `create_sequence_a023692/1`
    - [A023693 - Numbers with exactly 2 1's in ternary expansion.](https://oeis.org/A023693) - `:a023693` - `create_sequence_a023693/1`
    - [A023694 - Numbers with exactly 3 1's in ternary expansion.](https://oeis.org/A023694) - `:a023694` - `create_sequence_a023694/1`
@@ -118,6 +128,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A052414 - Numbers without 6 as a digit.](https://oeis.org/A052414) - `:a052414` - `create_sequence_a052414/1`
    - [A052419 - Numbers without 7 as a digit.](https://oeis.org/A052419) - `:a052419` - `create_sequence_a052419/1`
    - [A052421 - Numbers without 8 as a digit.](https://oeis.org/A052421) - `:a052421` - `create_sequence_a052421/1`
+   - [A053816 - Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.](https://oeis.org/A053816) - `:a053816` - `create_sequence_a053816/1`
    - [A099542 - Rhonda numbers to base 10.](https://oeis.org/A099542) - `:a099542` - `create_sequence_a099542/1`
    - [A010872 - a(n) = n mod 3.](https://oeis.org/A010872) - `:a010872` - `create_sequence_a010872/1`
    - [A023416 - Number of 0's in binary expansion of n.](https://oeis.org/A023416) - `:a023416` - `create_sequence_a023416/1`
@@ -174,12 +185,19 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A102682 - Number of digits >= 8 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102682) - `:a102682` - `create_sequence_a102682/1`
    - [A102683 - Number of digits 9 in decimal representation of n.](https://oeis.org/A102683) - `:a102683` - `create_sequence_a102683/1`
    - [A102684 - Number of times the digit 9 appears in the decimal representations of all integers from 0 to n.](https://oeis.org/A102684) - `:a102684` - `create_sequence_a102684/1`
+   - [A114904 - Sorted numbers of digits of any base-10 narcissistic number.](https://oeis.org/A114904) - `:a114904` - `create_sequence_a114904/1`
    - [A121022 - Even numbers containing a 2 in their decimal representation.](https://oeis.org/A121022) - `:a121022` - `create_sequence_a121022/1`
    - [A122840 - a(n) is the number of 0s at the end of n when n is written in base 10.](https://oeis.org/A122840) - `:a122840` - `create_sequence_a122840/1`
    - [A160093 - Number of digits in n, excluding any trailing zeros.](https://oeis.org/A160093) - `:a160093` - `create_sequence_a160093/1`
    - [A179868 - (Number of 1's in binary expansion of n) mod 4.](https://oeis.org/A179868) - `:a179868` - `create_sequence_a179868/1`
    - [A193238 - Number of prime digits in decimal representation of n.](https://oeis.org/A193238) - `:a193238` - `create_sequence_a193238/1`
    - [A196563 - Number of even digits in decimal representation of n.](https://oeis.org/A196563) - `:a196563` - `create_sequence_a196563/1`
+   - [A161948 - Base-11 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161948) - `:a161948` - `create_sequence_a161948/1`
+   - [A161949 - Base-12 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161949) - `:a161949` - `create_sequence_a161949/1`
+   - [A161950 - Base-13 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161950) - `:a161950` - `create_sequence_a161950/1`
+   - [A161951 - Base-14 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161951) - `:a161951` - `create_sequence_a161951/1`
+   - [A161952 - Base-15 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161952) - `:a161952` - `create_sequence_a161952/1`
+   - [A161953 - Base-16 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161953) - `:a161953` - `create_sequence_a161953/1`
    - [A248910 - Numbers with no zeros in base-6 representation.](https://oeis.org/A248910) - `:a248910` - `create_sequence_a248910/1`
    - [A255732 - Rhonda numbers in vigesimal number system.](https://oeis.org/A255732) - `:a255732` - `create_sequence_a255732/1`
    - [A255736 - Integers that are Rhonda numbers to base 30.](https://oeis.org/A255736) - `:a255736` - `create_sequence_a255736/1`
@@ -189,12 +207,20 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A255808 - Numbers with no zeros in base-9 representation.](https://oeis.org/A255808) - `:a255808` - `create_sequence_a255808/1`
 
 
+
   """
 
-  import Chunky.Sequence, only: [sequence_for_function: 1]
+  import Chunky.Sequence, only: [sequence_for_function: 1, sequence_for_list: 1]
 
   alias Chunky.Math
   alias Chunky.Math.Predicates
+  
+  # raw data for A014576 - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).
+  @data_a014576 [1,0,153,1634,54748,548834,1741725,24678050,146511208,4679307774,32164049650,0,0,28116440335967,0,4338281769391370,21897142587612075,0,1517841543307505039,63105425988599693916,128468643043731391252,0]
+
+  # raw data for A114904 - Sorted numbers of digits of any base-10 narcissistic number.
+  @data_a114904 [1,3,4,5,6,7,8,9,10,11,14,16,17,19,20,21,23,24,25,27,29,31,32,33,34,35,37,38,39]
+
 
   @doc """
   OEIS Sequence `A004176` - Omit 1's from n.
@@ -6855,4 +6881,571 @@ defmodule Chunky.Sequence.OEIS.Repr do
     |> Enum.map(fn d -> Math.digit_count(d, [9]) end)
     |> Enum.sum()
   end
+  
+  @doc """
+  OEIS Sequence `A006886` - Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.
+
+  From [OEIS A006886](https://oeis.org/A006886):
+
+  > Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.
+  > (Formerly M4625)
+
+  **Sequence IDs**: `:a006886`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a006886) |> Sequence.take!(17)
+      [1,9,45,55,99,297,703,999,2223,2728,4879,4950,5050,5292,7272,7777,9999]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.",
+       references: [{:oeis, :a006886, "https://oeis.org/A006886"}]
+  def create_sequence_a006886(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a006886/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a006886(_idx, last) do
+      Math.next_number(&Predicates.is_kaprekar_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A053816` - Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.
+
+  From [OEIS A053816](https://oeis.org/A053816):
+
+  > Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.
+  > (Formerly )
+
+  **Sequence IDs**: `:a053816`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a053816) |> Sequence.take!(15)
+      [1,9,45,55,99,297,703,999,2223,2728,4950,5050,7272,7777,9999]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.",
+       references: [{:oeis, :a053816, "https://oeis.org/A053816"}]
+  def create_sequence_a053816(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a053816/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a053816(_idx, last) do
+      Math.next_number(&Predicates.is_kaprekar_strict_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A005188` - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.
+
+  From [OEIS A005188](https://oeis.org/A005188):
+
+  > Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.
+  > (Formerly M0488)
+
+  **Sequence IDs**: `:a005188`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a005188) |> Sequence.take!(16)
+      [1,2,3,4,5,6,7,8,9,153,370,371,407,1634,8208,9474]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.",
+       references: [{:oeis, :a005188, "https://oeis.org/A005188"}]
+  def create_sequence_a005188(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005188/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a005188(_idx, last) do
+      Math.next_number(&Predicates.is_narcissistic_number?/1, last)
+  end
+
+  @doc """
+  OEIS Sequence `A010353` - Base-9 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A010353](https://oeis.org/A010353):
+
+  > Base-9 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a010353`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a010353) |> Sequence.take!(18)
+      [1,2,3,4,5,6,7,8,41,50,126,127,468,469,1824,8052,8295,9857]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-9 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a010353, "https://oeis.org/A010353"}]
+  def create_sequence_a010353(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010353/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a010353(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 9) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A010354` - Base-8 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A010354](https://oeis.org/A010354):
+
+  > Base-8 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a010354`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a010354) |> Sequence.take!(14)
+      [1,2,3,4,5,6,7,20,52,92,133,307,432,433]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-8 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a010354, "https://oeis.org/A010354"}]
+  def create_sequence_a010354(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010354/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a010354(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 8) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A010350` - Base-7 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A010350](https://oeis.org/A010350):
+
+  > Base-7 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a010350`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a010350) |> Sequence.take!(20)
+      [1,2,3,4,5,6,10,25,32,45,133,134,152,250,3190,3222,3612,3613,4183,9286]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-7 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a010350, "https://oeis.org/A010350"}]
+  def create_sequence_a010350(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010350/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a010350(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 7) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A010348` - Base-6 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A010348](https://oeis.org/A010348):
+
+  > Base-6 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a010348`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a010348) |> Sequence.take!(13)
+      [1,2,3,4,5,99,190,2292,2293,2324,3432,3433,6197]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-6 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a010348, "https://oeis.org/A010348"}]
+  def create_sequence_a010348(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010348/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a010348(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 6) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A010346` - Base-5 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A010346](https://oeis.org/A010346):
+
+  > Base-5 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a010346`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a010346) |> Sequence.take!(14)
+      [1,2,3,4,13,18,28,118,289,353,419,4890,4891,9113]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-5 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a010346, "https://oeis.org/A010346"}]
+  def create_sequence_a010346(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010346/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a010346(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 5) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A010344` - Base-4 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A010344](https://oeis.org/A010344):
+
+  > Base-4 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a010344`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a010344) |> Sequence.take!(11)
+      [1,2,3,28,29,35,43,55,62,83,243]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-4 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a010344, "https://oeis.org/A010344"}]
+  def create_sequence_a010344(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010344/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a010344(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 4) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A161948` - Base-11 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A161948](https://oeis.org/A161948):
+
+  > Base-11 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a161948`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a161948) |> Sequence.take!(18)
+      [1,2,3,4,5,6,7,8,9,10,61,72,126,370,855,1161,1216,1280]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-11 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a161948, "https://oeis.org/A161948"}]
+  def create_sequence_a161948(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161948/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a161948(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 11) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A161949` - Base-12 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A161949](https://oeis.org/A161949):
+
+  > Base-12 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a161949`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a161949) |> Sequence.take!(16)
+      [1,2,3,4,5,6,7,8,9,10,11,29,125,811,944,1539]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-12 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a161949, "https://oeis.org/A161949"}]
+  def create_sequence_a161949(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161949/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a161949(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 12) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A161950` - Base-13 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A161950](https://oeis.org/A161950):
+
+  > Base-13 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a161950`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a161950) |> Sequence.take!(23)
+      [1,2,3,4,5,6,7,8,9,10,11,12,17,45,85,98,136,160,793,794,854,1968,8194]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-13 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a161950, "https://oeis.org/A161950"}]
+  def create_sequence_a161950(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161950/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a161950(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 13) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A161951` - Base-14 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A161951](https://oeis.org/A161951):
+
+  > Base-14 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a161951`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a161951) |> Sequence.take!(15)
+      [1,2,3,4,5,6,7,8,9,10,11,12,13,244,793]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-14 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a161951, "https://oeis.org/A161951"}]
+  def create_sequence_a161951(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161951/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a161951(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 14) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A161952` - Base-15 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A161952](https://oeis.org/A161952):
+
+  > Base-15 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a161952`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a161952) |> Sequence.take!(19)
+      [1,2,3,4,5,6,7,8,9,10,11,12,13,14,113,128,2755,3052,5059]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-15 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a161952, "https://oeis.org/A161952"}]
+  def create_sequence_a161952(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161952/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a161952(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 15) end, last)
+  end
+
+  @doc """
+  OEIS Sequence `A161953` - Base-16 Armstrong or narcissistic numbers (written in base 10).
+
+  From [OEIS A161953](https://oeis.org/A161953):
+
+  > Base-16 Armstrong or narcissistic numbers (written in base 10).
+  > (Formerly )
+
+  **Sequence IDs**: `:a161953`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a161953) |> Sequence.take!(34)
+      [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,342,371,520,584,645,1189,1456,1457,1547,1611,2240,2241,2458,2729,2755,3240,3689,3744,3745]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Base-16 Armstrong or narcissistic numbers (written in base 10).",
+       references: [{:oeis, :a161953, "https://oeis.org/A161953"}]
+  def create_sequence_a161953(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161953/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a161953(_idx, last) do
+      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 16) end, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A114904` - Sorted numbers of digits of any base-10 narcissistic number.
+
+  From [OEIS A114904](https://oeis.org/A114904):
+
+  > Sorted numbers of digits of any base-10 narcissistic number.
+  > (Formerly )
+
+  **Sequence IDs**: `:a114904`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a114904) |> Sequence.take!(29)
+      [1,3,4,5,6,7,8,9,10,11,14,16,17,19,20,21,23,24,25,27,29,31,32,33,34,35,37,38,39]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Sorted numbers of digits of any base-10 narcissistic number.",
+       references: [{:oeis, :a114904, "https://oeis.org/A114904"}]
+  def create_sequence_a114904(_opts) do
+          sequence_for_list(@data_a114904)
+  end
+
+  @doc """
+  OEIS Sequence `A014576` - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).
+
+  From [OEIS A014576](https://oeis.org/A014576):
+
+  > Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).
+  > (Formerly )
+
+  **Sequence IDs**: `:a014576`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a014576) |> Sequence.take!(22)
+      [1,0,153,1634,54748,548834,1741725,24678050,146511208,4679307774,32164049650,0,0,28116440335967,0,4338281769391370,21897142587612075,0,1517841543307505039,63105425988599693916,128468643043731391252,0]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).",
+       references: [{:oeis, :a014576, "https://oeis.org/A014576"}]
+  def create_sequence_a014576(_opts) do
+          sequence_for_list(@data_a014576)
+  end
+  
 end

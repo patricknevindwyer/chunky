@@ -136,8 +136,12 @@ defmodule Chunky.Math.Predicates do
    Miscellaneous patterns:
       
     - `is_cyclops_number?/1` - Does `n` have an odd number of digits and a single `0` in the center most digit?
+    - `is_kaprekar_number?/1` - When squared, does any set of leading digits of `n^2` plus the remaining dgits equal `n`?
+    - `is_kaprekar_strict_number?/1` - When squared, do the fist half of the digits of `n^2` plus the second half, equal `n`?
+    - `is_narcissistic_number?/1` - Do the digits of length `k` number `n`, individually taken to the `k`th power and summed, equal `n`?
     - `is_pandigital?/1` - Does `n` contain all of the decimal digits at least once?
     - `is_plaindrome?/1` - Do the digits of `n` always stay the same or increase when read left to right?
+   
    
    
    ## Powers
@@ -308,6 +312,7 @@ defmodule Chunky.Math.Predicates do
                is_cyclops_number_in_base?: 2,
                is_euler_jacobi_pseudo_prime?: 2,
                is_euler_pseudo_prime?: 2,
+               is_narcissistic_in_base?: 2,
                is_rhonda_to_base?: 2,
                is_root_of?: 2,
                is_pandigital_in_base?: 2,
@@ -1595,6 +1600,43 @@ defmodule Chunky.Math.Predicates do
    def is_hoax_number?(_), do: false
    
    @doc """
+   Do the digits of length `k` number `n`, when individually taken to the `k`th power and summed, equal `n`?
+   
+   For instance, the number `153` is narcissistic, because `1^3 + 5^3 + 3^3 = 153`.
+   
+   OEIS References:
+    
+    - [A005188 - Armstrong, or narcissistic, number](http://oeis.org/A005188)
+   
+   See also:
+   
+    - `Chunky.Math.is_narcissistic_in_base?/2`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_narcissistic_number?(9)
+       true
+
+       iex> Predicates.is_narcissistic_number?(20)
+       false
+
+       iex> Predicates.is_narcissistic_number?(370)
+       true
+
+       iex> Predicates.is_narcissistic_number?(8208)
+       true
+
+       iex> Predicates.is_narcissistic_number?(9800817)
+       true
+   
+   """
+   def is_narcissistic_number?(n) when n > 0 do
+       is_narcissistic_in_base?(n, 10)
+   end
+   def is_narcissistic_number?(_), do: false
+   
+   @doc """
    Is `n` a hypotenuse number? A hypotenuse number is a numer whose square can be written as the sum of two other squares.
    
    A hypotenuse number is fairly literal - it can be the hypotenuse of an integer right triangle, i.e. it fullfils `c` in
@@ -1671,6 +1713,110 @@ defmodule Chunky.Math.Predicates do
    end
    
    def is_impolite_number?(_), do: false
+   
+   @doc """
+   When `n` is squared, does any set of the left digits of `n^2`, added to the right set, equal `n`?
+   
+   For example, `297` squared is `88209`, if we split digits so half (round up) are on the right, we
+   get the numbers `88` and `209`, and `88+209 = 297`. The number `4879` squared is `23804641` and
+   `238 + 04641 == 4879`.
+   
+   Note the difference between `is_kaprekar_number?/1` and `is_kaprekar_strict_number?/1`; the prior
+   can have any split of digits, so long as the first and second set of digits has _at least_ one digit,
+   while the later splits the digits of `n^2` into two equal (or near equal) numbers of digits.
+   
+   OEIS References:
+   
+    - [A006886 - Kaprekar Numbers](http://oeis.org/A006886)
+   
+   See also:
+   
+    - `is_kaprekar_strict_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_kaprekar_number?(9)
+       true
+
+       iex> Predicates.is_kaprekar_number?(40)
+       false
+
+       iex> Predicates.is_kaprekar_number?(45)
+       true
+   
+       iex> Predicates.is_kaprekar_number?(4879)
+       true
+   
+       iex> Predicates.is_kaprekar_number?(5292)
+       true
+   
+   """
+   def is_kaprekar_number?(1), do: true
+   def is_kaprekar_number?(n) when n > 0 do
+       
+       if is_power_of?(n, 10) do
+           false
+       else
+           # break out the digits
+           raw = n * n
+           |> Integer.digits()
+       
+       
+           # iterate over everything, from 1..length - 2
+           1..length(raw) - 2
+           |> Enum.map(fn breakpoint -> Enum.split(raw, breakpoint) end)
+           |> Enum.any?(fn {a, b} -> (Integer.undigits(a) + Integer.undigits(b)) == n end)
+       end
+       
+   end
+   def is_kaprekar_number?(_), do: false
+   
+   @doc """
+   When `n` is squared, do the left half of the digits of `n^2`, added to the right half, equal `n`?
+   
+   For example, `297` squared is `88209`, if we split digits so half (round up) are on the right, we
+   get the numbers `88` and `209`, and `88+209 = 297`.
+
+   Note the difference between `is_kaprekar_number?/1` and `is_kaprekar_strict_number?/1`; the prior
+   can have any split of digits, so long as the first and second set of digits has _at least_ one digit,
+   while the later splits the digits of `n^2` into two equal (or near equal) numbers of digits.
+
+   OEIS References:
+   
+    - [A053816 - Alternate version of Kaprekar Numbers](http://oeis.org/A053816)
+   
+   See also:
+   
+    - `is_kaprekar_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_kaprekar_strict_number?(99)
+       true
+
+       iex> Predicates.is_kaprekar_strict_number?(703)
+       true
+
+       iex> Predicates.is_kaprekar_strict_number?(4950)
+       true
+   
+       iex> Predicates.is_kaprekar_strict_number?(99999)
+       true
+   
+       iex> Predicates.is_kaprekar_strict_number?(461539)
+       true
+   
+   """
+   def is_kaprekar_strict_number?(n) when n > 0 do
+       raw = n * n
+       |> Integer.digits()
+       {a, b} = raw |> Enum.split(div(length(raw), 2))
+       
+       (Integer.undigits(a) + Integer.undigits(b)) == n       
+   end
+   def is_kaprekar_strict_number?(_), do: false
    
    @doc """
    Is `n` a _left/right_ truncatable prime?

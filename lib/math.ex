@@ -3327,6 +3327,70 @@ defmodule Chunky.Math do
       |> length() == 0
     end
   end
+  
+  @doc """
+  A narcissistic number `n` of length `k` is equal to the sum of the digits of `n` to the `k`-th power.
+  
+  For instance in base 10, the number `153` is of length `3`, and is a narcissistic number, because `1^3 + 5^3 + 3^3 = 153`.
+  
+  In base 4, the number `28` is narcissistic, as the base 4 representation is `130`, and `1^3 + 3^3 + 0^3 = 28`.
+  
+  Narcissistic numbers are also called _Armstrong_ numbers, or _plus-perfect_ numbers.
+  
+  
+  OEIS References:
+  
+   - [A161953 - Base-16 Armstrong](http://oeis.org/A161953)
+   - [A161952 - Base-15 Armstrong](http://oeis.org/A161952)
+   - [A161951 - Base-14 Armstrong](http://oeis.org/A161951)
+   - [A161950 - Base-13 Armstrong](http://oeis.org/A161950)
+   - [A161949 - Base-12 Armstrong](http://oeis.org/A161949)
+   - [A161948 - Base-11 Armstrong](http://oeis.org/A161948)
+   - [A005188 - Armstrong numbers](http://oeis.org/A005188)
+   - [A010353 - Base-9 Armstrong numbers](http://oeis.org/A010353)
+   - [A010354 - Base-8 Armstrong numbers](http://oeis.org/A010354)
+   - [A010350 - Base-7 Armstrong numbers](http://oeis.org/A010350)
+   - [A010348 - Base-6 Armstrong numbers](http://oeis.org/A010348)
+   - [A010346 - Base-5 Armstrong numbers](http://oeis.org/A010346)
+   - [A010344 - Base-4 Armstrong numbers](http://oeis.org/A010344)
+   - [A114904 - Sorted numbers of digits of any base-10 narcissistic number](http://oeis.org/A114904)
+   - [A014576 - Smallest n-digit narcissistic numbers](http://oeis.org/A014576)
+  
+  See also:
+  
+   - `Chunky.Math.Predicates.is_narcissistic_number?/1`
+  
+  
+  ## Examples
+  
+      iex> Math.is_narcissistic_in_base?(370, 10)
+      true
+
+      iex> Math.is_narcissistic_in_base?(1741725, 10)
+      true
+
+      iex> Math.is_narcissistic_in_base?(243, 4)
+      true
+
+      iex> Math.is_narcissistic_in_base?(2292, 6)
+      true
+
+      iex> Math.is_narcissistic_in_base?(432, 8)
+      true
+
+      iex> Math.is_narcissistic_in_base?(403584751, 9)
+      true
+  
+  """
+  def is_narcissistic_in_base?(n, b) when n > 0 and b > 1 do
+      
+      raw = Integer.digits(n, b)
+      
+      (raw
+      |> Enum.map(fn d -> Math.pow(d, length(raw)) end)
+      |> Enum.sum()) == n
+      
+  end
 
   @doc """
   Find the Aliquot Sum of `n`.

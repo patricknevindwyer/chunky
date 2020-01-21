@@ -112,14 +112,25 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x primitive pseudoperfect
   - x primitive weird (http://oeis.org/A002975)
   - x rebuild "see also" of perfect variants
-  - [-] giuga numbers
-  - ulam numbers
   - x semi-primes
-  - wolstenholm
-  - check Classes of Natural Numbers
-  - check Divisibility-based sets of integers (ref section of https://en.wikipedia.org/wiki/Practical_number)
-  - Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
-  - narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html
+  - x Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
+   - fix offset
+  - narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html (armstrong numbers)
+   - is narcissistic_in_base?(n, b)
+    - http://oeis.org/A114904 (n's by digit count for base 10)
+    - http://oeis.org/A014576 (smallest N for size D)
+    - http://oeis.org/A005188 base 10
+    - http://oeis.org/A010353 base 9
+    - http://oeis.org/A010354 base 8
+    - http://oeis.org/A010350 base 7
+    - http://oeis.org/A010348 base 6
+    - http://oeis.org/A010346 base 5
+    - http://oeis.org/A010344 base 4
+    
+   - is_narcissistic?(n)
+    - OEIS
+     - http://oeis.org/A005188
+     
   - muenchhausen number - http://mathworld.wolfram.com/MuenchhausenNumber.html
   - harshad number - http://mathworld.wolfram.com/HarshadNumber.html
   - apocalypse numbers - http://mathworld.wolfram.com/ApocalypseNumber.html
@@ -127,12 +138,20 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - belphegor numbers - http://mathworld.wolfram.com/BelphegorNumber.html
   - monica set - http://mathworld.wolfram.com/MonicaSet.html
   - suzanne set - http://mathworld.wolfram.com/SuzanneSet.html
-  
+  - check Classes of Natural Numbers
+  - check Divisibility-based sets of integers (ref section of https://en.wikipedia.org/wiki/Practical_number)
+  - congruences (https://en.wikipedia.org/wiki/Table_of_congruences)
+  - armstrong numbers http://oeis.org/A005188
+  - [-] giuga numbers
+  - [-] ulam numbers (s-additive sets, series calculation)
+  - [-] wolstenholme (congruences)
 
     
  - functions    
   - egyptian fraction
   - generalized harmonic number
+  - dirichlet functions
+  - limits?
  
  - better docs for sequence libraries
   - group by commonality, link to just internal ref
@@ -152,6 +171,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
 ### release 0.*.*
  
+ - do we rename? 
  
  - move util scripts that use JASON and HTTPoison into a scripts directory as .exs files
  - move jason and HTTPoison to dev only

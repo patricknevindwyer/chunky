@@ -27,6 +27,7 @@
    - nth_integer_root!/2 -> val
   - reduced_prime_factors/1
   - has_subset_sum?/2
+  - is_narcissistic_in_base?/2
  - new module Chunky.Math.Predicates
  - refactored all functions of form `is_*?/1` from Chunky.Math to Chunky.Math.Predicates
  - Math.Predicates
@@ -53,6 +54,9 @@
   - is_primitive_weird_number?/1
   - is_semiprime_number?/1
   - is_squarefree_semiprime?/1
+  - is_kaprekar_number?/1
+  - is_kaprekar_strict_number?/1
+  - is_narcissistic_number?/1
 
 ### Sequences
 
@@ -75,9 +79,23 @@
  - A006037 - Weird numbers
  - A006036 - Primitive pseudoperfect numbers
  - A002975 - Primitive weird numbers
- 
-
-
+ - A006886 - Kaprekar numbers
+ - A053816 - Another version of the Kaprekar numbers
+ - A005188 - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers
+ - A010353 - Base-9 Armstrong or narcissistic numbers
+ - A010354 - Base-8 Armstrong or narcissistic numbers
+ - A010350 - Base-7 Armstrong or narcissistic numbers
+ - A010348 - Base-6 Armstrong or narcissistic numbers
+ - A010346 - Base-5 Armstrong or narcissistic numbers
+ - A010344 - Base-4 Armstrong or narcissistic numbers
+ - A161948 - Base-11 Armstrong or narcissistic numbers
+ - A161949 - Base-12 Armstrong or narcissistic numbers
+ - A161950 - Base-13 Armstrong or narcissistic numbers
+ - A161951 - Base-14 Armstrong or narcissistic numbers
+ - A161952 - Base-15 Armstrong or narcissistic numbers
+ - A161953 - Base-16 Armstrong or narcissistic numbers
+ - A114904 - Sorted numbers of digits of any base-10 narcissistic number
+ - A014576 - Smallest n-digit narcissistic (or Armstrong) number
 
 
 ## v0.11.5
