@@ -115,21 +115,21 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x semi-primes
   - x Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
    - fix offset
-  - narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html (armstrong numbers)
-   - is narcissistic_in_base?(n, b)
-    - http://oeis.org/A114904 (n's by digit count for base 10)
-    - http://oeis.org/A014576 (smallest N for size D)
-    - http://oeis.org/A005188 base 10
-    - http://oeis.org/A010353 base 9
-    - http://oeis.org/A010354 base 8
-    - http://oeis.org/A010350 base 7
-    - http://oeis.org/A010348 base 6
-    - http://oeis.org/A010346 base 5
-    - http://oeis.org/A010344 base 4
+  - x narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html (armstrong numbers)
+   - x is narcissistic_in_base?(n, b)
+    - x http://oeis.org/A114904 (n's by digit count for base 10)
+    - x http://oeis.org/A014576 (smallest N for size D)
+    - x http://oeis.org/A005188 base 10
+    - x http://oeis.org/A010353 base 9
+    - x http://oeis.org/A010354 base 8
+    - x http://oeis.org/A010350 base 7
+    - x http://oeis.org/A010348 base 6
+    - x http://oeis.org/A010346 base 5
+    - x http://oeis.org/A010344 base 4
     
-   - is_narcissistic?(n)
-    - OEIS
-     - http://oeis.org/A005188
+   - x is_narcissistic?(n)
+    - x OEIS
+     - x http://oeis.org/A005188
      
   - muenchhausen number - http://mathworld.wolfram.com/MuenchhausenNumber.html
   - harshad number - http://mathworld.wolfram.com/HarshadNumber.html

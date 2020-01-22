@@ -112,6 +112,7 @@ defmodule Chunky.Math do
    - `get_rhonda_to/2` - Find the bases for which `n` is a Rhonda number
    - `hamming_weight/2` - Find the Hamming Weight, the count of digits not `0`, in different base representations of `n`
    - `is_of_mx_plux_b/3` - Does `n` conform to values of `mx + b`
+   - `is_narcissistic_in_base?/2` - Is the sum of the `k`th power of the digits of a `k` length number `n` equal to `n` in base `b`?
    - `is_rhonda_to_base?/2` - Is `n` a Rhonda number to base `b`?
    - `jacobi_symbol/2` - Calculate the Jacobi symbol for `(a/n)`
    - `jordan_totient/2` - Calculate the Jordan totient `J-k(n)`
