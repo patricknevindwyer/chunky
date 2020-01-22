@@ -116,6 +116,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - x Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
    - fix offset
   - x narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html (armstrong numbers)
+  - x armstrong numbers http://oeis.org/A005188
    - x is narcissistic_in_base?(n, b)
     - x http://oeis.org/A114904 (n's by digit count for base 10)
     - x http://oeis.org/A014576 (smallest N for size D)
@@ -131,17 +132,17 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
     - x OEIS
      - x http://oeis.org/A005188
      
-  - muenchhausen number - http://mathworld.wolfram.com/MuenchhausenNumber.html
-  - harshad number - http://mathworld.wolfram.com/HarshadNumber.html
+  - x muenchhausen number - http://mathworld.wolfram.com/MuenchhausenNumber.html
+  - x harshad number - http://mathworld.wolfram.com/HarshadNumber.html
   - apocalypse numbers - http://mathworld.wolfram.com/ApocalypseNumber.html
   - apocalyptic numbers - http://mathworld.wolfram.com/ApocalypticNumber.html
   - belphegor numbers - http://mathworld.wolfram.com/BelphegorNumber.html
+
   - monica set - http://mathworld.wolfram.com/MonicaSet.html
   - suzanne set - http://mathworld.wolfram.com/SuzanneSet.html
   - check Classes of Natural Numbers
   - check Divisibility-based sets of integers (ref section of https://en.wikipedia.org/wiki/Practical_number)
   - congruences (https://en.wikipedia.org/wiki/Table_of_congruences)
-  - armstrong numbers http://oeis.org/A005188
   - [-] giuga numbers
   - [-] ulam numbers (s-additive sets, series calculation)
   - [-] wolstenholme (congruences)

@@ -1,8 +1,8 @@
 ## Generators
 
 ```elixir 
-OEIS.Util.generate_function_sequences(~w(A053816), in_module: Chunky.Sequence.OEIS.Repr)
-OEIS.Util.generate_list_sequences(~w(A194472), in_module: Chunky.Sequence.OEIS.Multiples)
+OEIS.Util.generate_function_sequences(~w(A005188 A010353 A010354 A010350 A010348 A010346 A010344 A161948 A161949 A161950 A161951 A161952 A161953), in_module: Chunky.Sequence.OEIS.Repr)
+OEIS.Util.generate_list_sequences(~w(A046253), in_module: Chunky.Sequence.OEIS.Repr)
 ```
 
 ## Combinatorics
@@ -34,24 +34,14 @@ A057716
 
 ## Repr
 
-pandigitals
 
-http://oeis.org/A005188
-http://oeis.org/A010353
-http://oeis.org/A010354
-http://oeis.org/A010350
-http://oeis.org/A010348
-http://oeis.org/A010346
-http://oeis.org/A010344
-http://oeis.org/A161948
-http://oeis.org/A161949
-http://oeis.org/A161950
-http://oeis.org/A161951
-http://oeis.org/A161952
-http://oeis.org/A161953
+A001101
+A005349
+A007602
 
-http://oeis.org/A114904
-http://oeis.org/A014576
+
+
+
 
 
 ## Constant

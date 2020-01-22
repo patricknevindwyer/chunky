@@ -57,6 +57,10 @@
   - is_kaprekar_number?/1
   - is_kaprekar_strict_number?/1
   - is_narcissistic_number?/1
+  - is_munchhausen_number?/1
+  - is_harshad_number?/1
+  - is_moran_number?/1
+  - is_zuckerman_number?/1
 
 ### Sequences
 
@@ -96,6 +100,10 @@
  - A161953 - Base-16 Armstrong or narcissistic numbers
  - A114904 - Sorted numbers of digits of any base-10 narcissistic number
  - A014576 - Smallest n-digit narcissistic (or Armstrong) number
+ - A046253 - Equal to the sum of its nonzero digits raised to its own power
+ - A001101 - Moran numbers: n such that (n / sum of digits of n) is prime
+ - A005349 - Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits
+ - A007602 - Numbers that are divisible by the product of their digits
 
 
 ## v0.11.5

@@ -132,16 +132,24 @@ defmodule Chunky.Math.Predicates do
     - `is_evil_number?/1` - Does the binary expansion of `n` have an _even_ number of `1`s?
     - `is_odious_number?/1` - Does the binary expansion of `n` have _odd_ number of `1`s?
    
+   Powers of digits and digit sets:
+
+    - `is_kaprekar_number?/1` - When squared, does any set of leading digits of `n^2` plus the remaining dgits equal `n`?
+    - `is_kaprekar_strict_number?/1` - When squared, do the fist half of the digits of `n^2` plus the second half, equal `n`?
+    - `is_munchhausen_number?/1` - Do the digits of `n`, taken to their own power, sum to `n`?
+    - `is_narcissistic_number?/1` - Do the digits of length `k` number `n`, individually taken to the `k`th power and summed, equal `n`?
    
    Miscellaneous patterns:
       
     - `is_cyclops_number?/1` - Does `n` have an odd number of digits and a single `0` in the center most digit?
-    - `is_kaprekar_number?/1` - When squared, does any set of leading digits of `n^2` plus the remaining dgits equal `n`?
-    - `is_kaprekar_strict_number?/1` - When squared, do the fist half of the digits of `n^2` plus the second half, equal `n`?
-    - `is_narcissistic_number?/1` - Do the digits of length `k` number `n`, individually taken to the `k`th power and summed, equal `n`?
     - `is_pandigital?/1` - Does `n` contain all of the decimal digits at least once?
     - `is_plaindrome?/1` - Do the digits of `n` always stay the same or increase when read left to right?
    
+   Divisibility patterns:
+   
+    - `is_harshad_number?/1` - Is `n` divisible by the sum of the digits of `n`?
+    - `is_moran_number?/1` - Is `n` divided by the sum of the digits of `n` a prime number?
+    - `is_zuckerman_number?/1` - Is `n` divisible by the product of the digits of `n`?
    
    
    ## Powers
@@ -466,16 +474,16 @@ defmodule Chunky.Math.Predicates do
        [:negative, :odd, :odious_number]
 
        iex> Predicates.analyze_number(0)
-       [:cyclops_number, :doubly_even_number, :even, :evil_number, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
+       [:cyclops_number, :doubly_even_number, :even, :evil_number, :munchhausen_number, :palindromic, :perfect_square, :plaindrome, :repdigit, :zero]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :unhappy_number, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :harshad_number, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(105840, skip_smooth: true, predicate_wait_time: 20_000)
-       [:abundant, :arithmetic_number, :doubly_even_number, :even, :highly_abundant, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :pseudoperfect_number, :unhappy_number, :wasteful_number]
+       [:abundant, :arithmetic_number, :doubly_even_number, :even, :harshad_number, :highly_abundant, :hypotenuse_number, :odious_number, :polite_number, :positive, :practical_number, :pseudoperfect_number, :unhappy_number, :wasteful_number]
 
        iex> Predicates.analyze_number(1000, skip_smooth: true)
-       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :hypotenuse_number, :multiple_rhonda, :perfect_cube, :perfect_power, :polite_number, :positive, :powerful_number, :practical_number, :pseudoperfect_number, :rhonda_to_base_16]
+       [:abundant, :doubly_even_number, :equidigital_number, :even, :evil_number, :happy_number, :harshad_number, :hypotenuse_number, :multiple_rhonda, :perfect_cube, :perfect_power, :polite_number, :positive, :powerful_number, :practical_number, :pseudoperfect_number, :rhonda_to_base_16]
     
        iex> Predicates.analyze_number(1435)
        [:arithmetic_number, :cubefree, :deficient, :equidigital_number, :hypotenuse_number, :odd, :odious_number, :polite_number, :positive, :pseudo_vampire_number, :sphenic_number, :squarefree, :unhappy_number, :vampire_number]
@@ -1456,6 +1464,43 @@ defmodule Chunky.Math.Predicates do
    def is_happy_number?(_), do: false
    
    @doc """
+   Is the integer `n` cleanly divisible by the sum of the digits of `n`?
+   
+   Also called _Niven_ numbers. For example the number `27` is a Harshad
+   number, as `2 + 7 = 9` and `27 % 9 = 0`.
+   
+   OEIS References:
+   
+    - [A005349 - Niven or Harshad numbers](http://oeis.org/A005349)
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_harshad_number?(6)
+       true
+
+       iex> Predicates.is_harshad_number?(11)
+       false
+
+       iex> Predicates.is_harshad_number?(42)
+       true
+
+       iex> Predicates.is_harshad_number?(126)
+       true
+
+       iex> Predicates.is_harshad_number?(1180)
+       true
+
+       iex> Predicates.is_harshad_number?(99890)
+       true
+   
+   """
+   def is_harshad_number?(n) when n > 0 do
+       rem(n, digit_sum(n)) == 0
+   end
+   def is_harshad_number?(_), do: false
+   
+   @doc """
    Check if a number `n` is _highly abundant_.
 
    A number `n` is _highly abundant_ when the sum of the proper factors of `n` is
@@ -1895,6 +1940,46 @@ defmodule Chunky.Math.Predicates do
    end
    
    @doc """
+   Is `n` divided by the sum of the digits of `n` a prime number?
+   
+   The Moran numbers are `n` such that the sum of digits divides evenly into `n`, with the resulting
+   value `p` being a prime number.
+   
+   For instance, `399` is a Moran number, as `399 / (3 + 9 + 9) = 19`.
+   
+   OEIS Referenes:
+   
+    - [A001101 Moran numbers](http://oeis.org/A001101)
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_moran_number?(18)
+       true
+
+       iex> Predicates.is_moran_number?(36)
+       false
+
+       iex> Predicates.is_moran_number?(153)
+       true
+
+       iex> Predicates.is_moran_number?(1185)
+       true
+   
+       iex> Predicates.is_moran_number?(26519)
+       true
+   
+       iex> Predicates.is_moran_number?(194751)
+       true
+   
+   """
+   def is_moran_number?(n) when n > 0 do
+       ds = digit_sum(n)
+       rem(n, ds) == 0 && is_prime?(div(n, ds))
+   end
+   def is_moran_number?(_), do: false
+   
+   @doc """
    Check if the integer `n` is a Rhonda number to more than one base.
   
    **Generalized function**: `Chunky.Math.get_rhonda_to/2`
@@ -1921,6 +2006,48 @@ defmodule Chunky.Math.Predicates do
        _ -> true
      end
    end
+   
+   @doc """
+   Do the digits of `n` to their own power sum to `n`?
+   
+   Münchhausen numbers are a small, finite set of numbers where each digit of `n` taken to it's
+   own power, and then summed, equals `n`. The four known numbers are `0, 1, 3435, 438579088`.
+   
+   OEIS Reference:
+   
+    - [A046253 - Münchhausen numbers](http://oeis.org/A046253)
+   
+   See also:
+   
+    - `is_narcissistic_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_munchhausen_number?(0)
+       true
+
+       iex> Predicates.is_munchhausen_number?(3)
+       false
+
+       iex> Predicates.is_munchhausen_number?(3435)
+       true
+
+       iex> Predicates.is_munchhausen_number?(9000)
+       false
+   
+       iex> Predicates.is_munchhausen_number?(438579088)
+       true
+   
+   """
+   def is_munchhausen_number?(0), do: true
+   def is_munchhausen_number?(n) when n >= 0 do
+       (Integer.digits(n)
+       |> Enum.filter(fn d -> d != 0 end)
+       |> Enum.map(fn d -> Math.pow(d, d) end)
+       |> Enum.sum()) == n
+   end
+   def is_munchhausen_number?(_), do: false
    
    @doc """
    Determine if a number is a negative integer.
@@ -3898,6 +4025,49 @@ defmodule Chunky.Math.Predicates do
    """
    def is_zero?(0), do: true
    def is_zero?(n) when is_integer(n), do: false
+   
+   @doc """
+   Is `n` divisible by the product of the digits of `n`?
+   
+   The Zuckerman numbers in base 10 - numbers `n` such that the product of the digits of `n`
+   cleanly divides `n`. For example, `624` is a Zuckerman number, as `624 / (6 * 2 * 4) = 13`.
+   
+   OEIS References:
+   
+    - [A007602 - Numbers divisible by the product of their digits](http://oeis.org/A007602)
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_zuckerman_number?(9)
+       true
+
+       iex> Predicates.is_zuckerman_number?(13)
+       false
+
+       iex> Predicates.is_zuckerman_number?(36)
+       true
+
+       iex> Predicates.is_zuckerman_number?(612)
+       true
+
+       iex> Predicates.is_zuckerman_number?(1344)
+       true
+   
+       iex> Predicates.is_zuckerman_number?(1148424192)
+       true
+   
+   """
+   def is_zuckerman_number?(n) when n > 0 do
+       p = Integer.digits(n)
+       |> Enum.reduce(1, fn x, acc -> x * acc end)
+       
+       case p do
+           0 -> false
+           _ -> rem(n, p) == 0
+       end
+   end
+   def is_zuckerman_number?(_), do: false
    
    ####
    ## Private functions

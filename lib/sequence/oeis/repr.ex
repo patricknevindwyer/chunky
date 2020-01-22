@@ -6,7 +6,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
   ## Available Sequences
 
 
+
+
    - [A000788 - Total number of 1's in binary expansions of 0, ..., n.](https://oeis.org/A000788) - `:a000788` - `create_sequence_a000788/1`
+   - [A001101 - Moran numbers: n such that (n / sum of digits of n) is prime.](https://oeis.org/A001101) - `:a001101` - `create_sequence_a001101/1`
    - [A004176 - Omit 1's from n.](https://oeis.org/A004176) - `:a004176` - `create_sequence_a004176/1`
    - [A004177 - Omit 2's from n.](https://oeis.org/A004177) - `:a004177` - `create_sequence_a004177/1`
    - [A004178 - Omit 3's from n.](https://oeis.org/A004178) - `:a004178` - `create_sequence_a004178/1`
@@ -27,6 +30,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A004727 - Delete all 8's from the sequence of nonnegative integers.](https://oeis.org/A004727) - `:a004727` - `create_sequence_a004727/1`
    - [A004728 - Delete all 9's from the sequence of nonnegative integers.](https://oeis.org/A004728) - `:a004728` - `create_sequence_a004728/1`
    - [A005188 - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.](https://oeis.org/A005188) - `:a005188` - `create_sequence_a005188/1`
+   - [A005349 - Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.](https://oeis.org/A005349) - `:a005349` - `create_sequence_a005349/1`
    - [A005823 - Numbers whose ternary expansion contains no 1's.](https://oeis.org/A005823) - `:a005823` - `create_sequence_a005823/1`
    - [A005836 - Numbers n whose base 3 representation contains no 2.](https://oeis.org/A005836) - `:a005836` - `create_sequence_a005836/1`
    - [A006886 - Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.](https://oeis.org/A006886) - `:a006886` - `create_sequence_a006886/1`
@@ -38,6 +42,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A007093 - Numbers in base 7.](https://oeis.org/A007093) - `:a007093` - `create_sequence_a007093/1`
    - [A007094 - Numbers in base 8.](https://oeis.org/A007094) - `:a007094` - `create_sequence_a007094/1`
    - [A007095 - Numbers in base 9.](https://oeis.org/A007095) - `:a007095` - `create_sequence_a007095/1`
+   - [A007602 - Numbers that are divisible by the product of their digits.](https://oeis.org/A007602) - `:a007602` - `create_sequence_a007602/1`
    - [A007953 - Digital sum (i.e., sum of digits) of n; also called digsum(n).](https://oeis.org/A007953) - `:a007953` - `create_sequence_a007953/1`
    - [A007954 - Product of decimal digits of n.](https://oeis.org/A007954) - `:a007954` - `create_sequence_a007954/1`
    - [A010344 - Base-4 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010344) - `:a010344` - `create_sequence_a010344/1`
@@ -119,6 +124,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A023756 - Plaindromes: numbers whose digits in base 15 are in nondecreasing order.](https://oeis.org/A023756) - `:a023756` - `create_sequence_a023756/1`
    - [A023757 - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.](https://oeis.org/A023757) - `:a023757` - `create_sequence_a023757/1`
    - [A043321 - Numbers n such that number of 0's in base 3 is 1.](https://oeis.org/A043321) - `:a043321` - `create_sequence_a043321/1`
+   - [A046253 - Equal to the sum of its nonzero digits raised to its own power.](https://oeis.org/A046253) - `:a046253` - `create_sequence_a046253/1`
    - [A052382 - Numbers without 0 as a digit, a.k.a. zeroless numbers.](https://oeis.org/A052382) - `:a052382` - `create_sequence_a052382/1`
    - [A052383 - Numbers without 1 as a digit.](https://oeis.org/A052383) - `:a052383` - `create_sequence_a052383/1`
    - [A052404 - Numbers without 2 as a digit.](https://oeis.org/A052404) - `:a052404` - `create_sequence_a052404/1`
@@ -217,6 +223,9 @@ defmodule Chunky.Sequence.OEIS.Repr do
   
   # raw data for A014576 - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).
   @data_a014576 [1,0,153,1634,54748,548834,1741725,24678050,146511208,4679307774,32164049650,0,0,28116440335967,0,4338281769391370,21897142587612075,0,1517841543307505039,63105425988599693916,128468643043731391252,0]
+
+  # raw data for A046253 - Equal to the sum of its nonzero digits raised to its own power.
+  @data_a046253 [0,1,3435,438579088]
 
   # raw data for A114904 - Sorted numbers of digits of any base-10 narcissistic number.
   @data_a114904 [1,3,4,5,6,7,8,9,10,11,14,16,17,19,20,21,23,24,25,27,29,31,32,33,34,35,37,38,39]
@@ -7447,5 +7456,134 @@ defmodule Chunky.Sequence.OEIS.Repr do
   def create_sequence_a014576(_opts) do
           sequence_for_list(@data_a014576)
   end
+
+  @doc """
+  OEIS Sequence `A046253` - Equal to the sum of its nonzero digits raised to its own power.
+
+  From [OEIS A046253](https://oeis.org/A046253):
+
+  > Equal to the sum of its nonzero digits raised to its own power.
+  > (Formerly )
+
+  **Sequence IDs**: `:a046253`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a046253) |> Sequence.take!(4)
+      [0,1,3435,438579088] 
+
+
+  """
+  @doc offset: 1,
+       sequence: "Equal to the sum of its nonzero digits raised to its own power.",
+       references: [{:oeis, :a046253, "https://oeis.org/A046253"}]
+  def create_sequence_a046253(_opts) do
+          sequence_for_list(@data_a046253)
+  end  
   
+  @doc """
+  OEIS Sequence `A001101` - Moran numbers: n such that (n / sum of digits of n) is prime.
+
+  From [OEIS A001101](https://oeis.org/A001101):
+
+  > Moran numbers: n such that (n / sum of digits of n) is prime.
+  > (Formerly )
+
+  **Sequence IDs**: `:a001101`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a001101) |> Sequence.take!(45)
+      [18,21,27,42,45,63,84,111,114,117,133,152,153,156,171,190,195,198,201,207,209,222,228,247,261,266,285,333,370,372,399,402,407,423,444,465,481,511,516,518,531,555,558,592,603]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Moran numbers: n such that (n / sum of digits of n) is prime.",
+       references: [{:oeis, :a001101, "https://oeis.org/A001101"}]
+  def create_sequence_a001101(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a001101/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a001101(_idx, last) do
+      Math.next_number(&Predicates.is_moran_number?/1, last)
+  end
+
+  @doc """
+  OEIS Sequence `A005349` - Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.
+
+  From [OEIS A005349](https://oeis.org/A005349):
+
+  > Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.
+  > (Formerly M0481)
+
+  **Sequence IDs**: `:a005349`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a005349) |> Sequence.take!(61)
+      [1,2,3,4,5,6,7,8,9,10,12,18,20,21,24,27,30,36,40,42,45,48,50,54,60,63,70,72,80,81,84,90,100,102,108,110,111,112,114,117,120,126,132,133,135,140,144,150,152,153,156,162,171,180,190,192,195,198,200,201,204]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.",
+       references: [{:oeis, :a005349, "https://oeis.org/A005349"}]
+  def create_sequence_a005349(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005349/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a005349(_idx, last) do
+      Math.next_number(&Predicates.is_harshad_number?/1, last)
+  end
+
+  @doc """
+  OEIS Sequence `A007602` - Numbers that are divisible by the product of their digits.
+
+  From [OEIS A007602](https://oeis.org/A007602):
+
+  > Numbers that are divisible by the product of their digits.
+  > (Formerly M0482)
+
+  **Sequence IDs**: `:a007602`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a007602) |> Sequence.take!(53)
+      [1,2,3,4,5,6,7,8,9,11,12,15,24,36,111,112,115,128,132,135,144,175,212,216,224,312,315,384,432,612,624,672,735,816,1111,1112,1113,1115,1116,1131,1176,1184,1197,1212,1296,1311,1332,1344,1416,1575,1715,2112,2144]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Numbers that are divisible by the product of their digits.",
+       references: [{:oeis, :a007602, "https://oeis.org/A007602"}]
+  def create_sequence_a007602(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007602/2)
+  end
+
+
+  @doc offset: 1, fill_value: 0
+  def seq_a007602(_idx, last) do
+      Math.next_number(&Predicates.is_zuckerman_number?/1, last)
+  end
 end
