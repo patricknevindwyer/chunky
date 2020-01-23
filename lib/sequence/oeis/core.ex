@@ -2984,7 +2984,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1
   def seq_a005100(_idx, last) do
-      Math.next_number(&Predicates.is_deficient?/1, last)
+    Math.next_number(&Predicates.is_deficient?/1, last)
   end
 
   @doc """
@@ -3016,7 +3016,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
   @doc offset: 1, fill_value: 1
   def seq_a005101(_idx, last) do
-      Math.next_number(&Predicates.is_abundant?/1, last)
+    Math.next_number(&Predicates.is_abundant?/1, last)
   end
 
   @doc """

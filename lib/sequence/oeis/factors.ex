@@ -4823,7 +4823,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
   def seq_a211338(_idx, last) do
     Math.next_number(fn candidate -> rem(Math.tau(candidate), 3) == 2 end, last)
   end
-  
+
   @doc """
   OEIS Sequence `A046759` - Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).
 
@@ -4846,18 +4846,18 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
   """
   @doc offset: 1,
-       sequence: "Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).",
+       sequence:
+         "Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).",
        references: [{:oeis, :a046759, "https://oeis.org/A046759"}]
   def create_sequence_a046759(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046759/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046759/2)
   end
-
 
   @doc offset: 1
   def seq_a046759(_idx, last) do
-      Math.next_number(&Predicates.is_economical_number?/1, last)
+    Math.next_number(&Predicates.is_economical_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A046760` - Wasteful numbers.
 
@@ -4883,15 +4883,14 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Wasteful numbers.",
        references: [{:oeis, :a046760, "https://oeis.org/A046760"}]
   def create_sequence_a046760(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046760/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046760/2)
   end
-
 
   @doc offset: 1
   def seq_a046760(_idx, last) do
-      Math.next_number(&Predicates.is_wasteful_number?/1, last)
+    Math.next_number(&Predicates.is_wasteful_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A046758` - Equidigital numbers.
 
@@ -4917,12 +4916,11 @@ defmodule Chunky.Sequence.OEIS.Factors do
        sequence: "Equidigital numbers.",
        references: [{:oeis, :a046758, "https://oeis.org/A046758"}]
   def create_sequence_a046758(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046758/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046758/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a046758(_idx, last) do
-      Math.next_number(&Predicates.is_equidigital_number?/1, last)
+    Math.next_number(&Predicates.is_equidigital_number?/1, last)
   end
 end

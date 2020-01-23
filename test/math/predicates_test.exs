@@ -4,10 +4,10 @@ defmodule Chunky.Math.PredicatesTest do
   @moduledoc """
   Tests for predicate functions in Chunky.Math.Predicates.
   """
-  
+
   alias Chunky.Math
   alias Chunky.Math.Predicates
-  
+
   doctest Chunky.Math.Predicates
 
   describe "is_3_smooth?/1" do
@@ -105,7 +105,7 @@ defmodule Chunky.Math.PredicatesTest do
       |> Enum.each(fn n -> assert !Predicates.is_23_smooth?(n) end)
     end
   end
-  
+
   describe "is_abundant?/1" do
     test "1" do
       assert Predicates.is_abundant?(1) == false
@@ -127,7 +127,7 @@ defmodule Chunky.Math.PredicatesTest do
       assert Predicates.is_abundant?(945)
     end
   end
-  
+
   describe "is_achilles_number?/1" do
     test "1" do
       assert Predicates.is_achilles_number?(1) == false
@@ -149,7 +149,7 @@ defmodule Chunky.Math.PredicatesTest do
       assert Predicates.is_achilles_number?(5_425_069_447)
     end
   end
-  
+
   describe "is_arithmetic_number?/1" do
     test "1" do
       assert Predicates.is_arithmetic_number?(1)
@@ -163,7 +163,7 @@ defmodule Chunky.Math.PredicatesTest do
       assert Predicates.is_arithmetic_number?(12916) == false
     end
   end
-  
+
   describe "is_cubefree?" do
     test "value tests" do
       ns = [1, 2, 9, 19, 64, 700, 2400, 4545, 88688]
@@ -175,7 +175,7 @@ defmodule Chunky.Math.PredicatesTest do
       end)
     end
   end
-  
+
   describe "is_deficient?/1" do
     test "1" do
       assert Predicates.is_deficient?(1)
@@ -219,7 +219,7 @@ defmodule Chunky.Math.PredicatesTest do
       assert Predicates.is_highly_abundant?(1980)
     end
   end
-  
+
   describe "is_highly_powerful_number?/1" do
     test "1" do
       assert Predicates.is_highly_powerful_number?(1)
@@ -269,7 +269,7 @@ defmodule Chunky.Math.PredicatesTest do
       end)
     end
   end
-  
+
   describe "is_perfect?/1" do
     test "1" do
       assert Predicates.is_perfect?(1) == false
@@ -331,7 +331,7 @@ defmodule Chunky.Math.PredicatesTest do
       assert Predicates.is_perfect_power?(1010) == false
     end
   end
-  
+
   describe "is_perfect_square?/1" do
     test "3" do
       assert Predicates.is_perfect_square?(3) == false
@@ -349,7 +349,7 @@ defmodule Chunky.Math.PredicatesTest do
       assert Predicates.is_perfect_square?(29241)
     end
   end
-  
+
   describe "is_powerful_number?/1" do
     test "1" do
       assert Predicates.is_powerful_number?(1)
@@ -367,7 +367,7 @@ defmodule Chunky.Math.PredicatesTest do
       assert Predicates.is_powerful_number?(972)
     end
   end
-  
+
   describe "is_prime?/1" do
     test "first 100 primes" do
       [
@@ -709,7 +709,7 @@ defmodule Chunky.Math.PredicatesTest do
       end)
     end
   end
-  
+
   describe "is_prime_fast?/1" do
     test "value tests" do
       ns = [1, 2, 9, 19, 123_456_789, 987_654_321, 987_654_323]
@@ -733,7 +733,7 @@ defmodule Chunky.Math.PredicatesTest do
       end)
     end
   end
-  
+
   describe "is_sphenic_number?/1" do
     test "value tests" do
       ns = [1, 2, 9, 19, 700, 4543, 28438, 51322, 51334]
@@ -745,7 +745,7 @@ defmodule Chunky.Math.PredicatesTest do
       end)
     end
   end
-  
+
   describe "is_squarefree?/1" do
     test "value tests" do
       ns = [1, 2, 9, 19, 700, 2400, 4545, 88688]
@@ -757,5 +757,4 @@ defmodule Chunky.Math.PredicatesTest do
       end)
     end
   end
-  
 end

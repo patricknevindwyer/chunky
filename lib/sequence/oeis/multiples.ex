@@ -89,9 +89,17 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   alias Chunky.Math
   alias Chunky.Math.Predicates
 
-
   # raw data for A054377 - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.
-  @data_a054377 [2,6,42,1806,47058,2214502422,52495396602,8490421583559688410706771261086]
+  @data_a054377 [
+    2,
+    6,
+    42,
+    1806,
+    47058,
+    2_214_502_422,
+    52_495_396_602,
+    8_490_421_583_559_688_410_706_771_261_086
+  ]
 
   @doc """
   OEIS Sequence `A008585` - a(n) = 3*n.
@@ -2072,7 +2080,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   def seq_a152691(idx) do
     idx * 64
   end
-  
+
   @doc """
   OEIS Sequence `A016825` - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.
 
@@ -2098,15 +2106,14 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        sequence: "Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.",
        references: [{:oeis, :a016825, "https://oeis.org/A016825"}]
   def create_sequence_a016825(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a016825/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a016825/2)
   end
-
 
   @doc offset: 0
   def seq_a016825(_idx, last) do
-      Math.next_number(&Predicates.is_singly_even_number?/1, last + 1)
+    Math.next_number(&Predicates.is_singly_even_number?/1, last + 1)
   end
-  
+
   @doc """
   OEIS Sequence `A007770` - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.
 
@@ -2129,18 +2136,18 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
   @doc offset: 1,
-       sequence: "Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.",
+       sequence:
+         "Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.",
        references: [{:oeis, :a007770, "https://oeis.org/A007770"}]
   def create_sequence_a007770(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a007770/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a007770/2)
   end
-
 
   @doc offset: 1
   def seq_a007770(_idx, last) do
-      Math.next_number(&Predicates.is_happy_number?/1, last)
+    Math.next_number(&Predicates.is_happy_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A031177` - Unhappy numbers: numbers having period-8 2-digitized sequences.
 
@@ -2166,15 +2173,14 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        sequence: "Unhappy numbers: numbers having period-8 2-digitized sequences.",
        references: [{:oeis, :a031177, "https://oeis.org/A031177"}]
   def create_sequence_a031177(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a031177/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a031177/2)
   end
-
 
   @doc offset: 1
   def seq_a031177(_idx, last) do
-      Math.next_number(&Predicates.is_unhappy_number?/1, last)
+    Math.next_number(&Predicates.is_unhappy_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A138591` - Sums of two or more consecutive nonnegative integers.
 
@@ -2200,18 +2206,17 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        sequence: "Sums of two or more consecutive nonnegative integers.",
        references: [{:oeis, :a138591, "https://oeis.org/A138591"}]
   def create_sequence_a138591(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a138591/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a138591/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a138591(idx, last) do
-      case idx do
-          1 -> 1
-          _ -> Math.next_number(&Predicates.is_polite_number?/1, last)
-      end
+    case idx do
+      1 -> 1
+      _ -> Math.next_number(&Predicates.is_polite_number?/1, last)
+    end
   end
-  
+
   @doc """
   OEIS Sequence `A006753` - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).
 
@@ -2234,18 +2239,18 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
   @doc offset: 1,
-       sequence: "Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).",
+       sequence:
+         "Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).",
        references: [{:oeis, :a006753, "https://oeis.org/A006753"}]
   def create_sequence_a006753(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006753/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006753/2)
   end
-
 
   @doc offset: 1
   def seq_a006753(_idx, last) do
-      Math.next_number(&Predicates.is_smith_number?/1, last)
+    Math.next_number(&Predicates.is_smith_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A019506` - Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.
 
@@ -2268,18 +2273,18 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
   @doc offset: 1,
-       sequence: "Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.",
+       sequence:
+         "Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.",
        references: [{:oeis, :a019506, "https://oeis.org/A019506"}]
   def create_sequence_a019506(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a019506/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a019506/2)
   end
-
 
   @doc offset: 1
   def seq_a019506(_idx, last) do
-      Math.next_number(&Predicates.is_hoax_number?/1, last)
+    Math.next_number(&Predicates.is_hoax_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A004144` - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).
 
@@ -2302,16 +2307,16 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
   @doc offset: 1,
-       sequence: "Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).",
+       sequence:
+         "Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).",
        references: [{:oeis, :a004144, "https://oeis.org/A004144"}]
   def create_sequence_a004144(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a004144/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a004144/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a004144(_idx, last) do
-      Math.next_number(&Predicates.is_nonhypotenuse_number?/1, last)
+    Math.next_number(&Predicates.is_nonhypotenuse_number?/1, last)
   end
 
   @doc """
@@ -2339,15 +2344,14 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        sequence: "Hypotenuse numbers (squares are sums of 2 nonzero squares).",
        references: [{:oeis, :a009003, "https://oeis.org/A009003"}]
   def create_sequence_a009003(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a009003/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a009003/2)
   end
-
 
   @doc offset: 1
   def seq_a009003(_idx, last) do
-      Math.next_number(&Predicates.is_hypotenuse_number?/1, last)    
+    Math.next_number(&Predicates.is_hypotenuse_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A005153` - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.
 
@@ -2370,16 +2374,16 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
   @doc offset: 1,
-       sequence: "Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.",
+       sequence:
+         "Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.",
        references: [{:oeis, :a005153, "https://oeis.org/A005153"}]
   def create_sequence_a005153(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005153/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005153/2)
   end
-
 
   @doc offset: 1
   def seq_a005153(_idx, last) do
-      Math.next_number(&Predicates.is_practical_number?/1, last)
+    Math.next_number(&Predicates.is_practical_number?/1, last)
   end
 
   @doc """
@@ -2404,12 +2408,13 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
   @doc offset: 1,
-       sequence: "Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.",
+       sequence:
+         "Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.",
        references: [{:oeis, :a054377, "https://oeis.org/A054377"}]
   def create_sequence_a054377(_opts) do
-          sequence_for_list(@data_a054377)
-  end 
-  
+    sequence_for_list(@data_a054377)
+  end
+
   @doc """
   OEIS Sequence `A005835` - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.
 
@@ -2432,17 +2437,17 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   """
   @doc offset: 1,
-       sequence: "Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.",
+       sequence:
+         "Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.",
        references: [{:oeis, :a005835, "https://oeis.org/A005835"}]
   def create_sequence_a005835(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005835/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005835/2)
   end
-
 
   @doc offset: 1
   def seq_a005835(_idx, last) do
-      Math.next_number(&Predicates.is_pseudoperfect_number?/1, last)
-  end 
+    Math.next_number(&Predicates.is_pseudoperfect_number?/1, last)
+  end
 
   @doc """
   OEIS Sequence `A194472` - Erdős-Nicolas numbers.
@@ -2469,15 +2474,14 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        sequence: "Erdős-Nicolas numbers.",
        references: [{:oeis, :a194472, "https://oeis.org/A194472"}]
   def create_sequence_a194472(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a194472/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a194472/2)
   end
-
 
   @doc offset: 1
   def seq_a194472(_idx, last) do
-      Math.next_number(&Predicates.is_erdos_nicolas_number?/1, last)
-  end      
-  
+    Math.next_number(&Predicates.is_erdos_nicolas_number?/1, last)
+  end
+
   @doc """
   OEIS Sequence `A006037` - Weird numbers: abundant (A005101) but not pseudoperfect (A005835).
 
@@ -2498,20 +2502,19 @@ defmodule Chunky.Sequence.OEIS.Multiples do
       [70,836,4030,5830,7192]
 
 
-  """ 
+  """
   @doc offset: 1,
        sequence: "Weird numbers: abundant (A005101) but not pseudoperfect (A005835).",
        references: [{:oeis, :a006037, "https://oeis.org/A006037"}]
   def create_sequence_a006037(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006037/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006037/2)
   end
-
 
   @doc offset: 1
   def seq_a006037(_idx, last) do
-      Math.next_number(&Predicates.is_weird_number?/1, last)
+    Math.next_number(&Predicates.is_weird_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A006036` - Primitive pseudoperfect numbers.
 
@@ -2537,15 +2540,14 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        sequence: "Primitive pseudoperfect numbers.",
        references: [{:oeis, :a006036, "https://oeis.org/A006036"}]
   def create_sequence_a006036(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006036/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006036/2)
   end
-
 
   @doc offset: 1
   def seq_a006036(_idx, last) do
-      Math.next_number(&Predicates.is_primitive_pseudoperfect_number?/1, last)
+    Math.next_number(&Predicates.is_primitive_pseudoperfect_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A002975` - Primitive weird numbers: weird numbers with no proper weird divisors.
 
@@ -2571,12 +2573,11 @@ defmodule Chunky.Sequence.OEIS.Multiples do
        sequence: "Primitive weird numbers: weird numbers with no proper weird divisors.",
        references: [{:oeis, :a002975, "https://oeis.org/A002975"}]
   def create_sequence_a002975(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a002975/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a002975/2)
   end
-
 
   @doc offset: 1
   def seq_a002975(_idx, last) do
-      Math.next_number(&Predicates.is_primitive_weird_number?/1, last)
+    Math.next_number(&Predicates.is_primitive_weird_number?/1, last)
   end
 end

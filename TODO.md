@@ -105,12 +105,16 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - [-] ulam numbers (s-additive sets, series calculation)
   - [-] wolstenholme (congruences)
 
-    
+ - update summation and product to be `summation k, 1..100 over: ... end` or `of:`
+     
  - functions    
   - egyptian fraction
   - generalized harmonic number
   - dirichlet functions
   - limits?
+ 
+ - how would we do a decimal type?
+ - how would we do a complex number type?
  
  - better docs for sequence libraries
   - group by commonality, link to just internal ref

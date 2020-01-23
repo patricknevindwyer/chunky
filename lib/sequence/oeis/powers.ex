@@ -1614,7 +1614,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
   def seq_a159991(idx) do
     Math.pow(60, idx)
   end
-  
+
   @doc """
   OEIS Sequence `A057716` - The non-powers of 2.
 
@@ -1639,15 +1639,14 @@ defmodule Chunky.Sequence.OEIS.Powers do
        sequence: "The non-powers of 2.",
        references: [{:oeis, :a057716, "https://oeis.org/A057716"}]
   def create_sequence_a057716(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a057716/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a057716/2)
   end
-
 
   @doc offset: 0
   def seq_a057716(idx, last) do
-      case idx do 
-          0 -> 0
-          _ -> Math.next_number(&Predicates.is_polite_number?/1, last)
-      end
+    case idx do
+      0 -> 0
+      _ -> Math.next_number(&Predicates.is_polite_number?/1, last)
+    end
   end
 end

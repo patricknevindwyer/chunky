@@ -6,188 +6,158 @@ defmodule Chunky.MathTest do
   doctest Chunky.Math
 
   describe "has_subset_sum?/2" do
-      test "[]" do
-          vs = [-1, 0, 1]
-          hs = [false, false, false]
-          ls = []
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-      end
-      
-      test "[a]" do
-          vs = [-1, 0, 1]
-          hs = [false, false, true]
-          ls = [1]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-          
-      end
-      
-      test "[small] - all positive" do
-          vs = [-1, 0, 2, 5, 9, 10, 17, 18, 19]
-          hs = [false, false, true, true, true, true, true, true, false]
-          ls = [1, 2, 3, 5, 7]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-          
-      end
-      
-      test "[small] - all negative" do
-          vs = [2, 1, 0, -1, -3, -5, -11, -17, -18, -19]
-          hs = [false, false, false, true, true, true, true, true, true, false]
-          ls = [-1, -2, -3, -5, -7]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )          
-      end
-      
-      test "[small] - with zeros" do
-          vs = [-1, 0, 3, 7, 10]
-          hs = [false, true, true, true, false]
-          ls = [0, 0, 3, 4]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-          
-      end
-      
-      test "[small] - mixed" do
-          vs = [-7, -6, -3, -2, 0, 2, 3, 6, 7]
-          hs = [false, true, true, true, true, true, true, true, false]
-          ls = [-3, -2, -1, 1, 2, 3]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-      end
-      
-      test "[large] - all positive" do
-          vs = [-1, 0, 6, 10, 16, 20, 119, 120, 121]
-          hs = [false, false, true, true, true, true, true, true, false]
-          ls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-          
-      end
-      
-      test "[large] - all negative" do
-          vs = [1, 0, -2, -6, -10, -20, -119, -120, -121]
-          hs = [false, false, true, true, true, true, true, true, false]
-          ls = [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-          
-      end
-      
-      test "[large] - with zeros" do
-          vs = [-1, 0, 1, 3, 6, 10, 44, 45, 46]
-          hs = [false, true, true, true, true, true, true, true, false]
-          ls = [1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-          
-      end
-      
-      test "[large] - mixed" do
-          vs = [-60, -55, -40, -11, -10, -6, 0, 5, 9, 11, 42, 54, 70]
-          hs = [false, true, true, true, true, true, true, true, true, true, true, true, false]
-          ls = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )
-          
-      end
-      
-      test "[evens]" do
-          vs = [-11, -4, -3, -2, -1, 0, 1, 2, 3, 4, 11]
-          hs = [false, true, false, true, false, true, false, true, false, true, false]
-          ls = [-6, -4, -2, 0, 2, 4, 6]
-          
-          Enum.zip(vs, hs)
-          |> Enum.each(
-              fn {val, res} -> 
-                  assert Math.has_subset_sum?(ls, val) == res
-              end
-          )          
-      end
+    test "[]" do
+      vs = [-1, 0, 1]
+      hs = [false, false, false]
+      ls = []
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[a]" do
+      vs = [-1, 0, 1]
+      hs = [false, false, true]
+      ls = [1]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[small] - all positive" do
+      vs = [-1, 0, 2, 5, 9, 10, 17, 18, 19]
+      hs = [false, false, true, true, true, true, true, true, false]
+      ls = [1, 2, 3, 5, 7]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[small] - all negative" do
+      vs = [2, 1, 0, -1, -3, -5, -11, -17, -18, -19]
+      hs = [false, false, false, true, true, true, true, true, true, false]
+      ls = [-1, -2, -3, -5, -7]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[small] - with zeros" do
+      vs = [-1, 0, 3, 7, 10]
+      hs = [false, true, true, true, false]
+      ls = [0, 0, 3, 4]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[small] - mixed" do
+      vs = [-7, -6, -3, -2, 0, 2, 3, 6, 7]
+      hs = [false, true, true, true, true, true, true, true, false]
+      ls = [-3, -2, -1, 1, 2, 3]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[large] - all positive" do
+      vs = [-1, 0, 6, 10, 16, 20, 119, 120, 121]
+      hs = [false, false, true, true, true, true, true, true, false]
+      ls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[large] - all negative" do
+      vs = [1, 0, -2, -6, -10, -20, -119, -120, -121]
+      hs = [false, false, true, true, true, true, true, true, false]
+      ls = [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[large] - with zeros" do
+      vs = [-1, 0, 1, 3, 6, 10, 44, 45, 46]
+      hs = [false, true, true, true, true, true, true, true, false]
+      ls = [1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[large] - mixed" do
+      vs = [-60, -55, -40, -11, -10, -6, 0, 5, 9, 11, 42, 54, 70]
+      hs = [false, true, true, true, true, true, true, true, true, true, true, true, false]
+      ls = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
+
+    test "[evens]" do
+      vs = [-11, -4, -3, -2, -1, 0, 1, 2, 3, 4, 11]
+      hs = [false, true, false, true, false, true, false, true, false, true, false]
+      ls = [-6, -4, -2, 0, 2, 4, 6]
+
+      Enum.zip(vs, hs)
+      |> Enum.each(fn {val, res} ->
+        assert Math.has_subset_sum?(ls, val) == res
+      end)
+    end
   end
-  
+
   describe "reduced_prime_factors/1" do
-      test "value tests" do
-         [
-             # 1
-             {1, [{1, 1}]},
-             
-             # single low digit
-             {2, [{2, 1}]},
-             
-             # two digit prime
-             {17, [{17, 1}]},
-             
-             # power of 2
-             {64, [{2, 6}]},
-             
-             # larger composite
-             {12209276310, [{2, 1}, {3, 1}, {5, 1}, {7, 1}, {11, 5}, {19, 2}]},
-             
-             # skipped primes
-             {7569, [{3, 2}, {29, 2}]},
-             
-             # large power of 2
-             {9223372036854775808, [{2, 63}]},
-                          
-         ] 
-         |> Enum.each(fn {n, red} -> 
-             assert Math.reduced_prime_factors(n) == red
-         end)
-      end
+    test "value tests" do
+      [
+        # 1
+        {1, [{1, 1}]},
+
+        # single low digit
+        {2, [{2, 1}]},
+
+        # two digit prime
+        {17, [{17, 1}]},
+
+        # power of 2
+        {64, [{2, 6}]},
+
+        # larger composite
+        {12_209_276_310, [{2, 1}, {3, 1}, {5, 1}, {7, 1}, {11, 5}, {19, 2}]},
+
+        # skipped primes
+        {7569, [{3, 2}, {29, 2}]},
+
+        # large power of 2
+        {9_223_372_036_854_775_808, [{2, 63}]}
+      ]
+      |> Enum.each(fn {n, red} ->
+        assert Math.reduced_prime_factors(n) == red
+      end)
+    end
   end
-  
+
   describe "is_euler_pseudo_prime?/2" do
     test "value tests - true" do
       ns = [
@@ -2202,5 +2172,4 @@ defmodule Chunky.MathTest do
       assert Math.prime_factors(5_754_853_343) == [1, 5_754_853_343]
     end
   end
-  
 end

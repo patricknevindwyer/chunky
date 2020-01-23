@@ -89,6 +89,7 @@ Sequence Groups
 
 ### Sequences
 
+ - Passed 75% coverage of OEIS Core sequences
  - A016825 - Positive integers congruent to 2 mod 4
  - A046759 - Economical numbers
  - A046760 - Wasteful numbers

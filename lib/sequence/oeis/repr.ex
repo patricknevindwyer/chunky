@@ -4,7 +4,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
   representations, like alternate bases, digit contents, and patterns of digits.
 
   ## Available Sequences
-  
+
 
 
    - [A000788 - Total number of 1's in binary expansions of 0, ..., n.](https://oeis.org/A000788) - `:a000788` - `create_sequence_a000788/1`
@@ -221,16 +221,68 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   alias Chunky.Math
   alias Chunky.Math.Predicates
-  
+
   # raw data for A014576 - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).
-  @data_a014576 [1,0,153,1634,54748,548834,1741725,24678050,146511208,4679307774,32164049650,0,0,28116440335967,0,4338281769391370,21897142587612075,0,1517841543307505039,63105425988599693916,128468643043731391252,0]
+  @data_a014576 [
+    1,
+    0,
+    153,
+    1634,
+    54748,
+    548_834,
+    1_741_725,
+    24_678_050,
+    146_511_208,
+    4_679_307_774,
+    32_164_049_650,
+    0,
+    0,
+    28_116_440_335_967,
+    0,
+    4_338_281_769_391_370,
+    21_897_142_587_612_075,
+    0,
+    1_517_841_543_307_505_039,
+    63_105_425_988_599_693_916,
+    128_468_643_043_731_391_252,
+    0
+  ]
 
   # raw data for A046253 - Equal to the sum of its nonzero digits raised to its own power.
-  @data_a046253 [0,1,3435,438579088]
+  @data_a046253 [0, 1, 3435, 438_579_088]
 
   # raw data for A114904 - Sorted numbers of digits of any base-10 narcissistic number.
-  @data_a114904 [1,3,4,5,6,7,8,9,10,11,14,16,17,19,20,21,23,24,25,27,29,31,32,33,34,35,37,38,39]
-
+  @data_a114904 [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    14,
+    16,
+    17,
+    19,
+    20,
+    21,
+    23,
+    24,
+    25,
+    27,
+    29,
+    31,
+    32,
+    33,
+    34,
+    35,
+    37,
+    38,
+    39
+  ]
 
   @doc """
   OEIS Sequence `A004176` - Omit 1's from n.
@@ -6891,7 +6943,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     |> Enum.map(fn d -> Math.digit_count(d, [9]) end)
     |> Enum.sum()
   end
-  
+
   @doc """
   OEIS Sequence `A006886` - Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.
 
@@ -6914,18 +6966,18 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   """
   @doc offset: 1,
-       sequence: "Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.",
+       sequence:
+         "Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.",
        references: [{:oeis, :a006886, "https://oeis.org/A006886"}]
   def create_sequence_a006886(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a006886/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a006886/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a006886(_idx, last) do
-      Math.next_number(&Predicates.is_kaprekar_number?/1, last)
+    Math.next_number(&Predicates.is_kaprekar_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A053816` - Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.
 
@@ -6948,18 +7000,18 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   """
   @doc offset: 1,
-       sequence: "Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.",
+       sequence:
+         "Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.",
        references: [{:oeis, :a053816, "https://oeis.org/A053816"}]
   def create_sequence_a053816(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a053816/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a053816/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a053816(_idx, last) do
-      Math.next_number(&Predicates.is_kaprekar_strict_number?/1, last)
+    Math.next_number(&Predicates.is_kaprekar_strict_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A005188` - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.
 
@@ -6982,16 +7034,16 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   """
   @doc offset: 1,
-       sequence: "Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.",
+       sequence:
+         "Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.",
        references: [{:oeis, :a005188, "https://oeis.org/A005188"}]
   def create_sequence_a005188(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005188/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005188/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a005188(_idx, last) do
-      Math.next_number(&Predicates.is_narcissistic_number?/1, last)
+    Math.next_number(&Predicates.is_narcissistic_number?/1, last)
   end
 
   @doc """
@@ -7019,13 +7071,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-9 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a010353, "https://oeis.org/A010353"}]
   def create_sequence_a010353(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010353/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010353/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a010353(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 9) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 9) end, last)
   end
 
   @doc """
@@ -7053,13 +7104,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-8 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a010354, "https://oeis.org/A010354"}]
   def create_sequence_a010354(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010354/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010354/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a010354(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 8) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 8) end, last)
   end
 
   @doc """
@@ -7087,13 +7137,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-7 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a010350, "https://oeis.org/A010350"}]
   def create_sequence_a010350(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010350/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010350/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a010350(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 7) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 7) end, last)
   end
 
   @doc """
@@ -7121,13 +7170,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-6 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a010348, "https://oeis.org/A010348"}]
   def create_sequence_a010348(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010348/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010348/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a010348(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 6) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 6) end, last)
   end
 
   @doc """
@@ -7155,13 +7203,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-5 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a010346, "https://oeis.org/A010346"}]
   def create_sequence_a010346(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010346/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010346/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a010346(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 5) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 5) end, last)
   end
 
   @doc """
@@ -7189,13 +7236,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-4 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a010344, "https://oeis.org/A010344"}]
   def create_sequence_a010344(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010344/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010344/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a010344(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 4) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 4) end, last)
   end
 
   @doc """
@@ -7223,13 +7269,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-11 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a161948, "https://oeis.org/A161948"}]
   def create_sequence_a161948(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161948/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161948/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a161948(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 11) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 11) end, last)
   end
 
   @doc """
@@ -7257,13 +7302,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-12 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a161949, "https://oeis.org/A161949"}]
   def create_sequence_a161949(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161949/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161949/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a161949(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 12) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 12) end, last)
   end
 
   @doc """
@@ -7291,13 +7335,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-13 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a161950, "https://oeis.org/A161950"}]
   def create_sequence_a161950(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161950/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161950/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a161950(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 13) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 13) end, last)
   end
 
   @doc """
@@ -7325,13 +7368,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-14 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a161951, "https://oeis.org/A161951"}]
   def create_sequence_a161951(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161951/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161951/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a161951(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 14) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 14) end, last)
   end
 
   @doc """
@@ -7359,13 +7401,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-15 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a161952, "https://oeis.org/A161952"}]
   def create_sequence_a161952(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161952/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161952/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a161952(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 15) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 15) end, last)
   end
 
   @doc """
@@ -7393,15 +7434,14 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Base-16 Armstrong or narcissistic numbers (written in base 10).",
        references: [{:oeis, :a161953, "https://oeis.org/A161953"}]
   def create_sequence_a161953(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161953/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161953/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a161953(_idx, last) do
-      Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 16) end, last)
+    Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 16) end, last)
   end
-  
+
   @doc """
   OEIS Sequence `A114904` - Sorted numbers of digits of any base-10 narcissistic number.
 
@@ -7427,7 +7467,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Sorted numbers of digits of any base-10 narcissistic number.",
        references: [{:oeis, :a114904, "https://oeis.org/A114904"}]
   def create_sequence_a114904(_opts) do
-          sequence_for_list(@data_a114904)
+    sequence_for_list(@data_a114904)
   end
 
   @doc """
@@ -7452,10 +7492,11 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   """
   @doc offset: 1,
-       sequence: "Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).",
+       sequence:
+         "Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).",
        references: [{:oeis, :a014576, "https://oeis.org/A014576"}]
   def create_sequence_a014576(_opts) do
-          sequence_for_list(@data_a014576)
+    sequence_for_list(@data_a014576)
   end
 
   @doc """
@@ -7483,9 +7524,9 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Equal to the sum of its nonzero digits raised to its own power.",
        references: [{:oeis, :a046253, "https://oeis.org/A046253"}]
   def create_sequence_a046253(_opts) do
-          sequence_for_list(@data_a046253)
-  end  
-  
+    sequence_for_list(@data_a046253)
+  end
+
   @doc """
   OEIS Sequence `A001101` - Moran numbers: n such that (n / sum of digits of n) is prime.
 
@@ -7511,13 +7552,12 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Moran numbers: n such that (n / sum of digits of n) is prime.",
        references: [{:oeis, :a001101, "https://oeis.org/A001101"}]
   def create_sequence_a001101(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a001101/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a001101/2)
   end
-
 
   @doc offset: 1
   def seq_a001101(_idx, last) do
-      Math.next_number(&Predicates.is_moran_number?/1, last)
+    Math.next_number(&Predicates.is_moran_number?/1, last)
   end
 
   @doc """
@@ -7542,16 +7582,16 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   """
   @doc offset: 1,
-       sequence: "Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.",
+       sequence:
+         "Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.",
        references: [{:oeis, :a005349, "https://oeis.org/A005349"}]
   def create_sequence_a005349(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005349/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005349/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a005349(_idx, last) do
-      Math.next_number(&Predicates.is_harshad_number?/1, last)
+    Math.next_number(&Predicates.is_harshad_number?/1, last)
   end
 
   @doc """
@@ -7579,15 +7619,14 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Numbers that are divisible by the product of their digits.",
        references: [{:oeis, :a007602, "https://oeis.org/A007602"}]
   def create_sequence_a007602(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007602/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007602/2)
   end
-
 
   @doc offset: 1, fill_value: 0
   def seq_a007602(_idx, last) do
-      Math.next_number(&Predicates.is_zuckerman_number?/1, last)
+    Math.next_number(&Predicates.is_zuckerman_number?/1, last)
   end
-  
+
   @doc """
   OEIS Sequence `A115983` - Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.
 
@@ -7613,18 +7652,17 @@ defmodule Chunky.Sequence.OEIS.Repr do
        sequence: "Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.",
        references: [{:oeis, :a115983, "https://oeis.org/A115983"}]
   def create_sequence_a115983(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a115983/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a115983/2)
   end
-
 
   @doc offset: 1
   def seq_a115983(_idx, last) do
-      Math.next_number(
-          fn v -> 
-              Predicates.is_apocalypse_prime?(Math.pow(10, 665) + v) 
-          end, 
-          last
-      )
+    Math.next_number(
+      fn v ->
+        Predicates.is_apocalypse_prime?(Math.pow(10, 665) + v)
+      end,
+      last
+    )
   end
 
   @doc """
@@ -7649,15 +7687,15 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   """
   @doc offset: 1,
-       sequence: "Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.",
+       sequence:
+         "Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.",
        references: [{:oeis, :a051003, "https://oeis.org/A051003"}]
   def create_sequence_a051003(_opts) do
-          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a051003/2)
+    sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a051003/2)
   end
-
 
   @doc offset: 1
   def seq_a051003(_idx, last) do
-      Math.next_number(&Predicates.is_beast_number?/1, last)
+    Math.next_number(&Predicates.is_beast_number?/1, last)
   end
 end

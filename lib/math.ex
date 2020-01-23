@@ -4,7 +4,7 @@ defmodule Chunky.Math do
 
   A seperate module of predicate functions (inspection and analysis of individual integers, like
   testing for primality) are available in `Chunky.Math.Predicates`.
-  
+
 
   ## Modular Arithmetic
 
@@ -41,12 +41,12 @@ defmodule Chunky.Math do
    - `nth_root/3` - Floating point `n-th` root of an integer
    - `floats_equal?/3` - Determine if two floats are equal, within an error bound
 
-  
+
   ## Sets and Lists
-  
+
    - `has_subset_sum?/2` - Does any subset of integers in a list sum to `n`?
-  
-  
+
+
   ## Factorization and Divisors
 
   Work with divisors and prime factors.
@@ -229,23 +229,23 @@ defmodule Chunky.Math do
   alias Chunky.Fraction
   alias Chunky.Math
   alias Chunky.Math.Predicates
-  
+
   require Chunky.CacheAgent
   require Chunky.Math.Operations
-  
+
   import Chunky.Math.Operations, only: [summation: 3]
 
   @doc """
   Find the prime factors of `n` as the factors to a power.
-  
+
   While the `prime_factors/1` function will return the full prime factorization
   of `n` as a list of all factors (such as `[1, 2, 2, 3]` for factors of `12`), this
   function returns a list of tuples, with each tuple containing the prime factor, and
   the power of the prime factor, such as `[{1, 1}, {2, 2}, {3, 1}]` for the prime
   factors of `12`.
-  
+
   ## Examples
-  
+
       iex> Math.reduced_prime_factors(1)
       [{1, 1}]
 
@@ -257,15 +257,16 @@ defmodule Chunky.Math do
 
       iex> Math.reduced_prime_factors(30223017)
       [{3, 3}, {11, 3}, {29, 2}]
-  
+
   """
   def reduced_prime_factors(1), do: [{1, 1}]
+
   def reduced_prime_factors(n) when is_integer(n) and n > 1 do
-      prime_factors(n) -- [1]
-      |> Enum.chunk_by(fn v -> v end)
-      |> Enum.map(fn run -> {run |> List.first(), length(run)} end)
+    (prime_factors(n) -- [1])
+    |> Enum.chunk_by(fn v -> v end)
+    |> Enum.map(fn run -> {run |> List.first(), length(run)} end)
   end
-  
+
   @doc """
   Decompose an integer to prime factors.
 
@@ -314,7 +315,7 @@ defmodule Chunky.Math do
   def is_coprime?(a, b) when is_integer(a) and is_integer(b) and a > 0 and b > 0 do
     Integer.gcd(a, b) == 1
   end
-  
+
   @doc """
   Factorize an integer into all divisors.
 
@@ -471,19 +472,19 @@ defmodule Chunky.Math do
       end
     end
   end
-  
+
   @doc """
   Does a list of numbers contain any subset that sums to `n`?
-  
+
   The [subset sum](https://en.wikipedia.org/wiki/Subset_sum_problem) solution is an NP-Complete problem. For this
   implementation a series of heuristics is used to quickly eliminate edge cases, and then an exponential time exact
   combinatoric algorithm is used to search for solutions. This algoritm is a _fast pass_ recursion - as soon as a
   valid solution is found, the algorithm terminates. The best case running time is `O(1)`, while the worst case (a full
   search of all solutions, with no valid sum) is exponential to the size of the list of numbers, or approximates `O(2^N*N)`.
-  
-  
+
+
   ## Examples
-  
+
       iex> Math.has_subset_sum?([1, 2, 3, 5, 11], 9)
       true
 
@@ -492,7 +493,7 @@ defmodule Chunky.Math do
 
       iex> Math.has_subset_sum?([1, 2, 3, 5, 11], 23)
       false
-  
+
       iex> Math.has_subset_sum?([-3, 2, 4, 11], -1)
       true
 
@@ -501,101 +502,103 @@ defmodule Chunky.Math do
 
       iex> Math.has_subset_sum?([-3, 2, 4, 11], 10)
       true
-  
-  
+
+
   """
   def has_subset_sum?(nums, n) when is_list(nums) and is_integer(n) do
-            
-      # Our heuristics
-      #  - is N an explict member of the set?
-      #  - are nums all positive and n negative
-      #  - are nums all positive and n > sum(nums)
-      #  - are nums all even and n is negative?
-      #  - are nums all negative and n positive
-      #  - are nums all negative and n < sum(nums)
-      #  - is N < sum(negatives)
-      #  - is N > sum(positives)
-      all_pos = nums |> Enum.all?(&Predicates.is_positive?/1)
-      all_neg = nums |> Enum.all?(&Predicates.is_negative?/1)
-      all_evs = nums |> Enum.all?(&Predicates.is_even?/1)
-      pos_sum = nums |> Enum.filter(&Predicates.is_positive?/1) |> Enum.sum()
-      neg_sum = nums |> Enum.filter(&Predicates.is_negative?/1) |> Enum.sum()
-      
-      cond do
-          
-         Enum.member?(nums, n) -> true 
-         
-         all_pos && Predicates.is_negative?(n) -> false
-         
-         all_pos && Enum.sum(nums) < n -> false
-         
-         all_evs && Predicates.is_odd?(n) -> false
-         
-         all_neg && Predicates.is_positive?(n) -> false
-         
-         all_neg && Enum.sum(nums) > n -> false
-         
-         n > pos_sum -> false
-         
-         n < neg_sum -> false
-         
-         true ->
-             # drop into a pass fast check of all combinations
-             1..length(nums)
-             |> Enum.any?(fn subset_size ->
-                 case subset_check(nums, subset_size, n) do
-                     true -> true
-                     _ -> false
-                 end 
-             end)
-             
-      end
-      
+    # Our heuristics
+    #  - is N an explict member of the set?
+    #  - are nums all positive and n negative
+    #  - are nums all positive and n > sum(nums)
+    #  - are nums all even and n is negative?
+    #  - are nums all negative and n positive
+    #  - are nums all negative and n < sum(nums)
+    #  - is N < sum(negatives)
+    #  - is N > sum(positives)
+    all_pos = nums |> Enum.all?(&Predicates.is_positive?/1)
+    all_neg = nums |> Enum.all?(&Predicates.is_negative?/1)
+    all_evs = nums |> Enum.all?(&Predicates.is_even?/1)
+    pos_sum = nums |> Enum.filter(&Predicates.is_positive?/1) |> Enum.sum()
+    neg_sum = nums |> Enum.filter(&Predicates.is_negative?/1) |> Enum.sum()
+
+    cond do
+      Enum.member?(nums, n) ->
+        true
+
+      all_pos && Predicates.is_negative?(n) ->
+        false
+
+      all_pos && Enum.sum(nums) < n ->
+        false
+
+      all_evs && Predicates.is_odd?(n) ->
+        false
+
+      all_neg && Predicates.is_positive?(n) ->
+        false
+
+      all_neg && Enum.sum(nums) > n ->
+        false
+
+      n > pos_sum ->
+        false
+
+      n < neg_sum ->
+        false
+
+      true ->
+        # drop into a pass fast check of all combinations
+        1..length(nums)
+        |> Enum.any?(fn subset_size ->
+          case subset_check(nums, subset_size, n) do
+            true -> true
+            _ -> false
+          end
+        end)
+    end
   end
-  
+
   defp subset_check(_, 0, _), do: [[]]
   defp subset_check([], k, _) when is_integer(k), do: []
+
   defp subset_check([head | tail], k, value) when is_integer(k) and is_integer(value) do
-      
-      # our tail call could have a boolean or a list
-      tail_comb = subset_check(tail, k - 1, value)
-      # IO.inspect(tail_comb)
-            
-      cond do
-                    
-          # if it's a boolean, pass it back
-          is_boolean(tail_comb) -> tail_comb
-          
-          # not a bool, keep tryin
-          true -> 
-              
-              # check these inner values
-              inner_comb = Enum.map(
-                tail_comb,
-                fn r_comb ->
-                  [head | r_comb]
-                end
-              )
-              
-              # now we check to see if any of the inner values calculated so far
-              # match our test value - if so, return boolean, otherwise return
-              # our tail sets
-              if Enum.any?(inner_comb, fn vals -> Enum.sum(vals) == value end) do
-                  true
-              else
-                  
-                  # before we return our tail set, check if the _tail_ had a boolean
-                  # answer
-                  subs = subset_check(tail, k, value)
-                  cond do
-                      is_boolean(subs) -> subs
-                      true -> inner_comb ++ subs
-                  end                  
-              end
-          
-      end
+    # our tail call could have a boolean or a list
+    tail_comb = subset_check(tail, k - 1, value)
+    # IO.inspect(tail_comb)
+
+    cond do
+      # if it's a boolean, pass it back
+      is_boolean(tail_comb) ->
+        tail_comb
+
+      # not a bool, keep tryin
+      true ->
+        # check these inner values
+        inner_comb =
+          Enum.map(
+            tail_comb,
+            fn r_comb ->
+              [head | r_comb]
+            end
+          )
+
+        # now we check to see if any of the inner values calculated so far
+        # match our test value - if so, return boolean, otherwise return
+        # our tail sets
+        if Enum.any?(inner_comb, fn vals -> Enum.sum(vals) == value end) do
+          true
+        else
+          # before we return our tail set, check if the _tail_ had a boolean
+          # answer
+          subs = subset_check(tail, k, value)
+
+          cond do
+            is_boolean(subs) -> subs
+            true -> inner_comb ++ subs
+          end
+        end
+    end
   end
-  
 
   @doc """
   Count the number of possible factorizations of `n`.
@@ -3328,19 +3331,19 @@ defmodule Chunky.Math do
       |> length() == 0
     end
   end
-  
+
   @doc """
   A narcissistic number `n` of length `k` is equal to the sum of the digits of `n` to the `k`-th power.
-  
+
   For instance in base 10, the number `153` is of length `3`, and is a narcissistic number, because `1^3 + 5^3 + 3^3 = 153`.
-  
+
   In base 4, the number `28` is narcissistic, as the base 4 representation is `130`, and `1^3 + 3^3 + 0^3 = 28`.
-  
+
   Narcissistic numbers are also called _Armstrong_ numbers, or _plus-perfect_ numbers.
-  
-  
+
+
   OEIS References:
-  
+
    - [A161953 - Base-16 Armstrong](http://oeis.org/A161953)
    - [A161952 - Base-15 Armstrong](http://oeis.org/A161952)
    - [A161951 - Base-14 Armstrong](http://oeis.org/A161951)
@@ -3356,14 +3359,14 @@ defmodule Chunky.Math do
    - [A010344 - Base-4 Armstrong numbers](http://oeis.org/A010344)
    - [A114904 - Sorted numbers of digits of any base-10 narcissistic number](http://oeis.org/A114904)
    - [A014576 - Smallest n-digit narcissistic numbers](http://oeis.org/A014576)
-  
+
   See also:
-  
+
    - `Chunky.Math.Predicates.is_narcissistic_number?/1`
-  
-  
+
+
   ## Examples
-  
+
       iex> Math.is_narcissistic_in_base?(370, 10)
       true
 
@@ -3381,16 +3384,14 @@ defmodule Chunky.Math do
 
       iex> Math.is_narcissistic_in_base?(403584751, 9)
       true
-  
+
   """
   def is_narcissistic_in_base?(n, b) when n > 0 and b > 1 do
-      
-      raw = Integer.digits(n, b)
-      
-      (raw
-      |> Enum.map(fn d -> Math.pow(d, length(raw)) end)
-      |> Enum.sum()) == n
-      
+    raw = Integer.digits(n, b)
+
+    raw
+    |> Enum.map(fn d -> Math.pow(d, length(raw)) end)
+    |> Enum.sum() == n
   end
 
   @doc """
@@ -4812,7 +4813,7 @@ defmodule Chunky.Math do
   This is an iterative root method that bypasses any floating point operations, so is suitable
   for finding large integer roots. For numbers less than `2^64-1` the `nth_root` method may be
   faster.
-  
+
   The return value of `nth_integer_root` is a tuple of either `{:exact, value}` or `{:nearest, value}`
   depending on the root. To get an immediate value, see `nth_integer_root!/2`.
 
@@ -4832,14 +4833,14 @@ defmodule Chunky.Math do
     # iterative binary search across the answer space
     refine_nth_root_int(x, n, 1, x)
   end
-  
+
   @doc """
   Find the nearest integer `n`th root of `x`, such that `root^n <= x`.
 
   This is an iterative root method that bypasses any floating point operations, so is suitable
   for finding large integer roots. For numbers less than `2^64-1` the `nth_root` method may be
   faster.
-  
+
   The return value of `nth_integer_root` is an integer that is the exact, or nearest, `n`th root
   of `x`. If you need to _know_ if the root is exact or nearest, see `nth_integer_root/2`.
 
@@ -4856,19 +4857,19 @@ defmodule Chunky.Math do
       2
   """
   def nth_integer_root!(x, n) when n > 1 and x > 0 do
-     {_, v} = nth_integer_root(x, n)
-     v 
+    {_, v} = nth_integer_root(x, n)
+    v
   end
 
   # run a binary search to find our optimal candidate value
   defp refine_nth_root_int(x, n, c_low, c_hi) do
     # are low and hi right next to one another?
     if c_low == c_hi - 1 do
-        if Math.pow(c_low, n) == x do
-            {:exact, c_low}
-        else
-            {:nearest, c_low}
-        end
+      if Math.pow(c_low, n) == x do
+        {:exact, c_low}
+      else
+        {:nearest, c_low}
+      end
     else
       # pick a mid point
       c_mid = div(c_hi - c_low, 2) + c_low
