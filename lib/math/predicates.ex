@@ -151,6 +151,12 @@ defmodule Chunky.Math.Predicates do
     - `is_moran_number?/1` - Is `n` divided by the sum of the digits of `n` a prime number?
     - `is_zuckerman_number?/1` - Is `n` divisible by the product of the digits of `n`?
    
+   The patterns of some numbers are related to numerology, the occult, or religion.
+   
+    - `is_apocalypse_number?/1` - Is `n` a 666 digit number?
+    - `is_apocalypse_prime?/1` - Is `n` a 666 digit _prime_ number?
+    - `is_beast_number?/1` - Does `n` contain the substring of digits `666`?
+   
    
    ## Powers
    
@@ -311,6 +317,7 @@ defmodule Chunky.Math.Predicates do
                bigomega: 1,
                coprimes: 1,
                digit_count: 3, 
+               digit_runs: 1,
                digit_sum: 1,
                factor_pairs: 1,
                factors: 1, 
@@ -802,6 +809,69 @@ defmodule Chunky.Math.Predicates do
    end
    
    @doc """
+   Is `n` an integer with 666 digits?
+   
+   See also:
+   
+    - `is_apocalypse_prime?/1`
+    - `is_beast_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Math.pow(10, 665) + 37 |> Predicates.is_apocalypse_number?()
+       true
+
+       iex> Math.pow(10, 555) + 37 |> Predicates.is_apocalypse_number?()
+       false
+    
+       iex> Math.pow(10, 665) + 300_337 |> Predicates.is_apocalypse_number?()
+       true
+
+       iex> Math.pow(10, 665) + Math.pow(10, 37) |> Predicates.is_apocalypse_number?()
+       true
+   
+   """
+   def is_apocalypse_number?(n) when is_integer(n) do
+       (n |> Integer.digits() |> length()) == 666
+   end
+   
+   @doc """
+   Is `n` a 666 digit prime number?
+   
+   According to the OEIS, there are approximately 10^662 apocalypse primes, the last of which is `10^666-1157`.
+   
+   OEIS References
+   
+    - [A115983 - Apocalypse primes](http://oeis.org/A115983)
+   
+   See also:
+   
+    - `is_apocalypse_number?/1`
+    - `is_beast_number?/1`
+   
+   
+   ## Examples
+   
+       iex> Math.pow(10, 665) + 123 |> Predicates.is_apocalypse_prime?()
+       true
+
+       iex> Math.pow(10, 665) + 7123 |> Predicates.is_apocalypse_prime?()
+       false
+
+       iex> Math.pow(10, 665) + 8569 |> Predicates.is_apocalypse_prime?()
+       true
+
+       iex> Math.pow(10, 665) + 53683 |> Predicates.is_apocalypse_prime?()
+       true
+   
+   """
+   def is_apocalypse_prime?(n) when n > 0 do
+       is_apocalypse_number?(n) && is_prime?(n)
+   end
+   def is_apocalypse_prime?(_), do: false
+   
+   @doc """
    Determine if an integer is an _arithmetic number_.
 
    An arithmetic number is an integer `n` such that the average of the sum of the proper divisors of `n` is
@@ -832,6 +902,44 @@ defmodule Chunky.Math.Predicates do
    def is_arithmetic_number?(n) when is_integer(n) and n > 0 do
      divs = factors(n)
      rem(divs |> Enum.sum(), length(divs)) == 0
+   end
+   
+   @doc """
+   Does the number `n` contain the number sequence `666` somewhere in it's digits?
+   
+   OEIS References:
+   
+    - [A051003 - Beastly, or hateful, numbers](http://oeis.org/A051003)
+   
+   See also:
+   
+    - `is_apocalypse_number?/1`
+    - `is_apocalypse_prime?/1`
+   
+   
+   ## Examples
+   
+       iex> Predicates.is_beast_number?(6)
+       false
+
+       iex> Predicates.is_beast_number?(666)
+       true
+
+       iex> Predicates.is_beast_number?(64666)
+       true
+
+       iex> Predicates.is_beast_number?(116661)
+       true
+
+       iex> Predicates.is_beast_number?(306666)
+       true
+   
+   """
+   def is_beast_number?(n) when is_integer(n) do
+      (digit_runs(n)
+      |> Enum.filter(fn r -> length(r) >= 3 end)
+      |> Enum.filter(fn [d | _] -> d == 6 end)
+      |> length()) > 0
    end
       
    @doc """

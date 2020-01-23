@@ -91,53 +91,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ### release 0.12.0 - documentation and refactoring
    
    
- - add predicates
-  - x singly-even http://mathworld.wolfram.com/EvenNumber.html
-  - x doubly-even
-  - x frugal numbers /   - economical number?
-  - x extravagent numbers
-  - x equidigital
-  - x happy number
-  - x unhappy number
-  - x evil number
-  - x polite numbers
-  - x impolite numbers
-  - x smith numbers
-  - x hypotenuse numbers
-  - x non-hypotenuse numbers
-  - x practical numbers
-  - x primary pseudo-perfect
-  - x semiperfect
-  - x weird
-  - x primitive pseudoperfect
-  - x primitive weird (http://oeis.org/A002975)
-  - x rebuild "see also" of perfect variants
-  - x semi-primes
-  - x Kaprekar number - http://mathworld.wolfram.com/KaprekarNumber.html
-   - fix offset
-  - x narcissistic number - http://mathworld.wolfram.com/NarcissisticNumber.html (armstrong numbers)
-  - x armstrong numbers http://oeis.org/A005188
-   - x is narcissistic_in_base?(n, b)
-    - x http://oeis.org/A114904 (n's by digit count for base 10)
-    - x http://oeis.org/A014576 (smallest N for size D)
-    - x http://oeis.org/A005188 base 10
-    - x http://oeis.org/A010353 base 9
-    - x http://oeis.org/A010354 base 8
-    - x http://oeis.org/A010350 base 7
-    - x http://oeis.org/A010348 base 6
-    - x http://oeis.org/A010346 base 5
-    - x http://oeis.org/A010344 base 4
-    
-   - x is_narcissistic?(n)
-    - x OEIS
-     - x http://oeis.org/A005188
-     
-  - x muenchhausen number - http://mathworld.wolfram.com/MuenchhausenNumber.html
-  - x harshad number - http://mathworld.wolfram.com/HarshadNumber.html
-  - apocalypse numbers - http://mathworld.wolfram.com/ApocalypseNumber.html
-  - apocalyptic numbers - http://mathworld.wolfram.com/ApocalypticNumber.html
+  
   - belphegor numbers - http://mathworld.wolfram.com/BelphegorNumber.html
+  - belphegor primes - http://mathworld.wolfram.com/BelphegorPrime.html
 
+ Future
   - monica set - http://mathworld.wolfram.com/MonicaSet.html
   - suzanne set - http://mathworld.wolfram.com/SuzanneSet.html
   - check Classes of Natural Numbers
@@ -173,6 +131,13 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ### release 0.*.*
  
  - do we rename? 
+ - sequence generators as processes with macro for send/receive
+ - multi-sequence zip
+ - writeups of doing... Project Euler problems with Chunky? Project Rosalind? Advent of Code?
+ - draw triangles
+ - draw graphs
+ - splines/beziers/lines/curves as sequences
+ 
  
  - move util scripts that use JASON and HTTPoison into a scripts directory as .exs files
  - move jason and HTTPoison to dev only

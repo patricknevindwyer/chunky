@@ -1,7 +1,7 @@
 ## Generators
 
 ```elixir 
-OEIS.Util.generate_function_sequences(~w(A005188 A010353 A010354 A010350 A010348 A010346 A010344 A161948 A161949 A161950 A161951 A161952 A161953), in_module: Chunky.Sequence.OEIS.Repr)
+OEIS.Util.generate_function_sequences(~w(A001101 A005349 A007602), in_module: Chunky.Sequence.OEIS.Repr)
 OEIS.Util.generate_list_sequences(~w(A046253), in_module: Chunky.Sequence.OEIS.Repr)
 ```
 
@@ -35,10 +35,9 @@ A057716
 ## Repr
 
 
-A001101
-A005349
-A007602
 
+A115983 - apocalypse primes
+A051003 - beast numbers
 
 
 

@@ -121,10 +121,14 @@ or testing all the predicates at once, to determine the properties of a number:
 
 ```elixir
 iex> Chunky.Math.Predicates.analyze_number(12345678)
-[:abundant, :arithmetic_number, :cubefree, :even, :positive]
+[:abundant, :arithmetic_number, :cubefree, :even, :evil_number,
+ :hypotenuse_number, :plaindrome, :polite_number, :positive,
+ :pseudoperfect_number, :singly_even_number, :unhappy_number, :wasteful_number]
 
-iex> Chunky.Math.analyze_number(1299209)
-[:arithmetic_number, :cubefree, :deficient, :odd, :positive, :prime, :prime_power, :squarefree]
+iex> Chunky.Math.Predicates.analyze_number(1299209)
+[:arithmetic_number, :cubefree, :deficient, :equidigital_number, :evil_number,
+ :hypotenuse_number, :odd, :polite_number, :positive, :prime, :prime_power,
+ :squarefree, :unhappy_number]
 ```
 
 Chunky also has more advanced functions:

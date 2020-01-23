@@ -17,7 +17,29 @@
 
 # CHANGELOG
 
-## v0.*.*
+## v0.12.0
+
+```
+OEIS Coverage
+        745 total sequences
+By Module
+        Elixir.Chunky.Sequence.OEIS - 1 sequences
+        Elixir.Chunky.Sequence.OEIS.Combinatorics - 7 sequences
+        Elixir.Chunky.Sequence.OEIS.Constants - 31 sequences
+        Elixir.Chunky.Sequence.OEIS.Core - 136 sequences
+        Elixir.Chunky.Sequence.OEIS.Factors - 122 sequences
+        Elixir.Chunky.Sequence.OEIS.Multiples - 75 sequences
+        Elixir.Chunky.Sequence.OEIS.Powers - 48 sequences
+        Elixir.Chunky.Sequence.OEIS.Primes - 100 sequences
+        Elixir.Chunky.Sequence.OEIS.Repr - 205 sequences
+        Elixir.Chunky.Sequence.OEIS.Sigma - 20 sequences
+Sequence Groups
+        OEIS Core Sequences - 135 / 177 (76.27%)
+        OEIS Core::Easy Sequences - 121 / 146 (82.88%)
+        OEIS Core::Hard Sequences - 12 / 12 (100.0%)
+        OEIS Core::Multiplicative Sequences - 22 / 22 (100.0%)
+        OEIS Core::Eigen Sequences - 5 / 5 (100.0%)
+```
 
 ### Enhancements
 
@@ -61,6 +83,9 @@
   - is_harshad_number?/1
   - is_moran_number?/1
   - is_zuckerman_number?/1
+  - is_apocalypse_number?/1
+  - is_apocalypse_prime?/1
+  - is_beast_number?/1
 
 ### Sequences
 
@@ -104,7 +129,10 @@
  - A001101 - Moran numbers: n such that (n / sum of digits of n) is prime
  - A005349 - Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits
  - A007602 - Numbers that are divisible by the product of their digits
-
+ - A115983 - Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime
+ - A051003 - Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion
+ 
+ 
 
 ## v0.11.5
 

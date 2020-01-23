@@ -4,8 +4,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
   representations, like alternate bases, digit contents, and patterns of digits.
 
   ## Available Sequences
-
-
+  
 
 
    - [A000788 - Total number of 1's in binary expansions of 0, ..., n.](https://oeis.org/A000788) - `:a000788` - `create_sequence_a000788/1`
@@ -125,6 +124,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A023757 - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.](https://oeis.org/A023757) - `:a023757` - `create_sequence_a023757/1`
    - [A043321 - Numbers n such that number of 0's in base 3 is 1.](https://oeis.org/A043321) - `:a043321` - `create_sequence_a043321/1`
    - [A046253 - Equal to the sum of its nonzero digits raised to its own power.](https://oeis.org/A046253) - `:a046253` - `create_sequence_a046253/1`
+   - [A051003 - Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.](https://oeis.org/A051003) - `:a051003` - `create_sequence_a051003/1`
    - [A052382 - Numbers without 0 as a digit, a.k.a. zeroless numbers.](https://oeis.org/A052382) - `:a052382` - `create_sequence_a052382/1`
    - [A052383 - Numbers without 1 as a digit.](https://oeis.org/A052383) - `:a052383` - `create_sequence_a052383/1`
    - [A052404 - Numbers without 2 as a digit.](https://oeis.org/A052404) - `:a052404` - `create_sequence_a052404/1`
@@ -192,6 +192,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - [A102683 - Number of digits 9 in decimal representation of n.](https://oeis.org/A102683) - `:a102683` - `create_sequence_a102683/1`
    - [A102684 - Number of times the digit 9 appears in the decimal representations of all integers from 0 to n.](https://oeis.org/A102684) - `:a102684` - `create_sequence_a102684/1`
    - [A114904 - Sorted numbers of digits of any base-10 narcissistic number.](https://oeis.org/A114904) - `:a114904` - `create_sequence_a114904/1`
+   - [A115983 - Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.](https://oeis.org/A115983) - `:a115983` - `create_sequence_a115983/1`
    - [A121022 - Even numbers containing a 2 in their decimal representation.](https://oeis.org/A121022) - `:a121022` - `create_sequence_a121022/1`
    - [A122840 - a(n) is the number of 0s at the end of n when n is written in base 10.](https://oeis.org/A122840) - `:a122840` - `create_sequence_a122840/1`
    - [A160093 - Number of digits in n, excluding any trailing zeros.](https://oeis.org/A160093) - `:a160093` - `create_sequence_a160093/1`
@@ -7585,5 +7586,78 @@ defmodule Chunky.Sequence.OEIS.Repr do
   @doc offset: 1, fill_value: 0
   def seq_a007602(_idx, last) do
       Math.next_number(&Predicates.is_zuckerman_number?/1, last)
+  end
+  
+  @doc """
+  OEIS Sequence `A115983` - Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.
+
+  From [OEIS A115983](https://oeis.org/A115983):
+
+  > Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.
+  > (Formerly )
+
+  **Sequence IDs**: `:a115983`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a115983) |> Sequence.take!(7)
+      [123,1837,6409,7329,8569,8967,9663]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.",
+       references: [{:oeis, :a115983, "https://oeis.org/A115983"}]
+  def create_sequence_a115983(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a115983/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a115983(_idx, last) do
+      Math.next_number(
+          fn v -> 
+              Predicates.is_apocalypse_prime?(Math.pow(10, 665) + v) 
+          end, 
+          last
+      )
+  end
+
+  @doc """
+  OEIS Sequence `A051003` - Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.
+
+  From [OEIS A051003](https://oeis.org/A051003):
+
+  > Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.
+  > (Formerly )
+
+  **Sequence IDs**: `:a051003`
+
+  **Finite**: False
+
+  **Offset**: 1
+
+  ## Example
+
+      iex> Sequence.create(Elixir.Chunky.Sequence.OEIS.Repr, :a051003) |> Sequence.take!(19)
+      [666,1666,2666,3666,4666,5666,6660,6661,6662,6663,6664,6665,6666,6667,6668,6669,7666,8666,9666]
+
+
+  """
+  @doc offset: 1,
+       sequence: "Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.",
+       references: [{:oeis, :a051003, "https://oeis.org/A051003"}]
+  def create_sequence_a051003(_opts) do
+          sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a051003/2)
+  end
+
+
+  @doc offset: 1
+  def seq_a051003(_idx, last) do
+      Math.next_number(&Predicates.is_beast_number?/1, last)
   end
 end
