@@ -1,17 +1,25 @@
 defmodule Chunky.Sequence.OEIS.Combinatorics do
   @moduledoc """
-  Sequences from the [Online Encyclopedia of Integer Sequences](https://oeis.org) dealing with number
-  representations, like alternate bases, digit contents, and patterns of digits.
+  Sequences from the [Online Encyclopedia of Integer Sequences](https://oeis.org) dealing with combinatorics, set
+  manipulations, and permutations.
    
   ## Available Sequences
+  
+  ### Catalan Numbers
+  
+  Via [Catalan Number - Wikipedia](https://en.wikipedia.org/wiki/Catalan_number):
+  
+  > In combinatorial mathematics, the Catalan numbers form a sequence of natural numbers that occur in various 
+  > counting problems, often involving recursively-defined objects. They are named after the Belgian 
+  > mathematician Eugène Charles Catalan 
 
-   - [A159981 - Catalan numbers read modulo 4 .](https://oeis.org/A159981) - `:a159981` - `create_sequence_a159981/1`
-   - [A159984 - Catalan numbers read modulo 5 .](https://oeis.org/A159984) - `:a159984` - `create_sequence_a159984/1`
-   - [A159986 - Catalan numbers read modulo 7 .](https://oeis.org/A159986) - `:a159986` - `create_sequence_a159986/1`
-   - [A159987 - Catalan numbers read modulo 8.](https://oeis.org/A159987) - `:a159987` - `create_sequence_a159987/1`
-   - [A159988 - Catalan numbers read modulo 11 .](https://oeis.org/A159988) - `:a159988` - `create_sequence_a159988/1`
-   - [A159989 - Catalan numbers read modulo 12.](https://oeis.org/A159989) - `:a159989` - `create_sequence_a159989/1`
-   - [A289682 - Catalan numbers read modulo 16.](https://oeis.org/A289682) - `:a289682` - `create_sequence_a289682/1`
+   - `create_sequence_a159981/1` - A159981 - Catalan numbers read modulo 4
+   - `create_sequence_a159984/1` - A159984 - Catalan numbers read modulo 5
+   - `create_sequence_a159986/1` - A159986 - Catalan numbers read modulo 7
+   - `create_sequence_a159987/1` - A159987 - Catalan numbers read modulo 8
+   - `create_sequence_a159988/1` - A159988 - Catalan numbers read modulo 11
+   - `create_sequence_a159989/1` - A159989 - Catalan numbers read modulo 12
+   - `create_sequence_a289682/1` - A289682 - Catalan numbers read modulo 16
      
   """
 
@@ -25,7 +33,6 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   From [OEIS A159981](https://oeis.org/A159981):
 
   > Catalan numbers read modulo 4 .
-  > (Formerly )
 
   **Sequence IDs**: `:a159981`
 
@@ -47,6 +54,7 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Combinatorics.seq_a159981/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a159981(idx) do
     Math.catalan_number(idx) |> rem(4)
@@ -58,7 +66,6 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   From [OEIS A159984](https://oeis.org/A159984):
 
   > Catalan numbers read modulo 5 .
-  > (Formerly )
 
   **Sequence IDs**: `:a159984`
 
@@ -80,6 +87,7 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Combinatorics.seq_a159984/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a159984(idx) do
     Math.catalan_number(idx) |> rem(5)
@@ -91,7 +99,6 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   From [OEIS A159986](https://oeis.org/A159986):
 
   > Catalan numbers read modulo 7 .
-  > (Formerly )
 
   **Sequence IDs**: `:a159986`
 
@@ -113,6 +120,7 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Combinatorics.seq_a159986/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a159986(idx) do
     Math.catalan_number(idx) |> rem(7)
@@ -124,7 +132,6 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   From [OEIS A159987](https://oeis.org/A159987):
 
   > Catalan numbers read modulo 8.
-  > (Formerly )
 
   **Sequence IDs**: `:a159987`
 
@@ -146,6 +153,7 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Combinatorics.seq_a159987/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a159987(idx) do
     Math.catalan_number(idx) |> rem(8)
@@ -157,7 +165,6 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   From [OEIS A159988](https://oeis.org/A159988):
 
   > Catalan numbers read modulo 11 .
-  > (Formerly )
 
   **Sequence IDs**: `:a159988`
 
@@ -179,6 +186,7 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Combinatorics.seq_a159988/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a159988(idx) do
     Math.catalan_number(idx) |> rem(11)
@@ -190,7 +198,6 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   From [OEIS A159989](https://oeis.org/A159989):
 
   > Catalan numbers read modulo 12.
-  > (Formerly )
 
   **Sequence IDs**: `:a159989`
 
@@ -212,6 +219,7 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Combinatorics.seq_a159989/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a159989(idx) do
     Math.catalan_number(idx) |> rem(12)
@@ -223,7 +231,6 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   From [OEIS A289682](https://oeis.org/A289682):
 
   > Catalan numbers read modulo 16.
-  > (Formerly )
 
   **Sequence IDs**: `:a289682`
 
@@ -245,6 +252,7 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Combinatorics.seq_a289682/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a289682(idx) do
     Math.catalan_number(idx) |> rem(16)

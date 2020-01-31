@@ -5,37 +5,41 @@ defmodule Chunky.Sequence.OEIS.Constants do
 
   ## Available Sequences
 
-   - [A007395 - Constant sequence: the all 2's sequence.](https://oeis.org/A007395) - `:a007395` - `create_sequence_a007395/1`
-   - [A010701 - Constant sequence: the all 3's sequence.](https://oeis.org/A010701) - `:a010701` - `create_sequence_a010701/1`
-   - [A010709 - Constant sequence: the all 4's sequence.](https://oeis.org/A010709) - `:a010709` - `create_sequence_a010709/1`
-   - [A010716 - Constant sequence: the all 5's sequence.](https://oeis.org/A010716) - `:a010716` - `create_sequence_a010716/1`
-   - [A010722 - Constant sequence: the all 6's sequence.](https://oeis.org/A010722) - `:a010722` - `create_sequence_a010722/1`
-   - [A010727 - Constant sequence: the all 7's sequence.](https://oeis.org/A010727) - `:a010727` - `create_sequence_a010727/1`
-   - [A010731 - Constant sequence: the all 8's sequence.](https://oeis.org/A010731) - `:a010731` - `create_sequence_a010731/1`
-   - [A010734 - Constant sequence: the all 9's sequence.](https://oeis.org/A010734) - `:a010734` - `create_sequence_a010734/1`
-   - [A010692 - Constant sequence: a(n) = 10.](https://oeis.org/A010692) - `:a010692` - `create_sequence_a010692/1`
-   - [A010850 - Constant sequence: a(n) = 11.](https://oeis.org/A010850) - `:a010850` - `create_sequence_a010850/1`
-   - [A010851 - Constant sequence: a(n) = 12.](https://oeis.org/A010851) - `:a010851` - `create_sequence_a010851/1`
-   - [A010852 - Constant sequence: a(n) = 13.](https://oeis.org/A010852) - `:a010852` - `create_sequence_a010852/1`
-   - [A010853 - Constant sequence: a(n) = 14.](https://oeis.org/A010853) - `:a010853` - `create_sequence_a010853/1`
-   - [A010854 - Constant sequence: a(n) = 15.](https://oeis.org/A010854) - `:a010854` - `create_sequence_a010854/1`
-   - [A010855 - Constant sequence: a(n) = 16.](https://oeis.org/A010855) - `:a010855` - `create_sequence_a010855/1`
-   - [A010856 - Constant sequence: a(n) = 17.](https://oeis.org/A010856) - `:a010856` - `create_sequence_a010856/1`
-   - [A010857 - Constant sequence: a(n) = 18.](https://oeis.org/A010857) - `:a010857` - `create_sequence_a010857/1`
-   - [A010858 - Constant sequence: a(n) = 19.](https://oeis.org/A010858) - `:a010858` - `create_sequence_a010858/1`
-   - [A010859 - Constant sequence: a(n) = 20.](https://oeis.org/A010859) - `:a010859` - `create_sequence_a010859/1`
-   - [A010860 - Constant sequence: a(n) = 21.](https://oeis.org/A010860) - `:a010860` - `create_sequence_a010860/1`
-   - [A010861 - Constant sequence: a(n) = 22.](https://oeis.org/A010861) - `:a010861` - `create_sequence_a010861/1`
-   - [A010862 - Constant sequence: a(n) = 23.](https://oeis.org/A010862) - `:a010862` - `create_sequence_a010862/1`
-   - [A010863 - Constant sequence: a(n) = 24.](https://oeis.org/A010863) - `:a010863` - `create_sequence_a010863/1`
-   - [A010864 - Constant sequence: a(n) = 25.](https://oeis.org/A010864) - `:a010864` - `create_sequence_a010864/1`
-   - [A010865 - Constant sequence: a(n) = 26.](https://oeis.org/A010865) - `:a010865` - `create_sequence_a010865/1`
-   - [A010866 - Constant sequence: a(n) = 27.](https://oeis.org/A010866) - `:a010866` - `create_sequence_a010866/1`
-   - [A010867 - Constant sequence: a(n) = 28.](https://oeis.org/A010867) - `:a010867` - `create_sequence_a010867/1`
-   - [A010868 - Constant sequence: a(n) = 29.](https://oeis.org/A010868) - `:a010868` - `create_sequence_a010868/1`
-   - [A010869 - Constant sequence: a(n) = 30.](https://oeis.org/A010869) - `:a010869` - `create_sequence_a010869/1`
-   - [A010870 - Constant sequence: a(n) = 31.](https://oeis.org/A010870) - `:a010870` - `create_sequence_a010870/1`
-   - [A010871 - Constant sequence: a(n) = 32.](https://oeis.org/A010871) - `:a010871` - `create_sequence_a010871/1`
+  ### Constant Value Sequences
+  
+  The OEIS contains a large number of sequences that repeat the same number, the _constant sequences_. 
+  
+   - `create_sequence_a007395/1` - A007395 - Constant sequence: the all 2's sequence
+   - `create_sequence_a010701/1` - A010701 - Constant sequence: the all 3's sequence
+   - `create_sequence_a010709/1` - A010709 - Constant sequence: the all 4's sequence
+   - `create_sequence_a010716/1` - A010716 - Constant sequence: the all 5's sequence
+   - `create_sequence_a010722/1` - A010722 - Constant sequence: the all 6's sequence
+   - `create_sequence_a010727/1` - A010727 - Constant sequence: the all 7's sequence
+   - `create_sequence_a010731/1` - A010731 - Constant sequence: the all 8's sequence
+   - `create_sequence_a010734/1` - A010734 - Constant sequence: the all 9's sequence
+   - `create_sequence_a010692/1` - A010692 - Constant sequence: a(n) = 10
+   - `create_sequence_a010850/1` - A010850 - Constant sequence: a(n) = 11
+   - `create_sequence_a010851/1` - A010851 - Constant sequence: a(n) = 12
+   - `create_sequence_a010852/1` - A010852 - Constant sequence: a(n) = 13
+   - `create_sequence_a010853/1` - A010853 - Constant sequence: a(n) = 14
+   - `create_sequence_a010854/1` - A010854 - Constant sequence: a(n) = 15
+   - `create_sequence_a010855/1` - A010855 - Constant sequence: a(n) = 16
+   - `create_sequence_a010856/1` - A010856 - Constant sequence: a(n) = 17
+   - `create_sequence_a010857/1` - A010857 - Constant sequence: a(n) = 18
+   - `create_sequence_a010858/1` - A010858 - Constant sequence: a(n) = 19
+   - `create_sequence_a010859/1` - A010859 - Constant sequence: a(n) = 20
+   - `create_sequence_a010860/1` - A010860 - Constant sequence: a(n) = 21
+   - `create_sequence_a010861/1` - A010861 - Constant sequence: a(n) = 22
+   - `create_sequence_a010862/1` - A010862 - Constant sequence: a(n) = 23
+   - `create_sequence_a010863/1` - A010863 - Constant sequence: a(n) = 24
+   - `create_sequence_a010864/1` - A010864 - Constant sequence: a(n) = 25
+   - `create_sequence_a010865/1` - A010865 - Constant sequence: a(n) = 26
+   - `create_sequence_a010866/1` - A010866 - Constant sequence: a(n) = 27
+   - `create_sequence_a010867/1` - A010867 - Constant sequence: a(n) = 28
+   - `create_sequence_a010868/1` - A010868 - Constant sequence: a(n) = 29
+   - `create_sequence_a010869/1` - A010869 - Constant sequence: a(n) = 30
+   - `create_sequence_a010870/1` - A010870 - Constant sequence: a(n) = 31
+   - `create_sequence_a010871/1` - A010871 - Constant sequence: a(n) = 32
 
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
@@ -68,6 +72,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a007395/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a007395(_idx) do
     2
@@ -101,6 +106,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010701/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010701(_idx) do
     3
@@ -134,6 +140,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010709/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010709(_idx) do
     4
@@ -167,6 +174,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010716/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010716(_idx) do
     5
@@ -200,6 +208,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010722/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010722(_idx) do
     6
@@ -233,6 +242,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010727/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010727(_idx) do
     7
@@ -266,6 +276,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010731/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010731(_idx) do
     8
@@ -299,6 +310,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010734/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010734(_idx) do
     9
@@ -332,6 +344,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010692/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010692(_idx) do
     10
@@ -365,6 +378,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010850/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010850(_idx) do
     11
@@ -398,6 +412,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010851/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010851(_idx) do
     12
@@ -431,6 +446,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010852/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010852(_idx) do
     13
@@ -464,6 +480,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010853/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010853(_idx) do
     14
@@ -497,6 +514,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010854/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010854(_idx) do
     15
@@ -530,6 +548,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010855/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010855(_idx) do
     16
@@ -563,6 +582,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010856/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010856(_idx) do
     17
@@ -596,6 +616,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010857/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010857(_idx) do
     18
@@ -629,6 +650,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010858/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010858(_idx) do
     19
@@ -662,6 +684,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010859/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010859(_idx) do
     20
@@ -695,6 +718,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010860/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010860(_idx) do
     21
@@ -728,6 +752,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010861/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010861(_idx) do
     22
@@ -761,6 +786,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010862/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010862(_idx) do
     23
@@ -794,6 +820,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010863/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010863(_idx) do
     24
@@ -827,6 +854,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010864/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010864(_idx) do
     25
@@ -860,6 +888,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010865/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010865(_idx) do
     26
@@ -893,6 +922,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010866/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010866(_idx) do
     27
@@ -926,6 +956,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010867/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010867(_idx) do
     28
@@ -959,6 +990,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010868/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010868(_idx) do
     29
@@ -992,6 +1024,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010869/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010869(_idx) do
     30
@@ -1025,6 +1058,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010870/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010870(_idx) do
     31
@@ -1058,6 +1092,7 @@ defmodule Chunky.Sequence.OEIS.Constants do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Constants.seq_a010871/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010871(_idx) do
     32
