@@ -55,7 +55,7 @@ defmodule Chunky.Sequence do
   102
   ```
 
-  Sequences count indices as they go - the first value will always be at index `0`:
+  Sequences count indices as they go - the first value will usually be at index `0`:
 
   ```elixir
   iex> {_v, seq} = Sequence.create(Sequence.Basic, :whole_numbers) |> Sequence.next()
