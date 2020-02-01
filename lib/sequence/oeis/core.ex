@@ -3,145 +3,201 @@ defmodule Chunky.Sequence.OEIS.Core do
   OEIS [Core](http://oeis.org/search?q=keyword%3acore&sort=number) Sequences.
 
   ## Available Sequences
+  
+  
+  ### Divisors and Factors
+  
+  Core sequences dealing with divisors and factors of numbers, or the counting of divisors and factors. See `Chunky.Sequence.OEIS.Factors` for
+  non-core sequences of divisors and factors.
+  
+   - `create_sequence_a000005/1` - A000005 - Divisors of N
+   - `create_sequence_a000203/1` - A000203 - Sum of Divisors
+   - `create_sequence_a000396/1` - A000396 - Perfect Numbers
+   - `create_sequence_a000593/1` - A000593 - Sum of Odd Divisors of N
+   - `create_sequence_a001065/1` - A001065 - Sum of proper divisors (Aliquot parts) of N.
+   - `create_sequence_a001157/1` - A001157 - Sum of squares of divisors of N
+   - `create_sequence_a001221/1` - A001221 - Number of distinct primes dividing n (also called omega(n)).
+   - `create_sequence_a001222/1` - A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).
+   - `create_sequence_a001227/1` - A001227 - Number of odd divisors of n.
+   - `create_sequence_a006530/1` - A006530 - Gpf(n): greatest prime dividing n
+   - `create_sequence_a020639/1` - A020639 - Lpf(n): least prime dividing n
+   - `create_sequence_a074206/1` - A074206 - Kalmár's [Kalmar's] problem: number of ordered factorizations of n.
+   - `create_sequence_a001511/1` - A001511 - The ruler function: 2^a(n) divides 2n
+   - `create_sequence_a008683/1` - A008683 - Möbius (or Moebius) function mu(n)
+   - `create_sequence_a005100/1` - A005100 - Deficient Numbers
+   - `create_sequence_a005101/1` - A005101 - Abundant Numbers
 
-   - [A000001 - Number of groups of order n](https://oeis.org/A000001) - `:a000001` - `create_sequence_a000001/1`
-   - [A000002 - Kolakoski sequence](https://oeis.org/A000002) - `:a000002` - `create_sequence_a000002/1`
-   - [A000004 - The zero sequence](https://oeis.org/A000004) - `:a000004` - `create_sequence_a000004/1`
-   - [A000005 - Divisors of N](https://oeis.org/A000005) - `:a000005` - `create_sequence_a000005/1`
-   - [A000007 - The characteristic function of {0}: a(n) = 0^n](https://oeis.org/A000007) - `:a000007` - `create_sequence_a000007/1`
-   - [A000009 - Number of partitions of n into distinct parts](http://oeis.org/A000009) - `:a000009` - `create_sequence_a000009/1`
-   - [A000010 - Euler's totient function](https://oeis.org/A000010) - `:a000010` - `create_sequence_a000010/1`
-   - [A000012 - The simplest sequence of positive numbers: the all 1's sequence](https://oeis.org/A000012) - `:a000012` - `create_sequence_a000012/1`
-   - [A000027 - The positive integers](https://oeis.org/A000027) - `:a000027` - `create_sequence_a000027/1`
-   - [A000029 - Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).](https://oeis.org/A000029) - `:a000029` - `create_sequence_a000029/1`
-   - [A000031 - Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.](https://oeis.org/A000031) - `:a000031` - `create_sequence_a000031/1`
-   - [A000032 - Lucas numbers beginning at 2](https://oeis.org/A000032) - `:a000032` - `create_sequence_a000032/1`
-   - [A000035 - Period 2: repeat [0, 1]; a(n) = n mod 2](https://oeis.org/A000035) - `:a000035` - `create_sequence_a000035/1`
-   - [A000040 - The prime numbers.](https://oeis.org/A000040) - `:a000040` - `create_sequence_a000040/1`
-   - [A000041 - Partition Numbers](https://oeis.org/A000041) - `:a000041` - `create_sequence_a000041/1`
-   - [A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.](https://oeis.org/A000043) - `:a000043` - `create_sequence_a000043/1`
-   - [A000045 - Fibonacci Numbers](https://oeis.org/A000045) - `:a000045` or `:fibonacci` - `create_sequence_a000045/1`
-   - [A000048 - Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.](https://oeis.org/A000048) - `:a000048` - `create_sequence_a000048/1`
-   - [A000069 - Odious numbers: numbers with an odd number of 1's in their binary expansion](https://oeis.org/A000069) - `:a000069` - `create_sequence_a000069/1`
-   - [A000079 - Powers of 2](https://oeis.org/A000079) - `:a000079` - `create_sequence_a000079/1`
-   - [A000081 - Number of unlabeled rooted trees with n nodes](https://oeis.org/A000081) - `:a000081` - `create_sequence_a000081/1`
-   - [A000085 - Number of self-inverse permutations on n letters, also known as involutions](https://oeis.org/A000085) - `:a000085` - `create_sequence_a000085/1`
-   - [A000105 - Number of free polyominoes (or square animals) with n cells](https://oeis.org/A000105) - `:a000105` - `create_sequence_a000105/1`
-   - [A000108 - Catalan numbers: C(n), Also called Segner numbers.](https://oeis.org/A000108) - `:a000108` - `create_sequence_a000108/1`
-   - [A000109 - Number of simplicial polyhedra with n nodes](https://oeis.org/A000109) - `:a000109` - `create_sequence_a000109/1`
-   - [A000110 - Bell or exponential numbers: number of ways to partition a set of n labeled elements](https://oeis.org/A000110) - `:a000110` - `create_sequence_a000110/1`
-   - [A000111 - Euler or up/down numbers](https://oeis.org/A000111) - `:a000111` - `create_sequence_a000111/1`
-   - [A000112 - Number of partially ordered sets ("posets") with n unlabeled elements](https://oeis.org/A000112) - `:a000112` - `create_sequence_a000112/1`
-   - [A000120 - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n)](https://oeis.org/A000120) - `:a000120` - `create_sequence_a000120/1`
-   - [A000123 - Number of binary partitions: number of partitions of 2n into powers of 2.](https://oeis.org/A000123) - `:a000123` - `create_sequence_a000123/1`
-   - [A000124 - Central polygonal numbers (the Lazy Caterer's sequence)](https://oeis.org/A000124) - `:a000124` - `create_sequence_a000124/1`
-   - [A000129 - Pell numbers: a(n) = 2*a(n-1) + a(n-2)](https://oeis.org/A000129) - `:a000129` - `create_sequence_a000129/1`
-   - [A000142 - Factorial numbers: n! = 1*2*3*4*...*n ](https://oeis.org/A000142) - `:a000142` - `create_sequence_a000142/1`
-   - [A000161 - Number of partitions of n into 2 squares.](https://oeis.org/A000161) - `:a000161` - `create_sequence_a000161/1`
-   - [A000166 - Subfactorial or rencontres numbers, or derangements of `n`](https://oeis.org/A000166) - `:a000166` - `create_sequence_a000166/1`
-   - [A000169 - Number of labeled rooted trees with n nodes: n^(n-1)](https://oeis.org/A000169) - `:a000169` - `create_sequence_a000169/1`
-   - [A000203 - Sum of Divisors](https://oeis.org/A000203) - `:a000203` - `create_sequence_a000203/1`
-   - [A000204 - Lucas numbers (beginning with 1)](https://oeis.org/A000204) - `:a000204` - `create_sequence_a000204/1`
-   - [A000217 - Triangular numbers: a(n) = binomial(n+1,2)](https://oeis.org/A000217) - `:a000217` - `create_sequence_a000217/1`
-   - [A000219 - Number of planar partitions (or plane partitions) of n](https://oeis.org/A000219) - `:a000219` - `create_sequence_a000219/1`
-   - [A000225 - a(n) = 2^n - 1](https://oeis.org/A000225) - `:a000225` - `create_sequence_a000225/1`
-   - [A000244 - Powers of 3](https://oeis.org/A000244) - `:a000244` - `create_sequence_a000244/1`
-   - [A000262 - Number of "sets of lists"](https://oeis.org/A000262) - `:a000262` - `create_sequence_a000262/1`
-   - [A000272 - Number of trees on n labeled nodes](https://oeis.org/A000272) - `:a000272` - `create_sequence_a000272/1`
-   - [A000290 - The squares: a(n) = n^2](https://oeis.org/A000290) - `:a000290` - `create_sequence_a000290/1`
-   - [A000292 - Tetrahedral (or triangular pyramidal) numbers](https://oeis.org/A000292) - `:a000292` - `create_sequence_a000292/1`
-   - [A000302 - Powers of 4: a(n) = 4^n](https://oeis.org/A000302) - `:a000302` - `create_sequence_a000302/1`
-   - [A000311 - Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.](https://oeis.org/A000311) - `:a000311` - `create_sequence_a000311/1`
-   - [A000312 - a(n) = n^n; number of labeled mappings from n points to themselves](https://oeis.org/A000312) - `:a000312` - `create_sequence_a000312/1`
-   - [A000326 - Pentagonal numbers: a(n) = n*(3*n-1)/2.](https://oeis.org/A000326) - `:a000326` - `create_sequence_a000326/1`
-   - [A000330 - Square pyramidal numbers](https://oeis.org/A000330) - `:a000330` - `create_sequence_a000330/1`
-   - [A000364 - Euler (or secant or "Zig") numbers](https://oeis.org/A000364) - `:a000364` - `create_sequence_a000364/1`
-   - [A000396 - Perfect Numbers](https://oeis.org/A000396) - `:a000396` - `create_sequence_a000396/1`
-   - [A000521 - Coefficients of modular function j as power series in q = e^(2 Pi i t)](https://oeis.org/A000521) - `:a000521` - `create_sequence_a000521/1`
-   - [A000578 - The cubes: a(n) = n^3.](https://oeis.org/A000578) - `:a000578` - `create_sequence_a000578/1`
-   - [A000583 - Fourth powers: a(n) = n^4.](https://oeis.org/A000583) - `:a000583` - `create_sequence_a000583/1`
-   - [A000593 - Sum of Odd Divisors of N](https://oeis.org/A000593) - `:a000593` - `create_sequence_a000593/1`
-   - [A000594 - Ramanujan's tau function](https://oeis.org/A000594) - `:a000594` - `create_sequence_a000594/1`
-   - [A000609 - Number of threshold functions of n or fewer variables](https://oeis.org/A000609) - `:a000609` - `create_sequence_a000609/1`
-   - [A000670 - Fubini numbers](https://oeis.org/A000670) - `:a000670` - `create_sequence_a000670/1`
-   - [A000688 - Number of Abelian groups of order n](https://oeis.org/A000688) - `:a000688` - `create_sequence_a000688/1`
-   - [A000720 - pi(n), the number of primes <= n.](https://oeis.org/A000720) - `:a000720` - `create_sequence_a000720/1`
-   - [A000796 - Decimal expansion of Pi](https://oeis.org/A000796) - `:a000796` - `create_sequence_a000796/1`
-   - [A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements](https://oeis.org/A000798) - `:a000798` - `create_sequence_a000798/1`
-   - [A000959 - Lucky numbers](https://oeis.org/A000959) - `:a000959` - `create_sequence_a000959/1`
-   - [A000961 - Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1)](https://oeis.org/A000961) - `:a000961` - `create_sequence_a000961/1`
-   - [A000984 - Central binomial coefficients: binomial(2*n,n)](https://oeis.org/A000984) - `:a000984` - `create_sequence_a000984/1`
-   - [A001003 - Schroeder's second problem; also called super-Catalan numbers or little Schroeder numbers](https://oeis.org/A001003) - `:a001003` - `create_sequence_a001003/1`
-   - [A001006 - Motzkin numbers: number of ways of drawing any number of nonintersecting chords joining n points on a circle](https://oeis.org/A001006) - `:a001006` - `create_sequence_a001006/1`
-   - [A001045 - Jacobsthal sequence (or Jacobsthal numbers)](https://oeis.org/A001045) - `:a001045` - `create_sequence_a001045/1`
-   - [A001055 - The multiplicative partition function: number of ways of factoring n with all factors greater than 1](https://oeis.org/A001055) - `:a001055` - `create_sequence_a001055/1`
-   - [A001057 - Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.](https://oeis.org/A001057) - `:a001057` - `create_sequence_a001057/1`
-   - [A001065 - Sum of proper divisors (Aliquot parts) of N.](https://oeis.org/A001065) - `:a001065` - `create_sequence_a001065/1`
-   - [A001147 - Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).](https://oeis.org/A001147) - `:a001147` - `create_sequence_a001147/1`
-   - [A001157 - Sum of squares of divisors of N](https://oeis.org/A001157) - `:a001157` - `create_sequence_a001157/1`
-   - [A001190 - Wedderburn-Etherington numbers: unlabeled binary rooted trees](https://oeis.org/A001190) - `:a001190` - `create_sequence_a001190/1`
-   - [A001221 - Number of distinct primes dividing n (also called omega(n)).](https://oeis.org/A001221) - `:a001221` - `create_sequence_a001221/1`
-   - [A001222 - Number of prime divisors of n counted with multiplicity (also called bigomega(n) or Omega(n)).](https://oeis.org/A001222) - `:a001222` - `create_sequence_a001222/1`
-   - [A001227 - Number of odd divisors of n.](https://oeis.org/A001227) - `:a001227` - `create_sequence_a001227/1`
-   - [A001333 - Numerators of continued fraction convergents to sqrt(2).](https://oeis.org/A001333) - `:a001333` - `create_sequence_a001333/1`
-   - [A001358 - Semiprimes (or biprimes): products of two primes](https://oeis.org/A001358) - `:a001358` - `create_sequence_a001358/1`
-   - [A001405 - a(n) = binomial(n, floor(n/2)).](https://oeis.org/A001405) - `:a001405` - `create_sequence_a001405/1`
-   - [A001477 - The nonnegative integers.](https://oeis.org/A001477) - `:a001477` - `create_sequence_a001477/1`
-   - [A001478 - The negative integers.](https://oeis.org/A001478) - `:a001478` - `create_sequence_a001478/1`
-   - [A001481 - Numbers that are the sum of 2 squares.](https://oeis.org/A001481) - `:a001481` - `create_sequence_a001481/1`
-   - [A001489 - a(n) = -n.](https://oeis.org/A001489) - `:a001489` - `create_sequence_a001489/1`
-   - [A001511 - The ruler function: 2^a(n) divides 2n](https://oeis.org/A001511) - `:a001511` - `create_sequence_a001511/1`
-   - [A001519 - a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.](https://oeis.org/A001519) - `:a001519` - `create_sequence_a001519/1`
-   - [A001615 - Dedekind psi function](https://oeis.org/A001615) - `:a001615` - `create_sequence_a001615/1`
-   - [A001699 - Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.](https://oeis.org/A001699) - `:a001699` - `create_sequence_a001699/1`
-   - [A001700 - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.](https://oeis.org/A001700) - `:a001700` - `create_sequence_a001700/1`
-   - [A001764 - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).](https://oeis.org/A001764) - `:a001764` - `create_sequence_a001764/1`
-   - [A001906 - F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).](https://oeis.org/A001906) - `:a001906` - `create_sequence_a001906/1`
-   - [A001969 - Evil numbers: numbers with an even number of 1's in their binary expansion.](https://oeis.org/A001969) - `:a001969` - `create_sequence_a001969/1`
-   - [A002033 - Number of perfect partitions of n.](https://oeis.org/A002033) - `:a002033` - `create_sequence_a002033/1`
-   - [A002106 - Number of transitive permutation groups of degree n](https://oeis.org/A002106) - `:a002106` - `create_sequence_a002106/1`
-   - [A002110 - Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.](https://oeis.org/A002110) - `:a002110` - `create_sequence_a002110/1`
-   - [A002113 - Palindromes in base 10.](https://oeis.org/A002113) - `:a002113` - `create_sequence_a002113/1`
-   - [A002275 - Repunits: (10^n - 1)/9. Often denoted by R_n.](https://oeis.org/A002275) - `:a002275` - `create_sequence_a002275/1`
-   - [A002378 - Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).](https://oeis.org/A002378) - `:a002378` - `create_sequence_a002378/1`
-   - [A002487 - Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).](https://oeis.org/A002487) - `:a002487` - `create_sequence_a002487/1`
-   - [A002530 - a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.](https://oeis.org/A002530) - `:a002530` - `create_sequence_a002530/1`
-   - [A002531 - a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.](https://oeis.org/A002531) - `:a002531` - `create_sequence_a002531/1`
-   - [A002620 - Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).](https://oeis.org/A002620) - `:a002620` - `create_sequence_a002620/1`
-   - [A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters](https://oeis.org/A002654) - `:a002654` - `create_sequence_a002654/1`
-   - [A002808 - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.](https://oeis.org/A002808) - `:a002808` - `create_sequence_a002808/1`
-   - [A003094 - Number of unlabeled connected planar simple graphs with n nodes](https://oeis.org/A003094) - `:a003094` - `create_sequence_a003094/1`
-   - [A003418 - Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.](https://oeis.org/A003418) - `:a003418` - `create_sequence_a003418/1`
-   - [A003484 - Radon function, also called Hurwitz-Radon numbers](https://oeis.org/A003484) - `:a003484` - `create_sequence_a003484/1`
-   - [A004526 - Nonnegative integers repeated, floor(n/2).](https://oeis.org/A004526) - `:a004526` - `create_sequence_a004526/1`
-   - [A005100 - Deficient Numbers](https://oeis.org/A005100) - `:a005100` - `create_sequence_a005100/1`
-   - [A005101 - Abundant Numbers](https://oeis.org/A005101) - `:a005101` - `create_sequence_a005101/1`
-   - [A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1](https://oeis.org/A005117) - `:a005117` - `create_sequence_a005117/1`
-   - [A005408 - The odd numbers: a(n) = 2*n + 1.](https://oeis.org/A005408) - `:a005408` - `create_sequence_a005408/1`
-   - [A005470 - Number of unlabeled planar simple graphs with n nodes](https://oeis.org/A005470) - `:a005470` - `create_sequence_a005470/1`
-   - [A005588 - Number of free binary trees admitting height n.](https://oeis.org/A005588) - `:a005588` - `create_sequence_a005588/1`
-   - [A005811 - Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.](https://oeis.org/A005811) - `:a005811` - `create_sequence_a005811/1`
-   - [A005843 - The nonnegative even numbers: a(n) = 2n.](https://oeis.org/A005843) - `:a005843` - `create_sequence_a005843/1`
-   - [A006318 - Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).](https://oeis.org/A006318) - `:a006318` - `create_sequence_a006318/1`
-   - [A006530 - Gpf(n): greatest prime dividing n](https://oeis.org/A006530) - `:a006530` - `create_sequence_a006530/1`
-   - [A006882 - Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.](https://oeis.org/A006882) - `:a006882` - `create_sequence_a006882/1`
-   - [A006894 - Number of planted 3-trees of height < n.](https://oeis.org/A006894) - `:a006894` - `create_sequence_a006894/1`
-   - [A006966 - Number of lattices on n unlabeled nodes](https://oeis.org/A006966) - `:a006966` - `create_sequence_a006966/1`
-   - [A007318 - Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.](https://oeis.org/A007318) - `:a007318` - `create_sequence_a007318/1`
-   - [A008277 - Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.](https://oeis.org/A008277) - `:a008277` - `create_sequence_a008277/1`
-   - [A008279 - Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.](https://oeis.org/A008279) - `:a008279` - `create_sequence_a008279/1`
-   - [A008292 - Triangle of Eulerian numbers T(n,k)](https://oeis.org/A008292) - `:a008292` - `create_sequence_a008292/1`
-   - [A008683 - Möbius (or Moebius) function mu(n)](https://oeis.org/A008683) - `:a008683` - `create_sequence_a008683/1`
-   - [A018252 - The nonprime numbers: 1 together with the composite numbers, A002808.](https://oeis.org/A018252) - `:a018252` - `create_sequence_a018252/1`
-   - [A020639 - Lpf(n): least prime dividing n](https://oeis.org/A020639) - `:a020639` - `create_sequence_a020639/1`
-   - [A027642 - Denominator of Bernoulli number B_n.](https://oeis.org/A027642) - `:a027642` - `create_sequence_a027642/1`
-   - [A049310 - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).](https://oeis.org/A049310) - `:a049310` - `create_sequence_a049310/1`
-   - [A055512 - Lattices with n labeled elements](https://oeis.org/A055512) - `:a055512` - `create_sequence_a055512/1`  
-   - [A070939 - Length of binary representation of n.](https://oeis.org/A070939) - `:a070939` - `create_sequence_a070939/1`
-   - [A074206 - Kalmár's [Kalmar's] problem: number of ordered factorizations of n.](https://oeis.org/A074206) - `:a074206` - `create_sequence_a074206/1`
+  
+  ### Powers and Multiples
+  
+  Core sequences for the powers and multiples of numbers. See `Chunky.Sequence.OEIS.Multiples` and `Chunky.Sequence.OEIS.Powers` for non-core
+  sequences of integer powers and multiples.
+  
+   - `create_sequence_a000007/1` - A000007 - The characteristic function of {0}: a(n) = 0^n
+   - `create_sequence_a000079/1` - A000079 - Powers of 2
+   - `create_sequence_a000225/1` - A000225 - a(n) = 2^n - 1
+   - `create_sequence_a000244/1` - A000244 - Powers of 3
+   - `create_sequence_a000290/1` - A000290 - The squares: a(n) = n^2
+   - `create_sequence_a000302/1` - A000302 - Powers of 4: a(n) = 4^n
+   - `create_sequence_a000578/1` - A000578 - The cubes: a(n) = n^3.
+   - `create_sequence_a000583/1` - A000583 - Fourth powers: a(n) = n^4.
+   - `create_sequence_a000961/1` - A000961 - Powers of primes. Alternatively, 1 and the prime powers (p^k, p prime, k >= 1)
+   - `create_sequence_a001481/1` - A001481 - Numbers that are the sum of 2 squares.
+   - `create_sequence_a002620/1` - A002620 - Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).
+   - `create_sequence_a003418/1` - A003418 - Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.
+   - `create_sequence_a005117/1` - A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1
+  
+  
+  ### Representations and Patterns
+  
+  Core sequences that depend on digit patterns or representations, particularly in specific bases. See `Chunky.Sequence.OEIS.Repr` for non-core
+  sequences of digit patterns and base dependent representations.
+  
+   - `create_sequence_a000035/1` - A000035 - Period 2: repeat [0, 1]; a(n) = n mod 2
+   - `create_sequence_a000069/1` - A000069 - Odious numbers: numbers with an odd number of 1's in their binary expansion
+   - `create_sequence_a000120/1` - A000120 - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n)
+   - `create_sequence_a002113/1` - A002113 - Palindromes in base 10.
+   - `create_sequence_a002275/1` - A002275 - Repunits: (10^n - 1)/9. Often denoted by R_n.
+   - `create_sequence_a001969/1` - A001969 - Evil numbers: numbers with an even number of 1's in their binary expansion.
+   - `create_sequence_a070939/1` - A070939 - Length of binary representation of n.
+   - `create_sequence_a005811/1` - A005811 - Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.
+  
+  
+  ### Combinatorics
+  
+  Core sequences for combinatorics and counting functions. See `Chunky.Sequence.OEIS.Combinatorics` for non-core sequences dealing with
+  combinatorics and counting functions.
+  
+   - `create_sequence_a000001/1` - A000001 - Number of groups of order n
+   - `create_sequence_a000009/1` - A000009 - Number of partitions of n into distinct parts
+   - `create_sequence_a000029/1` - A000029 - Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).
+   - `create_sequence_a000031/1` - A000031 - Number of n-bead necklaces with 2 colors when turning over is not allowed; also number of output sequences from a simple n-stage cycling shift register; also number of binary irreducible polynomials whose degree divides n.
+   - `create_sequence_a000041/1` - A000041 - Partition Numbers
+   - `create_sequence_a000048/1` - A000048 - Number of n-bead necklaces with beads of 2 colors and primitive period n, when turning over is not allowed but the two colors can be interchanged.
+   - `create_sequence_a000081/1` - A000081 - Number of unlabeled rooted trees with n nodes
+   - `create_sequence_a000085/1` - A000085 - Number of self-inverse permutations on n letters, also known as involutions
+   - `create_sequence_a000105/1` - A000105 - Number of free polyominoes (or square animals) with n cells
+   - `create_sequence_a000108/1` - A000108 - Catalan numbers: C(n), Also called Segner numbers.
+   - `create_sequence_a000110/1` - A000110 - Bell or exponential numbers: number of ways to partition a set of n labeled elements
+   - `create_sequence_a000112/1` - A000112 - Number of partially ordered sets ("posets") with n unlabeled elements
+   - `create_sequence_a000123/1` - A000123 - Number of binary partitions: number of partitions of 2n into powers of 2.
+   - `create_sequence_a000161/1` - A000161 - Number of partitions of n into 2 squares.
+   - `create_sequence_a000166/1` - A000166 - Subfactorial or rencontres numbers, or derangements of `n`
+   - `create_sequence_a000169/1` - A000169 - Number of labeled rooted trees with n nodes: n^(n-1)
+   - `create_sequence_a000219/1` - A000219 - Number of planar partitions (or plane partitions) of n
+   - `create_sequence_a000262/1` - A000262 - Number of "sets of lists"
+   - `create_sequence_a000272/1` - A000272 - Number of trees on n labeled nodes
+   - `create_sequence_a000312/1` - A000312 - a(n) = n^n; number of labeled mappings from n points to themselves
+   - `create_sequence_a000798/1` - A000798 - Number of different quasi-orders (or topologies, or transitive digraphs) with n labeled elements
+   - `create_sequence_a002033/1` - A002033 - Number of perfect partitions of n.
+   - `create_sequence_a002106/1` - A002106 - Number of transitive permutation groups of degree n
+   - `create_sequence_a002654/1` - A002654 - Number of ways of writing n as a sum of at most two nonzero squares, where order matters
+   - `create_sequence_a005470/1` - A005470 - Number of unlabeled planar simple graphs with n nodes
+   - `create_sequence_a005588/1` - A005588 - Number of free binary trees admitting height n.
+   - `create_sequence_a006894/1` - A006894 - Number of planted 3-trees of height < n.
+   - `create_sequence_a006966/1` - A006966 - Number of lattices on n unlabeled nodes
+   - `create_sequence_a055512/1` - A055512 - Lattices with n labeled elements
+   - `create_sequence_a001699/1` - A001699 - Number of binary trees of height n; or products (ways to insert parentheses) of height n when multiplication is non-commutative and non-associative.
+   - `create_sequence_a000311/1` - A000311 - Schroeder's fourth problem; also series-reduced rooted trees with n labeled leaves; also number of total partitions of n.
+   - `create_sequence_a001055/1` - A001055 - The multiplicative partition function: number of ways of factoring n with all factors greater than 1
+   - `create_sequence_a001190/1` - A001190 - Wedderburn-Etherington numbers: unlabeled binary rooted trees
+   - `create_sequence_a003094/1` - A003094 - Number of unlabeled connected planar simple graphs with n nodes
+   - `create_sequence_a000111/1` - A000111 - Euler or up/down numbers
+   - `create_sequence_a000124/1` - A000124 - Central polygonal numbers (the Lazy Caterer's sequence)
+   - `create_sequence_a001045/1` - A001045 - Jacobsthal sequence (or Jacobsthal numbers)
+   - `create_sequence_a000670/1` - A000670 - Fubini numbers
+  
+  
+  ### Constants
+  
+  Core sequences of contant values or digits from expansions of non-integer constant values. See `Chunky.Sequence.OEIS.Constants` for non-core
+  sequences of constants.
+
+   - `create_sequence_a000004/1` - A000004 - The zero sequence
+   - `create_sequence_a000012/1` - A000012 - The simplest sequence of positive numbers: the all 1's sequence
+   - `create_sequence_a000796/1` - A000796 - Decimal expansion of Pi
+   - `create_sequence_a001333/1` - A001333 - Numerators of continued fraction convergents to sqrt(2).
 
 
+  ### Primes
+  
+  Core sequences about the primes, prime counting, or properties of primes. See `Chunky.Sequence.OEIS.Primes` for non-core sequences dealing
+  with prime numbers.
+    
+   - `create_sequence_a000040/1` - A000040 - The prime numbers.
+   - `create_sequence_a000043/1` - A000043 - Mersenne exponents: primes p such that 2^p - 1 is prime.
+   - `create_sequence_a000720/1` - A000720 - pi(n), the number of primes <= n.
+   - `create_sequence_a001358/1` - A001358 - Semiprimes (or biprimes): products of two primes
+   - `create_sequence_a002110/1` - A002110 - Primorial numbers (first definition): product of first n primes. Sometimes written prime(n)#.
 
+
+  ### Coefficients
+  
+  Core sequences for coefficient calculations, like binomials.
+  
+   - `create_sequence_a000521/1` - A000521 - Coefficients of modular function j as power series in q = e^(2 Pi i t)
+   - `create_sequence_a000984/1` - A000984 - Central binomial coefficients: binomial(2*n,n)
+   - `create_sequence_a001700/1` - A001700 - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.
+   - `create_sequence_a001764/1` - A001764 - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).
+   - `create_sequence_a001405/1` - A001405 - a(n) = binomial(n, floor(n/2)).
+  
+  
+  ### Triangles
+  
+  Core sequences enumerating values in triangular numeric constructions, like Pascal's triangle.
+  
+   - `create_sequence_a000217/1` - A000217 - Triangular numbers: a(n) = binomial(n+1,2)
+   - `create_sequence_a007318/1` - A007318 - Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.
+   - `create_sequence_a008277/1` - A008277 - Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.
+   - `create_sequence_a008279/1` - A008279 - Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.
+   - `create_sequence_a008292/1` - A008292 - Triangle of Eulerian numbers T(n,k)
+   - `create_sequence_a049310/1` - A049310 - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).
+  
+  
+  ### Number Theory
+  
+  Core sequences concerning general number theory, number sets, or ordered sets of values.
+  
+   - `create_sequence_a000027/1` - A000027 - The positive integers
+   - `create_sequence_a000045/1` - A000045 - Fibonacci Numbers
+   - `create_sequence_a000142/1` - A000142 - Factorial numbers: n! = 1*2*3*4*...*n 
+   - `create_sequence_a001057/1` - A001057 - Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.
+   - `create_sequence_a001147/1` - A001147 - Double factorial of odd numbers: a(n) = (2*n-1)!! = 1*3*5*...*(2*n-1).
+   - `create_sequence_a001477/1` - A001477 - The nonnegative integers.
+   - `create_sequence_a001478/1` - A001478 - The negative integers.
+   - `create_sequence_a001489/1` - A001489 - a(n) = -n.
+   - `create_sequence_a002808/1` - A002808 - The composite numbers: numbers n of the form x*y for x > 1 and y > 1.
+   - `create_sequence_a004526/1` - A004526 - Nonnegative integers repeated, floor(n/2).
+   - `create_sequence_a005843/1` - A005843 - The nonnegative even numbers: a(n) = 2n.
+   - `create_sequence_a005408/1` - A005408 - The odd numbers: a(n) = 2*n + 1.
+   - `create_sequence_a006882/1` - A006882 - Double factorials n!!: a(n) = n*a(n-2) for n > 1, a(0) = a(1) = 1.
+   - `create_sequence_a018252/1` - A018252 - The nonprime numbers: 1 together with the composite numbers, A002808.
+   - `create_sequence_a000002/1` - A000002 - Kolakoski sequence
+   - `create_sequence_a000010/1` - A000010 - Euler's totient function
+   - `create_sequence_a000032/1` - A000032 - Lucas numbers beginning at 2
+   - `create_sequence_a000109/1` - A000109 - Number of simplicial polyhedra with n nodes
+   - `create_sequence_a000129/1` - A000129 - Pell numbers: a(n) = 2*a(n-1) + a(n-2)
+   - `create_sequence_a000204/1` - A000204 - Lucas numbers (beginning with 1)
+   - `create_sequence_a000292/1` - A000292 - Tetrahedral (or triangular pyramidal) numbers
+   - `create_sequence_a000326/1` - A000326 - Pentagonal numbers: a(n) = n*(3*n-1)/2.
+   - `create_sequence_a000330/1` - A000330 - Square pyramidal numbers
+   - `create_sequence_a000364/1` - A000364 - Euler (or secant or "Zig") numbers
+   - `create_sequence_a000594/1` - A000594 - Ramanujan's tau function
+   - `create_sequence_a000609/1` - A000609 - Number of threshold functions of n or fewer variables
+   - `create_sequence_a000688/1` - A000688 - Number of Abelian groups of order n
+   - `create_sequence_a000959/1` - A000959 - Lucky numbers
+   - `create_sequence_a001003/1` - A001003 - Schroeder's second problem; also called super-Catalan numbers or little Schroeder numbers
+   - `create_sequence_a001006/1` - A001006 - Motzkin numbers: number of ways of drawing any number of nonintersecting chords joining n points on a circle
+   - `create_sequence_a001519/1` - A001519 - a(n) = 3*a(n-1) - a(n-2), with a(0) = a(1) = 1.
+   - `create_sequence_a001615/1` - A001615 - Dedekind psi function
+   - `create_sequence_a001906/1` - A001906 - F(2n) = bisection of Fibonacci sequence: a(n) = 3*a(n-1) - a(n-2).
+   - `create_sequence_a002378/1` - A002378 - Oblong (or promic, pronic, or heteromecic) numbers: a(n) = n*(n+1).
+   - `create_sequence_a002487/1` - A002487 - Stern's diatomic series (or Stern-Brocot sequence): a(0) = 0, a(1) = 1; for n > 0: a(2*n) = a(n), a(2*n+1) = a(n) + a(n+1).
+   - `create_sequence_a002530/1` - A002530 - a(n) = 4*a(n-2) - a(n-4) for n > 1, a(n) = n for n = 0, 1.
+   - `create_sequence_a002531/1` - A002531 - a(2*n) = a(2*n-1) + a(2*n-2), a(2*n+1) = 2*a(2*n) + a(2*n-1); a(0) = a(1) = 1.
+   - `create_sequence_a003484/1` - A003484 - Radon function, also called Hurwitz-Radon numbers
+   - `create_sequence_a006318/1` - A006318 - Large Schröder numbers (or large Schroeder numbers, or big Schroeder numbers).
+   - `create_sequence_a027642/1` - A027642 - Denominator of Bernoulli number B_n.
 
   """
   import Chunky.Sequence, only: [sequence_for_list: 1, sequence_for_function: 1]
@@ -584,6 +640,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   def seq_a000002(:init, data, _value) do
     %{
       data: data,
@@ -591,6 +648,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   def seq_a000002(:next, %{k: k_seq, idx: last_idx}, _val) do
     # what index are we looking for
     idx = last_idx + 1
@@ -632,6 +690,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000004/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000004(_idx) do
     0
@@ -665,6 +724,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000005/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000005(idx) do
     Math.sigma(idx, 0)
@@ -698,6 +758,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000007/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000007(idx) do
     if idx == 0 do
@@ -737,6 +798,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000009/1)
   end
 
+  @doc false
   def seq_a000009(idx) do
     seq_a000009_s(idx, 1)
   end
@@ -801,6 +863,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000010/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000010(idx) do
     Math.totient(idx)
@@ -834,6 +897,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000012/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000012(_idx) do
     1
@@ -867,6 +931,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000027/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000027(idx) do
     idx
@@ -900,6 +965,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000032/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000032(idx) do
     Math.lucas_number(idx)
@@ -933,6 +999,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000035/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000035(idx) do
     rem(idx, 2)
@@ -966,6 +1033,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000040/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000040(idx, last) do
     case idx do
@@ -1016,6 +1084,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000041/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000041(idx) do
     Math.partition_count(idx)
@@ -1079,6 +1148,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000045/3)
   end
 
+  @doc false
   def seq_a000045(idx, a, b) do
     case idx do
       0 -> 0
@@ -1115,6 +1185,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000069/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000069(_idx, last) do
     Math.next_number(&Predicates.is_odious_number?/1, last)
@@ -1146,8 +1217,9 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000079/1)
   end
 
+  @doc false
   def seq_a000079(idx) do
-    :math.pow(2, idx) |> Kernel.trunc()
+    Math.pow(2, idx)
   end
 
   @doc """
@@ -1178,6 +1250,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000081/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000081(idx) do
     Math.rooted_tree_count(idx)
@@ -1212,6 +1285,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000085/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000085(idx) do
     Math.involutions_count(idx)
@@ -1274,6 +1348,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000108/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000108(idx) do
     Math.catalan_number(idx)
@@ -1338,6 +1413,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000110/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000110(idx) do
     Math.bell_number(idx)
@@ -1372,6 +1448,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000111/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000111(idx) do
     Math.euler_zig_zag(idx)
@@ -1434,6 +1511,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000120/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000120(idx) do
     Math.hamming_weight(idx)
@@ -1468,6 +1546,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000124/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000124(idx) do
     Math.pancake_cut_max(idx)
@@ -1501,6 +1580,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000142/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000142(idx) do
     Math.factorial(idx)
@@ -1534,6 +1614,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000129/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000129(idx) do
     Math.pell_number(idx)
@@ -1568,6 +1649,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000166/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000166(idx) do
     Math.derangement_count(idx)
@@ -1601,6 +1683,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000169/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000169(idx) do
     Math.labeled_rooted_trees_count(idx)
@@ -1632,6 +1715,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000203/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000203(idx) do
     Math.sigma(idx)
@@ -1665,6 +1749,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000204/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000204(idx) do
     Math.lucas_number(idx)
@@ -1698,6 +1783,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000217/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000217(idx) do
     Math.triangle_number(idx)
@@ -1731,6 +1817,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000219/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000219(idx) do
     Math.plane_partition_count(idx)
@@ -1765,6 +1852,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000225/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000225(idx) do
     Math.pow(2, idx) - 1
@@ -1798,6 +1886,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000244/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000244(idx) do
     Math.pow(3, idx)
@@ -1831,6 +1920,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000262/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000262(idx) do
     Math.ordered_subsets_count(idx)
@@ -1864,6 +1954,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000272/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000272(idx) do
     Math.cayley_number(idx)
@@ -1896,6 +1987,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000290/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000290(idx) do
     Math.pow(idx, 2)
@@ -1930,6 +2022,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000292/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000292(idx) do
     Math.tetrahedral_number(idx)
@@ -1963,6 +2056,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000302/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000302(idx) do
     Math.pow(4, idx)
@@ -1997,6 +2091,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000312/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000312(idx) do
     Math.endomorphism_count(idx)
@@ -2030,6 +2125,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000326/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000326(idx) do
     Math.pentagonal_number(idx)
@@ -2064,6 +2160,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000330/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000330(idx) do
     Math.square_pyramidal_number(idx)
@@ -2097,6 +2194,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000364/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000364(idx) do
     Math.euler_zig(idx)
@@ -2157,6 +2255,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000521/1)
   end
 
+  @doc false
   @doc offset: -1
   def seq_a000521(idx) do
     Math.j_invariant_q_coefficient(idx)
@@ -2190,6 +2289,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000578/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000578(idx) do
     Math.pow(idx, 3)
@@ -2223,6 +2323,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000583/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000583(idx) do
     Math.pow(idx, 4)
@@ -2256,6 +2357,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a000593/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000593(idx) do
     # N is idx +1, as this is an offset sequence (1, 3)
@@ -2294,6 +2396,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000594/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000594(idx) do
     Math.ramanujan_tau(idx)
@@ -2330,6 +2433,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   def seq_a000959(:init, data, _v) do
     # setup our initial cache of values
     %{
@@ -2338,6 +2442,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   def seq_a000959(:next, %{idx: idx} = data, _v) do
     # is our current index too small? 
     numbers =
@@ -2388,6 +2493,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000961/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000961(_idx, last) do
     Math.next_number(&Predicates.is_prime_power?/1, last)
@@ -2421,6 +2527,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000984/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000984(idx) do
     Math.binomial(2 * idx, idx)
@@ -2455,6 +2562,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001003/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001003(idx) do
     Math.hipparchus_number(idx)
@@ -2488,6 +2596,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001006/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001006(idx) do
     Math.motzkin_number(idx)
@@ -2521,6 +2630,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001045/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001045(idx) do
     Math.jacobsthal_number(idx)
@@ -2555,6 +2665,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001055/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001055(idx) do
     Math.factorization_count(idx)
@@ -2587,6 +2698,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001065/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001065(idx) do
     Math.aliquot_sum(idx)
@@ -2619,6 +2731,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a001157/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001157(idx) do
     Math.sigma(idx, 2)
@@ -2653,6 +2766,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001190/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001190(idx) do
     Math.wedderburn_etherington_number(idx)
@@ -2685,6 +2799,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001221/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001221(idx) do
     Math.omega(idx)
@@ -2718,6 +2833,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001222/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001222(idx) do
     Math.bigomega(idx)
@@ -2729,7 +2845,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A001227](https://oeis.org/A001227):
 
   > Number of odd divisors of n.
-  > (Formerly )
 
   **Sequence IDs**: `:a001227`
 
@@ -2751,6 +2866,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001227/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001227(idx) do
     Math.factors(idx)
@@ -2786,6 +2902,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001358/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001358(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 2 end, last)
@@ -2797,7 +2914,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A001477](https://oeis.org/A001477):
 
   > The nonnegative integers.
-  > (Formerly )
 
   **Sequence IDs**: `:a001477`
 
@@ -2818,6 +2934,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001477/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001477(idx) do
     idx
@@ -2829,7 +2946,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A001489](https://oeis.org/A001489):
 
   > a(n) = -n.
-  > (Formerly )
 
   **Sequence IDs**: `:a001489`
 
@@ -2851,6 +2967,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001489/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001489(idx) do
     idx * -1
@@ -2884,6 +3001,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001511/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001511(idx) do
     Math.p_adic_valuation(2, idx * 2)
@@ -2917,6 +3035,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001615/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001615(idx) do
     div(Math.jordan_totient(idx, 2), Math.jordan_totient(idx, 1))
@@ -2950,6 +3069,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a003484/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a003484(idx) do
     Math.hurwitz_radon_number(idx)
@@ -2982,6 +3102,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005100/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005100(_idx, last) do
     Math.next_number(&Predicates.is_deficient?/1, last)
@@ -3014,6 +3135,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Chunky.Sequence.OEIS.Core.seq_a005101/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 1
   def seq_a005101(_idx, last) do
     Math.next_number(&Predicates.is_abundant?/1, last)
@@ -3046,6 +3168,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005117/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005117(_idx, last) do
     Math.next_number(&Predicates.is_squarefree?/1, last)
@@ -3079,6 +3202,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005843/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a005843(idx) do
     idx * 2
@@ -3111,6 +3235,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006530/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a006530(idx) do
     Math.greatest_prime_factor(idx)
@@ -3122,7 +3247,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A008292](https://oeis.org/A008292):
 
   > Triangle of Eulerian numbers T(n,k) (n >= 1, 1 <= k <= n) read by rows.
-  > (Formerly )
 
   **Sequence IDs**: `:a008292`
 
@@ -3144,6 +3268,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008292/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a008292(idx) do
     {n, m} = Math.triangle_position_for_element(idx - 1)
@@ -3177,6 +3302,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008683/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a008683(idx) do
     Math.mobius_function(idx)
@@ -3208,6 +3334,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a020639/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020639(idx) do
     Math.least_prime_factor(idx)
@@ -3298,6 +3425,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000670/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000670(idx) do
     Math.fubini_number(idx)
@@ -3332,6 +3460,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000688/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000688(idx) do
     Math.abelian_groups_count(idx)
@@ -3365,6 +3494,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000720/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000720(idx, last) do
     if idx == 1 do
@@ -3405,6 +3535,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   def seq_a000796(:init, data, _val) do
     %{
       data: data,
@@ -3412,6 +3543,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   def seq_a000796(:next, %{carry: carry, idx: idx} = data, _value) do
     {v, n_carry} =
       if idx == 0 do
@@ -3512,6 +3644,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002654/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a002654(idx) do
     length(Math.divisors_of_form_mx_plus_b(4, 1, idx)) -
@@ -3546,6 +3679,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002808/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 3
   def seq_a002808(_idx, last) do
     Math.next_number(fn v -> Predicates.is_prime?(v) == false end, last)
@@ -3641,7 +3775,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A055512](https://oeis.org/A055512):
 
   > Lattices with n labeled elements.
-  > (Formerly )
 
   **Sequence IDs**: `:a055512`
 
@@ -3691,6 +3824,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001147/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001147(idx) do
     Math.double_factorial(2 * idx - 1)
@@ -3724,6 +3858,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001405/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001405(idx) do
     Math.binomial(idx, div(idx, 2))
@@ -3757,6 +3892,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001519/3)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001519(idx, a, b) do
     case idx do
@@ -3795,6 +3931,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001700/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001700(idx) do
     Math.binomial(2 * idx + 1, idx + 1)
@@ -3829,6 +3966,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001764/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001764(idx) do
     Math.binomial(3 * idx, idx) |> div(2 * idx + 1)
@@ -3862,6 +4000,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006882/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a006882(idx) do
     Math.double_factorial(idx)
@@ -3895,6 +4034,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001906/3)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001906(idx, a, b) do
     case idx do
@@ -3932,6 +4072,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001969/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a001969(_idx, last) do
     Math.next_number(
@@ -3970,6 +4111,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002113/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a002113(_idx, last) do
     Math.next_number(fn v -> Predicates.is_palindromic?(v) end, last)
@@ -3981,7 +4123,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A002275](https://oeis.org/A002275):
 
   > Repunits: (10^n - 1)/9. Often denoted by R_n.
-  > (Formerly )
 
   **Sequence IDs**: `:a002275`
 
@@ -4003,6 +4144,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002275/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002275(idx) do
     Math.repunit(idx)
@@ -4036,6 +4178,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002378/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002378(idx) do
     idx * (idx + 1)
@@ -4070,6 +4213,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002487/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002487(idx) do
     Math.stern_diatomic_series(idx)
@@ -4103,6 +4247,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002620/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002620(idx) do
     b = div(idx, 2)
@@ -4138,6 +4283,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a003418/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a003418(idx) do
     case idx do
@@ -4153,7 +4299,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A004526](https://oeis.org/A004526):
 
   > Nonnegative integers repeated, floor(n/2).
-  > (Formerly )
 
   **Sequence IDs**: `:a004526`
 
@@ -4175,6 +4320,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a004526/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004526(idx) do
     div(idx, 2)
@@ -4208,6 +4354,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005408/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a005408(idx) do
     idx * 2 + 1
@@ -4241,6 +4388,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006318/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a006318(idx) do
     Math.schroder_number(idx)
@@ -4275,6 +4423,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a007318/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007318(idx) do
     {row, off} = Math.triangle_position_for_element(idx)
@@ -4287,7 +4436,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A008277](https://oeis.org/A008277):
 
   > Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.
-  > (Formerly )
 
   **Sequence IDs**: `:a008277`
 
@@ -4309,6 +4457,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008277/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008277(idx) do
     {row, off} = Math.triangle_position_for_element(idx)
@@ -4321,7 +4470,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A018252](https://oeis.org/A018252):
 
   > The nonprime numbers: 1 together with the composite numbers, A002808.
-  > (Formerly )
 
   **Sequence IDs**: `:a018252`
 
@@ -4343,6 +4491,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a018252/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a018252(idx, last) do
     case idx do
@@ -4357,7 +4506,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A027642](https://oeis.org/A027642):
 
   > Denominator of Bernoulli number B_n.
-  > (Formerly )
 
   **Sequence IDs**: `:a027642`
 
@@ -4379,6 +4527,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a027642/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a027642(idx) do
     {_, den} = Math.bernoulli_number(idx) |> Fraction.components()
@@ -4391,7 +4540,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A049310](https://oeis.org/A049310):
 
   > Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).
-  > (Formerly )
 
   **Sequence IDs**: `:a049310`
 
@@ -4414,6 +4562,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a049310/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a049310(idx) do
     {row, off} = Math.triangle_position_for_element(idx)
@@ -4426,7 +4575,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A070939](https://oeis.org/A070939):
 
   > Length of binary representation of n.
-  > (Formerly )
 
   **Sequence IDs**: `:a070939`
 
@@ -4448,6 +4596,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a070939/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a070939(idx) do
     Math.length_in_base(idx, 2)
@@ -4482,6 +4631,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000029/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000029(idx) do
     Math.two_color_bracelet_count(idx)
@@ -4516,6 +4666,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000031/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000031(idx) do
     Math.two_color_bracelet_count(idx, allow_turning_over: false)
@@ -4550,6 +4701,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000048/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000048(idx) do
     Math.two_color_bracelet_with_period_count(idx)
@@ -4583,6 +4735,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000123/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000123(idx) do
     Math.binary_partitions_count(idx)
@@ -4594,7 +4747,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A000161](https://oeis.org/A000161):
 
   > Number of partitions of n into 2 squares.
-  > (Formerly )
 
   **Sequence IDs**: `:a000161`
 
@@ -4616,6 +4768,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000161/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000161(idx) do
     Math.partitions_into_two_squares(idx)
@@ -4650,6 +4803,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a000311/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000311(idx) do
     Math.total_partitions(idx)
@@ -4661,7 +4815,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A001478](https://oeis.org/A001478):
 
   > The negative integers.
-  > (Formerly )
 
   **Sequence IDs**: `:a001478`
 
@@ -4683,6 +4836,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001478/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001478(idx) do
     -1 * idx
@@ -4716,6 +4870,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002531/3)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002531(idx, l_2, l_1) do
     cond do
@@ -4732,7 +4887,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A074206](https://oeis.org/A074206):
 
   > Kalmár's [Kalmar's] problem: number of ordered factorizations of n.
-  > (Formerly )
 
   **Sequence IDs**: `:a074206`
 
@@ -4754,6 +4908,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a074206/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a074206(idx) do
     Math.ordered_factorization_count(idx)
@@ -4765,7 +4920,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A001057](https://oeis.org/A001057):
 
   > Canonical enumeration of integers: interleaved positive and negative integers with zero prepended.
-  > (Formerly )
 
   **Sequence IDs**: `:a001057`
 
@@ -4788,6 +4942,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001057/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001057(idx) do
     cond do
@@ -4825,6 +4980,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001333/3)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001333(idx, n_2, n_1) do
     case idx do
@@ -4862,6 +5018,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001481/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a001481(_idx, last) do
     Math.next_number(
@@ -4901,6 +5058,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a001699/3)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001699(idx, n_2, n_1) do
     case idx do
@@ -4938,6 +5096,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002033/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002033(idx) do
     Math.perfect_partition_count(idx)
@@ -4977,6 +5136,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002110(:init, data, _value) do
     %{
@@ -4985,6 +5145,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     }
   end
 
+  @doc false
   def seq_a002110(:next, %{last_prime: last} = data, value) do
     # find our next prime
     n_prime =
@@ -5031,6 +5192,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a002530/5)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a002530(idx, n_4, _n_3, n_2, _n_1) do
     case idx do
@@ -5101,6 +5263,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a005811/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a005811(idx) do
     case idx do
@@ -5137,6 +5300,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a006894/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a006894(idx) do
     Math.planted_3_trees_count(idx)
@@ -5148,7 +5312,6 @@ defmodule Chunky.Sequence.OEIS.Core do
   From [OEIS A008279](https://oeis.org/A008279):
 
   > Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.
-  > (Formerly )
 
   **Sequence IDs**: `:a008279`
 
@@ -5171,6 +5334,7 @@ defmodule Chunky.Sequence.OEIS.Core do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Core.seq_a008279/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008279(idx) do
     {r, c} = Math.triangle_position_for_element(idx)

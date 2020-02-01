@@ -752,6 +752,10 @@ defmodule Chunky.Math.Predicates do
    - `is_perfect?/1`
    - `Chunky.Math.sigma/1`
 
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a005101/1` - Abundant numbers
+
 
   ## Examples
 
@@ -885,6 +889,10 @@ defmodule Chunky.Math.Predicates do
    - `is_perfect?/1`
    - `is_highly_abundant?/1`
 
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Sigma.create_sequence_a003601/1` - Arithmetic numbers
+  
 
   ## Examples
 
@@ -1103,6 +1111,12 @@ defmodule Chunky.Math.Predicates do
    - `is_arithmetic_number?/1`
    - `is_highly_abundant?/1`
    - `is_perfect?/1`
+
+
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a005100/1` - Deficient numbers
+
 
   ## Examples
 
@@ -1624,6 +1638,10 @@ defmodule Chunky.Math.Predicates do
    - `is_arithmetic_number?/1`
    - `is_deficient?/1`
    - `is_perfect?/1`
+
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Sigma.create_sequence_a002093/1` - Highly abundant numbers
 
 
   ## Examples
@@ -2240,10 +2258,11 @@ defmodule Chunky.Math.Predicates do
   Odious numbers have an odd number of `1`s in their binary expansion.
 
   See definition on [MathWorld](http://mathworld.wolfram.com/OdiousNumber.html) or [Wikipedia](https://en.wikipedia.org/wiki/Odious_number).
-
+  
   OEIS References:
-
-   - [A000069 - Odious Numbers](http://oeis.org/A000069)
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a000069/1` - Odious Numbers
+  
 
   See also:
    
@@ -2282,6 +2301,11 @@ defmodule Chunky.Math.Predicates do
    - `Chunky.Math.reverse_number/1`
    - `is_palindromic_prime?/1`
    - `is_strictly_non_palindromic?/1`
+
+
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a002113/1` - Palindromes in base 10
 
 
   ## Examples
@@ -2532,9 +2556,9 @@ defmodule Chunky.Math.Predicates do
   Is `n` a polite number? Polite numbers can be expressed as the sum of two consecutive digits.
 
   OEIS References:
-
-   - [A138591 - Sums of two or more consecutive nonnegative integers](https://oeis.org/A138591)
-   - [A057716 - The non-powers of 2](https://oeis.org/A057716)
+  
+   - `Chunky.Sequence.OEIS.Powers.create_sequence_a057716/1` - The non-powers of 2
+   - `Chunky.Sequence.OEIS.Multiples.create_sequence_a138591/1` - Sums of two or more consecutive nonnegative integers
 
   See also:
 
@@ -2800,6 +2824,10 @@ defmodule Chunky.Math.Predicates do
 
    - `is_prime_fast?/1`
 
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a000040/1` - The prime numbers
+  
 
   ## Examples
 
@@ -2838,6 +2866,10 @@ defmodule Chunky.Math.Predicates do
   See also:
 
    - `is_prime?/1`
+
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a000040/1` - The prime numbers
 
 
   ## Examples
@@ -2879,6 +2911,10 @@ defmodule Chunky.Math.Predicates do
    - `Chunky.Math.is_root_of?/2`
    - `is_perfect_power?/1`
 
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a000961/1` - Powers of Primes
+  
 
   ## Examples
 
@@ -3766,6 +3802,11 @@ defmodule Chunky.Math.Predicates do
    - `is_cubefree?/1`
    - `is_perfect_cube?/1`
    - `is_perfect_square?/1`
+
+
+  OEIS References:
+  
+   - `Chunky.Sequence.OEIS.Core.create_sequence_a005117/1` - Squarefree numbers
 
 
   ## Examples

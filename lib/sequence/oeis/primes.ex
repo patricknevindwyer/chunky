@@ -5,106 +5,115 @@ defmodule Chunky.Sequence.OEIS.Primes do
 
   ## Available Sequences
 
-    - [A162511 - Multiplicative function with a(p^e)=(-1)^(e-1)](https://oeis.org/A162511) - `:a162511` - `create_sequence_a162511/1`
-    - [A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.](https://oeis.org/A001567) - `:a001567` - `create_sequence_a001567/1`
-    - [A005935 - Pseudoprimes to base 3.](https://oeis.org/A005935) - `:a005935` - `create_sequence_a005935/1`
-    - [A005936 - Pseudoprimes to base 5.](https://oeis.org/A005936) - `:a005936` - `create_sequence_a005936/1`
-    - [A005937 - Pseudoprimes to base 6.](https://oeis.org/A005937) - `:a005937` - `create_sequence_a005937/1`
-    - [A005938 - Pseudoprimes to base 7.](https://oeis.org/A005938) - `:a005938` - `create_sequence_a005938/1`
-    - [A005939 - Pseudoprimes to base 10.](https://oeis.org/A005939) - `:a005939` - `create_sequence_a005939/1`
-    - [A020136 - Fermat pseudoprimes to base 4.](https://oeis.org/A020136) - `:a020136` - `create_sequence_a020136/1`
-    - [A020137 - Pseudoprimes to base 8.](https://oeis.org/A020137) - `:a020137` - `create_sequence_a020137/1`
-    - [A020138 - Pseudoprimes to base 9.](https://oeis.org/A020138) - `:a020138` - `create_sequence_a020138/1`
-    - [A020139 - Pseudoprimes to base 11.](https://oeis.org/A020139) - `:a020139` - `create_sequence_a020139/1`
-    - [A020140 - Pseudoprimes to base 12.](https://oeis.org/A020140) - `:a020140` - `create_sequence_a020140/1`
-    - [A020141 - Pseudoprimes to base 13.](https://oeis.org/A020141) - `:a020141` - `create_sequence_a020141/1`
-    - [A020142 - Pseudoprimes to base 14.](https://oeis.org/A020142) - `:a020142` - `create_sequence_a020142/1`
-    - [A020143 - Pseudoprimes to base 15.](https://oeis.org/A020143) - `:a020143` - `create_sequence_a020143/1`
-    - [A020144 - Pseudoprimes to base 16.](https://oeis.org/A020144) - `:a020144` - `create_sequence_a020144/1`
-    - [A020145 - Pseudoprimes to base 17.](https://oeis.org/A020145) - `:a020145` - `create_sequence_a020145/1`
-    - [A020146 - Pseudoprimes to base 18.](https://oeis.org/A020146) - `:a020146` - `create_sequence_a020146/1`
-    - [A020147 - Pseudoprimes to base 19.](https://oeis.org/A020147) - `:a020147` - `create_sequence_a020147/1`
-    - [A020148 - Pseudoprimes to base 20.](https://oeis.org/A020148) - `:a020148` - `create_sequence_a020148/1`
-    - [A020149 - Pseudoprimes to base 21.](https://oeis.org/A020149) - `:a020149` - `create_sequence_a020149/1`
-    - [A020150 - Pseudoprimes to base 22.](https://oeis.org/A020150) - `:a020150` - `create_sequence_a020150/1`
-    - [A020151 - Pseudoprimes to base 23.](https://oeis.org/A020151) - `:a020151` - `create_sequence_a020151/1`
-    - [A020152 - Pseudoprimes to base 24.](https://oeis.org/A020152) - `:a020152` - `create_sequence_a020152/1`
-    - [A020153 - Pseudoprimes to base 25.](https://oeis.org/A020153) - `:a020153` - `create_sequence_a020153/1`
-    - [A020154 - Pseudoprimes to base 26.](https://oeis.org/A020154) - `:a020154` - `create_sequence_a020154/1`
-    - [A020155 - Pseudoprimes to base 27.](https://oeis.org/A020155) - `:a020155` - `create_sequence_a020155/1`
-    - [A020156 - Pseudoprimes to base 28.](https://oeis.org/A020156) - `:a020156` - `create_sequence_a020156/1`
-    - [A020157 - Pseudoprimes to base 29.](https://oeis.org/A020157) - `:a020157` - `create_sequence_a020157/1`
-    - [A020158 - Pseudoprimes to base 30.](https://oeis.org/A020158) - `:a020158` - `create_sequence_a020158/1`
-    - [A020159 - Pseudoprimes to base 31.](https://oeis.org/A020159) - `:a020159` - `create_sequence_a020159/1`
-    - [A020160 - Pseudoprimes to base 32.](https://oeis.org/A020160) - `:a020160` - `create_sequence_a020160/1`
-    - [A020161 - Pseudoprimes to base 33.](https://oeis.org/A020161) - `:a020161` - `create_sequence_a020161/1`
-    - [A020162 - Pseudoprimes to base 34.](https://oeis.org/A020162) - `:a020162` - `create_sequence_a020162/1`
-    - [A020163 - Pseudoprimes to base 35.](https://oeis.org/A020163) - `:a020163` - `create_sequence_a020163/1`
-    - [A020164 - Pseudoprimes to base 36.](https://oeis.org/A020164) - `:a020164` - `create_sequence_a020164/1`
-    - [A020165 - Pseudoprimes to base 37.](https://oeis.org/A020165) - `:a020165` - `create_sequence_a020165/1`
-    - [A020166 - Pseudoprimes to base 38.](https://oeis.org/A020166) - `:a020166` - `create_sequence_a020166/1`
-    - [A020167 - Pseudoprimes to base 39.](https://oeis.org/A020167) - `:a020167` - `create_sequence_a020167/1`
-    - [A020168 - Pseudoprimes to base 40.](https://oeis.org/A020168) - `:a020168` - `create_sequence_a020168/1`
-    - [A020169 - Pseudoprimes to base 41.](https://oeis.org/A020169) - `:a020169` - `create_sequence_a020169/1`
-    - [A020170 - Pseudoprimes to base 42.](https://oeis.org/A020170) - `:a020170` - `create_sequence_a020170/1`
-    - [A020171 - Pseudoprimes to base 43.](https://oeis.org/A020171) - `:a020171` - `create_sequence_a020171/1`
-    - [A020172 - Pseudoprimes to base 44.](https://oeis.org/A020172) - `:a020172` - `create_sequence_a020172/1`
-    - [A020173 - Pseudoprimes to base 45.](https://oeis.org/A020173) - `:a020173` - `create_sequence_a020173/1`
-    - [A020174 - Pseudoprimes to base 46.](https://oeis.org/A020174) - `:a020174` - `create_sequence_a020174/1`
-    - [A020175 - Pseudoprimes to base 47.](https://oeis.org/A020175) - `:a020175` - `create_sequence_a020175/1`
-    - [A020176 - Pseudoprimes to base 48.](https://oeis.org/A020176) - `:a020176` - `create_sequence_a020176/1`
-    - [A020177 - Pseudoprimes to base 49.](https://oeis.org/A020177) - `:a020177` - `create_sequence_a020177/1`
-    - [A020178 - Pseudoprimes to base 50.](https://oeis.org/A020178) - `:a020178` - `create_sequence_a020178/1`
-    - [A020179 - Pseudoprimes to base 51.](https://oeis.org/A020179) - `:a020179` - `create_sequence_a020179/1`
-    - [A020180 - Pseudoprimes to base 52.](https://oeis.org/A020180) - `:a020180` - `create_sequence_a020180/1`
-    - [A020181 - Pseudoprimes to base 53.](https://oeis.org/A020181) - `:a020181` - `create_sequence_a020181/1`
-    - [A020182 - Pseudoprimes to base 54.](https://oeis.org/A020182) - `:a020182` - `create_sequence_a020182/1`
-    - [A020183 - Pseudoprimes to base 55.](https://oeis.org/A020183) - `:a020183` - `create_sequence_a020183/1`
-    - [A020184 - Pseudoprimes to base 56.](https://oeis.org/A020184) - `:a020184` - `create_sequence_a020184/1`
-    - [A020185 - Pseudoprimes to base 57.](https://oeis.org/A020185) - `:a020185` - `create_sequence_a020185/1`
-    - [A020186 - Pseudoprimes to base 58.](https://oeis.org/A020186) - `:a020186` - `create_sequence_a020186/1`
-    - [A020187 - Pseudoprimes to base 59.](https://oeis.org/A020187) - `:a020187` - `create_sequence_a020187/1`
-    - [A020188 - Pseudoprimes to base 60.](https://oeis.org/A020188) - `:a020188` - `create_sequence_a020188/1`
-    - [A020189 - Pseudoprimes to base 61.](https://oeis.org/A020189) - `:a020189` - `create_sequence_a020189/1`
-    - [A020190 - Pseudoprimes to base 62.](https://oeis.org/A020190) - `:a020190` - `create_sequence_a020190/1`
-    - [A020191 - Pseudoprimes to base 63.](https://oeis.org/A020191) - `:a020191` - `create_sequence_a020191/1`
-    - [A020192 - Pseudoprimes to base 64.](https://oeis.org/A020192) - `:a020192` - `create_sequence_a020192/1`
-    - [A020193 - Pseudoprimes to base 65.](https://oeis.org/A020193) - `:a020193` - `create_sequence_a020193/1`
-    - [A020194 - Pseudoprimes to base 66.](https://oeis.org/A020194) - `:a020194` - `create_sequence_a020194/1`
-    - [A020195 - Pseudoprimes to base 67.](https://oeis.org/A020195) - `:a020195` - `create_sequence_a020195/1`
-    - [A020196 - Pseudoprimes to base 68.](https://oeis.org/A020196) - `:a020196` - `create_sequence_a020196/1`
-    - [A020197 - Pseudoprimes to base 69.](https://oeis.org/A020197) - `:a020197` - `create_sequence_a020197/1`
-    - [A020198 - Pseudoprimes to base 70.](https://oeis.org/A020198) - `:a020198` - `create_sequence_a020198/1`
-    - [A020199 - Pseudoprimes to base 71.](https://oeis.org/A020199) - `:a020199` - `create_sequence_a020199/1`
-    - [A020200 - Pseudoprimes to base 72.](https://oeis.org/A020200) - `:a020200` - `create_sequence_a020200/1`
-    - [A020201 - Pseudoprimes to base 73.](https://oeis.org/A020201) - `:a020201` - `create_sequence_a020201/1`
-    - [A020202 - Pseudoprimes to base 74.](https://oeis.org/A020202) - `:a020202` - `create_sequence_a020202/1`
-    - [A020203 - Pseudoprimes to base 75.](https://oeis.org/A020203) - `:a020203` - `create_sequence_a020203/1`
-    - [A020204 - Pseudoprimes to base 76.](https://oeis.org/A020204) - `:a020204` - `create_sequence_a020204/1`
-    - [A020205 - Pseudoprimes to base 77.](https://oeis.org/A020205) - `:a020205` - `create_sequence_a020205/1`
-    - [A020206 - Pseudoprimes to base 78.](https://oeis.org/A020206) - `:a020206` - `create_sequence_a020206/1`
-    - [A020207 - Pseudoprimes to base 79.](https://oeis.org/A020207) - `:a020207` - `create_sequence_a020207/1`
-    - [A020208 - Pseudoprimes to base 80.](https://oeis.org/A020208) - `:a020208` - `create_sequence_a020208/1`
-    - [A020209 - Pseudoprimes to base 81.](https://oeis.org/A020209) - `:a020209` - `create_sequence_a020209/1`
-    - [A020210 - Pseudoprimes to base 82.](https://oeis.org/A020210) - `:a020210` - `create_sequence_a020210/1`
-    - [A020211 - Pseudoprimes to base 83.](https://oeis.org/A020211) - `:a020211` - `create_sequence_a020211/1`
-    - [A020212 - Pseudoprimes to base 84.](https://oeis.org/A020212) - `:a020212` - `create_sequence_a020212/1`
-    - [A020213 - Pseudoprimes to base 85.](https://oeis.org/A020213) - `:a020213` - `create_sequence_a020213/1`
-    - [A020214 - Pseudoprimes to base 86.](https://oeis.org/A020214) - `:a020214` - `create_sequence_a020214/1`
-    - [A020215 - Pseudoprimes to base 87.](https://oeis.org/A020215) - `:a020215` - `create_sequence_a020215/1`
-    - [A020216 - Pseudoprimes to base 88.](https://oeis.org/A020216) - `:a020216` - `create_sequence_a020216/1`
-    - [A020217 - Pseudoprimes to base 89.](https://oeis.org/A020217) - `:a020217` - `create_sequence_a020217/1`
-    - [A020218 - Pseudoprimes to base 90.](https://oeis.org/A020218) - `:a020218` - `create_sequence_a020218/1`
-    - [A020219 - Pseudoprimes to base 91.](https://oeis.org/A020219) - `:a020219` - `create_sequence_a020219/1`
-    - [A020220 - Pseudoprimes to base 92.](https://oeis.org/A020220) - `:a020220` - `create_sequence_a020220/1`
-    - [A020221 - Pseudoprimes to base 93.](https://oeis.org/A020221) - `:a020221` - `create_sequence_a020221/1`
-    - [A020222 - Pseudoprimes to base 94.](https://oeis.org/A020222) - `:a020222` - `create_sequence_a020222/1`
-    - [A020223 - Pseudoprimes to base 95.](https://oeis.org/A020223) - `:a020223` - `create_sequence_a020223/1`
-    - [A020224 - Pseudoprimes to base 96.](https://oeis.org/A020224) - `:a020224` - `create_sequence_a020224/1`
-    - [A020225 - Pseudoprimes to base 97.](https://oeis.org/A020225) - `:a020225` - `create_sequence_a020225/1`
-    - [A020226 - Pseudoprimes to base 98.](https://oeis.org/A020226) - `:a020226` - `create_sequence_a020226/1`
-    - [A020227 - Pseudoprimes to base 99.](https://oeis.org/A020227) - `:a020227` - `create_sequence_a020227/1`
-    - [A020228 - Pseudoprimes to base 100.](https://oeis.org/A020228) - `:a020228` - `create_sequence_a020228/1`
+  ### Pseudoprimes
+  
+  Fermat pseudoprimes to specific bases:
+  
+   - `create_sequence_a001567/1` - A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.
+   - `create_sequence_a005935/1` - A005935 - Pseudoprimes to base 3.
+   - `create_sequence_a020136/1` - A020136 - Fermat pseudoprimes to base 4.
+   - `create_sequence_a005936/1` - A005936 - Pseudoprimes to base 5.
+   - `create_sequence_a005937/1` - A005937 - Pseudoprimes to base 6.
+   - `create_sequence_a005938/1` - A005938 - Pseudoprimes to base 7.
+   - `create_sequence_a020137/1` - A020137 - Pseudoprimes to base 8.
+   - `create_sequence_a020138/1` - A020138 - Pseudoprimes to base 9.
+   - `create_sequence_a005939/1` - A005939 - Pseudoprimes to base 10.
+   - `create_sequence_a020139/1` - A020139 - Pseudoprimes to base 11.
+   - `create_sequence_a020140/1` - A020140 - Pseudoprimes to base 12.
+   - `create_sequence_a020141/1` - A020141 - Pseudoprimes to base 13.
+   - `create_sequence_a020142/1` - A020142 - Pseudoprimes to base 14.
+   - `create_sequence_a020143/1` - A020143 - Pseudoprimes to base 15.
+   - `create_sequence_a020144/1` - A020144 - Pseudoprimes to base 16.
+   - `create_sequence_a020145/1` - A020145 - Pseudoprimes to base 17.
+   - `create_sequence_a020146/1` - A020146 - Pseudoprimes to base 18.
+   - `create_sequence_a020147/1` - A020147 - Pseudoprimes to base 19.
+   - `create_sequence_a020148/1` - A020148 - Pseudoprimes to base 20.
+   - `create_sequence_a020149/1` - A020149 - Pseudoprimes to base 21.
+   - `create_sequence_a020150/1` - A020150 - Pseudoprimes to base 22.
+   - `create_sequence_a020151/1` - A020151 - Pseudoprimes to base 23.
+   - `create_sequence_a020152/1` - A020152 - Pseudoprimes to base 24.
+   - `create_sequence_a020153/1` - A020153 - Pseudoprimes to base 25.
+   - `create_sequence_a020154/1` - A020154 - Pseudoprimes to base 26.
+   - `create_sequence_a020155/1` - A020155 - Pseudoprimes to base 27.
+   - `create_sequence_a020156/1` - A020156 - Pseudoprimes to base 28.
+   - `create_sequence_a020157/1` - A020157 - Pseudoprimes to base 29.
+   - `create_sequence_a020158/1` - A020158 - Pseudoprimes to base 30.
+   - `create_sequence_a020159/1` - A020159 - Pseudoprimes to base 31.
+   - `create_sequence_a020160/1` - A020160 - Pseudoprimes to base 32.
+   - `create_sequence_a020161/1` - A020161 - Pseudoprimes to base 33.
+   - `create_sequence_a020162/1` - A020162 - Pseudoprimes to base 34.
+   - `create_sequence_a020163/1` - A020163 - Pseudoprimes to base 35.
+   - `create_sequence_a020164/1` - A020164 - Pseudoprimes to base 36.
+   - `create_sequence_a020165/1` - A020165 - Pseudoprimes to base 37.
+   - `create_sequence_a020166/1` - A020166 - Pseudoprimes to base 38.
+   - `create_sequence_a020167/1` - A020167 - Pseudoprimes to base 39.
+   - `create_sequence_a020168/1` - A020168 - Pseudoprimes to base 40.
+   - `create_sequence_a020169/1` - A020169 - Pseudoprimes to base 41.
+   - `create_sequence_a020170/1` - A020170 - Pseudoprimes to base 42.
+   - `create_sequence_a020171/1` - A020171 - Pseudoprimes to base 43.
+   - `create_sequence_a020172/1` - A020172 - Pseudoprimes to base 44.
+   - `create_sequence_a020173/1` - A020173 - Pseudoprimes to base 45.
+   - `create_sequence_a020174/1` - A020174 - Pseudoprimes to base 46.
+   - `create_sequence_a020175/1` - A020175 - Pseudoprimes to base 47.
+   - `create_sequence_a020176/1` - A020176 - Pseudoprimes to base 48.
+   - `create_sequence_a020177/1` - A020177 - Pseudoprimes to base 49.
+   - `create_sequence_a020178/1` - A020178 - Pseudoprimes to base 50.
+   - `create_sequence_a020179/1` - A020179 - Pseudoprimes to base 51.
+   - `create_sequence_a020180/1` - A020180 - Pseudoprimes to base 52.
+   - `create_sequence_a020181/1` - A020181 - Pseudoprimes to base 53.
+   - `create_sequence_a020182/1` - A020182 - Pseudoprimes to base 54.
+   - `create_sequence_a020183/1` - A020183 - Pseudoprimes to base 55.
+   - `create_sequence_a020184/1` - A020184 - Pseudoprimes to base 56.
+   - `create_sequence_a020185/1` - A020185 - Pseudoprimes to base 57.
+   - `create_sequence_a020186/1` - A020186 - Pseudoprimes to base 58.
+   - `create_sequence_a020187/1` - A020187 - Pseudoprimes to base 59.
+   - `create_sequence_a020188/1` - A020188 - Pseudoprimes to base 60.
+   - `create_sequence_a020189/1` - A020189 - Pseudoprimes to base 61.
+   - `create_sequence_a020190/1` - A020190 - Pseudoprimes to base 62.
+   - `create_sequence_a020191/1` - A020191 - Pseudoprimes to base 63.
+   - `create_sequence_a020192/1` - A020192 - Pseudoprimes to base 64.
+   - `create_sequence_a020193/1` - A020193 - Pseudoprimes to base 65.
+   - `create_sequence_a020194/1` - A020194 - Pseudoprimes to base 66.
+   - `create_sequence_a020195/1` - A020195 - Pseudoprimes to base 67.
+   - `create_sequence_a020196/1` - A020196 - Pseudoprimes to base 68.
+   - `create_sequence_a020197/1` - A020197 - Pseudoprimes to base 69.
+   - `create_sequence_a020198/1` - A020198 - Pseudoprimes to base 70.
+   - `create_sequence_a020199/1` - A020199 - Pseudoprimes to base 71.
+   - `create_sequence_a020200/1` - A020200 - Pseudoprimes to base 72.
+   - `create_sequence_a020201/1` - A020201 - Pseudoprimes to base 73.
+   - `create_sequence_a020202/1` - A020202 - Pseudoprimes to base 74.
+   - `create_sequence_a020203/1` - A020203 - Pseudoprimes to base 75.
+   - `create_sequence_a020204/1` - A020204 - Pseudoprimes to base 76.
+   - `create_sequence_a020205/1` - A020205 - Pseudoprimes to base 77.
+   - `create_sequence_a020206/1` - A020206 - Pseudoprimes to base 78.
+   - `create_sequence_a020207/1` - A020207 - Pseudoprimes to base 79.
+   - `create_sequence_a020208/1` - A020208 - Pseudoprimes to base 80.
+   - `create_sequence_a020209/1` - A020209 - Pseudoprimes to base 81.
+   - `create_sequence_a020210/1` - A020210 - Pseudoprimes to base 82.
+   - `create_sequence_a020211/1` - A020211 - Pseudoprimes to base 83.
+   - `create_sequence_a020212/1` - A020212 - Pseudoprimes to base 84.
+   - `create_sequence_a020213/1` - A020213 - Pseudoprimes to base 85.
+   - `create_sequence_a020214/1` - A020214 - Pseudoprimes to base 86.
+   - `create_sequence_a020215/1` - A020215 - Pseudoprimes to base 87.
+   - `create_sequence_a020216/1` - A020216 - Pseudoprimes to base 88.
+   - `create_sequence_a020217/1` - A020217 - Pseudoprimes to base 89.
+   - `create_sequence_a020218/1` - A020218 - Pseudoprimes to base 90.
+   - `create_sequence_a020219/1` - A020219 - Pseudoprimes to base 91.
+   - `create_sequence_a020220/1` - A020220 - Pseudoprimes to base 92.
+   - `create_sequence_a020221/1` - A020221 - Pseudoprimes to base 93.
+   - `create_sequence_a020222/1` - A020222 - Pseudoprimes to base 94.
+   - `create_sequence_a020223/1` - A020223 - Pseudoprimes to base 95.
+   - `create_sequence_a020224/1` - A020224 - Pseudoprimes to base 96.
+   - `create_sequence_a020225/1` - A020225 - Pseudoprimes to base 97.
+   - `create_sequence_a020226/1` - A020226 - Pseudoprimes to base 98.
+   - `create_sequence_a020227/1` - A020227 - Pseudoprimes to base 99.
+   - `create_sequence_a020228/1` - A020228 - Pseudoprimes to base 100.
+
+  
+  ### Characterizations of Primes
+  
+   - `create_sequence_a162511/1` - A162511 - Multiplicative function with a(p^e)=(-1)^(e-1)
+
 
   """
 
@@ -141,6 +150,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a001567/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001567(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 2) end, last)
@@ -174,6 +184,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005935/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005935(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 3) end, last)
@@ -207,6 +218,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005936/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005936(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 5) end, last)
@@ -240,6 +252,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005937/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005937(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 6) end, last)
@@ -273,6 +286,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005938/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005938(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 7) end, last)
@@ -306,6 +320,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a005939/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005939(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 10) end, last)
@@ -339,6 +354,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020136/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020136(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 4) end, last)
@@ -372,6 +388,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020137/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020137(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 8) end, last)
@@ -405,6 +422,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020138/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020138(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 9) end, last)
@@ -438,6 +456,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020139/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020139(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 11) end, last)
@@ -471,6 +490,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020140/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020140(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 12) end, last)
@@ -504,6 +524,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020141/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020141(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 13) end, last)
@@ -537,6 +558,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020142/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020142(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 14) end, last)
@@ -570,6 +592,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020143/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020143(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 15) end, last)
@@ -603,6 +626,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020144/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020144(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 16) end, last)
@@ -636,6 +660,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020145/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020145(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 17) end, last)
@@ -669,6 +694,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020146/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020146(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 18) end, last)
@@ -702,6 +728,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020147/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020147(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 19) end, last)
@@ -735,6 +762,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020148/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020148(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 20) end, last)
@@ -768,6 +796,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020149/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020149(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 21) end, last)
@@ -801,6 +830,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020150/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020150(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 22) end, last)
@@ -834,6 +864,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020151/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020151(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 23) end, last)
@@ -867,6 +898,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020152/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020152(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 24) end, last)
@@ -900,6 +932,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020153/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020153(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 25) end, last)
@@ -933,6 +966,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020154/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020154(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 26) end, last)
@@ -966,6 +1000,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020155/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020155(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 27) end, last)
@@ -999,6 +1034,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020156/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020156(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 28) end, last)
@@ -1032,6 +1068,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020157/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020157(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 29) end, last)
@@ -1065,6 +1102,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020158/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020158(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 30) end, last)
@@ -1098,6 +1136,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020159/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020159(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 31) end, last)
@@ -1131,6 +1170,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020160/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020160(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 32) end, last)
@@ -1164,6 +1204,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020161/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020161(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 33) end, last)
@@ -1197,6 +1238,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020162/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020162(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 34) end, last)
@@ -1230,6 +1272,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020163/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020163(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 35) end, last)
@@ -1263,6 +1306,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020164/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020164(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 36) end, last)
@@ -1296,6 +1340,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020165/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020165(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 37) end, last)
@@ -1329,6 +1374,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020166/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020166(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 38) end, last)
@@ -1362,6 +1408,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020167/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020167(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 39) end, last)
@@ -1395,6 +1442,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020168/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020168(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 40) end, last)
@@ -1428,6 +1476,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020169/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020169(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 41) end, last)
@@ -1461,6 +1510,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020170/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020170(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 42) end, last)
@@ -1494,6 +1544,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020171/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020171(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 43) end, last)
@@ -1527,6 +1578,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020172/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020172(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 44) end, last)
@@ -1560,6 +1612,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020173/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020173(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 45) end, last)
@@ -1593,6 +1646,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020174/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020174(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 46) end, last)
@@ -1626,6 +1680,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020175/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020175(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 47) end, last)
@@ -1659,6 +1714,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020176/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020176(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 48) end, last)
@@ -1692,6 +1748,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020177/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020177(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 49) end, last)
@@ -1725,6 +1782,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020178/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020178(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 50) end, last)
@@ -1758,6 +1816,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020179/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020179(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 51) end, last)
@@ -1791,6 +1850,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020180/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020180(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 52) end, last)
@@ -1824,6 +1884,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020181/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020181(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 53) end, last)
@@ -1857,6 +1918,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020182/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020182(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 54) end, last)
@@ -1890,6 +1952,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020183/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020183(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 55) end, last)
@@ -1923,6 +1986,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020184/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020184(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 56) end, last)
@@ -1956,6 +2020,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020185/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020185(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 57) end, last)
@@ -1989,6 +2054,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020186/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020186(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 58) end, last)
@@ -2022,6 +2088,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020187/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020187(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 59) end, last)
@@ -2055,6 +2122,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020188/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020188(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 60) end, last)
@@ -2088,6 +2156,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020189/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020189(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 61) end, last)
@@ -2121,6 +2190,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020190/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020190(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 62) end, last)
@@ -2154,6 +2224,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020191/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020191(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 63) end, last)
@@ -2187,6 +2258,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020192/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020192(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 64) end, last)
@@ -2220,6 +2292,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020193/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020193(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 65) end, last)
@@ -2253,6 +2326,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020194/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020194(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 66) end, last)
@@ -2286,6 +2360,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020195/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020195(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 67) end, last)
@@ -2319,6 +2394,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020196/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020196(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 68) end, last)
@@ -2352,6 +2428,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020197/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020197(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 69) end, last)
@@ -2385,6 +2462,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020198/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020198(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 70) end, last)
@@ -2418,6 +2496,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020199/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020199(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 71) end, last)
@@ -2451,6 +2530,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020200/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020200(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 72) end, last)
@@ -2484,6 +2564,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020201/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020201(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 73) end, last)
@@ -2517,6 +2598,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020202/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020202(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 74) end, last)
@@ -2550,6 +2632,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020203/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020203(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 75) end, last)
@@ -2583,6 +2666,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020204/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020204(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 76) end, last)
@@ -2616,6 +2700,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020205/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020205(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 77) end, last)
@@ -2649,6 +2734,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020206/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020206(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 78) end, last)
@@ -2682,6 +2768,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020207/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020207(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 79) end, last)
@@ -2715,6 +2802,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020208/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020208(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 80) end, last)
@@ -2748,6 +2836,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020209/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020209(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 81) end, last)
@@ -2781,6 +2870,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020210/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020210(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 82) end, last)
@@ -2814,6 +2904,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020211/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020211(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 83) end, last)
@@ -2847,6 +2938,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020212/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020212(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 84) end, last)
@@ -2880,6 +2972,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020213/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020213(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 85) end, last)
@@ -2913,6 +3006,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020214/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020214(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 86) end, last)
@@ -2946,6 +3040,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020215/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020215(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 87) end, last)
@@ -2979,6 +3074,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020216/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020216(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 88) end, last)
@@ -3012,6 +3108,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020217/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020217(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 89) end, last)
@@ -3045,6 +3142,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020218/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020218(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 90) end, last)
@@ -3078,6 +3176,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020219/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020219(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 91) end, last)
@@ -3111,6 +3210,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020220/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020220(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 92) end, last)
@@ -3144,6 +3244,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020221/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020221(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 93) end, last)
@@ -3177,6 +3278,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020222/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020222(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 94) end, last)
@@ -3210,6 +3312,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020223/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020223(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 95) end, last)
@@ -3243,6 +3346,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020224/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020224(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 96) end, last)
@@ -3276,6 +3380,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020225/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020225(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 97) end, last)
@@ -3309,6 +3414,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020226/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020226(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 98) end, last)
@@ -3342,6 +3448,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020227/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020227(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 99) end, last)
@@ -3375,6 +3482,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a020228/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a020228(_idx, last) do
     Math.next_number(fn v -> Math.is_pseudo_prime?(v, 100) end, last)
@@ -3407,6 +3515,7 @@ defmodule Chunky.Sequence.OEIS.Primes do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Primes.seq_a162511/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a162511(idx) do
     -1 |> Math.pow(Math.bigomega(idx) - Math.omega(idx))

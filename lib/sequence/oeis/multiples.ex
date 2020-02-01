@@ -5,81 +5,103 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
   ## Available Sequences
    
-   - [A002975 - Primitive weird numbers: weird numbers with no proper weird divisors.](https://oeis.org/A002975) - `:a002975` - `create_sequence_a002975/1`
-   - [A004144 - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).](https://oeis.org/A004144) - `:a004144` - `create_sequence_a004144/1`
-   - [A005153 - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.](https://oeis.org/A005153) - `:a005153` - `create_sequence_a005153/1`
-   - [A005835 - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.](https://oeis.org/A005835) - `:a005835` - `create_sequence_a005835/1`
-   - [A006036 - Primitive pseudoperfect numbers.](https://oeis.org/A006036) - `:a006036` - `create_sequence_a006036/1`
-   - [A006037 - Weird numbers: abundant (A005101) but not pseudoperfect (A005835).](https://oeis.org/A006037) - `:a006037` - `create_sequence_a006037/1`
-   - [A006753 - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).](https://oeis.org/A006753) - `:a006753` - `create_sequence_a006753/1`
-   - [A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.](https://oeis.org/A007770) - `:a007770` - `create_sequence_a007770/1`
-   - [A008585 - a(n) = 3*n.](https://oeis.org/A008585) - `:a008585` - `create_sequence_a008585/1`
-   - [A008586 - Multiples of 4.](https://oeis.org/A008586) - `:a008586` - `create_sequence_a008586/1`
-   - [A008587 - Multiples of 5.](https://oeis.org/A008587) - `:a008587` - `create_sequence_a008587/1`
-   - [A008588 - Nonnegative multiples of 6.](https://oeis.org/A008588) - `:a008588` - `create_sequence_a008588/1`
-   - [A008589 - Multiples of 7.](https://oeis.org/A008589) - `:a008589` - `create_sequence_a008589/1`
-   - [A008590 - Multiples of 8.](https://oeis.org/A008590) - `:a008590` - `create_sequence_a008590/1`
-   - [A008591 - Multiples of 9.](https://oeis.org/A008591) - `:a008591` - `create_sequence_a008591/1`
-   - [A008592 - Multiples of 10: a(n) = 10 * n.](https://oeis.org/A008592) - `:a008592` - `create_sequence_a008592/1`
-   - [A008593 - Multiples of 11.](https://oeis.org/A008593) - `:a008593` - `create_sequence_a008593/1`
-   - [A008594 - Multiples of 12.](https://oeis.org/A008594) - `:a008594` - `create_sequence_a008594/1`
-   - [A008595 - Multiples of 13.](https://oeis.org/A008595) - `:a008595` - `create_sequence_a008595/1`
-   - [A008596 - Multiples of 14.](https://oeis.org/A008596) - `:a008596` - `create_sequence_a008596/1`
-   - [A008597 - Multiples of 15.](https://oeis.org/A008597) - `:a008597` - `create_sequence_a008597/1`
-   - [A008598 - Multiples of 16.](https://oeis.org/A008598) - `:a008598` - `create_sequence_a008598/1`
-   - [A008599 - Multiples of 17.](https://oeis.org/A008599) - `:a008599` - `create_sequence_a008599/1`
-   - [A008600 - Multiples of 18.](https://oeis.org/A008600) - `:a008600` - `create_sequence_a008600/1`
-   - [A008601 - Multiples of 19.](https://oeis.org/A008601) - `:a008601` - `create_sequence_a008601/1`
-   - [A008602 - Multiples of 20.](https://oeis.org/A008602) - `:a008602` - `create_sequence_a008602/1`
-   - [A008603 - Multiples of 21.](https://oeis.org/A008603) - `:a008603` - `create_sequence_a008603/1`
-   - [A008604 - Multiples of 22.](https://oeis.org/A008604) - `:a008604` - `create_sequence_a008604/1`
-   - [A008605 - Multiples of 23.](https://oeis.org/A008605) - `:a008605` - `create_sequence_a008605/1`
-   - [A008606 - Multiples of 24.](https://oeis.org/A008606) - `:a008606` - `create_sequence_a008606/1`
-   - [A008607 - Multiples of 25.](https://oeis.org/A008607) - `:a008607` - `create_sequence_a008607/1`
-   - [A009003 - Hypotenuse numbers (squares are sums of 2 nonzero squares).](https://oeis.org/A009003) - `:a009003` - `create_sequence_a009003/1`
-   - [A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.](https://oeis.org/A016825) - `:a016825` - `create_sequence_a016825/1`
-   - [A019506 - Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.](https://oeis.org/A019506) - `:a019506` - `create_sequence_a019506/1`
-   - [A031177 - Unhappy numbers: numbers having period-8 2-digitized sequences.](https://oeis.org/A031177) - `:a031177` - `create_sequence_a031177/1`
-   - [A054377 - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.](https://oeis.org/A054377) - `:a054377` - `create_sequence_a054377/1`
-   - [A169823 - Multiples of 60.](https://oeis.org/A169823) - `:a169823` - `create_sequence_a169823/1`
-   - [A169825 - Multiples of 420.](https://oeis.org/A169825) - `:a169825` - `create_sequence_a169825/1`
-   - [A169827 - Multiples of 840.](https://oeis.org/A169827) - `:a169827` - `create_sequence_a169827/1`
-   - [A044102 - Multiples of 36.](https://oeis.org/A044102) - `:a044102` - `create_sequence_a044102/1`
-   - [A062768 - Multiples of 6 such that the sum of the digits is equal to 6.](https://oeis.org/A062768) - `:a062768` - `create_sequence_a062768/1`
-   - [A063416 - Multiples of 7 whose sum of digits is equal to 7.](https://oeis.org/A063416) - `:a063416` - `create_sequence_a063416/1`
-   - [A063997 - Multiples of 4 whose digits add to 4.](https://oeis.org/A063997) - `:a063997` - `create_sequence_a063997/1`
-   - [A069537 - Multiples of 2 with digit sum = 2.](https://oeis.org/A069537) - `:a069537` - `create_sequence_a069537/1`
-   - [A069540 - Multiples of 5 with digit sum 5.](https://oeis.org/A069540) - `:a069540` - `create_sequence_a069540/1`
-   - [A069543 - Multiples of 8 with digit sum 8.](https://oeis.org/A069543) - `:a069543` - `create_sequence_a069543/1`
-   - [A085959 - Multiples of 37.](https://oeis.org/A085959) - `:a085959` - `create_sequence_a085959/1`
-   - [A121023 - Multiples of 3 containing a 3 in their decimal representation.](https://oeis.org/A121023) - `:a121023` - `create_sequence_a121023/1`
-   - [A121024 - Multiples of 4 containing a 4 in their decimal representation.](https://oeis.org/A121024) - `:a121024` - `create_sequence_a121024/1`
-   - [A121025 - Multiples of 5 containing a 5 in their decimal representation.](https://oeis.org/A121025) - `:a121025` - `create_sequence_a121025/1`
-   - [A121026 - Multiples of 6 containing a 6 in their decimal representation.](https://oeis.org/A121026) - `:a121026` - `create_sequence_a121026/1`
-   - [A121027 - Multiples of 7 containing a 7 in their decimal representation.](https://oeis.org/A121027) - `:a121027` - `create_sequence_a121027/1`
-   - [A121028 - Multiples of 8 containing an 8 in their decimal representation.](https://oeis.org/A121028) - `:a121028` - `create_sequence_a121028/1`
-   - [A121029 - Multiples of 9 containing a 9 in their decimal representation.](https://oeis.org/A121029) - `:a121029` - `create_sequence_a121029/1`
-   - [A121030 - Multiples of 10 containing a 10 in their decimal representation.](https://oeis.org/A121030) - `:a121030` - `create_sequence_a121030/1`
-   - [A121031 - Multiples of 11 containing an 11 in their decimal representation.](https://oeis.org/A121031) - `:a121031` - `create_sequence_a121031/1`
-   - [A121032 - Multiples of 12 containing a 12 in their decimal representation.](https://oeis.org/A121032) - `:a121032` - `create_sequence_a121032/1`
-   - [A121033 - Multiples of 13 containing a 13 in their decimal representation.](https://oeis.org/A121033) - `:a121033` - `create_sequence_a121033/1`
-   - [A121034 - Multiples of 14 containing a 14 in their decimal representation.](https://oeis.org/A121034) - `:a121034` - `create_sequence_a121034/1`
-   - [A121035 - Multiples of 15 containing a 15 in their decimal representation.](https://oeis.org/A121035) - `:a121035` - `create_sequence_a121035/1`
-   - [A121036 - Multiples of 16 containing a 16 in their decimal representation.](https://oeis.org/A121036) - `:a121036` - `create_sequence_a121036/1`
-   - [A121037 - Multiples of 17 containing a 17 in their decimal representation.](https://oeis.org/A121037) - `:a121037` - `create_sequence_a121037/1`
-   - [A121038 - Multiples of 18 containing a 18 in their decimal representation.](https://oeis.org/A121038) - `:a121038` - `create_sequence_a121038/1`
-   - [A121039 - Multiples of 19 containing a 19 in their decimal representation.](https://oeis.org/A121039) - `:a121039` - `create_sequence_a121039/1`
-   - [A121040 - Multiples of 20 containing a 20 in their decimal representation.](https://oeis.org/A121040) - `:a121040` - `create_sequence_a121040/1`
-   - [A135628 - Multiples of 28.](https://oeis.org/A135628) - `:a135628` - `create_sequence_a135628/1`
-   - [A135631 - Multiples of 31.](https://oeis.org/A135631) - `:a135631` - `create_sequence_a135631/1`
-   - [A138591 - Sums of two or more consecutive nonnegative integers.](https://oeis.org/A138591) - `:a138591` - `create_sequence_a138591/1`
-   - [A152691 - Multiples of 64.](https://oeis.org/A152691) - `:a152691` - `create_sequence_a152691/1`
-   - [A174312 - 32*n.](https://oeis.org/A174312) - `:a174312` - `create_sequence_a174312/1`
-   - [A194472 - Erdős-Nicolas numbers.](https://oeis.org/A194472) - `:a194472` - `create_sequence_a194472/1`
-   - [A195819 - Multiples of 29.](https://oeis.org/A195819) - `:a195819` - `create_sequence_a195819/1`
-   - [A249674 - a(n) = 30*n.](https://oeis.org/A249674) - `:a249674` - `create_sequence_a249674/1`
-   - [A252994 - Multiples of 26.](https://oeis.org/A252994) - `:a252994` - `create_sequence_a252994/1`
-   - [A305548 - a(n) = 27*n.](https://oeis.org/A305548) - `:a305548` - `create_sequence_a305548/1`
+  ### Multiples of an integer
+  
+   - `create_sequence_a008585/1` - A008585 - a(n) = 3*n.
+   - `create_sequence_a008586/1` - A008586 - Multiples of 4.
+   - `create_sequence_a008587/1` - A008587 - Multiples of 5.
+   - `create_sequence_a008588/1` - A008588 - Nonnegative multiples of 6.
+   - `create_sequence_a008589/1` - A008589 - Multiples of 7.
+   - `create_sequence_a008590/1` - A008590 - Multiples of 8.
+   - `create_sequence_a008591/1` - A008591 - Multiples of 9.
+   - `create_sequence_a008592/1` - A008592 - Multiples of 10: a(n) = 10 * n.
+   - `create_sequence_a008593/1` - A008593 - Multiples of 11.
+   - `create_sequence_a008594/1` - A008594 - Multiples of 12.
+   - `create_sequence_a008595/1` - A008595 - Multiples of 13.
+   - `create_sequence_a008596/1` - A008596 - Multiples of 14.
+   - `create_sequence_a008597/1` - A008597 - Multiples of 15.
+   - `create_sequence_a008598/1` - A008598 - Multiples of 16.
+   - `create_sequence_a008599/1` - A008599 - Multiples of 17.
+   - `create_sequence_a008600/1` - A008600 - Multiples of 18.
+   - `create_sequence_a008601/1` - A008601 - Multiples of 19.
+   - `create_sequence_a008602/1` - A008602 - Multiples of 20.
+   - `create_sequence_a008603/1` - A008603 - Multiples of 21.
+   - `create_sequence_a008604/1` - A008604 - Multiples of 22.
+   - `create_sequence_a008605/1` - A008605 - Multiples of 23.
+   - `create_sequence_a008606/1` - A008606 - Multiples of 24.
+   - `create_sequence_a008607/1` - A008607 - Multiples of 25.
+   - `create_sequence_a252994/1` - A252994 - Multiples of 26.
+   - `create_sequence_a305548/1` - A305548 - a(n) = 27*n.
+   - `create_sequence_a135628/1` - A135628 - Multiples of 28.
+   - `create_sequence_a195819/1` - A195819 - Multiples of 29.
+   - `create_sequence_a249674/1` - A249674 - a(n) = 30*n.
+   - `create_sequence_a135631/1` - A135631 - Multiples of 31.
+   - `create_sequence_a174312/1` - A174312 - 32*n.
+   - `create_sequence_a044102/1` - A044102 - Multiples of 36.
+   - `create_sequence_a085959/1` - A085959 - Multiples of 37.  
+   - `create_sequence_a169823/1` - A169823 - Multiples of 60.
+   - `create_sequence_a152691/1` - A152691 - Multiples of 64.
+   - `create_sequence_a169825/1` - A169825 - Multiples of 420.
+   - `create_sequence_a169827/1` - A169827 - Multiples of 840.
+  
+  
+  ### Multiples with specific Digit Sums
+  
+   - `create_sequence_a069537/1` - A069537 - Multiples of 2 with digit sum = 2.
+   - `create_sequence_a063997/1` - A063997 - Multiples of 4 whose digits add to 4.
+   - `create_sequence_a069540/1` - A069540 - Multiples of 5 with digit sum 5.
+   - `create_sequence_a062768/1` - A062768 - Multiples of 6 such that the sum of the digits is equal to 6.
+   - `create_sequence_a063416/1` - A063416 - Multiples of 7 whose sum of digits is equal to 7.
+   - `create_sequence_a069543/1` - A069543 - Multiples of 8 with digit sum 8.
+  
+  
+  ### Multiples containing specific Digits
+  
+   - `create_sequence_a121023/1` - A121023 - Multiples of 3 containing a 3 in their decimal representation.
+   - `create_sequence_a121024/1` - A121024 - Multiples of 4 containing a 4 in their decimal representation.
+   - `create_sequence_a121025/1` - A121025 - Multiples of 5 containing a 5 in their decimal representation.
+   - `create_sequence_a121026/1` - A121026 - Multiples of 6 containing a 6 in their decimal representation.
+   - `create_sequence_a121027/1` - A121027 - Multiples of 7 containing a 7 in their decimal representation.
+   - `create_sequence_a121028/1` - A121028 - Multiples of 8 containing an 8 in their decimal representation.
+   - `create_sequence_a121029/1` - A121029 - Multiples of 9 containing a 9 in their decimal representation.
+   - `create_sequence_a121030/1` - A121030 - Multiples of 10 containing a 10 in their decimal representation.
+   - `create_sequence_a121031/1` - A121031 - Multiples of 11 containing an 11 in their decimal representation.
+   - `create_sequence_a121032/1` - A121032 - Multiples of 12 containing a 12 in their decimal representation.
+   - `create_sequence_a121033/1` - A121033 - Multiples of 13 containing a 13 in their decimal representation.
+   - `create_sequence_a121034/1` - A121034 - Multiples of 14 containing a 14 in their decimal representation.
+   - `create_sequence_a121035/1` - A121035 - Multiples of 15 containing a 15 in their decimal representation.
+   - `create_sequence_a121036/1` - A121036 - Multiples of 16 containing a 16 in their decimal representation.
+   - `create_sequence_a121037/1` - A121037 - Multiples of 17 containing a 17 in their decimal representation.
+   - `create_sequence_a121038/1` - A121038 - Multiples of 18 containing a 18 in their decimal representation.
+   - `create_sequence_a121039/1` - A121039 - Multiples of 19 containing a 19 in their decimal representation.
+   - `create_sequence_a121040/1` - A121040 - Multiples of 20 containing a 20 in their decimal representation.
+
+
+  ### Perfect Numbers and Variations
+  
+   - `create_sequence_a006037/1` - A006037 - Weird numbers: abundant (A005101) but not pseudoperfect (A005835).
+   - `create_sequence_a002975/1` - A002975 - Primitive weird numbers: weird numbers with no proper weird divisors.
+   - `create_sequence_a005835/1` - A005835 - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.
+   - `create_sequence_a006036/1` - A006036 - Primitive pseudoperfect numbers.
+   - `create_sequence_a054377/1` - A054377 - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.
+   - `create_sequence_a194472/1` - A194472 - Erdős-Nicolas numbers.
+  
+  
+  ### Digit sums or sequential digits
+  
+   - `create_sequence_a009003/1` - A009003 - Hypotenuse numbers (squares are sums of 2 nonzero squares).
+   - `create_sequence_a004144/1` - A004144 - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).
+   - `create_sequence_a005153/1` - A005153 - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.
+   - `create_sequence_a006753/1` - A006753 - Smith (or joke) numbers: composite numbers n such that sum of digits of n = sum of digits of prime factors of n (counted with multiplicity).
+   - `create_sequence_a019506/1` - A019506 - Hoax numbers: composite numbers whose digit-sum equals the sum of the digit-sums of its distinct prime factors.
+   - `create_sequence_a016825/1` - A016825 - Positive integers congruent to 2 mod 4: a(n) = 4*n+2, for n >= 0.
+   - `create_sequence_a138591/1` - A138591 - Sums of two or more consecutive nonnegative integers.
+
+
+  ### Convergences
+  
+   - `create_sequence_a007770/1` - A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.
+   - `create_sequence_a031177/1` - A031177 - Unhappy numbers: numbers having period-8 2-digitized sequences.
 
 
   """
@@ -129,6 +151,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008585/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008585(idx) do
     idx * 3
@@ -162,6 +185,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008586/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008586(idx) do
     idx * 4
@@ -195,6 +219,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008587/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008587(idx) do
     idx * 5
@@ -228,6 +253,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008588/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008588(idx) do
     idx * 6
@@ -261,6 +287,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008589/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008589(idx) do
     idx * 7
@@ -294,6 +321,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008590/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008590(idx) do
     idx * 8
@@ -327,6 +355,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008591/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008591(idx) do
     idx * 9
@@ -360,6 +389,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008592/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008592(idx) do
     idx * 10
@@ -393,6 +423,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008593/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008593(idx) do
     idx * 11
@@ -426,6 +457,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008594/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008594(idx) do
     idx * 12
@@ -459,6 +491,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008595/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008595(idx) do
     idx * 13
@@ -492,6 +525,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008596/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008596(idx) do
     idx * 14
@@ -525,6 +559,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008597/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008597(idx) do
     idx * 15
@@ -558,6 +593,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008598/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008598(idx) do
     idx * 16
@@ -591,6 +627,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008599/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008599(idx) do
     idx * 17
@@ -624,6 +661,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008600/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008600(idx) do
     idx * 18
@@ -657,6 +695,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008601/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008601(idx) do
     idx * 19
@@ -690,6 +729,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008602/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008602(idx) do
     idx * 20
@@ -723,6 +763,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008603/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008603(idx) do
     idx * 21
@@ -756,6 +797,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008604/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008604(idx) do
     idx * 22
@@ -789,6 +831,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008605/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008605(idx) do
     idx * 23
@@ -822,6 +865,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008606/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008606(idx) do
     idx * 24
@@ -855,6 +899,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a008607/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a008607(idx) do
     idx * 25
@@ -888,6 +933,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a169823/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a169823(idx) do
     idx * 60
@@ -921,6 +967,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a169825/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a169825(idx) do
     idx * 420
@@ -954,6 +1001,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a169827/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a169827(idx) do
     idx * 840
@@ -987,6 +1035,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a252994/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a252994(idx) do
     idx * 26
@@ -1020,6 +1069,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a305548/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a305548(idx) do
     idx * 27
@@ -1053,6 +1103,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121023/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121023(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 3) end, last, 3)
@@ -1086,6 +1137,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121024/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121024(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 4) end, last, 4)
@@ -1119,6 +1171,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121025/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121025(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 5) end, last, 5)
@@ -1152,6 +1205,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121026/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121026(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 6) end, last, 6)
@@ -1185,6 +1239,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121027/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121027(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 7) end, last, 7)
@@ -1218,6 +1273,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121028/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121028(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 8) end, last, 8)
@@ -1251,6 +1307,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121029/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121029(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 9) end, last, 9)
@@ -1284,6 +1341,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121030/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121030(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 10) end, last, 10)
@@ -1317,6 +1375,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121031/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121031(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 11) end, last, 11)
@@ -1350,6 +1409,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121032/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121032(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 12) end, last, 12)
@@ -1383,6 +1443,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121033/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121033(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 13) end, last, 13)
@@ -1416,6 +1477,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121034/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121034(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 14) end, last, 14)
@@ -1449,6 +1511,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121035/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121035(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 15) end, last, 15)
@@ -1482,6 +1545,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121036/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121036(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 16) end, last, 16)
@@ -1515,6 +1579,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121037/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121037(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 17) end, last, 17)
@@ -1548,6 +1613,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121038/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121038(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 18) end, last, 18)
@@ -1581,6 +1647,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121039/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121039(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 19) end, last, 19)
@@ -1614,6 +1681,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a121040/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a121040(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 20) end, last, 20)
@@ -1647,6 +1715,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a135628/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a135628(idx) do
     idx * 28
@@ -1680,6 +1749,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a195819/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a195819(idx) do
     idx * 29
@@ -1713,6 +1783,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a249674/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a249674(idx) do
     idx * 30
@@ -1746,6 +1817,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a135631/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a135631(idx) do
     idx * 31
@@ -1779,6 +1851,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a174312/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a174312(idx) do
     idx * 32
@@ -1812,6 +1885,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a044102/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a044102(idx) do
     idx * 36
@@ -1845,6 +1919,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a062768/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a062768(_idx, last) do
     Math.next_number(fn v -> Math.digit_sum(v) == 6 end, last, 6)
@@ -1878,6 +1953,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a063416/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a063416(_idx, last) do
     Math.next_number(fn v -> Math.digit_sum(v) == 7 end, last, 7)
@@ -1911,6 +1987,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a063997/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a063997(_idx, last) do
     Math.next_number(fn v -> Math.digit_sum(v) == 4 end, last, 4)
@@ -1944,6 +2021,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a069537/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069537(_idx, last) do
     Math.next_number(fn v -> Math.digit_sum(v) == 2 end, last, 2)
@@ -1977,6 +2055,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a069540/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069540(_idx, last) do
     Math.next_number(fn v -> Math.digit_sum(v) == 5 end, last, 5)
@@ -2010,6 +2089,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a069543/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069543(_idx, last) do
     Math.next_number(fn v -> Math.digit_sum(v) == 8 end, last, 8)
@@ -2043,6 +2123,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a085959/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a085959(idx) do
     idx * 37
@@ -2076,6 +2157,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a152691/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a152691(idx) do
     idx * 64
@@ -2109,6 +2191,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a016825/2)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a016825(_idx, last) do
     Math.next_number(&Predicates.is_singly_even_number?/1, last + 1)
@@ -2143,6 +2226,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a007770/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a007770(_idx, last) do
     Math.next_number(&Predicates.is_happy_number?/1, last)
@@ -2176,6 +2260,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a031177/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a031177(_idx, last) do
     Math.next_number(&Predicates.is_unhappy_number?/1, last)
@@ -2209,6 +2294,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a138591/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a138591(idx, last) do
     case idx do
@@ -2246,6 +2332,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006753/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a006753(_idx, last) do
     Math.next_number(&Predicates.is_smith_number?/1, last)
@@ -2280,6 +2367,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a019506/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a019506(_idx, last) do
     Math.next_number(&Predicates.is_hoax_number?/1, last)
@@ -2314,6 +2402,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a004144/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a004144(_idx, last) do
     Math.next_number(&Predicates.is_nonhypotenuse_number?/1, last)
@@ -2347,6 +2436,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a009003/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a009003(_idx, last) do
     Math.next_number(&Predicates.is_hypotenuse_number?/1, last)
@@ -2381,6 +2471,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005153/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005153(_idx, last) do
     Math.next_number(&Predicates.is_practical_number?/1, last)
@@ -2444,6 +2535,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a005835/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005835(_idx, last) do
     Math.next_number(&Predicates.is_pseudoperfect_number?/1, last)
@@ -2477,6 +2569,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a194472/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a194472(_idx, last) do
     Math.next_number(&Predicates.is_erdos_nicolas_number?/1, last)
@@ -2510,6 +2603,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006037/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a006037(_idx, last) do
     Math.next_number(&Predicates.is_weird_number?/1, last)
@@ -2543,6 +2637,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a006036/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a006036(_idx, last) do
     Math.next_number(&Predicates.is_primitive_pseudoperfect_number?/1, last)
@@ -2576,6 +2671,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Multiples.seq_a002975/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a002975(_idx, last) do
     Math.next_number(&Predicates.is_primitive_weird_number?/1, last)

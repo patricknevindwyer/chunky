@@ -3,133 +3,215 @@ defmodule Chunky.Sequence.OEIS.Factors do
   OEIS Sequences dealing with Factors, Factorization, and properties of integer factors. 
 
   ## Available Sequences
-
-   - [A000037 - Numbers that are not squares](https://oeis.org/A000037) - `:a000037` - `create_sequence_a000037/1`
-   - [A000977 - Numbers that are divisible by at least three different primes](https://oeis.org/A000977) - `:a000977` - `create_sequence_a000977/1`
-   - [A001414 - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).](https://oeis.org/A001414) - `:a001414` - `create_sequence_a001414/1`
-   - [A001597 - Perfect Powers](https://oeis.org/A001597) - `:a001597` - `create_sequence_a001597/1`
-   - [A001694 - Powerful Numbers](https://oeis.org/A001694) - `:a001694` - `create_sequence_a001694/1`
-   - [A002182 - Highly composite numbers: numbers with record value](https://oeis.org/A002182) - `:a002182` - `create_sequence_a002182/1`
-   - [A002473 - 7-smooth Numbers](https://oeis.org/A002473) - `:a002473` - `create_sequence_a03586/1`
-   - [A003586 - 3-smooth Numbers](https://oeis.org/A003586) - `:a003586` - `create_sequence_a03586/1`
-   - [A004709 - Cubefree numbers: numbers that are not divisible by any cube > 1](https://oeis.org/A004709) - `:a004709` - `create_sequence_a004709/1`
-   - [A005361 - Product of Expoenents of prime factors of N](https://oeis.org/A005361) - `:a005361` - `create_sequence_a005361/1`
-   - [A005934 - Highly powerful numbers: numbers with record value](https://oeis.org/A005934) - `:a005934` - `create_sequence_a005934/1`
-   - [A006881 - Squarefree semiprimes: Numbers that are the product of two distinct primes](https://oeis.org/A006881) - `:a006881` - `create_sequence_a006881/1`
-   - [A007018 - a(n) = a(n-1)^2 + a(n-1), a(0)=1](https://oeis.org/A007018) - `:a007018` - `create_sequence_a007018/1`
-   - [A007304 - Sphenic numbers: products of 3 distinct primes](https://oeis.org/A007304) - `:a007304` - `create_sequence_a007304/1`
-   - [A007412 - The noncubes: n + [ (n + [ n^{1/3} ])^{1/3} ]](https://oeis.org/A007412) - `:a007412` - `create_sequence_a007412/1`
-   - [A007434 - Jordan function J_2(n)](https://oeis.org/A007434) - `:a007434` - `create_sequence_a007434/1`
-   - [A007774 - Numbers that are divisible by exactly 2 different primes](https://oeis.org/A007774) - `:a007774` - `create_sequence_a007774/1`
-   - [A007947 - Largest squarefree number dividing n](https://oeis.org/A007947) - `:a007947` - `create_sequence_a007947/1`
-   - [A008966 - 1 if n is squarefree, else 0.](https://oeis.org/A008966) - `:a008966` - `create_sequence_a008966/1`
-   - [A013929 - Numbers that are not squarefree.](https://oeis.org/A013929) - `:a013929` - `create_sequence_a013929/1`
-   - [A014612 - Numbers that are the product of exactly three primes, including multiplicity.](https://oeis.org/A014612) - `:a014612` - `create_sequence_a014612/1`
-   - [A014613 - Numbers that are products of 4 primes](https://oeis.org/A014613) - `:a014613` - `create_sequence_a014613/1`
-   - [A014614 - Numbers that are products of 5 primes](https://oeis.org/A014614) - `:a014614` - `create_sequence_a014614/1`
-   - [A001826 - Number of divisors of n of form 4k+1](https://oeis.org/A001826) - `:a001826` - `create_sequence_a001826/1`
-   - [A001842 - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3))](https://oeis.org/A001842) - `:a001842` - `create_sequence_a001842/1`
-   - [A018253 - Divisors of 24.](https://oeis.org/A018253) - `:a018253` - `create_sequence_a018253/1`
-   - [A018256 - Divisors of 36.](https://oeis.org/A018256) - `:a018256` - `create_sequence_a018256/1`
-   - [A018261 - Divisors of 48.](https://oeis.org/A018261) - `:a018261` - `create_sequence_a018261/1`
-   - [A018266 - Divisors of 60.](https://oeis.org/A018266) - `:a018266` - `create_sequence_a018266/1`
-   - [A018293 - Divisors of 120.](https://oeis.org/A018293) - `:a018293` - `create_sequence_a018293/1`
-   - [A018321 - Divisors of 180.](https://oeis.org/A018321) - `:a018321` - `create_sequence_a018321/1`
-   - [A018350 - Divisors of 240.](https://oeis.org/A018350) - `:a018350` - `create_sequence_a018350/1`
-   - [A018412 - Divisors of 360.](https://oeis.org/A018412) - `:a018412` - `create_sequence_a018412/1`
-   - [A018609 - Divisors of 720.](https://oeis.org/A018609) - `:a018609` - `create_sequence_a018609/1`
-   - [A018676 - Divisors of 840.](https://oeis.org/A018676) - `:a018676` - `create_sequence_a018676/1`
-   - [A030513 - Numbers with 4 divisors](https://oeis.org/A030513) - `:a030513` - `create_sequence_a030513/1`
-   - [A030515 - Numbers with exactly 6 divisors](https://oeis.org/A030515) - `:a030515` - `create_sequence_a030515/1`
-   - [A033273 - Number of nonprime divisors of n](https://oeis.org/A033273) - `:a033273` - `create_sequence_a033273/1`
-   - [A033942 - At least 3 prime factors (counted with multiplicity).](https://oeis.org/A033942) - `:a033942` - `create_sequence_a033942/1`
-   - [A033987 - Numbers that are divisible by at least 4 primes (counted with multiplicity)](https://oeis.org/A033987) - `:a033987` - `create_sequence_a033987/1`
-   - [A033992 - Numbers that are divisible by exactly three different primes](https://oeis.org/A033992) - `:a033992` - `create_sequence_a033992/1`
-   - [A033993 - Numbers that are divisible by exactly four different primes](https://oeis.org/A033993) - `:a033993` - `create_sequence_a033993/1`
-   - [A036537 - Numbers whose number of divisors is a power of 2.](https://oeis.org/A036537) - `:a036537` - `create_sequence_a036537/1`
-   - [A037143 - Numbers with at most 2 prime factors (counted with multiplicity).](https://oeis.org/A037143) - `:a037143` - `create_sequence_a037143/1`
-   - [A038109 - Divisible exactly by the square of a prime.](https://oeis.org/A038109) - `:a038109` - `create_sequence_a038109/1`
-   - [A039956 - Even squarefree numbers.](https://oeis.org/A039956) - `:a039956` - `create_sequence_a039956/1`
-   - [A046099 - Numbers that are not cubefree. Numbers divisible by a cube greater than 1. ](https://oeis.org/A046099) - `:a046099` - `create_sequence_a046099/1`
-   - [A046306 - Numbers that are divisible by exactly 6 primes with multiplicity.](https://oeis.org/A046306) - `:a046306` - `create_sequence_a046306/1`
-   - [A046308 - Numbers that are divisible by exactly 7 primes counting multiplicity.](https://oeis.org/A046308) - `:a046308` - `create_sequence_a046308/1`
-   - [A046310 - Numbers that are divisible by exactly 8 primes counting multiplicity](https://oeis.org/A046310) - `:a046310` - `create_sequence_a046310/1`
-   - [A046312 - Numbers that are divisible by exactly 9 primes with multiplicity](https://oeis.org/A046312) - `:a046312` - `create_sequence_a046312/1`
-   - [A046314 - Numbers that are divisible by exactly 10 primes with multiplicity](https://oeis.org/A046314) - `:a046314` - `create_sequence_a046314/1`
-   - [A046321 - Odd numbers divisible by exactly 8 primes (counted with multiplicity)](https://oeis.org/A046321) - `:a046321` - `create_sequence_a046321/1`
-   - [A046386 - Products of four distinct primes](https://oeis.org/A046386) - `:a046386` - `create_sequence_a046386/1`
-   - [A046387 - Products of 5 distinct primes](https://oeis.org/A046387) - `:a046387` - `create_sequence_a046387/1`
-   - [A046660 - Excess of n = Ω(n) - ω(n)](https://oeis.org/A046660) - `:a046660` - `create_sequence_a046660/1`
-   - [A046758 - Equidigital numbers.](https://oeis.org/A046758) - `:a046758` - `create_sequence_a046758/1`
-   - [A046759 - Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).](https://oeis.org/A046759) - `:a046759` - `create_sequence_a046759/1`
-   - [A046760 - Wasteful numbers.](https://oeis.org/A046760) - `:a046760` - `create_sequence_a046760/1`
-   - [A048272 - Number of odd divisors of n minus number of even divisors of n](https://oeis.org/A048272) - `:a048272` - `create_sequence_a048272/1`
-   - [A051037 - 5-smooth Numbers](https://oeis.org/A051037) - `:a051037` - `create_sequence_a03586/1`
-   - [A051038 - 11-smooth Numbers](https://oeis.org/A051038) - `:a051038` - `create_sequence_a03586/1`
-   - [A051270 - Numbers that are divisible by exactly 5 different primes](https://oeis.org/A051270) - `:a051270` - `create_sequence_a051270/1`
-   - [A052486 - Achilles numbers - powerful but imperfect](https://oeis.org/A052486) - `:a052486` - `create_sequence_a052486/1`
-   - [A056911 - Odd squarefree numbers.](https://oeis.org/A056911) - `:a056911` - `create_sequence_a056911/1`
-   - [A059269 - Numbers n for which tau(n) is divisible by 3.](https://oeis.org/A059269) - `:a059269` - `create_sequence_a059269/1`
-   - [A059376 - Jordan function J_3(n)](https://oeis.org/A059376) - `:a059376` - `create_sequence_a059376/1`
-   - [A059377 - Jordan function J_4(n)](https://oeis.org/A059377) - `:a059377` - `create_sequence_a059377/1`
-   - [A059378 - Jordan function J_5(n)](https://oeis.org/A059378) - `:a059378` - `create_sequence_a059378/1`
-   - [A065958 - a(n) = n^2*Product_{distinct primes p dividing n} (1+1/p^2)](https://oeis.org/A065958) - `:a065958` - `create_sequence_a065958/1`
-   - [A065959 - a(n) = n^3*Product_{distinct primes p dividing n} (1+1/p^3)](https://oeis.org/A065959) - `:a065959` - `create_sequence_a065959/1`
-   - [A065960 - a(n) = n^4*Product_{distinct primes p dividing n} (1+1/p^4)](https://oeis.org/A065960) - `:a065960` - `create_sequence_a065960/1`
-   - [A067259 - Cubefree numbers which are not squarefree](https://oeis.org/A067259) - `:a067259` - `create_sequence_a067259/1`
-   - [A067885 - Product of 6 distinct primes](https://oeis.org/A067885) - `:a067885` - `create_sequence_a067885/1`
-   - [A069091 - Jordan function J_6(n)](https://oeis.org/A069091) - `:a069091` - `create_sequence_a069091/1`
-   - [A069092 - Jordan function J_7(n)](https://oeis.org/A069092) - `:a069092` - `create_sequence_a069092/1`
-   - [A069093 - Jordan function J_8(n)](https://oeis.org/A069093) - `:a069093` - `create_sequence_a069093/1`
-   - [A069094 - Jordan function J_9(n)](https://oeis.org/A069094) - `:a069094` - `create_sequence_a069094/1`
-   - [A069095 - Jordan function J_10(n)](https://oeis.org/A069095) - `:a069095` - `create_sequence_a069095/1`
-   - [A069272 - 11-almost primes (generalization of semiprimes)](https://oeis.org/A069272) - `:a069272` - `create_sequence_a069272/1`
-   - [A069273 - 12-almost primes (generalization of semiprimes)](https://oeis.org/A069273) - `:a069273` - `create_sequence_a069273/1`
-   - [A069274 - 13-almost primes (generalization of semiprimes)](https://oeis.org/A069274) - `:a069274` - `create_sequence_a069274/1`
-   - [A069275 - 14-almost primes (generalization of semiprimes)](https://oeis.org/A069275) - `:a069275` - `create_sequence_a069275/1`
-   - [A069276 - 15-almost primes (generalization of semiprimes)](https://oeis.org/A069276) - `:a069276` - `create_sequence_a069276/1`
-   - [A069277 - 16-almost primes (generalization of semiprimes)](https://oeis.org/A069277) - `:a069277` - `create_sequence_a069277/1`
-   - [A069278 - 17-almost primes (generalization of semiprimes)](https://oeis.org/A069278) - `:a069278` - `create_sequence_a069278/1`
-   - [A069279 - Products of exactly 18 primes (generalization of semiprimes)](https://oeis.org/A069279) - `:a069279` - `create_sequence_a069279/1`
-   - [A069280 - 19-almost primes (generalization of semiprimes)](https://oeis.org/A069280) - `:a069280` - `create_sequence_a069280/1`
-   - [A069281 - 20-almost primes (generalization of semiprimes)](https://oeis.org/A069281) - `:a069281` - `create_sequence_a069281/1`
-   - [A074969 - Numbers with six distinct prime divisors](https://oeis.org/A074969) - `:a074969` - `create_sequence_a074969/1`
-   - [A076479 - a(n) = mu(rad(n)), where mu is the Moebius-function](https://oeis.org/A076479) - `:a076479` - `create_sequence_a076479/1`
-   - [A080197 - 13-smooth Numbers](https://oeis.org/A080197) - `:a080197` - `create_sequence_a03586/1`
-   - [A080681 - 17-smooth Numbers](https://oeis.org/A080681) - `:a080681` - `create_sequence_a03586/1`
-   - [A080682 - 29-smooth Numbers](https://oeis.org/A080682) - `:a080682` - `create_sequence_a03586/1`
-   - [A080683 - 23-smooth Numbers](https://oeis.org/A080683) - `:a080683` - `create_sequence_a03586/1`
-   - [A117805 - Start with 3. Square the previous term and subtract it.](https://oeis.org/A117805) - `:a117805` - `create_sequence_a117805/1`
-   - [A123321 - Products of 7 distinct primes](https://oeis.org/A123321) - `:a123321` - `create_sequence_a123321/1`
-   - [A123322 - Products of 8 distinct primes](https://oeis.org/A123322) - `:a123322` - `create_sequence_a123322/1`
-   - [A130897 - Numbers that are not exponentially squarefree.](https://oeis.org/A130897) - `:a130897` - `create_sequence_a130897/1`
-   - [A160889 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 4](https://oeis.org/A160889) - `:a160889` - `create_sequence_a160889/1`
-   - [A160891 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 5](https://oeis.org/A160891) - `:a160891` - `create_sequence_a160891/1`
-   - [A160893 - a(n) = Sum_{d|n} Möbius(n/d)*d^5/phi(n)](https://oeis.org/A160893) - `:a160893` - `create_sequence_a160893/1`
-   - [A160895 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 7](https://oeis.org/A160895) - `:a160895` - `create_sequence_a160895/1`
-   - [A160897 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 8](https://oeis.org/A160897) - `:a160897` - `create_sequence_a160897/1`
-   - [A160908 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 9](https://oeis.org/A160908) - `:a160908` - `create_sequence_a160908/1`
-   - [A160953 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 10](https://oeis.org/A160953) - `:a160953` - `create_sequence_a160953/1`
-   - [A160957 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 11](https://oeis.org/A160957) - `:a160957` - `create_sequence_a160957/1`
-   - [A160960 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 12](https://oeis.org/A160960) - `:a160960` - `create_sequence_a160960/1`
-   - [A162643 - Numbers such that their number of divisors is not a power of 2.](https://oeis.org/A162643) - `:a162643` - `create_sequence_a162643/1`
-   - [A165412 - Divisors of 2520.](https://oeis.org/A165412) - `:a165412` - `create_sequence_a165412/1`
-   - [A178858 - Divisors of 5040.](https://oeis.org/A178858) - `:a178858` - `create_sequence_a178858/1`
-   - [A178859 - Divisors of 7560.](https://oeis.org/A178859) - `:a178859` - `create_sequence_a178859/1`
-   - [A178860 - Divisors of 10080.](https://oeis.org/A178860) - `:a178860` - `create_sequence_a178860/1`
-   - [A178861 - Divisors of 15120.](https://oeis.org/A178861) - `:a178861` - `create_sequence_a178861/1`
-   - [A178862 - Divisors of 20160.](https://oeis.org/A178862) - `:a178862` - `create_sequence_a178862/1`
-   - [A178863 - Divisors of 25200.](https://oeis.org/A178863) - `:a178863` - `create_sequence_a178863/1`
-   - [A178864 - Divisors of 27720.](https://oeis.org/A178864) - `:a178864` - `create_sequence_a178864/1`
-   - [A178877 - Divisors of 1260.](https://oeis.org/A178877) - `:a178877` - `create_sequence_a178877/1`
-   - [A178878 - Divisors of 1680.](https://oeis.org/A178878) - `:a178878` - `create_sequence_a178878/1`
-   - [A209061 - Exponentially squarefree numbers](https://oeis.org/A209061) - `:a209061` - `create_sequence_a209061/1`
-   - [A211337 - Numbers n for which the number of divisors, tau(n), is congruent to 1 modulo 3](https://oeis.org/A211337) - `:a211337` - `create_sequence_a211337/1`
-   - [A211338 - Numbers n for which the number of divisors, tau(n), is congruent to 2 modulo 3](https://oeis.org/A211338) - `:a211338` - `create_sequence_a211338/1`
+  
+  ### Semiprimes and Prime factors
+  
+  These sequences are related to the semi-primes, prime factorization, and characteristics of prime factors.
+  
+  Prime factors with multiplicity:
+  
+   - `create_sequence_a037143/1` - A037143 - Numbers with at most 2 prime factors (counted with multiplicity).
+   - `create_sequence_a033942/1` - A033942 - At least 3 prime factors (counted with multiplicity).
 
 
+  Divisibility by a given number of primes:
+  
+   - `create_sequence_a000977/1` - A000977 - Numbers that are divisible by at least three different primes
+   - `create_sequence_a033987/1` - A033987 - Numbers that are divisible by at least 4 primes (counted with multiplicity)
+   - `create_sequence_a007774/1` - A007774 - Numbers that are divisible by exactly 2 different primes
+   - `create_sequence_a033992/1` - A033992 - Numbers that are divisible by exactly three different primes
+   - `create_sequence_a033993/1` - A033993 - Numbers that are divisible by exactly four different primes
+   - `create_sequence_a051270/1` - A051270 - Numbers that are divisible by exactly 5 different primes
+   - `create_sequence_a074969/1` - A074969 - Numbers with six distinct prime divisors
 
 
+  The semiprimes:
+  
+   - `create_sequence_a014612/1` - A014612 - Numbers that are the product of exactly three primes, including multiplicity.
+   - `create_sequence_a014613/1` - A014613 - Numbers that are products of 4 primes
+   - `create_sequence_a014614/1` - A014614 - Numbers that are products of 5 primes
+   - `create_sequence_a046306/1` - A046306 - Numbers that are divisible by exactly 6 primes with multiplicity.
+   - `create_sequence_a046308/1` - A046308 - Numbers that are divisible by exactly 7 primes counting multiplicity.
+   - `create_sequence_a046310/1` - A046310 - Numbers that are divisible by exactly 8 primes counting multiplicity
+   - `create_sequence_a046312/1` - A046312 - Numbers that are divisible by exactly 9 primes with multiplicity
+   - `create_sequence_a046314/1` - A046314 - Numbers that are divisible by exactly 10 primes with multiplicity
+   - `create_sequence_a069272/1` - A069272 - 11-almost primes (generalization of semiprimes)
+   - `create_sequence_a069273/1` - A069273 - 12-almost primes (generalization of semiprimes)
+   - `create_sequence_a069274/1` - A069274 - 13-almost primes (generalization of semiprimes)
+   - `create_sequence_a069275/1` - A069275 - 14-almost primes (generalization of semiprimes)
+   - `create_sequence_a069276/1` - A069276 - 15-almost primes (generalization of semiprimes)
+   - `create_sequence_a069277/1` - A069277 - 16-almost primes (generalization of semiprimes)
+   - `create_sequence_a069278/1` - A069278 - 17-almost primes (generalization of semiprimes)
+   - `create_sequence_a069279/1` - A069279 - Products of exactly 18 primes (generalization of semiprimes)
+   - `create_sequence_a069280/1` - A069280 - 19-almost primes (generalization of semiprimes)
+   - `create_sequence_a069281/1` - A069281 - 20-almost primes (generalization of semiprimes)
+  
+  
+  The semiprimes with distinct prime factors.
+  
+   - `create_sequence_a006881/1` - A006881 - Squarefree semiprimes: Numbers that are the product of two distinct primes
+   - `create_sequence_a007304/1` - A007304 - Sphenic numbers: products of 3 distinct primes
+   - `create_sequence_a046386/1` - A046386 - Products of four distinct primes
+   - `create_sequence_a046387/1` - A046387 - Products of 5 distinct primes
+   - `create_sequence_a067885/1` - A067885 - Product of 6 distinct primes
+   - `create_sequence_a123321/1` - A123321 - Products of 7 distinct primes
+   - `create_sequence_a123322/1` - A123322 - Products of 8 distinct primes
+  
+  
+  Odd semiprimes with distinct factors.
+  
+   - `create_sequence_a046321/1` - A046321 - Odd numbers divisible by exactly 8 primes (counted with multiplicity)
+
+
+  Counting the number of factors:
+
+   - `create_sequence_a007018/1` - A007018 - a(n) = a(n-1)^2 + a(n-1), a(0)=1
+   - `create_sequence_a046660/1` - A046660 - Excess of n = Ω(n) - ω(n)
+   - `create_sequence_a076479/1` - A076479 - a(n) = mu(rad(n)), where mu is the Moebius-function
+
+  
+  ### Non-prime Divisors
+  
+  Divisors of specific values:
+
+   - `create_sequence_a018253/1` - A018253 - Divisors of 24.
+   - `create_sequence_a018256/1` - A018256 - Divisors of 36.
+   - `create_sequence_a018261/1` - A018261 - Divisors of 48.
+   - `create_sequence_a018266/1` - A018266 - Divisors of 60.
+   - `create_sequence_a018293/1` - A018293 - Divisors of 120.
+   - `create_sequence_a018321/1` - A018321 - Divisors of 180.
+   - `create_sequence_a018350/1` - A018350 - Divisors of 240.
+   - `create_sequence_a018412/1` - A018412 - Divisors of 360.
+   - `create_sequence_a018609/1` - A018609 - Divisors of 720.
+   - `create_sequence_a018676/1` - A018676 - Divisors of 840.
+   - `create_sequence_a178877/1` - A178877 - Divisors of 1260.
+   - `create_sequence_a178878/1` - A178878 - Divisors of 1680.
+   - `create_sequence_a165412/1` - A165412 - Divisors of 2520.
+   - `create_sequence_a178858/1` - A178858 - Divisors of 5040.
+   - `create_sequence_a178859/1` - A178859 - Divisors of 7560.
+   - `create_sequence_a178860/1` - A178860 - Divisors of 10080.
+   - `create_sequence_a178861/1` - A178861 - Divisors of 15120.
+   - `create_sequence_a178862/1` - A178862 - Divisors of 20160.
+   - `create_sequence_a178863/1` - A178863 - Divisors of 25200.
+   - `create_sequence_a178864/1` - A178864 - Divisors of 27720.
+
+
+  Counting divisors:
+
+   - `create_sequence_a030513/1` - A030513 - Numbers with 4 divisors
+   - `create_sequence_a030515/1` - A030515 - Numbers with exactly 6 divisors
+   - `create_sequence_a033273/1` - A033273 - Number of nonprime divisors of n
+
+
+  Related to `tau(n)`:
+
+   - `create_sequence_a211337/1` - A211337 - Numbers n for which the number of divisors, tau(n), is congruent to 1 modulo 3
+   - `create_sequence_a211338/1` - A211338 - Numbers n for which the number of divisors, tau(n), is congruent to 2 modulo 3
+   - `create_sequence_a162643/1` - A162643 - Numbers such that their number of divisors is not a power of 2.
+   - `create_sequence_a059269/1` - A059269 - Numbers n for which tau(n) is divisible by 3.
+
+
+  Divisors of the form `4k+j`:
+
+   - `create_sequence_a001826/1` - A001826 - Number of divisors of n of form 4k+1
+   - `create_sequence_a001842/1` - A001842 - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3))
+
+  
+  Properties of divisors:
+
+   - `create_sequence_a001414/1` - A001414 - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).
+   - `create_sequence_a036537/1` - A036537 - Numbers whose number of divisors is a power of 2.
+   - `create_sequence_a038109/1` - A038109 - Divisible exactly by the square of a prime.
+   - `create_sequence_a048272/1` - A048272 - Number of odd divisors of n minus number of even divisors of n
+   - `create_sequence_a002182/1` - A002182 - Highly composite numbers: numbers with record value
+   - `create_sequence_a046758/1` - A046758 - Equidigital numbers.
+   - `create_sequence_a046760/1` - A046760 - Wasteful numbers.
+
+  
+  ### Smooth Numbers
+  
+  The smooth numbers are sequences of integers such that all prime factors of `n` are less than a specific value `b`, often shortened
+  to `b-smooth` numbers:
+
+   - `create_sequence_a003586/1` - A003586 - 3-smooth Numbers
+   - `create_sequence_a051037/1` - A051037 - 5-smooth Numbers
+   - `create_sequence_a002473/1` - A002473 - 7-smooth Numbers
+   - `create_sequence_a051038/1` - A051038 - 11-smooth Numbers
+   - `create_sequence_a080197/1` - A080197 - 13-smooth Numbers
+   - `create_sequence_a080681/1` - A080681 - 17-smooth Numbers
+   - `create_sequence_a080683/1` - A080683 - 23-smooth Numbers
+   - `create_sequence_a080682/1` - A080682 - 29-smooth Numbers
+
+
+  ### Squares and Square-free Numbers
+  
+  Sequences related to squaring numbers, lack of square factors, or properties of square factors:
+
+   - `create_sequence_a000037/1` - A000037 - Numbers that are not squares
+   - `create_sequence_a013929/1` - A013929 - Numbers that are not squarefree.
+   - `create_sequence_a007947/1` - A007947 - Largest squarefree number dividing n
+   - `create_sequence_a008966/1` - A008966 - 1 if n is squarefree, else 0.
+   - `create_sequence_a056911/1` - A056911 - Odd squarefree numbers.
+   - `create_sequence_a039956/1` - A039956 - Even squarefree numbers.
+   - `create_sequence_a067259/1` - A067259 - Cubefree numbers which are not squarefree
+   - `create_sequence_a130897/1` - A130897 - Numbers that are not exponentially squarefree.
+   - `create_sequence_a209061/1` - A209061 - Exponentially squarefree numbers
+   - `create_sequence_a117805/1` - A117805 - Start with 3. Square the previous term and subtract it.
+
+  
+  ### Cubes and Cube-free numbers
+  
+  Sequences related to cubed numbers, lack of cube factors, or properties of cube factors:
+
+   - `create_sequence_a004709/1` - A004709 - Cubefree numbers: numbers that are not divisible by any cube > 1
+   - `create_sequence_a046099/1` - A046099 - Numbers that are not cubefree. Numbers divisible by a cube greater than 1. 
+   - `create_sequence_a007412/1` - A007412 - The noncubes: n + [ (n + [ n^{1/3} ])^{1/3} ]
+   - `create_sequence_a067259/1` - A067259 - Cubefree numbers which are not squarefree
+
+
+  ### Co-primes
+  
+  These sequences are related to co-primes of numbers, or relatively prime numbers.
+  
+  The Jordan totients:
+
+   - `create_sequence_a007434/1` - A007434 - Jordan function J_2(n)
+   - `create_sequence_a059376/1` - A059376 - Jordan function J_3(n)
+   - `create_sequence_a059377/1` - A059377 - Jordan function J_4(n)
+   - `create_sequence_a059378/1` - A059378 - Jordan function J_5(n)
+   - `create_sequence_a069091/1` - A069091 - Jordan function J_6(n)
+   - `create_sequence_a069092/1` - A069092 - Jordan function J_7(n)
+   - `create_sequence_a069093/1` - A069093 - Jordan function J_8(n)
+   - `create_sequence_a069094/1` - A069094 - Jordan function J_9(n)
+   - `create_sequence_a069095/1` - A069095 - Jordan function J_10(n)
+   - `create_sequence_a065958/1` - A065958 - a(n) = n^2*Product_{distinct primes p dividing n} (1+1/p^2)
+   - `create_sequence_a065959/1` - A065959 - a(n) = n^3*Product_{distinct primes p dividing n} (1+1/p^3)
+   - `create_sequence_a065960/1` - A065960 - a(n) = n^4*Product_{distinct primes p dividing n} (1+1/p^4)
+
+
+  Classical Moebius function:
+
+   - `create_sequence_a160889/1` - A160889 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 4
+   - `create_sequence_a160891/1` - A160891 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 5
+   - `create_sequence_a160893/1` - A160893 - a(n) = Sum_{d|n} Möbius(n/d)*d^5/phi(n)
+   - `create_sequence_a160895/1` - A160895 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 7
+   - `create_sequence_a160897/1` - A160897 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 8
+   - `create_sequence_a160908/1` - A160908 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 9
+   - `create_sequence_a160953/1` - A160953 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 10
+   - `create_sequence_a160957/1` - A160957 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 11
+   - `create_sequence_a160960/1` - A160960 - a(n) = Sum_{d|n} Moebius(n/d)*d^(b-1)/phi(n) for b = 12
+
+
+  ### Powers of Factors
+  
+  Sequences related to powers of divisors or prime factors:
+
+   - `create_sequence_a001597/1` - A001597 - Perfect Powers
+   - `create_sequence_a001694/1` - A001694 - Powerful Numbers
+   - `create_sequence_a005361/1` - A005361 - Product of Expoenents of prime factors of N
+   - `create_sequence_a005934/1` - A005934 - Highly powerful numbers: numbers with record value
+   - `create_sequence_a046759/1` - A046759 - Economical numbers: write n as a product of primes raised to powers, let D(n) = number of digits in product, l(n) = number of digits in n; sequence gives n such that D(n) < l(n).
+   - `create_sequence_a052486/1` - A052486 - Achilles numbers - powerful but imperfect
 
 
   """
@@ -886,6 +968,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a000037/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000037(_idx, last) do
     Math.next_number(
@@ -927,6 +1010,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a000977/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a000977(_idx, last) do
     Math.next_number(
@@ -968,6 +1052,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001414/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001414(idx) do
     (Math.prime_factors(idx) -- [1])
@@ -1002,6 +1087,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a001597/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001597(_idx, last) do
     Math.next_number(&Predicates.is_perfect_power?/1, last)
@@ -1034,6 +1120,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a001694/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001694(_idx, last) do
     Math.next_number(&Predicates.is_powerful_number?/1, last)
@@ -1121,6 +1208,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a002473/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a002473(_idx, last) do
     Math.next_number(&Predicates.is_7_smooth?/1, last)
@@ -1152,6 +1240,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a003586/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a003586(_idx, last) do
     Math.next_number(&Predicates.is_3_smooth?/1, last)
@@ -1185,6 +1274,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a004709/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a004709(_idx, last) do
     Math.next_number(&Predicates.is_cubefree?/1, last)
@@ -1217,6 +1307,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a005361/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a005361(idx) do
     Math.product_of_prime_factor_exponents(idx)
@@ -1314,6 +1405,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a006881/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a006881(_idx, last) do
     Math.next_number(
@@ -1353,6 +1445,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a007018/2)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007018(idx, last) do
     if idx == 0 do
@@ -1390,6 +1483,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a007304/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a007304(_idx, last) do
     Math.next_number(&Predicates.is_sphenic_number?/1, last)
@@ -1423,6 +1517,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a007412/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a007412(_idx, last) do
     Math.next_number(
@@ -1464,6 +1559,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a007434/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a007434(idx) do
     Math.jordan_totient(idx, 2)
@@ -1496,6 +1592,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a007774/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a007774(_idx, last) do
     Math.next_number(
@@ -1535,6 +1632,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a007947/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a007947(idx) do
     Math.radical(idx)
@@ -1568,6 +1666,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a008966/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a008966(idx) do
     if Predicates.is_squarefree?(idx) do
@@ -1605,6 +1704,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a013929/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013929(_idx, last) do
     Math.next_number(
@@ -1643,6 +1743,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a014612/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a014612(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 3 end, last)
@@ -1675,6 +1776,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a014613/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a014613(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 4 end, last)
@@ -1707,6 +1809,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a014614/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a014614(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 5 end, last)
@@ -1740,6 +1843,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001826/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001826(idx) do
     Math.divisors_of_form_mx_plus_b(4, 1, idx) |> length()
@@ -1773,6 +1877,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a001842/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001842(idx) do
     if idx == 0 do
@@ -2090,6 +2195,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a030513/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a030513(_idx, last) do
     Math.next_number(fn candidate -> Math.factors(candidate) |> length() == 4 end, last)
@@ -2121,6 +2227,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a030515/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a030515(_idx, last) do
     Math.next_number(fn candidate -> Math.factors(candidate) |> length() == 6 end, last)
@@ -2152,6 +2259,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a033273/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a033273(idx) do
     length(Math.factors(idx)) - Math.omega(idx)
@@ -2184,6 +2292,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a033942/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a033942(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) >= 3 end, last)
@@ -2215,6 +2324,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a033987/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a033987(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) >= 4 end, last)
@@ -2246,6 +2356,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a033992/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a033992(_idx, last) do
     Math.next_number(
@@ -2286,6 +2397,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a033993/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a033993(_idx, last) do
     Math.next_number(
@@ -2326,6 +2438,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a036537/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a036537(_idx, last) do
     Math.next_number(
@@ -2364,6 +2477,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a037143/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a037143(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) <= 2 end, last)
@@ -2396,6 +2510,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a038109/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a038109(_idx, last) do
     Math.next_number(
@@ -2435,6 +2550,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a039956/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a039956(_idx, last) do
     Math.next_number(
@@ -2474,6 +2590,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046099/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046099(_idx, last) do
     Math.next_number(
@@ -2510,6 +2627,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046306/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046306(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 6 end, last)
@@ -2542,6 +2660,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046308/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046308(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 7 end, last)
@@ -2573,6 +2692,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046310/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 250
   def seq_a046310(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 8 end, last)
@@ -2604,6 +2724,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046312/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046312(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 9 end, last)
@@ -2635,6 +2756,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046314/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 1000
   def seq_a046314(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 10 end, last)
@@ -2667,6 +2789,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046321/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 6500
   def seq_a046321(_idx, last) do
     Math.next_number(
@@ -2705,6 +2828,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046386/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046386(_idx, last) do
     Math.next_number(
@@ -2743,6 +2867,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046387/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046387(_idx, last) do
     Math.next_number(
@@ -2781,6 +2906,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046660/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046660(idx) do
     Math.bigomega(idx) - Math.omega(idx)
@@ -2812,6 +2938,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a048272/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a048272(idx) do
     groups =
@@ -2849,6 +2976,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051037/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a051037(_idx, last) do
     Math.next_number(&Predicates.is_5_smooth?/1, last)
@@ -2880,6 +3008,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a051038/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a051038(_idx, last) do
     Math.next_number(&Predicates.is_11_smooth?/1, last)
@@ -2911,6 +3040,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a051270/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 2300
   def seq_a051270(_idx, last) do
     Math.next_number(
@@ -2951,6 +3081,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a052486/2)
   end
 
+  @doc false
   def seq_a052486(_idx, last) do
     Math.next_number(&Predicates.is_achilles_number?/1, last)
   end
@@ -2983,6 +3114,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a056911/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a056911(_idx, last) do
     Math.next_number(
@@ -3021,6 +3153,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a059269/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a059269(_idx, last) do
     Math.next_number(
@@ -3059,6 +3192,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a059376/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a059376(idx) do
     Math.jordan_totient(idx, 3)
@@ -3092,6 +3226,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a059377/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a059377(idx) do
     Math.jordan_totient(idx, 4)
@@ -3125,6 +3260,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a059378/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a059378(idx) do
     Math.jordan_totient(idx, 5)
@@ -3156,6 +3292,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a065958/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a065958(idx) do
     div(Math.jordan_totient(idx, 4), Math.jordan_totient(idx, 2))
@@ -3189,6 +3326,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a065959/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a065959(idx) do
     div(Math.jordan_totient(idx, 6), Math.jordan_totient(idx, 3))
@@ -3220,6 +3358,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a065960/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a065960(idx) do
     div(Math.jordan_totient(idx, 8), Math.jordan_totient(idx, 4))
@@ -3251,6 +3390,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a067259/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a067259(_idx, last) do
     Math.next_number(
@@ -3289,6 +3429,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a067885/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 30_000
   def seq_a067885(_idx, last) do
     Math.next_number(
@@ -3326,6 +3467,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069091/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069091(idx) do
     Math.jordan_totient(idx, 6)
@@ -3357,6 +3499,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069092/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069092(idx) do
     Math.jordan_totient(idx, 7)
@@ -3388,6 +3531,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069093/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069093(idx) do
     Math.jordan_totient(idx, 8)
@@ -3419,6 +3563,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069094/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069094(idx) do
     Math.jordan_totient(idx, 9)
@@ -3451,6 +3596,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069095/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069095(idx) do
     Math.jordan_totient(idx, 10)
@@ -3482,6 +3628,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069272/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 2000
   def seq_a069272(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 11 end, last)
@@ -3513,6 +3660,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069273/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069273(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 12 end, last)
@@ -3544,6 +3692,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069274/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 8000
   def seq_a069274(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 13 end, last)
@@ -3575,6 +3724,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069275/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 16_000
   def seq_a069275(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 14 end, last)
@@ -3606,6 +3756,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069276/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 32_000
   def seq_a069276(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 15 end, last)
@@ -3637,6 +3788,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069277/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 65_000
   def seq_a069277(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 16 end, last)
@@ -3669,6 +3821,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069278/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 131_000
   def seq_a069278(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 17 end, last)
@@ -3700,6 +3853,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069279/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 262_100
   def seq_a069279(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 18 end, last)
@@ -3731,6 +3885,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069280/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 524_000
   def seq_a069280(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 19 end, last)
@@ -3762,6 +3917,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a069281/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a069281(_idx, last) do
     Math.next_number(fn candidate -> Math.bigomega(candidate) == 20 end, last)
@@ -3793,6 +3949,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a074969/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 30_000
   def seq_a074969(_idx, last) do
     Math.next_number(
@@ -3831,6 +3988,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a076479/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a076479(idx) do
     Math.mobius_function(Math.radical(idx))
@@ -3862,6 +4020,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080197/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a080197(_idx, last) do
     Math.next_number(&Predicates.is_13_smooth?/1, last)
@@ -3893,6 +4052,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080681/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a080681(_idx, last) do
     Math.next_number(&Predicates.is_17_smooth?/1, last)
@@ -3924,6 +4084,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080682/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a080682(_idx, last) do
     Math.next_number(&Predicates.is_19_smooth?/1, last)
@@ -3955,6 +4116,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Chunky.Sequence.OEIS.Factors.seq_a080683/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a080683(_idx, last) do
     Math.next_number(&Predicates.is_23_smooth?/1, last)
@@ -3987,6 +4149,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a117805/2)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a117805(idx, last) do
     if idx == 0 do
@@ -4022,6 +4185,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a123321/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 500_000
   def seq_a123321(_idx, last) do
     Math.next_number(
@@ -4060,6 +4224,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a123322/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 9_699_600
   def seq_a123322(_idx, last) do
     Math.next_number(
@@ -4098,6 +4263,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a130897/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a130897(_idx, last) do
     Math.next_number(
@@ -4141,6 +4307,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160889/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160889(idx) do
     div(Math.jordan_totient(idx, 3), Math.jordan_totient(idx, 1))
@@ -4173,6 +4340,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160891/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160891(idx) do
     div(Math.jordan_totient(idx, 4), Math.jordan_totient(idx, 1))
@@ -4205,6 +4373,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160893/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160893(idx) do
     div(Math.jordan_totient(idx, 5), Math.jordan_totient(idx, 1))
@@ -4238,6 +4407,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160895/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160895(idx) do
     div(Math.jordan_totient(idx, 6), Math.jordan_totient(idx, 1))
@@ -4269,6 +4439,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160897/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160897(idx) do
     div(Math.jordan_totient(idx, 7), Math.jordan_totient(idx, 1))
@@ -4300,6 +4471,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160908/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160908(idx) do
     div(Math.jordan_totient(idx, 8), Math.jordan_totient(idx, 1))
@@ -4331,6 +4503,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160953/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160953(idx) do
     div(Math.jordan_totient(idx, 9), Math.jordan_totient(idx, 1))
@@ -4362,6 +4535,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160957/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160957(idx) do
     div(Math.jordan_totient(idx, 10), Math.jordan_totient(idx, 1))
@@ -4393,6 +4567,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a160960/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160960(idx) do
     div(Math.jordan_totient(idx, 11), Math.jordan_totient(idx, 1))
@@ -4424,6 +4599,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a162643/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a162643(_idx, last) do
     Math.next_number(
@@ -4743,6 +4919,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a209061/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a209061(_idx, last) do
     Math.next_number(
@@ -4787,6 +4964,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a211337/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a211337(_idx, last) do
     Math.next_number(fn candidate -> rem(Math.tau(candidate), 3) == 1 end, last)
@@ -4819,6 +4997,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a211338/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a211338(_idx, last) do
     Math.next_number(fn candidate -> rem(Math.tau(candidate), 3) == 2 end, last)
@@ -4853,6 +5032,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046759/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046759(_idx, last) do
     Math.next_number(&Predicates.is_economical_number?/1, last)
@@ -4886,6 +5066,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046760/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a046760(_idx, last) do
     Math.next_number(&Predicates.is_wasteful_number?/1, last)
@@ -4919,6 +5100,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Factors.seq_a046758/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a046758(_idx, last) do
     Math.next_number(&Predicates.is_equidigital_number?/1, last)

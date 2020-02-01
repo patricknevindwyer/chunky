@@ -61,13 +61,15 @@ OEIS.Util.crawl_keywords(["core", "hard"])
 OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> "#{seq_id |> String.downcase()}" |> String.to_atom() end) |> Enum.sort() |> IO.inspect(limit: :infinity)
 ```
 
- - todos for functions
+## Templates
+
+ - TODOs for functions
   - TOF
   - test
   - inline
   - CHANGELOG
 
- - module refactoring todos
+ - module refactoring TODOs
   - create module
   - create test file
   - move funcs
@@ -77,7 +79,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - link from Math
   - link from library.md
  
- - todo for new predicate
+ - TODO for new predicate
   - predicate function
   - predicate TOF
   - predicate doc (inline, OEIS ref, see also, examples)
@@ -88,8 +90,66 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ## TODO
  
    
-### release 0.12.0 - documentation and refactoring
+### release 0.12.* - documentation and refactoring
    
+
+ - update stub generator to include `@doc false` for sequence methods
+ - update stub generator to exclude "Formerly" section if it's empty
+ 
+ - Extended Summation (when: of:) (see notes from MCO to BWI flight)
+ 
+ - sequence genserver/client
+ 
+ - Summation with sequences
+
+ - geometry module
+  - triangles
+   - is_triangle guard
+   - triangles from latest Numberphile
+   - write up on building/testing/finding numberphile triangles
+ 
+### Articles
+
+ - Project Euler Template
+  - static site generator
+   - jekyll
+  - asciidoc
+  - chunky version
+  - OEIS refs
+  - chunky refs
+  - notes/callouts
+  
+  
+
+ - Project Euler 001
+ 
+ - Project Euler 002
+ 
+ - Project Euler 003
+ 
+ - Project Euler 004
+ 
+ - Project Euler 005
+ 
+ - Project Euler 006
+ 
+ - Project Euler 007
+ 
+ - Project Euler 008
+ 
+ - Project Euler 009
+ 
+ - Project Euler 010
+   
+### Future   
+
+  - sequence modules documentation
+   - [ ] factors
+    - [ ] OEIS backref to Math module functions
+   - [ ] multiples
+    - [ ] OEIS backref to Math module functions
+   - [ ] repr
+    - [ ] OEIS backref to Math module functions
    
   
   - belphegor numbers - http://mathworld.wolfram.com/BelphegorNumber.html

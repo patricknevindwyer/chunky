@@ -7,26 +7,35 @@ defmodule Chunky.Sequence.OEIS.Sigma do
 
   ## Available Sequences
 
-   - [A001158 - Sum of cubes of divisors of N, simga-3(n)](https://oeis.org/A001158) - `:a001158` - `create_sequence_a001158/1`
-   - [A001159 - sum of 4th powers of divisors of n, simga-4(n)](https://oeis.org/A001159) - `a001159` - `create_sequence_a001159/1`
-   - [A001160 - sum of 5th powers of divisors of n, simga-5(n)](https://oeis.org/A001160) - `a001160` - `create_sequence_a001160/1`
-   - [A002093 - Highly Abundant Numbers](https://oeis.org/A002093) - `a002093` - `create_sequence_a002093/1`
-   - [A003601 - Arithmetic Numbers](https://oeis.org/A003601) - `a003601` - `create_sequence_a003601/1`
-   - [A013954 - sum of 6th powers of divisors of n, simga-6(n)](https://oeis.org/A013954) - `a013954` - `create_sequence_a013954/1`
-   - [A013955 - sum of 7th powers of divisors of n, simga-7(n)](https://oeis.org/A013955) - `a013955` - `create_sequence_a013955/1`
-   - [A013956 - sum of 8th powers of divisors of n, simga-8(n)](https://oeis.org/A013956) - `a013956` - `create_sequence_a013956/1`
-   - [A013957 - sum of 9th powers of divisors of n, simga-9(n)](https://oeis.org/A013957) - `a013957` - `create_sequence_a013957/1`
-   - [A013958 - sum of 10th powers of divisors of n, simga-10(n)](https://oeis.org/A013958) - `a013958` - `create_sequence_a013958/1`
-   - [A013959 - sum of 11th powers of divisors of n, simga-11(n)](https://oeis.org/A013959) - `a013959` - `create_sequence_a013959/1`
-   - [A013960 - sum of 12th powers of divisors of n, simga-12(n)](https://oeis.org/A013960) - `a013960` - `create_sequence_a013960/1`
-   - [A013961 - sum of 13th powers of divisors of n, simga-13(n)](https://oeis.org/A013961) - `a013961` - `create_sequence_a013961/1`
-   - [A013962 - sum of 14th powers of divisors of n, simga-14(n)](https://oeis.org/A013962) - `a013962` - `create_sequence_a013962/1`
-   - [A013963 - sum of 15th powers of divisors of n, simga-15(n)](https://oeis.org/A013963) - `a013963` - `create_sequence_a013963/1`
-   - [A013964 - sum of 16th powers of divisors of n, simga-16(n)](https://oeis.org/A013964) - `a013964` - `create_sequence_a013964/1`
-   - [A013965 - sum of 17th powers of divisors of n, simga-17(n)](https://oeis.org/A013965) - `a013965` - `create_sequence_a013965/1`
-   - [A013966 - sum of 18th powers of divisors of n, simga-18(n)](https://oeis.org/A013966) - `a013966` - `create_sequence_a013966/1`
-   - [A013967 - sum of 19th powers of divisors of n, simga-19(n)](https://oeis.org/A013967) - `a013967` - `create_sequence_a013967/1`
-   - [A013968 - sum of 20th powers of divisors of n, simga-20(n)](https://oeis.org/A013968) - `a013968` - `create_sequence_a013968/1`
+  ### Sigma_M of integers
+  
+  Sequences of `sigma_M(n)` of integers:
+  
+   - `create_sequence_a001158/1` - A001158 - Sum of cubes of divisors of N, simga-3(n)
+   - `create_sequence_a001159/1` - A001159 - sum of 4th powers of divisors of n, simga-4(n)
+   - `create_sequence_a001160/1` - A001160 - sum of 5th powers of divisors of n, simga-5(n)
+   - `create_sequence_a013954/1` - A013954 - sum of 6th powers of divisors of n, simga-6(n)
+   - `create_sequence_a013955/1` - A013955 - sum of 7th powers of divisors of n, simga-7(n)
+   - `create_sequence_a013956/1` - A013956 - sum of 8th powers of divisors of n, simga-8(n)
+   - `create_sequence_a013957/1` - A013957 - sum of 9th powers of divisors of n, simga-9(n)
+   - `create_sequence_a013958/1` - A013958 - sum of 10th powers of divisors of n, simga-10(n)
+   - `create_sequence_a013959/1` - A013959 - sum of 11th powers of divisors of n, simga-11(n)
+   - `create_sequence_a013960/1` - A013960 - sum of 12th powers of divisors of n, simga-12(n)
+   - `create_sequence_a013961/1` - A013961 - sum of 13th powers of divisors of n, simga-13(n)
+   - `create_sequence_a013962/1` - A013962 - sum of 14th powers of divisors of n, simga-14(n)
+   - `create_sequence_a013963/1` - A013963 - sum of 15th powers of divisors of n, simga-15(n)
+   - `create_sequence_a013964/1` - A013964 - sum of 16th powers of divisors of n, simga-16(n)
+   - `create_sequence_a013965/1` - A013965 - sum of 17th powers of divisors of n, simga-17(n)
+   - `create_sequence_a013966/1` - A013966 - sum of 18th powers of divisors of n, simga-18(n)
+   - `create_sequence_a013967/1` - A013967 - sum of 19th powers of divisors of n, simga-19(n)
+   - `create_sequence_a013968/1` - A013968 - sum of 20th powers of divisors of n, simga-20(n)
+
+
+  Variations on sums of divisors:
+  
+   - `create_sequence_a002093/1` - A002093 - Highly Abundant Numbers
+   - `create_sequence_a003601/1` - A003601 - Arithmetic Numbers
+
 
   """
   import Chunky.Sequence, only: [sequence_for_function: 1]
@@ -60,6 +69,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a001158/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001158(idx) do
     Math.sigma(idx, 3)
@@ -92,6 +102,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a001159/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001159(idx) do
     Math.sigma(idx, 4)
@@ -124,6 +135,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a001160/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001160(idx) do
     Math.sigma(idx, 5)
@@ -165,6 +177,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     }
   end
 
+  @doc false
   def seq_a002093(:init, data, _value) do
     %{
       data: data,
@@ -172,6 +185,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     }
   end
 
+  @doc false
   def seq_a002093(:next, data, value) do
     # find the next number after value that has a sigma greater than sigma max
     s_m = data.sigma_max
@@ -222,6 +236,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a003601/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a003601(_idx, last) do
     next_seq_a003601(last)
@@ -261,6 +276,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013954/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013954(idx) do
     Math.sigma(idx, 6)
@@ -292,6 +308,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013955/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013955(idx) do
     Math.sigma(idx, 7)
@@ -323,6 +340,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013956/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013956(idx) do
     Math.sigma(idx, 8)
@@ -354,6 +372,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013957/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013957(idx) do
     Math.sigma(idx, 9)
@@ -385,6 +404,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013958/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013958(idx) do
     Math.sigma(idx, 10)
@@ -416,6 +436,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013959/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013959(idx) do
     Math.sigma(idx, 11)
@@ -447,6 +468,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013960/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013960(idx) do
     Math.sigma(idx, 12)
@@ -478,6 +500,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013961/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013961(idx) do
     Math.sigma(idx, 13)
@@ -509,6 +532,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013962/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013962(idx) do
     Math.sigma(idx, 14)
@@ -540,6 +564,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013963/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013963(idx) do
     Math.sigma(idx, 15)
@@ -571,6 +596,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013964/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013964(idx) do
     Math.sigma(idx, 16)
@@ -602,6 +628,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013965/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013965(idx) do
     Math.sigma(idx, 17)
@@ -633,6 +660,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013966/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013966(idx) do
     Math.sigma(idx, 18)
@@ -664,6 +692,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013967/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013967(idx) do
     Math.sigma(idx, 19)
@@ -695,6 +724,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
     sequence_for_function(&Chunky.Sequence.OEIS.Sigma.seq_a013968/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a013968(idx) do
     Math.sigma(idx, 20)

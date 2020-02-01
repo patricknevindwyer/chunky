@@ -5,215 +5,304 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
   ## Available Sequences
 
+  ### Omissions and Deletions of digits
+  
+   - `create_sequence_a004176/1` - A004176 - Omit 1's from n.
+   - `create_sequence_a004177/1` - A004177 - Omit 2's from n.
+   - `create_sequence_a004178/1` - A004178 - Omit 3's from n.
+   - `create_sequence_a004179/1` - A004179 - Omit 4's from n.
+   - `create_sequence_a004180/1` - A004180 - Omit 5's from n.
+   - `create_sequence_a004181/1` - A004181 - Omit 6's from n.
+   - `create_sequence_a004182/1` - A004182 - Omit 7's from n.
+   - `create_sequence_a004183/1` - A004183 - Omit 8's from n.
+   - `create_sequence_a004184/1` - A004184 - Omit 9's from n.
+   - `create_sequence_a004719/1` - A004719 - Delete all 0's from n.
+   - `create_sequence_a004720/1` - A004720 - Delete all digits '1' from the sequence of nonnegative integers.
+   - `create_sequence_a004721/1` - A004721 - Delete all 2's from the sequence of nonnegative integers.
+   - `create_sequence_a004722/1` - A004722 - Delete all digits 3 from the terms of the sequence of nonnegative integers.
+   - `create_sequence_a004723/1` - A004723 - Delete all 4's from the sequence of nonnegative integers.
+   - `create_sequence_a004724/1` - A004724 - Delete all 5's from the sequence of nonnegative integers.
+   - `create_sequence_a004725/1` - A004725 - Delete all 6's from the sequence of nonnegative integers.
+   - `create_sequence_a004726/1` - A004726 - Delete all 7's from the sequence of nonnegative integers.
+   - `create_sequence_a004727/1` - A004727 - Delete all 8's from the sequence of nonnegative integers.
+   - `create_sequence_a004728/1` - A004728 - Delete all 9's from the sequence of nonnegative integers.
+
+  ### Base 10 Representations
+
+  These representations are in Base 10. See below for representations in other bases.
+  
+  Numbers with or without specific decimal digits:
+  
+   - `create_sequence_a011531/1` - A011531 - Numbers that contain a digit 1 in their decimal representation.
+   - `create_sequence_a011532/1` - A011532 - Numbers that contain a 2.
+   - `create_sequence_a011533/1` - A011533 - Numbers that contain a 3.
+   - `create_sequence_a011534/1` - A011534 - Numbers that contain a 4.
+   - `create_sequence_a011535/1` - A011535 - Numbers that contain a 5.
+   - `create_sequence_a011536/1` - A011536 - Numbers that contain a 6.
+   - `create_sequence_a011537/1` - A011537 - Numbers that contain at least one 7.
+   - `create_sequence_a011538/1` - A011538 - Numbers that contain an 8.
+   - `create_sequence_a011539/1` - A011539 - "9ish numbers": decimal representation contains at least one nine.
+   - `create_sequence_a011540/1` - A011540 - Numbers that contain a digit 0.
+   - `create_sequence_a014263/1` - A014263 - Numbers that contain even digits only.
+   - `create_sequence_a052382/1` - A052382 - Numbers without 0 as a digit, a.k.a. zeroless numbers.
+   - `create_sequence_a052383/1` - A052383 - Numbers without 1 as a digit.
+   - `create_sequence_a052404/1` - A052404 - Numbers without 2 as a digit.
+   - `create_sequence_a052405/1` - A052405 - Numbers without 3 as a digit.
+   - `create_sequence_a052406/1` - A052406 - Numbers without 4 as a digit.
+   - `create_sequence_a052413/1` - A052413 - Numbers without 5 as a digit.
+   - `create_sequence_a052414/1` - A052414 - Numbers without 6 as a digit.
+   - `create_sequence_a052419/1` - A052419 - Numbers without 7 as a digit.
+   - `create_sequence_a052421/1` - A052421 - Numbers without 8 as a digit.
+   - `create_sequence_a051003/1` - A051003 - Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.
+   - `create_sequence_a052040/1` - A052040 - Numbers n such that n^2 lacks the digit zero in its decimal expansion.
+   - `create_sequence_a067251/1` - A067251 - Numbers with no trailing zeros in decimal representation.
+   - `create_sequence_a097256/1` - A097256 - Numbers whose set of base 10 digits is {0,9}.
+   - `create_sequence_a121022/1` - A121022 - Even numbers containing a 2 in their decimal representation.
+
+  
+  Digit counts, summations, or products in base 10:
+  
+   - `create_sequence_a001101/1` - A001101 - Moran numbers: n such that (n / sum of digits of n) is prime.
+   - `create_sequence_a005349/1` - A005349 - Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.
+   - `create_sequence_a007602/1` - A007602 - Numbers that are divisible by the product of their digits.
+   - `create_sequence_a007953/1` - A007953 - Digital sum (i.e., sum of digits) of n; also called digsum(n).
+   - `create_sequence_a007954/1` - A007954 - Product of decimal digits of n.
+   - `create_sequence_a055640/1` - A055640 - Number of nonzero digits in decimal expansion of n.
+   - `create_sequence_a055641/1` - A055641 - Number of zero digits in n.
+   - `create_sequence_a055642/1` - A055642 - Number of digits in decimal expansion of n.
+   - `create_sequence_a102669/1` - A102669 - Number of digits >= 2 in decimal representation of n.
+   - `create_sequence_a102670/1` - A102670 - Number of digits >= 2 in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a102671/1` - A102671 - Number of digits >= 3 in decimal representation of n.
+   - `create_sequence_a102672/1` - A102672 - Number of digits >= 3 in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a102673/1` - A102673 - Number of digits >= 4 in decimal representation of n.
+   - `create_sequence_a102674/1` - A102674 - Number of digits >= 4 in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a102675/1` - A102675 - Number of digits >= 5 in decimal representation of n.
+   - `create_sequence_a102676/1` - A102676 - Number of digits >= 5 in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a102677/1` - A102677 - Number of digits >= 6 in decimal representation of n.
+   - `create_sequence_a102678/1` - A102678 - Number of digits >= 6 in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a102679/1` - A102679 - Number of digits >= 7 in decimal representation of n.
+   - `create_sequence_a102680/1` - A102680 - Number of digits >= 7 in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a102681/1` - A102681 - Number of digits >= 8 in decimal representation of n.
+   - `create_sequence_a102682/1` - A102682 - Number of digits >= 8 in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a102683/1` - A102683 - Number of digits 9 in decimal representation of n.
+   - `create_sequence_a102684/1` - A102684 - Number of times the digit 9 appears in the decimal representations of all integers from 0 to n.
+   - `create_sequence_a115983/1` - A115983 - Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.
+   - `create_sequence_a160093/1` - A160093 - Number of digits in n, excluding any trailing zeros.
+   - `create_sequence_a193238/1` - A193238 - Number of prime digits in decimal representation of n.
+   - `create_sequence_a196563/1` - A196563 - Number of even digits in decimal representation of n.
+   - `create_sequence_a122840/1` - A122840 - a(n) is the number of 0s at the end of n when n is written in base 10.
+   - `create_sequence_a114904/1` - A114904 - Sorted numbers of digits of any base-10 narcissistic number.
+   - `create_sequence_a046253/1` - A046253 - Equal to the sum of its nonzero digits raised to its own power.
+   - `create_sequence_a010872/1` - A010872 - a(n) = n mod 3.
+
+    
+  Rhonda numbers in base 10:
+  
+   - `create_sequence_a099542/1` - A099542 - Rhonda numbers to base 10.
+   - `create_sequence_a100987/1` - A100987 - Integers that are Rhonda numbers to some base.
+   - `create_sequence_a100988/1` - A100988 - Integers that are Rhonda numbers to more than one base.
 
 
-   - [A000788 - Total number of 1's in binary expansions of 0, ..., n.](https://oeis.org/A000788) - `:a000788` - `create_sequence_a000788/1`
-   - [A001101 - Moran numbers: n such that (n / sum of digits of n) is prime.](https://oeis.org/A001101) - `:a001101` - `create_sequence_a001101/1`
-   - [A004176 - Omit 1's from n.](https://oeis.org/A004176) - `:a004176` - `create_sequence_a004176/1`
-   - [A004177 - Omit 2's from n.](https://oeis.org/A004177) - `:a004177` - `create_sequence_a004177/1`
-   - [A004178 - Omit 3's from n.](https://oeis.org/A004178) - `:a004178` - `create_sequence_a004178/1`
-   - [A004179 - Omit 4's from n.](https://oeis.org/A004179) - `:a004179` - `create_sequence_a004179/1`
-   - [A004180 - Omit 5's from n.](https://oeis.org/A004180) - `:a004180` - `create_sequence_a004180/1`
-   - [A004181 - Omit 6's from n.](https://oeis.org/A004181) - `:a004181` - `create_sequence_a004181/1`
-   - [A004182 - Omit 7's from n.](https://oeis.org/A004182) - `:a004182` - `create_sequence_a004182/1`
-   - [A004183 - Omit 8's from n.](https://oeis.org/A004183) - `:a004183` - `create_sequence_a004183/1`
-   - [A004184 - Omit 9's from n.](https://oeis.org/A004184) - `:a004184` - `create_sequence_a004184/1`
-   - [A004719 - Delete all 0's from n.](https://oeis.org/A004719) - `:a004719` - `create_sequence_a004719/1`
-   - [A004720 - Delete all digits '1' from the sequence of nonnegative integers.](https://oeis.org/A004720) - `:a004720` - `create_sequence_a004720/1`
-   - [A004721 - Delete all 2's from the sequence of nonnegative integers.](https://oeis.org/A004721) - `:a004721` - `create_sequence_a004721/1`
-   - [A004722 - Delete all digits 3 from the terms of the sequence of nonnegative integers.](https://oeis.org/A004722) - `:a004722` - `create_sequence_a004722/1`
-   - [A004723 - Delete all 4's from the sequence of nonnegative integers.](https://oeis.org/A004723) - `:a004723` - `create_sequence_a004723/1`
-   - [A004724 - Delete all 5's from the sequence of nonnegative integers.](https://oeis.org/A004724) - `:a004724` - `create_sequence_a004724/1`
-   - [A004725 - Delete all 6's from the sequence of nonnegative integers.](https://oeis.org/A004725) - `:a004725` - `create_sequence_a004725/1`
-   - [A004726 - Delete all 7's from the sequence of nonnegative integers.](https://oeis.org/A004726) - `:a004726` - `create_sequence_a004726/1`
-   - [A004727 - Delete all 8's from the sequence of nonnegative integers.](https://oeis.org/A004727) - `:a004727` - `create_sequence_a004727/1`
-   - [A004728 - Delete all 9's from the sequence of nonnegative integers.](https://oeis.org/A004728) - `:a004728` - `create_sequence_a004728/1`
-   - [A005188 - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.](https://oeis.org/A005188) - `:a005188` - `create_sequence_a005188/1`
-   - [A005349 - Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.](https://oeis.org/A005349) - `:a005349` - `create_sequence_a005349/1`
-   - [A005823 - Numbers whose ternary expansion contains no 1's.](https://oeis.org/A005823) - `:a005823` - `create_sequence_a005823/1`
-   - [A005836 - Numbers n whose base 3 representation contains no 2.](https://oeis.org/A005836) - `:a005836` - `create_sequence_a005836/1`
-   - [A006886 - Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.](https://oeis.org/A006886) - `:a006886` - `create_sequence_a006886/1`
-   - [A007088 - The binary numbers (or binary words, or binary vectors): numbers written in base 2.](https://oeis.org/A007088) - `:a007088` - `create_sequence_a007088/1`
-   - [A007089 - Numbers in base 3.](https://oeis.org/A007089) - `:a007089` - `create_sequence_a007089/1`
-   - [A007090 - Numbers in base 4.](https://oeis.org/A007090) - `:a007090` - `create_sequence_a007090/1`
-   - [A007091 - Numbers in base 5.](https://oeis.org/A007091) - `:a007091` - `create_sequence_a007091/1`
-   - [A007092 - Numbers in base 6.](https://oeis.org/A007092) - `:a007092` - `create_sequence_a007092/1`
-   - [A007093 - Numbers in base 7.](https://oeis.org/A007093) - `:a007093` - `create_sequence_a007093/1`
-   - [A007094 - Numbers in base 8.](https://oeis.org/A007094) - `:a007094` - `create_sequence_a007094/1`
-   - [A007095 - Numbers in base 9.](https://oeis.org/A007095) - `:a007095` - `create_sequence_a007095/1`
-   - [A007602 - Numbers that are divisible by the product of their digits.](https://oeis.org/A007602) - `:a007602` - `create_sequence_a007602/1`
-   - [A007953 - Digital sum (i.e., sum of digits) of n; also called digsum(n).](https://oeis.org/A007953) - `:a007953` - `create_sequence_a007953/1`
-   - [A007954 - Product of decimal digits of n.](https://oeis.org/A007954) - `:a007954` - `create_sequence_a007954/1`
-   - [A010344 - Base-4 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010344) - `:a010344` - `create_sequence_a010344/1`
-   - [A010346 - Base-5 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010346) - `:a010346` - `create_sequence_a010346/1`
-   - [A010348 - Base-6 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010348) - `:a010348` - `create_sequence_a010348/1`
-   - [A010350 - Base-7 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010350) - `:a010350` - `create_sequence_a010350/1`
-   - [A010353 - Base-9 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010353) - `:a010353` - `create_sequence_a010353/1`
-   - [A010354 - Base-8 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A010354) - `:a010354` - `create_sequence_a010354/1`
-   - [A011531 - Numbers that contain a digit 1 in their decimal representation.](https://oeis.org/A011531) - `:a011531` - `create_sequence_a011531/1`
-   - [A011532 - Numbers that contain a 2.](https://oeis.org/A011532) - `:a011532` - `create_sequence_a011532/1`
-   - [A011533 - Numbers that contain a 3.](https://oeis.org/A011533) - `:a011533` - `create_sequence_a011533/1`
-   - [A011534 - Numbers that contain a 4.](https://oeis.org/A011534) - `:a011534` - `create_sequence_a011534/1`
-   - [A011535 - Numbers that contain a 5.](https://oeis.org/A011535) - `:a011535` - `create_sequence_a011535/1`
-   - [A011536 - Numbers that contain a 6.](https://oeis.org/A011536) - `:a011536` - `create_sequence_a011536/1`
-   - [A011537 - Numbers that contain at least one 7.](https://oeis.org/A011537) - `:a011537` - `create_sequence_a011537/1`
-   - [A011538 - Numbers that contain an 8.](https://oeis.org/A011538) - `:a011538` - `create_sequence_a011538/1`
-   - [A011539 - "9ish numbers": decimal representation contains at least one nine.](https://oeis.org/A011539) - `:a011539` - `create_sequence_a011539/1`
-   - [A011540 - Numbers that contain a digit 0.](https://oeis.org/A011540) - `:a011540` - `create_sequence_a011540/1`   
-   - [A014263 - Numbers that contain even digits only.](https://oeis.org/A014263) - `:a014263` - `create_sequence_a014263/1`
-   - [A014576 - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).](https://oeis.org/A014576) - `:a014576` - `create_sequence_a014576/1`
-   - [A023692 - Numbers with a single 1 in their ternary expansion.](https://oeis.org/A023692) - `:a023692` - `create_sequence_a023692/1`
-   - [A023693 - Numbers with exactly 2 1's in ternary expansion.](https://oeis.org/A023693) - `:a023693` - `create_sequence_a023693/1`
-   - [A023694 - Numbers with exactly 3 1's in ternary expansion.](https://oeis.org/A023694) - `:a023694` - `create_sequence_a023694/1`
-   - [A023695 - Numbers with exactly 4 1's in ternary expansion.](https://oeis.org/A023695) - `:a023695` - `create_sequence_a023695/1`
-   - [A023696 - Numbers with exactly 5 1's in ternary expansion.](https://oeis.org/A023696) - `:a023696` - `create_sequence_a023696/1`
-   - [A023697 - Numbers with exactly 6 1's in ternary expansion.](https://oeis.org/A023697) - `:a023697` - `create_sequence_a023697/1`
-   - [A023698 - Numbers with exactly 7 1's in ternary expansion.](https://oeis.org/A023698) - `:a023698` - `create_sequence_a023698/1`
-   - [A023699 - Numbers with a single 2 in their ternary expansion.](https://oeis.org/A023699) - `:a023699` - `create_sequence_a023699/1`
-   - [A023700 - Numbers with exactly 2 2's in ternary expansion.](https://oeis.org/A023700) - `:a023700` - `create_sequence_a023700/1`
-   - [A023701 - Numbers with exactly 3 2's in their ternary expansion.](https://oeis.org/A023701) - `:a023701` - `create_sequence_a023701/1`
-   - [A023702 - Numbers with exactly 4 2's in ternary expansion of n.](https://oeis.org/A023702) - `:a023702` - `create_sequence_a023702/1`
-   - [A023703 - Numbers with exactly 5 2's in ternary expansion.](https://oeis.org/A023703) - `:a023703` - `create_sequence_a023703/1`
-   - [A023704 - Numbers with exactly 6 2's in ternary expansion.](https://oeis.org/A023704) - `:a023704` - `create_sequence_a023704/1`
-   - [A023706 - Numbers with a single 0 in their base 4 expansion.](https://oeis.org/A023706) - `:a023706` - `create_sequence_a023706/1`
-   - [A023707 - Numbers with exactly 2 0's in base 4 expansion.](https://oeis.org/A023707) - `:a023707` - `create_sequence_a023707/1`
-   - [A023708 - Numbers with exactly 3 0's in base 4 expansion.](https://oeis.org/A023708) - `:a023708` - `create_sequence_a023708/1`
-   - [A023709 - Numbers with no 1's in base 4 expansion.](https://oeis.org/A023709) - `:a023709` - `create_sequence_a023709/1`
-   - [A023710 - Numbers with a single 1 in their base 4 expansion.](https://oeis.org/A023710) - `:a023710` - `create_sequence_a023710/1`
-   - [A023711 - Numbers with exactly 2 1's in base 4 expansion.](https://oeis.org/A023711) - `:a023711` - `create_sequence_a023711/1`
-   - [A023712 - Numbers with exactly 3 1's in base 4 expansion.](https://oeis.org/A023712) - `:a023712` - `create_sequence_a023712/1`
-   - [A023713 - Numbers with no 2's in base 4 expansion.](https://oeis.org/A023713) - `:a023713` - `create_sequence_a023713/1`
-   - [A023714 - Numbers with a single 2 in their base 4 expansion.](https://oeis.org/A023714) - `:a023714` - `create_sequence_a023714/1`
-   - [A023715 - Numbers with exactly 2 2's in base 4 expansion.](https://oeis.org/A023715) - `:a023715` - `create_sequence_a023715/1`
-   - [A023716 - Numbers with exactly 3 2's in base 4 expansion.](https://oeis.org/A023716) - `:a023716` - `create_sequence_a023716/1`
-   - [A023717 - Numbers with no 3's in base 4 expansion.](https://oeis.org/A023717) - `:a023717` - `create_sequence_a023717/1`
-   - [A023718 - Numbers with a single 3 in their base 4 expansion.](https://oeis.org/A023718) - `:a023718` - `create_sequence_a023718/1`
-   - [A023719 - Numbers with exactly two 3's in base 4 expansion.](https://oeis.org/A023719) - `:a023719` - `create_sequence_a023719/1`
-   - [A023720 - Numbers with exactly 3 3's in base 4 expansion.](https://oeis.org/A023720) - `:a023720` - `create_sequence_a023720/1`
-   - [A023721 - Numbers with no 0's in their base-5 expansion.](https://oeis.org/A023721) - `:a023721` - `create_sequence_a023721/1`
-   - [A023722 - Numbers with a single 0 in their base 5 expansion.](https://oeis.org/A023722) - `:a023722` - `create_sequence_a023722/1`
-   - [A023723 - Numbers with exactly 2 0's in base 5 expansion.](https://oeis.org/A023723) - `:a023723` - `create_sequence_a023723/1`
-   - [A023724 - Numbers with exactly 3 0's in base 5 expansion.](https://oeis.org/A023724) - `:a023724` - `create_sequence_a023724/1`
-   - [A023725 - Numbers with no 1's in their base-5 expansion.](https://oeis.org/A023725) - `:a023725` - `create_sequence_a023725/1`
-   - [A023726 - Numbers with a single 1 in their base 5 expansion.](https://oeis.org/A023726) - `:a023726` - `create_sequence_a023726/1`
-   - [A023727 - Numbers with exactly 2 1's in their base 5 expansion.](https://oeis.org/A023727) - `:a023727` - `create_sequence_a023727/1`
-   - [A023728 - Numbers with exactly 3 1's in base 5 expansion.](https://oeis.org/A023728) - `:a023728` - `create_sequence_a023728/1`
-   - [A023729 - Numbers with no 2's in their base-5 expansion.](https://oeis.org/A023729) - `:a023729` - `create_sequence_a023729/1`
-   - [A023730 - Numbers with a single 2 in their base 5 expansion.](https://oeis.org/A023730) - `:a023730` - `create_sequence_a023730/1`
-   - [A023731 - Numbers with exactly two 2's in base 5 expansion.](https://oeis.org/A023731) - `:a023731` - `create_sequence_a023731/1`
-   - [A023732 - Numbers with exactly 3 2's in base 5 expansion.](https://oeis.org/A023732) - `:a023732` - `create_sequence_a023732/1`
-   - [A023733 - Numbers with no 3's in base-5 expansion.](https://oeis.org/A023733) - `:a023733` - `create_sequence_a023733/1`
-   - [A023734 - Numbers with a single 3 in their base-5 expansion.](https://oeis.org/A023734) - `:a023734` - `create_sequence_a023734/1`
-   - [A023735 - Numbers with exactly 2 3's in their base-5 expansion.](https://oeis.org/A023735) - `:a023735` - `create_sequence_a023735/1`
-   - [A023736 - Numbers with exactly 3 3's in their base-5 expansion.](https://oeis.org/A023736) - `:a023736` - `create_sequence_a023736/1`
-   - [A023738 - Numbers with a single 4 in their base 5 expansion.](https://oeis.org/A023738) - `:a023738` - `create_sequence_a023738/1`
-   - [A023739 - Numbers with exactly 2 4's in base 5 expansion.](https://oeis.org/A023739) - `:a023739` - `create_sequence_a023739/1`
-   - [A023740 - Numbers with exactly 3 4's in base 5 expansion.](https://oeis.org/A023740) - `:a023740` - `create_sequence_a023740/1`
-   - [A023745 - Plaindromes: numbers whose digits in base 3 are in nondecreasing order.](https://oeis.org/A023745) - `:a023745` - `create_sequence_a023745/1`
-   - [A023746 - Plaindromes: numbers whose digits in base 4 are in nondecreasing order.](https://oeis.org/A023746) - `:a023746` - `create_sequence_a023746/1`
-   - [A023747 - Plaindromes: numbers whose digits in base 5 are in nondecreasing order.](https://oeis.org/A023747) - `:a023747` - `create_sequence_a023747/1`
-   - [A023748 - Plaindromes: numbers whose digits in base 6 are in nondecreasing order.](https://oeis.org/A023748) - `:a023748` - `create_sequence_a023748/1`
-   - [A023749 - Plaindromes: numbers whose digits in base 7 are in nondecreasing order.](https://oeis.org/A023749) - `:a023749` - `create_sequence_a023749/1`
-   - [A023750 - Plaindromes: numbers whose digits in base 8 are in nondecreasing order.](https://oeis.org/A023750) - `:a023750` - `create_sequence_a023750/1`
-   - [A023751 - Plaindromes: numbers whose digits in base 9 are in nondecreasing order.](https://oeis.org/A023751) - `:a023751` - `create_sequence_a023751/1`
-   - [A023752 - Plaindromes: numbers whose digits in base 11 are in nondecreasing order.](https://oeis.org/A023752) - `:a023752` - `create_sequence_a023752/1`
-   - [A023753 - Plaindromes: numbers whose digits in base 12 are in nondecreasing order.](https://oeis.org/A023753) - `:a023753` - `create_sequence_a023753/1`
-   - [A023754 - Plaindromes: numbers whose digits in base 13 are in nondecreasing order.](https://oeis.org/A023754) - `:a023754` - `create_sequence_a023754/1`
-   - [A023755 - Plaindromes: numbers whose digits in base 14 are in nondecreasing order.](https://oeis.org/A023755) - `:a023755` - `create_sequence_a023755/1`
-   - [A023756 - Plaindromes: numbers whose digits in base 15 are in nondecreasing order.](https://oeis.org/A023756) - `:a023756` - `create_sequence_a023756/1`
-   - [A023757 - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.](https://oeis.org/A023757) - `:a023757` - `create_sequence_a023757/1`
-   - [A043321 - Numbers n such that number of 0's in base 3 is 1.](https://oeis.org/A043321) - `:a043321` - `create_sequence_a043321/1`
-   - [A046253 - Equal to the sum of its nonzero digits raised to its own power.](https://oeis.org/A046253) - `:a046253` - `create_sequence_a046253/1`
-   - [A051003 - Beastly (or hateful) numbers: numbers containing the string 666 in their decimal expansion.](https://oeis.org/A051003) - `:a051003` - `create_sequence_a051003/1`
-   - [A052382 - Numbers without 0 as a digit, a.k.a. zeroless numbers.](https://oeis.org/A052382) - `:a052382` - `create_sequence_a052382/1`
-   - [A052383 - Numbers without 1 as a digit.](https://oeis.org/A052383) - `:a052383` - `create_sequence_a052383/1`
-   - [A052404 - Numbers without 2 as a digit.](https://oeis.org/A052404) - `:a052404` - `create_sequence_a052404/1`
-   - [A052405 - Numbers without 3 as a digit.](https://oeis.org/A052405) - `:a052405` - `create_sequence_a052405/1`
-   - [A052406 - Numbers without 4 as a digit.](https://oeis.org/A052406) - `:a052406` - `create_sequence_a052406/1`
-   - [A052413 - Numbers without 5 as a digit.](https://oeis.org/A052413) - `:a052413` - `create_sequence_a052413/1`
-   - [A052414 - Numbers without 6 as a digit.](https://oeis.org/A052414) - `:a052414` - `create_sequence_a052414/1`
-   - [A052419 - Numbers without 7 as a digit.](https://oeis.org/A052419) - `:a052419` - `create_sequence_a052419/1`
-   - [A052421 - Numbers without 8 as a digit.](https://oeis.org/A052421) - `:a052421` - `create_sequence_a052421/1`
-   - [A053816 - Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.](https://oeis.org/A053816) - `:a053816` - `create_sequence_a053816/1`
-   - [A099542 - Rhonda numbers to base 10.](https://oeis.org/A099542) - `:a099542` - `create_sequence_a099542/1`
-   - [A010872 - a(n) = n mod 3.](https://oeis.org/A010872) - `:a010872` - `create_sequence_a010872/1`
-   - [A023416 - Number of 0's in binary expansion of n.](https://oeis.org/A023416) - `:a023416` - `create_sequence_a023416/1`
-   - [A023705 - Numbers with no 0's in base 4 expansion.](https://oeis.org/A023705) - `:a023705` - `create_sequence_a023705/1`
-   - [A032924 - Numbers whose ternary expansion contains no 0.](https://oeis.org/A032924) - `:a032924` - `create_sequence_a032924/1`
-   - [A052040 - Numbers n such that n^2 lacks the digit zero in its decimal expansion.](https://oeis.org/A052040) - `:a052040` - `create_sequence_a052040/1`
-   - [A055640 - Number of nonzero digits in decimal expansion of n.](https://oeis.org/A055640) - `:a055640` - `create_sequence_a055640/1`
-   - [A055641 - Number of zero digits in n.](https://oeis.org/A055641) - `:a055641` - `create_sequence_a055641/1`
-   - [A055642 - Number of digits in decimal expansion of n.](https://oeis.org/A055642) - `:a055642` - `create_sequence_a055642/1`
-   - [A059015 - Total number of 0's in binary expansions of 0, ..., n.](https://oeis.org/A059015) - `:a059015` - `create_sequence_a059015/1`
-   - [A062756 - Number of 1's in ternary (base 3) expansion of n.](https://oeis.org/A062756) - `:a062756` - `create_sequence_a062756/1`
-   - [A067251 - Numbers with no trailing zeros in decimal representation.](https://oeis.org/A067251) - `:a067251` - `create_sequence_a067251/1`
-   - [A071858 - (Number of 1's in binary expansion of n) mod 3.](https://oeis.org/A071858) - `:a071858` - `create_sequence_a071858/1`
-   - [A074940 - Numbers having at least one 2 in their ternary representation.](https://oeis.org/A074940) - `:a074940` - `create_sequence_a074940/1`
-   - [A077267 - Number of zeros in base 3 expansion of n.](https://oeis.org/A077267) - `:a077267` - `create_sequence_a077267/1`
-   - [A081603 - Number of 2's in ternary representation of n.](https://oeis.org/A081603) - `:a081603` - `create_sequence_a081603/1`
-   - [A081605 - Numbers having at least one 0 in their ternary representation.](https://oeis.org/A081605) - `:a081605` - `create_sequence_a081605/1`
-   - [A081606 - Numbers having at least one 1 in their ternary representation.](https://oeis.org/A081606) - `:a081606` - `create_sequence_a081606/1`
-   - [A097251 - Numbers whose set of base 5 digits is {0,4}.](https://oeis.org/A097251) - `:a097251` - `create_sequence_a097251/1`
-   - [A097252 - Numbers whose set of base 6 digits is {0,5}.](https://oeis.org/A097252) - `:a097252` - `create_sequence_a097252/1`
-   - [A097253 - Numbers whose set of base 7 digits is {0,6}.](https://oeis.org/A097253) - `:a097253` - `create_sequence_a097253/1`
-   - [A097254 - Numbers whose set of base 8 digits is {0,7}.](https://oeis.org/A097254) - `:a097254` - `create_sequence_a097254/1`
-   - [A097255 - Numbers whose set of base 9 digits is {0,8}.](https://oeis.org/A097255) - `:a097255` - `create_sequence_a097255/1`
-   - [A097256 - Numbers whose set of base 10 digits is {0,9}.](https://oeis.org/A097256) - `:a097256` - `create_sequence_a097256/1`
-   - [A097257 - Numbers whose set of base 11 digits is {0,A}, where A base 11 = 10 base 10.](https://oeis.org/A097257) - `:a097257` - `create_sequence_a097257/1`
-   - [A097258 - Numbers whose set of base 12 digits is {0,B}, where B base 12 = 11 base 10.](https://oeis.org/A097258) - `:a097258` - `create_sequence_a097258/1`
-   - [A097259 - Numbers whose set of base 13 digits is {0,C}, where C base 13 = 12 base 10.](https://oeis.org/A097259) - `:a097259` - `create_sequence_a097259/1`
-   - [A097260 - Numbers whose set of base 14 digits is {0,D}, where D base 14 = 13 base 10.](https://oeis.org/A097260) - `:a097260` - `create_sequence_a097260/1`
-   - [A097261 - Numbers whose set of base 15 digits is {0,E}, where E base 15 = 14 base 10.](https://oeis.org/A097261) - `:a097261` - `create_sequence_a097261/1`
-   - [A097262 - Numbers whose set of base 16 digits is {0,F}, where F base 16 = 15 base 10.](https://oeis.org/A097262) - `:a097262` - `create_sequence_a097262/1`
-   - [A100968 - Integers n that are Rhonda numbers to base 4.](https://oeis.org/A100968) - `:a100968` - `create_sequence_a100968/1`
-   - [A100969 - Integers n that are Rhonda numbers to base 6.](https://oeis.org/A100969) - `:a100969` - `create_sequence_a100969/1`
-   - [A100970 - Integers n that are Rhonda numbers to base 8.](https://oeis.org/A100970) - `:a100970` - `create_sequence_a100970/1`
-   - [A100973 - Integers that are Rhonda numbers to base 9.](https://oeis.org/A100973) - `:a100973` - `create_sequence_a100973/1`
-   - [A100971 - Integers n that are Rhonda numbers to base 12.](https://oeis.org/A100971) - `:a100971` - `create_sequence_a100971/1`
-   - [A100972 - Integers that are Rhonda numbers to base 14.](https://oeis.org/A100972) - `:a100972` - `create_sequence_a100972/1`
-   - [A100974 - Integers that are Rhonda numbers to base 15.](https://oeis.org/A100974) - `:a100974` - `create_sequence_a100974/1`
-   - [A100975 - Integers that are Rhonda numbers to base 16.](https://oeis.org/A100975) - `:a100975` - `create_sequence_a100975/1`
-   - [A100987 - Integers that are Rhonda numbers to some base.](https://oeis.org/A100987) - `:a100987` - `create_sequence_a100987/1`
-   - [A100988 - Integers that are Rhonda numbers to more than one base.](https://oeis.org/A100988) - `:a100988` - `create_sequence_a100988/1`
-   - [A102669 - Number of digits >= 2 in decimal representation of n.](https://oeis.org/A102669) - `:a102669` - `create_sequence_a102669/1`
-   - [A102670 - Number of digits >= 2 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102670) - `:a102670` - `create_sequence_a102670/1`
-   - [A102671 - Number of digits >= 3 in decimal representation of n.](https://oeis.org/A102671) - `:a102671` - `create_sequence_a102671/1`
-   - [A102672 - Number of digits >= 3 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102672) - `:a102672` - `create_sequence_a102672/1`
-   - [A102673 - Number of digits >= 4 in decimal representation of n.](https://oeis.org/A102673) - `:a102673` - `create_sequence_a102673/1`
-   - [A102674 - Number of digits >= 4 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102674) - `:a102674` - `create_sequence_a102674/1`
-   - [A102675 - Number of digits >= 5 in decimal representation of n.](https://oeis.org/A102675) - `:a102675` - `create_sequence_a102675/1`
-   - [A102676 - Number of digits >= 5 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102676) - `:a102676` - `create_sequence_a102676/1`
-   - [A102677 - Number of digits >= 6 in decimal representation of n.](https://oeis.org/A102677) - `:a102677` - `create_sequence_a102677/1`
-   - [A102678 - Number of digits >= 6 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102678) - `:a102678` - `create_sequence_a102678/1`
-   - [A102679 - Number of digits >= 7 in decimal representation of n.](https://oeis.org/A102679) - `:a102679` - `create_sequence_a102679/1`
-   - [A102680 - Number of digits >= 7 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102680) - `:a102680` - `create_sequence_a102680/1`
-   - [A102681 - Number of digits >= 8 in decimal representation of n.](https://oeis.org/A102681) - `:a102681` - `create_sequence_a102681/1`
-   - [A102682 - Number of digits >= 8 in the decimal representations of all integers from 0 to n.](https://oeis.org/A102682) - `:a102682` - `create_sequence_a102682/1`
-   - [A102683 - Number of digits 9 in decimal representation of n.](https://oeis.org/A102683) - `:a102683` - `create_sequence_a102683/1`
-   - [A102684 - Number of times the digit 9 appears in the decimal representations of all integers from 0 to n.](https://oeis.org/A102684) - `:a102684` - `create_sequence_a102684/1`
-   - [A114904 - Sorted numbers of digits of any base-10 narcissistic number.](https://oeis.org/A114904) - `:a114904` - `create_sequence_a114904/1`
-   - [A115983 - Apocalypse primes: 10^665+a(n) has 666 decimal digits and is prime.](https://oeis.org/A115983) - `:a115983` - `create_sequence_a115983/1`
-   - [A121022 - Even numbers containing a 2 in their decimal representation.](https://oeis.org/A121022) - `:a121022` - `create_sequence_a121022/1`
-   - [A122840 - a(n) is the number of 0s at the end of n when n is written in base 10.](https://oeis.org/A122840) - `:a122840` - `create_sequence_a122840/1`
-   - [A160093 - Number of digits in n, excluding any trailing zeros.](https://oeis.org/A160093) - `:a160093` - `create_sequence_a160093/1`
-   - [A179868 - (Number of 1's in binary expansion of n) mod 4.](https://oeis.org/A179868) - `:a179868` - `create_sequence_a179868/1`
-   - [A193238 - Number of prime digits in decimal representation of n.](https://oeis.org/A193238) - `:a193238` - `create_sequence_a193238/1`
-   - [A196563 - Number of even digits in decimal representation of n.](https://oeis.org/A196563) - `:a196563` - `create_sequence_a196563/1`
-   - [A161948 - Base-11 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161948) - `:a161948` - `create_sequence_a161948/1`
-   - [A161949 - Base-12 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161949) - `:a161949` - `create_sequence_a161949/1`
-   - [A161950 - Base-13 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161950) - `:a161950` - `create_sequence_a161950/1`
-   - [A161951 - Base-14 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161951) - `:a161951` - `create_sequence_a161951/1`
-   - [A161952 - Base-15 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161952) - `:a161952` - `create_sequence_a161952/1`
-   - [A161953 - Base-16 Armstrong or narcissistic numbers (written in base 10).](https://oeis.org/A161953) - `:a161953` - `create_sequence_a161953/1`
-   - [A248910 - Numbers with no zeros in base-6 representation.](https://oeis.org/A248910) - `:a248910` - `create_sequence_a248910/1`
-   - [A255732 - Rhonda numbers in vigesimal number system.](https://oeis.org/A255732) - `:a255732` - `create_sequence_a255732/1`
-   - [A255736 - Integers that are Rhonda numbers to base 30.](https://oeis.org/A255736) - `:a255736` - `create_sequence_a255736/1`
-   - [A255731 - Rhonda numbers in sexagesimal number system.](https://oeis.org/A255731) - `:a255731` - `create_sequence_a255731/1`
-   - [A255735 - Integers that are Rhonda numbers to base 18.](https://oeis.org/A255735) - `:a255735` - `create_sequence_a255735/1`   
-   - [A255805 - Numbers with no zeros in base-8 representation.](https://oeis.org/A255805) - `:a255805` - `create_sequence_a255805/1`
-   - [A255808 - Numbers with no zeros in base-9 representation.](https://oeis.org/A255808) - `:a255808` - `create_sequence_a255808/1`
+  Kaprekar numbers:
+  
+   - `create_sequence_a006886/1` - A006886 - Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.
+   - `create_sequence_a053816/1` - A053816 - Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.
 
 
+  Armstrong numbers:
+    
+   - `create_sequence_a005188/1` - A005188 - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.
+   - `create_sequence_a014576/1` - A014576 - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).
+  
+  
+  ### Base Specific Representations (excluding Base 10)
+  
+  Base 2:
+
+   - `create_sequence_a007088/1` - A007088 - The binary numbers (or binary words, or binary vectors): numbers written in base 2.
+   - `create_sequence_a023416/1` - A023416 - Number of 0's in binary expansion of n.
+   - `create_sequence_a059015/1` - A059015 - Total number of 0's in binary expansions of 0, ..., n.
+   - `create_sequence_a071858/1` - A071858 - (Number of 1's in binary expansion of n) mod 3.
+   - `create_sequence_a179868/1` - A179868 - (Number of 1's in binary expansion of n) mod 4.
+   - `create_sequence_a000788/1` - A000788 - Total number of 1's in binary expansions of 0, ..., n.
+  
+  Base 3:
+
+   - `create_sequence_a007089/1` - A007089 - Numbers in base 3.  
+   - `create_sequence_a005823/1` - A005823 - Numbers whose ternary expansion contains no 1's.
+   - `create_sequence_a005836/1` - A005836 - Numbers n whose base 3 representation contains no 2.
+   - `create_sequence_a023692/1` - A023692 - Numbers with a single 1 in their ternary expansion.
+   - `create_sequence_a043321/1` - A043321 - Numbers n such that number of 0's in base 3 is 1.
+   - `create_sequence_a023693/1` - A023693 - Numbers with exactly 2 1's in ternary expansion.
+   - `create_sequence_a023694/1` - A023694 - Numbers with exactly 3 1's in ternary expansion.
+   - `create_sequence_a023695/1` - A023695 - Numbers with exactly 4 1's in ternary expansion.
+   - `create_sequence_a023696/1` - A023696 - Numbers with exactly 5 1's in ternary expansion.
+   - `create_sequence_a023697/1` - A023697 - Numbers with exactly 6 1's in ternary expansion.
+   - `create_sequence_a023698/1` - A023698 - Numbers with exactly 7 1's in ternary expansion.
+   - `create_sequence_a023699/1` - A023699 - Numbers with a single 2 in their ternary expansion.
+   - `create_sequence_a023700/1` - A023700 - Numbers with exactly 2 2's in ternary expansion.
+   - `create_sequence_a023701/1` - A023701 - Numbers with exactly 3 2's in their ternary expansion.
+   - `create_sequence_a023702/1` - A023702 - Numbers with exactly 4 2's in ternary expansion of n.
+   - `create_sequence_a023703/1` - A023703 - Numbers with exactly 5 2's in ternary expansion.
+   - `create_sequence_a023704/1` - A023704 - Numbers with exactly 6 2's in ternary expansion.
+   - `create_sequence_a032924/1` - A032924 - Numbers whose ternary expansion contains no 0.
+   - `create_sequence_a062756/1` - A062756 - Number of 1's in ternary (base 3) expansion of n.
+   - `create_sequence_a074940/1` - A074940 - Numbers having at least one 2 in their ternary representation.
+   - `create_sequence_a077267/1` - A077267 - Number of zeros in base 3 expansion of n.
+   - `create_sequence_a081603/1` - A081603 - Number of 2's in ternary representation of n.
+   - `create_sequence_a081605/1` - A081605 - Numbers having at least one 0 in their ternary representation.
+   - `create_sequence_a081606/1` - A081606 - Numbers having at least one 1 in their ternary representation.
+   - `create_sequence_a023745/1` - A023745 - Plaindromes: numbers whose digits in base 3 are in nondecreasing order.
+
+  Base 4:
+
+   - `create_sequence_a007090/1` - A007090 - Numbers in base 4.
+   - `create_sequence_a010344/1` - A010344 - Base-4 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023706/1` - A023706 - Numbers with a single 0 in their base 4 expansion.
+   - `create_sequence_a023707/1` - A023707 - Numbers with exactly 2 0's in base 4 expansion.
+   - `create_sequence_a023708/1` - A023708 - Numbers with exactly 3 0's in base 4 expansion.
+   - `create_sequence_a023709/1` - A023709 - Numbers with no 1's in base 4 expansion.
+   - `create_sequence_a023710/1` - A023710 - Numbers with a single 1 in their base 4 expansion.
+   - `create_sequence_a023711/1` - A023711 - Numbers with exactly 2 1's in base 4 expansion.
+   - `create_sequence_a023712/1` - A023712 - Numbers with exactly 3 1's in base 4 expansion.
+   - `create_sequence_a023713/1` - A023713 - Numbers with no 2's in base 4 expansion.
+   - `create_sequence_a023714/1` - A023714 - Numbers with a single 2 in their base 4 expansion.
+   - `create_sequence_a023715/1` - A023715 - Numbers with exactly 2 2's in base 4 expansion.
+   - `create_sequence_a023716/1` - A023716 - Numbers with exactly 3 2's in base 4 expansion.
+   - `create_sequence_a023717/1` - A023717 - Numbers with no 3's in base 4 expansion.
+   - `create_sequence_a023718/1` - A023718 - Numbers with a single 3 in their base 4 expansion.
+   - `create_sequence_a023719/1` - A023719 - Numbers with exactly two 3's in base 4 expansion.
+   - `create_sequence_a023720/1` - A023720 - Numbers with exactly 3 3's in base 4 expansion.
+   - `create_sequence_a023705/1` - A023705 - Numbers with no 0's in base 4 expansion.
+   - `create_sequence_a100968/1` - A100968 - Integers n that are Rhonda numbers to base 4.
+   - `create_sequence_a023746/1` - A023746 - Plaindromes: numbers whose digits in base 4 are in nondecreasing order.
+  
+  Base 5:
+
+   - `create_sequence_a007091/1` - A007091 - Numbers in base 5.
+   - `create_sequence_a010346/1` - A010346 - Base-5 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023721/1` - A023721 - Numbers with no 0's in their base-5 expansion.
+   - `create_sequence_a023722/1` - A023722 - Numbers with a single 0 in their base 5 expansion.
+   - `create_sequence_a023723/1` - A023723 - Numbers with exactly 2 0's in base 5 expansion.
+   - `create_sequence_a023724/1` - A023724 - Numbers with exactly 3 0's in base 5 expansion.
+   - `create_sequence_a023725/1` - A023725 - Numbers with no 1's in their base-5 expansion.
+   - `create_sequence_a023726/1` - A023726 - Numbers with a single 1 in their base 5 expansion.
+   - `create_sequence_a023727/1` - A023727 - Numbers with exactly 2 1's in their base 5 expansion.
+   - `create_sequence_a023728/1` - A023728 - Numbers with exactly 3 1's in base 5 expansion.
+   - `create_sequence_a023729/1` - A023729 - Numbers with no 2's in their base-5 expansion.
+   - `create_sequence_a023730/1` - A023730 - Numbers with a single 2 in their base 5 expansion.
+   - `create_sequence_a023731/1` - A023731 - Numbers with exactly two 2's in base 5 expansion.
+   - `create_sequence_a023732/1` - A023732 - Numbers with exactly 3 2's in base 5 expansion.
+   - `create_sequence_a023733/1` - A023733 - Numbers with no 3's in base-5 expansion.
+   - `create_sequence_a023734/1` - A023734 - Numbers with a single 3 in their base-5 expansion.
+   - `create_sequence_a023735/1` - A023735 - Numbers with exactly 2 3's in their base-5 expansion.
+   - `create_sequence_a023736/1` - A023736 - Numbers with exactly 3 3's in their base-5 expansion.
+   - `create_sequence_a023738/1` - A023738 - Numbers with a single 4 in their base 5 expansion.
+   - `create_sequence_a023739/1` - A023739 - Numbers with exactly 2 4's in base 5 expansion.
+   - `create_sequence_a023740/1` - A023740 - Numbers with exactly 3 4's in base 5 expansion.
+   - `create_sequence_a097251/1` - A097251 - Numbers whose set of base 5 digits is {0,4}.
+   - `create_sequence_a023747/1` - A023747 - Plaindromes: numbers whose digits in base 5 are in nondecreasing order.
+  
+  Base 6:
+
+   - `create_sequence_a007092/1` - A007092 - Numbers in base 6.
+   - `create_sequence_a010348/1` - A010348 - Base-6 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a097252/1` - A097252 - Numbers whose set of base 6 digits is {0,5}.
+   - `create_sequence_a100969/1` - A100969 - Integers n that are Rhonda numbers to base 6.
+   - `create_sequence_a248910/1` - A248910 - Numbers with no zeros in base-6 representation.
+   - `create_sequence_a023748/1` - A023748 - Plaindromes: numbers whose digits in base 6 are in nondecreasing order.
+  
+  Base 7:
+
+   - `create_sequence_a007093/1` - A007093 - Numbers in base 7.
+   - `create_sequence_a010350/1` - A010350 - Base-7 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a097253/1` - A097253 - Numbers whose set of base 7 digits is {0,6}.
+   - `create_sequence_a023749/1` - A023749 - Plaindromes: numbers whose digits in base 7 are in nondecreasing order.
+  
+  Base 8:
+
+   - `create_sequence_a007094/1` - A007094 - Numbers in base 8.
+   - `create_sequence_a010353/1` - A010353 - Base-9 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a097254/1` - A097254 - Numbers whose set of base 8 digits is {0,7}.
+   - `create_sequence_a100970/1` - A100970 - Integers n that are Rhonda numbers to base 8.
+   - `create_sequence_a255805/1` - A255805 - Numbers with no zeros in base-8 representation.
+   - `create_sequence_a023750/1` - A023750 - Plaindromes: numbers whose digits in base 8 are in nondecreasing order.
+  
+  Base 9:
+
+   - `create_sequence_a007095/1` - A007095 - Numbers in base 9.
+   - `create_sequence_a010354/1` - A010354 - Base-8 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a097255/1` - A097255 - Numbers whose set of base 9 digits is {0,8}.
+   - `create_sequence_a100973/1` - A100973 - Integers that are Rhonda numbers to base 9.
+   - `create_sequence_a255808/1` - A255808 - Numbers with no zeros in base-9 representation.
+   - `create_sequence_a023751/1` - A023751 - Plaindromes: numbers whose digits in base 9 are in nondecreasing order.
+
+
+  Base 11
+
+   - `create_sequence_a097257/1` - A097257 - Numbers whose set of base 11 digits is {0,A}, where A base 11 = 10 base 10.
+   - `create_sequence_a161948/1` - A161948 - Base-11 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023752/1` - A023752 - Plaindromes: numbers whose digits in base 11 are in nondecreasing order.
+
+
+  Base 12
+  
+   - `create_sequence_a097258/1` - A097258 - Numbers whose set of base 12 digits is {0,B}, where B base 12 = 11 base 10.
+   - `create_sequence_a100971/1` - A100971 - Integers n that are Rhonda numbers to base 12.
+   - `create_sequence_a161949/1` - A161949 - Base-12 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023753/1` - A023753 - Plaindromes: numbers whose digits in base 12 are in nondecreasing order.
+
+
+  Base 13
+  
+   - `create_sequence_a097259/1` - A097259 - Numbers whose set of base 13 digits is {0,C}, where C base 13 = 12 base 10.
+   - `create_sequence_a161950/1` - A161950 - Base-13 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023754/1` - A023754 - Plaindromes: numbers whose digits in base 13 are in nondecreasing order.
+
+
+  Base 14
+  
+   - `create_sequence_a097260/1` - A097260 - Numbers whose set of base 14 digits is {0,D}, where D base 14 = 13 base 10.
+   - `create_sequence_a100972/1` - A100972 - Integers that are Rhonda numbers to base 14.
+   - `create_sequence_a161951/1` - A161951 - Base-14 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023755/1` - A023755 - Plaindromes: numbers whose digits in base 14 are in nondecreasing order.
+
+
+  Base 15
+  
+   - `create_sequence_a097261/1` - A097261 - Numbers whose set of base 15 digits is {0,E}, where E base 15 = 14 base 10.
+   - `create_sequence_a100974/1` - A100974 - Integers that are Rhonda numbers to base 15.
+   - `create_sequence_a161952/1` - A161952 - Base-15 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023756/1` - A023756 - Plaindromes: numbers whose digits in base 15 are in nondecreasing order.
+
+
+  Base 16
+  
+   - `create_sequence_a097262/1` - A097262 - Numbers whose set of base 16 digits is {0,F}, where F base 16 = 15 base 10.
+   - `create_sequence_a100975/1` - A100975 - Integers that are Rhonda numbers to base 16.
+   - `create_sequence_a161953/1` - A161953 - Base-16 Armstrong or narcissistic numbers (written in base 10).
+   - `create_sequence_a023757/1` - A023757 - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.
+  
+  
+  Base 18
+    
+   - `create_sequence_a255735/1` - A255735 - Integers that are Rhonda numbers to base 18.
+
+
+  Base 20
+  
+   - `create_sequence_a255732/1` - A255732 - Rhonda numbers in vigesimal number system.
+  
+  
+  Base 30
+  
+   - `create_sequence_a255736/1` - A255736 - Integers that are Rhonda numbers to base 30.
+  
+  
+  Base 60
+  
+   - `create_sequence_a255731/1` - A255731 - Rhonda numbers in sexagesimal number system.
+  
 
   """
 
@@ -312,6 +401,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004176/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004176(idx) do
     Math.remove_digits!(idx, [1])
@@ -345,6 +435,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004177/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004177(idx) do
     Math.remove_digits!(idx, [2])
@@ -378,6 +469,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004178/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004178(idx) do
     Math.remove_digits!(idx, [3])
@@ -411,6 +503,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004179/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004179(idx) do
     Math.remove_digits!(idx, [4])
@@ -444,6 +537,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004180/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004180(idx) do
     Math.remove_digits!(idx, [5])
@@ -477,6 +571,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004181/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004181(idx) do
     Math.remove_digits!(idx, [6])
@@ -510,6 +605,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004182/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004182(idx) do
     Math.remove_digits!(idx, [7])
@@ -543,6 +639,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004183/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004183(idx) do
     Math.remove_digits!(idx, [8])
@@ -576,6 +673,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a004184/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a004184(idx) do
     Math.remove_digits!(idx, [9])
@@ -614,8 +712,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004719(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004719(:next, data, _v) do
     # find the next number
     r = 0
@@ -671,8 +771,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004720(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004720(:next, data, _v) do
     # find the next number
     r = 1
@@ -728,8 +830,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004721(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004721(:next, data, _v) do
     # find the next number
     r = 2
@@ -785,8 +889,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004722(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004722(:next, data, _v) do
     # find the next number
     r = 3
@@ -842,8 +948,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004723(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004723(:next, data, _v) do
     # find the next number
     r = 4
@@ -899,8 +1007,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004724(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004724(:next, data, _v) do
     # find the next number
     r = 5
@@ -956,8 +1066,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004725(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004725(:next, data, _v) do
     # find the next number
     r = 6
@@ -1013,8 +1125,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004726(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004726(:next, data, _v) do
     # find the next number
     r = 7
@@ -1070,8 +1184,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004727(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004727(:next, data, _v) do
     # find the next number
     r = 8
@@ -1127,8 +1243,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     }
   end
 
+  @doc false
   def seq_a004728(:init, data, _v), do: %{data: data, value: 0}
 
+  @doc false
   def seq_a004728(:next, data, _v) do
     # find the next number
     r = 9
@@ -1180,6 +1298,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007088/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007088(idx) do
     idx |> Integer.digits(2) |> Integer.undigits()
@@ -1213,6 +1332,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007089/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007089(idx) do
     idx |> Integer.digits(3) |> Integer.undigits()
@@ -1246,6 +1366,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007090/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007090(idx) do
     idx |> Integer.digits(4) |> Integer.undigits()
@@ -1279,6 +1400,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007091/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007091(idx) do
     idx |> Integer.digits(5) |> Integer.undigits()
@@ -1312,6 +1434,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007092/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007092(idx) do
     idx |> Integer.digits(6) |> Integer.undigits()
@@ -1345,6 +1468,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007093/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007093(idx) do
     idx |> Integer.digits(7) |> Integer.undigits()
@@ -1378,6 +1502,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007094/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007094(idx) do
     idx |> Integer.digits(8) |> Integer.undigits()
@@ -1411,6 +1536,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007095/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007095(idx) do
     idx |> Integer.digits(9) |> Integer.undigits()
@@ -1444,6 +1570,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011531/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011531(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 1) end, last)
@@ -1477,6 +1604,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011532/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011532(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 2) end, last)
@@ -1510,6 +1638,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011533/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011533(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 3) end, last)
@@ -1543,6 +1672,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011534/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011534(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 4) end, last)
@@ -1576,6 +1706,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011535/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011535(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 5) end, last)
@@ -1609,6 +1740,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011536/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011536(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 6) end, last)
@@ -1642,6 +1774,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011537/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011537(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 7) end, last)
@@ -1675,6 +1808,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011538/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011538(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 8) end, last)
@@ -1708,6 +1842,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011539/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a011539(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 9) end, last)
@@ -1741,6 +1876,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a011540/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a011540(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 0) end, last)
@@ -1774,6 +1910,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052382/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a052382(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 0) == false end, last)
@@ -1807,6 +1944,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052383/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052383(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 1) == false end, last)
@@ -1840,6 +1978,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052404/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052404(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 2) == false end, last)
@@ -1873,6 +2012,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052405/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052405(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 3) == false end, last)
@@ -1906,6 +2046,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052406/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052406(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 4) == false end, last)
@@ -1939,6 +2080,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052413/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052413(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 5) == false end, last)
@@ -1972,6 +2114,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052414/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052414(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 6) == false end, last)
@@ -2005,6 +2148,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052419/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052419(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 7) == false end, last)
@@ -2038,6 +2182,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052421/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a052421(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 8) == false end, last)
@@ -2071,6 +2216,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a121022/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a121022(_idx, last) do
     Math.next_number(fn v -> Math.contains_number?(v, 2) end, last, 2)
@@ -2104,6 +2250,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100968/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 10000
   def seq_a100968(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_4?/1, last)
@@ -2137,6 +2284,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100969/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 800
   def seq_a100969(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_6?/1, last)
@@ -2170,6 +2318,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100970/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 1800
   def seq_a100970(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_8?/1, last)
@@ -2203,6 +2352,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100973/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 15500
   def seq_a100973(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_9?/1, last)
@@ -2236,6 +2386,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a099542/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 1500
   def seq_a099542(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_10?/1, last)
@@ -2269,6 +2420,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100971/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 500
   def seq_a100971(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_12?/1, last)
@@ -2302,6 +2454,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100972/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 11400
   def seq_a100972(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_14?/1, last)
@@ -2335,6 +2488,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100974/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 2300
   def seq_a100974(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_15?/1, last)
@@ -2368,6 +2522,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100975/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 900
   def seq_a100975(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_16?/1, last)
@@ -2401,6 +2556,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255732/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 1800
   def seq_a255732(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_20?/1, last)
@@ -2434,6 +2590,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255736/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 3000
   def seq_a255736(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_30?/1, last)
@@ -2467,6 +2624,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255731/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 3300
   def seq_a255731(_idx, last) do
     Math.next_number(&Predicates.is_rhonda_to_base_60?/1, last)
@@ -2500,6 +2658,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100988/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 900
   def seq_a100988(_idx, last) do
     Math.next_number(&Predicates.is_multiple_rhonda?/1, last)
@@ -2533,6 +2692,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a100987/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 500
   def seq_a100987(_idx, last) do
     Math.next_number(
@@ -2571,6 +2731,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255735/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 1400
   def seq_a255735(_idx, last) do
     Math.next_number(
@@ -2609,6 +2770,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a000788/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000788(idx) do
     0..idx
@@ -2644,6 +2806,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005823/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a005823(_idx, last) do
     Math.next_number(
@@ -2682,6 +2845,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005836/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a005836(_idx, last) do
     Math.next_number(
@@ -2720,6 +2884,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007954/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007954(idx) do
     idx
@@ -2755,6 +2920,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010872/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a010872(idx) do
     rem(idx, 3)
@@ -2788,6 +2954,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023416/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a023416(idx) do
     Math.digit_count(idx, [0], base: 2)
@@ -2821,6 +2988,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023705/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023705(_idx, last) do
     Math.next_number(
@@ -2859,6 +3027,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a032924/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a032924(_idx, last) do
     Math.next_number(
@@ -2897,6 +3066,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a052040/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a052040(_idx, last) do
     Math.next_number(
@@ -2935,6 +3105,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a055640/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a055640(idx) do
     Math.digit_count(idx, [1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -2968,6 +3139,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a055641/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a055641(idx) do
     Math.digit_count(idx, [0])
@@ -3001,6 +3173,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a055642/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a055642(idx) do
     Integer.digits(idx) |> length()
@@ -3034,6 +3207,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a067251/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a067251(_idx, last) do
     Math.next_number(
@@ -3072,6 +3246,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a071858/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a071858(idx) do
     Math.digit_count(idx, [1], base: 2) |> rem(3)
@@ -3105,6 +3280,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a122840/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a122840(idx) do
     idx
@@ -3142,6 +3318,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a160093/1)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a160093(idx) do
     idx
@@ -3179,6 +3356,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a179868/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a179868(idx) do
     Math.digit_count(idx, [1], base: 2) |> rem(4)
@@ -3212,6 +3390,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a193238/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a193238(idx) do
     Math.digit_count(idx, [2, 3, 5, 7])
@@ -3245,6 +3424,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a196563/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a196563(idx) do
     Math.digit_count(idx, [0, 2, 4, 6, 8])
@@ -3278,6 +3458,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a248910/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a248910(_idx, last) do
     Math.next_number(
@@ -3316,6 +3497,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255805/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a255805(_idx, last) do
     Math.next_number(
@@ -3354,6 +3536,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a255808/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a255808(_idx, last) do
     Math.next_number(
@@ -3392,6 +3575,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007953/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a007953(idx) do
     idx |> Integer.digits() |> Enum.sum()
@@ -3425,6 +3609,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a014263/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a014263(_idx, last) do
     Math.next_number(
@@ -3463,6 +3648,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023692/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023692(_idx, last) do
     Math.next_number(
@@ -3501,6 +3687,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023693/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023693(_idx, last) do
     Math.next_number(
@@ -3539,6 +3726,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023694/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023694(_idx, last) do
     Math.next_number(
@@ -3577,6 +3765,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023695/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023695(_idx, last) do
     Math.next_number(
@@ -3615,6 +3804,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023696/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023696(_idx, last) do
     Math.next_number(
@@ -3653,6 +3843,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023698/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023698(_idx, last) do
     Math.next_number(
@@ -3691,6 +3882,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023699/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023699(_idx, last) do
     Math.next_number(
@@ -3729,6 +3921,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023700/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023700(_idx, last) do
     Math.next_number(
@@ -3767,6 +3960,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023701/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023701(_idx, last) do
     Math.next_number(
@@ -3805,6 +3999,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023702/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023702(_idx, last) do
     Math.next_number(
@@ -3843,6 +4038,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023703/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023703(_idx, last) do
     Math.next_number(
@@ -3881,6 +4077,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023704/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023704(_idx, last) do
     Math.next_number(
@@ -3919,6 +4116,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023706/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023706(_idx, last) do
     Math.next_number(
@@ -3957,6 +4155,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023707/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023707(_idx, last) do
     Math.next_number(
@@ -3995,6 +4194,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023708/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023708(_idx, last) do
     Math.next_number(
@@ -4033,6 +4233,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023709/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023709(_idx, last) do
     Math.next_number(
@@ -4071,6 +4272,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023710/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023710(_idx, last) do
     Math.next_number(
@@ -4109,6 +4311,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023711/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023711(_idx, last) do
     Math.next_number(
@@ -4147,6 +4350,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023712/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023712(_idx, last) do
     Math.next_number(
@@ -4185,6 +4389,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023713/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023713(_idx, last) do
     Math.next_number(
@@ -4223,6 +4428,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023714/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023714(_idx, last) do
     Math.next_number(
@@ -4261,6 +4467,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023715/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023715(_idx, last) do
     Math.next_number(
@@ -4299,6 +4506,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023716/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023716(_idx, last) do
     Math.next_number(
@@ -4337,6 +4545,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023717/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a023717(_idx, last) do
     Math.next_number(
@@ -4375,6 +4584,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023718/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023718(_idx, last) do
     Math.next_number(
@@ -4413,6 +4623,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023719/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023719(_idx, last) do
     Math.next_number(
@@ -4451,6 +4662,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023720/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023720(_idx, last) do
     Math.next_number(
@@ -4489,6 +4701,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023721/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023721(_idx, last) do
     Math.next_number(
@@ -4527,6 +4740,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023722/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023722(_idx, last) do
     Math.next_number(
@@ -4565,6 +4779,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023723/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023723(_idx, last) do
     Math.next_number(
@@ -4603,6 +4818,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023724/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023724(_idx, last) do
     Math.next_number(
@@ -4641,6 +4857,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023725/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023725(_idx, last) do
     Math.next_number(
@@ -4679,6 +4896,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023726/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023726(_idx, last) do
     Math.next_number(
@@ -4717,6 +4935,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023727/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023727(_idx, last) do
     Math.next_number(
@@ -4755,6 +4974,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023728/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023728(_idx, last) do
     Math.next_number(
@@ -4793,6 +5013,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023729/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023729(_idx, last) do
     Math.next_number(
@@ -4831,6 +5052,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023730/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023730(_idx, last) do
     Math.next_number(
@@ -4869,6 +5091,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023731/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023731(_idx, last) do
     Math.next_number(
@@ -4907,6 +5130,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023732/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023732(_idx, last) do
     Math.next_number(
@@ -4945,6 +5169,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023733/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023733(_idx, last) do
     Math.next_number(
@@ -4983,6 +5208,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023734/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023734(_idx, last) do
     Math.next_number(
@@ -5021,6 +5247,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023735/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023735(_idx, last) do
     Math.next_number(
@@ -5059,6 +5286,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023736/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023736(_idx, last) do
     Math.next_number(
@@ -5097,6 +5325,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023738/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023738(_idx, last) do
     Math.next_number(
@@ -5135,6 +5364,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023739/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023739(_idx, last) do
     Math.next_number(
@@ -5173,6 +5403,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023740/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023740(_idx, last) do
     Math.next_number(
@@ -5211,6 +5442,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023745/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023745(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 3) end, last)
@@ -5244,6 +5476,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023746/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023746(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 4) end, last)
@@ -5277,6 +5510,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023747/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023747(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 5) end, last)
@@ -5310,6 +5544,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023748/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023748(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 6) end, last)
@@ -5343,6 +5578,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023749/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023749(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 7) end, last)
@@ -5376,6 +5612,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023750/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023750(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 8) end, last)
@@ -5409,6 +5646,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023751/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023751(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 9) end, last)
@@ -5442,6 +5680,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023752/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023752(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 11) end, last)
@@ -5475,6 +5714,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023753/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023753(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 12) end, last)
@@ -5508,6 +5748,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023754/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023754(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 13) end, last)
@@ -5541,6 +5782,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023755/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023755(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 14) end, last)
@@ -5574,6 +5816,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023756/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023756(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 15) end, last)
@@ -5607,6 +5850,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023757/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a023757(_idx, last) do
     Math.next_number(fn v -> Math.is_plaindrome_in_base?(v, 16) end, last)
@@ -5640,6 +5884,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a023697/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a023697(_idx, last) do
     Math.next_number(
@@ -5678,6 +5923,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a043321/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a043321(_idx, last) do
     Math.next_number(
@@ -5716,6 +5962,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a059015/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a059015(idx) do
     0..idx
@@ -5751,6 +5998,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a062756/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a062756(idx) do
     Math.digit_count(idx, [1], base: 3)
@@ -5784,6 +6032,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a074940/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a074940(_idx, last) do
     Math.next_number(
@@ -5822,6 +6071,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a077267/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a077267(idx) do
     Math.digit_count(idx, [0], base: 3)
@@ -5855,6 +6105,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a081603/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a081603(idx) do
     Math.digit_count(idx, [2], base: 3)
@@ -5888,6 +6139,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a081605/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a081605(_idx, last) do
     Math.next_number(
@@ -5926,6 +6178,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a081606/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a081606(_idx, last) do
     Math.next_number(
@@ -5964,6 +6217,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097251/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097251(_idx, last) do
     Math.next_number(
@@ -6002,6 +6256,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097252/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097252(_idx, last) do
     Math.next_number(
@@ -6040,6 +6295,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097253/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a097253(_idx, last) do
     Math.next_number(
@@ -6078,6 +6334,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097254/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a097254(_idx, last) do
     Math.next_number(
@@ -6116,6 +6373,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097255/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097255(_idx, last) do
     Math.next_number(
@@ -6154,6 +6412,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097256/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097256(_idx, last) do
     Math.next_number(
@@ -6192,6 +6451,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097257/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097257(_idx, last) do
     Math.next_number(
@@ -6230,6 +6490,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097258/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097258(_idx, last) do
     Math.next_number(
@@ -6268,6 +6529,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097259/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097259(_idx, last) do
     Math.next_number(
@@ -6306,6 +6568,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097260/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: -1
   def seq_a097260(_idx, last) do
     Math.next_number(
@@ -6344,6 +6607,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097261/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097261(_idx, last) do
     Math.next_number(
@@ -6382,6 +6646,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a097262/2)
   end
 
+  @doc false
   @doc offset: 0, fill_value: -1
   def seq_a097262(_idx, last) do
     Math.next_number(
@@ -6420,6 +6685,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102669/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102669(idx) do
     Math.digit_count(idx, [2, 3, 4, 5, 6, 7, 8, 9])
@@ -6454,6 +6720,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102670/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102670(idx) do
     0..idx
@@ -6489,6 +6756,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102671/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102671(idx) do
     Math.digit_count(idx, [3, 4, 5, 6, 7, 8, 9])
@@ -6523,6 +6791,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102672/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102672(idx) do
     0..idx
@@ -6558,6 +6827,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102673/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102673(idx) do
     Math.digit_count(idx, [4, 5, 6, 7, 8, 9])
@@ -6592,6 +6862,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102674/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102674(idx) do
     0..idx
@@ -6627,6 +6898,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102675/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102675(idx) do
     Math.digit_count(idx, [5, 6, 7, 8, 9])
@@ -6661,6 +6933,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102676/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102676(idx) do
     0..idx
@@ -6696,6 +6969,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102677/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102677(idx) do
     Math.digit_count(idx, [6, 7, 8, 9])
@@ -6730,6 +7004,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102678/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102678(idx) do
     0..idx
@@ -6765,6 +7040,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102679/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102679(idx) do
     Math.digit_count(idx, [7, 8, 9])
@@ -6799,6 +7075,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102680/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102680(idx) do
     0..idx
@@ -6834,6 +7111,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102681/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102681(idx) do
     Math.digit_count(idx, [8, 9])
@@ -6868,6 +7146,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102682/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102682(idx) do
     0..idx
@@ -6903,6 +7182,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102683/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102683(idx) do
     Math.digit_count(idx, [9])
@@ -6937,6 +7217,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a102684/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a102684(idx) do
     0..idx
@@ -6973,6 +7254,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a006886/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a006886(_idx, last) do
     Math.next_number(&Predicates.is_kaprekar_number?/1, last)
@@ -7007,6 +7289,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a053816/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a053816(_idx, last) do
     Math.next_number(&Predicates.is_kaprekar_strict_number?/1, last)
@@ -7041,6 +7324,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005188/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a005188(_idx, last) do
     Math.next_number(&Predicates.is_narcissistic_number?/1, last)
@@ -7074,6 +7358,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010353/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a010353(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 9) end, last)
@@ -7107,6 +7392,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010354/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a010354(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 8) end, last)
@@ -7140,6 +7426,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010350/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a010350(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 7) end, last)
@@ -7173,6 +7460,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010348/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a010348(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 6) end, last)
@@ -7206,6 +7494,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010346/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a010346(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 5) end, last)
@@ -7239,6 +7528,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a010344/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a010344(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 4) end, last)
@@ -7272,6 +7562,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161948/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a161948(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 11) end, last)
@@ -7305,6 +7596,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161949/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a161949(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 12) end, last)
@@ -7338,6 +7630,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161950/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a161950(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 13) end, last)
@@ -7371,6 +7664,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161951/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a161951(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 14) end, last)
@@ -7404,6 +7698,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161952/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a161952(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 15) end, last)
@@ -7437,6 +7732,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a161953/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a161953(_idx, last) do
     Math.next_number(fn v -> Math.is_narcissistic_in_base?(v, 16) end, last)
@@ -7555,6 +7851,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a001101/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a001101(_idx, last) do
     Math.next_number(&Predicates.is_moran_number?/1, last)
@@ -7589,6 +7886,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a005349/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a005349(_idx, last) do
     Math.next_number(&Predicates.is_harshad_number?/1, last)
@@ -7622,6 +7920,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a007602/2)
   end
 
+  @doc false
   @doc offset: 1, fill_value: 0
   def seq_a007602(_idx, last) do
     Math.next_number(&Predicates.is_zuckerman_number?/1, last)
@@ -7655,6 +7954,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a115983/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a115983(_idx, last) do
     Math.next_number(
@@ -7694,6 +7994,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Repr.seq_a051003/2)
   end
 
+  @doc false
   @doc offset: 1
   def seq_a051003(_idx, last) do
     Math.next_number(&Predicates.is_beast_number?/1, last)

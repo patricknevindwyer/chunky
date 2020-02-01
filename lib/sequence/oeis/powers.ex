@@ -5,57 +5,60 @@ defmodule Chunky.Sequence.OEIS.Powers do
 
   ## Available Sequences
 
-   - [A000051 - a(n) = 2^n + 1.](https://oeis.org/A000051) - `:a000051` - `create_sequence_a000051/1`
-   - [A000351 - Powers of 5: a(n) = 5^n.](https://oeis.org/A000351) - `:a000351` - `create_sequence_a000351/1`
-   - [A000400 - Powers of 6: a(n) = 6^n.](https://oeis.org/A000400) - `:a000400` - `create_sequence_a000400/1`
-   - [A000420 - Powers of 7: a(n) = 7^n.](https://oeis.org/A000420) - `:a000420` - `create_sequence_a000420/1`
-   - [A001018 - Powers of 8: a(n) = 8^n.](https://oeis.org/A001018) - `:a001018` - `create_sequence_a001018/1`
-   - [A001019 - Powers of 9: a(n) = 9^n.](https://oeis.org/A001019) - `:a001019` - `create_sequence_a001019/1`
-   - [A001020 - Powers of 11: a(n) = 11^n.](https://oeis.org/A001020) - `:a001020` - `create_sequence_a001020/1`
-   - [A001021 - Powers of 12.](https://oeis.org/A001021) - `:a001021` - `create_sequence_a001021/1`
-   - [A001022 - Powers of 13.](https://oeis.org/A001022) - `:a001022` - `create_sequence_a001022/1`
-   - [A001023 - Powers of 14.](https://oeis.org/A001023) - `:a001023` - `create_sequence_a001023/1`
-   - [A001024 - Powers of 15.](https://oeis.org/A001024) - `:a001024` - `create_sequence_a001024/1`
-   - [A001025 - Powers of 16: a(n) = 16^n.](https://oeis.org/A001025) - `:a001025` - `create_sequence_a001025/1`
-   - [A001026 - Powers of 17.](https://oeis.org/A001026) - `:a001026` - `create_sequence_a001026/1`
-   - [A001027 - Powers of 18.](https://oeis.org/A001027) - `:a001027` - `create_sequence_a001027/1`
-   - [A001029 - Powers of 19.](https://oeis.org/A001029) - `:a001029` - `create_sequence_a001029/1`
-   - [A009964 - Powers of 20.](https://oeis.org/A009964) - `:a009964` - `create_sequence_a009964/1`
-   - [A009965 - Powers of 21.](https://oeis.org/A009965) - `:a009965` - `create_sequence_a009965/1`
-   - [A009966 - Powers of 22.](https://oeis.org/A009966) - `:a009966` - `create_sequence_a009966/1`
-   - [A009967 - Powers of 23.](https://oeis.org/A009967) - `:a009967` - `create_sequence_a009967/1`
-   - [A009968 - Powers of 24: a(n) = 24^n.](https://oeis.org/A009968) - `:a009968` - `create_sequence_a009968/1`
-   - [A009969 - Powers of 25.](https://oeis.org/A009969) - `:a009969` - `create_sequence_a009969/1`
-   - [A009970 - Powers of 26.](https://oeis.org/A009970) - `:a009970` - `create_sequence_a009970/1`
-   - [A009971 - Powers of 27.](https://oeis.org/A009971) - `:a009971` - `create_sequence_a009971/1`
-   - [A009972 - Powers of 28.](https://oeis.org/A009972) - `:a009972` - `create_sequence_a009972/1`
-   - [A009973 - Powers of 29.](https://oeis.org/A009973) - `:a009973` - `create_sequence_a009973/1`
-   - [A009974 - Powers of 30.](https://oeis.org/A009974) - `:a009974` - `create_sequence_a009974/1`
-   - [A009975 - Powers of 31.](https://oeis.org/A009975) - `:a009975` - `create_sequence_a009975/1`
-   - [A009976 - Powers of 32.](https://oeis.org/A009976) - `:a009976` - `create_sequence_a009976/1`
-   - [A009977 - Powers of 33.](https://oeis.org/A009977) - `:a009977` - `create_sequence_a009977/1`
-   - [A009978 - Powers of 34.](https://oeis.org/A009978) - `:a009978` - `create_sequence_a009978/1`
-   - [A009979 - Powers of 35.](https://oeis.org/A009979) - `:a009979` - `create_sequence_a009979/1`
-   - [A009980 - Powers of 36.](https://oeis.org/A009980) - `:a009980` - `create_sequence_a009980/1`
-   - [A009981 - Powers of 37.](https://oeis.org/A009981) - `:a009981` - `create_sequence_a009981/1`
-   - [A009982 - Powers of 38.](https://oeis.org/A009982) - `:a009982` - `create_sequence_a009982/1`
-   - [A009983 - Powers of 39.](https://oeis.org/A009983) - `:a009983` - `create_sequence_a009983/1`
-   - [A009984 - Powers of 40.](https://oeis.org/A009984) - `:a009984` - `create_sequence_a009984/1`
-   - [A009985 - Powers of 41.](https://oeis.org/A009985) - `:a009985` - `create_sequence_a009985/1`
-   - [A009986 - Powers of 42.](https://oeis.org/A009986) - `:a009986` - `create_sequence_a009986/1`
-   - [A009987 - Powers of 43.](https://oeis.org/A009987) - `:a009987` - `create_sequence_a009987/1`
-   - [A009988 - Powers of 44.](https://oeis.org/A009988) - `:a009988` - `create_sequence_a009988/1`
-   - [A009989 - Powers of 45.](https://oeis.org/A009989) - `:a009989` - `create_sequence_a009989/1`
-   - [A009990 - Powers of 46.](https://oeis.org/A009990) - `:a009990` - `create_sequence_a009990/1`
-   - [A009991 - Powers of 47.](https://oeis.org/A009991) - `:a009991` - `create_sequence_a009991/1`
-   - [A009992 - Powers of 48: a(n) = 48^n.](https://oeis.org/A009992) - `:a009992` - `create_sequence_a009992/1`
-   - [A011557 - Powers of 10: a(n) = 10^n.](https://oeis.org/A011557) - `:a011557` - `create_sequence_a011557/1`
-   - [A087752 - Powers of 49.](https://oeis.org/A087752) - `:a087752` - `create_sequence_a087752/1`
-   - [A057716 - The non-powers of 2.](https://oeis.org/A057716) - `:a057716` - `create_sequence_a057716/1`
-   - [A159991 - Powers of 60.](https://oeis.org/A159991) - `:a159991` - `create_sequence_a159991/1`
+  ### Powers of specific integers
+  
+   - `create_sequence_a000351/1` - A000351 - Powers of 5: a(n) = 5^n.
+   - `create_sequence_a000400/1` - A000400 - Powers of 6: a(n) = 6^n.
+   - `create_sequence_a000420/1` - A000420 - Powers of 7: a(n) = 7^n.
+   - `create_sequence_a001018/1` - A001018 - Powers of 8: a(n) = 8^n.
+   - `create_sequence_a001019/1` - A001019 - Powers of 9: a(n) = 9^n.
+   - `create_sequence_a011557/1` - A011557 - Powers of 10: a(n) = 10^n.
+   - `create_sequence_a001020/1` - A001020 - Powers of 11: a(n) = 11^n.
+   - `create_sequence_a001021/1` - A001021 - Powers of 12.
+   - `create_sequence_a001022/1` - A001022 - Powers of 13.
+   - `create_sequence_a001023/1` - A001023 - Powers of 14.
+   - `create_sequence_a001024/1` - A001024 - Powers of 15.
+   - `create_sequence_a001025/1` - A001025 - Powers of 16: a(n) = 16^n.
+   - `create_sequence_a001026/1` - A001026 - Powers of 17.
+   - `create_sequence_a001027/1` - A001027 - Powers of 18.
+   - `create_sequence_a001029/1` - A001029 - Powers of 19.
+   - `create_sequence_a009964/1` - A009964 - Powers of 20.
+   - `create_sequence_a009965/1` - A009965 - Powers of 21.
+   - `create_sequence_a009966/1` - A009966 - Powers of 22.
+   - `create_sequence_a009967/1` - A009967 - Powers of 23.
+   - `create_sequence_a009968/1` - A009968 - Powers of 24: a(n) = 24^n.
+   - `create_sequence_a009969/1` - A009969 - Powers of 25.
+   - `create_sequence_a009970/1` - A009970 - Powers of 26.
+   - `create_sequence_a009971/1` - A009971 - Powers of 27.
+   - `create_sequence_a009972/1` - A009972 - Powers of 28.
+   - `create_sequence_a009973/1` - A009973 - Powers of 29.
+   - `create_sequence_a009974/1` - A009974 - Powers of 30.
+   - `create_sequence_a009975/1` - A009975 - Powers of 31.
+   - `create_sequence_a009976/1` - A009976 - Powers of 32.
+   - `create_sequence_a009977/1` - A009977 - Powers of 33.
+   - `create_sequence_a009978/1` - A009978 - Powers of 34.
+   - `create_sequence_a009979/1` - A009979 - Powers of 35.
+   - `create_sequence_a009980/1` - A009980 - Powers of 36.
+   - `create_sequence_a009981/1` - A009981 - Powers of 37.
+   - `create_sequence_a009982/1` - A009982 - Powers of 38.
+   - `create_sequence_a009983/1` - A009983 - Powers of 39.
+   - `create_sequence_a009984/1` - A009984 - Powers of 40.
+   - `create_sequence_a009985/1` - A009985 - Powers of 41.
+   - `create_sequence_a009986/1` - A009986 - Powers of 42.
+   - `create_sequence_a009987/1` - A009987 - Powers of 43.
+   - `create_sequence_a009988/1` - A009988 - Powers of 44.
+   - `create_sequence_a009989/1` - A009989 - Powers of 45.
+   - `create_sequence_a009990/1` - A009990 - Powers of 46.
+   - `create_sequence_a009991/1` - A009991 - Powers of 47.
+   - `create_sequence_a009992/1` - A009992 - Powers of 48: a(n) = 48^n.
+   - `create_sequence_a087752/1` - A087752 - Powers of 49.
+   - `create_sequence_a159991/1` - A159991 - Powers of 60.
 
 
-
+  ### Variations of powers of 2
+  
+   - `create_sequence_a000051/1` - A000051 - a(n) = 2^n + 1.
+   - `create_sequence_a057716/1` - A057716 - The non-powers of 2.
 
   """
 
@@ -92,6 +95,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a000051/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000051(idx) do
     Math.pow(2, idx) + 1
@@ -125,6 +129,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a000351/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000351(idx) do
     Math.pow(5, idx)
@@ -158,6 +163,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a000400/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000400(idx) do
     Math.pow(6, idx)
@@ -191,6 +197,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a000420/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a000420(idx) do
     Math.pow(7, idx)
@@ -224,6 +231,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001018/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001018(idx) do
     Math.pow(8, idx)
@@ -257,6 +265,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001019/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001019(idx) do
     Math.pow(9, idx)
@@ -290,6 +299,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001020/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001020(idx) do
     Math.pow(11, idx)
@@ -323,6 +333,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001021/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001021(idx) do
     Math.pow(12, idx)
@@ -356,6 +367,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001022/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001022(idx) do
     Math.pow(13, idx)
@@ -389,6 +401,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001023/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001023(idx) do
     Math.pow(14, idx)
@@ -422,6 +435,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001024/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001024(idx) do
     Math.pow(15, idx)
@@ -455,6 +469,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001025/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001025(idx) do
     Math.pow(16, idx)
@@ -488,6 +503,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001026/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001026(idx) do
     Math.pow(17, idx)
@@ -521,6 +537,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001027/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001027(idx) do
     Math.pow(18, idx)
@@ -554,6 +571,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a001029/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a001029(idx) do
     Math.pow(19, idx)
@@ -587,6 +605,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009964/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009964(idx) do
     Math.pow(20, idx)
@@ -620,6 +639,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009965/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009965(idx) do
     Math.pow(21, idx)
@@ -653,6 +673,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009966/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009966(idx) do
     Math.pow(22, idx)
@@ -686,6 +707,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009967/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009967(idx) do
     Math.pow(23, idx)
@@ -719,6 +741,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009968/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009968(idx) do
     Math.pow(24, idx)
@@ -752,6 +775,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009969/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009969(idx) do
     Math.pow(25, idx)
@@ -785,6 +809,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009970/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009970(idx) do
     Math.pow(26, idx)
@@ -818,6 +843,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009971/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009971(idx) do
     Math.pow(27, idx)
@@ -851,6 +877,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009972/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009972(idx) do
     Math.pow(28, idx)
@@ -884,6 +911,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009973/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009973(idx) do
     Math.pow(29, idx)
@@ -917,6 +945,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009974/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009974(idx) do
     Math.pow(30, idx)
@@ -950,6 +979,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009975/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009975(idx) do
     Math.pow(31, idx)
@@ -983,6 +1013,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009976/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009976(idx) do
     Math.pow(32, idx)
@@ -1016,6 +1047,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009977/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009977(idx) do
     Math.pow(33, idx)
@@ -1049,6 +1081,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009978/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009978(idx) do
     Math.pow(34, idx)
@@ -1082,6 +1115,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009979/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009979(idx) do
     Math.pow(35, idx)
@@ -1115,6 +1149,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009980/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009980(idx) do
     Math.pow(36, idx)
@@ -1148,6 +1183,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009981/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009981(idx) do
     Math.pow(37, idx)
@@ -1181,6 +1217,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009982/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009982(idx) do
     Math.pow(38, idx)
@@ -1214,6 +1251,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009983/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009983(idx) do
     Math.pow(39, idx)
@@ -1247,6 +1285,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009984/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009984(idx) do
     Math.pow(40, idx)
@@ -1280,6 +1319,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009985/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009985(idx) do
     Math.pow(41, idx)
@@ -1313,6 +1353,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009986/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009986(idx) do
     Math.pow(42, idx)
@@ -1346,6 +1387,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009987/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009987(idx) do
     Math.pow(43, idx)
@@ -1379,6 +1421,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009988/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009988(idx) do
     Math.pow(44, idx)
@@ -1412,6 +1455,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009989/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009989(idx) do
     Math.pow(45, idx)
@@ -1445,6 +1489,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009990/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009990(idx) do
     Math.pow(46, idx)
@@ -1478,6 +1523,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009991/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009991(idx) do
     Math.pow(47, idx)
@@ -1511,6 +1557,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a009992/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a009992(idx) do
     Math.pow(48, idx)
@@ -1544,6 +1591,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a011557/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a011557(idx) do
     Math.pow(10, idx)
@@ -1577,6 +1625,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a087752/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a087752(idx) do
     Math.pow(49, idx)
@@ -1610,6 +1659,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a159991/1)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a159991(idx) do
     Math.pow(60, idx)
@@ -1642,6 +1692,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
     sequence_for_function(&Elixir.Chunky.Sequence.OEIS.Powers.seq_a057716/2)
   end
 
+  @doc false
   @doc offset: 0
   def seq_a057716(idx, last) do
     case idx do
