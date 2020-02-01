@@ -95,9 +95,33 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 
  - geometry module
   - triangles
-   - is_triangle guard
+   - x is_triangle guard
    - triangles from latest Numberphile
    - write up on building/testing/finding numberphile triangles
+  - triangle guard (or another function) needs to test for valid shape (like a + b > c)
+
+Heronian triangles - (integer sides, integer area)
+ - 5/12/13
+- equilateral - impossible
+
+Super hero triangles - (integer sides, perimeter and area equal and integer) (finite set, only 5 of them)
+ - 6/25/29
+
+
+Indecomposible triangles (cannot be broken into smaller right angle triangles)
+
+Heronians where Area exactly double perimeter (finite)
+Heronians where Area exactly a multiple of perimeter (always finite)
+
+Parker Super Triangle (hero triangle with consecutive numbers (like 13, 14, 15)
+
+Numberphile - Superhero Triangles
+
+
+ - document triangle
+  - library.md
+  - readme.md
+  - ?
 
  - Extended Summation (when: of:) (see notes from MCO to BWI flight)
  
@@ -117,7 +141,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - chunky refs
   - notes/callouts
   
-  
+ - numberphile triangles 
 
  - Project Euler 001
  
