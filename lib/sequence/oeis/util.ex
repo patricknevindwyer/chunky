@@ -241,7 +241,7 @@ defmodule Chunky.Sequence.OEIS.Util do
     # do we need to add in the sequence function?
     if include_seq_func do
       IO.puts(seq_io, """
-
+      @doc false
       @doc offset: #{seq_offset}
       def seq_#{seq_id_lower}(_idx, last) do
           

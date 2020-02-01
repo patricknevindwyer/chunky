@@ -91,22 +91,20 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  
    
 ### release 0.12.* - documentation and refactoring
-   
-
- - update stub generator to include `@doc false` for sequence methods
- - update stub generator to exclude "Formerly" section if it's empty
- 
- - Extended Summation (when: of:) (see notes from MCO to BWI flight)
- 
- - sequence genserver/client
- 
- - Summation with sequences
+    
 
  - geometry module
   - triangles
    - is_triangle guard
    - triangles from latest Numberphile
    - write up on building/testing/finding numberphile triangles
+
+ - Extended Summation (when: of:) (see notes from MCO to BWI flight)
+ 
+ - sequence genserver/client
+ 
+ - Summation with sequences
+
  
 ### Articles
 
@@ -140,6 +138,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
  - Project Euler 009
  
  - Project Euler 010
+   
    
 ### Future   
 
