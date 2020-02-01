@@ -36,10 +36,17 @@ defmodule Chunky.Geometry.Triangle do
    
        iex> Triangle.area({5, 12, 13})
        {:integer, 30}
+   
+       iex> Triangle.area({5, 10, 20})
+       ** (ArgumentError) Shape of the triangle is invalid
        
    
    """
    def area(t={a, b, c}) when is_triangle?(t) do
+       
+       if is_valid_triangle?(t) == false do
+           raise ArgumentError, message: "Shape of the triangle is invalid"
+       end
        
        # find the semi-perimeter
        semi_p = Fraction.new("1/2") |> Fraction.multiply(a + b + c)
