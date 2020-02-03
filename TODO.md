@@ -97,23 +97,44 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - triangles
    - x is_triangle guard
    - triangles from latest Numberphile
+    - use stills
+    - build up triangle analysis
    - write up on building/testing/finding numberphile triangles
-  - triangle guard (or another function) needs to test for valid shape (like a + b > c)
-
-Heronian triangles - (integer sides, integer area)
- - 5/12/13
-- equilateral - impossible
-
-Super hero triangles - (integer sides, perimeter and area equal and integer) (finite set, only 5 of them)
- - 6/25/29
-
+ 
+ - Geometry.Triangle.Predicates
+  - [x] is_heronian_triangle
+  - [x] is_super_heronian_triangle (area == perimeter)
+  - [x] almost_equilateral_heronian (parker, super heronian, sequential sides)
+  - [ ] is_decomposible
+  - [ ] is_indecomposible
+  - [ ] is_2_heronian
+  - [ ] is_3_heronian
+  - [ ] ...
+  - [x] is parker super triangle
+  - [x] normalize/1 (reorder sides in increasing order)
+  - [x] almost equilateral heronians (https://en.wikipedia.org/wiki/Heronian_triangle#Almost-equilateral_Heronian_triangles)
+   - also called super-heronian
+   - add a generator
+  - [ ] next_almost_equilateral_heronian_triangle/1
+  - [ ] is obtuse
+  - [ ] is acute
+ 
+ - Geometry.Triangle
+  - [x] decompose
+   - need scalene solutions
+  - [ ] compose
+  - [x] perimeter
+  - [x] is_b_heronian
+  - [x] triangles_from_hypotenuse
+  - [ ] get_heronian_multiple/1 - derive the multiple for `b-heronian` (this is a complement of is_multiple_heronian?/2)
+  - [x] type
+  - [!] height
+   - height of scalene triangles (for decompose), could have integer solutions for non-hypotenuse sides
+   - we need a generalized solution for this (see scalene_base)
+  - [ ] !! scalene_base/1 needs to account for multiple integer heights
 
 Indecomposible triangles (cannot be broken into smaller right angle triangles)
 
-Heronians where Area exactly double perimeter (finite)
-Heronians where Area exactly a multiple of perimeter (always finite)
-
-Parker Super Triangle (hero triangle with consecutive numbers (like 13, 14, 15)
 
 Numberphile - Superhero Triangles
 
@@ -122,7 +143,9 @@ Numberphile - Superhero Triangles
   - library.md
   - readme.md
   - ?
-
+ - break Geometry.Triangle into Triangle and Triangle.Predicates
+ - add analyze/1 method to Triangle.Predicates
+ 
  - Extended Summation (when: of:) (see notes from MCO to BWI flight)
  
  - sequence genserver/client
