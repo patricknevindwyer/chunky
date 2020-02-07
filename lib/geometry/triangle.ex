@@ -1,20 +1,13 @@
 defmodule Chunky.Geometry.Triangle do
    @moduledoc """
-   Functions for working with geometric shapes.
+   Functions for working with geometric shapes. For _predicate functions_ related to Triangles, see `Chunky.Geometry.Triangle.Predicates`.
       
    ## Integer Triangles
    
+    - `angles/1` - Find the interior angles of a triangle
     - `area/1` - Find the area of any triangle
     - `decompose/1` - Break a triangle into two smaller right triangles
     - `height/2` - Find the bisecting height of a triangle
-    - `is_almost_equilateral_heronian_triangle?/1` - Heronian triangle with sides `n - 1`, `n`, `n + 1`
-    - `is_equilateral?/1` - Is a triangle an equilateral triangle?
-    - `is_heronian_triangle?/1` - Is a triangle a _heronian_ triangle, with integer sides and integer area?
-    - `is_isoceles?/1` - Is a triangle an isoceles triangle?
-    - `is_multiple_heronian_triangle?/2` - Is a triangle a heronian triange with an area that is a specific multiple of the perimeter?
-    - `is_pythagorean_triangle?/1` - Is the given triangle a right triangle with integer sides?
-    - `is_scalene?/1` - Is a triangle a scalene triangle?
-    - `is_super_heronian_triangle?/1` - Does a triangle have integer sides, integer area, and a perimeter equal to area?
     - `normalize/1` - Normalize the ordering of sides of a triangle
     - `triangles_from_hypotenuse/2` - Generate integer triangles given a hypotenuse and optional filter
     - `type/1` - Determine the basic type, or form, of a triangle
@@ -24,6 +17,52 @@ defmodule Chunky.Geometry.Triangle do
 
    alias Chunky.Fraction
    alias Chunky.Math
+   alias Chunky.Geometry.Triangle.Predicates
+   
+   @doc """
+   Find the angles of a triangle.
+   
+   The resulting 3-tuple will be floats, in order such that each angle is opposite
+   it's edge. So for a triangle with sides `{a, b, c}`, the resulting angles `{θa, θb, θc}`
+   are such that `θa` is opposite edge `a`, `θb` opposite edge `b`, and `θc` opposite edge
+   `c`:
+   
+    ![Triangle](https://upload.wikimedia.org/wikipedia/commons/4/49/Triangle_with_notations_2.svg)
+   
+   ## Examples
+   
+       iex> Triangle.angles({3, 4, 5})
+       {36.86989764584401, 53.13010235415599, 90.0}
+
+       iex> Triangle.angles({13, 13, 13})
+       {59.99999999999999, 59.99999999999999, 59.99999999999999}
+   
+       iex> Triangle.angles({10, 5, 10})
+       {75.52248781407008, 28.95502437185985, 75.52248781407008}
+
+       iex> Triangle.angles({30, 16, 17})
+       {130.73591716163173, 23.83600707762401, 25.428075760744253}
+   
+   
+   """
+   def angles(t={a, b, c}) when is_triangle?(t) do
+       if is_valid_triangle?(t) == false do
+           raise ArgumentError, message: "Shape of triangle is invalid"
+       else
+           {
+               solve_for_angle(a, b, c),
+               solve_for_angle(b, a, c),
+               solve_for_angle(c, b, a)
+           }
+       end
+   end
+   
+   defp solve_for_angle(c, a, b) do
+       :math.acos(((c * c) - ( ( a * a) + (b * b))) / (-2.0 * a * b)) |> rad_to_deg()
+      # :math.acos((c * c) / ((a * a) + (b * b) - (2 * a * b)))
+   end
+   
+   defp rad_to_deg(v), do: v * (180.0 / 3.141592653589793)
    
    @doc """
    Find the area of a triangle, returning either an integer, float, or fraction value.
@@ -259,235 +298,6 @@ defmodule Chunky.Geometry.Triangle do
    end
    
    @doc """
-   An _almost_ equilateral heronian triangle has sequentially sized integer sides and an integer area.
-   
-   Sometimes called _super heronian_ (which is a different contruction in this library), parker triangles,
-   or almost equilaterals, these are integer triangles with sequential increasing sides, like `{3, 4, 5}`.
-   
-   ## Examples
-   
-       iex> Triangle.is_almost_equilateral_heronian_triangle?({3, 4, 5})
-       true
-
-       iex> Triangle.is_almost_equilateral_heronian_triangle?({51, 52, 53})
-       true
-
-       iex> Triangle.is_almost_equilateral_heronian_triangle?({53, 54, 55})
-       false
-   
-       iex> Triangle.is_almost_equilateral_heronian_triangle?({3, 7, 9})
-       false
-   
-   """
-   def is_almost_equilateral_heronian_triangle?(t) when is_triangle?(t) do
-       {a, b, c} = normalize(t)
-       (a == (b - 1)) && (b == (c - 1)) && is_heronian_triangle?(t)
-   end
-   
-   @doc """
-   Is the provided triangle an equilateral triangle?
-   
-   ## Examples
-   
-       iex> Triangle.is_equilateral?({5, 5, 5})
-       true
-
-       iex> Triangle.is_equilateral?({3, 4, 5})
-       false
-
-       iex> Triangle.is_equilateral?({15, 5, 15})
-       false
-
-       iex> Triangle.is_equilateral?({0, 0, 0})
-       ** (FunctionClauseError) no function clause matching in Chunky.Geometry.Triangle.is_equilateral?/1
-   
-       iex> Triangle.is_equilateral?({-5, 5, 5})
-       ** (FunctionClauseError) no function clause matching in Chunky.Geometry.Triangle.is_equilateral?/1
-   
-   """
-   def is_equilateral?(t={a, b, c}) when is_triangle?(t) do
-       (a == b) && (b == c)
-   end
-   
-   @doc """
-   Is a triangle a _heronian_ triangle, one with integer sides and integer area?
-   
-   ## Examples
-   
-       iex> Triangle.is_heronian_triangle?({3, 4, 5})
-       true
-
-       iex> Triangle.is_heronian_triangle?({5, 6, 7})
-       false
-
-       iex> Triangle.is_heronian_triangle?({17, 16, 17})
-       true
-   
-       iex> Triangle.is_heronian_triangle?({41, 41, 80})
-       true
-   
-       iex> Triangle.is_heronian_triangle?({30, 5, 29})
-       true
-   
-   """
-   def is_heronian_triangle?(t) when is_triangle?(t) do
-
-       
-       is_valid_triangle?(t) && case area(t) do
-          {:integer, _} -> true
-          _ -> false 
-       end
-
-   end
-   
-   @doc """
-   Is the triangle an isoceles triangle, a triangle with two equal sides?
-   
-   ## Examples
-   
-       iex> Triangle.is_isoceles?({5, 5, 5})
-       false
-
-       iex> Triangle.is_isoceles?({15, 5, 15})
-       true
-
-       iex> Triangle.is_isoceles?({5, 15, 25})
-       false
-
-       iex> Triangle.is_isoceles?({5, 25, 25})
-       true
-       
-   """
-   def is_isoceles?(t={a, b, c}) when is_triangle?(t) do
-       is_equilateral?(t) == false && ( (a ==b) || (b == c) || (a == c))
-   end
-   
-   @doc """
-   Is a triangle a heronian triangle where the area is a specific multiple of the perimeter?
-   
-   A `2-heronian` triangle would have an area that is `2*perimeter` of the triangle, while a
-   `3-heronian` would have an area that is `3*perimeter`. For each multiple size `m`, there 
-   are a finite number of multiple heronians triangles that are `m-heronian`.
-   
-   ## Examples
-   
-       iex> Triangle.is_multiple_heronian_triangle?({13, 14, 15}, 2)
-       true
-
-       iex> Triangle.is_multiple_heronian_triangle?({11, 25, 30}, 2)
-       true
-
-       iex> Triangle.is_multiple_heronian_triangle?({25, 26, 17}, 3)
-       true
-
-       iex> Triangle.is_multiple_heronian_triangle?({25, 28, 17}, 3)
-       true
-
-       iex> Triangle.is_multiple_heronian_triangle?({25, 36, 29}, 4)
-       true
-   
-   """
-   def is_multiple_heronian_triangle?(t={a, b, c}, m) when is_triangle?(t) and is_integer(m) do
-       
-       {_, ta} = area(t)
-       tp = a + b + c
-       is_heronian_triangle?(t) && (ta == (tp * m))
-   end
-   
-   @doc """
-   Is the given triangle a _right triangle_ with integer sides?
-   
-   ## Examples
-   
-       iex> Triangle.is_pythagorean_triangle?({5, 5, 5})
-       false
-
-       iex> Triangle.is_pythagorean_triangle?({10, 24, 26})
-       true
-   
-       iex> Triangle.is_pythagorean_triangle?({24, 10, 26})
-       true
-
-       iex> Triangle.is_pythagorean_triangle?({3, 4, 5})
-       true
-
-       iex> Triangle.is_pythagorean_triangle?({4, 5, 3})
-       true
-   
-       iex> Triangle.is_pythagorean_triangle?({4, 5, 6})
-       false
-   
-   """
-   def is_pythagorean_triangle?(t={a, b, c}) when is_triangle?(t) do
-       hyp = Enum.max([a, b, c])
-       
-       edges = [a, b, c] -- [hyp]
-       |> Enum.map(fn v -> v * v end)
-       |> Enum.sum()
-       
-       edges == (hyp * hyp)
-   end
-   
-   @doc """
-   Is the triangle a scalene triangle, a triangle with three different length sides?
-   
-   ## Examples
-   
-       iex> Triangle.is_scalene?({5, 5, 5})
-       false
-
-       iex> Triangle.is_scalene?({15, 15, 5})
-       false
-
-       iex> Triangle.is_scalene?({5, 15, 25})
-       true
-   
-       iex> Triangle.is_scalene?({15, 5, 35})
-       true
-   
-   """
-   def is_scalene?(t={a, b, c}) when is_triangle?(t) do
-       (a != b) && (b != c) && (a != c)
-   end
-     
-   @doc """
-   Is a triangle _super heronian_, a triangle with integer area and perimeter that are equal?
-   
-   Not to be confused with _almost equilateral heronians_, which are also sometimes called super
-   heronian triangles. In our definition, the super heronian triangles have an integer area and
-   perimeter that are equal. This is a finite set:
-   
-    - `{5, 12, 13}`
-    - `{6, 8, 10}`
-    - `{6, 25, 29}`
-    - `{7, 15, 20}`
-    - `{9, 10, 17}`
-   
-   ## Examples
-   
-       iex> Triangle.is_super_heronian_triangle?({5, 12, 13})
-       true
-
-       iex> Triangle.is_super_heronian_triangle?({5, 12, 15})
-       false
-
-       iex> Triangle.is_super_heronian_triangle?({3, 4, 5})
-       false
-   
-       iex> Triangle.is_super_heronian_triangle?({6, 29, 25})
-       true
-   
-   """     
-   def is_super_heronian_triangle?(t={a, b, c}) when is_triangle?(t) do
-   
-       case area(t) do
-           {:integer, ta} -> ta == (a + b + c)
-           _ -> false
-       end
-       
-   end
-   
-   @doc """
    Normalize the order of edges of a triangle.
    
    ## Examples
@@ -529,13 +339,13 @@ defmodule Chunky.Geometry.Triangle do
        iex> Triangle.triangles_from_hypotenuse(5)
        [{1, 5, 5}, {2, 4, 5}, {2, 5, 5}, {3, 3, 5}, {3, 4, 5}, {3, 5, 5}, {4, 4, 5}, {4, 5, 5}, {5, 5, 5}]
 
-       iex> Triangle.triangles_from_hypotenuse(5, filter: &Triangle.is_scalene?/1)
+       iex> Triangle.triangles_from_hypotenuse(5, filter: &Triangle.Predicates.is_scalene?/1)
        [{2, 4, 5}, {3, 4, 5}]
    
-       iex> Triangle.triangles_from_hypotenuse(5, filter: &Triangle.is_pythagorean_triangle?/1)
+       iex> Triangle.triangles_from_hypotenuse(5, filter: &Triangle.Predicates.is_pythagorean_triangle?/1)
        [{3, 4, 5}]
 
-       iex> Triangle.triangles_from_hypotenuse(125, filter: &Triangle.is_pythagorean_triangle?/1)
+       iex> Triangle.triangles_from_hypotenuse(125, filter: &Triangle.Predicates.is_pythagorean_triangle?/1)
        [{35, 120, 125}, {44, 117, 125}, {75, 100, 125}]
    
    """
@@ -595,9 +405,9 @@ defmodule Chunky.Geometry.Triangle do
        cond do
            
            is_valid_triangle?(t) == false -> :invalid
-           is_pythagorean_triangle?(t) -> :right
-           is_equilateral?(t) -> :equilateral
-           is_isoceles?(t) -> :isoceles
+           Predicates.is_pythagorean_triangle?(t) -> :right
+           Predicates.is_equilateral?(t) -> :equilateral
+           Predicates.is_isoceles?(t) -> :isoceles
            true -> :scalene
        end
    end

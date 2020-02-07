@@ -6,6 +6,7 @@ defmodule Chunky.GeometryTest do
   alias Chunky.Geometry.Triangle
   doctest Chunky.Geometry
   doctest Chunky.Geometry.Triangle
-  
+  doctest Chunky.Geometry.Triangle.Predicates
+    
 
 end

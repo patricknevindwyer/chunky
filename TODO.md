@@ -95,18 +95,18 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 
  - geometry module
   - triangles
-   - x is_triangle guard
-   - triangles from latest Numberphile
-    - use stills
-    - build up triangle analysis
-   - write up on building/testing/finding numberphile triangles
+ 
+ - [x] analyze
+ - [x] move predicates
  
  - Geometry.Triangle.Predicates
   - [x] is_heronian_triangle
   - [x] is_super_heronian_triangle (area == perimeter)
   - [x] almost_equilateral_heronian (parker, super heronian, sequential sides)
-  - [ ] is_decomposible
-  - [ ] is_indecomposible
+  - [x] is_decomposible
+  - [x] is_indecomposible
+  - [x] is obtuse
+  - [x] is acute
   - [ ] is_2_heronian
   - [ ] is_3_heronian
   - [ ] ...
@@ -115,22 +115,23 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   - [x] almost equilateral heronians (https://en.wikipedia.org/wiki/Heronian_triangle#Almost-equilateral_Heronian_triangles)
    - also called super-heronian
    - add a generator
-  - [ ] next_almost_equilateral_heronian_triangle/1
-  - [ ] is obtuse
-  - [ ] is acute
  
  - Geometry.Triangle
   - [x] decompose
-   - need scalene solutions
+   - x need scalene solutions
   - [ ] compose
+  - [ ] rad to deg
+  - [ ] deg to rad
+  - [ ] all angluar functions need to either annotate params ({:radians, 1.5}, {:degree, 90}) or offer an option for selecting mode
+   - or we work purely in degrees or radians and offer methods for conversion
   - [x] perimeter
   - [x] is_b_heronian
   - [x] triangles_from_hypotenuse
   - [ ] get_heronian_multiple/1 - derive the multiple for `b-heronian` (this is a complement of is_multiple_heronian?/2)
   - [x] type
-  - [!] height
-   - height of scalene triangles (for decompose), could have integer solutions for non-hypotenuse sides
-   - we need a generalized solution for this (see scalene_base)
+  - [x] height
+   - x height of scalene triangles (for decompose), could have integer solutions for non-hypotenuse sides
+   - x we need a generalized solution for this (see scalene_base)
   - [ ] !! scalene_base/1 needs to account for multiple integer heights
 
 Indecomposible triangles (cannot be broken into smaller right angle triangles)
@@ -143,14 +144,16 @@ Numberphile - Superhero Triangles
   - library.md
   - readme.md
   - ?
- - break Geometry.Triangle into Triangle and Triangle.Predicates
- - add analyze/1 method to Triangle.Predicates
+ - [x] break Geometry.Triangle into Triangle and Triangle.Predicates
+ - [x] add analyze/1 method to Triangle.Predicates
  
  - Extended Summation (when: of:) (see notes from MCO to BWI flight)
  
  - sequence genserver/client
  
  - Summation with sequences
+ 
+ - document next steps for Geometry.Triangle
 
  
 ### Articles
@@ -165,6 +168,10 @@ Numberphile - Superhero Triangles
   - notes/callouts
   
  - numberphile triangles 
+   - triangles from latest Numberphile
+    - use stills
+    - build up triangle analysis
+   - write up on building/testing/finding numberphile triangles
 
  - Project Euler 001
  
