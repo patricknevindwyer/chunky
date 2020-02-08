@@ -167,7 +167,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -187,7 +187,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -207,7 +207,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -227,7 +227,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -247,7 +247,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -267,7 +267,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -287,7 +287,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -307,7 +307,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -327,7 +327,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -347,7 +347,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -367,7 +367,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -387,7 +387,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -407,7 +407,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -427,7 +427,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -447,7 +447,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -467,7 +467,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -487,7 +487,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
@@ -507,7 +507,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
   See also:
 
-   - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   - `Chunky.Geometry.Triangle.is_multiple_heronian_triangle?/2`
 
   ## Examples
 
