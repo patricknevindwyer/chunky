@@ -90,11 +90,11 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ## TODO
  
    
-### release 0.12.* - documentation and refactoring, triangles
+### release 0.13.* - documentation and refactoring, triangles
 
 
 
-### release 0.12.n + 1 - recreationals
+### release 0.13.n + 1 - recreationals
 
  - Math
   - josephus numbers
@@ -102,7 +102,7 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
   
 
 
-### release 0.12. n + 2 - summations of sequences
+### release 0.13. n + 2 - summations of sequences
  
  - Extended Summation (when: of:) (see notes from MCO to BWI flight)
  
