@@ -1,4 +1,4 @@
-The Chunky library brings Fractions, Sequences, and extended Math functions
+The Chunky library brings Fractions, Sequences, Geometry, and extended Math functions
 to elixir.
 
 Install by adding `chunky` to your list of dependencies in `mix.exs`:
@@ -142,6 +142,27 @@ iex> Chunky.Math.euler_polynomial(2, 15) |> Chunky.Fraction.get_whole()
 ```
 
 See the Math modules for functions dealing with _number theory_, _combinatorics_, _predicates_, and much more.
+
+# Geometry
+
+Chunky has a selection of functions and predicates for working with Geometry and Triangles:
+
+ - `Chunky.Geometry.Triangle` - Measure, build, and construct triangles
+ - `Chunky.Geometry.Triangle.Predicates` - Numeric analysis and inspection of triangles
+
+Build, measure, and inspect triangles:
+
+```elixir
+iex> Triangle.type({3, 4, 5})
+:right
+
+iex> Triangle.compose({12, 5, 13}, {9, 15, 12})
+{:ok, {13, 14, 15}}
+
+iex> Triangle.Predicates.analyze({10, 13, 13})
+[:acute, :decomposable, :heronian_triangle, :isoceles]
+```
+
 
 # Series Operations
 

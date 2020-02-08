@@ -4,7 +4,15 @@ defmodule Chunky.Geometry.Triangle.Predicates do
    characteristic of the triangle. Predicate functions will, in almost every possible case, return a boolean,
    even in situations that would normally throw an error (like invalid triangles).
    
-
+   ## Analyzing Triangles
+   
+   Most often using individual predicates is the right approach. Sometimes, though, it can be useful to inspect
+   a wider set of properties about a triangle. The `analyze/2` function applies all of the predicate functions
+   for triangles against the provided triangle.
+   
+    - `analyze/2` - Assess properties of a triangle
+   
+   
    ## Shape
    
    Properties of the edges of a triangle:
@@ -21,10 +29,33 @@ defmodule Chunky.Geometry.Triangle.Predicates do
 
    ## Heronian Properties
       
+   Basic heronian triangles:
+   
     - `is_almost_equilateral_heronian_triangle?/1` - Heronian triangle with sides `n - 1`, `n`, `n + 1`
     - `is_heronian_triangle?/1` - Is a triangle a _heronian_ triangle, with integer sides and integer area?
-    - `is_multiple_heronian_triangle?/2` - Is a triangle a heronian triange with an area that is a specific multiple of the perimeter?
     - `is_super_heronian_triangle?/1` - Does a triangle have integer sides, integer area, and a perimeter equal to area?
+   
+   An extension of _super_ heronian triangles, heronian triangles with areas that are a specific multiple of the
+   perimeter:
+   
+    - `is_2_heronian_triangle?/1` - Is a triangle heronian, with area 2 times perimeter?
+    - `is_3_heronian_triangle?/1` - Is a triangle heronian, with area 3 times perimeter?
+    - `is_4_heronian_triangle?/1` - Is a triangle heronian, with area 4 times perimeter?
+    - `is_5_heronian_triangle?/1` - Is a triangle heronian, with area 5 times perimeter?
+    - `is_6_heronian_triangle?/1` - Is a triangle heronian, with area 6 times perimeter?
+    - `is_7_heronian_triangle?/1` - Is a triangle heronian, with area 7 times perimeter?
+    - `is_8_heronian_triangle?/1` - Is a triangle heronian, with area 8 times perimeter?
+    - `is_9_heronian_triangle?/1` - Is a triangle heronian, with area 9 times perimeter?
+    - `is_10_heronian_triangle?/1` - Is a triangle heronian, with area 10 times perimeter?
+    - `is_20_heronian_triangle?/1` - Is a triangle heronian, with area 20 times perimeter?
+    - `is_30_heronian_triangle?/1` - Is a triangle heronian, with area 30 times perimeter?
+    - `is_40_heronian_triangle?/1` - Is a triangle heronian, with area 40 times perimeter?
+    - `is_50_heronian_triangle?/1` - Is a triangle heronian, with area 50 times perimeter?
+    - `is_60_heronian_triangle?/1` - Is a triangle heronian, with area 60 times perimeter?
+    - `is_70_heronian_triangle?/1` - Is a triangle heronian, with area 70 times perimeter?
+    - `is_80_heronian_triangle?/1` - Is a triangle heronian, with area 80 times perimeter?
+    - `is_90_heronian_triangle?/1` - Is a triangle heronian, with area 90 times perimeter?
+    - `is_100_heronian_triangle?/1` - Is a triangle heronian, with area 100 times perimeter?
    
    ## Composability
    
@@ -38,6 +69,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
        angles: 1,
        area: 1,
        decompose: 1,
+       is_multiple_heronian_triangle?: 2,
        normalize: 1
    ]
    
@@ -71,6 +103,9 @@ defmodule Chunky.Geometry.Triangle.Predicates do
    
        iex> Triangle.Predicates.analyze({10, 13, 13})
        [:acute, :decomposable, :heronian_triangle, :isoceles]
+   
+       iex> Triangle.Predicates.analyze({477, 477, 504})
+       [:"70_heronian_triangle", :acute, :decomposable, :heronian_triangle, :isoceles]
    
    """
    def analyze(t, opts \\ []) when is_triangle?(t) do
@@ -127,10 +162,366 @@ defmodule Chunky.Geometry.Triangle.Predicates do
        end
    end
    
-   # def is_2_heronian_triangle?(t) when is_triangle?(t) do
-   #
-   # end
+   @doc """
+   Is a triangle `2-heronian`, a triangle with an area 2 times it's perimeter?
    
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_2_heronian_triangle?({13, 14, 15})
+       true
+
+       iex> Triangle.Predicates.is_2_heronian_triangle?({11, 25, 30})
+       true
+ 
+   """
+   def is_2_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 2)
+   end
+
+   @doc """
+   Is a triangle `3-heronian`, a triangle with an area 3 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_3_heronian_triangle?({25, 26, 17})
+       true
+
+       iex> Triangle.Predicates.is_3_heronian_triangle?({25, 28, 17})
+       true
+ 
+   """
+   def is_3_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 3)
+   end
+
+   @doc """
+   Is a triangle `4-heronian`, a triangle with an area 4 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_4_heronian_triangle?({30, 30, 48})
+       true
+
+       iex> Triangle.Predicates.is_4_heronian_triangle?({18, 80, 82})
+       true
+ 
+   """
+   def is_4_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 4)
+   end
+
+   @doc """
+   Is a triangle `5-heronian`, a triangle with an area 5 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_5_heronian_triangle?({30, 40, 50})
+       true
+
+       iex> Triangle.Predicates.is_5_heronian_triangle?({45, 50, 85})
+       true
+ 
+   """
+   def is_5_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 5)
+   end
+
+   @doc """
+   Is a triangle `6-heronian`, a triangle with an area 6 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_6_heronian_triangle?({33, 56, 65})
+       true
+
+       iex> Triangle.Predicates.is_6_heronian_triangle?({34, 61, 75})
+       true
+ 
+   """
+   def is_6_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 6)
+   end
+
+   @doc """
+   Is a triangle `7-heronian`, a triangle with an area 7 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_7_heronian_triangle?({42, 56, 70})
+       true
+
+       iex> Triangle.Predicates.is_7_heronian_triangle?({35, 84, 91})
+       true
+ 
+   """
+   def is_7_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 7)
+   end
+
+   @doc """
+   Is a triangle `8-heronian`, a triangle with an area 8 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_8_heronian_triangle?({52, 56, 60})
+       true
+
+       iex> Triangle.Predicates.is_8_heronian_triangle?({41, 84, 85})
+       true
+ 
+   """
+   def is_8_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 8)
+   end
+
+   @doc """
+   Is a triangle `9-heronian`, a triangle with an area 9 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_9_heronian_triangle?({52, 73, 75})
+       true
+
+       iex> Triangle.Predicates.is_9_heronian_triangle?({54, 72, 90})
+       true
+ 
+   """
+   def is_9_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 9)
+   end
+
+   @doc """
+   Is a triangle `10-heronian`, a triangle with an area 10 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_10_heronian_triangle?({65, 70, 75})
+       true
+
+       iex> Triangle.Predicates.is_10_heronian_triangle?({65, 72, 97})
+       true
+ 
+   """
+   def is_10_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 10)
+   end
+
+   @doc """
+   Is a triangle `20-heronian`, a triangle with an area 20 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_20_heronian_triangle?({130, 140, 150})
+       true
+
+       iex> Triangle.Predicates.is_20_heronian_triangle?({125, 145, 180})
+       true
+ 
+   """
+   def is_20_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 20)
+   end
+
+   @doc """
+   Is a triangle `30-heronian`, a triangle with an area 30 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_30_heronian_triangle?({195, 210, 225})
+       true
+
+       iex> Triangle.Predicates.is_30_heronian_triangle?({200, 200, 240})
+       true
+ 
+   """
+   def is_30_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 30)
+   end
+
+   @doc """
+   Is a triangle `40-heronian`, a triangle with an area 40 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_40_heronian_triangle?({267, 278, 289})
+       true
+
+       iex> Triangle.Predicates.is_40_heronian_triangle?({260, 280, 300})
+       true
+ 
+   """
+   def is_40_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 40)
+   end
+
+   @doc """
+   Is a triangle `50-heronian`, a triangle with an area 50 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_50_heronian_triangle?({325, 350, 375})
+       true
+
+       iex> Triangle.Predicates.is_50_heronian_triangle?({300, 390, 390})
+       true
+ 
+   """
+   def is_50_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 50)
+   end
+
+   @doc """
+   Is a triangle `60-heronian`, a triangle with an area 60 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_60_heronian_triangle?({408, 416, 424})
+       true
+
+       iex> Triangle.Predicates.is_60_heronian_triangle?({389, 425, 444})
+       true
+ 
+   """
+   def is_60_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 60)
+   end
+
+   @doc """
+   Is a triangle `70-heronian`, a triangle with an area 70 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_70_heronian_triangle?({477, 477, 504})
+       true
+
+       iex> Triangle.Predicates.is_70_heronian_triangle?({456, 481, 545})
+       true
+ 
+   """
+   def is_70_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 70)
+   end
+
+   @doc """
+   Is a triangle `80-heronian`, a triangle with an area 80 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_80_heronian_triangle?({534, 556, 578})
+       true
+
+       iex> Triangle.Predicates.is_80_heronian_triangle?({520, 560, 600})
+       true
+ 
+   """
+   def is_80_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 80)
+   end
+
+   @doc """
+   Is a triangle `90-heronian`, a triangle with an area 90 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_90_heronian_triangle?({612, 624, 636})
+       true
+
+       iex> Triangle.Predicates.is_90_heronian_triangle?({546, 690, 696})
+       true
+ 
+   """
+   def is_90_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 90)
+   end
+
+   @doc """
+   Is a triangle `100-heronian`, a triangle with an area 100 times it's perimeter?
+   
+   See also:
+   
+    - `Chunky.Geometry.Triangle.is_multiple_heronian?/2`
+   
+   ## Examples
+   
+       iex> Triangle.Predicates.is_100_heronian_triangle?({650, 700, 750})
+       true
+
+       iex> Triangle.Predicates.is_100_heronian_triangle?({663, 678, 765})
+       true
+ 
+   """
+   def is_100_heronian_triangle?(t) when is_triangle?(t) do
+       is_multiple_heronian_triangle?(t, 100)
+   end
+      
    @doc """
    Are all of the interior angles of a triangle equal to or smaller than 90 degrees?
    
@@ -312,39 +703,7 @@ defmodule Chunky.Geometry.Triangle.Predicates do
    def is_isoceles?(t={a, b, c}) when is_triangle?(t) do
        is_equilateral?(t) == false && ( (a ==b) || (b == c) || (a == c))
    end
-   
-   @doc """
-   Is a triangle a heronian triangle where the area is a specific multiple of the perimeter?
-   
-   A `2-heronian` triangle would have an area that is `2*perimeter` of the triangle, while a
-   `3-heronian` would have an area that is `3*perimeter`. For each multiple size `m`, there 
-   are a finite number of multiple heronians triangles that are `m-heronian`.
-   
-   ## Examples
-   
-       iex> Triangle.Predicates.is_multiple_heronian_triangle?({13, 14, 15}, 2)
-       true
-
-       iex> Triangle.Predicates.is_multiple_heronian_triangle?({11, 25, 30}, 2)
-       true
-
-       iex> Triangle.Predicates.is_multiple_heronian_triangle?({25, 26, 17}, 3)
-       true
-
-       iex> Triangle.Predicates.is_multiple_heronian_triangle?({25, 28, 17}, 3)
-       true
-
-       iex> Triangle.Predicates.is_multiple_heronian_triangle?({25, 36, 29}, 4)
-       true
-   
-   """
-   def is_multiple_heronian_triangle?(t={a, b, c}, m) when is_triangle?(t) and is_integer(m) do
-       
-       {_, ta} = area(t)
-       tp = a + b + c
-       is_heronian_triangle?(t) && (ta == (tp * m))
-   end
-   
+      
    @doc """
    Are any of the interior angles of a triangle greater than 90 degrees?
    

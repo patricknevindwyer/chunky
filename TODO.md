@@ -90,62 +90,19 @@ OEIS.Util.crawl_keywords(["core", "eigen"]) |> Enum.map(fn %{seq_id: seq_id} -> 
 ## TODO
  
    
-### release 0.12.* - documentation and refactoring
-    
-
- - geometry module
-  - triangles
- 
- - [x] analyze
- - [x] move predicates
- 
- - Geometry.Triangle.Predicates
-  - [x] is_heronian_triangle
-  - [x] is_super_heronian_triangle (area == perimeter)
-  - [x] almost_equilateral_heronian (parker, super heronian, sequential sides)
-  - [x] is_decomposible
-  - [x] is_indecomposible
-  - [x] is obtuse
-  - [x] is acute
-  - [ ] is_2_heronian
-  - [ ] is_3_heronian
-  - [ ] ...
-  - [x] is parker super triangle
-  - [x] normalize/1 (reorder sides in increasing order)
-  - [x] almost equilateral heronians (https://en.wikipedia.org/wiki/Heronian_triangle#Almost-equilateral_Heronian_triangles)
-   - also called super-heronian
-   - add a generator
- 
- - Geometry.Triangle
-  - [x] decompose
-   - x need scalene solutions
-  - [ ] compose
-  - [ ] rad to deg
-  - [ ] deg to rad
-  - [ ] all angluar functions need to either annotate params ({:radians, 1.5}, {:degree, 90}) or offer an option for selecting mode
-   - or we work purely in degrees or radians and offer methods for conversion
-  - [x] perimeter
-  - [x] is_b_heronian
-  - [x] triangles_from_hypotenuse
-  - [ ] get_heronian_multiple/1 - derive the multiple for `b-heronian` (this is a complement of is_multiple_heronian?/2)
-  - [x] type
-  - [x] height
-   - x height of scalene triangles (for decompose), could have integer solutions for non-hypotenuse sides
-   - x we need a generalized solution for this (see scalene_base)
-  - [ ] !! scalene_base/1 needs to account for multiple integer heights
-
-Indecomposible triangles (cannot be broken into smaller right angle triangles)
+### release 0.12.* - documentation and refactoring, triangles
 
 
-Numberphile - Superhero Triangles
+
+### release 0.12.n + 1 - recreationals
+
+ - Math
+  - josephus numbers
+  - leyland numbers
+  
 
 
- - document triangle
-  - library.md
-  - readme.md
-  - ?
- - [x] break Geometry.Triangle into Triangle and Triangle.Predicates
- - [x] add analyze/1 method to Triangle.Predicates
+### release 0.12. n + 2 - summations of sequences
  
  - Extended Summation (when: of:) (see notes from MCO to BWI flight)
  
@@ -196,7 +153,16 @@ Numberphile - Superhero Triangles
    
 ### Future   
 
-  - sequence modules documentation
+ - triangles
+  - [ ] all angluar functions need to either annotate params ({:radians, 1.5}, {:degree, 90}) or offer an option for selecting mode
+   - or we work purely in degrees or radians and offer methods for conversion
+  - [ ] get_heronian_multiple/1 - derive the multiple for `b-heronian` (this is a complement of is_multiple_heronian?/2)
+  - [ ] !! scalene_base/1 needs to account for multiple integer heights
+  - [ ] rad to deg
+  - [ ] deg to rad
+  - we could have a rad type that maintains a x * 180/pi relationship
+ 
+ - sequence modules documentation
    - [ ] factors
     - [ ] OEIS backref to Math module functions
    - [ ] multiples

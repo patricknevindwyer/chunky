@@ -17,6 +17,56 @@
 
 # CHANGELOG
 
+## v0.12.1
+
+### Enhancements
+ 
+ - New modules:
+  - Chunky.Geometry
+   - guard `is_triangle?/1`
+   - `is_valid_triangle?/1`
+  - Chunky.Geometry.Triangle
+   - `angles/1` - Find the interior angles of a triangle
+   - `area/1` - Find the area of any triangle
+   - `compose/2` - Create a new triangle from two compatible right triangles
+   - `decompose/1` - Break a triangle into two smaller right triangles
+   - `height/2` - Find the bisecting height of a triangle
+   - `is_multiple_heronian_triangle?/2` - Is a triangle a heronian triange with an area that is a specific multiple of the perimeter?
+   - `normalize/1` - Normalize the ordering of sides of a triangle
+   - `triangles_from_hypotenuse/2` - Generate integer triangles given a hypotenuse and optional filter
+   - `type/1` - Determine the basic type, or form, of a triangle
+  - Chunky.Geometry.Triangle.Predicates
+   - `is_equilateral?/1` - Is a triangle an equilateral triangle?
+   - `is_isoceles?/1` - Is a triangle an isoceles triangle?
+   - `is_pythagorean_triangle?/1` - Is the given triangle a right triangle with integer sides?
+   - `is_scalene?/1` - Is a triangle a scalene triangle?
+   - `is_acute?/1` - Are all of the interior angles equal or less than 90 degrees?
+   - `is_obtuse?/1` - Are any of the interior angles greater than 90 degrees?
+   - `is_almost_equilateral_heronian_triangle?/1` - Heronian triangle with sides `n - 1`, `n`, `n + 1`
+   - `is_heronian_triangle?/1` - Is a triangle a _heronian_ triangle, with integer sides and integer area?
+   - `is_super_heronian_triangle?/1` - Does a triangle have integer sides, integer area, and a perimeter equal to area?
+   - `is_2_heronian_triangle?/1` - Is a triangle heronian, with area 2 times perimeter?
+   - `is_3_heronian_triangle?/1` - Is a triangle heronian, with area 3 times perimeter?
+   - `is_4_heronian_triangle?/1` - Is a triangle heronian, with area 4 times perimeter?
+   - `is_5_heronian_triangle?/1` - Is a triangle heronian, with area 5 times perimeter?
+   - `is_6_heronian_triangle?/1` - Is a triangle heronian, with area 6 times perimeter?
+   - `is_7_heronian_triangle?/1` - Is a triangle heronian, with area 7 times perimeter?
+   - `is_8_heronian_triangle?/1` - Is a triangle heronian, with area 8 times perimeter?
+   - `is_9_heronian_triangle?/1` - Is a triangle heronian, with area 9 times perimeter?
+   - `is_10_heronian_triangle?/1` - Is a triangle heronian, with area 10 times perimeter?
+   - `is_20_heronian_triangle?/1` - Is a triangle heronian, with area 20 times perimeter?
+   - `is_30_heronian_triangle?/1` - Is a triangle heronian, with area 30 times perimeter?
+   - `is_40_heronian_triangle?/1` - Is a triangle heronian, with area 40 times perimeter?
+   - `is_50_heronian_triangle?/1` - Is a triangle heronian, with area 50 times perimeter?
+   - `is_60_heronian_triangle?/1` - Is a triangle heronian, with area 60 times perimeter?
+   - `is_70_heronian_triangle?/1` - Is a triangle heronian, with area 70 times perimeter?
+   - `is_80_heronian_triangle?/1` - Is a triangle heronian, with area 80 times perimeter?
+   - `is_90_heronian_triangle?/1` - Is a triangle heronian, with area 90 times perimeter?
+   - `is_100_heronian_triangle?/1` - Is a triangle heronian, with area 100 times perimeter?
+   - `is_decomposable?/1` - Can a triangle be decomposed into two, smaller, right triangles?
+   - `is_indecomposable?/1` - Can a triangle _not_ be decomposed into two, smaller, right triangles?
+  
+
 ## v0.12.0
 
 ```

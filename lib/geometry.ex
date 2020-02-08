@@ -6,11 +6,12 @@ defmodule Chunky.Geometry do
 
   See specific modules for more in depth functions:
 
-   - `Chunky.Geometry.Triangle`
+   - `Chunky.Geometry.Triangle` - Manipulate and measure triangles
+   - `Chunky.Geometry.Triangle.Predicates` - Assess properties of triangles
 
   ## Guards
 
-   - `is_triangle?/1` - Is the given parameter a 3-tuple of integers?
+   - `is_triangle?/1` - Is the given parameter a 3-tuple of positive integers greater than `0`?
 
   ## Shape tests
   

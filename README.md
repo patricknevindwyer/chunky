@@ -3,7 +3,7 @@
 
 # Chunky
 
-Fractions, Sequences, 2D Grids, and Enumeration manipulations in Elixir.
+Fractions, extended Maths, Sequences, 2D Grids, Geometry, and Enumeration manipulations in Elixir.
 
 ```elixir
 iex> Chunky.permutations("😀🤷🏽‍♀️⭐️")
@@ -34,6 +34,8 @@ iex> Chunky.Fraction.power(Chunky.Fraction.new(7, 32), Chunky.Fraction.new(30, 5
 iex> Chunky.Math.prime_factors(3217644767340672907899084554130)
 [1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79]
 
+iex> Chunky.Math.binomial(20, 5)
+15504
 ```
 
 ## Installation

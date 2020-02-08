@@ -1,16 +1,94 @@
 defmodule Chunky.Geometry.Triangle do
    @moduledoc """
-   Functions for working with geometric shapes. For _predicate functions_ related to Triangles, see `Chunky.Geometry.Triangle.Predicates`.
-      
-   ## Integer Triangles
+   Functions for working with **triangles**. For _predicate functions_ related to Triangles, see `Chunky.Geometry.Triangle.Predicates`.
+   
+   Triangles in Chunky are represented as a tuple of three positive integers, with each integer greater than or equal to `1`. So `{3, 4, 5}`
+   is a triangle, as is `{145, 7, 139}`. Not every 3-tuple of integers is a _valid_ triangle - `{3, 5, 10}` doesn't describe a realizable
+   triangle. You can test for a _valid_ triangle with `Chunky.Geometry.is_valid_triangle?/1`.
+   
+   Some functions will raise argument errors for invalid triangles, while others will return an error tuple, where possible.
+   
+   # Triangle Functions
+         
+   ## Measurements
+   
+   These functions provide measurements of triangles, their angles, or their shape.
    
     - `angles/1` - Find the interior angles of a triangle
     - `area/1` - Find the area of any triangle
-    - `decompose/1` - Break a triangle into two smaller right triangles
     - `height/2` - Find the bisecting height of a triangle
+    - `is_multiple_heronian_triangle?/2` - Is a triangle a heronian triange with an area that is a specific multiple of the perimeter?
+   
+   
+   ## Construction and Deconstructing Triangles
+   
+   Create new triangles, break existing triangles into smaller triangles, or recombine smaller triangles:
+
+    - `compose/2` - Create a new triangle from two compatible right triangles
+    - `decompose/1` - Break a triangle into two smaller right triangles
     - `normalize/1` - Normalize the ordering of sides of a triangle
     - `triangles_from_hypotenuse/2` - Generate integer triangles given a hypotenuse and optional filter
+
+
+   ## Meta-inspection of triangles
+   
+   Metadata about triangles:
+   
     - `type/1` - Determine the basic type, or form, of a triangle
+   
+   
+   # Finding Triangles
+   
+   Finding specific _shapes_ of triangles (like Heronian, m-heronian, scalenes, etc) can be useful. For instance, finding triangles
+   that are _decomposable_ or _19-heronian_ triangles. Constructing these by hand can be tedious - instead we can combine a series
+   of functions from the Triangle and Predicates modules to help find what we're looking for.
+   
+   The heart of searching for triangles is the `triangles_from_hypotenuse/2` function, which generates the set of all valid triangles
+   for a given hypotenuse edge:
+   
+       iex> Triangle.triangles_from_hypotenuse(3)
+       [{1, 3, 3}, {2, 2, 3}, {2, 3, 3}, {3, 3, 3}]
+   
+   All of the valid triangles for the given hypotenuse are generated, without duplicates, edge order independent (so `{3, 2, 3}` and `{2, 3, 3}`
+   would be the same, and only one included in the output). For a small hypotenuse this output by itself can be useful
+   for visual inspection, but the number of valid triangles grows fairly quickly. For a hypotenuse of `15`, there
+   are `64` valid triangles. For a hypotenuse of `100`, there are `2550` triangles. On to the next step: filter functions.
+   
+   The second parameter of `triangles_from_hypotenuse/2` is a predicate function - any function that takes a triangle
+   as it's only parameter, and returns a boolean. The output of `triangles_from_hypotenuse/2` will be filtered to contain only
+   those triangles that pass the filter. For instance, we can filter our list of triangles with a hypotenuse of `3` to
+   only the equilateral triangles:
+   
+       iex> Triangle.triangles_from_hypotenuse(3, filter: &Triangle.Predicates.is_equilateral?/1)
+       [{3, 3, 3}]
+   
+   Let's look at the first example we cited, finding decomposable triangles. Constructing these by hand can be tedious. But using
+   the above technique, we can quickly find what we're looking for. How about triangles with a hypotenuse of `30` that are
+   decomposable:
+   
+       iex> Triangle.triangles_from_hypotenuse(30, filter: &Triangle.Predicates.is_decomposable?/1)
+       [{8, 26, 30}, {11, 25, 30}, {17, 17, 30}, {25, 25, 30}, {26, 28, 30}]
+   
+   If we want to tackle the second example we cited, finding _19-heronian_ triangles (these are triangles whose area is exactly 19 times
+   their perimeter), we'll need to expand our search: we don't know _exactly_ what the hypotenuse will be, so we check multiple:
+   
+   ```elixir
+   150..250 
+   |> Enum.map(
+       fn h -> 
+           Triangle.triangles_from_hypotenuse(
+               h, 
+               filter: fn t -> 
+                   Triangle.is_multiple_heronian_triangle?(t, 19) 
+               end) 
+       end
+   ) 
+   |> List.flatten()
+   ```
+   
+   Here we've take the range of `150` to `250`, and used each of those in order as the hypotenuse of `triangles_from_hypotenuse/2`. The
+   filter function is an anonymous function, where we use the `is_multiple_heronian?/2` function to filter down to only those triangles
+   that are an exact multiple of perimeter and area.
    
    """
    import Chunky.Geometry
@@ -123,6 +201,62 @@ defmodule Chunky.Geometry.Triangle do
    end
    
    @doc """
+   Compose two pythagorean (right) triangles into a larger triangle, if possible.
+   
+   This is the inverse of `decompose/1` - two compatible right triangles can be joined on 
+   an equal, non-hypotenuse edge to form a new triangle. 
+   
+   The results of this function will either be a tuple of `{:ok, _}` with a one or two new triangles,
+   or `{:error, reason}` for not being composable.
+   
+   ## Examples
+   
+       iex> Triangle.compose({12, 5, 13}, {5, 13, 12})
+       {:ok, {10, 13, 13}, {13, 13, 24}}
+
+       iex> Triangle.compose({12, 5, 13}, {9, 15, 12})
+       {:ok, {13, 14, 15}}
+
+       iex> Triangle.compose({12, 5, 13}, {3, 4, 5})
+       {:error, :not_composable}
+   
+       iex> Triangle.compose({12, 5, 13}, {5, 7, 24})
+       {:error, :not_pythagorean_triangles}
+   
+   """
+   def compose(v, w) when is_triangle?(v) and is_triangle?(w) do
+       case {Predicates.is_pythagorean_triangle?(v), Predicates.is_pythagorean_triangle?(w)} do
+           
+           {true, true} ->
+               {v_a, v_b, v_c} = normalize(v)
+               {w_a, w_b, w_c} = normalize(w)
+               
+               cond do
+                   v_a == w_a && v_b == w_b -> 
+                       
+                       # build the result triangles
+                       comp_a = {v_c, w_c, v_b + w_b} |> normalize()
+                       comp_b = {v_c, w_c, v_a + w_a} |> normalize()
+                       
+                       # sort by the smallest edge
+                       [res_a, res_b] = [comp_a, comp_b] |> Enum.sort(fn {side_a, _, _}, {side_b, _, _} -> side_a <= side_b end)
+                       
+                       # results!
+                       {:ok, res_a, res_b}
+                       
+                   v_a == w_a -> {:ok, {v_c, w_c, v_b + w_b} |> normalize()} 
+                   v_a == w_b -> {:ok, {v_c, w_c, v_b + w_a} |> normalize()}
+                   v_b == w_a -> {:ok, {v_c, w_c, v_a + w_b} |> normalize()}
+                   v_b == w_b -> {:ok, {v_c, w_c, v_a + w_a} |> normalize()}
+                   true -> {:error, :not_composable}
+               end
+               
+           _ -> 
+               {:error, :not_pythagorean_triangles}
+       end
+   end
+   
+   @doc """
    Decompose an integer triangle into two smaller integer right triangles.
    
    ## Examples
@@ -138,6 +272,9 @@ defmodule Chunky.Geometry.Triangle do
 
        iex> Triangle.decompose({13, 14, 15})
        {:ok, {5, 12, 13}, {9, 12, 15}}
+
+       iex> Triangle.decompose({13, 13, 24})
+       {:ok, {5, 12, 13}, {5, 12, 13}}
    
    """
    def decompose(t) when is_triangle?(t) do
@@ -157,11 +294,24 @@ defmodule Chunky.Geometry.Triangle do
                case height(t) do
                    
                    {:integer, h} -> 
-                       if rem(a, 2) == 0 do
-                           {:ok, {div(a, 2), h, c} |> normalize(), {div(a, 2), h, c} |> normalize()}
+                       
+                       if a == b do
+                           
+                           # the equal sides are shorter than the inequal side
+                           if rem(c, 2) == 0 do
+                               {:ok, {div(c, 2), h, a} |> normalize(), {div(c, 2), h, a} |> normalize()}
+                           else
+                               {:error, :indecomposable}
+                           end
                        else
-                           {:error, :indecomposable}
+                           # the equal sides are longer than the inequal side
+                           if rem(a, 2) == 0 do
+                               {:ok, {div(a, 2), h, c} |> normalize(), {div(a, 2), h, c} |> normalize()}
+                           else
+                               {:error, :indecomposable}
+                           end                           
                        end
+                       
                        
                    _ -> 
                        {:error, :indecomposable}
@@ -295,6 +445,38 @@ defmodule Chunky.Geometry.Triangle do
            {:float, ta} ->
                {:float, 2 * ta / base}
        end
+   end
+   
+   @doc """
+   Is a triangle a heronian triangle where the area is a specific multiple of the perimeter?
+   
+   A `2-heronian` triangle would have an area that is `2*perimeter` of the triangle, while a
+   `3-heronian` would have an area that is `3*perimeter`. For each multiple size `m`, there 
+   are a finite number of multiple heronians triangles that are `m-heronian`.
+   
+   ## Examples
+   
+       iex> Triangle.is_multiple_heronian_triangle?({13, 14, 15}, 2)
+       true
+
+       iex> Triangle.is_multiple_heronian_triangle?({11, 25, 30}, 2)
+       true
+
+       iex> Triangle.is_multiple_heronian_triangle?({25, 26, 17}, 3)
+       true
+
+       iex> Triangle.is_multiple_heronian_triangle?({25, 28, 17}, 3)
+       true
+
+       iex> Triangle.is_multiple_heronian_triangle?({25, 36, 29}, 4)
+       true
+   
+   """
+   def is_multiple_heronian_triangle?(t={a, b, c}, m) when is_triangle?(t) and is_integer(m) do
+       
+       {_, ta} = area(t)
+       tp = a + b + c
+       Predicates.is_heronian_triangle?(t) && (ta == (tp * m))
    end
    
    @doc """
