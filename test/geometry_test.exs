@@ -7,6 +7,4 @@ defmodule Chunky.GeometryTest do
   doctest Chunky.Geometry
   doctest Chunky.Geometry.Triangle
   doctest Chunky.Geometry.Triangle.Predicates
-    
-
 end

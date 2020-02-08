@@ -3,19 +3,19 @@ defmodule Chunky.Sequence.OEIS.Factors do
   OEIS Sequences dealing with Factors, Factorization, and properties of integer factors. 
 
   ## Available Sequences
-  
+
   ### Semiprimes and Prime factors
-  
+
   These sequences are related to the semi-primes, prime factorization, and characteristics of prime factors.
-  
+
   Prime factors with multiplicity:
-  
+
    - `create_sequence_a037143/1` - A037143 - Numbers with at most 2 prime factors (counted with multiplicity).
    - `create_sequence_a033942/1` - A033942 - At least 3 prime factors (counted with multiplicity).
 
 
   Divisibility by a given number of primes:
-  
+
    - `create_sequence_a000977/1` - A000977 - Numbers that are divisible by at least three different primes
    - `create_sequence_a033987/1` - A033987 - Numbers that are divisible by at least 4 primes (counted with multiplicity)
    - `create_sequence_a007774/1` - A007774 - Numbers that are divisible by exactly 2 different primes
@@ -26,7 +26,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
 
   The semiprimes:
-  
+
    - `create_sequence_a014612/1` - A014612 - Numbers that are the product of exactly three primes, including multiplicity.
    - `create_sequence_a014613/1` - A014613 - Numbers that are products of 4 primes
    - `create_sequence_a014614/1` - A014614 - Numbers that are products of 5 primes
@@ -45,10 +45,10 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - `create_sequence_a069279/1` - A069279 - Products of exactly 18 primes (generalization of semiprimes)
    - `create_sequence_a069280/1` - A069280 - 19-almost primes (generalization of semiprimes)
    - `create_sequence_a069281/1` - A069281 - 20-almost primes (generalization of semiprimes)
-  
-  
+
+
   The semiprimes with distinct prime factors.
-  
+
    - `create_sequence_a006881/1` - A006881 - Squarefree semiprimes: Numbers that are the product of two distinct primes
    - `create_sequence_a007304/1` - A007304 - Sphenic numbers: products of 3 distinct primes
    - `create_sequence_a046386/1` - A046386 - Products of four distinct primes
@@ -56,10 +56,10 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - `create_sequence_a067885/1` - A067885 - Product of 6 distinct primes
    - `create_sequence_a123321/1` - A123321 - Products of 7 distinct primes
    - `create_sequence_a123322/1` - A123322 - Products of 8 distinct primes
-  
-  
+
+
   Odd semiprimes with distinct factors.
-  
+
    - `create_sequence_a046321/1` - A046321 - Odd numbers divisible by exactly 8 primes (counted with multiplicity)
 
 
@@ -69,9 +69,9 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - `create_sequence_a046660/1` - A046660 - Excess of n = Ω(n) - ω(n)
    - `create_sequence_a076479/1` - A076479 - a(n) = mu(rad(n)), where mu is the Moebius-function
 
-  
+
   ### Non-prime Divisors
-  
+
   Divisors of specific values:
 
    - `create_sequence_a018253/1` - A018253 - Divisors of 24.
@@ -116,7 +116,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - `create_sequence_a001826/1` - A001826 - Number of divisors of n of form 4k+1
    - `create_sequence_a001842/1` - A001842 - Expansion of Sum_{n>=0} x^(4*n+3)/(1 - x^(4*n+3))
 
-  
+
   Properties of divisors:
 
    - `create_sequence_a001414/1` - A001414 - Integer log of n: sum of primes dividing n (with repetition). Also called sopfr(n).
@@ -127,9 +127,9 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - `create_sequence_a046758/1` - A046758 - Equidigital numbers.
    - `create_sequence_a046760/1` - A046760 - Wasteful numbers.
 
-  
+
   ### Smooth Numbers
-  
+
   The smooth numbers are sequences of integers such that all prime factors of `n` are less than a specific value `b`, often shortened
   to `b-smooth` numbers:
 
@@ -144,7 +144,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
 
   ### Squares and Square-free Numbers
-  
+
   Sequences related to squaring numbers, lack of square factors, or properties of square factors:
 
    - `create_sequence_a000037/1` - A000037 - Numbers that are not squares
@@ -158,9 +158,9 @@ defmodule Chunky.Sequence.OEIS.Factors do
    - `create_sequence_a209061/1` - A209061 - Exponentially squarefree numbers
    - `create_sequence_a117805/1` - A117805 - Start with 3. Square the previous term and subtract it.
 
-  
+
   ### Cubes and Cube-free numbers
-  
+
   Sequences related to cubed numbers, lack of cube factors, or properties of cube factors:
 
    - `create_sequence_a004709/1` - A004709 - Cubefree numbers: numbers that are not divisible by any cube > 1
@@ -170,9 +170,9 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
 
   ### Co-primes
-  
+
   These sequences are related to co-primes of numbers, or relatively prime numbers.
-  
+
   The Jordan totients:
 
    - `create_sequence_a007434/1` - A007434 - Jordan function J_2(n)
@@ -203,7 +203,7 @@ defmodule Chunky.Sequence.OEIS.Factors do
 
 
   ### Powers of Factors
-  
+
   Sequences related to powers of divisors or prime factors:
 
    - `create_sequence_a001597/1` - A001597 - Perfect Powers

@@ -6,9 +6,9 @@ defmodule Chunky.Sequence.OEIS.Constants do
   ## Available Sequences
 
   ### Constant Value Sequences
-  
+
   The OEIS contains a large number of sequences that repeat the same number, the _constant sequences_. 
-  
+
    - `create_sequence_a007395/1` - A007395 - Constant sequence: the all 2's sequence
    - `create_sequence_a010701/1` - A010701 - Constant sequence: the all 3's sequence
    - `create_sequence_a010709/1` - A010709 - Constant sequence: the all 4's sequence

@@ -4,11 +4,11 @@ defmodule Chunky.Sequence.OEIS.Combinatorics do
   manipulations, and permutations.
    
   ## Available Sequences
-  
+
   ### Catalan Numbers
-  
+
   Via [Catalan Number - Wikipedia](https://en.wikipedia.org/wiki/Catalan_number):
-  
+
   > In combinatorial mathematics, the Catalan numbers form a sequence of natural numbers that occur in various 
   > counting problems, often involving recursively-defined objects. They are named after the Belgian 
   > mathematician Eugène Charles Catalan 

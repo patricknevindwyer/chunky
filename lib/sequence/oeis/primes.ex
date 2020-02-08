@@ -6,9 +6,9 @@ defmodule Chunky.Sequence.OEIS.Primes do
   ## Available Sequences
 
   ### Pseudoprimes
-  
+
   Fermat pseudoprimes to specific bases:
-  
+
    - `create_sequence_a001567/1` - A001567 - Fermat pseudoprimes to base 2, also called Sarrus numbers or Poulet numbers.
    - `create_sequence_a005935/1` - A005935 - Pseudoprimes to base 3.
    - `create_sequence_a020136/1` - A020136 - Fermat pseudoprimes to base 4.
@@ -109,9 +109,9 @@ defmodule Chunky.Sequence.OEIS.Primes do
    - `create_sequence_a020227/1` - A020227 - Pseudoprimes to base 99.
    - `create_sequence_a020228/1` - A020228 - Pseudoprimes to base 100.
 
-  
+
   ### Characterizations of Primes
-  
+
    - `create_sequence_a162511/1` - A162511 - Multiplicative function with a(p^e)=(-1)^(e-1)
 
 

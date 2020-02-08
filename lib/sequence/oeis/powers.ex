@@ -6,7 +6,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
   ## Available Sequences
 
   ### Powers of specific integers
-  
+
    - `create_sequence_a000351/1` - A000351 - Powers of 5: a(n) = 5^n.
    - `create_sequence_a000400/1` - A000400 - Powers of 6: a(n) = 6^n.
    - `create_sequence_a000420/1` - A000420 - Powers of 7: a(n) = 7^n.
@@ -56,7 +56,7 @@ defmodule Chunky.Sequence.OEIS.Powers do
 
 
   ### Variations of powers of 2
-  
+
    - `create_sequence_a000051/1` - A000051 - a(n) = 2^n + 1.
    - `create_sequence_a057716/1` - A057716 - The non-powers of 2.
 

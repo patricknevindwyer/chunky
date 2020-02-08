@@ -441,7 +441,7 @@ defmodule Chunky.Math do
   of `n`, regardless of order. So `10` has 3 factorizations, `2x5`, `5x2`, and `10`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a074206/1` - Kalmar's problem: number of ordered factorizations of `n`
 
 
@@ -608,7 +608,7 @@ defmodule Chunky.Math do
   has `3` factorizations; `8`, `2*4`, and `2*2*2`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001055/1` - The multiplicative partition
 
 
@@ -789,7 +789,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a005811/1` - Number of runs in binary expansion of `n`
 
 
@@ -819,7 +819,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a006894/1` - Number of planted 3-trees of height < `n`
 
 
@@ -857,7 +857,7 @@ defmodule Chunky.Math do
   This implementation uses a cache to speed up efficiency.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000142/1` - Factorial of `n`
 
   ## Examples
@@ -900,7 +900,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001147/1` - Double factorial of odd numbers
    - `Chunky.Sequence.OEIS.Core.create_sequence_a006882/1` - Double factorials of `n`
 
@@ -1075,7 +1075,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000959/1` - Lucky numbers
 
 
@@ -1231,7 +1231,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000670/1` - Fubini numbers
 
 
@@ -1282,7 +1282,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000292/1` - Tetrahedral numbers
 
 
@@ -1314,9 +1314,9 @@ defmodule Chunky.Math do
   pentagonal numbers grow.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000326/1` - Pentagonal numbers
-  
+
 
   ## Examples
 
@@ -1351,9 +1351,9 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000330/1` - Square pyramidal numbers
-  
+
 
   ## Examples
 
@@ -1383,7 +1383,7 @@ defmodule Chunky.Math do
   with `n` elements on a side. 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000217/1` - Triangular numbers
 
 
@@ -1513,7 +1513,7 @@ defmodule Chunky.Math do
   Also called the Central Polygonal Numbers, Pizza Numbers, or the Lazy Caterer's Sequence.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000123/1` - Lazy caterer's sequence
 
 
@@ -1547,7 +1547,7 @@ defmodule Chunky.Math do
    - the number of nilpotent partial bijections (of an n-element set)
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000272/1` - Number of trees on `n` labeled nodes
 
 
@@ -1587,7 +1587,7 @@ defmodule Chunky.Math do
   As this is a highly recursive relation, a cache is used for efficiency.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000262/1` - Number of sets of lists
 
   ## Examples
@@ -1631,9 +1631,9 @@ defmodule Chunky.Math do
   binomial by this method is fairly efficient.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000984/1` - Central binomial coefficients
-  
+
 
   ## Examples
 
@@ -1669,7 +1669,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a008277/1` - Triangle of Stirling numbers of the second kind
 
 
@@ -1715,7 +1715,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a007318/1` - Pascal's triangle
 
 
@@ -1746,7 +1746,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000110/1` - Bell or exponential numbers
 
 
@@ -1794,11 +1794,11 @@ defmodule Chunky.Math do
   ```
 
   This implementation uses a cache for efficiency.
-  
+
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000129/1` - Pell numbers
-  
+
 
   ## Examples
 
@@ -1830,7 +1830,7 @@ defmodule Chunky.Math do
   This counts endofunctions as an endomorphism over the set of size `n`, which is equivalent to `n^n`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000312/1` - Number of endofunctions
 
   ## Examples
@@ -1879,7 +1879,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a008292/1` - Triangle of Eulerian numbers
 
 
@@ -1924,7 +1924,7 @@ defmodule Chunky.Math do
   uses a cache for efficiency. 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000111/1` - Euler or up/down numbers
 
   ## Examples
@@ -1966,7 +1966,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000364/1` - Euler secant (or _zig_) numbers
 
 
@@ -2094,7 +2094,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a027642/1` - Denominator of Bernoulli numbers
 
 
@@ -2141,7 +2141,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a049310/1` - Triangle of coefficients of Chebyshev's polynomials
 
 
@@ -2183,7 +2183,7 @@ defmodule Chunky.Math do
   This implementation uses a cache for efficiency.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000032/1` - Lucas numbers beginning at `2`
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000204/1` - Lucas numbers beginning at `1`
 
@@ -2227,7 +2227,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000219/1` - Number of planar partitions of `n`
 
 
@@ -2277,7 +2277,7 @@ defmodule Chunky.Math do
   to increase efficiency.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000081/1` - Number of unlabeled rooted trees with `n` nodes
 
   ## Examples
@@ -2361,7 +2361,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a002654/1` - Number of ways of writing `n` as a sum of at most two nonzero squares
 
 
@@ -2398,7 +2398,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a003484/1` - Radon function
 
 
@@ -2432,7 +2432,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a006318/1` - Large Schroder numbers
 
 
@@ -2482,7 +2482,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001003/1` - Schroeder's second problem
 
 
@@ -2534,7 +2534,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001006/1` - Motzkin numbers
 
 
@@ -2578,7 +2578,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001045/1` - Jacobsthal Numbers
 
 
@@ -2747,7 +2747,7 @@ defmodule Chunky.Math do
   fractional parts to avoid recursion and precision loss.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000108/1` - Catalan Numbers
    - `Chunky.Sequence.OEIS.Combinatorics.create_sequence_a159981/1` - Catalan numbers read modulo 4
    - `Chunky.Sequence.OEIS.Combinatorics.create_sequence_a159984/1` - Catalan numbers read modulo 5
@@ -2756,8 +2756,8 @@ defmodule Chunky.Math do
    - `Chunky.Sequence.OEIS.Combinatorics.create_sequence_a159988/1` - Catalan numbers read modulo 11
    - `Chunky.Sequence.OEIS.Combinatorics.create_sequence_a159989/1` - Catalan numbers read modulo 12
    - `Chunky.Sequence.OEIS.Combinatorics.create_sequence_a289682/1` - Catalan numbers read modulo 16
-  
-  
+
+
   ## Examples
 
       iex> Math.catalan_number(2)
@@ -2793,7 +2793,7 @@ defmodule Chunky.Math do
   trees with `n` nodes is `n^(n - 1)`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000169/1` - Number of labeled rooted trees with `n` nodes
 
 
@@ -2866,9 +2866,9 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001190/1` - Wedderburn-Etherington numbers
-  
+
 
   ## Examples
 
@@ -2938,7 +2938,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000161/1` - Number of partitions of `n` into 2 squares
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001481/1` - Numbers that are the sum of two squares
 
@@ -2989,7 +2989,7 @@ defmodule Chunky.Math do
   or `coprimes/2`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000010/1` - Euler's totient function, `phi(n)`
 
   ## Examples
@@ -3039,9 +3039,9 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001615/1` - Dedekind `psi` function
-  
+
 
   ## Examples
 
@@ -3095,9 +3095,9 @@ defmodule Chunky.Math do
   As this function is highly recursive, and uses a recurrence relationship, it uses a cache for efficiency.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000123/1` - Number of binary partitions
-  
+
 
   ## Examples
 
@@ -3128,7 +3128,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000048/1` - Number of n-bead necklaces with beads of 2 colors and period `n`
 
 
@@ -3180,10 +3180,10 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000029/1` - Bracelets with n beads of two colors with turning over
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000031/1` - Bracelets with n beads of two colors without turning over
-  
+
 
   ## Options
 
@@ -3274,7 +3274,7 @@ defmodule Chunky.Math do
   are required for generating new values for the sequence.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000002/1` - Kolakoski Sequence
 
 
@@ -3367,7 +3367,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a008683/1` - Moebius function
 
 
@@ -3411,7 +3411,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001221/1` - Number of distinct primes dividing `n`
 
 
@@ -3463,7 +3463,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a020639/1` - `lpf(n)`
 
 
@@ -3490,7 +3490,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a006530/1` - Greatest prime factor of `n`
 
 
@@ -3519,7 +3519,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001222/1` - Number of prime divisors of `n` counting multiplicity
 
 
@@ -3655,7 +3655,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001065/1` - Aliquot sum of `n`
 
 
@@ -3750,10 +3750,10 @@ defmodule Chunky.Math do
   This is all of the divisors of `n` summed.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000203/1` - Sum of divisors of `n`
    - `Chunky.Sequence.OEIS.Sigma` - Sigma sequences
-  
+
 
   ## Example
 
@@ -3781,7 +3781,7 @@ defmodule Chunky.Math do
   For a faster version of `σ1(n)` (or the sum-of-divisors) see `sigma/1`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000005/1` - Number of divisors of `n`
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001157/1` - Sum of squares of divisors of `n`
 
@@ -3862,7 +3862,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000594/1` - Ramanujan's Tau function
 
 
@@ -3908,7 +3908,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000688/1` - Number of Abelian groups of order `n`
 
 
@@ -3941,9 +3941,9 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a001511/1` - The ruler function
-  
+
 
   ## Examples
 
@@ -4020,7 +4020,7 @@ defmodule Chunky.Math do
   Because this implementation is recursive, it uses a cache for efficiency.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000521/1` - Coefficients of modular function `j`
 
 
@@ -4068,7 +4068,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000311/1` - Series-reduced rooted trees with `n` labeled leaves
 
 
@@ -4121,9 +4121,9 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a002033/1` - Number of perfect partitions of `n`
-  
+
 
   ## Examples
 
@@ -4173,9 +4173,9 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000041/1` - Partitions of integer `n`
-  
+
 
   ## Examples
 
@@ -4507,10 +4507,10 @@ defmodule Chunky.Math do
   If `n` is pseudo-prime to all bases `a` that are coprime to `n`, it is a Carmichael number.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Primes` - Fermat pseudo primes to base 2 through 100
-  
-  
+
+
   ## Examples
 
       iex> Math.is_pseudo_prime?(33, 10)
@@ -4634,7 +4634,7 @@ defmodule Chunky.Math do
   in a given base representation of an integer that _are not_ `0`. See [Hamming Weight](https://en.wikipedia.org/wiki/Hamming_weight).
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000120/1` - Number of 1's in binary expansion of `n`
 
   ## Examples
@@ -4668,7 +4668,7 @@ defmodule Chunky.Math do
   This implementation uses the Euler recurrence, `a(n) = n * a(n - 1) + -1^n`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000166/1` - Derangement, or recontres number
 
   ## Examples
@@ -4700,7 +4700,7 @@ defmodule Chunky.Math do
   This implementation is based on a recursive calculation, and so uses a cache for efficiency.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000085/1` - Number of self-inverse permutations on n letters
 
   ## Examples
@@ -4737,7 +4737,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a002487/1` - Stern diatomic series, or Stern-Brocot sequence
 
 
@@ -4897,7 +4897,7 @@ defmodule Chunky.Math do
 
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a002275/1` - Repunits
 
 
@@ -5066,7 +5066,7 @@ defmodule Chunky.Math do
   For pure integer roots, see `nth_root_int/2`.
 
   OEIS References:
-  
+
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000079/1` - Powers of 2
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000225/1` - Mersenne numbers
    - `Chunky.Sequence.OEIS.Core.create_sequence_a000244/1` - Powers of 3

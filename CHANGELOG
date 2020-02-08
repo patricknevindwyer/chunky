@@ -1,15 +1,16 @@
 # Feature Release steps
 
- - tests passing
  - mix format
+ - tests passing
  - inline documentation
  - top of module documentation
+ - mix docs passes without errors
  - OEIS Stats in lib/sequence/oeis.ex
+ - OEIS Stats for release version in CHANGELOG
  - version bump in mix.exs
  - version bump in README.md
  - version bump in CHANGELOG
  - version bump in library.md
- - update OEIS stats for release version in CHANGELOG
  - git tag -a v0.x.x -m "v0.x.x - summary"
  - git push
  - git push --tags
@@ -19,6 +20,10 @@
 
 ## v0.13.0
 
+### Documentation
+ 
+ - Extensive documentation cleanup in all OEIS sequence modules
+ 
 ### Enhancements
  
  - New modules:

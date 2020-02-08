@@ -6,7 +6,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
   ## Available Sequences
 
   ### Omissions and Deletions of digits
-  
+
    - `create_sequence_a004176/1` - A004176 - Omit 1's from n.
    - `create_sequence_a004177/1` - A004177 - Omit 2's from n.
    - `create_sequence_a004178/1` - A004178 - Omit 3's from n.
@@ -30,9 +30,9 @@ defmodule Chunky.Sequence.OEIS.Repr do
   ### Base 10 Representations
 
   These representations are in Base 10. See below for representations in other bases.
-  
+
   Numbers with or without specific decimal digits:
-  
+
    - `create_sequence_a011531/1` - A011531 - Numbers that contain a digit 1 in their decimal representation.
    - `create_sequence_a011532/1` - A011532 - Numbers that contain a 2.
    - `create_sequence_a011533/1` - A011533 - Numbers that contain a 3.
@@ -59,9 +59,9 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - `create_sequence_a097256/1` - A097256 - Numbers whose set of base 10 digits is {0,9}.
    - `create_sequence_a121022/1` - A121022 - Even numbers containing a 2 in their decimal representation.
 
-  
+
   Digit counts, summations, or products in base 10:
-  
+
    - `create_sequence_a001101/1` - A001101 - Moran numbers: n such that (n / sum of digits of n) is prime.
    - `create_sequence_a005349/1` - A005349 - Niven (or Harshad) numbers: numbers that are divisible by the sum of their digits.
    - `create_sequence_a007602/1` - A007602 - Numbers that are divisible by the product of their digits.
@@ -97,14 +97,14 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
     
   Rhonda numbers in base 10:
-  
+
    - `create_sequence_a099542/1` - A099542 - Rhonda numbers to base 10.
    - `create_sequence_a100987/1` - A100987 - Integers that are Rhonda numbers to some base.
    - `create_sequence_a100988/1` - A100988 - Integers that are Rhonda numbers to more than one base.
 
 
   Kaprekar numbers:
-  
+
    - `create_sequence_a006886/1` - A006886 - Kaprekar numbers: positive numbers n such that n = q+r and n^2 = q*10^m+r, for some m >= 1, q >= 0 and 0 <= r < 10^m, with n != 10^a, a >= 1.
    - `create_sequence_a053816/1` - A053816 - Another version of the Kaprekar numbers (A006886): n such that n=q+r and n^2=q*10^m+r, for some m >= 1, q>=0 and 0<=r<10^m, with n != 10^a, a>=1 and n an m-digit number.
 
@@ -113,10 +113,10 @@ defmodule Chunky.Sequence.OEIS.Repr do
     
    - `create_sequence_a005188/1` - A005188 - Armstrong (or pluperfect, or Plus Perfect, or narcissistic) numbers: m-digit positive numbers equal to sum of the m-th powers of their digits.
    - `create_sequence_a014576/1` - A014576 - Smallest n-digit narcissistic (or Armstrong) number: smallest n-digit number equal to sum of n-th powers of its digits (or 0 if no such number exists).
-  
-  
+
+
   ### Base Specific Representations (excluding Base 10)
-  
+
   Base 2:
 
    - `create_sequence_a007088/1` - A007088 - The binary numbers (or binary words, or binary vectors): numbers written in base 2.
@@ -125,7 +125,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - `create_sequence_a071858/1` - A071858 - (Number of 1's in binary expansion of n) mod 3.
    - `create_sequence_a179868/1` - A179868 - (Number of 1's in binary expansion of n) mod 4.
    - `create_sequence_a000788/1` - A000788 - Total number of 1's in binary expansions of 0, ..., n.
-  
+
   Base 3:
 
    - `create_sequence_a007089/1` - A007089 - Numbers in base 3.  
@@ -176,7 +176,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - `create_sequence_a023705/1` - A023705 - Numbers with no 0's in base 4 expansion.
    - `create_sequence_a100968/1` - A100968 - Integers n that are Rhonda numbers to base 4.
    - `create_sequence_a023746/1` - A023746 - Plaindromes: numbers whose digits in base 4 are in nondecreasing order.
-  
+
   Base 5:
 
    - `create_sequence_a007091/1` - A007091 - Numbers in base 5.
@@ -202,7 +202,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - `create_sequence_a023740/1` - A023740 - Numbers with exactly 3 4's in base 5 expansion.
    - `create_sequence_a097251/1` - A097251 - Numbers whose set of base 5 digits is {0,4}.
    - `create_sequence_a023747/1` - A023747 - Plaindromes: numbers whose digits in base 5 are in nondecreasing order.
-  
+
   Base 6:
 
    - `create_sequence_a007092/1` - A007092 - Numbers in base 6.
@@ -211,14 +211,14 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - `create_sequence_a100969/1` - A100969 - Integers n that are Rhonda numbers to base 6.
    - `create_sequence_a248910/1` - A248910 - Numbers with no zeros in base-6 representation.
    - `create_sequence_a023748/1` - A023748 - Plaindromes: numbers whose digits in base 6 are in nondecreasing order.
-  
+
   Base 7:
 
    - `create_sequence_a007093/1` - A007093 - Numbers in base 7.
    - `create_sequence_a010350/1` - A010350 - Base-7 Armstrong or narcissistic numbers (written in base 10).
    - `create_sequence_a097253/1` - A097253 - Numbers whose set of base 7 digits is {0,6}.
    - `create_sequence_a023749/1` - A023749 - Plaindromes: numbers whose digits in base 7 are in nondecreasing order.
-  
+
   Base 8:
 
    - `create_sequence_a007094/1` - A007094 - Numbers in base 8.
@@ -227,7 +227,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
    - `create_sequence_a100970/1` - A100970 - Integers n that are Rhonda numbers to base 8.
    - `create_sequence_a255805/1` - A255805 - Numbers with no zeros in base-8 representation.
    - `create_sequence_a023750/1` - A023750 - Plaindromes: numbers whose digits in base 8 are in nondecreasing order.
-  
+
   Base 9:
 
    - `create_sequence_a007095/1` - A007095 - Numbers in base 9.
@@ -246,7 +246,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
 
   Base 12
-  
+
    - `create_sequence_a097258/1` - A097258 - Numbers whose set of base 12 digits is {0,B}, where B base 12 = 11 base 10.
    - `create_sequence_a100971/1` - A100971 - Integers n that are Rhonda numbers to base 12.
    - `create_sequence_a161949/1` - A161949 - Base-12 Armstrong or narcissistic numbers (written in base 10).
@@ -254,14 +254,14 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
 
   Base 13
-  
+
    - `create_sequence_a097259/1` - A097259 - Numbers whose set of base 13 digits is {0,C}, where C base 13 = 12 base 10.
    - `create_sequence_a161950/1` - A161950 - Base-13 Armstrong or narcissistic numbers (written in base 10).
    - `create_sequence_a023754/1` - A023754 - Plaindromes: numbers whose digits in base 13 are in nondecreasing order.
 
 
   Base 14
-  
+
    - `create_sequence_a097260/1` - A097260 - Numbers whose set of base 14 digits is {0,D}, where D base 14 = 13 base 10.
    - `create_sequence_a100972/1` - A100972 - Integers that are Rhonda numbers to base 14.
    - `create_sequence_a161951/1` - A161951 - Base-14 Armstrong or narcissistic numbers (written in base 10).
@@ -269,7 +269,7 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
 
   Base 15
-  
+
    - `create_sequence_a097261/1` - A097261 - Numbers whose set of base 15 digits is {0,E}, where E base 15 = 14 base 10.
    - `create_sequence_a100974/1` - A100974 - Integers that are Rhonda numbers to base 15.
    - `create_sequence_a161952/1` - A161952 - Base-15 Armstrong or narcissistic numbers (written in base 10).
@@ -277,32 +277,32 @@ defmodule Chunky.Sequence.OEIS.Repr do
 
 
   Base 16
-  
+
    - `create_sequence_a097262/1` - A097262 - Numbers whose set of base 16 digits is {0,F}, where F base 16 = 15 base 10.
    - `create_sequence_a100975/1` - A100975 - Integers that are Rhonda numbers to base 16.
    - `create_sequence_a161953/1` - A161953 - Base-16 Armstrong or narcissistic numbers (written in base 10).
    - `create_sequence_a023757/1` - A023757 - Plaindromes: numbers whose digits in base 16 are in nondecreasing order.
-  
-  
+
+
   Base 18
     
    - `create_sequence_a255735/1` - A255735 - Integers that are Rhonda numbers to base 18.
 
 
   Base 20
-  
+
    - `create_sequence_a255732/1` - A255732 - Rhonda numbers in vigesimal number system.
-  
-  
+
+
   Base 30
-  
+
    - `create_sequence_a255736/1` - A255736 - Integers that are Rhonda numbers to base 30.
-  
-  
+
+
   Base 60
-  
+
    - `create_sequence_a255731/1` - A255731 - Rhonda numbers in sexagesimal number system.
-  
+
 
   """
 

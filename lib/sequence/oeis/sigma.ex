@@ -8,9 +8,9 @@ defmodule Chunky.Sequence.OEIS.Sigma do
   ## Available Sequences
 
   ### Sigma_M of integers
-  
+
   Sequences of `sigma_M(n)` of integers:
-  
+
    - `create_sequence_a001158/1` - A001158 - Sum of cubes of divisors of N, simga-3(n)
    - `create_sequence_a001159/1` - A001159 - sum of 4th powers of divisors of n, simga-4(n)
    - `create_sequence_a001160/1` - A001160 - sum of 5th powers of divisors of n, simga-5(n)
@@ -32,7 +32,7 @@ defmodule Chunky.Sequence.OEIS.Sigma do
 
 
   Variations on sums of divisors:
-  
+
    - `create_sequence_a002093/1` - A002093 - Highly Abundant Numbers
    - `create_sequence_a003601/1` - A003601 - Arithmetic Numbers
 

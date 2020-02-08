@@ -3,13 +3,13 @@ defmodule Chunky.Sequence.OEIS.Core do
   OEIS [Core](http://oeis.org/search?q=keyword%3acore&sort=number) Sequences.
 
   ## Available Sequences
-  
-  
+
+
   ### Divisors and Factors
-  
+
   Core sequences dealing with divisors and factors of numbers, or the counting of divisors and factors. See `Chunky.Sequence.OEIS.Factors` for
   non-core sequences of divisors and factors.
-  
+
    - `create_sequence_a000005/1` - A000005 - Divisors of N
    - `create_sequence_a000203/1` - A000203 - Sum of Divisors
    - `create_sequence_a000396/1` - A000396 - Perfect Numbers
@@ -27,12 +27,12 @@ defmodule Chunky.Sequence.OEIS.Core do
    - `create_sequence_a005100/1` - A005100 - Deficient Numbers
    - `create_sequence_a005101/1` - A005101 - Abundant Numbers
 
-  
+
   ### Powers and Multiples
-  
+
   Core sequences for the powers and multiples of numbers. See `Chunky.Sequence.OEIS.Multiples` and `Chunky.Sequence.OEIS.Powers` for non-core
   sequences of integer powers and multiples.
-  
+
    - `create_sequence_a000007/1` - A000007 - The characteristic function of {0}: a(n) = 0^n
    - `create_sequence_a000079/1` - A000079 - Powers of 2
    - `create_sequence_a000225/1` - A000225 - a(n) = 2^n - 1
@@ -46,13 +46,13 @@ defmodule Chunky.Sequence.OEIS.Core do
    - `create_sequence_a002620/1` - A002620 - Quarter-squares: floor(n/2)*ceiling(n/2). Equivalently, floor(n^2/4).
    - `create_sequence_a003418/1` - A003418 - Least common multiple (or LCM) of {1, 2, ..., n} for n >= 1, a(0) = 1.
    - `create_sequence_a005117/1` - A005117 - Squarefree numbers: numbers that are not divisible by a square greater than 1
-  
-  
+
+
   ### Representations and Patterns
-  
+
   Core sequences that depend on digit patterns or representations, particularly in specific bases. See `Chunky.Sequence.OEIS.Repr` for non-core
   sequences of digit patterns and base dependent representations.
-  
+
    - `create_sequence_a000035/1` - A000035 - Period 2: repeat [0, 1]; a(n) = n mod 2
    - `create_sequence_a000069/1` - A000069 - Odious numbers: numbers with an odd number of 1's in their binary expansion
    - `create_sequence_a000120/1` - A000120 - 1's-counting sequence: number of 1's in binary expansion of n (or the binary weight of n)
@@ -61,13 +61,13 @@ defmodule Chunky.Sequence.OEIS.Core do
    - `create_sequence_a001969/1` - A001969 - Evil numbers: numbers with an even number of 1's in their binary expansion.
    - `create_sequence_a070939/1` - A070939 - Length of binary representation of n.
    - `create_sequence_a005811/1` - A005811 - Number of runs in binary expansion of n (n>0); number of 1's in Gray code for n.
-  
-  
+
+
   ### Combinatorics
-  
+
   Core sequences for combinatorics and counting functions. See `Chunky.Sequence.OEIS.Combinatorics` for non-core sequences dealing with
   combinatorics and counting functions.
-  
+
    - `create_sequence_a000001/1` - A000001 - Number of groups of order n
    - `create_sequence_a000009/1` - A000009 - Number of partitions of n into distinct parts
    - `create_sequence_a000029/1` - A000029 - Number of necklaces with n beads of 2 colors, allowing turning over (these are also called bracelets).
@@ -106,10 +106,10 @@ defmodule Chunky.Sequence.OEIS.Core do
    - `create_sequence_a000124/1` - A000124 - Central polygonal numbers (the Lazy Caterer's sequence)
    - `create_sequence_a001045/1` - A001045 - Jacobsthal sequence (or Jacobsthal numbers)
    - `create_sequence_a000670/1` - A000670 - Fubini numbers
-  
-  
+
+
   ### Constants
-  
+
   Core sequences of contant values or digits from expansions of non-integer constant values. See `Chunky.Sequence.OEIS.Constants` for non-core
   sequences of constants.
 
@@ -120,7 +120,7 @@ defmodule Chunky.Sequence.OEIS.Core do
 
 
   ### Primes
-  
+
   Core sequences about the primes, prime counting, or properties of primes. See `Chunky.Sequence.OEIS.Primes` for non-core sequences dealing
   with prime numbers.
     
@@ -132,32 +132,32 @@ defmodule Chunky.Sequence.OEIS.Core do
 
 
   ### Coefficients
-  
+
   Core sequences for coefficient calculations, like binomials.
-  
+
    - `create_sequence_a000521/1` - A000521 - Coefficients of modular function j as power series in q = e^(2 Pi i t)
    - `create_sequence_a000984/1` - A000984 - Central binomial coefficients: binomial(2*n,n)
    - `create_sequence_a001700/1` - A001700 - a(n) = binomial(2n+1, n+1): number of ways to put n+1 indistinguishable balls into n+1 distinguishable boxes = number of (n+1)-st degree monomials in n+1 variables = number of monotone maps from 1..n+1 to 1..n+1.
    - `create_sequence_a001764/1` - A001764 - a(n) = binomial(3n,n)/(2n+1) (enumerates ternary trees and also noncrossing trees).
    - `create_sequence_a001405/1` - A001405 - a(n) = binomial(n, floor(n/2)).
-  
-  
+
+
   ### Triangles
-  
+
   Core sequences enumerating values in triangular numeric constructions, like Pascal's triangle.
-  
+
    - `create_sequence_a000217/1` - A000217 - Triangular numbers: a(n) = binomial(n+1,2)
    - `create_sequence_a007318/1` - A007318 - Pascal's triangle read by rows: C(n,k) = binomial(n,k) = n!/(k!*(n-k)!), 0 <= k <= n.
    - `create_sequence_a008277/1` - A008277 - Triangle of Stirling numbers of the second kind, S2(n,k), n >= 1, 1 <= k <= n.
    - `create_sequence_a008279/1` - A008279 - Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) read by rows, giving number of permutations of n things k at a time.
    - `create_sequence_a008292/1` - A008292 - Triangle of Eulerian numbers T(n,k)
    - `create_sequence_a049310/1` - A049310 - Triangle of coefficients of Chebyshev's S(n,x) := U(n,x/2) polynomials (exponents in increasing order).
-  
-  
+
+
   ### Number Theory
-  
+
   Core sequences concerning general number theory, number sets, or ordered sets of values.
-  
+
    - `create_sequence_a000027/1` - A000027 - The positive integers
    - `create_sequence_a000045/1` - A000045 - Fibonacci Numbers
    - `create_sequence_a000142/1` - A000142 - Factorial numbers: n! = 1*2*3*4*...*n 

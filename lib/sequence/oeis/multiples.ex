@@ -6,7 +6,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
   ## Available Sequences
    
   ### Multiples of an integer
-  
+
    - `create_sequence_a008585/1` - A008585 - a(n) = 3*n.
    - `create_sequence_a008586/1` - A008586 - Multiples of 4.
    - `create_sequence_a008587/1` - A008587 - Multiples of 5.
@@ -43,20 +43,20 @@ defmodule Chunky.Sequence.OEIS.Multiples do
    - `create_sequence_a152691/1` - A152691 - Multiples of 64.
    - `create_sequence_a169825/1` - A169825 - Multiples of 420.
    - `create_sequence_a169827/1` - A169827 - Multiples of 840.
-  
-  
+
+
   ### Multiples with specific Digit Sums
-  
+
    - `create_sequence_a069537/1` - A069537 - Multiples of 2 with digit sum = 2.
    - `create_sequence_a063997/1` - A063997 - Multiples of 4 whose digits add to 4.
    - `create_sequence_a069540/1` - A069540 - Multiples of 5 with digit sum 5.
    - `create_sequence_a062768/1` - A062768 - Multiples of 6 such that the sum of the digits is equal to 6.
    - `create_sequence_a063416/1` - A063416 - Multiples of 7 whose sum of digits is equal to 7.
    - `create_sequence_a069543/1` - A069543 - Multiples of 8 with digit sum 8.
-  
-  
+
+
   ### Multiples containing specific Digits
-  
+
    - `create_sequence_a121023/1` - A121023 - Multiples of 3 containing a 3 in their decimal representation.
    - `create_sequence_a121024/1` - A121024 - Multiples of 4 containing a 4 in their decimal representation.
    - `create_sequence_a121025/1` - A121025 - Multiples of 5 containing a 5 in their decimal representation.
@@ -78,17 +78,17 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
 
   ### Perfect Numbers and Variations
-  
+
    - `create_sequence_a006037/1` - A006037 - Weird numbers: abundant (A005101) but not pseudoperfect (A005835).
    - `create_sequence_a002975/1` - A002975 - Primitive weird numbers: weird numbers with no proper weird divisors.
    - `create_sequence_a005835/1` - A005835 - Pseudoperfect (or semiperfect) numbers n: some subset of the proper divisors of n sums to n.
    - `create_sequence_a006036/1` - A006036 - Primitive pseudoperfect numbers.
    - `create_sequence_a054377/1` - A054377 - Primary pseudoperfect numbers: numbers n > 1 such that 1/n + sum 1/p = 1, where the sum is over the primes p | n.
    - `create_sequence_a194472/1` - A194472 - Erdős-Nicolas numbers.
-  
-  
+
+
   ### Digit sums or sequential digits
-  
+
    - `create_sequence_a009003/1` - A009003 - Hypotenuse numbers (squares are sums of 2 nonzero squares).
    - `create_sequence_a004144/1` - A004144 - Nonhypotenuse numbers (indices of positive squares that are not the sums of 2 distinct nonzero squares).
    - `create_sequence_a005153/1` - A005153 - Practical numbers: positive integers m such that every k <= sigma(m) is a sum of distinct divisors of m. Also called panarithmic numbers.
@@ -99,7 +99,7 @@ defmodule Chunky.Sequence.OEIS.Multiples do
 
 
   ### Convergences
-  
+
    - `create_sequence_a007770/1` - A007770 - Happy numbers: numbers whose trajectory under iteration of sum of squares of digits map (see A003132) includes 1.
    - `create_sequence_a031177/1` - A031177 - Unhappy numbers: numbers having period-8 2-digitized sequences.
 
